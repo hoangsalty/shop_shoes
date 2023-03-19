@@ -1,5 +1,6 @@
 <?php
 /* Request data */
+$type = (!empty($_REQUEST['type'])) ? htmlspecialchars($_REQUEST['type']) : '';
 $com = (!empty($_REQUEST['com'])) ? htmlspecialchars($_REQUEST['com']) : '';
 $act = (!empty($_REQUEST['act'])) ? htmlspecialchars($_REQUEST['act']) : '';
 $kind = (!empty($_REQUEST['kind'])) ? htmlspecialchars($_REQUEST['kind']) : '';

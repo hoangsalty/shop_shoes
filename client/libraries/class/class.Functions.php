@@ -14,7 +14,7 @@ class Functions
         if (preg_match('/^[0-9]+$/', $numbs)) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -391,6 +391,7 @@ class Functions
                     "table_product_brand",
                     "table_product",
                     "table_news",
+                    "table_static",
                 );
                 $where = (!empty($data['id'])) ? "id != " . $data['id'] . " and " : "";
                 foreach ($table as $v) {

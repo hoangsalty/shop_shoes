@@ -56,7 +56,7 @@ switch ($act) {
         deleteList();
         break;
 
-    /* Brand */
+        /* Brand */
     case "man_brand":
         viewBrands();
         $template = "product/brand/brands";
@@ -102,7 +102,7 @@ function viewMans()
 /* Edit man */
 function editMan()
 {
-    global $d, $func, $strUrl, $curPage, $item;
+    global $d, $func, $strUrl, $curPage, $item, $gallery;
     if (!empty($_REQUEST['id']))
         $id = htmlspecialchars($_REQUEST['id']);
     else
@@ -114,6 +114,8 @@ function editMan()
         $item = $d->rawQueryOne("select * from table_product where id = ? limit 0,1", array($id));
         if (empty($item)) {
             $func->transfer("Không có dữ liệu", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
+        } else {
+            $gallery = $d->rawQuery("select * from table_gallery where id_parent = ? order by numb,id desc", array($id));
         }
     }
 }
@@ -247,7 +249,7 @@ function saveMan()
         $data['date_created'] = time();
         /*lay stt*/
         $list_numb = $d->rawQuery("select numb from table_product order by numb desc ", array());
-        $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : $data['numb'];
+        $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : 1;
 
         if ($d->insert('table_product', $data)) {
             $id_insert = $d->getLastInsertId();

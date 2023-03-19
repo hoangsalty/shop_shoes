@@ -24,7 +24,7 @@
                 }
                 ?>
                 <li class="nav-item">
-                    <a href="index.php" class="nav-link <?=$active?>">
+                    <a href="index.php" class="nav-link <?= $active ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -75,12 +75,56 @@
                         </li>
                     </ul>
                 </li>
+
+                <?php
+                $active = "";
+                if ($com == 'news') {
+                    $active = 'active';
+                }
+                ?>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="index.php?com=news&act=man" class="nav-link <?= $active ?>">
                         <i class="nav-icon far fa-newspaper"></i>
                         <p>Quản lý tin tức</p>
                     </a>
                 </li>
+
+                <?php
+                $active = "";
+                $menuopen = "";
+                if ($com == 'static') {
+                    $active = 'active';
+                    $menuopen = 'menu-open';
+                }
+                ?>
+                <li class="nav-item <?= $menuopen ?>">
+                    <a href="#" class="nav-link <?= $active ?>">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>Quản lý trang tĩnh<i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <?php
+                        $active = "";
+                        if ($com == 'static' && $_GET['type'] == 'gioi-thieu') $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=static&act=update&type=gioi-thieu" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Giới thiệu</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'static' && $_GET['type'] == 'footer') $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=static&act=update&type=footer" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Footer</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-image"></i>

@@ -15,10 +15,6 @@ function validateForm(ele) {
         $('.' + ele).find('input[type=submit],button[type=submit]').removeAttr('disabled');
     });
 }
-
-/* Validation form chung */
-validateForm('validation-form');
-
 /* HoldOn */
 function holdonOpen(
     theme = 'sk-circle',
@@ -61,7 +57,6 @@ function notifyDialog(content = '', title = 'Thông báo', icon = 'fas fa-exclam
         }
     });
 }
-
 /* Confirm */
 function confirmDialog(action, text, value, title = 'Thông báo', icon = 'fas fa-exclamation-triangle', type = 'blue') {
     $.confirm({
@@ -82,9 +77,10 @@ function confirmDialog(action, text, value, title = 'Thông báo', icon = 'fas f
                 text: '<i class="fas fa-check align-middle mr-2"></i>Đồng ý',
                 btnClass: 'btn-blue btn-sm bg-gradient-primary',
                 action: function () {
-                    if (action == 'send-email') sendEmail();
                     if (action == 'delete-item') deleteItem(value);
                     if (action == 'delete-all') deleteAll(value);
+                    if (action == 'delete-filer') deleteFiler(value);
+                    if (action == 'delete-all-filer') deleteAllFiler(value);
                 }
             },
             cancel: {
@@ -94,13 +90,11 @@ function confirmDialog(action, text, value, title = 'Thông báo', icon = 'fas f
         }
     });
 }
-
 /* Delete item */
 function deleteItem(url) {
     holdonOpen();
     document.location = url;
 }
-
 /* Delete all */
 function deleteAll(url) {
     var listid = '';
@@ -121,7 +115,59 @@ function deleteAll(url) {
     holdonOpen();
     document.location = url + '&listid=' + listid;
 }
+/* Delete filer */
+function deleteFiler(id) {
+    var cmd = 'delete';
 
+    $.ajax({
+        type: 'POST',
+        url: 'api/gallery.php',
+        data: {
+            id: id,
+            cmd: cmd
+        }
+    });
+
+    $('.my-jFiler-item-' + id).remove();
+    if ($('.my-jFiler-items ul li').length == 0) {
+        $('.form-group-gallery').remove();
+    }
+}
+/* Delete all filer */
+function deleteAllFiler(folder) {
+    var listid = '';
+    var cmd = 'delete-all';
+
+    $('input.filer-checkbox').each(function () {
+        if (this.checked) listid = listid + ',' + this.value;
+    });
+
+    listid = listid.substring(1);
+
+    if (listid == '') {
+        notifyDialog('Bạn hãy chọn ít nhất 1 mục để xóa');
+        return false;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: 'api/gallery.php',
+        data: {
+            listid: listid,
+            cmd: cmd
+        }
+    });
+
+    listid = listid.split(',');
+
+    for (var i = 0; i < listid.length; i++) {
+        $('.my-jFiler-item-' + listid[i]).remove();
+    }
+
+    if ($('.my-jFiler-items ul li').length == 0) {
+        $('.form-group-gallery').remove();
+    }
+}
 /* Slug */
 function slugConvert(slug, focus = false) {
     slug = slug.toLowerCase();
@@ -242,7 +288,6 @@ function slugCheck() {
     var id = $('.slug-id').val();
 
     slugInput.each(function (index) {
-        var slugId = $(this).attr('id');
         var slug = $(this).val();
         if (slug) {
             $.ajax({
@@ -261,7 +306,6 @@ function slugCheck() {
         }
     });
 }
-
 /* Reader image */
 function readImage(inputFile, elementPhoto) {
     if (inputFile[0].files[0]) {
@@ -288,7 +332,6 @@ function readImage(inputFile, elementPhoto) {
         return false;
     }
 }
-
 /* Photo zone */
 function photoZone(eDrag, iDrag, eLoad) {
     if ($(eDrag).length) {
@@ -329,7 +372,6 @@ function photoZone(eDrag, iDrag, eLoad) {
         });
     }
 }
-
 function onSearch(obj, url) {
     if (url == '') {
         notifyDialog('Đường dẫn không hợp lệ');
@@ -345,17 +387,13 @@ function onSearch(obj, url) {
         window.location = filterCategory(url);
     }
 }
-
 /* onChange Category */
 function filterCategory(url) {
     if ($('.filter-category').length > 0 && url != '') {
-        var id = '';
-        var value = 0;
-
         $('.filter-category').each(function () {
-            id = $(this).attr('id');
+            var id = $(this).attr('id');
             if (id) {
-                value = parseInt($('#' + id).val());
+                var value = parseInt($('#' + id).val());
                 if (value) {
                     url += '&' + id + '=' + value;
                 }
@@ -365,7 +403,6 @@ function filterCategory(url) {
 
     return url;
 }
-
 function onchangeCategory(obj) {
     var name = '';
     var keyword = $('#keyword').val();
@@ -386,8 +423,10 @@ function onchangeCategory(obj) {
 
     return (window.location = url);
 }
-
 $(document).ready(function () {
+    /* Validation form chung */
+    validateForm('validation-form');
+
     /* Loader */
     if ($('.loader-wrapper').length) {
         setTimeout(function () {
@@ -413,14 +452,13 @@ $(document).ready(function () {
             centsLimit: 0
         });
     }
-    /* Format price */
-    if ($('.format-price').length) {
-        $('.format-price').priceFormat({
-            limit: 13,
-            prefix: '',
-            centsLimit: 0
-        });
-    }
+    /* Ckeditor */
+	if ($('.form-control-ckeditor').length) {
+		$('.form-control-ckeditor').each(function () {
+			var id = $(this).attr('id');
+			CKEDITOR.replace(id);
+		});
+	}
     /* Check required form */
     if ($('.submit-check').length) {
         $('.submit-check').click(function () {
@@ -491,20 +529,20 @@ $(document).ready(function () {
             }
         });
     }
-	/* Delete all */
-	if ($('#delete-all').length) {
-		$('body').on('click', '#delete-all', function () {
-			var url = $(this).data('url');
-			confirmDialog('delete-all', 'Bạn có chắc muốn xóa những mục này ?', url);
-		});
-	}
+    /* Delete all */
+    if ($('#delete-all').length) {
+        $('body').on('click', '#delete-all', function () {
+            var url = $(this).data('url');
+            confirmDialog('delete-all', 'Bạn có chắc muốn xóa những mục này ?', url);
+        });
+    }
     /* Delete item */
-	if ($('#delete-item').length) {
-		$('body').on('click', '#delete-item', function () {
-			var url = $(this).data('url');
-			confirmDialog('delete-item', 'Bạn có chắc muốn xóa mục này ?', url);
-		});
-	}
+    if ($('#delete-item').length) {
+        $('body').on('click', '#delete-item', function () {
+            var url = $(this).data('url');
+            confirmDialog('delete-item', 'Bạn có chắc muốn xóa mục này ?', url);
+        });
+    }
     /* Change status ajax */
     if ($('.show-checkbox').length) {
         $('body').on('click', '.show-checkbox', function () {
@@ -523,8 +561,10 @@ $(document).ready(function () {
                     attr: attr
                 },
                 success: function () {
-                    if ($this.is(':checked')) $this.prop('checked', false);
-                    else $this.prop('checked', true);
+                    if ($this.is(':checked'))
+                        $this.prop('checked', false);
+                    else
+                        $this.prop('checked', true);
                 }
             });
 
@@ -552,4 +592,101 @@ $(document).ready(function () {
             return false;
         });
     }
+    /* Filer */
+    if ($('#filer-gallery').length) {
+        $('#filer-gallery').filer({
+            limit: null,
+            maxSize: null,
+            extensions: ['jpg', 'png', 'jpeg', 'JPG', 'PNG', 'JPEG', 'Png'],
+            changeInput: '<div class="jFiler-input-dragDrop"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-cloud-up-o"></i></div><div class="jFiler-input-text"><h3>Kéo và thả hình vào đây</h3> <span style="display:inline-block; margin: 15px 0">hoặc</span></div><a class="jFiler-input-choose-btn blue">Chọn hình</a></div></div>',
+            theme: 'dragdropbox',
+            showThumbs: false,
+            addMore: true,
+            allowDuplicates: false,
+            clipBoardPaste: false,
+            dragDrop: {
+                dragEnter: null,
+                dragLeave: null,
+                drop: null,
+                dragContainer: null
+            },
+            captions: {
+                button: 'Thêm hình',
+                feedback: 'Vui lòng chọn hình ảnh',
+                feedback2: 'Những hình đã được chọn',
+                drop: 'Kéo hình vào đây để upload',
+                removeConfirmation: 'Bạn muốn loại bỏ hình ảnh này ?',
+                errors: {
+                    filesLimit: 'Chỉ được upload mỗi lần {{fi-limit}} hình ảnh',
+                    filesType: 'Chỉ hỗ trợ tập tin là hình ảnh có định dạng: {{fi-extensions}}',
+                    filesSize: 'Hình {{fi-name}} có kích thước quá lớn. Vui lòng upload hình ảnh có kích thước tối đa {{fi-maxSize}} MB.',
+                    filesSizeAll: 'Những hình ảnh bạn chọn có kích thước quá lớn. Vui lòng chọn những hình ảnh có kích thước tối đa {{fi-maxSize}} MB.'
+                }
+            },
+            uploadFile: {
+                url: 'api/upload.php',
+                data: {
+                    'params': QUERY_STRING,
+                },
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                dataType: 'json',
+                async: false,
+                beforeSend: function () {
+                    holdonOpen();
+                },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data['success'] == true) {
+                        holdonClose();
+                        location.reload();
+                    } else {
+                        alert(data['msg']);
+                    }
+                },
+                error: function () {
+                    alert('Error with filer');
+                },
+            },
+        });
+    }
+    /* Delete filer */
+    $('body').on('click', '.my-jFiler-item-trash', function () {
+        var id = $(this).data('id');
+        confirmDialog('delete-filer', 'Bạn có chắc muốn xóa hình ảnh này ?', id);
+    });
+    /* Check all filer */
+    $('body').on('click', '.check-all-filer', function () {
+        var input = $('.my-jFiler-items .jFiler-items-list').find('input.filer-checkbox');
+        var jFilerItems = $('#jFilerSortable').find('.my-jFiler-item');
+
+        $(this).find('i').toggleClass('far fa-square fas fa-check-square');
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $('.sort-filer').removeClass('active');
+            $('.sort-filer').attr('disabled', false);
+            input.each(function () {
+                $(this).prop('checked', false);
+            });
+        } else {
+            $(this).addClass('active');
+            $('.sort-filer').attr('disabled', true);
+            $('.alert-sort-filer').hide();
+            $('.my-jFiler-item-trash').show();
+            input.each(function () {
+                $(this).prop('checked', true);
+            });
+            jFilerItems.each(function () {
+                $(this).find('input').attr('disabled', false);
+            });
+            jFilerItems.each(function () {
+                $(this).removeClass('moved');
+            });
+        }
+    });
+    /* Delete all filer */
+    $('body').on('click', '.delete-all-filer', function () {
+        var folder = $('.folder-filer').val();
+        confirmDialog('delete-all-filer', 'Bạn có chắc muốn xóa các hình ảnh đã chọn ?', folder);
+    });
 });
