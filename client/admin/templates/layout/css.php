@@ -7,8 +7,13 @@
 <link href="assets/css/animate.min.css" rel="stylesheet">
 <link href="assets/holdon/HoldOn.css" rel="stylesheet">
 <link href="assets/holdon/HoldOn-style.css" rel="stylesheet">
-<link href="assets/css/adminlte.css" rel="stylesheet">
-<link href="assets/css/adminlte-style.css" rel="stylesheet">
 <link href="assets/daterangepicker/daterangepicker.css" rel="stylesheet">
 <link href="assets/datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet">
 <link href="assets/confirm/confirm.css" rel="stylesheet">
+<link href="assets/confirm/confirm.css" rel="stylesheet">
+<link href="assets/filer/jquery.filer.css" rel="stylesheet">
+<link href="assets/filer/jquery.filer-dragdropbox-theme.css" rel="stylesheet">
+
+
+<link href="assets/css/adminlte.css" rel="stylesheet">
+<link href="assets/css/adminlte-style.css" rel="stylesheet">

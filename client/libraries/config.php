@@ -31,8 +31,15 @@ $config = array(
     ),
 );
 
+/*Ảnh product*/
 $config['product']['width'] = 270;
 $config['product']['height'] = 270;
+/*Ảnh news*/
+$config['news']['width'] = 270;
+$config['news']['height'] = 270;
+/*Ảnh static*/
+$config['static']['width'] = 270;
+$config['static']['height'] = 270;
 
 /* Path */
 define('ROOT', str_replace(basename(__DIR__), '', __DIR__));
