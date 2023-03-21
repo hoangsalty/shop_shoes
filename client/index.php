@@ -10,7 +10,6 @@ define('LAYOUT', './layout/');
 require_once LIBRARIES . "config.php";
 require_once LIBRARIES . 'autoload.php';
 new AutoLoad();
-$injection = new AntiSQLInjection();
 $d = new PDODb($config['database']);
 $flash = new Flash();
 $router = new AltoRouter();

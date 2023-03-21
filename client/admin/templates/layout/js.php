@@ -26,5 +26,7 @@
 <script src="assets/js/priceFormat.js"></script>
 <script src="assets/confirm/confirm.js"></script>
 <script src="assets/ckeditor/ckeditor.js"></script>
+<script src="assets/jscolor/jscolor.js"></script>
+<script src="assets/sumoselect/jquery.sumoselect.js"></script>
 <script src="assets/js/apps.js"></script>
 <script src="assets/js/adminlte.js"></script>

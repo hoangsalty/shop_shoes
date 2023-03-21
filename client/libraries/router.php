@@ -2,13 +2,13 @@
 /* Router */
 $router->setBasePath($config['database']['url']);
 $router->map('GET', ADMIN . '/', function () {
-    global $func, $config;
-    $func->redirect($config['database']['url'] . ADMIN . "/index.php");
+    global $config;
+    $this->redirect($config['database']['url'] . ADMIN . "/index.php");
     exit;
 });
 $router->map('GET', ADMIN, function () {
-    global $func, $config;
-    $func->redirect($config['database']['url'] . ADMIN . "/index.php");
+    global $config;
+    $this->redirect($config['database']['url'] . ADMIN . "/index.php");
     exit;
 });
 $router->map('GET|POST', '', 'index', 'home');
@@ -68,7 +68,7 @@ switch ($com) {
         $source = "index";
         $template = "index/index";
         break;
-    
+
     default:
         header('HTTP/1.0 404 Not Found', true, 404);
         include("404.php");

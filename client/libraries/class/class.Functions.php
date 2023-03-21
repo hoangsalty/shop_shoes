@@ -407,4 +407,72 @@ class Functions
         }
         return $result;
     }
+    /* Join column */
+    public function joinCols($array = null, $column = null)
+    {
+        $str = '';
+        $arrayTemp = array();
+        if ($array && $column) {
+            foreach ($array as $k => $v) {
+                if (!empty($v[$column])) {
+                    $arrayTemp[] = $v[$column];
+                }
+            }
+            if (!empty($arrayTemp)) {
+                $arrayTemp = array_unique($arrayTemp);
+                $str = implode(",", $arrayTemp);
+            }
+        }
+        return $str;
+    }
+    /* Get color */
+    public function getColor($id = 0)
+    {
+        global $d;
+        if ($id) {
+            $temps = $d->rawQuery("select id_color from table_product_color where id_product = ?", array($id));
+            $temps = (!empty($temps)) ? $this->joinCols($temps, 'id_color') : array();
+            $temps = (!empty($temps)) ? explode(",", $temps) : array();
+        }
+        $row_color = $d->rawQuery("select * from table_color where date_deleted = 0 order by numb,id desc", array());
+
+        $str = '<select id="dataColor" name="dataColor[]" class="select multiselect" multiple="multiple" >';
+        for ($i = 0; $i < count($row_color); $i++) {
+            if (!empty($temps)) {
+                if (in_array($row_color[$i]['id'], $temps))
+                    $selected = 'selected="selected"';
+                else
+                    $selected = '';
+            } else {
+                $selected = '';
+            }
+            $str .= '<option value="' . $row_color[$i]["id"] . '" ' . $selected . ' /> ' . $row_color[$i]["name"] . '</option>';
+        }
+        $str .= '</select>';
+        return $str;
+    }
+    /* Get size */
+    public function getSize($id = 0)
+    {
+        global $d;
+        if ($id) {
+            $temps = $d->rawQuery("select id_size from table_product_size where id_product = ?", array($id));
+            $temps = (!empty($temps)) ? $this->joinCols($temps, 'id_size') : array();
+            $temps = (!empty($temps)) ? explode(",", $temps) : array();
+        }
+        $row_size = $d->rawQuery("select * from table_size where date_deleted = 0 order by numb,id desc", array());
+
+        $str = '<select id="dataSize" name="dataSize[]" class="select multiselect" multiple="multiple" >';
+        for ($i = 0; $i < count($row_size); $i++) {
+            if (!empty($temps)) {
+                if (in_array($row_size[$i]['id'], $temps)) $selected = 'selected="selected"';
+                else $selected = '';
+            } else {
+                $selected = '';
+            }
+            $str .= '<option value="' . $row_size[$i]["id"] . '" ' . $selected . ' /> ' . $row_size[$i]["name"] . '</option>';
+        }
+        $str .= '</select>';
+        return $str;
+    }
 }

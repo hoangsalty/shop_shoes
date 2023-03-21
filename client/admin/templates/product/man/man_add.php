@@ -50,15 +50,15 @@ else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Tiêu đề:</label>
-                        <input type="text" class="form-control for-seo text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
+                        <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="desc">Mô tả:</label>
-                        <textarea class="form-control for-seo text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars($flash->get('desc')) ?: $func->decodeHtmlChars(@$item['desc']) ?></textarea>
+                        <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars($flash->get('desc')) ?: $func->decodeHtmlChars(@$item['desc']) ?></textarea>
                     </div>
                     <div class="form-group">
                         <label for="content">Nội dung:</label>
-                        <textarea class="form-control for-seo text-sm form-control-ckeditor" name="data[content]" id="content" rows="5" placeholder="Nội dung"><?= $func->decodeHtmlChars($flash->get('content')) ?: $func->decodeHtmlChars(@$item['content']) ?></textarea>
+                        <textarea class="form-control text-sm form-control-ckeditor" name="data[content]" id="content" rows="5" placeholder="Nội dung"><?= $func->decodeHtmlChars($flash->get('content')) ?: $func->decodeHtmlChars(@$item['content']) ?></textarea>
                     </div>
                 </div>
             </div>
@@ -77,9 +77,18 @@ else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
                             <label class="d-block" for="id_list">Loại sản phẩm:</label>
                             <?= $func->getAjaxCategory('product', 'list', 'Chọn loại') ?>
                         </div>
-                        <div class="col-xl-6 col-sm-4">
+                        <div class="form-group col-xl-6 col-sm-4">
                             <label class="d-block" for="id_brand">Danh mục hãng:</label>
                             <?= $func->getAjaxCategory('product', 'brand', 'Chọn hãng') ?>
+                        </div>
+
+                        <div class="form-group col-xl-6 col-sm-4">
+                            <label class="d-block" for="id_color">Danh mục màu sắc:</label>
+                            <?= $func->getColor(@$item['id']) ?>
+                        </div>
+                        <div class="form-group col-xl-6 col-sm-4">
+                            <label class="d-block" for="id_size">Danh mục kích thước:</label>
+                            <?= $func->getSize(@$item['id']) ?>
                         </div>
                     </div>
                 </div>

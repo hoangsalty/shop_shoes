@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2023 at 11:16 PM
+-- Generation Time: Mar 21, 2023 at 03:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -118,6 +118,7 @@ INSERT INTO `table_city` (`id`, `name`, `slug`, `level`, `code`, `numb`, `status
 CREATE TABLE `table_color` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `color` varchar(255) DEFAULT NULL,
   `numb` int(11) DEFAULT 0,
   `status` varchar(255) DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
@@ -129,9 +130,8 @@ CREATE TABLE `table_color` (
 -- Dumping data for table `table_color`
 --
 
-INSERT INTO `table_color` (`id`, `name`, `numb`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'Xanh', 1, 'hienthi', 1609247839, 1628742013, 0),
-(2, 'Tím', 2, 'hienthi', 1609247860, 0, 0);
+INSERT INTO `table_color` (`id`, `name`, `color`, `numb`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(6, 'Đen', '000000', 1, 'hienthi', 1679408905, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -4872,7 +4872,7 @@ CREATE TABLE `table_product` (
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(25, 4, 8, 'jpc1kzktrzrtpxgphryk-9520-9600.png', 'san-pham-1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP01', 70000, 30000, 1, 0, 'hienthi', 1678543416, 1678796492, 0),
+(25, 4, 8, 'jpc1kzktrzrtpxgphryk-9520-9600.png', 'san-pham-1', '&lt;p&gt;Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP01', 70000, 30000, 1, 0, 'hienthi', 1678543416, 1679408946, 0),
 (26, 5, NULL, 'pxbotpg619vte84cqhpg-1165-5041-6904.png', 'san-pham-2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nibh felis, commodo ac eros tempor, rhoncus cursus mi. Sed velit urna, venenatis eget purus at, consequat dignissim ante. Quisque consequat, enim sit amet interdum feugiat, mi sapien porta ipsum, non mattis nisi arcu non lorem. Mauris enim dui, viverra id fermentum quis, fringilla non sem. Quisque gravida sit amet orci sed semper. Donec sit amet dictum sapien. Sed condimentum libero a consectetur lobortis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam quis sem venenatis, dignissim ligula eget, viverra est. Proin fermentum dapibus augue, at convallis sapien sodales at. Mauris varius commodo dui non consequat. Donec commodo ultrices nulla laoreet efficitur. Nulla eget odio vitae odio dictum fringilla.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nibh felis, commodo ac eros tempor, rhoncus cursus mi. Sed velit urna, venenatis eget purus at, consequat dignissim ante. Quisque consequat, enim sit amet interdum feugiat, mi sapien porta ipsum, non mattis nisi arcu non lorem. Mauris enim dui, viverra id fermentum quis, fringilla non sem. Quisque gravida sit amet orci sed semper. Donec sit amet dictum sapien. Sed condimentum libero a consectetur lobortis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam quis sem venenatis, dignissim ligula eget, viverra est. Proin fermentum dapibus augue, at convallis sapien sodales at. Mauris varius commodo dui non consequat. Donec commodo ultrices nulla laoreet efficitur. Nulla eget odio vitae odio dictum fringilla.', 'Sản phẩm 2', 'SP-01', 300000, 200000, 2, 0, 'hienthi', 1678611681, 1678796862, 0);
 
 -- --------------------------------------------------------
@@ -4914,6 +4914,13 @@ CREATE TABLE `table_product_color` (
   `id_color` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `table_product_color`
+--
+
+INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
+(4, 25, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -4945,19 +4952,6 @@ INSERT INTO `table_product_list` (`id`, `slug`, `content`, `desc`, `name`, `phot
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_sale`
---
-
-CREATE TABLE `table_product_sale` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `id_parent` int(11) UNSIGNED DEFAULT NULL,
-  `id_color` int(11) UNSIGNED DEFAULT NULL,
-  `id_size` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `table_product_size`
 --
 
@@ -4966,6 +4960,14 @@ CREATE TABLE `table_product_size` (
   `id_product` int(10) UNSIGNED DEFAULT NULL,
   `id_size` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `table_product_size`
+--
+
+INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
+(16, 25, 5),
+(17, 25, 6);
 
 -- --------------------------------------------------------
 
@@ -5007,10 +5009,9 @@ CREATE TABLE `table_size` (
 --
 
 INSERT INTO `table_size` (`id`, `name`, `numb`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'S', 2, 'hienthi', 1609247908, 1616894255, 0),
-(2, 'M', 1, 'hienthi', 1609247923, 0, 0),
-(3, 'L', 3, 'hienthi', 1609247931, 0, 0),
-(4, 'XL', 4, 'hienthi', 1609247937, 0, 0);
+(5, 'S', 1, 'hienthi', 1679399953, 0, 0),
+(6, 'M', 2, 'hienthi', 1679399959, 0, 0),
+(7, 'L', 3, 'hienthi', 1679399966, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -15848,15 +15849,6 @@ ALTER TABLE `table_product_list`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_product_sale`
---
-ALTER TABLE `table_product_sale`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_sale` (`id_parent`),
-  ADD KEY `size_sale` (`id_size`),
-  ADD KEY `color_sale` (`id_color`);
-
---
 -- Indexes for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
@@ -15917,7 +15909,7 @@ ALTER TABLE `table_city`
 -- AUTO_INCREMENT for table `table_color`
 --
 ALTER TABLE `table_color`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `table_comment`
@@ -15995,7 +15987,7 @@ ALTER TABLE `table_product_brand`
 -- AUTO_INCREMENT for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `table_product_list`
@@ -16004,16 +15996,10 @@ ALTER TABLE `table_product_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `table_product_sale`
---
-ALTER TABLE `table_product_sale`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1545;
-
---
 -- AUTO_INCREMENT for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `table_setting`
@@ -16025,7 +16011,7 @@ ALTER TABLE `table_setting`
 -- AUTO_INCREMENT for table `table_size`
 --
 ALTER TABLE `table_size`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `table_static`
@@ -16100,22 +16086,14 @@ ALTER TABLE `table_product`
 --
 ALTER TABLE `table_product_color`
   ADD CONSTRAINT `product1` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `product_color` FOREIGN KEY (`id_color`) REFERENCES `table_product_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
-
---
--- Constraints for table `table_product_sale`
---
-ALTER TABLE `table_product_sale`
-  ADD CONSTRAINT `color_sale` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `product_sale` FOREIGN KEY (`id_parent`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `size_sale` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `product_color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `product_size` FOREIGN KEY (`id_size`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `product_size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `table_user`
