@@ -287,7 +287,7 @@
 .SumoSelect.open .search-txt{padding:.46875rem .75rem;}
 .SumoSelect.open > .optWrapper{top:40px;}
 .form-group-category .SumoSelect{width:100%;}
-
+.placeholder {background-color: transparent !important;opacity: 1 !important;}
 /* Select */
 .was-validated select.form-control:invalid{background-position:right calc(.375em + 0.6rem) center;}
 .was-validated select.form-control:valid{background-position:right calc(.375em + 0.6rem) center;}

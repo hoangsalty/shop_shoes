@@ -453,12 +453,12 @@ $(document).ready(function () {
         });
     }
     /* Ckeditor */
-	if ($('.form-control-ckeditor').length) {
-		$('.form-control-ckeditor').each(function () {
-			var id = $(this).attr('id');
-			CKEDITOR.replace(id);
-		});
-	}
+    if ($('.form-control-ckeditor').length) {
+        $('.form-control-ckeditor').each(function () {
+            var id = $(this).attr('id');
+            CKEDITOR.replace(id);
+        });
+    }
     /* Check required form */
     if ($('.submit-check').length) {
         $('.submit-check').click(function () {
@@ -689,4 +689,17 @@ $(document).ready(function () {
         var folder = $('.folder-filer').val();
         confirmDialog('delete-all-filer', 'Bạn có chắc muốn xóa các hình ảnh đã chọn ?', folder);
     });
+
+    /* Sumoselect */
+    if ($('.multiselect').length) {
+        $('.multiselect').SumoSelect({
+            placeholder: 'Chọn danh mục',
+            selectAll: true,
+            search: true,
+            searchText: 'Tìm kiếm',
+            locale: ['OK', 'Hủy', 'Chọn hết'],
+            captionFormat: 'Đã chọn {0} mục',
+            captionFormatAllSelected: 'Đã chọn tất cả {0} mục'
+        });
+    }
 });

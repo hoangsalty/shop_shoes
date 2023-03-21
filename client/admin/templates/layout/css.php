@@ -13,7 +13,6 @@
 <link href="assets/confirm/confirm.css" rel="stylesheet">
 <link href="assets/filer/jquery.filer.css" rel="stylesheet">
 <link href="assets/filer/jquery.filer-dragdropbox-theme.css" rel="stylesheet">
-
-
+<link href="assets/sumoselect/sumoselect.css" rel="stylesheet">
 <link href="assets/css/adminlte.css" rel="stylesheet">
 <link href="assets/css/adminlte-style.css" rel="stylesheet">

@@ -66,6 +66,26 @@
 
                         <?php
                         $active = "";
+                        if ($com == 'product' && ($act == 'man_color' || $act == 'add_color' || $act == 'edit_color')) $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=product&act=man_color" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Màu sản phẩm</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'product' && ($act == 'man_size' || $act == 'add_size' || $act == 'edit_size')) $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=product&act=man_size" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Size sản phẩm</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
                         if ($com == 'product' && ($act == 'man' || $act == 'add' || $act == 'edit')) $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=product&act=man" class="nav-link <?= $active ?>">
