@@ -16,7 +16,7 @@
         //include TEMPLATE . LAYOUT . "breadcrumb.php";
         ?>
         <div class="wrap-main <?= ($source == 'index') ? 'wrap-home' : '' ?>">
-            <?php include TEMPLATE . $template . "_tpl.php"; ?>
+            <?php include TEMPLATE . $template . ".php"; ?>
         </div>
         <?php
         include TEMPLATE . LAYOUT . "footer.php";
