@@ -69,6 +69,7 @@ switch ($com) {
         $template = "index/index";
         break;
 
+
     default:
         header('HTTP/1.0 404 Not Found', true, 404);
         include("404.php");
