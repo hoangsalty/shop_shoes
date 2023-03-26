@@ -31,10 +31,10 @@ $config = array(
     ),
 );
 /*Ảnh Categories*/
-$config['product_list']['width'] = 270;
+$config['product_list']['width'] = 285;
 $config['product_list']['height'] = 270;
 /*Ảnh product*/
-$config['product']['width'] = 270;
+$config['product']['width'] = 285;
 $config['product']['height'] = 270;
 /*Ảnh news*/
 $config['news']['width'] = 270;
@@ -46,8 +46,8 @@ $config['static']['height'] = 270;
 $config['album']['width'] = 270;
 $config['album']['height'] = 270;
 /*Ảnh slideshow*/
-$config['slideshow']['width'] = 1366;
-$config['slideshow']['height'] = 500;
+$config['slideshow']['width'] = 895;
+$config['slideshow']['height'] = 430;
 /*Ảnh video*/
 $config['video']['width'] = 300;
 $config['video']['height'] = 300;

@@ -1,11 +1,11 @@
 <?php if (!empty($productlist)) { ?>
-    <section class="wrap-categories" data-margin="30" data-padding="50">
+    <section class="wrap-categories">
         <div class="wrap-content">
-            <div class="categories__slider owl-carousel">
+            <div class="categories__slider owl-carousel control-owl">
                 <?php foreach ($productlist as $k => $v) { ?>
                     <div>
                         <div class="item-categories">
-                            <a class="image" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
+                            <a class="image scale-img transition" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
                                 <?= $func->getImage(['class' => '', 'width' => $config['product_list']['width'], 'height' => $config['product_list']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
                             </a>
                             <div class="info">
