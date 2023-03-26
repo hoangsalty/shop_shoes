@@ -58,7 +58,7 @@ function notifyDialog(content = '', title = 'Thông báo', icon = 'fas fa-exclam
     });
 }
 /* Confirm */
-function confirmDialog(action, text, value, title = 'Thông báo', icon = 'fas fa-exclamation-triangle', type = 'blue') {
+function confirmDialog(action, text, value, table = '', title = 'Thông báo', icon = 'fas fa-exclamation-triangle', type = 'blue') {
     $.confirm({
         title: title,
         icon: icon, // font awesome
@@ -79,7 +79,7 @@ function confirmDialog(action, text, value, title = 'Thông báo', icon = 'fas f
                 action: function () {
                     if (action == 'delete-item') deleteItem(value);
                     if (action == 'delete-all') deleteAll(value);
-                    if (action == 'delete-filer') deleteFiler(value);
+                    if (action == 'delete-filer') deleteFiler(value, table);
                     if (action == 'delete-all-filer') deleteAllFiler(value);
                 }
             },
@@ -116,15 +116,14 @@ function deleteAll(url) {
     document.location = url + '&listid=' + listid;
 }
 /* Delete filer */
-function deleteFiler(id) {
-    var cmd = 'delete';
-
+function deleteFiler(id, table) {
     $.ajax({
         type: 'POST',
         url: 'api/gallery.php',
         data: {
             id: id,
-            cmd: cmd
+            cmd: 'delete',
+            table: table,
         }
     });
 
@@ -134,16 +133,12 @@ function deleteFiler(id) {
     }
 }
 /* Delete all filer */
-function deleteAllFiler(folder) {
+function deleteAllFiler(table) {
     var listid = '';
-    var cmd = 'delete-all';
-
     $('input.filer-checkbox').each(function () {
         if (this.checked) listid = listid + ',' + this.value;
     });
-
     listid = listid.substring(1);
-
     if (listid == '') {
         notifyDialog('Bạn hãy chọn ít nhất 1 mục để xóa');
         return false;
@@ -154,12 +149,12 @@ function deleteAllFiler(folder) {
         url: 'api/gallery.php',
         data: {
             listid: listid,
-            cmd: cmd
-        }
+            cmd: 'delete-all',
+            table: table,
+        },
     });
 
     listid = listid.split(',');
-
     for (var i = 0; i < listid.length; i++) {
         $('.my-jFiler-item-' + listid[i]).remove();
     }
@@ -661,7 +656,9 @@ $(document).ready(function () {
     /* Delete filer */
     $('body').on('click', '.my-jFiler-item-trash', function () {
         var id = $(this).data('id');
-        confirmDialog('delete-filer', 'Bạn có chắc muốn xóa hình ảnh này ?', id);
+        var table = $(this).data('table');
+
+        confirmDialog('delete-filer', 'Bạn có chắc muốn xóa hình ảnh này ?', id, table);
     });
     /* Check all filer */
     $('body').on('click', '.check-all-filer', function () {
@@ -694,8 +691,8 @@ $(document).ready(function () {
     });
     /* Delete all filer */
     $('body').on('click', '.delete-all-filer', function () {
-        var folder = $('.folder-filer').val();
-        confirmDialog('delete-all-filer', 'Bạn có chắc muốn xóa các hình ảnh đã chọn ?', folder);
+        var table = $(this).data('table');
+        confirmDialog('delete-all-filer', 'Bạn có chắc muốn xóa các hình ảnh đã chọn ?', table);
     });
 
     /* Sumoselect */

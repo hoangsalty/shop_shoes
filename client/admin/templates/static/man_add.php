@@ -27,12 +27,6 @@ $linkSave = "index.php?com=static&act=save&type=" . $type;
 
         <div class="row">
             <div class="col-xl-8">
-                <?php
-                if($type != 'footer') {
-                    $slugchange = 0;
-                    include TEMPLATE . LAYOUT . "slug.php";
-                }
-                ?>
                 <div class=" card card-primary card-outline text-sm">
                 <div class="card-header">
                     <h3 class="card-title">Nội dung trang tĩnh</h3>
