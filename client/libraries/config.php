@@ -40,6 +40,18 @@ $config['news']['height'] = 270;
 /*Ảnh static*/
 $config['static']['width'] = 270;
 $config['static']['height'] = 270;
+/*Ảnh album*/
+$config['album']['width'] = 270;
+$config['album']['height'] = 270;
+/*Ảnh slideshow*/
+$config['slideshow']['width'] = 1366;
+$config['slideshow']['height'] = 500;
+/*Ảnh video*/
+$config['video']['width'] = 300;
+$config['video']['height'] = 300;
+/*Ảnh logo*/
+$config['logo']['width'] = 100;
+$config['logo']['height'] = 100;
 
 /* Path */
 define('ROOT', str_replace(basename(__DIR__), '', __DIR__));

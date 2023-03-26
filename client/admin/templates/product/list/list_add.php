@@ -35,7 +35,7 @@ else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&i
         <?= $flash->getMessages('admin') ?>
 
         <div class="row">
-            <div class="col-xl-8"">
+            <div class="col-xl-8">
                 <?php
                 $slugchange = ($act == 'edit_list') ? 1 : 0;
                 include TEMPLATE . LAYOUT . "slug.php";

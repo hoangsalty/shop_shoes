@@ -35,7 +35,7 @@ else if ($act == 'edit_brand') $linkSave = "index.php?com=product&act=save_brand
         <?= $flash->getMessages('admin') ?>
 
         <div class="row">
-            <div class="col-xl-8"">
+            <div class="col-xl-8">
                 <?php
                 $slugchange = ($act == 'edit_brand') ? 1 : 0;
                 include TEMPLATE . LAYOUT . "slug.php";

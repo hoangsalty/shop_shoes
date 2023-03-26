@@ -26,7 +26,7 @@ $linkSave = "index.php?com=static&act=save&type=" . $type;
         <?= $flash->getMessages('admin') ?>
 
         <div class="row">
-            <div class="col-xl-8"">
+            <div class="col-xl-8">
                 <?php
                 if($type != 'footer') {
                     $slugchange = 0;

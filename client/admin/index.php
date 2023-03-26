@@ -22,6 +22,7 @@ require_once LIBRARIES . "requick.php";
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,8 +39,8 @@ require_once LIBRARIES . "requick.php";
     <!-- Main -->
     <div class="main-wrapper">
         <?php
-            include TEMPLATE . LAYOUT . "header.php";
-            include TEMPLATE . LAYOUT . "menu.php";
+        include TEMPLATE . LAYOUT . "header.php";
+        include TEMPLATE . LAYOUT . "menu.php";
         ?>
         <div class="content-wrapper">
             <?php include TEMPLATE . $template . ".php"; ?>
@@ -50,4 +51,5 @@ require_once LIBRARIES . "requick.php";
     <!-- Js all -->
     <?php include TEMPLATE . LAYOUT . "js.php"; ?>
 </body>
+
 </html>
