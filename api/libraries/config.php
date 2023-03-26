@@ -42,4 +42,3 @@ $configBase = $http . $configUrl;
 /* Cấu hình upload */
 /* require_once LIBRARIES . "constant.php"; */
 include LIBRARIES . "upload.php";
-?>

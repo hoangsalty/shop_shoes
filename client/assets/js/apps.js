@@ -109,14 +109,14 @@ $(document).ready(function () {
 /* Carousel */
 $(document).ready(function () {
   $(".categories__slider").owlCarousel({
-    loop: true,
+    loop: false,
     margin: 20,
     items: 4,
     dots: false,
     nav: true,
     navText: [
-      "<i class='fa-solid fa-angle-left'></i>",
-      "<i class='fa-solid fa-angle-right'></i>",
+      "<span class='fa fa-angle-left'><span/>",
+      "<span class='fa fa-angle-right'><span/>",
     ],
     animateOut: "fadeOut",
     animateIn: "fadeIn",
@@ -142,6 +142,7 @@ $(document).ready(function () {
     },
   });
 });
+
 $(document).ready(function () {
   $(".set-bg").each(function () {
     var bg = $(this).data("setbg");
@@ -161,4 +162,37 @@ $(document).ready(function () {
       0
     );
   });
+});
+
+$(document).ready(function () {
+  if (isExist($("[data-margin]"))) {
+    $("[data-margin]").each(function () {
+      var $margin = $(this).data("margin");
+      $(this).css({ "margin-bottom": $margin + "px" });
+    });
+  }
+
+  if (isExist($("[data-padding]"))) {
+    $("[data-padding]").each(function () {
+      var $padding = $(this).data("padding");
+      $(this).css({ "padding-top": $padding + "px" });
+      $(this).css({ "padding-bottom": $padding + "px" });
+    });
+  }
+
+  if (isExist($("[data-row]"))) {
+    $("[data-row]").each(function () {
+      var $padding = $(this).data("row");
+
+      $this.children('[class*="col"]').css({
+        paddingLeft: $padding + "px",
+        paddingRight: $padding + "px",
+      });
+
+      $this.css({
+        marginLeft: -$padding + "px",
+        marginRight: -$padding + "px",
+      });
+    });
+  }
 });

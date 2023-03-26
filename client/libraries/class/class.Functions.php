@@ -475,4 +475,23 @@ class Functions
         $str .= '</select>';
         return $str;
     }
+
+    /* Format money */
+    public function formatMoney($price = 0, $unit = 'đ', $html = false)
+    {
+        $str = '';
+
+        if ($price) {
+            $str .= number_format($price, 0, ',', '.');
+            if ($unit != '') {
+                if ($html) {
+                    $str .= '<span>' . $unit . '</span>';
+                } else {
+                    $str .= $unit;
+                }
+            }
+        }
+
+        return $str;
+    }
 }
