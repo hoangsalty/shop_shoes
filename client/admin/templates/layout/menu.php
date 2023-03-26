@@ -145,18 +145,64 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <?php
+                $active = "";
+                $menuopen = "";
+                if ($com == 'photo') {
+                    $active = 'active';
+                    $menuopen = 'menu-open';
+                }
+                ?>
+                <li class="nav-item <?= $menuopen ?>">
+                    <a href="#" class="nav-link <?= $active ?>">
                         <i class="nav-icon fas fa-image"></i>
-                        <p>Quản lý hình ảnh</p>
+                        <p>Quản lý hình ảnh<i class="fas fa-angle-left right"></i></p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <?php
+                        $active = "";
+                        if ($com == 'photo' && $_GET['type'] == 'logo') $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=photo&act=photo_static&type=logo" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Logo</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'photo' && $_GET['type'] == 'slideshow' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo')) $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=photo&act=man_photo&type=slideshow" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Slideshow</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'photo' && $_GET['type'] == 'album' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo')) $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=photo&act=man_photo&type=album" class="nav-link <?= $active ?>">
+                                <i class="nav-icon fas fa-images"></i>
+                                <p>Album</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'photo' && $_GET['type'] == 'video' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo')) $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=photo&act=man_photo&type=video" class="nav-link <?= $active ?>">
+                                <i class="nav-icon fas fa-video"></i>
+                                <p>Quản lý video</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-video"></i>
-                        <p>Quản lý video</p>
-                    </a>
-                </li>
+
+
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-alt"></i>

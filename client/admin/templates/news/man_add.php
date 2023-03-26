@@ -35,7 +35,7 @@ else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&id=" . $id;
         <?= $flash->getMessages('admin') ?>
 
         <div class="row">
-            <div class="col-xl-8"">
+            <div class="col-xl-8">
                 <?php
                 $slugchange = ($act == 'edit') ? 1 : 0;
                 include TEMPLATE . LAYOUT . "slug.php";

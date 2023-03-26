@@ -7,7 +7,24 @@ class Functions
     {
         $this->d = $d;
     }
-
+    /* Is url youtube */
+    public function isYoutube($str)
+    {
+        if (preg_match('/https?:\/\/(?:[a-zA_Z]{2,3}.)?(?:youtube\.com\/watch\?)((?:[\w\d\-\_\=]+&amp;(?:amp;)?)*v(?:&lt;[A-Z]+&gt;)?=([0-9a-zA-Z\-\_]+))/i', $str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /* Is url */
+    public function isUrl($str)
+    {
+        if (preg_match('/^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/', $str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /* Is number */
     public function isNumber($numbs)
     {
@@ -15,6 +32,16 @@ class Functions
             return true;
         }
 
+        return false;
+    }
+    /* Lấy youtube */
+    public function getYoutube($url = '')
+    {
+        if ($url != '') {
+            preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $url, $matches);
+
+            if ($matches[1] != '') return $matches[1];
+        }
         return false;
     }
 

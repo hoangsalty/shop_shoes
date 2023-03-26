@@ -37,12 +37,6 @@ function saveStatic()
     if ($data) {
         foreach ($data as $column => $value) {
             $data[$column] = htmlspecialchars($func->checkInput($value));
-
-            if (strpos($column, 'id_list') !== false || strpos($column, 'id_brand') !== false) {
-                if (empty($value) || $value == 0) {
-                    $data[$column] = NULL;
-                }
-            }
         }
 
         if (!empty($_REQUEST['slug']))

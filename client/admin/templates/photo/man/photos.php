@@ -1,20 +1,23 @@
 <?php
-$linkView = $configBase;
-$linkMan = $linkFilter = "index.php?com=product&act=man_list";
-$linkAdd = "index.php?com=product&act=add_list";
-$linkEdit = "index.php?com=product&act=edit_list";
-$linkDelete = "index.php?com=product&act=delete_list";
+$linkMan = "index.php?com=photo&act=man_photo&type=" . $type;
+$linkAdd = "index.php?com=photo&act=add_photo&type=" . $type;
+$linkEdit = "index.php?com=photo&act=edit_photo&type=" . $type;
+$linkDelete = "index.php?com=photo&act=delete_photo&type=" . $type;
 
-$status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
+$status = array("hienthi" => "Hiển thị");
+
+$name = '';
+if ($type == 'logo') $name = 'Logo';
+else if ($type == 'slideshow') $name = 'Slideshow';
+else if ($type == 'album') $name = 'Album';
 ?>
-
 <!-- Content Header -->
 <section class="content-header text-sm">
     <div class="container-fluid">
         <div class="row">
             <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="index.php" title="Dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active">Quản lý loại sản phẩm</li>
+                <li class="breadcrumb-item active">Quản lý <?= $name ?></li>
             </ol>
         </div>
     </div>
@@ -22,29 +25,14 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 
 <!-- Main content -->
 <section class="content">
-    <div class="d-flex card-footer text-sm">
-        <a class="btn btn-sm bg-gradient-primary text-white mr-2" href="<?= $linkAdd ?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?= $linkDelete ?><?= $strUrl ?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
-        <div class="form-inline form-search d-inline-block align-middle ml-auto">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?= (isset($_GET['keyword'])) ? $_GET['keyword'] : '' ?>" onkeypress="doEnter(event,'keyword','<?= $linkMan ?>')">
-                <div class="input-group-append bg-primary rounded-right">
-                    <button class="btn btn-navbar text-white" type="button" onclick="onSearch('keyword','<?= $linkMan ?>')">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+    <div class="card-footer text-sm sticky-top">
+        <a class="btn btn-sm bg-gradient-primary text-white" href="<?= $linkAdd ?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?= $linkDelete ?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
     </div>
+
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
-            <h3 class="card-title">Danh sách loại sản phẩm</h3>
-
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </div>
+            <h3 class="card-title">Danh sách <?= $name ?></h3>
         </div>
         <div class="card-body table-responsive p-0">
             <table class="table table-hover">
@@ -56,11 +44,15 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                 <label for="selectall-checkbox" class="custom-control-label"></label>
                             </div>
                         </th>
-                        <th class="align-middle text-center" width="75px">STT</th>
-                        <th class="align-middle text-center" width="150px">Hình</th>
-                        <th class="align-middle">Tiêu đề</th>
+                        <th class="align-middle text-center" width="10%">STT</th>
+                        <th class="align-middle text-center" width="8%">Hình</th>
+                        <th class="align-middle" style="width:30%">Tiêu đề</th>
+                        <th class="align-middle">Link</th>
+                        <?php if ($type == 'video') { ?>
+                            <th class="align-middle">Link video</th>
+                        <?php } ?>
                         <?php foreach ($status as $key => $value) { ?>
-                            <th class="align-middle text-center" width="120px"><?= $value ?></th>
+                            <th class="align-middle text-center"><?= $value ?></th>
                         <?php } ?>
                     </tr>
                 </thead>
@@ -81,29 +73,34 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                     </div>
                                 </td>
                                 <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="table_product_list">
+                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="photo">
                                 </td>
-                                <td class="align-middle">
+                                <td class="align-middle text-center">
                                     <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                        <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 80, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
+                                        <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 80, 'upload' => UPLOAD_PHOTO_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
                                     </a>
                                 </td>
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
-                                        <a class="text-primary mr-3" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
                                         <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                         <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>
+                                <td class="align-middle"><?= $items[$i]['link'] ?></td>
+
+                                <?php if ($type == 'video') { ?>
+                                    <td class="align-middle"><?= $items[$i]['link_video'] ?></td>
+                                <?php } ?>
+
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                                 <?php foreach ($status as $key => $value) { ?>
-                                    <td class="align-middle text-center">
-                                        <div class="custom-control custom-checkbox my-checkbox">
-                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_product_list" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
-                                            <label for="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
-                                        </div>
-                                    </td>
+                                        <td class="align-middle text-center">
+                                            <div class="custom-control custom-checkbox my-checkbox">
+                                                <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="photo" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
+                                                <label for="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
+                                            </div>
+                                        </td>
                                 <?php } ?>
                             </tr>
                         <?php } ?>
@@ -113,6 +110,12 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
         </div>
     </div>
     <?php if ($paging) { ?>
-        <div class="card-footer text-sm pb-0"><?= $paging ?></div>
+        <div class="card-footer text-sm pb-0">
+            <?= $paging ?>
+        </div>
     <?php } ?>
+    <div class="card-footer text-sm">
+        <a class="btn btn-sm bg-gradient-primary text-white" href="<?= $linkAdd ?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?= $linkDelete ?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
+    </div>
 </section>

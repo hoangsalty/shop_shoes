@@ -423,6 +423,14 @@ function onchangeCategory(obj) {
 
     return (window.location = url);
 }
+/* Youtube preview */
+function youtubePreview(url, element) {
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    url = match && match[7].length == 11 ? match[7] : false;
+
+    $(element).attr('src', '//www.youtube.com/embed/' + url).css({ width: '500', height: '300' });
+}
 $(document).ready(function () {
     /* Validation form chung */
     validateForm('validation-form');
