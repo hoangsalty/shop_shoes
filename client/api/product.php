@@ -24,12 +24,12 @@ $tempLink .= "&p=";
 $pageLink .= $tempLink;
 
 /* Get data */
-$sql = "select name$lang, slugvi, slugen, id, photo, regular_price, sale_price, discount, type from #_product where type='san-pham' $where and find_in_set('noibat',status) and find_in_set('hienthi',status) order by numb,id desc";
+$sql = "select * from table_product where date_deleted = 0 $where and find_in_set('noibat',status) and find_in_set('hienthi',status) order by numb,id desc";
 $sqlCache = $sql . " limit $start, $pagingAjax->perpage";
-$items = $cache->get($sqlCache, $params, 'result', 7200);
+$items = $d->rawQuery($sqlCache, $params);
 
 /* Count all data */
-$countItems = count($cache->get($sql, $params, 'result', 7200));
+$countItems = count($d->rawQuery($sql, $params));
 
 /* Get page result */
 $pagingItems = $pagingAjax->getAllPageLinks($countItems, $pageLink, $eShow);
@@ -40,25 +40,24 @@ $pagingItems = $pagingAjax->getAllPageLinks($countItems, $pageLink, $eShow);
             <?php foreach ($items as $k => $v) { ?>
                 <div class="col-lg-3 col-md-4 col-6">
                     <div class="product">
-                        <a class="box-product text-decoration-none" href="<?= $v[$sluglang] ?>" title="<?= $v['name' . $lang] ?>">
-                            <p class="pic-product scale-img">
-                                <?= $func->getImage(['sizes' => '270x270x1', 'isWatermark' => true, 'prefix' => 'product', 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name' . $lang]]) ?>
-                            </p>
-                            <h3 class="name-product text-split"><?= $v['name' . $lang] ?></h3>
-                            <p class="price-product">
-                                <?php if ($v['discount']) { ?>
-                                    <span class="price-new"><?= $func->formatMoney($v['sale_price']) ?></span>
-                                    <span class="price-old"><?= $func->formatMoney($v['regular_price']) ?></span>
-                                    <span class="price-per"><?= '-' . $v['discount'] . '%' ?></span>
-                                <?php } else { ?>
-                                    <span class="price-new"><?= ($v['regular_price']) ? $func->formatMoney($v['regular_price']) : lienhe ?></span>
-                                <?php } ?>
-                            </p>
-                        </a>
-                        <p class="cart-product w-clear">
-                            <span class="btn btn-sm btn-success cart-add addcart mr-2" data-id="<?= $v['id'] ?>" data-action="addnow">Thêm vào giỏ hàng</span>
-                            <span class="btn btn-sm btn-danger cart-buy addcart" data-id="<?= $v['id'] ?>" data-action="buynow">Mua ngay</span>
-                        </p>
+                        <div class="box-product text-decoration-none">
+                            <div class="box-image">
+                                <a class="pic-product scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
+                                    <?= $func->getImage(['class' => 'rounded img-preview', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                </a>
+                                <p class="cart-product w-clear">
+                                    <span class="btn btn-sm btn-success cart-add addcart mr-2" data-id="<?= $v['id'] ?>" data-action="addnow">Thêm vào giỏ hàng</span>
+                                </p>
+                            </div>
+                            <div class="info">
+                                <h3 class="name-product text-split"><?= $v['name'] ?></h3>
+                                <p class="price-product">
+                                    <span class="price-new">
+                                        <?= ($v['regular_price']) ? $func->formatMoney($v['regular_price']) : '' ?>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php } ?>

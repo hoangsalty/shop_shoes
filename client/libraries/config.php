@@ -30,7 +30,9 @@ $config = array(
         ),
     ),
 );
-
+/*Ảnh Categories*/
+$config['product_list']['width'] = 270;
+$config['product_list']['height'] = 270;
 /*Ảnh product*/
 $config['product']['width'] = 270;
 $config['product']['height'] = 270;
@@ -64,4 +66,3 @@ $configBase = $http . $configUrl;
 
 /* Cấu hình upload */
 include LIBRARIES . "upload.php";
-?>
