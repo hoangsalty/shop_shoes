@@ -10,6 +10,9 @@ $com = (!empty($params['com'])) ? $params['com'] : '';
 $numb = (!empty($_POST['numb'])) ? (int)$_POST['numb'] : 0;
 $data = array('success' => true, 'msg' => 'Upload thành công');
 
+$album_table = (!empty($params['album_table'])) ? $params['album_table'] : '';
+$table = "table_" . $album_table;
+
 /* Xử lý $_FILE - Path image */
 $myFile = (!empty($_FILES['files'])) ? $_FILES['files'] : null;
 $_FILES['file'] = array('name' => $myFile['name'][0], 'type' => $myFile['type'][0], 'tmp_name' => $myFile['tmp_name'][0], 'error' => $myFile['error'][0], 'size' => $myFile['size'][0]);
@@ -23,10 +26,10 @@ $data_file['name'] = "";
 $data_file['id_parent'] = $id;
 $data_file['status'] = 'hienthi';
 $data_file['date_created'] = time();
-$max_numb = $d->rawQueryOne("select max(numb) as max_numb from table_gallery where id_parent = ?", array($id));
+$max_numb = $d->rawQueryOne("select max(numb) as max_numb from $table where id_parent = ?", array($id));
 $data_file['numb'] = $max_numb['max_numb'] + 1;
 
-if ($d->insert('table_gallery', $data_file)) {
+if ($d->insert($table, $data_file)) {
     $id_insert = $d->getLastInsertId();
 
     if ($func->hasFile("file")) {
@@ -35,7 +38,7 @@ if ($d->insert('table_gallery', $data_file)) {
         if ($photo = $func->uploadImage("file", '../' . UPLOAD_PRODUCT, $file_name)) {
             $photoUpdate['photo'] = $photo;
             $d->where('id', $id_insert);
-            $d->update('table_gallery', $photoUpdate);
+            $d->update($table, $photoUpdate);
             unset($photoUpdate);
         }
     }

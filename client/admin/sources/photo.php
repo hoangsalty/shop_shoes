@@ -149,7 +149,7 @@ function viewPhotos()
 /* Edit photo */
 function editPhoto()
 {
-    global $d, $func, $curPage, $item, $type;
+    global $d, $func, $curPage, $item, $type, $gallery;
     if (!empty($_REQUEST['id']))
         $id = htmlspecialchars($_REQUEST['id']);
     else
@@ -161,6 +161,8 @@ function editPhoto()
         $item = $d->rawQueryOne("select * from table_photo where id = ? limit 0,1", array($id));
         if (empty($item)) {
             $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&p=" . $curPage, false);
+        } else {
+            $gallery = $d->rawQuery("select * from table_gallery_album where id_parent = ? order by numb,id desc", array($id));
         }
     }
 }
