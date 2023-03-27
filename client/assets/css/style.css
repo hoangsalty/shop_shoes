@@ -1,6 +1,6 @@
 /* Main */
 :root {
-  --color-red: #ec2d3f;
+  --color-red: var(--color-main);
   --color-main: #001973;
 }
 
@@ -162,7 +162,7 @@ input[type="number"]::-webkit-inner-spin-button {
   right: 0;
   height: 4px;
   width: 80px;
-  background: #7fad39;
+  background: var(--color-main);
   content: "";
   margin: 0 auto;
 }
@@ -365,7 +365,7 @@ input[type="number"]::-webkit-inner-spin-button {
   color: #ffffff;
   font-weight: 800;
   text-transform: uppercase;
-  background: #7fad39;
+  background: var(--color-main);
   margin-bottom: 0;
   display: flex;
   align-items: center;
@@ -381,7 +381,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .header__hotline__icon {
   font-size: 18px;
-  color: #7fad39;
+  color: var(--color-main);
   height: 50px;
   width: 50px;
   background: #f5f5f5;
@@ -966,8 +966,8 @@ input[type="number"]::-webkit-inner-spin-button {
 .pagination-ajax a.current,
 .pagination-ajax a:hover {
   color: #ffffff !important;
-  border-color: #ec2d3f;
-  background-color: #ec2d3f;
+  border-color: var(--color-main);
+  background-color: var(--color-main);
 }
 
 .pagination-ajax a.first,
@@ -1009,4 +1009,451 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .pagination-ajax a.next:before {
   background-image: url(../images/page-next.png);
+}
+
+/* News  */
+.wrap-newsnb {
+  margin-bottom: 60px;
+}
+
+.item-newsnb .image {
+  display: block;
+}
+
+.item-newsnb .info {
+  padding-top: 25px;
+}
+
+.item-newsnb .info .ngaydang {
+  font-size: 16px;
+  color: #b2b2b2;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.item-newsnb .info .ngaydang i {
+  margin-right: 5px;
+}
+
+.item-newsnb .info h3 {
+  margin-bottom: 10px;
+}
+
+.item-newsnb .info h3 a {
+  font-size: 20px;
+  color: #1c1c1c;
+  font-weight: 700;
+  -webkit-line-clamp: 1;
+}
+
+.item-newsnb:hover .info h3 a {
+  color: var(--color-main);
+}
+
+.item-newsnb .info .desc {
+  font-size: 16px;
+  color: #6f6f6f;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.wrap-newsnb .newsnb__owl.owl-carousel .owl-nav button {
+  font-size: 18px;
+  color: #1c1c1c;
+  height: 70px;
+  width: 30px;
+  line-height: 70px;
+  text-align: center;
+  border: 1px solid #ebebeb;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  background: #ffffff;
+  display: inline-block;
+}
+
+.wrap-newsnb .newsnb__owl.owl-carousel .owl-nav button.owl-prev {
+  right: auto;
+  left: -35px;
+}
+
+.wrap-newsnb .newsnb__owl.owl-carousel .owl-nav button.owl-next {
+  left: auto;
+  right: -35px;
+}
+
+.wrap-newsnb .newsnb__owl.owl-carousel .owl-nav button.owl-prev:hover {
+  background-color: var(--color-main);
+  color: #ffffff;
+}
+
+.wrap-newsnb .newsnb__owl.owl-carousel .owl-nav button.owl-next:hover {
+  background-color: var(--color-main);
+  color: #ffffff;
+}
+
+/* Zalo */
+.btn-zalo {
+  bottom: 315px;
+}
+
+/* Phone */
+.btn-phone {
+  bottom: 230px;
+}
+
+/* Messenger */
+.js-facebook-messenger-container.closed {
+  display: none !important;
+}
+
+.js-facebook-messenger-tooltip {
+  bottom: 97px;
+  right: 97px;
+  color: #404040;
+  background: #fff;
+}
+
+.js-facebook-messenger-tooltip.closed {
+  display: none !important;
+}
+
+.js-facebook-messenger-box,
+.js-facebook-messenger-button {
+  z-index: 999;
+}
+
+.js-facebook-messenger-tooltip {
+  z-index: 999;
+  display: none;
+  position: fixed;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 2pt 10pt;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 2pt 10pt;
+  z-index: 1000000000000000019884624838656;
+}
+
+.js-facebook-messenger-close-tooltip {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.js-facebook-messenger-box {
+  z-index: 999;
+}
+
+.js-facebook-messenger-box.rubberBand {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
+
+.js-facebook-messenger-box.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.js-facebook-messenger-button,
+.js-facebook-messenger-tooltip {
+  z-index: 999;
+}
+
+.js-facebook-messenger-box {
+  display: block;
+  position: fixed;
+  cursor: pointer;
+  bottom: 150px;
+  right: 17px;
+  width: 56px;
+  height: 56px;
+  text-align: center;
+  background: #1182fc;
+  border-radius: 100%;
+  overflow: hidden;
+  z-index: 99;
+  -webkit-box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.js-facebook-messenger-box.rotate svg#fb-msng-icon {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.js-facebook-messenger-box svg#fb-msng-icon {
+  width: 32px;
+  height: 33px;
+  position: absolute;
+  top: 13px;
+  left: 12px;
+  opacity: 1;
+  overflow: hidden;
+  -webkit-transition: opacity 160ms ease-in-out, transform 160ms ease-in-out;
+  -webkit-transition: opacity 160ms ease-in-out,
+    -webkit-transform 160ms ease-in-out;
+  transition: opacity 160ms ease-in-out, -webkit-transform 160ms ease-in-out;
+  transition: opacity 160ms ease-in-out, transform 160ms ease-in-out;
+  transition: opacity 160ms ease-in-out, transform 160ms ease-in-out,
+    -webkit-transform 160ms ease-in-out;
+}
+
+.js-facebook-messenger-box.rotate svg#close-icon {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.js-facebook-messenger-box svg#close-icon {
+  opacity: 0;
+  width: 19px;
+  height: 20px;
+  position: absolute;
+  top: 19px;
+  left: 19px;
+  -webkit-transition: opacity 160ms ease-in-out, transform 160ms ease-in-out;
+  -webkit-transition: opacity 160ms ease-in-out,
+    -webkit-transform 160ms ease-in-out;
+  transition: opacity 160ms ease-in-out, -webkit-transform 160ms ease-in-out;
+  transition: opacity 160ms ease-in-out, transform 160ms ease-in-out;
+  transition: opacity 160ms ease-in-out, transform 160ms ease-in-out,
+    -webkit-transform 160ms ease-in-out;
+}
+
+.js-facebook-messenger-container,
+.js-facebook-messenger-container-button {
+  z-index: 1000;
+}
+
+.js-facebook-messenger-container {
+  position: fixed;
+  opacity: 0;
+  -webkit-transform: translateY(50px);
+  transform: translateY(50px);
+  bottom: 110px;
+  right: 90px;
+  border-radius: 10px;
+  pointer-events: none;
+  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06),
+    0 2px 32px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
+  -webkit-transition: transform 160ms ease-in-out, opacity 160ms ease-in-out;
+  -webkit-transition: opacity 160ms ease-in-out,
+    -webkit-transform 160ms ease-in-out;
+  transition: opacity 160ms ease-in-out, -webkit-transform 160ms ease-in-out;
+  transition: transform 160ms ease-in-out, opacity 160ms ease-in-out;
+  transition: transform 160ms ease-in-out, opacity 160ms ease-in-out,
+    -webkit-transform 160ms ease-in-out;
+}
+
+.js-facebook-messenger-top-header {
+  width: 220px;
+  color: #ffffff;
+  background: #1182fc;
+  display: block;
+  position: relative;
+  width: 220px;
+  background: #1182fc;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1;
+  padding: 10px;
+  font-size: 14px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.js-facebook-messenger-container iframe,
+.js-facebook-messenger-container-button iframe {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.js-facebook-messenger-box,
+.js-facebook-messenger-button,
+.js-facebook-messenger-tooltip {
+  z-index: 999;
+}
+
+.js-facebook-messenger-container,
+.js-facebook-messenger-container-button {
+  z-index: 1000;
+}
+
+.js-facebook-messenger-top-header {
+  color: #ffffff;
+  background: #1182fc;
+  width: 220px;
+}
+
+.js-facebook-messenger-tooltip {
+  color: #404040;
+  background: #fff;
+}
+
+.js-facebook-messenger-container.open {
+  -webkit-transform: translateY(0px);
+  transform: translateY(0px);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.js-facebook-messenger-tooltip {
+  bottom: 97px;
+  right: 97px;
+}
+
+.js-facebook-messenger-box.open svg#fb-msng-icon {
+  opacity: 0;
+}
+
+.js-facebook-messenger-box.rotate.open svg#close-icon {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.js-facebook-messenger-box.open svg#close-icon {
+  opacity: 1;
+}
+
+/* Button Frame */
+.btn-frame {
+  display: block;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 20px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.btn-frame i {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #1182fc;
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.btn-frame i img {
+  vertical-align: middle;
+  width: 70%;
+}
+
+.btn-frame .animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.btn-frame .kenit-alo-circle {
+  width: 60px;
+  height: 60px;
+  top: -5px;
+  right: -5px;
+  position: absolute;
+  background-color: transparent;
+  border-radius: 100%;
+  border: 2px solid rgba(7, 41, 103, 0.8);
+  opacity: 0.1;
+  border-color: #1182fc;
+  opacity: 0.5;
+}
+
+.btn-frame .zoomIn {
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn;
+}
+
+.btn-frame .animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.btn-frame .kenit-alo-circle-fill {
+  width: 70px;
+  height: 70px;
+  top: -10px;
+  right: -10px;
+  position: absolute;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  background-color: rgba(7, 41, 103, 0.35);
+  opacity: 0.4;
+}
+
+.btn-frame .pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+}
+
+/* Footer */
+
+.footer {
+  background: #f3f6fa;
+  padding-top: 60px;
+  padding-bottom: 0;
+}
+
+.footer__about__logo {
+  margin-bottom: 15px;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+}
+
+.footer__about ul li {
+  font-size: 16px;
+  color: #1c1c1c;
+  line-height: 36px;
+  list-style: none;
+}
+
+.footer__widget h6 {
+  color: #1c1c1c;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.footer__widget ul {
+  width: 50%;
+  float: left;
+}
+
+.footer__widget ul li {
+  list-style: none;
+}
+
+.footer__widget ul li a {
+  color: #1c1c1c;
+  font-size: 14px;
+  line-height: 32px;
+}
+
+.footer__widget p {
+  font-size: 14px;
+  color: #1c1c1c;
+  margin-bottom: 30px;
 }

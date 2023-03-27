@@ -42,4 +42,34 @@
     </section>
 <?php } ?>
 
-<?php $func->var_dump($productlist) ?>
+<?php if (!empty($newsnb)) { ?>
+    <section class="wrap-newsnb">
+        <div class="wrap-content">
+            <div class="title-main">
+                <span>Tin tức</span>
+            </div>
+            <div class="newsnb__owl owl-carousel control-owl">
+                <?php foreach ($newsnb as $k => $v) { ?>
+                    <div>
+                        <div class="item-newsnb">
+                            <a class="image scale-img transition" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
+                                <?= $func->getImage(['class' => 'w-100', 'width' => $config['news']['width'], 'height' => $config['news']['height'], 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                            </a>
+                            <div class="info">
+                                <span class="ngaydang"><i class="fa-solid fa-calendar-days"></i><?= date("d/m/Y", $v['date_created']) ?></span>
+                                <h3 class="name">
+                                    <a class="text-decoration-none transition text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
+                                </h3>
+                                <div class="desc text-split"><?= $v['desc'] ?></div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </section>
+<?php } ?>
+
+
+<?php // $func->var_dump() 
+?>
