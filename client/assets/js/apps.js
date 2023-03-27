@@ -52,20 +52,6 @@ $(document).ready(function () {
     }
   });
 
-  $(".xdvt").hover(function () {
-    var vitri = $(this).position().top - 1;
-    $(".xdvt>ul").css({ top: vitri + "px" });
-  });
-  $(".xdvt2").hover(function () {
-    var vitri = $(this).position().top - 1;
-
-    $(".xdvt2>ul").css({ top: vitri + "px" });
-  });
-  $(".xdvt3").hover(function () {
-    var vitri = $(this).position().top - 1;
-    $(".xdvt3>ul").css({ top: vitri + "px" });
-  });
-
   $(".menu-left .title").click(function () {
     if ($(".ul-menu").hasClass("hidden-menu")) {
       $(".ul-menu").removeClass("hidden-menu");
@@ -76,7 +62,7 @@ $(document).ready(function () {
 
   $(window).bind("load resize", function () {
     if (isExist($(".slideshow"))) {
-      heigth = $(".slideshow").height() - 20;
+      heigth = $(".slideshow").height();
     } else {
       heigth = 350;
     }
@@ -108,6 +94,22 @@ $(document).ready(function () {
 
 /* Carousel */
 $(document).ready(function () {
+  $(".slideshow__slider").owlCarousel({
+    loop: false,
+    margin: 10,
+    items: 1,
+    dots: false,
+    nav: true,
+    navText: [
+      "<span class='fa fa-angle-left'><span/>",
+      "<span class='fa fa-angle-right'><span/>",
+    ],
+    animateOut: "fadeOut",
+    animateIn: "fadeIn",
+    smartSpeed: 1200,
+    autoHeight: false,
+    autoplay: true,
+  });
   $(".categories__slider").owlCarousel({
     loop: false,
     margin: 20,
@@ -122,7 +124,7 @@ $(document).ready(function () {
     animateIn: "fadeIn",
     smartSpeed: 1200,
     autoHeight: false,
-    autoplay: false,
+    autoplay: true,
     responsive: {
       0: {
         items: 1,

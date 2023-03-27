@@ -9,58 +9,11 @@
                             <span>Danh mục sản phẩm</span>
                         </div>
                         <ul class="ul-menu list-inline scroll-maded">
-                            <li class="xdvt">
-                                <a href="">tên sản phẩm cấp 1</a>
-                                <ul class="list-unstyled animate__animated animate__faster animate__fadeInUp">
-                                    <li class="xdvt2">
-                                        <a href="">tên sản phẩm cấp 2</a>
-                                        <ul class="list-unstyled animate__animated animate__faster animate__fadeInUp">
-                                            <li class="xdvt3">
-                                                <a href="">tên sản phẩm cấp 3</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="xdvt">
-                                <a href="">tên sản phẩm cấp 1</a>
-                                <ul class="list-unstyled animate__animated animate__faster animate__fadeInUp">
-                                    <li class="xdvt2">
-                                        <a href="">tên sản phẩm cấp 2</a>
-                                        <ul class="list-unstyled animate__animated animate__faster animate__fadeInUp">
-                                            <li class="xdvt3">
-                                                <a href="">tên sản phẩm cấp 3</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="xdvt">
-                                <a href="">tên sản phẩm cấp 1</a>
-                                <ul class="list-unstyled animate__animated animate__faster animate__fadeInUp">
-                                    <li class="xdvt2">
-                                        <a href="">tên sản phẩm cấp 2</a>
-                                        <ul class="list-unstyled animate__animated animate__faster animate__fadeInUp">
-                                            <li class="xdvt3">
-                                                <a href="">tên sản phẩm cấp 3</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="xdvt">
-                                <a href="">tên sản phẩm cấp 1</a>
-                                <ul class="list-unstyled animate__animated animate__faster animate__fadeInUp">
-                                    <li class="xdvt2">
-                                        <a href="">tên sản phẩm cấp 2</a>
-                                        <ul class="list-unstyled animate__animated animate__faster animate__fadeInUp">
-                                            <li class="xdvt3">
-                                                <a href="">tên sản phẩm cấp 3</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
+                            <?php foreach ($splistht as $klist => $vlist) { ?>
+                                <li class="xdvt">
+                                    <a class="has-child transition" title="<?= $vlist['name'] ?>" href="<?= $vlist['slug'] ?>"><?= $vlist['name'] ?></a>
+                                </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -68,25 +21,25 @@
             <div class="right">
                 <ul class="d-flex align-items-center justify-content-between">
                     <li>
-                        <a href="#">Trang chủ</a>
+                        <a class="<?php if ($com == '' || $com == 'index') echo 'active'; ?> transition" href="" title="Trang chủ">Trang chủ</a>
                     </li>
                     <li>
-                        <a href="#">Giới thiệu</a>
+                        <a class="<?php if ($com == 'gioi-thieu') echo 'active'; ?> transition" href="gioi-thieu" title="Giới thiệu">Giới thiệu</a>
                     </li>
                     <li>
-                        <a href="#">Khuyến mãi</a>
+                        <a class="<?php if ($com == 'khuyen-mai') echo 'active'; ?> transition" href="khuyen-mai" title="Khuyến mãi">Khuyến mãi</a>
                     </li>
                     <li>
-                        <a href="#">Thư viện ảnh</a>
+                        <a class="<?php if ($com == 'thu-vien-anh') echo 'active'; ?> transition" href="thu-vien-anh" title="Thư viện ảnh">Thư viện ảnh</a>
                     </li>
                     <li>
-                        <a href="#">Video</a>
+                        <a class="<?php if ($com == 'video') echo 'active'; ?> transition" href="video" title="Video">Video</a>
                     </li>
                     <li>
-                        <a href="#">Tin tức</a>
+                        <a class="<?php if ($com == 'tin-tuc') echo 'active'; ?> transition" href="tin-tuc" title="Tin tức">Tin tức</a>
                     </li>
                     <li>
-                        <a href="#">Liên hệ</a>
+                        <a class="<?php if ($com == 'lien-he') echo 'active'; ?> transition" href="lien-he" title="Liên hệ">Liên hệ</a>
                     </li>
                 </ul>
             </div>
