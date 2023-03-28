@@ -13,7 +13,7 @@ $status = array("hienthi" => "Hiển thị");
     <div class="container-fluid">
         <div class="row">
             <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
                 <li class="breadcrumb-item active">Quản lý màu sản phẩm</li>
             </ol>
         </div>
