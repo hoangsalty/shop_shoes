@@ -253,9 +253,9 @@ class Functions
         return $result;
     }
     /* Redirect */
-    public function redirect($url = '', $response = null)
+    public function redirect($url = '')
     {
-        header("location:$url", true, $response);
+        header("location:$url", true);
         exit();
     }
     /* Transfer */

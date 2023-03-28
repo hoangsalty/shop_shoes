@@ -15,7 +15,7 @@ else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&id=" . $id;
     <div class="container-fluid">
         <div class="row">
             <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
                 <li class="breadcrumb-item active"><?= $labelAct ?> tin tức</li>
             </ol>
         </div>

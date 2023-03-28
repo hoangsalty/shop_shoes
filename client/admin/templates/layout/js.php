@@ -11,6 +11,7 @@
     var TYPE = '<?= (!empty($type)) ? $type : '' ?>';
     var MAX_DATE = '<?= date("Y/m/d", time()) ?>';
     var QUERY_STRING = '<?= ($_SERVER['QUERY_STRING']) ?>';
+    var LOGIN_PAGE = <?= (empty($_SESSION['admin']['active'])) ? 'true' : 'false' ?>;
 </script>
 
 <!-- Js Files -->
