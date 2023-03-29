@@ -1,40 +1,43 @@
 <?php
-if (!defined('SOURCES')) die("Error");
+if (!defined('SOURCES'))
+    die("Error");
 
 /* Cấu hình đường dẫn trả về */
 $strUrl = "";
-if (isset($_REQUEST['keyword'])) $strUrl .= "&keyword=" . htmlspecialchars($_REQUEST['keyword']);
+if (isset($_REQUEST['keyword']))
+    $strUrl .= "&keyword=" . htmlspecialchars($_REQUEST['keyword']);
 
 switch ($act) {
-    /* Man */
     case "man":
-        viewMans();
+        viewNews();
         $template = "news/mans";
         break;
     case "add":
         $template = "news/man_add";
         break;
     case "edit":
-        editMan();
+        editNew();
         $template = "news/man_add";
         break;
     case "save":
-        saveMan();
+        saveNew();
         break;
     case "delete":
-        deleteMan();
+        deleteNew();
         break;
 }
 
 /* View man */
-function viewMans()
+function viewNews()
 {
     global $d, $func, $strUrl, $curPage, $paging, $items;
     $where = "";
     $idlist = (isset($_REQUEST['id_list'])) ? htmlspecialchars($_REQUEST['id_list']) : 0;
     $idbrand = (isset($_REQUEST['id_brand'])) ? htmlspecialchars($_REQUEST['id_brand']) : 0;
-    if ($idlist) $where .= " and id_list=$idlist";
-    if ($idbrand) $where .= " and id_brand=$idbrand";
+    if ($idlist)
+        $where .= " and id_list=$idlist";
+    if ($idbrand)
+        $where .= " and id_brand=$idbrand";
     if (isset($_REQUEST['keyword'])) {
         $keyword = htmlspecialchars($_REQUEST['keyword']);
         $where .= " and (name LIKE '%$keyword%')";
@@ -50,7 +53,7 @@ function viewMans()
     $paging = $func->pagination($total, $perPage, $curPage, $url);
 }
 /* Edit man */
-function editMan()
+function editNew()
 {
     global $d, $func, $strUrl, $curPage, $item;
     if (!empty($_REQUEST['id']))
@@ -68,7 +71,7 @@ function editMan()
     }
 }
 /* Save man */
-function saveMan()
+function saveNew()
 {
     global $d, $strUrl, $func, $flash, $curPage;
     /* Check post */
@@ -86,7 +89,7 @@ function saveMan()
     if ($data) {
         foreach ($data as $column => $value) {
             /* if (strpos($column, 'content') !== false || strpos($column, 'desc') !== false) {
-                $data[$column] = htmlspecialchars($func->checkInput($value, 'iframe'));
+            $data[$column] = htmlspecialchars($func->checkInput($value, 'iframe'));
             } else { */
             $data[$column] = htmlspecialchars($func->checkInput($value));
 
@@ -219,7 +222,7 @@ function saveMan()
     }
 }
 /* Delete man */
-function deleteMan()
+function deleteNew()
 {
     global $d, $strUrl, $func, $curPage, $com;
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;

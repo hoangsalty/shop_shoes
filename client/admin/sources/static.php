@@ -1,5 +1,6 @@
 <?php
-if (!defined('SOURCES')) die("Error");
+if (!defined('SOURCES'))
+    die("Error");
 
 switch ($act) {
     case "update":

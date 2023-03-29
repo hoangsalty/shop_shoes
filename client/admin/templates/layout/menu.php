@@ -7,7 +7,9 @@
                 <img src="assets/images/admin.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= $_SESSION['admin']['fullname'] ?></a>
+                <a href="#" class="d-block">
+                    <?= $_SESSION['admin']['fullname'] ?>
+                </a>
             </div>
         </div>
 
@@ -43,7 +45,8 @@
                     <ul class="nav nav-treeview">
                         <?php
                         $active = "";
-                        if ($com == 'product' && ($act == 'man_list' || $act == 'add_list' || $act == 'edit_list')) $active = "active"; ?>
+                        if ($com == 'product' && ($act == 'man_list' || $act == 'add_list' || $act == 'edit_list'))
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=product&act=man_list" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -53,7 +56,8 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'product' && ($act == 'man_brand' || $act == 'add_brand' || $act == 'edit_brand')) $active = "active"; ?>
+                        if ($com == 'product' && ($act == 'man_brand' || $act == 'add_brand' || $act == 'edit_brand'))
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=product&act=man_brand" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -63,7 +67,8 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'product' && ($act == 'man_color' || $act == 'add_color' || $act == 'edit_color')) $active = "active"; ?>
+                        if ($com == 'product' && ($act == 'man_color' || $act == 'add_color' || $act == 'edit_color'))
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=product&act=man_color" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -73,7 +78,8 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'product' && ($act == 'man_size' || $act == 'add_size' || $act == 'edit_size')) $active = "active"; ?>
+                        if ($com == 'product' && ($act == 'man_size' || $act == 'add_size' || $act == 'edit_size'))
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=product&act=man_size" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -83,7 +89,8 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'product' && ($act == 'man' || $act == 'add' || $act == 'edit')) $active = "active"; ?>
+                        if ($com == 'product' && ($act == 'man' || $act == 'add' || $act == 'edit'))
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=product&act=man" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -122,7 +129,8 @@
                     <ul class="nav nav-treeview">
                         <?php
                         $active = "";
-                        if ($com == 'static' && $_GET['type'] == 'gioi-thieu') $active = "active"; ?>
+                        if ($com == 'static' && $_GET['type'] == 'gioi-thieu')
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=static&act=update&type=gioi-thieu" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -132,7 +140,8 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'static' && $_GET['type'] == 'footer') $active = "active"; ?>
+                        if ($com == 'static' && $_GET['type'] == 'footer')
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=static&act=update&type=footer" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -158,7 +167,8 @@
                     <ul class="nav nav-treeview">
                         <?php
                         $active = "";
-                        if ($com == 'photo' && $_GET['type'] == 'logo') $active = "active"; ?>
+                        if ($com == 'photo' && $_GET['type'] == 'logo')
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=photo&act=photo_static&type=logo" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -168,7 +178,8 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'photo' && $_GET['type'] == 'slideshow' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo')) $active = "active"; ?>
+                        if ($com == 'photo' && $_GET['type'] == 'slideshow' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo'))
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=photo&act=man_photo&type=slideshow" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -178,20 +189,22 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'photo' && $_GET['type'] == 'album' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo')) $active = "active"; ?>
+                        if ($com == 'photo' && $_GET['type'] == 'album' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo'))
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=photo&act=man_photo&type=album" class="nav-link <?= $active ?>">
-                                <i class="nav-icon fas fa-images"></i>
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>Album</p>
                             </a>
                         </li>
 
                         <?php
                         $active = "";
-                        if ($com == 'photo' && $_GET['type'] == 'video' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo')) $active = "active"; ?>
+                        if ($com == 'photo' && $_GET['type'] == 'video' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo'))
+                            $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=photo&act=man_photo&type=video" class="nav-link <?= $active ?>">
-                                <i class="nav-icon fas fa-video"></i>
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>Quản lý video</p>
                             </a>
                         </li>
@@ -201,7 +214,8 @@
 
                 <?php
                 $active = "";
-                if ($com == 'user' && ($act == 'man' || $act == 'add' || $act == 'edit')) $active = "active"; ?>
+                if ($com == 'user' && ($act == 'man' || $act == 'add' || $act == 'edit'))
+                    $active = "active"; ?>
                 <li class="nav-item">
                     <a href="index.php?com=user&act=man" class="nav-link <?= $active ?>">
                         <i class="nav-icon fas fa-user-alt"></i>

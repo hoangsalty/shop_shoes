@@ -383,37 +383,6 @@ function deleteMan()
         $func->transfer("Không nhận được dữ liệu", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
     }
 }
-/* Delete man */
-function permDeleteMan()
-{
-    global $d, $strUrl, $func, $curPage, $com;
-    $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
-    if ($id) {
-        /* Lấy dữ liệu */
-        $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
-        if (!empty($row)) {
-            unlink(UPLOAD_PRODUCT . $row['photo']);
-            $d->rawQuery("delete from table_product where id = ?", array($id));
-            $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man&page=" . $curPage . $strUrl);
-        } else {
-            $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
-        }
-    } elseif (isset($_REQUEST['listid'])) {
-        $listid = explode(",", $_REQUEST['listid']);
-        for ($i = 0; $i < count($listid); $i++) {
-            $id = htmlspecialchars($listid[$i]);
-            /* Lấy dữ liệu */
-            $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
-            if (!empty($row)) {
-                unlink(UPLOAD_PRODUCT . $row['photo']);
-                $d->rawQuery("delete from table_product where id = ?", array($id));
-            }
-        }
-        $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man&page=" . $curPage . $strUrl);
-    } else {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
-    }
-}
 
 /* View list */
 function viewLists()
