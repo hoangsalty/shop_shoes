@@ -51,6 +51,7 @@ $linkDelete = "index.php?com=user&act=delete";
                         <th class="align-middle">Tài khoản</th>
                         <th class="align-middle">Họ tên</th>
                         <th class="align-middle">Email</th>
+                        <th class="align-middle">Nhóm quyền</th>
                         <th class="align-middle text-center">Trạng thái</th>
                     </tr>
                 </thead>
@@ -71,7 +72,7 @@ $linkDelete = "index.php?com=user&act=delete";
                                     </div>
                                 </td>
                                 <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="user">
+                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="table_user">
                                 </td>
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['username'] ?>"><?= $items[$i]['username'] ?></a>
@@ -82,11 +83,17 @@ $linkDelete = "index.php?com=user&act=delete";
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['email'] ?>"><?= $items[$i]['email'] ?></a>
                                 </td>
+                                <td class="align-middle">
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->getPermissionName($items[$i]['id_permission']) ?>"><?= $func->getPermissionName($items[$i]['id_permission']) ?></a>
+                                </td>
                                 <td class="align-middle text-center">
-                                    <?php /* <span class="badge badge-success">Success</span> */ ?>
-                                    <?php /* <span class="badge bg-danger">Danger</span> */ ?>
-                                    <?php /* <span class="badge bg-warning">Warning</span> */ ?>
-                                    <span class="badge bg-primary">Normal</span>
+                                    <?php if($items[$i]['status'] == 'hoatdong') { ?>
+                                        <span class="badge bg-success">Hoạt động</span>
+                                    <?php } else if($items[$i]['status'] == 'khoa') { ?>
+                                        <span class="badge bg-danger">Khóa</span>
+                                    <?php } else if($items[$i]['status'] == 'kichhoat') { ?>
+                                        <span class="badge bg-warning">Chờ kích hoạt</span>
+                                    <?php } ?>
                                 </td>
                                 <td class="align-middle text-center text-md text-nowrap">
                                     <a class="text-primary mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>

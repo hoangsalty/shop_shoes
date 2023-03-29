@@ -784,4 +784,11 @@ $(document).ready(function () {
             captionFormatAllSelected: 'Đã chọn tất cả {0} mục'
         });
     }
+
+    $('.max-date').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y',
+        formatDate: 'd/m/Y',
+        // minDate: '1950/01/01',
+    });
 });

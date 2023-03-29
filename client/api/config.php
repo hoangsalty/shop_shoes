@@ -1,5 +1,4 @@
 <?php
-session_start();
 define('LIBRARIES', '../libraries/');
 
 require_once LIBRARIES . "config.php";

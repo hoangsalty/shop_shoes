@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2023 at 02:07 PM
+-- Generation Time: Mar 29, 2023 at 05:50 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -4811,8 +4811,8 @@ CREATE TABLE `table_permission_group` (
 --
 
 INSERT INTO `table_permission_group` (`id`, `name`, `type`, `numb`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'Nhóm quyền cấp cao', 'admin', 1, 'hienthi', 1609288475, 1672991502, 0),
-(2, 'Nhóm quyền cơ bản', 'admin', 2, 'hienthi', 1609288536, 1641189579, 0),
+(1, 'Nhóm quyền Admin cấp cao', 'admin', 1, 'hienthi', 1609288475, 1672991502, 0),
+(2, 'Nhóm quyền Admin', 'admin', 2, 'hienthi', 1609288536, 1641189579, 0),
 (3, 'Nhóm quyền người dùng', 'user', 3, 'hienthi', 2147483647, 2147483647, 0);
 
 -- --------------------------------------------------------
@@ -4879,18 +4879,18 @@ CREATE TABLE `table_product` (
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, NULL, NULL, '1-5039.png', 'san-pham-1', '', '', 'Sản phẩm 1', '', 500000, 400000, 1, 0, 'hienthi', 1679827982, 1679828134, 0),
-(2, NULL, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 2, 0, 'hienthi', 1679827990, 1679828144, 0),
-(3, NULL, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 0, 'hienthi', 1679828000, 1679828150, 0),
-(4, NULL, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 4, 0, 'hienthi', 1679828010, 1679828182, 0),
-(5, NULL, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 5, 0, 'hienthi', 1679828021, 1679828159, 0),
-(6, NULL, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 6, 0, 'hienthi', 1679828031, 1679828199, 0),
-(7, NULL, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 7, 0, 'hienthi', 1679828041, 1679828212, 0),
-(8, NULL, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 8, 0, 'hienthi', 1679828051, 1679828220, 0),
-(9, NULL, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 9, 0, 'hienthi', 1679828075, 1679828231, 0),
-(10, NULL, NULL, '10-2976.png', 'san-pham-10', '', '', 'Sản phẩm 10', '', 723433, 231423, 10, 0, 'hienthi', 1679828083, 1679828237, 0),
-(11, NULL, NULL, '11-3977.png', 'san-pham-11', '', '', 'Sản phẩm 11', '', 888464, 231122, 11, 0, 'hienthi', 1679828093, 1679828246, 0),
-(12, NULL, NULL, '12-3249.png', 'san-pham-12', '', '', 'Sản phẩm 12', '', 623443, 123132, 12, 0, 'hienthi', 1679828105, 1679828261, 0);
+(1, NULL, NULL, '1-5039.png', 'san-pham-1', '', '', 'Sản phẩm 1', '', 500000, 400000, 2, 0, 'hienthi,noibat', 1679827982, 1679828134, 0),
+(2, NULL, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 1, 0, 'hienthi,noibat', 1679827990, 1679828144, 0),
+(3, NULL, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 0, 'hienthi,noibat', 1679828000, 1679828150, 0),
+(4, NULL, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 4, 0, 'hienthi,noibat', 1679828010, 1679828182, 0),
+(5, NULL, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 5, 0, 'hienthi,noibat', 1679828021, 1679828159, 0),
+(6, NULL, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 6, 0, 'hienthi,noibat', 1679828031, 1679828199, 0),
+(7, NULL, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 7, 0, 'hienthi,noibat', 1679828041, 1679828212, 0),
+(8, NULL, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 8, 0, 'hienthi,noibat', 1679828051, 1679828220, 0),
+(9, NULL, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 9, 0, 'hienthi,noibat', 1679828075, 1679828231, 0),
+(10, NULL, NULL, '10-2976.png', 'san-pham-10', '', '', 'Sản phẩm 10', '', 723433, 231423, 10, 0, 'hienthi,noibat', 1679828083, 1679828237, 0),
+(11, NULL, NULL, '11-3977.png', 'san-pham-11', '', '', 'Sản phẩm 11', '', 888464, 231122, 11, 0, 'hienthi,noibat', 1679828093, 1679828246, 0),
+(12, NULL, NULL, '12-3249.png', 'san-pham-12', '', '', 'Sản phẩm 12', '', 623443, 123132, 12, 0, 'hienthi,noibat', 1679828105, 1679828261, 0);
 
 -- --------------------------------------------------------
 
@@ -4960,8 +4960,8 @@ CREATE TABLE `table_product_list` (
 --
 
 INSERT INTO `table_product_list` (`id`, `slug`, `content`, `desc`, `name`, `photo`, `numb`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(6, 'giay-nam', NULL, '', 'Giày nam', '1-8598.jpg', 1, 'hienthi', 1679827339, 0, 0),
-(7, 'giay-nu', NULL, '', 'Giày nữ', '2-8403.jpg', 2, 'hienthi', 1679827370, 0, 0);
+(6, 'giay-nam', NULL, '', 'Giày nam', '1-8598.jpg', 1, 'hienthi,noibat', 1679827339, 0, 0),
+(7, 'giay-nu', NULL, '', 'Giày nữ', '2-8403.jpg', 2, 'hienthi,noibat', 1679827370, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -5065,7 +5065,7 @@ CREATE TABLE `table_user` (
   `username` varchar(225) DEFAULT NULL,
   `password` varchar(225) DEFAULT NULL,
   `confirm_code` varchar(255) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   `fullname` varchar(225) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -5076,15 +5076,20 @@ CREATE TABLE `table_user` (
   `lastlogin` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `birthday` int(11) DEFAULT 0,
-  `numb` int(11) DEFAULT 0
+  `numb` int(11) DEFAULT 0,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `table_user`
 --
 
-INSERT INTO `table_user` (`id`, `id_permission`, `username`, `password`, `confirm_code`, `avatar`, `fullname`, `phone`, `email`, `address`, `gender`, `login_session`, `user_token`, `lastlogin`, `status`, `birthday`, `numb`) VALUES
-(1, 1, 'admin', '713e68f601a5ad3d1265c2634f07b063', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '222 huỳnh thị na', 1, 'd30de1dd805bcc6b6b6cdc0c10684115', '30a62a9cb44d8575ea94e8e93dd96a46', '1676424712', 'hienthi', 1608051600, 0);
+INSERT INTO `table_user` (`id`, `id_permission`, `username`, `password`, `confirm_code`, `photo`, `fullname`, `phone`, `email`, `address`, `gender`, `login_session`, `user_token`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(1, 1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '', 0, '', 'cb9de613da96a11c709abc176cd2c61e', '1680102483', 'hoatdong', 1608051600, 0, 0, 0, 0),
+(146, 3, 'test', '098f6bcd4621d373cade4e832627b4f6', NULL, '2-7335.jpg', 'Test', '0909090909', 'test@gmail.com', 'Test', 1, 'f577080b13c67d7f3c25fac5d0ee92de', 'b7955571b6e95d6150556b5f74c5a4e6', '1680102466', 'hoatdong', 954176400, 0, 1680100745, 1680101911, 0),
+(147, 1, 'test1', '098f6bcd4621d373cade4e832627b4f6', NULL, '1-7945.jpg', 'Test', '0909090909', 'test1@gmail.com', 'Test', 1, 'face9250a60ecb67ff31284b0e338314', '8e8c4f7cd8bae54802f63465c79ef916', '1680102543', 'hoatdong', 1680022800, 1, 1680101968, 1680102499, 0);
 
 -- --------------------------------------------------------
 
@@ -16048,7 +16053,7 @@ ALTER TABLE `table_static`
 -- AUTO_INCREMENT for table `table_user`
 --
 ALTER TABLE `table_user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `table_variants`

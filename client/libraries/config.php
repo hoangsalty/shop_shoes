@@ -54,6 +54,9 @@ $config['video']['height'] = 300;
 /*Ảnh logo*/
 $config['logo']['width'] = 100;
 $config['logo']['height'] = 100;
+/*Ảnh avatar user*/
+$config['user']['width'] = 100;
+$config['user']['height'] = 100;
 
 /* Path */
 define('ROOT', str_replace(basename(__DIR__), '', __DIR__));

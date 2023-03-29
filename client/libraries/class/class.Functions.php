@@ -7,6 +7,64 @@ class Functions
     {
         $this->d = $d;
     }
+    /* Is date */
+    public function isDate($str)
+    {
+        if (preg_match('/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/', $str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /* Is phone */
+    public function isPhone($number)
+    {
+        $number = str_replace(" ", "", $number);;
+        if (preg_match_all('/^(0|84)(2(0[3-9]|1[0-6|8|9]|2[0-2|5-9]|3[2-9]|4[0-9]|5[1|2|4-9]|6[0-3|9]|7[0-7]|8[0-9]|9[0-4|6|7|9])|3[2-9]|5[5|6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])([0-9]{7})$/m', $number, $matches, PREG_SET_ORDER, 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /* Is email */
+    public function isEmail($email)
+    {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /* Is match */
+    public function isMatch($value1, $value2)
+    {
+        if ($value1 == $value2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /* Account exists */
+    public function checkExist($data = '', $type = '', $tbl = '', $id = 0)
+    {
+        if (!empty($data) && !empty($type) && !empty($tbl)) {
+            $where = (!empty($id)) ? ' and id != ' . $id : '';
+            $row = $this->d->rawQueryOne("select id from table_$tbl where $type = ? $where limit 0,1", array($data));
+            if (!empty($row)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /* Check letters and nums */
+    public function isAlphaNum($str)
+    {
+        if (preg_match('/^[a-z0-9]+$/', $str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /* Is url youtube */
     public function isYoutube($str)
     {
@@ -40,7 +98,8 @@ class Functions
         if ($url != '') {
             preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $url, $matches);
 
-            if ($matches[1] != '') return $matches[1];
+            if ($matches[1] != '')
+                return $matches[1];
         }
         return false;
     }
@@ -50,6 +109,19 @@ class Functions
         echo '<pre>';
         print_r($arr);
         echo '</pre>';
+    }
+
+    /* Kiểm tra đăng nhập */
+    public function checkLoginAdmin()
+    {
+        $token = (!empty($_SESSION['admin']['user_token'])) ? $_SESSION['admin']['user_token'] : '';
+        $row = $this->d->rawQuery("select user_token from table_user where user_token = ? and find_in_set('hienthi',status)", array($token));
+        if (!empty($row)) {
+            return true;
+        } else {
+            unset($_SESSION['admin']);
+            return false;
+        }
     }
 
     /* Kiểm tra dữ liệu nhập vào */
@@ -112,7 +184,7 @@ class Functions
                 $output[$var] = $this->checkInput($val, $type);
             }
         } else {
-            $output  = $this->cleanInput($input, $type);
+            $output = $this->cleanInput($input, $type);
         }
         return $output;
     }
@@ -259,13 +331,13 @@ class Functions
         exit();
     }
     /* Transfer */
-    public function transfer($msg = '', $page = '', $numb = true)
+    public function transfer($msg = '', $page = '', $numb1 = true)
     {
         global $configBase;
         $basehref = $configBase;
         $showtext = $msg;
         $page_transfer = $page;
-        $numb = $numb;
+        $numb = $numb1;
         include("../templates/layout/transfer.php");
         exit();
     }
@@ -273,7 +345,8 @@ class Functions
     public function getCurrentPageURL()
     {
         $pageURL = 'http';
-        if (array_key_exists('HTTPS', $_SERVER) && $_SERVER["HTTPS"] == "on") $pageURL .= "s";
+        if (array_key_exists('HTTPS', $_SERVER) && $_SERVER["HTTPS"] == "on")
+            $pageURL .= "s";
         $pageURL .= "://";
         $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
         $urlpos = strpos($pageURL, "?page");
@@ -308,14 +381,18 @@ class Functions
             }
             if ($lastpage < 7 + ($adjacents * 2)) {
                 for ($counter = 1; $counter <= $lastpage; $counter++) {
-                    if ($counter == $page) $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
-                    else $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
+                    if ($counter == $page)
+                        $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
+                    else
+                        $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
                 }
             } elseif ($lastpage > 5 + ($adjacents * 2)) {
                 if ($page < 1 + ($adjacents * 2)) {
                     for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
-                        if ($counter == $page) $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
-                        else $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
+                        if ($counter == $page)
+                            $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
+                        else
+                            $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
                     }
                     $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>...</a></li>";
                     $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a></li>";
@@ -325,8 +402,10 @@ class Functions
                     $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=2'>2</a></li>";
                     $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>...</a></li>";
                     for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
-                        if ($counter == $page) $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
-                        else $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
+                        if ($counter == $page)
+                            $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
+                        else
+                            $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
                     }
                     $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>...</a></li>";
                     $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a></li>";
@@ -336,8 +415,10 @@ class Functions
                     $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=2'>2</a></li>";
                     $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>...</a></li>";
                     for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++) {
-                        if ($counter == $page) $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
-                        else $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
+                        if ($counter == $page)
+                            $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
+                        else
+                            $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
                     }
                 }
             }
@@ -361,8 +442,10 @@ class Functions
         $rows = $d->rawQuery("select name, id from table_" . $table . "_" . $level . " where id > 0 " . $where . " order by numb,id desc", array());
         $str = '<select id="' . $id_parent . '" name="' . $id_parent . '" onchange="onchangeCategory($(this))" class="form-control filter-category select2"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
-            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int)$_REQUEST[$id_parent])) $selected = "selected";
-            else $selected = "";
+            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
+                $selected = "selected";
+            else
+                $selected = "";
             $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
         }
         $str .= '</select>';
@@ -379,8 +462,10 @@ class Functions
         $rows = $d->rawQuery("select name, id from table_" . $table . "_" . $level . " where id > 0 " . $where . " order by numb,id desc", array());
         $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" class="form-control select2 ' . $class_select . '"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
-            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int)$_REQUEST[$id_parent])) $selected = "selected";
-            else $selected = "";
+            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
+                $selected = "selected";
+            else
+                $selected = "";
             $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
         }
         $str .= '</select>';
@@ -492,8 +577,10 @@ class Functions
         $str = '<select id="dataSize" name="dataSize[]" class="select multiselect" multiple="multiple" >';
         for ($i = 0; $i < count($row_size); $i++) {
             if (!empty($temps)) {
-                if (in_array($row_size[$i]['id'], $temps)) $selected = 'selected="selected"';
-                else $selected = '';
+                if (in_array($row_size[$i]['id'], $temps))
+                    $selected = 'selected="selected"';
+                else
+                    $selected = '';
             } else {
                 $selected = '';
             }
@@ -517,6 +604,32 @@ class Functions
                     $str .= $unit;
                 }
             }
+        }
+
+        return $str;
+    }
+    /* Get permission */
+    public function getPermission($id_permission = 0)
+    {
+        $row = $this->d->rawQuery("select * from table_permission_group where date_deleted = 0 order by numb,id desc", array());
+        $str = '<select id="id_permission" name="data[id_permission]" class="form-control select2"><option value="0">Nhóm quyền</option>';
+        foreach ($row as $v) {
+            if ($v["id"] == (int) @$id_permission)
+                $selected = "selected";
+            else
+                $selected = "";
+
+            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
+        }
+        $str .= '</select>';
+        return $str;
+    }
+    public function getPermissionName($id_permission = 0)
+    {
+        $str = '';
+        $row = $this->d->rawQueryOne("select * from table_permission_group where date_deleted = 0 and id = ? limit 0,1", array($id_permission));
+        if (!empty($row)) {
+            $str = $row['name'];
         }
 
         return $str;
