@@ -477,6 +477,7 @@ function youtubePreview(url, element) {
 
     $(element).attr('src', '//www.youtube.com/embed/' + url).css({ width: '500', height: '300' });
 }
+
 $(document).ready(function () {
     /* Validation form chung */
     validateForm('validation-form');

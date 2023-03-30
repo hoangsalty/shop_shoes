@@ -60,28 +60,4 @@ class PaginationsAjax
 
         return $output;
     }
-
-    function getPrevNext($count, $href, $elShow)
-    {
-        $output = '';
-
-        if (empty($_GET["p"])) $_GET["p"] = 1;
-
-        if ($this->perpage != 0)
-            $pages  = ceil($count / $this->perpage);
-
-        if ($pages > 1) {
-            if ($_GET["p"] == 1)
-                $output = $output . '<a class="prev disabled">Prev</a>';
-            else
-                $output = $output . '<a class="prev" onclick="loadPaging(\'' . $href . ($_GET["p"] - 1) . '\',\'' . $elShow . '\')" >Prev</a>';
-
-            if ($_GET["p"] < $pages)
-                $output = $output . '<a class="next" onclick="loadPaging(\'' . $href . ($_GET["p"] + 1) . '\',\'' . $elShow . '\')" >Next</a>';
-            else
-                $output = $output . '<a class="next disabled">Next</a>';
-        }
-
-        return $output;
-    }
 }

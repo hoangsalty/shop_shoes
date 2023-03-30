@@ -189,18 +189,6 @@ function photoZone(eDrag, iDrag, eLoad) {
     }
 }
 
-function generateCaptcha(action, id, id_form) {
-    if (RECAPTCHA_ACTIVE && action && id && $("#" + id).length) {
-        grecaptcha
-            .execute(RECAPTCHA_SITEKEY, { action: action })
-            .then(function (token) {
-                var recaptchaResponse = document.getElementById(id);
-                recaptchaResponse.value = token;
-                document.getElementById(id_form).submit();
-            });
-    }
-}
-
 function loadPaging(url = "", eShow = "") {
     if ($(eShow).length && url) {
         $.ajax({
@@ -211,7 +199,6 @@ function loadPaging(url = "", eShow = "") {
             },
             success: function (result) {
                 $(eShow).html(result);
-                NN_FRAMEWORK.Lazys();
             },
         });
     }
