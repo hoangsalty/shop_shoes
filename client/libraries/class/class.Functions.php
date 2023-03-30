@@ -479,7 +479,6 @@ class Functions
     /* Check title */
     public function checkTitle($data = array())
     {
-        global $config;
         $result = array();
         if (isset($data['name'])) {
             $title = trim($data['name']);
@@ -609,12 +608,15 @@ class Functions
         return $str;
     }
     /* Get permission */
-    public function getPermission($id_permission = 0)
+    public function getPermission($permission = '')
     {
-        $row = $this->d->rawQuery("select * from table_permission_group where date_deleted = 0 order by numb,id desc", array());
-        $str = '<select id="id_permission" name="data[id_permission]" class="form-control select2"><option value="0">Nhóm quyền</option>';
+        $row = array(
+            array('id' => 'admin', 'name' => 'Nhóm quyền admin'),
+            array('id' => 'user', 'name' => 'Nhóm quyền người dùng'),
+        );
+        $str = '<select id="permission" name="data[permission]" class="form-control select2"><option value="">Nhóm quyền</option>';
         foreach ($row as $v) {
-            if ($v["id"] == (int) @$id_permission)
+            if ($v["id"] == $permission)
                 $selected = "selected";
             else
                 $selected = "";
@@ -624,12 +626,18 @@ class Functions
         $str .= '</select>';
         return $str;
     }
-    public function getPermissionName($id_permission = 0)
+    public function getPermissionName($permission = '')
     {
         $str = '';
-        $row = $this->d->rawQueryOne("select * from table_permission_group where date_deleted = 0 and id = ? limit 0,1", array($id_permission));
-        if (!empty($row)) {
-            $str = $row['name'];
+        $row = array(
+            array('id' => 'admin', 'name' => 'Nhóm quyền admin'),
+            array('id' => 'user', 'name' => 'Nhóm quyền người dùng'),
+        );
+        foreach ($row as $v) {
+            if ($v["id"] == $permission) {
+                $str = $v['name'];
+                break;
+            }
         }
 
         return $str;

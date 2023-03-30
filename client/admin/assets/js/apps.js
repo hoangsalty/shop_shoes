@@ -772,7 +772,6 @@ $(document).ready(function () {
         var table = $(this).data('table');
         confirmDialog('delete-all-filer', 'Bạn có chắc muốn xóa các hình ảnh đã chọn ?', table);
     });
-
     /* Sumoselect */
     if ($('.multiselect').length) {
         $('.multiselect').SumoSelect({
@@ -785,11 +784,10 @@ $(document).ready(function () {
             captionFormatAllSelected: 'Đã chọn tất cả {0} mục'
         });
     }
-
     $('.max-date').datetimepicker({
         timepicker: false,
         format: 'd/m/Y',
         formatDate: 'd/m/Y',
-        // minDate: '1950/01/01',
+        maxDate: MAX_DATE,
     });
 });
