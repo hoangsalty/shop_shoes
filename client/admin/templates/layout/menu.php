@@ -210,8 +210,7 @@
                         </li>
                     </ul>
                 </li>
-
-
+                
                 <?php
                 $active = "";
                 if ($com == 'user' && ($act == 'man' || $act == 'add' || $act == 'edit'))

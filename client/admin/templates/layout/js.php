@@ -3,16 +3,10 @@
     var PHP_VERSION = parseFloat('<?= phpversion() ?>'.replaceAll('.', ','));
     var CONFIG_BASE = '<?= $configBase ?>';
     var ADMIN = '<?= ADMIN ?>';
-    var ASSET = '<?= ASSETS ?>';
     var LINK_FILTER = '<?= (!empty($linkFilter)) ? $linkFilter : '' ?>';
-    var ID = <?= (!empty($id)) ? $id : 0 ?>;
-    var COM = '<?= (!empty($com)) ? $com : '' ?>';
-    var ACT = '<?= (!empty($act)) ? $act : '' ?>';
-    var TYPE = '<?= (!empty($type)) ? $type : '' ?>';
     var MAX_DATE = '<?= date("Y/m/d", time()) ?>';
     var QUERY_STRING = '<?= ($_SERVER['QUERY_STRING']) ?>';
     var LOGIN_PAGE = <?= (empty($_SESSION['admin']['active'])) ? 'true' : 'false' ?>;
-    var MAX_DATE = '<?= date("Y/m/d", time()) ?>';
 </script>
 
 <!-- Js Files -->

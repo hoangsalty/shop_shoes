@@ -65,7 +65,7 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="id_permission">Danh sách nhóm quyền:</label>
-                                <?= $func->getPermission((!empty($flash->has('id_permission'))) ? $flash->get('id_permission') : @$item['id_permission']) ?>
+                                <?= $func->getPermission($item['permission']) ?>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="username">Tài khoản: <span class="text-danger">*</span></label>

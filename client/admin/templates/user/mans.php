@@ -84,7 +84,7 @@ $linkDelete = "index.php?com=user&act=delete";
                                     <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['email'] ?>"><?= $items[$i]['email'] ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->getPermissionName($items[$i]['id_permission']) ?>"><?= $func->getPermissionName($items[$i]['id_permission']) ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->getPermissionName($items[$i]['permission']) ?>"><?= $func->getPermissionName($items[$i]['permission']) ?></a>
                                 </td>
                                 <td class="align-middle text-center">
                                     <?php if($items[$i]['status'] == 'hoatdong') { ?>
@@ -92,7 +92,7 @@ $linkDelete = "index.php?com=user&act=delete";
                                     <?php } else if($items[$i]['status'] == 'khoa') { ?>
                                         <span class="badge bg-danger">Khóa</span>
                                     <?php } else if($items[$i]['status'] == 'kichhoat') { ?>
-                                        <span class="badge bg-warning">Chờ kích hoạt</span>
+                                        <span class="badge bg-warning">Chưa kích hoạt</span>
                                     <?php } ?>
                                 </td>
                                 <td class="align-middle text-center text-md text-nowrap">

@@ -56,7 +56,7 @@ function ViewUsers()
 
     if (isset($_REQUEST['keyword'])) {
         $keyword = htmlspecialchars($_REQUEST['keyword']);
-        $where .= " and (username like '%$keyword%' or fullname like '%$keyword%' or email like '%$keyword%')";
+        $where .= " and (username like '%$keyword%' or fullname like '%$keyword%' or email like '%$keyword%' or permission like '%$keyword%' or status like '%$keyword%')";
     }
 
     $perPage = 10;
@@ -111,7 +111,7 @@ function saveUser()
     }
 
     /* Valid data */
-    if (empty($data['id_permission'])) {
+    if (empty($data['permission'])) {
         $response['messages'][] = 'Chưa chọn nhóm quyền';
     }
 

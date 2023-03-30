@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2023 at 05:50 PM
+-- Generation Time: Mar 30, 2023 at 08:07 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -4792,32 +4792,6 @@ CREATE TABLE `table_order_detail` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_permission_group`
---
-
-CREATE TABLE `table_permission_group` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `numb` int(11) DEFAULT 0,
-  `status` varchar(255) DEFAULT NULL,
-  `date_created` int(11) DEFAULT 0,
-  `date_updated` int(11) DEFAULT 0,
-  `date_deleted` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_permission_group`
---
-
-INSERT INTO `table_permission_group` (`id`, `name`, `type`, `numb`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'Nhóm quyền Admin cấp cao', 'admin', 1, 'hienthi', 1609288475, 1672991502, 0),
-(2, 'Nhóm quyền Admin', 'admin', 2, 'hienthi', 1609288536, 1641189579, 0),
-(3, 'Nhóm quyền người dùng', 'user', 3, 'hienthi', 2147483647, 2147483647, 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `table_photo`
 --
 
@@ -5061,7 +5035,7 @@ INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `t
 
 CREATE TABLE `table_user` (
   `id` int(11) UNSIGNED NOT NULL,
-  `id_permission` int(11) UNSIGNED DEFAULT NULL,
+  `permission` varchar(255) DEFAULT NULL,
   `username` varchar(225) DEFAULT NULL,
   `password` varchar(225) DEFAULT NULL,
   `confirm_code` varchar(255) DEFAULT NULL,
@@ -5086,10 +5060,10 @@ CREATE TABLE `table_user` (
 -- Dumping data for table `table_user`
 --
 
-INSERT INTO `table_user` (`id`, `id_permission`, `username`, `password`, `confirm_code`, `photo`, `fullname`, `phone`, `email`, `address`, `gender`, `login_session`, `user_token`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '', 0, '', 'cb9de613da96a11c709abc176cd2c61e', '1680102483', 'hoatdong', 1608051600, 0, 0, 0, 0),
-(146, 3, 'test', '098f6bcd4621d373cade4e832627b4f6', NULL, '2-7335.jpg', 'Test', '0909090909', 'test@gmail.com', 'Test', 1, 'f577080b13c67d7f3c25fac5d0ee92de', 'b7955571b6e95d6150556b5f74c5a4e6', '1680102466', 'hoatdong', 954176400, 0, 1680100745, 1680101911, 0),
-(147, 1, 'test1', '098f6bcd4621d373cade4e832627b4f6', NULL, '1-7945.jpg', 'Test', '0909090909', 'test1@gmail.com', 'Test', 1, 'face9250a60ecb67ff31284b0e338314', '8e8c4f7cd8bae54802f63465c79ef916', '1680102543', 'hoatdong', 1680022800, 1, 1680101968, 1680102499, 0);
+INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `confirm_code`, `photo`, `fullname`, `phone`, `email`, `address`, `gender`, `login_session`, `user_token`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(1, NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '', 0, '9d8510398d14c4230d978c6eea28ed86', '4700a6f476283ed9e9131f2ebb3870aa', '1680199390', 'hoatdong', 1608051600, 0, 0, 0, 0),
+(146, 'admin', 'test', '098f6bcd4621d373cade4e832627b4f6', NULL, '2-7335.jpg', 'Test', '0909090909', 'test@gmail.com', 'Test', 1, 'f577080b13c67d7f3c25fac5d0ee92de', 'b7955571b6e95d6150556b5f74c5a4e6', '1680102466', 'hoatdong', 954176400, 1, 1680100745, 1680199552, 0),
+(147, 'user', 'test1', '098f6bcd4621d373cade4e832627b4f6', NULL, '1-7945.jpg', 'Test', '0909090909', 'test1@gmail.com', 'Test', 1, 'face9250a60ecb67ff31284b0e338314', '8e8c4f7cd8bae54802f63465c79ef916', '1680102543', 'hoatdong', 1680022800, 2, 1680101968, 1680199544, 0);
 
 -- --------------------------------------------------------
 
@@ -15833,12 +15807,6 @@ ALTER TABLE `table_order_detail`
   ADD KEY `order_detail_color` (`id_color`);
 
 --
--- Indexes for table `table_permission_group`
---
-ALTER TABLE `table_permission_group`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `table_photo`
 --
 ALTER TABLE `table_photo`
@@ -15902,8 +15870,7 @@ ALTER TABLE `table_static`
 -- Indexes for table `table_user`
 --
 ALTER TABLE `table_user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_permission` (`id_permission`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `table_variants`
@@ -15988,12 +15955,6 @@ ALTER TABLE `table_order`
 --
 ALTER TABLE `table_order_detail`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
-
---
--- AUTO_INCREMENT for table `table_permission_group`
---
-ALTER TABLE `table_permission_group`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `table_photo`
@@ -16130,12 +16091,6 @@ ALTER TABLE `table_product_color`
 ALTER TABLE `table_product_size`
   ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `product_size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
-
---
--- Constraints for table `table_user`
---
-ALTER TABLE `table_user`
-  ADD CONSTRAINT `user_permission` FOREIGN KEY (`id_permission`) REFERENCES `table_permission_group` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `table_ward`
