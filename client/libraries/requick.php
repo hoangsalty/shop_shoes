@@ -10,7 +10,7 @@ $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : '';
 $curPage = (!empty($_GET['page'])) ? htmlspecialchars($_GET['page']) : 1;
 
 /* Kiểm tra quyền */
-if ((!empty($_SESSION['admin']['role']) && $_SESSION['admin']['role'] == 3)) {
+if ((!empty($_SESSION['admin']['role']) && $_SESSION['admin']['role'] == 'user')) {
     unset($_SESSION['admin']);
     $func->transfer("Bạn không có quyền truy cập vào khu vực này", "../index.php", false);
 }
