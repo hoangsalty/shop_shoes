@@ -1,9 +1,6 @@
 <?php
 if (!defined('LIBRARIES')) die("Error");
 
-/* Timezone */
-date_default_timezone_set('Asia/Ho_Chi_Minh');
-
 /* Cấu hình chung */
 $config = array(
     'database' => array(
@@ -62,7 +59,7 @@ $config['user']['height'] = 100;
 define('ROOT', str_replace(basename(__DIR__), '', __DIR__));
 define('ADMIN', 'admin');
 
-/* Cấu hình base */
+/* Cấu hình mặc định */
 $http = 'http://';
 $configUrl = $config['database']['server-name'] . $config['database']['url'];
 $configBase = $http . $configUrl;

@@ -1,8 +1,8 @@
 /* Validation form */
-function validateForm(ele) {
+function validateForm(e) {
     window.addEventListener('load', function () {
-        var forms = document.getElementsByClassName(ele);
-        var validation = Array.prototype.filter.call(forms, function (form) {
+        var forms = document.getementsByClassName(e);
+        forms.each(function (form) {
             form.addEventListener('submit', function (event) {
                 if (form.checkValidity() === false) {
                     event.preventDefault();
@@ -12,7 +12,7 @@ function validateForm(ele) {
             });
         });
 
-        $('.' + ele).find('input[type=submit],button[type=submit]').removeAttr('disabled');
+        $('.' + e).find('input[type=submit],button[type=submit]').removeAttr('disabled');
     });
 }
 /* Login */
@@ -67,12 +67,7 @@ function login() {
     });
 }
 /* HoldOn */
-function holdonOpen(
-    theme = 'sk-circle',
-    text = 'Loading...',
-    backgroundColor = 'rgba(0,0,0,0.8)',
-    textColor = 'white'
-) {
+function holdonOpen(theme = 'sk-circle', text = 'Loading...', backgroundColor = 'rgba(0,0,0,0.8)', textColor = 'white') {
     var options = {
         theme: theme,
         message: text,
@@ -481,14 +476,12 @@ function youtubePreview(url, element) {
 $(document).ready(function () {
     /* Validation form chung */
     validateForm('validation-form');
-
     /* Loader */
     if ($('.loader-wrapper').length) {
         setTimeout(function () {
             $('.loader-wrapper').fadeOut('medium');
         }, 300);
     }
-
     /* Login */
     if (LOGIN_PAGE) {
         $('#username, #password').keypress(function (event) {

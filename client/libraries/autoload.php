@@ -8,7 +8,7 @@ class AutoLoad
 
     private function _autoload($file)
     {
-        $file = LIBRARIES . "class/class." . str_replace("\\", "/", trim($file, '\\')) . '.php';
+        $file = LIBRARIES . "class/class." . trim($file) . '.php';
         if (file_exists($file)) require_once $file;
     }
 }

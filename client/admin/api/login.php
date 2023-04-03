@@ -49,7 +49,7 @@ if ($error == '') {
                 $_SESSION['admin']['fullname'] = $account['fullname'];
                 $_SESSION['admin']['phone'] = $account['phone'];
                 $_SESSION['admin']['email'] = $account['email'];
-                $_SESSION['admin']['role'] = $account['id_permission'];
+                $_SESSION['admin']['role'] = $account['permission'];
                 $_SESSION['admin']['user_token'] = $sessionhash;
                 $_SESSION['admin']['password'] = $account['password'];
                 $_SESSION['admin']['login_session'] = $sessionhash;
