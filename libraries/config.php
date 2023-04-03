@@ -5,7 +5,7 @@ if (!defined('LIBRARIES')) die("Error");
 $config = array(
     'database' => array(
         'server-name' => $_SERVER["SERVER_NAME"],
-        'url' => '/shop_shoes/client/',
+        'url' => '/shop_shoes/',
         'type' => 'mysql',
         'host' => 'localhost',
         'username' => 'root',
