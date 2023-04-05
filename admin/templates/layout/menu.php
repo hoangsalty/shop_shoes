@@ -162,7 +162,7 @@
                 <li class="nav-item <?= $menuopen ?>">
                     <a href="#" class="nav-link <?= $active ?>">
                         <i class="nav-icon fas fa-image"></i>
-                        <p>Quản lý hình ảnh<i class="fas fa-angle-left right"></i></p>
+                        <p>Quản lý media<i class="fas fa-angle-left right"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <?php
@@ -205,7 +205,7 @@
                         <li class="nav-item">
                             <a href="index.php?com=photo&act=man_photo&type=video" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Quản lý video</p>
+                                <p>Video</p>
                             </a>
                         </li>
                     </ul>

@@ -1,11 +1,6 @@
 <?php
 /* Router */
 $router->setBasePath($config['database']['url']);
-$router->map('GET', ADMIN . '/', function () {
-    global $config;
-    $this->redirect($config['database']['url'] . ADMIN . "/index.php");
-    exit;
-});
 $router->map('GET', ADMIN, function () {
     global $config;
     $this->redirect($config['database']['url'] . ADMIN . "/index.php");
@@ -24,7 +19,7 @@ if (is_array($match)) {
         call_user_func_array($match['target'], $match['params']);
     } else {
         $com = (!empty($match['params']['com'])) ? htmlspecialchars($match['params']['com']) : htmlspecialchars($match['target']);
-        $getPage = !empty($_GET['p']) ? htmlspecialchars($_GET['p']) : 1;
+        $getPage = !empty($_GET['page']) ? htmlspecialchars($_GET['page']) : 1;
     }
 } else {
     header('HTTP/1.0 404 Not Found', true, 404);

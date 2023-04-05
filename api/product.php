@@ -7,8 +7,8 @@ $pagingAjax = new PaginationsAjax();
 $pagingAjax->perpage = (!empty($_GET['perpage'])) ? htmlspecialchars($_GET['perpage']) : 1;
 $eShow = htmlspecialchars($_GET['eShow']);
 $idList = (!empty($_GET['idList'])) ? htmlspecialchars($_GET['idList']) : 0;
-$p = (!empty($_GET['p'])) ? htmlspecialchars($_GET['p']) : 1;
-$start = ($p - 1) * $pagingAjax->perpage;
+$page = (!empty($_GET['page'])) ? htmlspecialchars($_GET['page']) : 1;
+$start = ($page - 1) * $pagingAjax->perpage;
 $pageLink = "api/product.php?perpage=" . $pagingAjax->perpage;
 $tempLink = "";
 $where = "";
@@ -20,7 +20,7 @@ if ($idList) {
     $where .= " and id_list = ?";
     array_push($params, $idList);
 }
-$tempLink .= "&p=";
+$tempLink .= "&page=";
 $pageLink .= $tempLink;
 
 /* Get data */
