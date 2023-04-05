@@ -39,7 +39,11 @@ $optsetting = (!empty($setting['options'])) ? json_decode($setting['options'], t
 /* Tối ưu link */
 $requick = array(
     /* Sản phẩm */
+    array("tbl" => "product_list", "field" => "idl", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
+
+    /* Trang tĩnh */
+    array("tbl" => "static", "field" => "id", "source" => "static", "com" => "gioi-thieu"),
 );
 
 /* Find data */
@@ -63,10 +67,36 @@ if (!empty($com)) {
 }
 
 switch ($com) {
-    case '':
     case 'index':
         $source = "index";
         $template = "index/index";
+        break;
+
+    case 'gioi-thieu':
+        $source = "static";
+        $template = "static/static";
+        $type = $com;
+        $titleMain = "Giới thiệu";
+        break;
+
+    case 'san-pham':
+        $source = "product";
+        $template = isset($_GET['id']) ? "product/product_detail" : "product/product";
+        $type = $com;
+        $titleMain = "Sản phẩm";
+        break;
+
+    case 'khuyen-mai':
+        $source = "product";
+        $template = "product/product";
+        $type = 'san-pham';
+        $titleMain = "Khuyến mãi";
+        break;
+
+    case 'tim-kiem':
+        $source = "search";
+        $template = "product/product";
+        $titleMain = "Tìm kiếm";
         break;
 
     default:

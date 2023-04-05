@@ -141,6 +141,30 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: auto;
 }
 
+/* Breadcrumb */
+.breadCrumbs {
+  background-color: #eee;
+}
+
+.breadCrumbs .wrap-content {
+  padding: 0.75rem 15px;
+}
+
+.breadCrumbs .wrap-content .breadcrumb {
+  padding: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.breadCrumbs .wrap-content .breadcrumb-item a {
+  color: #212529;
+}
+
+.breadCrumbs .wrap-content .breadcrumb-item.active a {
+  color: #6c757d;
+}
+
 /* General */
 .title-main {
   margin-bottom: 30px;
@@ -940,6 +964,18 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .wrap-product .row {
   gap: 20px 0;
+}
+
+/* Paging */
+.pagination-home .pagination .page-item .page-link {
+  color: #555555;
+  font-size: 0.875rem;
+}
+
+.pagination-home .pagination .page-item.active .page-link {
+  color: #ffffff;
+  background-color: #555555;
+  border-color: #555555;
 }
 
 /* Paging Ajax */
