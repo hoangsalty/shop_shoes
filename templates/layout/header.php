@@ -30,7 +30,9 @@
         <div class="wrap-content">
             <div class="flex__header__bottom">
                 <div class="header__logo">
-                    <a href="./index.html"><img src="assets/images/logo.png" alt=""></a>
+                    <a href="">
+                        <?= $func->getImage(['class' => 'w-100', 'width' => $config['logo']['width'], 'height' => $config['logo']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $logo['photo'], 'alt' => $logo['name']]) ?>
+                    </a>
                 </div>
                 <div class="header__search">
                     <input type="text" id="keyword" placeholder="Nhập từ khóa tìm kiếm" onkeypress="doEnter(event,'keyword');" />
