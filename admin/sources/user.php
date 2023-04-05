@@ -27,9 +27,6 @@ switch ($act) {
     case "save":
         saveUser();
         break;
-    case "delete":
-        deleteUser();
-        break;
 }
 
 /* Logout admin */
@@ -78,11 +75,11 @@ function editUser()
     $id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
 
     if (empty($id)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man&p=" . $curPage, false);
+        $func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
     } else {
         $item = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($id));
         if (empty($item)) {
-            $func->transfer("Dữ liệu không có thực", "index.php?com=user&act=man&p=" . $curPage, false);
+            $func->transfer("Dữ liệu không có thực", "index.php?com=user&act=man&page=" . $curPage, false);
         }
     }
 }
@@ -93,7 +90,7 @@ function saveUser()
 
     /* Check post */
     if (empty($_POST)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man&p=" . $curPage, false);
+        $func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
     }
 
     /* Post dữ liệu */
@@ -232,9 +229,9 @@ function saveUser()
                 }
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=user&act=man&p=" . $curPage);
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=user&act=man&page=" . $curPage);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=man&p=" . $curPage, false);
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=man&page=" . $curPage, false);
         }
     } else {
         $data['date_created'] = time();
@@ -264,7 +261,7 @@ function saveUser()
                 }
             }
 
-            $func->transfer("Lưu dữ liệu thành công", "index.php?com=user&act=man&p=" . $curPage);
+            $func->transfer("Lưu dữ liệu thành công", "index.php?com=user&act=man&page=" . $curPage);
         } else {
             $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=user&act=man", false);
         }

@@ -192,8 +192,8 @@ $(document).ready(function () {
   $(".title-product-list .a-title-product").click(function () {
     $(".title-product-list .a-title-product").removeClass("active");
     $(this).addClass("active");
-    var _list = $(this).data("list");
-    loadPaging("api/product.php?idList=" + _list + "&perpage=8", ".paging-product-list", 0);
+    var idList = $(this).data("list");
+    loadPaging("api/product.php?idList=" + idList + "&perpage=8", ".paging-product-list", 0);
   });
 });
 

@@ -156,11 +156,11 @@ function editPhoto()
         $id = 0;
 
     if (empty($id)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&p=" . $curPage, false);
+        $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
     } else {
         $item = $d->rawQueryOne("select * from table_photo where id = ? limit 0,1", array($id));
         if (empty($item)) {
-            $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&p=" . $curPage, false);
+            $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
         } else {
             $gallery = $d->rawQuery("select * from table_gallery_album where id_parent = ? order by numb,id desc", array($id));
         }
@@ -175,7 +175,7 @@ function savePhoto()
     /* Check post */
     if (!empty($_REQUEST)) {
     } else {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&p=" . $curPage, false);
+        $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
     }
 
     /* Post dữ liệu */
@@ -262,9 +262,9 @@ function savePhoto()
                 }
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&p=" . $curPage);
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&p=" . $curPage, false);
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
         }
     } else {
         $data['date_created'] = time();

@@ -1,8 +1,8 @@
 /* Validation form */
 function validateForm(e) {
     window.addEventListener('load', function () {
-        var forms = document.getementsByClassName(e);
-        forms.each(function (form) {
+        var forms = document.getElementsByClassName(e);
+        Array.prototype.filter.call(forms, function (form) {
             form.addEventListener('submit', function (event) {
                 if (form.checkValidity() === false) {
                     event.preventDefault();

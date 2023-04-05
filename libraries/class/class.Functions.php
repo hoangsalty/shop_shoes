@@ -344,10 +344,7 @@ class Functions
     /* Lấy link page hiện tại */
     public function getCurrentPageURL()
     {
-        $pageURL = 'http';
-        if (array_key_exists('HTTPS', $_SERVER) && $_SERVER["HTTPS"] == "on")
-            $pageURL .= "s";
-        $pageURL .= "://";
+        $pageURL = 'http://';
         $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
         $urlpos = strpos($pageURL, "?page");
         $pageURL = ($urlpos) ? explode("?page=", $pageURL) : explode("&page=", $pageURL);
@@ -371,6 +368,7 @@ class Functions
         $next = $page + 1;
         $lastpage = ceil($total / $perPage);
         $lpm1 = $lastpage - 1;
+
         $pagination = "";
         if ($lastpage > 1) {
             $pagination .= "<ul class='pagination flex-wrap justify-content-center mb-0'>";

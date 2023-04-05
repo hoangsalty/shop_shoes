@@ -54,7 +54,8 @@ if ($error == '') {
                 $_SESSION['admin']['password'] = $account['password'];
                 $_SESSION['admin']['login_session'] = $sessionhash;
                 $_SESSION['admin']['login_token'] = $token;
-                
+                $_SESSION['admin']['status'] = $account['status'];
+
                 $success = "Đăng nhập thành công";
             } else {
                 $login_failed = true;

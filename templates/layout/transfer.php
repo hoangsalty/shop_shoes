@@ -4,7 +4,7 @@
     <title>:: Thông Báo ::</title>
     <base href="<?= $basehref ?>" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="REFRESH" content="2; url=<?= $basehref . ADMIN . "/" . $page_transfer ?>">
+    <meta http-equiv="REFRESH" content="10; url=<?= $basehref . ADMIN . "/" . $page_transfer ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="assets/transfer/transfer.css">
@@ -26,7 +26,7 @@
         setInterval(function() {
             pos += 1;
             elem.style.width = pos + '%';
-        }, 5);
+        }, 90);
     </script>
 </body>
 
