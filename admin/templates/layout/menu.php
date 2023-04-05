@@ -210,7 +210,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <?php
                 $active = "";
                 if ($com == 'user' && ($act == 'man' || $act == 'add' || $act == 'edit'))
@@ -244,6 +244,16 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-industry"></i>
                         <p>Quản lý nhập hàng</p>
+                    </a>
+                </li>
+
+                <?php
+                $active = "";
+                if ($com == 'setting') $active = "active"; ?>
+                <li class="nav-item">
+                    <a href="index.php?com=setting&act=update" class="nav-link <?= $active ?>">
+                        <i class="nav-icon text-sm fas fa-cogs"></i>
+                        <p>Thiết lập thông tin</p>
                     </a>
                 </li>
             </ul>

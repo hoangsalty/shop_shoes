@@ -7,6 +7,15 @@ class Functions
     {
         $this->d = $d;
     }
+    /* Is fanpage */
+    public function isFanpage($str)
+    {
+        if (preg_match('/^(https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/', $str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /* Is date */
     public function isDate($str)
     {
