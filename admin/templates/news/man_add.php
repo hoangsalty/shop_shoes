@@ -2,12 +2,16 @@
 if ($act == "add") $labelAct = "Thêm mới";
 else if ($act == "edit") $labelAct = "Chỉnh sửa";
 
-$linkMan = "index.php?com=news&act=man";
-if ($act == 'add') $linkFilter = "index.php?com=news&act=add";
-else if ($act == 'edit') $linkFilter = "index.php?com=news&act=edit&id=" . $id;
+$linkMan = "index.php?com=news&act=man&type=" . $type;
+if ($act == 'add') $linkFilter = "index.php?com=news&act=add&type=" . $type;
+else if ($act == 'edit') $linkFilter = "index.php?com=news&act=edit&type=" . $type . "&id=" . $id;
 
-if ($act == 'add') $linkSave = "index.php?com=news&act=save";
-else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&id=" . $id;
+if ($act == 'add') $linkSave = "index.php?com=news&act=save&type=" . $type;
+else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&type=" . $type . "&id=" . $id;
+
+$name = '';
+if ($type == 'tin-tuc') $name = 'Tin tức';
+else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
 ?>
 
 <!-- Content Header -->
@@ -16,7 +20,7 @@ else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&id=" . $id;
         <div class="row">
             <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active"><?= $labelAct ?> tin tức</li>
+                <li class="breadcrumb-item active"><?= $labelAct ?> <?= $name ?></li>
             </ol>
         </div>
     </div>
@@ -27,7 +31,6 @@ else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&id=" . $id;
     <form class="validation-form" novalidate method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
-            <button type="submit" class="btn btn-sm bg-gradient-success submit-check" name="save-here" disabled><i class="far fa-save mr-2"></i>Lưu tại trang</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
         </div>
@@ -36,13 +39,13 @@ else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&id=" . $id;
 
         <div class="row">
             <div class="col-xl-8">
-                <?php
-                $slugchange = ($act == 'edit') ? 1 : 0;
-                include TEMPLATE . LAYOUT . "slug.php";
-                ?>
+                <?php if ($type == 'tin-tuc') {
+                    $slugchange = ($act == 'edit') ? 1 : 0;
+                    include TEMPLATE . LAYOUT . "slug.php";
+                } ?>
                 <div class=" card card-primary card-outline text-sm">
                     <div class="card-header">
-                        <h3 class="card-title">Nội dung tin tức</h3>
+                        <h3 class="card-title">Nội dung <?= $name ?></h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
@@ -66,7 +69,7 @@ else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&id=" . $id;
             <div class="col-xl-4">
                 <div class="card card-primary card-outline text-sm">
                     <div class="card-header">
-                        <h3 class="card-title">Hình ảnh tin tức</h3>
+                        <h3 class="card-title">Hình ảnh <?= $name ?></h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>

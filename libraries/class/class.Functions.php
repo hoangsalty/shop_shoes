@@ -56,9 +56,11 @@ class Functions
     /* Account exists */
     public function checkExist($data = '', $type = '', $tbl = '', $id = 0)
     {
+        global $d;
+
         if (!empty($data) && !empty($type) && !empty($tbl)) {
             $where = (!empty($id)) ? ' and id != ' . $id : '';
-            $row = $this->d->rawQueryOne("select id from table_$tbl where $type = ? $where limit 0,1", array($data));
+            $row = $d->rawQueryOne("select id from table_$tbl where $type = ? $where limit 0,1", array($data));
             if (!empty($row)) {
                 return true;
             }
@@ -123,8 +125,10 @@ class Functions
     /* Kiểm tra đăng nhập */
     public function checkLoginAdmin()
     {
+        global $d;
+
         $token = (!empty($_SESSION['admin']['user_token'])) ? $_SESSION['admin']['user_token'] : '';
-        $row = $this->d->rawQuery("select user_token from table_user where user_token = ? and find_in_set('hienthi',status)", array($token));
+        $row = $d->rawQuery("select user_token from table_user where user_token = ? and find_in_set('hienthi',status)", array($token));
         if (!empty($row)) {
             return true;
         } else {
@@ -648,5 +652,100 @@ class Functions
         }
 
         return $str;
+    }
+    /* Get status order */
+    public function orderStatus($status = '')
+    {
+        global $d;
+
+        $row = array(
+            array('id' => 'moidat', 'name' => 'Mới đặt'),
+            array('id' => 'daxacnhan', 'name' => 'Đã xác nhận'),
+            array('id' => 'danggiaohang', 'name' => 'Đang giao hàng'),
+            array('id' => 'dagiao', 'name' => 'Đã giao'),
+            array('id' => 'dahuy', 'name' => 'Đã hủy'),
+        );
+
+        $str = '<select id="order_status" name="data[order_status]" class="form-control select2"><option value="">Chọn tình trạng</option>';
+        foreach ($row as $v) {
+            if (isset($_REQUEST['order_status']) && ($v["id"] == $_REQUEST['order_status']) || ($v["id"] == $status))
+                $selected = "selected";
+            else
+                $selected = "";
+            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
+        }
+        $str .= '</select>';
+        return $str;
+    }
+    /* Get payments order */
+    function orderPayments()
+    {
+        global $d;
+
+        $row = $d->rawQuery("select * from table_news where type = ? and date_deleted = 0 order by numb,id desc", array('hinh-thuc-thanh-toan'));
+        $str = '<select id="order_payment" name="order_payment" class="form-control select2"><option value="0">Chọn hình thức thanh toán</option>';
+        foreach ($row as $v) {
+            if (isset($_REQUEST['order_payment']) && ($v["id"] == (int)$_REQUEST['order_payment']))
+                $selected = "selected";
+            else
+                $selected = "";
+            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
+        }
+        $str .= '</select>';
+        return $str;
+    }
+    /* Get place by ajax */
+    public function getAjaxPlace($table = '', $title_select = 'Chọn danh mục')
+    {
+        global $d;
+
+        $where = '';
+        $params = array('0');
+        $id_parent = 'id_' . $table;
+        $data_level = '';
+        $data_table = '';
+        $data_child = '';
+        if ($table == 'city') {
+            $data_level = 'data-level="0"';
+            $data_table = 'data-table="table_district"';
+            $data_child = 'data-child="id_district"';
+        } else if ($table == 'district') {
+            $data_level = 'data-level="1"';
+            $data_table = 'data-table="table_ward"';
+            $data_child = 'data-child="id_ward"';
+            $idcity = (isset($_REQUEST['id_city'])) ? htmlspecialchars($_REQUEST['id_city']) : 0;
+            $where .= ' and id_city = ?';
+            array_push($params, $idcity);
+        } else if ($table == 'ward') {
+            $data_level = '';
+            $data_table = '';
+            $data_child = '';
+            $idcity = (isset($_REQUEST['id_city'])) ? htmlspecialchars($_REQUEST['id_city']) : 0;
+            $where .= ' and id_city = ?';
+            array_push($params, $idcity);
+            $iddistrict = (isset($_REQUEST['id_district'])) ? htmlspecialchars($_REQUEST['id_district']) : 0;
+            $where .= ' and id_district = ?';
+            array_push($params, $iddistrict);
+        }
+        $rows = $d->rawQuery("select name, id from table_" . $table . " where id <> ? " . $where . " order by id asc", $params, "result", 7200);
+        $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" ' . $data_level . ' ' . $data_table . ' ' . $data_child . ' class="form-control select2 select-place"><option value="0">' . $title_select . '</option>';
+        foreach ($rows as $v) {
+            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int)$_REQUEST[$id_parent])) $selected = "selected";
+            else $selected = "";
+            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
+        }
+        $str .= '</select>';
+        return $str;
+    }
+    /* Lấy thông tin chi tiết */
+    public function getInfoDetail($cols = '', $table = '', $id = 0)
+    {
+        global $d;
+
+        $row = array();
+        if (!empty($cols) && !empty($table) && !empty($id)) {
+            $row = $d->rawQueryOne("select $cols from table_$table where id = ? limit 0,1", array($id));
+        }
+        return $row;
     }
 }

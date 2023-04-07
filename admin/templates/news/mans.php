@@ -1,11 +1,19 @@
 <?php
 $linkView = $configBase;
-$linkMan = $linkFilter = "index.php?com=news&act=man";
-$linkAdd = "index.php?com=news&act=add";
-$linkEdit = "index.php?com=news&act=edit";
-$linkDelete = "index.php?com=news&act=delete";
+$linkMan = $linkFilter = "index.php?com=news&act=man&type=" . $type;
+$linkAdd = "index.php?com=news&act=add&type=" . $type;
+$linkEdit = "index.php?com=news&act=edit&type=" . $type;
+$linkDelete = "index.php?com=news&act=delete&type=" . $type;
 
-$status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
+$status = array();
+$name = '';
+if ($type == 'tin-tuc') {
+    $name = 'Tin tức';
+    $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
+} else if ($type == 'hinh-thuc-thanh-toan') {
+    $name = 'Hình thức thanh toán';
+    $status = array("hienthi" => "Hiển thị");
+}
 ?>
 
 <!-- Content Header -->
@@ -14,7 +22,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
         <div class="row">
             <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý tin tức</li>
+                <li class="breadcrumb-item active">Quản lý <?= $name ?></li>
             </ol>
         </div>
     </div>
@@ -38,7 +46,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
     </div>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
-            <h3 class="card-title">Danh sách tin tức</h3>
+            <h3 class="card-title">Danh sách <?= $name ?></h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -91,7 +99,9 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
-                                        <a class="text-primary mr-3" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
+                                        <?php if ($type == 'tin-tuc') { ?>
+                                            <a class="text-primary mr-3" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
+                                        <?php } ?>
                                         <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                         <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
