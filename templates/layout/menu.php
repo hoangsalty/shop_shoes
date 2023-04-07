@@ -8,7 +8,7 @@
                             <i class="fa-solid fa-bars"></i>
                             <span>Danh mục sản phẩm</span>
                         </div>
-                        <ul class="ul-menu list-inline scroll-maded">
+                        <ul class="ul-menu list-inline scroll-maded <?= ($source != 'index') ? 'hidden-menu' : '' ?>">
                             <?php foreach ($splistht as $klist => $vlist) { ?>
                                 <li class="xdvt">
                                     <a class="has-child transition" title="<?= $vlist['name'] ?>" href="<?= $vlist['slug'] ?>"><?= $vlist['name'] ?></a>

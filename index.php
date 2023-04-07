@@ -20,10 +20,10 @@ $d = new PDODb($config['database']);
 $flash = new Flash();
 $router = new AltoRouter();
 $func = new Functions($d);
+$breadcr = new BreadCrumbs($d);
 
 /* Router */
 require_once LIBRARIES . "router.php";
 
 /* Template */
 include TEMPLATE . "index.php";
-?>

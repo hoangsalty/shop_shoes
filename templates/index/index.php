@@ -69,7 +69,3 @@
         </div>
     </section>
 <?php } ?>
-
-
-<?php // $func->var_dump() 
-?>
