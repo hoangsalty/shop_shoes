@@ -3,38 +3,28 @@ if (!defined('SOURCES')) die("Error");
 
 /* Cấu hình đường dẫn trả về */
 $strUrl = "";
-$arrUrl = array('id_list', 'id_brand');
-if (isset($_REQUEST['data'])) {
-    $dataUrl = isset($_REQUEST['data']) ? $_REQUEST['data'] : null;
-    if ($dataUrl) {
-        foreach ($arrUrl as $k => $v) {
-            if (isset($dataUrl[$arrUrl[$k]])) $strUrl .= "&" . $arrUrl[$k] . "=" . htmlspecialchars($dataUrl[$arrUrl[$k]]);
-        }
-    }
-} else {
-    foreach ($arrUrl as $k => $v) {
-        if (isset($_REQUEST[$arrUrl[$k]])) $strUrl .= "&" . $arrUrl[$k] . "=" . htmlspecialchars($_REQUEST[$arrUrl[$k]]);
-    }
-    if (isset($_REQUEST['keyword'])) $strUrl .= "&keyword=" . htmlspecialchars($_REQUEST['keyword']);
-}
+$strUrl .= (isset($_REQUEST['id_list'])) ? "&id_list=" . htmlspecialchars($_REQUEST['id_list']) : "";
+$strUrl .= (isset($_REQUEST['id_brand'])) ? "&id_brand=" . htmlspecialchars($_REQUEST['id_brand']) : "";
+$strUrl .= (isset($_REQUEST['keyword'])) ? "&keyword=" . htmlspecialchars($_REQUEST['keyword']) : "";
+
 switch ($act) {
-        /* Man */
+        /* Product */
     case "man":
-        viewMans();
+        viewProducts();
         $template = "product/man/mans";
         break;
     case "add":
         $template = "product/man/man_add";
         break;
     case "edit":
-        editMan();
+        editProduct();
         $template = "product/man/man_add";
         break;
     case "save":
-        saveMan();
+        saveProduct();
         break;
     case "delete":
-        deleteMan();
+        deleteProduct();
         break;
 
         /* List */
@@ -115,7 +105,7 @@ switch ($act) {
 }
 
 /* View man */
-function viewMans()
+function viewProducts()
 {
     global $d, $func, $strUrl, $curPage, $paging, $items;
     $where = "";
@@ -138,7 +128,7 @@ function viewMans()
     $paging = $func->pagination($total, $perPage, $curPage, $url);
 }
 /* Edit man */
-function editMan()
+function editProduct()
 {
     global $d, $func, $strUrl, $curPage, $item, $gallery;
     if (!empty($_REQUEST['id']))
@@ -158,7 +148,7 @@ function editMan()
     }
 }
 /* Save man */
-function saveMan()
+function saveProduct()
 {
     global $d, $strUrl, $func, $flash, $curPage;
     /* Check post */
@@ -169,7 +159,6 @@ function saveMan()
     /* Post dữ liệu */
     $message = '';
     $response = array();
-    $savehere = (isset($_REQUEST['save-here'])) ? true : false;
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     $data = (!empty($_REQUEST['data'])) ? $_REQUEST['data'] : null;
     $dataColor = (!empty($_POST['dataColor'])) ? $_POST['dataColor'] : null;
@@ -309,17 +298,9 @@ function saveMan()
                 $d->rawQuery("delete from table_product_color where id_product = ?", array($id));
             }
 
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id);
-            } else {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=man&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id);
         } else {
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id, false);
-            } else {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
-            }
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id, false);
         }
     } else {
         $data['date_created'] = time();
@@ -344,18 +325,14 @@ function saveMan()
                 }
             }
 
-            if ($savehere) {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id_insert);
-            } else {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=man&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
             $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
         }
     }
 }
 /* Delete man */
-function deleteMan()
+function deleteProduct()
 {
     global $d, $strUrl, $func, $curPage, $com;
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
@@ -433,7 +410,6 @@ function saveList()
     /* Post dữ liệu */
     $message = '';
     $response = array();
-    $savehere = (isset($_REQUEST['save-here'])) ? true : false;
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     $data = (!empty($_REQUEST['data'])) ? $_REQUEST['data'] : null;
 
@@ -519,17 +495,9 @@ function saveList()
                 }
             }
 
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_list&page=" . $curPage . $strUrl . "&id=" . $id);
-            } else {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_list&page=" . $curPage . $strUrl . "&id=" . $id);
         } else {
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_list&page=" . $curPage . $strUrl . "&id=" . $id, false);
-            } else {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl, false);
-            }
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_list&page=" . $curPage . $strUrl . "&id=" . $id, false);
         }
     } else {
         $data['date_created'] = time();
@@ -554,11 +522,7 @@ function saveList()
                 }
             }
 
-            if ($savehere) {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_list&page=" . $curPage . $strUrl . "&id=" . $id_insert);
-            } else {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_list&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
             $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl, false);
         }
@@ -643,7 +607,6 @@ function saveBrand()
     /* Post dữ liệu */
     $message = '';
     $response = array();
-    $savehere = (isset($_REQUEST['save-here'])) ? true : false;
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     $data = (!empty($_REQUEST['data'])) ? $_REQUEST['data'] : null;
 
@@ -729,17 +692,9 @@ function saveBrand()
                 }
             }
 
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_brand&page=" . $curPage . $strUrl . "&id=" . $id);
-            } else {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_brand&page=" . $curPage . $strUrl . "&id=" . $id);
         } else {
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_brand&page=" . $curPage . $strUrl . "&id=" . $id, false);
-            } else {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl, false);
-            }
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_brand&page=" . $curPage . $strUrl . "&id=" . $id, false);
         }
     } else {
         $data['date_created'] = time();
@@ -764,11 +719,7 @@ function saveBrand()
                 }
             }
 
-            if ($savehere) {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_brand&page=" . $curPage . $strUrl . "&id=" . $id_insert);
-            } else {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_brand&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
             $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl, false);
         }
@@ -854,7 +805,6 @@ function saveSize()
     /* Post dữ liệu */
     $message = '';
     $response = array();
-    $savehere = (isset($_REQUEST['save-here'])) ? true : false;
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     $data = (!empty($_REQUEST['data'])) ? $_REQUEST['data'] : null;
 
@@ -904,17 +854,9 @@ function saveSize()
         $d->where('id', $id);
 
         if ($d->update('table_size', $data)) {
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_size&page=" . $curPage . $strUrl . "&id=" . $id);
-            } else {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_size&page=" . $curPage . $strUrl . "&id=" . $id);
         } else {
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_size&page=" . $curPage . $strUrl . "&id=" . $id, false);
-            } else {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl, false);
-            }
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_size&page=" . $curPage . $strUrl . "&id=" . $id, false);
         }
     } else {
         $data['date_created'] = time();
@@ -928,11 +870,7 @@ function saveSize()
             /*update stt*/
             $d->rawQuery("update table_size set numb = ? where id = " . $id_insert, array($new_numb));
 
-            if ($savehere) {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_size&page=" . $curPage . $strUrl . "&id=" . $id_insert);
-            } else {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_size&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
             $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl, false);
         }
@@ -1018,7 +956,6 @@ function saveColor()
     /* Post dữ liệu */
     $message = '';
     $response = array();
-    $savehere = (isset($_REQUEST['save-here'])) ? true : false;
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     $data = (!empty($_REQUEST['data'])) ? $_REQUEST['data'] : null;
 
@@ -1072,17 +1009,9 @@ function saveColor()
         $d->where('id', $id);
 
         if ($d->update('table_color', $data)) {
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_color&page=" . $curPage . $strUrl . "&id=" . $id);
-            } else {
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_color&page=" . $curPage . $strUrl . "&id=" . $id);
         } else {
-            if ($savehere) {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_color&page=" . $curPage . $strUrl . "&id=" . $id, false);
-            } else {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl, false);
-            }
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_color&page=" . $curPage . $strUrl . "&id=" . $id, false);
         }
     } else {
         $data['date_created'] = time();
@@ -1096,11 +1025,7 @@ function saveColor()
             /*update stt*/
             $d->rawQuery("update table_color set numb = ? where id = " . $id_insert, array($new_numb));
 
-            if ($savehere) {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_color&page=" . $curPage . $strUrl . "&id=" . $id_insert);
-            } else {
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl);
-            }
+            $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_color&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
             $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl, false);
         }

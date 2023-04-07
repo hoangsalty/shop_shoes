@@ -102,12 +102,12 @@
 
                 <?php
                 $active = "";
-                if ($com == 'news') {
+                if ($com == 'news' && $_GET['type'] == 'tin-tuc') {
                     $active = 'active';
                 }
                 ?>
                 <li class="nav-item">
-                    <a href="index.php?com=news&act=man" class="nav-link <?= $active ?>">
+                    <a href="index.php?com=news&act=man&type=tin-tuc" class="nav-link <?= $active ?>">
                         <i class="nav-icon far fa-newspaper"></i>
                         <p>Quản lý tin tức</p>
                     </a>
@@ -178,7 +178,7 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'photo' && $_GET['type'] == 'slideshow' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo'))
+                        if ($com == 'photo' && $_GET['type'] == 'slideshow')
                             $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=photo&act=man_photo&type=slideshow" class="nav-link <?= $active ?>">
@@ -189,7 +189,7 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'photo' && $_GET['type'] == 'album' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo'))
+                        if ($com == 'photo' && $_GET['type'] == 'album')
                             $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=photo&act=man_photo&type=album" class="nav-link <?= $active ?>">
@@ -200,7 +200,7 @@
 
                         <?php
                         $active = "";
-                        if ($com == 'photo' && $_GET['type'] == 'video' && ($act == 'man_photo' || $act == 'add_photo' || $act == 'edit_photo'))
+                        if ($com == 'photo' && $_GET['type'] == 'video')
                             $active = "active"; ?>
                         <li class="nav-item">
                             <a href="index.php?com=photo&act=man_photo&type=video" class="nav-link <?= $active ?>">
@@ -222,6 +222,42 @@
                     </a>
                 </li>
 
+                <?php
+                $active = "";
+                $menuopen = "";
+                if ($com == 'order' || ($com == 'news' && $_GET['type'] == 'hinh-thuc-thanh-toan')) {
+                    $active = 'active';
+                    $menuopen = 'menu-open';
+                }
+                ?>
+                <li class="nav-item <?= $menuopen ?>">
+                    <a href="#" class="nav-link <?= $active ?>">
+                        <i class="nav-icon fas fa-shopping-bag"></i>
+                        <p>Quản lý đơn hàng<i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <?php
+                        $active = "";
+                        if ($com == 'news') $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=news&act=man&type=hinh-thuc-thanh-toan" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Hình thức thanh toán</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'order') $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=order&act=man" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Đơn hàng</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-comments"></i>
@@ -234,12 +270,7 @@
                         <p>Quản lý liên hệ</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-shopping-bag"></i>
-                        <p>Quản lý đơn hàng</p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-industry"></i>
