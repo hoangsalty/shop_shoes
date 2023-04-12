@@ -27,7 +27,16 @@
                         <a class="<?php if ($com == 'gioi-thieu') echo 'active'; ?> transition" href="gioi-thieu" title="Giới thiệu">Giới thiệu</a>
                     </li>
                     <li>
-                        <a class="<?php if ($com == 'khuyen-mai') echo 'active'; ?> transition" href="khuyen-mai" title="Khuyến mãi">Khuyến mãi</a>
+                        <a class="<?php if ($com == 'san-pham') echo 'active'; ?> transition" href="san-pham" title="Sản phẩm">Sản phẩm</a>
+                        <?php if (!empty($splistht)) {  ?>
+                            <ul>
+                                <?php foreach ($splistht as $klist => $vlist) { ?>
+                                    <li class="xdvt">
+                                        <a class="has-child transition" title="<?= $vlist['name'] ?>" href="<?= $vlist['slug'] ?>"><?= $vlist['name'] ?></a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        <?php } ?>
                     </li>
                     <li>
                         <a class="<?php if ($com == 'thu-vien-anh') echo 'active'; ?> transition" href="thu-vien-anh" title="Thư viện ảnh">Thư viện ảnh</a>
