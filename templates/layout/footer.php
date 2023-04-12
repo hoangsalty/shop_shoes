@@ -8,9 +8,9 @@
                             <a href="./index.html"><img src="assets/images/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Địa chỉ: <?= $optsetting['address'] ?></li>
+                            <li>Hotline: <?= $optsetting['hotline'] ?></li>
+                            <li>Email: <?= $optsetting['email'] ?></li>
                         </ul>
                     </div>
                 </div>
@@ -36,30 +36,34 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
-                    <h2 class="footer-title">Đăng ký nhận tin</h2>
-                    <p class="newsletter-slogan">Get E-mail updates about our latest shop and special offers.</p>
-                    <form class="validation-newsletter" novalidate method="post" action="" enctype="multipart/form-data">
-                        <div class="newsletter-input">
-                            <input type="email" class="form-control text-sm" id="email-newsletter" name="dataNewsletter[email]" placeholder="Nhập email" required />
-                        </div>
-                        <div class="newsletter-button">
-                            <input type="submit" class="btn btn-sm btn-danger w-100" value="Gửi" disabled>
-                            <input type="hidden" name="submit-newsletter" value="1">
-                            <input type="hidden" name="recaptcha_response_newsletter" id="recaptchaResponseNewsletter">
-                        </div>
-                    </form>
+                    <div class="footer__newsletter">
+                        <h2 class="footer-title">Đăng ký nhận tin</h2>
+                        <p class="newsletter-slogan">Get E-mail updates about our latest shop and special offers.</p>
+                        <form class="validation-newsletter" novalidate method="post" action="" enctype="multipart/form-data">
+                            <div class="newsletter-input">
+                                <input type="email" class="form-control text-sm" id="email-newsletter" name="dataNewsletter[email]" placeholder="Nhập email" required />
+                            </div>
+                            <div class="newsletter-button">
+                                <input type="submit" class="btn btn-sm btn-danger w-100" value="Gửi" disabled>
+                                <input type="hidden" name="submit-newsletter" value="1">
+                                <input type="hidden" name="recaptcha_response_newsletter" id="recaptchaResponseNewsletter">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="footer-powered">
         <div class="wrap-content">
-            <div class="row">
-                <div class="footer-copyright col-md-6">Copyright © 2023 CKC. Design by CKC</div>
+            <div class="footer__copyright">
+                <div class="row">
+                    <div class="copyright col-md-6">Copyright © 2023 CKC. Design by CKC</div>
+                    <div class="payment col-md-6"><img src="assets/images/payment-item.png" alt=""></div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <a class="btn-zalo btn-frame text-decoration-none" target="_blank" href="https://zalo.me/<?= preg_replace('/[^0-9]/', '', $optsetting['zalo']); ?>">

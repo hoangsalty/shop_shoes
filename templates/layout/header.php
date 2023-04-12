@@ -5,8 +5,10 @@
                 <div class="col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa-solid fa-envelope"></i> hello@colorlib.com</li>
-                            <li>Free Shipping for all Order of $99</li>
+                            <li><i class="fa-solid fa-envelope"></i><?= $optsetting['email'] ?></li>
+                            <li class="d-inline-flex">
+                                <marquee><?= $optsetting['slogan'] ?></marquee>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -36,15 +38,15 @@
                 </div>
                 <div class="header__search">
                     <input type="text" id="keyword" placeholder="Nhập từ khóa tìm kiếm" onkeypress="doEnter(event,'keyword');" />
-                    <p onclick="onSearch('keyword');">SEARCH</p>
+                    <p onclick="onSearch('keyword');">Tìm kiếm</p>
                 </div>
                 <div class="header__hotline">
-                    <div class="header__hotline__icon">
+                    <div class="header__hotline__icon animate__animated animate__infinite animate__tada">
                         <i class="fa-solid fa-phone-flip"></i>
                     </div>
                     <div class="header__hotline__text">
                         <p>Hotline</p>
-                        <span>0868 202 710</span>
+                        <span><?= $optsetting['hotline'] ?></span>
                     </div>
                 </div>
                 <div class="header__cart">

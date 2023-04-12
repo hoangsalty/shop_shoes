@@ -34,7 +34,7 @@ $config['product_list']['height'] = 270;
 $config['product']['width'] = 285;
 $config['product']['height'] = 270;
 /*Ảnh news*/
-$config['news']['width'] = 380;
+$config['news']['width'] = 386;
 $config['news']['height'] = 270;
 /*Ảnh static*/
 $config['static']['width'] = 270;

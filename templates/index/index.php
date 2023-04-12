@@ -42,6 +42,32 @@
     </section>
 <?php } ?>
 
+<?php if (count($albumnb)) { ?>
+    <section class="wrap-album">
+        <div class="wrap-content">
+            <div class="title-main">
+                <span>Thư viện ảnh</span>
+            </div>
+            <div class="main-album">
+                <div class="row">
+                    <?php foreach ($albumnb as $k => $v) { ?>
+                        <div class="album col-lg-3 col-md-4 col-6">
+                            <a class="album-item text-decoration-none transition" href="<?= $v['link'] ?>" title="<?= $v['name'] ?>">
+                                <div class="image scale-img">
+                                    <?= $func->getImage(['class' => 'w-100', 'width' => $config['album']['width'], 'height' => $config['album']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                </div>
+                                <div class="info">
+                                    <h3 class="name text-split"><?= $v['name'] ?> </h3>
+                                </div>
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>
+
 <?php if (!empty($newsnb)) { ?>
     <section class="wrap-newsnb">
         <div class="wrap-content">

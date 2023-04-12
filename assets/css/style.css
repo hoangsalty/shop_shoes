@@ -538,7 +538,7 @@ input[type="number"]::-webkit-inner-spin-button {
   list-style: none;
 }
 
-.menu .right ul li:not(.line):not(.search-menu) {
+.menu .right ul li {
   position: relative;
   z-index: 99;
   -ms-flex: 1 1 auto;
@@ -561,17 +561,14 @@ input[type="number"]::-webkit-inner-spin-button {
   text-transform: uppercase;
 }
 
-.menu .right ul li a.active {
-  color: var(--color-main);
-}
-
+.menu .right ul li a.active,
 .menu .right ul li:hover > a {
   color: var(--color-main);
 }
 
 .menu .right ul li ul {
   position: absolute;
-  min-width: 200px;
+  min-width: 250px;
   background: #ffffff;
   box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
   -webkit-transform: perspective(600px) rotateX(-90deg);
@@ -595,9 +592,14 @@ input[type="number"]::-webkit-inner-spin-button {
   text-align: left;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 14px;
-  padding: 14px 15px;
-  line-height: 23px;
+  padding: 13px 15px;
+  line-height: 24px;
   height: auto;
+}
+
+.menu .right ul li ul li:hover a {
+  background-color: var(--color-main);
+  color: #ffffff;
 }
 
 .menu .right ul li ul li:last-child > a {
@@ -1128,6 +1130,32 @@ input[type="number"]::-webkit-inner-spin-button {
   color: #ffffff;
 }
 
+.news {
+  margin-bottom: 30px;
+}
+
+.othernews b {
+  margin-bottom: 10px;
+}
+
+.list-news-other {
+  padding-left: 17px;
+  list-style: square;
+}
+
+.list-news-other li {
+  margin-bottom: 2px;
+}
+
+.list-news-other li a {
+  text-transform: none;
+  color: #333333;
+}
+
+.list-news-other li a:hover {
+  color: #ec2d3f;
+}
+
 /* Zalo */
 .btn-zalo {
   bottom: 315px;
@@ -1444,10 +1472,9 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* Footer */
 
-.footer {
+.footer-article {
   background: #f3f6fa;
-  padding-top: 60px;
-  padding-bottom: 0;
+  padding: 50px 0 35px;
 }
 
 .footer__about__logo {
@@ -1460,10 +1487,14 @@ ol {
   margin: 0;
 }
 
+.footer__about ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
 .footer__about ul li {
   font-size: 16px;
   color: #1c1c1c;
-  line-height: 36px;
+  line-height: 26px;
   list-style: none;
 }
 
@@ -1492,4 +1523,42 @@ ol {
   font-size: 14px;
   color: #1c1c1c;
   margin-bottom: 30px;
+}
+
+.footer-powered {
+  background: #f3f6fa;
+}
+
+.footer__copyright {
+  border-top: 1px solid #b2b2b2;
+  padding: 15px 0;
+}
+
+.copyright {
+  font-size: 16px;
+  color: #6f6f6f;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.payment {
+  text-align: right;
+}
+
+/* Album */
+.album {
+  margin-bottom: 1.5rem;
+}
+
+.album-item {
+  display: block;
+  text-align: center;
+}
+
+.album-item .info {
+  margin-top: 10px;
+}
+
+.album-item .info h3 {
+  margin: 0;
 }
