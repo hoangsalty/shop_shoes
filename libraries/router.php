@@ -37,6 +37,13 @@ $requick = array(
     array("tbl" => "product_list", "field" => "idl", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
+    /* Video */
+    // array("tbl" => "photo", "field" => "id", "source" => "video", "com" => "video", "type" => "video"),
+
+    /* Bài viết */
+    array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tin-tuc"),
+    array("tbl" => "news", "field" => "id", "source" => "news", "com" => "chinh-sach"),
+
     /* Trang tĩnh */
     array("tbl" => "static", "field" => "id", "source" => "static", "com" => "gioi-thieu"),
 );
@@ -74,6 +81,13 @@ switch ($com) {
         $titleMain = "Giới thiệu";
         break;
 
+    case 'tin-tuc':
+        $source = "news";
+        $template = isset($_GET['id']) ? "news/news_detail" : "news/news";
+        $type = $com;
+        $titleMain = "Tin tức";
+        break;
+
     case 'san-pham':
         $source = "product";
         $template = isset($_GET['id']) ? "product/product_detail" : "product/product";
@@ -92,6 +106,13 @@ switch ($com) {
         $source = "search";
         $template = "product/product";
         $titleMain = "Tìm kiếm";
+        break;
+
+    case 'video':
+        $source = "video";
+        $template = "video/video";
+        $type = $com;
+        $titleMain = "Video";
         break;
 
     default:
