@@ -14071,7 +14071,8 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 .user-panel .info {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: 5px 5px 5px 10px;
 }
 

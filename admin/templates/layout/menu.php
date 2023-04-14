@@ -2,9 +2,9 @@
 
 
     <div class="sidebar">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
             <div class="image">
-                <img src="assets/images/admin.png" class="img-circle elevation-2" alt="User Image">
+                <?= $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $_SESSION['admin']['photo'], 'alt' => $_SESSION['admin']['fullname']]) ?>
             </div>
             <div class="info">
                 <a href="#" class="d-block">

@@ -310,6 +310,7 @@ class Functions
         global $config;
         /* Defaults */
         $defaults = [
+            'class' => 'lazy',
             'width' => '',
             'height' => '',
             'upload' => '',
@@ -333,8 +334,10 @@ class Functions
         $info['pathSrc'] = $info['pathOrigin'];
         /* Src */
         $info['src'] = "src='" . $info['pathSrc'] . "'";
+        /* Class */
+        $info['class'] = (!empty($info['class'])) ? "class='" . $info['class'] . "'" : "";
         /* Image */
-        $result = "<img style='width:" . $info['width'] . "px; height:" . $info['height'] . "px' onerror=\"this.src='" . $info['pathError'] . "';\" " . $info['src'] . " alt='" . $info['alt'] . "'/>";
+        $result = "<img " . $info['class'] . " style='width:" . $info['width'] . "px; height:" . $info['height'] . "px' onerror=\"this.src='" . $info['pathError'] . "';\" " . $info['src'] . " alt='" . $info['alt'] . "'/>";
         return $result;
     }
     /* Redirect */
@@ -385,7 +388,6 @@ class Functions
         $pagination = "";
         if ($lastpage > 1) {
             $pagination .= "<ul class='pagination flex-wrap justify-content-center mb-0'>";
-            $pagination .= "<li class='page-item'><a class='page-link'>Page {$page} / {$lastpage}</a></li>";
             if ($page > 1) {
                 $pagination .= "<li class='page-item'><a class='page-link' href='{$this->getCurrentPageURL()}'>{$firstlabel}</a></li>";
                 $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$prev}'>{$prevlabel}</a></li>";

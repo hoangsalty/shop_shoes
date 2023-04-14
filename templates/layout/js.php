@@ -6,7 +6,6 @@
     var ASSETS = '<?= ASSETS ?>';
     var WEBSITE_NAME = '<?= (!empty($setting['name' . $lang])) ? addslashes($setting['name' . $lang]) : '' ?>';
     var TIMENOW = '<?= date("d/m/Y", time()) ?>';
-    //var IS_LOGIN = <?= (isset($_SESSION[$loginMember]['active']) && $_SESSION[$loginMember]['active'] == true) ? 1 : 0 ?>;
 </script>
 <!-- Js Files -->
 <script type="text/javascript" src="<?= $configBase ?>assets/js/jquery.min.js"></script>
