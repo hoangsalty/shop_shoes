@@ -305,14 +305,14 @@ function saveProduct()
     } else {
         $data['date_created'] = time();
         /*lay stt*/
-        $list_numb = $d->rawQuery("select numb from table_product order by numb desc ", array());
-        $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : 1;
+        /* $list_numb = $d->rawQuery("select numb from table_product order by numb desc ", array());
+        $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : 1; */
 
         if ($d->insert('table_product', $data)) {
             $id_insert = $d->getLastInsertId();
 
             /*update stt*/
-            $d->rawQuery("update table_product set numb = ? where id = " . $id_insert, array($new_numb));
+            /* $d->rawQuery("update table_product set numb = ? where id = " . $id_insert, array($new_numb)); */
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();

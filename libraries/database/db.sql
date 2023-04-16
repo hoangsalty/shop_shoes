@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2023 at 04:00 PM
+-- Generation Time: Apr 16, 2023 at 03:03 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -947,8 +947,7 @@ INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `numb`, `status
 (35, 1, '2-6455.png', '', 5, 'hienthi', 1679832226, 0, 0),
 (36, 1, '3-7640.png', '', 6, 'hienthi', 1679832226, 0, 0),
 (37, 1, '4-6223.png', '', 7, 'hienthi', 1679832226, 0, 0),
-(38, 1, '5-8950.png', '', 8, 'hienthi', 1679832226, 0, 0),
-(46, 2, '1-7903.png', '', 1, 'hienthi', 1680338355, 0, 0);
+(38, 1, '5-8950.png', '', 8, 'hienthi', 1679832226, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1114,6 +1113,7 @@ CREATE TABLE `table_product` (
   `code` varchar(30) DEFAULT NULL,
   `regular_price` double DEFAULT 0,
   `sale_price` double DEFAULT 0,
+  `quantity` int(11) DEFAULT 0,
   `numb` int(11) DEFAULT 0,
   `view` int(11) DEFAULT 0,
   `status` varchar(255) DEFAULT NULL,
@@ -1126,19 +1126,18 @@ CREATE TABLE `table_product` (
 -- Dumping data for table `table_product`
 --
 
-INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, NULL, '1-5039.png', 'san-pham-1', '', '', 'Sản phẩm 1', '', 500000, 400000, 1, 0, 'hienthi,noibat', 1679827982, 1680869922, 0),
-(2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 2, 0, 'hienthi,noibat', 1679827990, 1680869938, 0),
-(3, 6, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 0, 'hienthi,noibat', 1679828000, 1680869946, 0),
-(4, 6, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 4, 0, 'hienthi,noibat', 1679828010, 1680869956, 0),
-(5, 6, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 5, 0, 'hienthi,noibat', 1679828021, 1680869965, 0),
-(6, 7, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 6, 0, 'hienthi,noibat', 1679828031, 1680869972, 0),
-(7, 7, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 7, 0, 'hienthi,noibat', 1679828041, 1680869978, 0),
-(8, 7, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 8, 0, 'hienthi,noibat', 1679828051, 1680869987, 0),
-(9, 7, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 9, 0, 'hienthi,noibat', 1679828075, 1680869993, 0),
-(10, 7, NULL, '10-2976.png', 'san-pham-10', '', '', 'Sản phẩm 10', '', 723433, 231423, 10, 0, 'hienthi,noibat', 1679828083, 1680870000, 0),
-(11, 7, NULL, '11-3977.png', 'san-pham-11', '', '', 'Sản phẩm 11', '', 888464, 231122, 11, 0, 'hienthi,noibat', 1679828093, 1680870009, 0),
-(12, 7, NULL, '12-3249.png', 'san-pham-12', '', '', 'Sản phẩm 12', '', 623443, 123132, 12, 0, 'hienthi', 1679828105, 1680870018, 0);
+INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `quantity`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 10, 1, 131, 'hienthi', 1679827982, 1681648898, 0),
+(2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 10, 2, 0, 'hienthi,noibat', 1679827990, 1680869938, 0),
+(3, 6, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 10, 3, 0, 'hienthi,noibat', 1679828000, 1680869946, 0),
+(4, 6, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 10, 4, 0, 'hienthi,noibat', 1679828010, 1680869956, 0),
+(5, 6, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 10, 5, 0, 'hienthi,noibat', 1679828021, 1680869965, 0),
+(6, 7, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 10, 6, 0, 'hienthi,noibat', 1679828031, 1680869972, 0),
+(7, 7, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 10, 7, 0, 'hienthi,noibat', 1679828041, 1680869978, 0),
+(8, 7, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 10, 8, 0, 'hienthi,noibat', 1679828051, 1680869987, 0),
+(9, 7, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 10, 9, 1, 'hienthi,noibat', 1679828075, 1680869993, 0),
+(10, 7, NULL, '10-2976.png', 'san-pham-10', '', '', 'Sản phẩm 10', '', 723433, 231423, 10, 10, 0, 'hienthi,noibat', 1679828083, 1680870000, 0),
+(11, 7, NULL, '11-3977.png', 'san-pham-11', '', '', 'Sản phẩm 11', '', 888464, 231122, 10, 11, 0, 'hienthi,noibat', 1679828093, 1680870009, 0);
 
 -- --------------------------------------------------------
 
@@ -1182,6 +1181,15 @@ CREATE TABLE `table_product_color` (
   `id_product` int(10) UNSIGNED DEFAULT NULL,
   `id_color` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `table_product_color`
+--
+
+INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
+(7, NULL, 7),
+(8, 1, 7),
+(9, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -1228,9 +1236,12 @@ CREATE TABLE `table_product_size` (
 --
 
 INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
-(21, 1, 8),
-(22, 1, 9),
-(23, 1, 10);
+(30, NULL, 9),
+(31, NULL, 11),
+(32, NULL, 12),
+(33, 1, 8),
+(34, 1, 9),
+(35, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -1344,9 +1355,10 @@ CREATE TABLE `table_user` (
 --
 
 INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `confirm_code`, `photo`, `fullname`, `phone`, `email`, `address`, `gender`, `login_session`, `user_token`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '', 0, '9d8510398d14c4230d978c6eea28ed86', 'a7302ca9e14e24fd8ec9051ecb49374d', '1680869276', 'hoatdong', 1608051600, 0, 0, 0, 0),
+(1, NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '', 0, '', '00cce9ad91ac51b64540a930ea86ed97', '1681477676', 'hoatdong', 1608051600, 0, 0, 0, 0),
 (146, 'admin', 'test', '098f6bcd4621d373cade4e832627b4f6', NULL, '2-7335.jpg', 'Test', '0909090909', 'test@gmail.com', 'Test', 1, '', '8bfc73420c2a4b3725c9738d2b2955f9', '1680338040', 'hoatdong', 954176400, 1, 1680100745, 1680199552, 0),
-(147, 'user', 'test1', '098f6bcd4621d373cade4e832627b4f6', NULL, '1-7945.jpg', 'Test', '0909090909', 'test1@gmail.com', 'Test', 1, 'face9250a60ecb67ff31284b0e338314', '4e12402597b39f5dfbecda0c75d9c44d', '1680699182', 'khoa', 1679954400, 2, 1680101968, 1680698881, 0);
+(147, 'user', 'test1', '098f6bcd4621d373cade4e832627b4f6', NULL, '1-7945.jpg', 'Test', '0909090909', 'test1@gmail.com', 'Test', 1, 'face9250a60ecb67ff31284b0e338314', 'c0114c8f6951a8b4295aa86b644a971b', '1681342575', 'khoa', 1679954400, 2, 1680101968, 1680698881, 0),
+(148, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', NULL, '6783077-cool-wallpapers-hd-3332-7219.jpg', 'Hoàng', '0909090909', 'hoang@gmail.com', 'Địa chỉ', 1, 'e05d488dd52f4940bb46376850b8bc63', '956c6e8f8cc80d58cc34b5f339a53202', '1681484728', 'hoatdong', 980722800, 3, 1681481036, 1681484741, 0);
 
 -- --------------------------------------------------------
 
@@ -12213,7 +12225,7 @@ ALTER TABLE `table_district`
 -- AUTO_INCREMENT for table `table_gallery`
 --
 ALTER TABLE `table_gallery`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `table_gallery_album`
@@ -12249,7 +12261,7 @@ ALTER TABLE `table_photo`
 -- AUTO_INCREMENT for table `table_product`
 --
 ALTER TABLE `table_product`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `table_product_brand`
@@ -12261,7 +12273,7 @@ ALTER TABLE `table_product_brand`
 -- AUTO_INCREMENT for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `table_product_list`
@@ -12273,7 +12285,7 @@ ALTER TABLE `table_product_list`
 -- AUTO_INCREMENT for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `table_setting`
@@ -12297,7 +12309,7 @@ ALTER TABLE `table_static`
 -- AUTO_INCREMENT for table `table_user`
 --
 ALTER TABLE `table_user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `table_variants`

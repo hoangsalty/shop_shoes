@@ -95,13 +95,6 @@ switch ($com) {
         $titleMain = "Sản phẩm";
         break;
 
-    case 'khuyen-mai':
-        $source = "product";
-        $template = "product/product";
-        $type = 'san-pham';
-        $titleMain = "Khuyến mãi";
-        break;
-
     case 'tim-kiem':
         $source = "search";
         $template = "product/product";
