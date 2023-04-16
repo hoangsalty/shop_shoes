@@ -178,6 +178,40 @@ $(document).ready(function () {
       },
     },
   });
+
+  $(".gallery__slider").owlCarousel({
+    loop: false,
+    margin: 20,
+    items: 4,
+    dots: false,
+    nav: true,
+    navText: [
+      "<span class='fa fa-angle-left'><span/>",
+      "<span class='fa fa-angle-right'><span/>",
+    ],
+    animateOut: "fadeOut",
+    animateIn: "fadeIn",
+    smartSpeed: 1200,
+    autoHeight: true,
+    autoplay: true,
+    responsive: {
+      0: {
+        items: 2,
+      },
+
+      480: {
+        items: 3,
+      },
+
+      768: {
+        items: 4,
+      },
+
+      992: {
+        items: 5,
+      },
+    },
+  });
 });
 
 $(document).ready(function () {
@@ -229,3 +263,5 @@ $(document).ready(function () {
     });
   }
 });
+
+

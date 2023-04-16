@@ -4,7 +4,6 @@
     var CONFIG_BASE = '<?= $configBase ?>';
     var JS_AUTOPLAY = <?= ($_SERVER["SERVER_NAME"] != "localhost") ? 'true' : 'false' ?>;
     var ASSETS = '<?= ASSETS ?>';
-    var WEBSITE_NAME = '<?= (!empty($setting['name' . $lang])) ? addslashes($setting['name' . $lang]) : '' ?>';
     var TIMENOW = '<?= date("d/m/Y", time()) ?>';
 </script>
 <!-- Js Files -->
