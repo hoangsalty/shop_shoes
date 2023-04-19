@@ -16,3 +16,4 @@
 <script type="text/javascript" src="<?= $configBase ?>assets/owlcarousel/owl.carousel.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/holdon/HoldOn.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/slick/slick.js"></script>
+<script type="text/javascript" src="<?= $configBase ?>assets/magiczoomplus/magiczoomplus.js"></script>

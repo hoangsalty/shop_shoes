@@ -13,3 +13,4 @@
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fontawesome-6/all.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/owlcarousel/owl.carousel.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/owlcarousel/owl.theme.default.css" />
+<link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/magiczoomplus/magiczoomplus.css" />

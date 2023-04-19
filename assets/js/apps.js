@@ -180,9 +180,9 @@ $(document).ready(function () {
   });
 
   $(".gallery__slider").owlCarousel({
-    loop: false,
-    margin: 20,
-    items: 4,
+    loop: true,
+    margin: 10,
+    items: 5,
     dots: false,
     nav: true,
     navText: [
@@ -196,7 +196,7 @@ $(document).ready(function () {
     autoplay: true,
     responsive: {
       0: {
-        items: 2,
+        items: 1,
       },
 
       480: {
