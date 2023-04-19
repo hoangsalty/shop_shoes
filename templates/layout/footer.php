@@ -66,6 +66,13 @@
     </div>
 </div>
 
+<?php if ($com != 'gio-hang') { ?>
+    <a class="cart-fixed text-decoration-none" href="gio-hang" title="Giỏ hàng">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="count-cart"><?= (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0 ?></span>
+    </a>
+<?php } ?>
+
 <a class="btn-zalo btn-frame text-decoration-none" target="_blank" href="https://zalo.me/<?= preg_replace('/[^0-9]/', '', $optsetting['zalo']); ?>">
     <div class="animated infinite zoomIn kenit-alo-circle"></div>
     <div class="animated infinite pulse kenit-alo-circle-fill"></div>
