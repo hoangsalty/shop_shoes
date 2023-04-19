@@ -3,8 +3,8 @@ if (!defined('SOURCES')) die("Error");
 
 /* Lấy tất cả video */
 $where = "";
-$where = "type = ? and act <> ? and find_in_set('hienthi',status)";
-$params = array($type, 'photo_static');
+$where = "date_deleted = 0  and find_in_set('hienthi',status)";
+$params = array();
 
 $curPage = $getPage;
 $perPage = 10;
