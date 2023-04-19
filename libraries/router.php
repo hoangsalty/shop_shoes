@@ -37,8 +37,11 @@ $requick = array(
     array("tbl" => "product_list", "field" => "idl", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
+    /* Thư viện ảnh */
+    // array("tbl" => "product", "field" => "id", "source" => "product", "com" => "thu-vien-anh", "type" => "thu-vien-anh", "menu" => true),
+
     /* Video */
-    // array("tbl" => "photo", "field" => "id", "source" => "video", "com" => "video", "type" => "video"),
+    // array("tbl" => "photo", "field" => "id", "source" => "video", "com" => "video"),
 
     /* Bài viết */
     array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tin-tuc"),
@@ -46,6 +49,7 @@ $requick = array(
 
     /* Trang tĩnh */
     array("tbl" => "static", "field" => "id", "source" => "static", "com" => "gioi-thieu"),
+
 );
 
 /* Find data */
@@ -55,11 +59,10 @@ if (!empty($com)) {
         $urlType = (!empty($v['type'])) ? $v['type'] : '';
         $urlField = (!empty($v['field'])) ? $v['field'] : '';
         $urlCom = (!empty($v['com'])) ? $v['com'] : '';
-
         if (!empty($urlTbl)) {
             $row = $d->rawQueryOne("select id from table_$urlTbl where slug = ? and find_in_set('hienthi',status) limit 0,1", array($com));
 
-            if (!empty($row)) {
+            if (!empty($row['id'])) {
                 $_GET[$urlField] = $row['id'];
                 $com = $urlCom;
                 break;
@@ -106,6 +109,12 @@ switch ($com) {
         $template = "video/video";
         $type = $com;
         $titleMain = "Video";
+        break;
+
+    case 'gio-hang':
+        $source = "order";
+        $template = 'order/order';
+        $titleMain = "Giỏ hàng";
         break;
 
     default:
