@@ -1,5 +1,4 @@
-/* Menu */
-$(document).ready(function () {
+FRAMEWORK.Menu = function () {
   /* Menu remove empty ul */
   if (isExist($(".menu"))) {
     $(".menu ul li a").each(function () {
@@ -17,10 +16,8 @@ $(document).ready(function () {
       extensions: ["border-full", "position-left", "position-front"],
     });
   }
-});
 
-/* Fix menu */
-$(document).ready(function () {
+  /* Fixed menu */
   $(window).scroll(function () {
     if ($(window).width() > 991) {
       if (
@@ -69,10 +66,9 @@ $(document).ready(function () {
 
     $(".ul-menu").height(heigth);
   });
-});
+}
 
-/* Search */
-$(document).ready(function () {
+FRAMEWORK.Search = function () {
   if (isExist($(".icon-search"))) {
     $(".icon-search").click(function () {
       if ($(this).hasClass("active")) {
@@ -90,10 +86,9 @@ $(document).ready(function () {
       $(".icon-search i").toggleClass("fa fa-search fa fa-times");
     });
   }
-});
+}
 
-/* Carousel */
-$(document).ready(function () {
+FRAMEWORK.Carousel = function () {
   $(".slideshow__slider").owlCarousel({
     loop: false,
     margin: 10,
@@ -212,16 +207,9 @@ $(document).ready(function () {
       },
     },
   });
-});
+}
 
-$(document).ready(function () {
-  $(".set-bg").each(function () {
-    var bg = $(this).data("setbg");
-    $(this).css("background-image", "url(" + bg + ")");
-  });
-});
-
-$(document).ready(function () {
+FRAMEWORK.Pagings = function () {
   loadPaging("api/product.php?perpage=8", ".paging-product-list", 0);
   $(".title-product-list .a-title-product").click(function () {
     $(".title-product-list .a-title-product").removeClass("active");
@@ -233,9 +221,9 @@ $(document).ready(function () {
       0
     );
   });
-});
+}
 
-$(document).ready(function () {
+FRAMEWORK.Bootstrap = function () {
   if (isExist($("[data-margin]"))) {
     $("[data-margin]").each(function () {
       var $margin = $(this).data("margin");
@@ -266,35 +254,49 @@ $(document).ready(function () {
       });
     });
   }
-});
+}
 
-$(document).ready(function () {
-  $("body").on("click", ".addcart", function () {
+FRAMEWORK.Cart = function () {
+  /* Popup */
+  $('body').on('click', '.popup_cart', function () {
+    $.ajax({
+      url: 'api/cart.php',
+      type: 'POST',
+      dataType: 'html',
+      async: false,
+      data: {
+        cmd: 'popup-cart'
+      },
+      success: function (result) {
+        $('#popup-cart .modal-body').html(result);
+        $('#popup-cart').modal('show');
+        holdonClose();
+      }
+    });
+  });
+  /* Add */
+  $('body').on('click', '.addcart', function () {
     $this = $(this);
-    $parents = $this.parents(".right-pro-detail");
-    var id = $this.data("id");
-    var action = $this.data("action");
-    var quantity = $parents.find(".quantity-pro-detail").find(".qty-pro").val();
+    $parents = $this.parents('.right-pro-detail');
+    var id = $this.data('id');
+    var action = $this.data('action');
+    var quantity = $parents.find('.quantity-pro-detail').find('.qty-pro').val();
     quantity = quantity ? quantity : 1;
-    var color = $parents
-      .find(".color-block-pro-detail")
-      .find(".color-pro-detail input:checked")
-      .val();
+
+    /* size màu cơ bản*/
+    var color = $parents.find('.color-block-pro-detail').find('.color-pro-detail input:checked').val();
     color = color ? color : 0;
-    var size = $parents
-      .find(".size-block-pro-detail")
-      .find(".size-pro-detail input:checked")
-      .val();
+    var size = $parents.find('.size-block-pro-detail').find('.size-pro-detail input:checked').val();
     size = size ? size : 0;
 
     if (id) {
       $.ajax({
-        url: "api/cart.php",
-        type: "POST",
-        dataType: "json",
+        url: 'api/cart.php',
+        type: 'POST',
+        dataType: 'json',
         async: false,
         data: {
-          cmd: "add-cart",
+          cmd: 'add-cart',
           id: id,
           color: color,
           size: size,
@@ -304,171 +306,112 @@ $(document).ready(function () {
           holdonOpen();
         },
         success: function (result) {
-          if (action == "addnow") {
-            $(".count-cart").html(result.max);
+          if (action == 'addnow') {
+            $('.count-cart').html(result.max);
             $.ajax({
-              url: "api/cart.php",
-              type: "POST",
-              dataType: "html",
+              url: 'api/cart.php',
+              type: 'POST',
+              dataType: 'html',
               async: false,
               data: {
-                cmd: "popup-cart",
+                cmd: 'popup-cart'
+              },
+              beforeSend: function () {
+                HoldOn.open({
+                  theme: "sk-bounce",
+                  message: 'Vui lòng chờ tí ...'
+                });
               },
               success: function (result) {
-                $("#popup-cart .modal-body").html(result);
-                $("#popup-cart").modal("show");
-                NN_FRAMEWORK.Lazys();
+                $('#popup-cart .modal-body').html(result);
+                $('#popup-cart').modal('show');
+                $('#popup-quickview').modal('hide');
                 holdonClose();
-              },
+              }
             });
-          } else if (action == "buynow") {
-            window.location = CONFIG_BASE + "gio-hang";
+          } else if (action == 'buynow') {
+            window.location = CONFIG_BASE + 'gio-hang';
           }
-        },
+        }
       });
     }
   });
-
   /* Delete */
-  $("body").on("click", ".del-procart", function () {
-    confirmDialog("delete-procart", LANG["delete_product_from_cart"], $(this));
+  $('body').on('click', '.del-procart', function () {
+    confirmDialog('delete-procart', 'Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?', $(this));
   });
-
   /* Counter */
-  $("body").on("click", ".counter-procart", function () {
+  $('body').on('click', '.counter-procart', function () {
     var $button = $(this);
     var quantity = 1;
-    var input = $button.parent().find("input");
-    var id = input.data("pid");
-    var code = input.data("code");
-    var oldValue = $button.parent().find("input").val();
-    if ($button.text() == "+") quantity = parseFloat(oldValue) + 1;
+    var input = $button.parent().find('input');
+    var id = input.data('pid');
+    var code = input.data('code');
+    var oldValue = $button.parent().find('input').val();
+    if ($button.text() == '+') quantity = parseFloat(oldValue) + 1;
     else if (oldValue > 1) quantity = parseFloat(oldValue) - 1;
-    $button.parent().find("input").val(quantity);
+    $button.parent().find('input').val(quantity);
     updateCart(id, code, quantity);
   });
-
-  /* Quantity */
-  $("body").on("change", "input.quantity-procart", function () {
-    var quantity = $(this).val() < 1 ? 1 : $(this).val();
-    $(this).val(quantity);
-    var id = $(this).data("pid");
-    var code = $(this).data("code");
-    updateCart(id, code, quantity);
-  });
-
   /* City */
-  if (isExist($(".select-city-cart"))) {
-    $(".select-city-cart").change(function () {
+  if (isExist($('.select-city-cart'))) {
+    $('.select-city-cart').change(function () {
       var id = $(this).val();
       loadDistrict(id);
-      loadShip();
     });
   }
-
   /* District */
-  if (isExist($(".select-district-cart"))) {
-    $(".select-district-cart").change(function () {
+  if (isExist($('.select-district-cart'))) {
+    $('.select-district-cart').change(function () {
       var id = $(this).val();
       loadWard(id);
-      loadShip();
     });
   }
-
   /* Ward */
-  if (isExist($(".select-ward-cart"))) {
-    $(".select-ward-cart").change(function () {
+  if (isExist($('.select-ward-cart'))) {
+    $('.select-ward-cart').change(function () {
       var id = $(this).val();
-      loadShip(id);
     });
   }
-
   /* Payments */
-  if (isExist($(".payments-label"))) {
-    $(".payments-label").click(function () {
-      var payments = $(this).data("payments");
-      $(".payments-cart .payments-label, .payments-info").removeClass("active");
-      $(this).addClass("active");
-      $(".payments-info-" + payments).addClass("active");
+  if (isExist($('.payments-label'))) {
+    $('.payments-label').click(function () {
+      var payments = $(this).data('payments');
+      $('.payments-cart .payments-label, .payments-info').removeClass('active');
+      $(this).addClass('active');
+      $('.payments-info-' + payments).addClass('active');
     });
   }
-
   /* Colors */
-  if (isExist($(".color-pro-detail"))) {
-    $(".color-pro-detail input").click(function () {
-      $this = $(this).parents("label.color-pro-detail");
-      $parents = $this.parents(".attr-pro-detail");
-      $parents_detail = $this.parents(".grid-pro-detail");
-      $parents
-        .find(".color-block-pro-detail")
-        .find(".color-pro-detail")
-        .removeClass("active");
-      $parents
-        .find(".color-block-pro-detail")
-        .find(".color-pro-detail input")
-        .prop("checked", false);
-      $this.addClass("active");
-      $this.find("input").prop("checked", true);
-      var id_color = $parents
-        .find(".color-block-pro-detail")
-        .find(".color-pro-detail input:checked")
-        .val();
-      var id_pro = $this.data("idproduct");
-
-      $.ajax({
-        url: "api/color.php",
-        type: "POST",
-        dataType: "html",
-        data: {
-          id_color: id_color,
-          id_pro: id_pro,
-        },
-        beforeSend: function () {
-          holdonOpen();
-        },
-        success: function (result) {
-          if (result) {
-            $parents_detail.find(".left-pro-detail").html(result);
-            MagicZoom.refresh("Zoom-1");
-            NN_FRAMEWORK.OwlData($(".owl-pro-detail"));
-            NN_FRAMEWORK.Lazys();
-          }
-          holdonClose();
-        },
-      });
+  if (isExist($('.color-pro-detail'))) {
+    $('.color-pro-detail input').click(function () {
+      $this = $(this).parents('label.color-pro-detail');
+      $parents = $this.parents('.attr-pro-detail');
+      $parents_detail = $this.parents('.grid-pro-detail');
+      $parents.find('.color-block-pro-detail').find('.color-pro-detail').removeClass('active');
+      $parents.find('.color-block-pro-detail').find('.color-pro-detail input').prop('checked', false);
+      $this.addClass('active');
+      $this.find('input').prop('checked', true);
     });
   }
-
   /* Sizes */
-  if (isExist($(".size-pro-detail"))) {
-    $(".size-pro-detail input").click(function () {
-      $this = $(this).parents("label.size-pro-detail");
-      $parents = $this.parents(".attr-pro-detail");
-      $parents
-        .find(".size-block-pro-detail")
-        .find(".size-pro-detail")
-        .removeClass("active");
-      $parents
-        .find(".size-block-pro-detail")
-        .find(".size-pro-detail input")
-        .prop("checked", false);
-      $this.addClass("active");
-      $this.find("input").prop("checked", true);
+  if (isExist($('.size-pro-detail'))) {
+    $('.size-pro-detail input').click(function () {
+      $this = $(this).parents('label.size-pro-detail');
+      $parents = $this.parents('.attr-pro-detail');
+      $parents.find('.size-block-pro-detail').find('.size-pro-detail').removeClass('active');
+      $parents.find('.size-block-pro-detail').find('.size-pro-detail input').prop('checked', false);
+      $this.addClass('active');
+      $this.find('input').prop('checked', true);
     });
   }
+}
 
-  /* Quantity detail page */
-  if (isExist($(".quantity-pro-detail span"))) {
-    $(".quantity-pro-detail span").click(function () {
-      var $button = $(this);
-      var oldValue = $button.parent().find("input").val();
-      if ($button.text() == "+") {
-        var newVal = parseFloat(oldValue) + 1;
-      } else {
-        if (oldValue > 1) var newVal = parseFloat(oldValue) - 1;
-        else var newVal = 1;
-      }
-      $button.parent().find("input").val(newVal);
-    });
-  }
+/* Ready */
+$(document).ready(function () {
+  FRAMEWORK.Menu();
+  FRAMEWORK.Search();
+  FRAMEWORK.Carousel();
+  FRAMEWORK.Bootstrap();
+  FRAMEWORK.Cart();
 });

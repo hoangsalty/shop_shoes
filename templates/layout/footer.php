@@ -67,7 +67,7 @@
 </div>
 
 <?php if ($com != 'gio-hang') { ?>
-    <a class="cart-fixed text-decoration-none" href="gio-hang" title="Giỏ hàng">
+    <a class="popup_cart cart-fixed" href="javascript::void(0)" title="Giỏ hàng">
         <i class="fas fa-shopping-bag"></i>
         <span class="count-cart"><?= (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0 ?></span>
     </a>
@@ -83,3 +83,5 @@
     <div class="animated infinite pulse kenit-alo-circle-fill"></div>
     <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'hl.png', 'alt' => 'Hotline']) ?></i>
 </a>
+
+

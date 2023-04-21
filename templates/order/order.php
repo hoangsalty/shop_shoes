@@ -7,7 +7,7 @@
                     <p class="title-cart">Giỏ hàng của bạn:</p>
                     <div class="list-procart">
                         <div class="procart procart-label">
-                            <div class="form-row">
+                            <div class="row">
                                 <div class="pic-procart col-3 col-md-2">Hình ảnh</div>
                                 <div class="info-procart col-6 col-md-5">Tên sản phẩm</div>
                                 <div class="quantity-procart col-3 col-md-2">
@@ -29,27 +29,28 @@
                             $pro_price_new = $proinfo['sale_price'];
                             $pro_price_qty = $pro_price * $quantity;
                             $pro_price_new_qty = $pro_price_new * $quantity; ?>
+
                             <div class="procart procart-<?= $code ?>">
-                                <div class="form-row">
+                                <div class="row">
                                     <div class="pic-procart col-3 col-md-2">
-                                        <a class="text-decoration-none" href="<?= $proinfo[$sluglang] ?>" target="_blank" title="<?= $proinfo['name' . $lang] ?>">
-                                            <?= $func->getImage(['sizes' => '85x85x2', 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name' . $lang]]) ?>
+                                        <a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>">
+                                            <?= $func->getImage(['class' => 'w-100', 'width' => 85, 'height' => 85, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name']]) ?>
                                         </a>
-                                        <a class="del-procart text-decoration-none" data-code="<?= $code ?>">
+                                        <a class="del-procart text-decoration-none" data-code="<?= $code ?>" href="javascript::void(0)">
                                             <i class="fa fa-times-circle"></i>
                                             <span>Xóa</span>
                                         </a>
                                     </div>
                                     <div class="info-procart col-6 col-md-5">
-                                        <h3 class="name-procart"><a class="text-decoration-none" href="<?= $proinfo[$sluglang] ?>" target="_blank" title="<?= $proinfo['name' . $lang] ?>"><?= $proinfo['name' . $lang] ?></a></h3>
+                                        <h3 class="name-procart"><a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>"><?= $proinfo['name'] ?></a></h3>
                                         <div class="properties-procart">
                                             <?php if ($color) {
-                                                $color_detail = $d->rawQueryOne("select name$lang from #_color where type = ? and id = ? limit 0,1", array($proinfo['type'], $color)); ?>
-                                                <p>Màu: <strong><?= $color_detail['name' . $lang] ?></strong></p>
+                                                $color_detail = $d->rawQueryOne("select name from table_color where id = ? limit 0,1", array($color)); ?>
+                                                <p>Màu: <strong><?= $color_detail['name'] ?></strong></p>
                                             <?php } ?>
                                             <?php if ($size) {
-                                                $size_detail = $d->rawQueryOne("select name$lang from #_size where type = ? and id = ? limit 0,1", array($proinfo['type'], $size)); ?>
-                                                <p>Size: <strong><?= $size_detail['name' . $lang] ?></strong></p>
+                                                $size_detail = $d->rawQueryOne("select name from table_size where id = ? limit 0,1", array($size)); ?>
+                                                <p>Size: <strong><?= $size_detail['name'] ?></strong></p>
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -93,18 +94,14 @@
                         <?php } ?>
                     </div>
                     <div class="money-procart">
-                        <?php if ($config['order']['ship']) { ?>
-                            <div class="total-procart">
-                                <p>Tạm tính:</p>
-                                <p class="total-price load-price-temp"><?= $func->formatMoney($cart->getOrderTotal()) ?></p>
-                            </div>
-                        <?php } ?>
-                        <?php if ($config['order']['ship']) { ?>
-                            <div class="total-procart">
-                                <p>Phí vận chuyển:</p>
-                                <p class="total-price load-price-ship">0đ</p>
-                            </div>
-                        <?php } ?>
+                        <div class="total-procart">
+                            <p>Tạm tính:</p>
+                            <p class="total-price load-price-temp"><?= $func->formatMoney($cart->getOrderTotal()) ?></p>
+                        </div>
+                        <div class="total-procart">
+                            <p>Phí vận chuyển:</p>
+                            <p class="total-price load-price-ship">0đ</p>
+                        </div>
                         <div class="total-procart">
                             <p>Tổng tiền:</p>
                             <p class="total-price load-price-total"><?= $func->formatMoney($cart->getOrderTotal()) ?></p>
@@ -119,14 +116,14 @@
                             <?php foreach ($payments_info as $key => $value) { ?>
                                 <div class="payments-cart custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="payments-<?= $value['id'] ?>" name="dataOrder[payments]" value="<?= $value['id'] ?>" <?= (!empty($flashPayment) && $flashPayment == $value['id']) ? 'checked' : '' ?> required>
-                                    <label class="payments-label custom-control-label" for="payments-<?= $value['id'] ?>" data-payments="<?= $value['id'] ?>"><?= $value['name' . $lang] ?></label>
-                                    <div class="payments-info payments-info-<?= $value['id'] ?> transition"><?= str_replace("\n", "<br>", $value['desc' . $lang]) ?></div>
+                                    <label class="payments-label custom-control-label" for="payments-<?= $value['id'] ?>" data-payments="<?= $value['id'] ?>"><?= $value['name'] ?></label>
+                                    <div class="payments-info payments-info-<?= $value['id'] ?> transition"><?= str_replace("\n", "<br>", $value['desc']) ?></div>
                                 </div>
                             <?php } ?>
                         </div>
                         <p class="title-cart">Thông tin giao hàng:</p>
                         <div class="information-cart">
-                            <div class="form-row">
+                            <div class="row">
                                 <div class="input-cart col-md-6">
                                     <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Họ tên" value="<?= (!empty($flash->has('fullname'))) ? $flash->get('fullname') : '' ?>" required />
                                     <div class="invalid-feedback">Vui lòng nhập họ tên</div>
@@ -171,12 +168,12 @@
                                 <textarea class="form-control text-sm" id="requirements" name="dataOrder[requirements]" placeholder="Yêu cầu khác"><?= (!empty($flash->has('requirements'))) ? $flash->get('requirements') : '' ?></textarea>
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan" value="Thanh toán" disabled />
+                        <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan" value="Thanh toán" />
                     </div>
                 </div>
             <?php } else { ?>
                 <a href="" class="empty-cart text-decoration-none w-100">
-                    <i class="fa-duotone fa-cart-xmark"></i>
+                    <i class="fas fa-cart-plus"></i>
                     <p>Không tồn tại sản phẩm trong giỏ hàng</p>
                     <span class="btn btn-warning">Về trang chủ</span>
                 </a>

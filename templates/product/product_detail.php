@@ -1,29 +1,16 @@
 <div class="grid-pro-detail">
     <div class="row">
-        <div class="left-pro-detail col-md-5">
-            <a id="Zoom-1" class="MagicZoom" data-options="zoomMode: on; hint: off; rightClick: true; selectorTrigger: hover; expandCaption: false; history: false;" href="<?= UPLOAD_PRODUCT_L . $rowDetail['photo'] ?>" title="<?= $rowDetail['name'] ?>">
-                <?= $func->getImage(['class' => 'w-100', 'width' => 540, 'height' => 400, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
-            </a>
-            <?php if (!empty($rowDetailPhoto)) { ?>
-                <div class="gallery-thumb-pro">
-                    <div class="gallery__slider owl-carousel control-owl">
-                        <div class="gallery-item" owl-item-animation>
-                            <a class="thumb-pro-detail" data-zoom-id="Zoom-1" href="<?= UPLOAD_PRODUCT_L . $rowDetail['photo'] ?>" title="<?= $rowDetail['name'] ?>">
-                                <?= $func->getImage(['class' => 'w-100', 'width' => 75, 'height' => 75, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
-                            </a>
-                        </div>
-                        <?php foreach ($rowDetailPhoto as $v) { ?>
-                            <div class="gallery-item" owl-item-animation>
-                                <a class="thumb-pro-detail" data-zoom-id="Zoom-1" href="<?= UPLOAD_PRODUCT_L . $v['photo'] ?>" title="<?= $rowDetail['name'] ?>">
-                                    <?= $func->getImage(['class' => 'w-100', 'width' => 75, 'height' => 75, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
-                                </a>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-            <?php } ?>
+        <div class="left-pro-detail col-md-6">
+            <div class="fotorama" data-width="100%" data-thumbmargin="10" data-height="400" data-fit="contain" data-thumbwidth="120" data-thumbheight="80" data-allowfullscreen="false" data-nav="thumbs">
+                <?= $func->getImage(['class' => 'w-100', 'width' => 280, 'height' => 280, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                <?php if (!empty($rowDetailPhoto)) { ?>
+                    <?php foreach ($rowDetailPhoto as $v) { ?>
+                        <?= $func->getImage(['class' => 'w-100', 'width' => 280, 'height' => 280, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
+                    <?php } ?>
+                <?php } ?>
+            </div>
         </div>
-        <div class="right-pro-detail col-md-7">
+        <div class="right-pro-detail col-md-6">
             <p class="title-pro-detail mb-2"><?= $rowDetail['name'] ?></p>
             <div class="desc-pro-detail"><?= nl2br($func->decodeHtmlChars($rowDetail['desc'])) ?></div>
             <ul class="attr-pro-detail">
@@ -79,6 +66,16 @@
                         </div>
                     </li>
                 <?php } ?>
+                <li class="">
+                    <label class="attr-label-pro-detail d-block">Số lượng:</label>
+                    <div class="attr-content-pro-detail d-block">
+                        <div class="quantity-pro-detail">
+                            <span class="quantity-minus-pro-detail counter-procart">-</span>
+                            <input type="number" class="qty-pro" min="1" value="1" readonly />
+                            <span class="quantity-plus-pro-detail counter-procart">+</span>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <div class="cart-pro-detail">
                 <a class="btn btn-success addcart rounded-0 mr-2" data-id="<?= $rowDetail['id'] ?>" data-action="addnow">
@@ -95,10 +92,10 @@
     <div class="tabs-pro-detail">
         <ul class="nav nav-tabs" id="tabsProDetail">
             <li class="nav-item">
-                <a class="nav-link active" id="info-pro-detail-tab" data-bs-toggle="tab" href="#info-pro-detail">Thông tin sản phẩm</a>
+                <a class="nav-link active" id="info-pro-detail-tab" data-toggle="tab" href="#info-pro-detail">Thông tin sản phẩm</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="review-pro-detail-tab" data-bs-toggle="tab" href="#review-pro-detail">Reviews</a>
+                <a class="nav-link" id="review-pro-detail-tab" data-toggle="tab" href="#review-pro-detail">Reviews</a>
             </li>
         </ul>
         <div class="tab-content pt-4 pb-4" id="tabsProDetailContent">

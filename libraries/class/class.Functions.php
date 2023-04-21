@@ -354,7 +354,7 @@ class Functions
         $showtext = $msg;
         $page_transfer = $page;
         $numb = $numb1;
-        include("../templates/layout/transfer.php");
+        include("./templates/layout/transfer.php");
         exit();
     }
     /* Lấy link page hiện tại */
@@ -749,5 +749,18 @@ class Functions
             $row = $d->rawQueryOne("select $cols from table_$table where id = ? limit 0,1", array($id));
         }
         return $row;
+    }
+    /* String random */
+    public function stringRandom($sokytu = 10)
+    {
+        $str = '';
+        if ($sokytu > 0) {
+            $chuoi = 'ABCDEFGHIJKLMNOPQRSTUVWXYZWabcdefghijklmnopqrstuvwxyzw0123456789';
+            for ($i = 0; $i < $sokytu; $i++) {
+                $vitri = mt_rand(0, strlen($chuoi));
+                $str = $str . substr($chuoi, $vitri, 1);
+            }
+        }
+        return $str;
     }
 }
