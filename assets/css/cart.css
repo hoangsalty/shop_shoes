@@ -25,7 +25,7 @@
 }
 
 .buymore-cart {
-  color: #ec2d3f;
+  color: #001973;
   cursor: pointer;
   margin: 0px;
 }
@@ -83,7 +83,7 @@
 }
 
 .name-procart a:hover {
-  color: #ec2d3f;
+  color: #001973;
 }
 
 .properties-procart {
@@ -137,7 +137,7 @@
 
 .counter-procart:hover,
 .counter-procart:focus {
-  color: #ec2d3f;
+  color: #001973;
 }
 
 .counter-procart:disabled {
@@ -186,7 +186,7 @@
 }
 
 .price-new-cart {
-  color: #ec2d3f;
+  color: #001973;
   margin-bottom: 0px;
 }
 
@@ -229,7 +229,7 @@
 }
 
 .total-procart p:last-child {
-  color: #ec2d3f;
+  color: #001973;
 }
 
 .section-cart {
@@ -241,7 +241,7 @@
 .title-cart {
   font-size: 15px;
   text-transform: uppercase;
-  color: #ec2d3f;
+  color: #001973;
   border-bottom: 1px solid #eee;
   padding-bottom: 5px;
   margin-bottom: 15px;
@@ -295,7 +295,7 @@
 }
 
 .payments-label.active {
-  background: #ec2d3f;
+  background: #001973;
   color: #ffffff !important;
 }
 
@@ -400,4 +400,26 @@
   .procart-label .quantity-procart p:last-child {
     display: block;
   }
+}
+
+.size-pro-detail.active:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 13px;
+  height: 13px;
+  background-repeat: no-repeat;
+  background-image: url(../images/check-cart.png)
+}
+
+.color-pro-detail.active:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 13px;
+  height: 13px;
+  background-repeat: no-repeat;
+  background-image: url(../images/check-cart.png)
 }

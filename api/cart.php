@@ -13,7 +13,6 @@ if ($cmd == 'add-cart' && $id > 0) {
     $cart->addToCart($quantity, $id, $color, $size);
     $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
     $data = array('max' => $max);
-
     echo json_encode($data);
 } else if ($cmd == 'update-cart' && $id > 0 && $code != '') {
     if (!empty($_SESSION['cart'])) {
@@ -24,11 +23,6 @@ if ($cmd == 'add-cart' && $id > 0) {
                 break;
             }
         }
-    }
-
-    if (!empty($config['order']['ship'])) {
-        $shipData = (!empty($ward)) ? $func->getInfoDetail('ship_price', "ward", $ward) : array();
-        $ship = (!empty($shipData)) ? $shipData['ship_price'] : 0;
     }
 
     $proinfo = $cart->getProductInfo($id);
@@ -80,55 +74,79 @@ if ($cmd == 'add-cart' && $id > 0) {
 } else if ($cmd == 'popup-cart') { ?>
     <form class="form-cart" method="post" action="" enctype="multipart/form-data">
         <div class="wrap-cart">
-            <div class="top-cart border-right-0">
-                <div class="list-procart">
-                    <div class="procart procart-label">
-                        <div class="form-row">
-                            <div class="pic-procart col-3 col-md-2"><?= hinhanh ?></div>
-                            <div class="info-procart col-6 col-md-5"><?= tensanpham ?></div>
-                            <div class="quantity-procart col-3 col-md-2">
-                                <p><?= soluong ?></p>
-                                <p><?= thanhtien ?></p>
-                            </div>
-                            <div class="price-procart col-3 col-md-3"><?= thanhtien ?></div>
-                        </div>
-                    </div>
-                    <?php $max = count($_SESSION['cart']);
-                    for ($i = 0; $i < $max; $i++) {
-                        $pid = $_SESSION['cart'][$i]['productid'];
-                        $quantity = $_SESSION['cart'][$i]['qty'];
-                        $color = ($_SESSION['cart'][$i]['color']) ? $_SESSION['cart'][$i]['color'] : 0;
-                        $size = ($_SESSION['cart'][$i]['size']) ? $_SESSION['cart'][$i]['size'] : 0;
-                        $code = ($_SESSION['cart'][$i]['code']) ? $_SESSION['cart'][$i]['code'] : '';
-                        $proinfo = $cart->getProductInfo($pid);
-                        $pro_price = $proinfo['regular_price'];
-                        $pro_price_new = $proinfo['sale_price'];
-                        $pro_price_qty = $pro_price * $quantity;
-                        $pro_price_new_qty = $pro_price_new * $quantity; ?>
-                        <div class="procart procart-<?= $code ?>">
+            <?php if (!empty($_SESSION['cart'])) { ?>
+                <div class="top-cart border-right-0">
+                    <div class="list-procart">
+                        <div class="procart procart-label">
                             <div class="form-row">
-                                <div class="pic-procart col-3 col-md-2">
-                                    <a class="text-decoration-none" href="<?= $proinfo[$sluglang] ?>" target="_blank" title="<?= $proinfo['name' . $lang] ?>"><?= $func->getImage(['sizes' => '85x85x2', 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name' . $lang]]) ?></a>
-                                    <a class="del-procart text-decoration-none" data-code="<?= $code ?>">
-                                        <i class="fa fa-times-circle"></i>
-                                        <span><?= xoa ?></span>
-                                    </a>
-                                </div>
-                                <div class="info-procart col-6 col-md-5">
-                                    <h3 class="name-procart"><a class="text-decoration-none" href="<?= $proinfo[$sluglang] ?>" target="_blank" title="<?= $proinfo['name' . $lang] ?>"><?= $proinfo['name' . $lang] ?></a></h3>
-                                    <div class="properties-procart">
-                                        <?php if ($color) {
-                                            $color_detail = $d->rawQueryOne("select name$lang from #_color where type = ? and id = ? limit 0,1", array($proinfo['type'], $color)); ?>
-                                            <p>Màu: <strong><?= $color_detail['name' . $lang] ?></strong></p>
-                                        <?php } ?>
-                                        <?php if ($size) {
-                                            $size_detail = $d->rawQueryOne("select name$lang from #_size where type = ? and id = ? limit 0,1", array($proinfo['type'], $size)); ?>
-                                            <p>Size: <strong><?= $size_detail['name' . $lang] ?></strong></p>
-                                        <?php } ?>
-                                    </div>
-                                </div>
+                                <div class="pic-procart col-3 col-md-2">Hình ảnh</div>
+                                <div class="info-procart col-6 col-md-5">Tên sản phẩm</div>
                                 <div class="quantity-procart col-3 col-md-2">
-                                    <div class="price-procart price-procart-rp">
+                                    <p>Số lượng</p>
+                                    <p>Thành tiền</p>
+                                </div>
+                                <div class="price-procart col-3 col-md-3">Thành tiền</div>
+                            </div>
+                        </div>
+                        <?php $max = count($_SESSION['cart']);
+                        for ($i = 0; $i < $max; $i++) {
+                            $pid = $_SESSION['cart'][$i]['productid'];
+                            $quantity = $_SESSION['cart'][$i]['qty'];
+                            $color = ($_SESSION['cart'][$i]['color']) ? $_SESSION['cart'][$i]['color'] : 0;
+                            $size = ($_SESSION['cart'][$i]['size']) ? $_SESSION['cart'][$i]['size'] : 0;
+                            $code = ($_SESSION['cart'][$i]['code']) ? $_SESSION['cart'][$i]['code'] : '';
+                            $proinfo = $cart->getProductInfo($pid);
+
+                            $pro_price = $proinfo['regular_price'];
+                            $pro_price_new = $proinfo['sale_price'];
+                            $pro_price_qty = $pro_price * $quantity;
+                            $pro_price_new_qty = $pro_price_new * $quantity; ?>
+                            <div class="procart procart-<?= $code ?>">
+                                <div class="form-row">
+                                    <div class="pic-procart col-3 col-md-2">
+                                        <a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>">
+                                            <?= $func->getImage(['class' => 'w-100', 'width' => 85, 'height' => 85, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name']]) ?>
+                                        </a>
+                                        <a class="del-procart text-decoration-none" data-code="<?= $code ?>">
+                                            <i class="fa fa-times-circle"></i>
+                                            <span>Xóa</span>
+                                        </a>
+                                    </div>
+                                    <div class="info-procart col-6 col-md-5">
+                                        <h3 class="name-procart"><a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>"><?= $proinfo['name'] ?></a></h3>
+                                        <div class="properties-procart">
+                                            <?php if ($size) {
+                                                $size_detail = $d->rawQueryOne("select name from tale_size where id = ? limit 0,1", array($size)); ?>
+                                                <p>Size: <strong><?= $size_detail['name'] ?></strong></p>
+                                            <?php } ?>
+                                            <?php if ($color) {
+                                                $color_detail = $d->rawQueryOne("select name from tale_color where id = ? limit 0,1", array($color)); ?>
+                                                <p>Màu: <strong><?= $color_detail['name'] ?></strong></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="quantity-procart col-3 col-md-2">
+                                        <div class="price-procart price-procart-rp">
+                                            <?php if ($proinfo['sale_price']) { ?>
+                                                <p class="price-new-cart load-price-new-<?= $code ?>">
+                                                    <?= $func->formatMoney($pro_price_new_qty) ?>
+                                                </p>
+                                                <p class="price-old-cart load-price-<?= $code ?>">
+                                                    <?= $func->formatMoney($pro_price_qty) ?>
+                                                </p>
+                                            <?php } else { ?>
+                                                <p class="price-new-cart load-price-<?= $code ?>">
+                                                    <?= $func->formatMoney($pro_price_qty) ?>
+                                                </p>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="quantity-counter-procart quantity-counter-procart-<?= $code ?>">
+                                            <span class="counter-procart-minus counter-procart">-</span>
+                                            <input type="number" class="quantity-procart" min="1" value="<?= $quantity ?>" data-pid="<?= $pid ?>" data-code="<?= $code ?>" readonly />
+                                            <span class="counter-procart-plus counter-procart">+</span>
+                                        </div>
+                                    </div>
+                                    <div class="price-procart col-3 col-md-3">
                                         <?php if ($proinfo['sale_price']) { ?>
                                             <p class="price-new-cart load-price-new-<?= $code ?>">
                                                 <?= $func->formatMoney($pro_price_new_qty) ?>
@@ -142,44 +160,31 @@ if ($cmd == 'add-cart' && $id > 0) {
                                             </p>
                                         <?php } ?>
                                     </div>
-                                    <div class="quantity-counter-procart quantity-counter-procart-<?= $code ?>">
-                                        <span class="counter-procart-minus counter-procart">-</span>
-                                        <input type="number" class="quantity-procart" min="1" value="<?= $quantity ?>" data-pid="<?= $pid ?>" data-code="<?= $code ?>" />
-                                        <span class="counter-procart-plus counter-procart">+</span>
-                                    </div>
-                                </div>
-                                <div class="price-procart col-3 col-md-3">
-                                    <?php if ($proinfo['sale_price']) { ?>
-                                        <p class="price-new-cart load-price-new-<?= $code ?>">
-                                            <?= $func->formatMoney($pro_price_new_qty) ?>
-                                        </p>
-                                        <p class="price-old-cart load-price-<?= $code ?>">
-                                            <?= $func->formatMoney($pro_price_qty) ?>
-                                        </p>
-                                    <?php } else { ?>
-                                        <p class="price-new-cart load-price-<?= $code ?>">
-                                            <?= $func->formatMoney($pro_price_qty) ?>
-                                        </p>
-                                    <?php } ?>
                                 </div>
                             </div>
+                        <?php } ?>
+                    </div>
+                    <div class="money-procart">
+                        <div class="total-procart">
+                            <p>Tạm tính:</p>
+                            <p class="total-price load-price-temp"><?= $func->formatMoney($cart->getOrderTotal()) ?></p>
                         </div>
-                    <?php } ?>
-                </div>
-                <div class="money-procart">
-                    <div class="total-procart">
-                        <p><?= tamtinh ?>:</p>
-                        <p class="total-price load-price-temp"><?= $func->formatMoney($cart->getOrderTotal()) ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="san-pham" class="buymore-cart text-decoration-none" title="Tiếp tục mua hàng">
+                            <i class="fa fa-angle-double-left"></i>
+                            <span>Tiếp tục mua hàng</span>
+                        </a>
+                        <a class="btn btn-dark btn-sm btn-cart" href="gio-hang" title="Thanh toán">Thanh toán</a>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a href="san-pham" class="buymore-cart text-decoration-none" title="<?= tieptucmuahang ?>">
-                        <i class="fa fa-angle-double-left"></i>
-                        <span><?= tieptucmuahang ?></span>
-                    </a>
-                    <a class="btn btn-primary btn-cart" href="gio-hang" title="<?= thanhtoan ?>"><?= thanhtoan ?></a>
-                </div>
-            </div>
+            <?php } else { ?>
+                <a href="" class="empty-cart text-decoration-none w-100">
+                    <i class="fa-duotone fa-cart-xmark"></i>
+                    <p>Không tồn tại sản phẩm nào trong giỏ hàng</p>
+                    <span class="btn btn-warning">Về trang chủ</span>
+                </a>
+            <?php } ?>
         </div>
     </form>
 <?php }

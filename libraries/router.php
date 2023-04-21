@@ -114,7 +114,6 @@ switch ($com) {
     case 'gio-hang':
         $source = "order";
         $template = 'order/order';
-        $titleMain = "Giỏ hàng";
         break;
 
     default:

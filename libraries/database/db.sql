@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2023 at 03:03 PM
+-- Generation Time: Apr 21, 2023 at 06:26 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -1031,13 +1031,12 @@ CREATE TABLE `table_order` (
   `district` int(11) DEFAULT 0,
   `ward` int(11) DEFAULT 0,
   `requirements` mediumtext DEFAULT NULL,
-  `notes` mediumtext DEFAULT NULL,
   `numb` int(11) DEFAULT 0,
   `temp_price` double DEFAULT 0,
   `ship_price` double DEFAULT 0,
   `total_price` double DEFAULT 0,
   `order_payment` int(11) DEFAULT 0,
-  `order_status` int(11) DEFAULT 0,
+  `order_status` varchar(255) DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
@@ -1059,7 +1058,8 @@ CREATE TABLE `table_order_detail` (
   `name` varchar(255) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
   `quantity` int(11) DEFAULT 0,
-  `price` int(11) DEFAULT 0
+  `regular_price` int(11) DEFAULT 0,
+  `sale_price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1127,8 +1127,8 @@ CREATE TABLE `table_product` (
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `quantity`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 10, 1, 131, 'hienthi', 1679827982, 1681648898, 0),
-(2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 10, 2, 0, 'hienthi,noibat', 1679827990, 1680869938, 0),
+(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 10, 1, 256, 'hienthi', 1679827982, 1681648898, 0),
+(2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 10, 2, 1, 'hienthi,noibat', 1679827990, 1680869938, 0),
 (3, 6, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 10, 3, 0, 'hienthi,noibat', 1679828000, 1680869946, 0),
 (4, 6, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 10, 4, 0, 'hienthi,noibat', 1679828010, 1680869956, 0),
 (5, 6, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 10, 5, 0, 'hienthi,noibat', 1679828021, 1680869965, 0),
@@ -1355,10 +1355,10 @@ CREATE TABLE `table_user` (
 --
 
 INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `confirm_code`, `photo`, `fullname`, `phone`, `email`, `address`, `gender`, `login_session`, `user_token`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '', 0, '', '00cce9ad91ac51b64540a930ea86ed97', '1681477676', 'hoatdong', 1608051600, 0, 0, 0, 0),
+(1, NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '', 0, '', '4bed4f046ec6d83c2609d9c0214895bc', '1681923467', 'hoatdong', 1608051600, 0, 0, 0, 0),
 (146, 'admin', 'test', '098f6bcd4621d373cade4e832627b4f6', NULL, '2-7335.jpg', 'Test', '0909090909', 'test@gmail.com', 'Test', 1, '', '8bfc73420c2a4b3725c9738d2b2955f9', '1680338040', 'hoatdong', 954176400, 1, 1680100745, 1680199552, 0),
 (147, 'user', 'test1', '098f6bcd4621d373cade4e832627b4f6', NULL, '1-7945.jpg', 'Test', '0909090909', 'test1@gmail.com', 'Test', 1, 'face9250a60ecb67ff31284b0e338314', 'c0114c8f6951a8b4295aa86b644a971b', '1681342575', 'khoa', 1679954400, 2, 1680101968, 1680698881, 0),
-(148, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', NULL, '6783077-cool-wallpapers-hd-3332-7219.jpg', 'Hoàng', '0909090909', 'hoang@gmail.com', 'Địa chỉ', 1, 'e05d488dd52f4940bb46376850b8bc63', '956c6e8f8cc80d58cc34b5f339a53202', '1681484728', 'hoatdong', 980722800, 3, 1681481036, 1681484741, 0);
+(148, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', NULL, '6783077-cool-wallpapers-hd-3332-7219.jpg', 'Hoàng', '0909090909', 'hoang@gmail.com', 'Địa chỉ', 1, 'e05d488dd52f4940bb46376850b8bc63', 'ae864bd7fadc4df6be3cf67cb427cdc4', '1681995083', 'hoatdong', 980722800, 3, 1681481036, 1681484741, 0);
 
 -- --------------------------------------------------------
 
@@ -12243,13 +12243,13 @@ ALTER TABLE `table_news`
 -- AUTO_INCREMENT for table `table_order`
 --
 ALTER TABLE `table_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `table_photo`
