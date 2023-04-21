@@ -215,8 +215,6 @@ $linkDelete = "index.php?com=order&act=delete";
         </div>
     </div>
     <?php if ($paging) { ?>
-        <div class="card-footer text-sm pb-0">
-            <?= $paging ?>
-        </div>
+        <div class="card-footer text-sm pb-0"><?= $paging ?></div>
     <?php } ?>
 </section>

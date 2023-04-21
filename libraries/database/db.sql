@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2023 at 06:26 PM
+-- Generation Time: Apr 21, 2023 at 06:37 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -1022,25 +1022,31 @@ INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `num
 CREATE TABLE `table_order` (
   `id` int(11) UNSIGNED NOT NULL,
   `id_user` int(11) UNSIGNED DEFAULT NULL,
+  `order_payment` int(11) UNSIGNED DEFAULT 0,
   `code` varchar(25) DEFAULT NULL,
   `fullname` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `requirements` mediumtext DEFAULT NULL,
   `city` int(11) DEFAULT 0,
   `district` int(11) DEFAULT 0,
   `ward` int(11) DEFAULT 0,
-  `requirements` mediumtext DEFAULT NULL,
-  `numb` int(11) DEFAULT 0,
+  `order_status` varchar(255) DEFAULT NULL,
   `temp_price` double DEFAULT 0,
   `ship_price` double DEFAULT 0,
   `total_price` double DEFAULT 0,
-  `order_payment` int(11) DEFAULT 0,
-  `order_status` varchar(255) DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `table_order`
+--
+
+INSERT INTO `table_order` (`id`, `id_user`, `order_payment`, `code`, `fullname`, `phone`, `address`, `email`, `requirements`, `city`, `district`, `ward`, `order_status`, `temp_price`, `ship_price`, `total_price`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(1, NULL, 4, 'S7KWFQ', 'Hoàng Phạm', '0909090909', 'Test, Phường Thọ Sơn, Thành phố Việt Trì, Tỉnh Phú Thọ', 'hoangpham@gmail.com', '', 16, 168, 2865, 'moidat', 400000, 0, 400000, 1682094883, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1058,9 +1064,15 @@ CREATE TABLE `table_order_detail` (
   `name` varchar(255) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
   `quantity` int(11) DEFAULT 0,
-  `regular_price` int(11) DEFAULT 0,
-  `sale_price` int(11) DEFAULT 0
+  `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `table_order_detail`
+--
+
+INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `id_size`, `photo`, `name`, `code`, `quantity`, `price`) VALUES
+(1, 1, 1, 8, 8, '1-5039.png', 'Sản phẩm 1', 'S7KWFQ', 1, 400000);
 
 -- --------------------------------------------------------
 
@@ -1127,7 +1139,7 @@ CREATE TABLE `table_product` (
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `quantity`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 10, 1, 256, 'hienthi', 1679827982, 1681648898, 0),
+(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 10, 1, 258, 'hienthi', 1679827982, 1681648898, 0),
 (2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 10, 2, 1, 'hienthi,noibat', 1679827990, 1680869938, 0),
 (3, 6, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 10, 3, 0, 'hienthi,noibat', 1679828000, 1680869946, 0),
 (4, 6, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 10, 4, 0, 'hienthi,noibat', 1679828010, 1680869956, 0),
@@ -12089,7 +12101,8 @@ ALTER TABLE `table_news`
 --
 ALTER TABLE `table_order`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order_user` (`id_user`);
+  ADD KEY `order_user` (`id_user`),
+  ADD KEY `order_news` (`order_payment`);
 
 --
 -- Indexes for table `table_order_detail`
@@ -12243,13 +12256,13 @@ ALTER TABLE `table_news`
 -- AUTO_INCREMENT for table `table_order`
 --
 ALTER TABLE `table_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `table_photo`
@@ -12355,6 +12368,7 @@ ALTER TABLE `table_gallery_album`
 -- Constraints for table `table_order`
 --
 ALTER TABLE `table_order`
+  ADD CONSTRAINT `order_news` FOREIGN KEY (`order_payment`) REFERENCES `table_news` (`id`),
   ADD CONSTRAINT `order_user` FOREIGN KEY (`id_user`) REFERENCES `table_user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
