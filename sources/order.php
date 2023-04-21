@@ -134,7 +134,6 @@ if (!empty($_POST['thanhtoan'])) {
     $data_donhang['city'] = $city;
     $data_donhang['district'] = $district;
     $data_donhang['ward'] = $ward;
-    $data_donhang['numb'] = 1;
 
     /* lưu đơn hàng chi tiết */
     if ($d->insert('table_order', $data_donhang)) {
@@ -160,8 +159,11 @@ if (!empty($_POST['thanhtoan'])) {
             $data_donhangchitiet['code'] = $code;
             $data_donhangchitiet['id_color'] = $color;
             $data_donhangchitiet['id_size'] = $size;
-            $data_donhangchitiet['regular_price'] = $regular_price;
-            $data_donhangchitiet['sale_price'] = $sale_price;
+            if ($sale_price > 0) {
+                $data_donhangchitiet['price'] = $sale_price;
+            } else {
+                $data_donhangchitiet['price'] = $regular_price;
+            }
             $data_donhangchitiet['quantity'] = $q;
             $d->insert('table_order_detail', $data_donhangchitiet);
         }
