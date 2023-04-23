@@ -116,11 +116,11 @@ if ($cmd == 'add-cart' && $id > 0) {
                                         <h3 class="name-procart"><a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>"><?= $proinfo['name'] ?></a></h3>
                                         <div class="properties-procart">
                                             <?php if ($size) {
-                                                $size_detail = $d->rawQueryOne("select name from tale_size where id = ? limit 0,1", array($size)); ?>
+                                                $size_detail = $d->rawQueryOne("select name from table_size where id = ? limit 0,1", array($size)); ?>
                                                 <p>Size: <strong><?= $size_detail['name'] ?></strong></p>
                                             <?php } ?>
                                             <?php if ($color) {
-                                                $color_detail = $d->rawQueryOne("select name from tale_color where id = ? limit 0,1", array($color)); ?>
+                                                $color_detail = $d->rawQueryOne("select name from table_color where id = ? limit 0,1", array($color)); ?>
                                                 <p>Màu: <strong><?= $color_detail['name'] ?></strong></p>
                                             <?php } ?>
                                         </div>
@@ -180,8 +180,8 @@ if ($cmd == 'add-cart' && $id > 0) {
                 </div>
             <?php } else { ?>
                 <a href="" class="empty-cart text-decoration-none w-100">
-                    <i class="fa-duotone fa-cart-xmark"></i>
-                    <p>Không tồn tại sản phẩm nào trong giỏ hàng</p>
+                    <i class="fas fa-cart-plus"></i>
+                    <p>Không tồn tại sản phẩm trong giỏ hàng</p>
                     <span class="btn btn-warning">Về trang chủ</span>
                 </a>
             <?php } ?>

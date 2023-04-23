@@ -12,7 +12,7 @@
     var QUERY_STRING = '<?= ($_SERVER['QUERY_STRING']) ?>';
 
     /* Login */
-    var LOGIN_PAGE = <?= (empty($_SESSION['admin']['active'])) ? 'true' : 'false' ?>;
+    var LOGIN_PAGE = <?= (empty($_SESSION['account']['active'])) ? 'true' : 'false' ?>;
 
     /* Order */
     var ORDER_MIN_TOTAL = <?= (!empty($minTotal)) ? $minTotal : 1 ?>;

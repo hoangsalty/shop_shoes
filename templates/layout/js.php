@@ -4,6 +4,8 @@
     var CONFIG_BASE = '<?= $configBase ?>';
     var ASSETS = '<?= ASSETS ?>';
     var TIMENOW = '<?= date("d/m/Y", time()) ?>';
+    /* Login */
+    var IS_LOGIN = <?= (empty($_SESSION['account']['active'])) ? 'false' : 'true' ?>;
 </script>
 <!-- Js Files -->
 <script type="text/javascript" src="<?= $configBase ?>assets/js/jquery.min.js"></script>

@@ -28,7 +28,8 @@ class Functions
     /* Is phone */
     public function isPhone($number)
     {
-        $number = str_replace(" ", "", $number);;
+        $number = str_replace(" ", "", $number);
+        ;
         if (preg_match_all('/^(0|84)(2(0[3-9]|1[0-6|8|9]|2[0-2|5-9]|3[2-9]|4[0-9]|5[1|2|4-9]|6[0-3|9]|7[0-7]|8[0-9]|9[0-4|6|7|9])|3[2-9]|5[5|6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])([0-9]{7})$/m', $number, $matches, PREG_SET_ORDER, 0)) {
             return true;
         } else {
@@ -127,12 +128,12 @@ class Functions
     {
         global $d;
 
-        $token = (!empty($_SESSION['admin']['user_token'])) ? $_SESSION['admin']['user_token'] : '';
+        $token = (!empty($_SESSION['account']['user_token'])) ? $_SESSION['account']['user_token'] : '';
         $row = $d->rawQuery("select user_token from table_user where user_token = ? and find_in_set('hienthi',status)", array($token));
         if (!empty($row)) {
             return true;
         } else {
-            unset($_SESSION['admin']);
+            unset($_SESSION['account']);
             return false;
         }
     }
@@ -290,8 +291,7 @@ class Functions
                         $_FILES[$file]['name'] = $name . $i . '.' . $ext;
                         break;
                     }
-                }
-            else {
+                } else {
                 $_FILES[$file]['name'] = $newname . '.' . $ext;
             }
             if (!copy($_FILES[$file]["tmp_name"], $folder . $_FILES[$file]['name'])) {
@@ -348,6 +348,16 @@ class Functions
     }
     /* Transfer */
     public function transfer($msg = '', $page = '', $numb1 = true)
+    {
+        global $configBase;
+        $basehref = $configBase;
+        $showtext = $msg;
+        $page_transfer = ADMIN . "/" . $page;
+        $numb = $numb1;
+        include("../templates/layout/transfer.php");
+        exit();
+    }
+    public function transfer2($msg = '', $page = '', $numb1 = true)
     {
         global $configBase;
         $basehref = $configBase;
@@ -687,7 +697,7 @@ class Functions
         $row = $d->rawQuery("select * from table_news where type = ? and date_deleted = 0 order by numb,id desc", array('hinh-thuc-thanh-toan'));
         $str = '<select id="order_payment" name="order_payment" class="form-control select2"><option value="0">Chọn hình thức thanh toán</option>';
         foreach ($row as $v) {
-            if (isset($_REQUEST['order_payment']) && ($v["id"] == (int)$_REQUEST['order_payment']))
+            if (isset($_REQUEST['order_payment']) && ($v["id"] == (int) $_REQUEST['order_payment']))
                 $selected = "selected";
             else
                 $selected = "";
@@ -732,8 +742,10 @@ class Functions
         $rows = $d->rawQuery("select name, id from table_" . $table . " where id <> ? " . $where . " order by id asc", $params, "result", 7200);
         $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" ' . $data_level . ' ' . $data_table . ' ' . $data_child . ' class="form-control select2 select-place"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
-            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int)$_REQUEST[$id_parent])) $selected = "selected";
-            else $selected = "";
+            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
+                $selected = "selected";
+            else
+                $selected = "";
             $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
         }
         $str .= '</select>';
@@ -762,5 +774,16 @@ class Functions
             }
         }
         return $str;
+    }
+
+    public function checkLogin()
+    {
+        global $configBase, $d;
+
+        if (empty($_COOKIE['login_account_id']) && empty($_COOKIE['login_account_session'])) {
+            unset($_SESSION['account']);
+            setcookie('login_account_id', "", -1, '/');
+            setcookie('login_account_session', "", -1, '/');
+        }
     }
 }

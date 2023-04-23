@@ -4,7 +4,7 @@ if (!defined('SOURCES'))
 
 switch ($act) {
     case "login":
-        if (!empty($_SESSION['admin']['active']))
+        if (!empty($_SESSION['account']['active']))
             $func->transfer("Trang không tồn tại", "index.php", false);
         else
             $template = "user/login";
@@ -37,11 +37,11 @@ function logout()
 
     /* Hủy bỏ quyền */
     $data['login_session'] = '';
-    $d->where('id', $_SESSION['admin']['id']);
+    $d->where('id', $_SESSION['account']['id']);
     $d->update('table_user', $data);
 
     /* Hủy bỏ login */
-    unset($_SESSION['admin']);
+    unset($_SESSION['account']);
     $func->redirect("index.php?com=user&act=login");
 }
 
@@ -78,8 +78,8 @@ function editUser()
     if ($act == 'edit' && empty($id)) {
         $func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
     } else {
-        if ($act == 'info' && !empty($_SESSION['admin']['username'])) {
-            $item = $d->rawQueryOne("select * from table_user where username = ? limit 0,1", array($_SESSION['admin']['username']));
+        if ($act == 'info' && !empty($_SESSION['account']['username'])) {
+            $item = $d->rawQueryOne("select * from table_user where username = ? limit 0,1", array($_SESSION['account']['username']));
         } else {
             $item = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($id));
         }
@@ -115,7 +115,7 @@ function saveUser()
         }
 
         if (!empty($old_pass)) {
-            $row = $d->rawQueryOne("select id, password from table_user where username = ? limit 0,1", array($_SESSION['admin']['username']));
+            $row = $d->rawQueryOne("select id, password from table_user where username = ? limit 0,1", array($_SESSION['account']['username']));
 
             if (empty($row['id']) || (!empty($row['id']) && ($row['password'] != md5($old_pass)))) {
                 $response['messages'][] = 'Mật khẩu cũ không chính xác';
@@ -148,9 +148,9 @@ function saveUser()
         /* Change to new password */
         $data['password'] = md5($new_pass);
         /* Save data */
-        $d->where('username', $_SESSION['admin']['username']);
+        $d->where('username', $_SESSION['account']['username']);
         if ($d->update('table_user', $data)) {
-            unset($_SESSION['admin']);
+            unset($_SESSION['account']);
             $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=user&act=login");
         } else {
             $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=info");

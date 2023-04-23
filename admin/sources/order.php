@@ -1,5 +1,6 @@
 <?php
-if (!defined('SOURCES')) die("Error");
+if (!defined('SOURCES'))
+    die("Error");
 
 /* Cấu hình đường dẫn trả về */
 $strUrl = "";
@@ -35,16 +36,17 @@ function viewOrders()
     global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal, $price_from, $price_to, $allNewOrder, $totalNewOrder, $allConfirmOrder, $totalConfirmOrder, $allDeliveriedOrder, $totalDeliveriedOrder, $allCanceledOrder, $totalCanceledOrder, $list_city, $list_district, $list_ward;
 
     $where = "";
-    $order_status = (isset($_REQUEST['order_status'])) ? htmlspecialchars($_REQUEST['order_status']) : 0;
+    $order_status = (isset($_REQUEST['order_status'])) ? htmlspecialchars($_REQUEST['order_status']) : '';
     $order_payment = (isset($_REQUEST['order_payment'])) ? htmlspecialchars($_REQUEST['order_payment']) : 0;
     $order_date = (isset($_REQUEST['order_date'])) ? htmlspecialchars($_REQUEST['order_date']) : 0;
     $range_price = (isset($_REQUEST['range_price'])) ? htmlspecialchars($_REQUEST['range_price']) : 0;
     $city = (isset($_REQUEST['id_city'])) ? htmlspecialchars($_REQUEST['id_city']) : 0;
     $district = (isset($_REQUEST['id_district'])) ? htmlspecialchars($_REQUEST['id_district']) : 0;
     $ward = (isset($_REQUEST['id_ward'])) ? htmlspecialchars($_REQUEST['id_ward']) : 0;
-
-    if ($order_status) $where .= " and order_status=$order_status";
-    if ($order_payment) $where .= " and order_payment=$order_payment";
+    if ($order_status)
+        $where .= " and order_status='$order_status'";
+    if ($order_payment)
+        $where .= " and order_payment=$order_payment";
     if ($order_date) {
         $order_date = explode("-", $order_date);
         $date_from = trim($order_date[0] . ' 12:00:00 AM');
@@ -59,9 +61,12 @@ function viewOrders()
         $price_to = trim($range_price[1]);
         $where .= " and total_price<=$price_to and total_price>=$price_from";
     }
-    if ($city) $where .= " and city=$city";
-    if ($district) $where .= " and district=$district";
-    if ($ward) $where .= " and ward=$ward";
+    if ($city)
+        $where .= " and city=$city";
+    if ($district)
+        $where .= " and district=$district";
+    if ($ward)
+        $where .= " and ward=$ward";
     if (isset($_REQUEST['keyword'])) {
         $keyword = htmlspecialchars($_REQUEST['keyword']);
         $where .= " and (fullname LIKE '%$keyword%' or email LIKE '%$keyword%' or phone LIKE '%$keyword%' or code LIKE '%$keyword%')";
@@ -80,13 +85,17 @@ function viewOrders()
 
     /* Lấy tổng giá min */
     $minTotal = $d->rawQueryOne("select min(total_price) from table_order");
-    if ($minTotal['min(total_price)']) $minTotal = $minTotal['min(total_price)'];
-    else $minTotal = 0;
+    if ($minTotal['min(total_price)'])
+        $minTotal = $minTotal['min(total_price)'];
+    else
+        $minTotal = 0;
 
     /* Lấy tổng giá max */
     $maxTotal = $d->rawQueryOne("select max(total_price) from table_order");
-    if ($maxTotal['max(total_price)']) $maxTotal = $maxTotal['max(total_price)'];
-    else $maxTotal = 0;
+    if ($maxTotal['max(total_price)'])
+        $maxTotal = $maxTotal['max(total_price)'];
+    else
+        $maxTotal = 0;
 
     /* Lấy đơn hàng - mới đặt */
     $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'moidat'");
@@ -112,4 +121,56 @@ function viewOrders()
     $list_city = $d->rawQuery("select name, id from table_city order by id asc");
     $list_district = $d->rawQuery("select name, id from table_district order by id asc");
     $list_ward = $d->rawQuery("select name, id from table_ward order by id asc");
+}
+
+/* Edit order */
+function editOrder()
+{
+    global $d, $func, $curPage, $item, $order_detail;
+
+    $id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
+
+    if (empty($id)) {
+        $func->transfer("Không nhận được dữ liệu", "index.php?com=order&act=man&page=" . $curPage, false);
+    } else {
+        $item = $d->rawQueryOne("select * from table_order where id = ? limit 0,1", array($id));
+
+        if (empty($item)) {
+            $func->transfer("Dữ liệu không có thực", "index.php?com=order&act=man&page=" . $curPage, false);
+        } else {
+            /* Lấy chi tiết đơn hàng */
+            $order_detail = $d->rawQuery("select * from table_order_detail where id_order = ? order by id desc", array($id));
+        }
+    }
+}
+/* Save order */
+function saveOrder()
+{
+    global $d, $func, $curPage;
+
+    /* Check post */
+    if (empty($_REQUEST)) {
+        $func->transfer("Không nhận được dữ liệu", "index.php?com=order&act=man&page=" . $curPage, false);
+    }
+
+    /* Post dữ liệu */
+    $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
+    $data = (!empty($_REQUEST['data'])) ? $_REQUEST['data'] : null;
+    if ($data) {
+        foreach ($data as $column => $value) {
+            $data[$column] = htmlspecialchars($func->checkInput($value));
+        }
+    }
+
+    /* Save data */
+    if ($id) {
+        $d->where('id', $id);
+        if ($d->update('table_order', $data)) {
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=order&act=man&page=" . $curPage);
+        } else {
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=order&act=man&page=" . $curPage, false);
+        }
+    } else {
+        $func->transfer("Dữ liệu rỗng", "index.php?com=order&act=man&page=" . $curPage, false);
+    }
 }

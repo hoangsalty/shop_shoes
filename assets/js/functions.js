@@ -73,7 +73,7 @@ function confirmDialog(
         closeAnimation: "scale",
         typeAnimated: true,
         animateFromElement: false,
-        autoClose: "cancel|3000",
+        autoClose: "cancel|5000",
         escapeKey: "cancel",
         buttons: {
             success: {
@@ -81,6 +81,7 @@ function confirmDialog(
                 btnClass: "btn-sm btn-primary",
                 action: function () {
                     if (action == "delete-procart") deleteCart(value);
+                    if (action == "force-login") window.location = CONFIG_BASE + 'account/dang-nhap';
                 },
             },
             cancel: {

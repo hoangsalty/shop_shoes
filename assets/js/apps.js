@@ -276,6 +276,11 @@ FRAMEWORK.Cart = function () {
   });
   /* Add */
   $('body').on('click', '.addcart', function () {
+    if (!IS_LOGIN) {
+      confirmDialog('force-login', 'Vui lòng đăng nhập để sử dụng chức năng giỏ hàng');
+      return false;  
+    }
+
     $this = $(this);
     $parents = $this.parents('.right-pro-detail');
     var id = $this.data('id');
