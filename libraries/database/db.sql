@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2023 at 06:37 PM
+-- Generation Time: Apr 23, 2023 at 05:47 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -1041,13 +1041,6 @@ CREATE TABLE `table_order` (
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `table_order`
---
-
-INSERT INTO `table_order` (`id`, `id_user`, `order_payment`, `code`, `fullname`, `phone`, `address`, `email`, `requirements`, `city`, `district`, `ward`, `order_status`, `temp_price`, `ship_price`, `total_price`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, NULL, 4, 'S7KWFQ', 'Hoàng Phạm', '0909090909', 'Test, Phường Thọ Sơn, Thành phố Việt Trì, Tỉnh Phú Thọ', 'hoangpham@gmail.com', '', 16, 168, 2865, 'moidat', 400000, 0, 400000, 1682094883, 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -1066,13 +1059,6 @@ CREATE TABLE `table_order_detail` (
   `quantity` int(11) DEFAULT 0,
   `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_order_detail`
---
-
-INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `id_size`, `photo`, `name`, `code`, `quantity`, `price`) VALUES
-(1, 1, 1, 8, 8, '1-5039.png', 'Sản phẩm 1', 'S7KWFQ', 1, 400000);
 
 -- --------------------------------------------------------
 
@@ -1139,7 +1125,7 @@ CREATE TABLE `table_product` (
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `quantity`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 10, 1, 258, 'hienthi', 1679827982, 1681648898, 0),
+(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 10, 1, 296, 'hienthi', 1679827982, 1681648898, 0),
 (2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 10, 2, 1, 'hienthi,noibat', 1679827990, 1680869938, 0),
 (3, 6, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 10, 3, 0, 'hienthi,noibat', 1679828000, 1680869946, 0),
 (4, 6, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 10, 4, 0, 'hienthi,noibat', 1679828010, 1680869956, 0),
@@ -1331,7 +1317,7 @@ CREATE TABLE `table_static` (
 --
 
 INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `type`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(9, 'xe-moto-chopper-7223-7952.jpg', 've-chung-toi', '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tortor in ex posuere, euismod pretium justo sodales. Morbi sit amet neque porttitor, ullamcorper nisi sed, malesuada augue. Nunc eu orci neque. Duis sed ultricies ex. Sed lorem neque, elementum quis porta eget, malesuada eget massa. Aenean rhoncus justo vel nunc rutrum hendrerit. Nam et nulla magna. Duis auctor ante at lectus luctus bibendum. In eleifend, nibh efficitur molestie pulvinar, elit turpis finibus lorem, ac aliquet quam metus sed justo. Curabitur tempor mollis ex ut feugiat. Duis varius ligula quam. Donec vehicula dui nec velit lacinia, vel porta dolor suscipit. In suscipit lacinia maximus. Praesent a turpis quis ante laoreet tincidunt. Donec et lectus turpis.&lt;/p&gt;\r\n\r\n&lt;p&gt;Morbi imperdiet gravida risus. Fusce volutpat enim eget porta tempus. Pellentesque vehicula suscipit ipsum. Nunc ut tellus leo. Sed rhoncus augue quis est posuere dignissim. Etiam mollis elit odio, vel luctus mauris blandit sit amet. Nullam sed vulputate eros. Etiam tincidunt turpis non mi luctus ultricies. Sed mattis lacus non nibh iaculis viverra. Aenean malesuada mauris quis risus viverra tristique. Curabitur quis iaculis libero. Quisque pharetra vitae eros bibendum egestas. Nam id urna ut ligula suscipit porttitor sit amet sollicitudin tellus. Sed rutrum luctus mauris, id tristique massa scelerisque eu. Mauris lacus mauris, porta nec quam quis, efficitur imperdiet lacus. Mauris suscipit elit eget rhoncus sollicitudin.&lt;/p&gt;\r\n', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tortor in ex posuere, euismod pretium justo sodales. Morbi sit amet neque porttitor, ullamcorper nisi sed, malesuada augue. Nunc eu orci neque. Duis sed ultricies ex. Sed lorem neque, elementum quis porta eget, malesuada eget massa. Aenean rhoncus justo vel nunc rutrum hendrerit. Nam et nulla magna. Duis auctor ante at lectus luctus bibendum. In eleifend, nibh efficitur molestie pulvinar, elit turpis finibus lorem, ac aliquet quam metus sed justo. Curabitur tempor mollis ex ut feugiat. Duis varius ligula quam. Donec vehicula dui nec velit lacinia, vel porta dolor suscipit. In suscipit lacinia maximus. Praesent a turpis quis ante laoreet tincidunt. Donec et lectus turpis.\r\n\r\nMorbi imperdiet gravida risus. Fusce volutpat enim eget porta tempus. Pellentesque vehicula suscipit ipsum. Nunc ut tellus leo. Sed rhoncus augue quis est posuere dignissim. Etiam mollis elit odio, vel luctus mauris blandit sit amet. Nullam sed vulputate eros. Etiam tincidunt turpis non mi luctus ultricies. Sed mattis lacus non nibh iaculis viverra. Aenean malesuada mauris quis risus viverra tristique. Curabitur quis iaculis libero. Quisque pharetra vitae eros bibendum egestas. Nam id urna ut ligula suscipit porttitor sit amet sollicitudin tellus. Sed rutrum luctus mauris, id tristique massa scelerisque eu. Mauris lacus mauris, porta nec quam quis, efficitur imperdiet lacus. Mauris suscipit elit eget rhoncus sollicitudin.', 'Về chúng tôi', 'gioi-thieu', 'hienthi', 1679828407, 0, 0);
+(9, 'xe-moto-chopper-7223-7952.jpg', 've-chung-toi', '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tortor in ex posuere, euismod pretium justo sodales. Morbi sit amet neque porttitor, ullamcorper nisi sed, malesuada augue. Nunc eu orci neque. Duis sed ultricies ex. Sed lorem neque, elementum quis porta eget, malesuada eget massa. Aenean rhoncus justo vel nunc rutrum hendrerit. Nam et nulla magna. Duis auctor ante at lectus luctus bibendum. In eleifend, nibh efficitur molestie pulvinar, elit turpis finibus lorem, ac aliquet quam metus sed justo. Curabitur tempor mollis ex ut feugiat. Duis varius ligula quam. Donec vehicula dui nec velit lacinia, vel porta dolor suscipit. In suscipit lacinia maximus. Praesent a turpis quis ante laoreet tincidunt. Donec et lectus turpis.&lt;/p&gt;\r\n\r\n&lt;p&gt;Morbi imperdiet gravida risus. Fusce volutpat enim eget porta tempus. Pellentesque vehicula suscipit ipsum. Nunc ut tellus leo. Sed rhoncus augue quis est posuere dignissim. Etiam mollis elit odio, vel luctus mauris blandit sit amet. Nullam sed vulputate eros. Etiam tincidunt turpis non mi luctus ultricies. Sed mattis lacus non nibh iaculis viverra. Aenean malesuada mauris quis risus viverra tristique. Curabitur quis iaculis libero. Quisque pharetra vitae eros bibendum egestas. Nam id urna ut ligula suscipit porttitor sit amet sollicitudin tellus. Sed rutrum luctus mauris, id tristique massa scelerisque eu. Mauris lacus mauris, porta nec quam quis, efficitur imperdiet lacus. Mauris suscipit elit eget rhoncus sollicitudin.&lt;/p&gt;\r\n', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tortor in ex posuere, euismod pretium justo sodales. Morbi sit amet neque porttitor, ullamcorper nisi sed, malesuada augue. Nunc eu orci neque. Duis sed ultricies ex. Sed lorem neque, elementum quis porta eget, malesuada eget massa. Aenean rhoncus justo vel nunc rutrum hendrerit. Nam et nulla magna. Duis auctor ante at lectus luctus bibendum. In eleifend, nibh efficitur molestie pulvinar, elit turpis finibus lorem, ac aliquet quam metus sed justo. Curabitur tempor mollis ex ut feugiat. Duis varius ligula quam. Donec vehicula dui nec velit lacinia, vel porta dolor suscipit. In suscipit lacinia maximus. Praesent a turpis quis ante laoreet tincidunt. Donec et lectus turpis.\r\n\r\nMorbi imperdiet gravida risus. Fusce volutpat enim eget porta tempus. Pellentesque vehicula suscipit ipsum. Nunc ut tellus leo. Sed rhoncus augue quis est posuere dignissim. Etiam mollis elit odio, vel luctus mauris blandit sit amet. Nullam sed vulputate eros. Etiam tincidunt turpis non mi luctus ultricies. Sed mattis lacus non nibh iaculis viverra. Aenean malesuada mauris quis risus viverra tristique. Curabitur quis iaculis libero. Quisque pharetra vitae eros bibendum egestas. Nam id urna ut ligula suscipit porttitor sit amet sollicitudin tellus. Sed rutrum luctus mauris, id tristique massa scelerisque eu. Mauris lacus mauris, porta nec quam quis, efficitur imperdiet lacus. Mauris suscipit elit eget rhoncus sollicitudin.', 'Về chúng tôi', 'gioi-thieu', 'hienthi', 1679828407, 1682263089, 0);
 
 -- --------------------------------------------------------
 
@@ -1342,17 +1328,15 @@ INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `t
 CREATE TABLE `table_user` (
   `id` int(11) UNSIGNED NOT NULL,
   `permission` varchar(255) DEFAULT NULL,
-  `username` varchar(225) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
   `password` varchar(225) DEFAULT NULL,
-  `confirm_code` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `fullname` varchar(225) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
   `address` varchar(225) DEFAULT NULL,
   `gender` tinyint(1) DEFAULT 0,
   `login_session` varchar(255) DEFAULT NULL,
-  `user_token` varchar(255) DEFAULT NULL,
   `lastlogin` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `birthday` int(11) DEFAULT 0,
@@ -1366,11 +1350,10 @@ CREATE TABLE `table_user` (
 -- Dumping data for table `table_user`
 --
 
-INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `confirm_code`, `photo`, `fullname`, `phone`, `email`, `address`, `gender`, `login_session`, `user_token`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', '', 'Administrator', '0939513667', 'admin@gmail.com', '', 0, '', '4bed4f046ec6d83c2609d9c0214895bc', '1681923467', 'hoatdong', 1608051600, 0, 0, 0, 0),
-(146, 'admin', 'test', '098f6bcd4621d373cade4e832627b4f6', NULL, '2-7335.jpg', 'Test', '0909090909', 'test@gmail.com', 'Test', 1, '', '8bfc73420c2a4b3725c9738d2b2955f9', '1680338040', 'hoatdong', 954176400, 1, 1680100745, 1680199552, 0),
-(147, 'user', 'test1', '098f6bcd4621d373cade4e832627b4f6', NULL, '1-7945.jpg', 'Test', '0909090909', 'test1@gmail.com', 'Test', 1, 'face9250a60ecb67ff31284b0e338314', 'c0114c8f6951a8b4295aa86b644a971b', '1681342575', 'khoa', 1679954400, 2, 1680101968, 1680698881, 0),
-(148, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', NULL, '6783077-cool-wallpapers-hd-3332-7219.jpg', 'Hoàng', '0909090909', 'hoang@gmail.com', 'Địa chỉ', 1, 'e05d488dd52f4940bb46376850b8bc63', 'ae864bd7fadc4df6be3cf67cb427cdc4', '1681995083', 'hoatdong', 980722800, 3, 1681481036, 1681484741, 0);
+INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `photo`, `fullname`, `phone`, `address`, `gender`, `login_session`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, '', '1682261315', 'hoatdong', 1608051600, 0, 0, 0, 0),
+(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', '1-7945-6712.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '2a7862e192fc8ac07f2850b62dc6d1f6', '1682264179', 'hoatdong', 987544800, 1, 1682254418, 0, 0),
+(150, 'user', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user@gmail.com', '2-7335-5701.jpg', 'User', '0909090909', 'Địa chỉ test 1', 1, '4500b7f3ae5302fbabe910b92f35b55c', '1682264613', 'hoatdong', 1044399600, 2, 1682254452, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -12256,13 +12239,13 @@ ALTER TABLE `table_news`
 -- AUTO_INCREMENT for table `table_order`
 --
 ALTER TABLE `table_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `table_photo`
@@ -12322,7 +12305,7 @@ ALTER TABLE `table_static`
 -- AUTO_INCREMENT for table `table_user`
 --
 ALTER TABLE `table_user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT for table `table_variants`

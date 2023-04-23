@@ -14,7 +14,6 @@ $username = (!empty($_POST['username'])) ? $_POST['username'] : '';
 $password = (!empty($_POST['password'])) ? $_POST['password'] : '';
 $error = "";
 $success = "";
-$login_failed = false;
 
 if ($error == '') {
     /* Kiểm tra thông tin đăng nhập */
@@ -30,41 +29,36 @@ if ($error == '') {
 
         if (!empty($account)) {
             if (($account['password'] == md5($password))) {
-                $timenow = time();
                 $id_user = $account['id'];
-                $token = md5(time());
-                $sessionhash = md5(sha1($account['password'] . $account['username']));
 
                 /* Tạo login session */
-                $d->rawQuery("update table_user set login_session = ?, lastlogin = ?, user_token = ? where id = ?", array($sessionhash, $timenow, $token, $id_user));
+                $lastlogin = time();
+                $login_session = md5($account['password'] . $lastlogin);
+                $d->rawQuery("update table_user set login_session = ?, lastlogin = ? where id = ?", array($login_session, $lastlogin, $id_user));
 
                 /* Tạo session login */
-                $_SESSION['admin']['active'] = true;
-                $_SESSION['admin']['id'] = $account['id'];
-                $_SESSION['admin']['username'] = $account['username'];
-                $_SESSION['admin']['fullname'] = $account['fullname'];
-                $_SESSION['admin']['photo'] = $account['photo'];
-                $_SESSION['admin']['phone'] = $account['phone'];
-                $_SESSION['admin']['email'] = $account['email'];
-                $_SESSION['admin']['role'] = $account['permission'];
-                $_SESSION['admin']['user_token'] = $sessionhash;
-                $_SESSION['admin']['password'] = $account['password'];
-                $_SESSION['admin']['login_session'] = $sessionhash;
-                $_SESSION['admin']['login_token'] = $token;
-                $_SESSION['admin']['status'] = $account['status'];
+                $_SESSION['account']['active'] = true;
+                $_SESSION['account']['id'] = $account['id'];
+                $_SESSION['account']['username'] = $account['username'];
+                $_SESSION['account']['fullname'] = $account['fullname'];
+                $_SESSION['account']['photo'] = $account['photo'];
+                $_SESSION['account']['phone'] = $account['phone'];
+                $_SESSION['account']['email'] = $account['email'];
+                $_SESSION['account']['role'] = $account['permission'];
+                $_SESSION['account']['login_session'] = $login_session;
+                $_SESSION['account']['status'] = $account['status'];
+
+                /* Nhớ mật khẩu */
+                $time_expiry = time() + 1800;
+                setcookie('login_account_id', $account['id'], $time_expiry, '/');
+                setcookie('login_account_session', $login_session, $time_expiry, '/');
 
                 $success = "Đăng nhập thành công";
             } else {
-                $login_failed = true;
                 $error = "Mật khẩu không chính xác";
             }
         } else {
-            $login_failed = true;
             $error = "Tên đăng nhập không tồn tại";
-        }
-
-        /* Xử lý khi đăng nhập thất bại */
-        if ($login_failed) {
         }
     }
 }

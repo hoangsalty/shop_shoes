@@ -366,6 +366,7 @@
     display: none;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .price-procart-rp {
     display: block;
@@ -422,4 +423,44 @@
   height: 13px;
   background-repeat: no-repeat;
   background-image: url(../images/check-cart.png)
+}
+
+.cart-fixed {
+  position: fixed;
+  right: 20px;
+  bottom: 390px;
+  z-index: 997;
+  background: #4b4f56;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: #fff !important;
+  border-radius: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center
+}
+
+.cart-fixed i {
+  font-size: 20px
+}
+
+.cart-fixed span {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  color: #fff;
+  width: 25px;
+  height: 25px;
+  background: #c00;
+  text-align: center;
+  line-height: 25px;
+  font-size: 11px;
+  border-radius: 100%
 }

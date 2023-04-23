@@ -5,7 +5,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="" class="nav-link">Xin chào, <?= $_SESSION['admin']['fullname'] ?> !</a>
+            <a href="" class="nav-link">Xin chào, <?= $_SESSION['account']['fullname'] ?> !</a>
         </li>
     </ul>
 
@@ -20,7 +20,7 @@
             </a>
             <ul aria-labelledby="dropdownSubMenu-info" class="dropdown-menu dropdown-menu-right border-0 shadow">
                 <li>
-                    <a href="index.php?com=user&act=edit&id=<?=$_SESSION['admin']['id']?>" class="dropdown-item">
+                    <a href="index.php?com=user&act=edit&id=<?=$_SESSION['account']['id']?>" class="dropdown-item">
                         <i class="fas fa-user-cog"></i>
                         <span>Thông tin tài khoản</span>
                     </a>

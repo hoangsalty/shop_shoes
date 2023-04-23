@@ -5,9 +5,13 @@
                 <div class="col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa-solid fa-envelope"></i><?= $optsetting['email'] ?></li>
+                            <li><i class="fa-solid fa-envelope"></i>
+                                <?= $optsetting['email'] ?>
+                            </li>
                             <li class="d-inline-flex">
-                                <marquee><?= $optsetting['slogan'] ?></marquee>
+                                <marquee>
+                                    <?= $optsetting['slogan'] ?>
+                                </marquee>
                             </li>
                         </ul>
                     </div>
@@ -20,9 +24,29 @@
                             <a href="#"><i class="fa-brands fa-linkedin"></i></a>
                             <a href="#"><i class="fa-brands fa-pinterest"></i></a>
                         </div>
-                        <div class="header__top__right__auth">
-                            <a href="#"><i class="fa-solid fa-user"></i> Login</a>
-                        </div>
+
+                        <?php if (array_key_exists('account', $_SESSION) && $_SESSION['account']['active'] == true) { ?>
+                            <div class="user-header">
+                                <a href="account/thong-tin">
+                                    <span>Hi,<?= $_SESSION['account']['username'] ?></span>
+                                </a>
+                                <a href="account/dang-xuat">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Đăng xuất</span>
+                                </a>
+                            </div>
+                        <?php } else { ?>
+                            <div class="user-header">
+                                <a href="account/dang-nhap">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Đăng nhập</span>
+                                </a>
+                                <a href="account/dang-ky">
+                                    <i class="fas fa-user-plus"></i>
+                                    <span>Đăng ký</span>
+                                </a>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -46,12 +70,10 @@
                     </div>
                     <div class="header__hotline__text">
                         <p>Hotline</p>
-                        <span><?= $optsetting['hotline'] ?></span>
+                        <span>
+                            <?= $optsetting['hotline'] ?>
+                        </span>
                     </div>
-                </div>
-                <div class="header__cart">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    Giỏ hàng
                 </div>
             </div>
         </div>

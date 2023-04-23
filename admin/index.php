@@ -33,21 +33,23 @@ require_once LIBRARIES . "requick.php";
     <?php include TEMPLATE . LAYOUT . "css.php"; ?>
 </head>
 
-<body class="hold-transition <?= (!isset($_SESSION['admin']['active']) || $_SESSION['admin']['active'] == false) ? 'login-page' : '' ?>"">
+<body
+    class="hold-transition <?= (!isset($_SESSION['account']['active']) || $_SESSION['account']['active'] == false) ? 'login-page' : '' ?>"">
     <!-- Loader -->
-    <?php if ($template == 'index' || $template == 'user/login') include TEMPLATE . LAYOUT . "loader.php"; ?>
+    <?php if ($template == 'index' || $template == 'user/login')
+        include TEMPLATE . LAYOUT . "loader.php"; ?>
 
-    <?php if (isset($_SESSION['admin']['active']) && ($_SESSION['admin']['active'] == true)) { ?>
+    <?php if (isset($_SESSION['account']['active']) && ($_SESSION['account']['active'] == true)) { ?>
         <!-- Main -->
-        <div class="wrapper">
-            <?php
-            include TEMPLATE . LAYOUT . "header.php";
-            include TEMPLATE . LAYOUT . "menu.php";
-            ?>
-            <div class="content-wrapper">
-                <?php include TEMPLATE . $template . ".php"; ?>
-            </div>
-            <?php include TEMPLATE . LAYOUT . "footer.php"; ?>
+        <div class=" wrapper">
+        <?php
+        include TEMPLATE . LAYOUT . "header.php";
+        include TEMPLATE . LAYOUT . "menu.php";
+        ?>
+        <div class="content-wrapper">
+            <?php include TEMPLATE . $template . ".php"; ?>
+        </div>
+        <?php include TEMPLATE . LAYOUT . "footer.php"; ?>
         </div>
     <?php } else {
         include TEMPLATE . "user/login.php";
