@@ -65,7 +65,6 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                         <th class="align-middle">Tiêu đề</th>
                         <th class="align-middle">Giá</th>
                         <th class="align-middle">Giá mới</th>
-                        <th class="align-middle">Số lượng</th>
                         <?php foreach ($status as $key => $value) { ?>
                             <th class="align-middle text-center" width="120px"><?= $value ?></th>
                         <?php } ?>
@@ -111,9 +110,6 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                 </td>
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>&album_table=gallery" title="<?= $func->formatMoney($items[$i]['sale_price']) ?>"><?= $func->formatMoney($items[$i]['sale_price']) ?></a>
-                                </td>
-                                <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>&album_table=gallery" title="<?= $items[$i]['quantity'] ?>"><?= $items[$i]['quantity'] ?></a>
                                 </td>
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                                 <?php foreach ($status as $key => $value) { ?>

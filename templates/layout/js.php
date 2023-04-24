@@ -17,5 +17,9 @@
 <script type="text/javascript" src="<?= $configBase ?>assets/slick/slick.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/fotorama/fotorama.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/confirm/confirm.js"></script>
+<script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/jquery.datetimepicker.min.js"></script>
+<script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/php-date-formatter.min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/functions.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/apps.js"></script>
