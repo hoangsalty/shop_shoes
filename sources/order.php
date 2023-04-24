@@ -118,7 +118,7 @@ if (!empty($_POST['thanhtoan'])) {
 
     /* lưu đơn hàng */
     $data_donhang = array();
-    //$data_donhang['id_user'] = (!empty($_SESSION['user']['id'])) ? $_SESSION['user']['id'] : 0;
+    $data_donhang['id_user'] = (!empty($_SESSION['account']['id'])) ? $_SESSION['account']['id'] : 0;
     $data_donhang['code'] = $code;
     $data_donhang['fullname'] = $fullname;
     $data_donhang['phone'] = $phone;
@@ -145,8 +145,8 @@ if (!empty($_POST['thanhtoan'])) {
             $proinfo = $cart->getProductInfo($pid);
             $regular_price = $proinfo['regular_price'];
             $sale_price = $proinfo['sale_price'];
-            $color = $_SESSION['cart'][$i]['color'];
-            $size = $_SESSION['cart'][$i]['size'];
+            $color = ($_SESSION['cart'][$i]['color'] > 0) ? $_SESSION['cart'][$i]['color'] : NULL;
+            $size = ($_SESSION['cart'][$i]['size'] > 0) ? $_SESSION['cart'][$i]['size'] : NULL;
             $code_order = $_SESSION['cart'][$i]['code'];
 
             if ($q == 0) continue;
@@ -171,5 +171,5 @@ if (!empty($_POST['thanhtoan'])) {
 
     /* Xóa giỏ hàng */
     unset($_SESSION['cart']);
-    $func->transfer("Thông tin đơn hàng đã được gửi thành công.", "../index.php");
+    $func->transfer2("Thông tin đơn hàng đã được gửi thành công.", "index.php");
 }

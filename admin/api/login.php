@@ -41,6 +41,7 @@ if ($error == '') {
                 $_SESSION['account']['id'] = $account['id'];
                 $_SESSION['account']['username'] = $account['username'];
                 $_SESSION['account']['fullname'] = $account['fullname'];
+                $_SESSION['account']['address'] = $account['address'];
                 $_SESSION['account']['photo'] = $account['photo'];
                 $_SESSION['account']['phone'] = $account['phone'];
                 $_SESSION['account']['email'] = $account['email'];

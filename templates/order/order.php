@@ -125,16 +125,16 @@
                         <div class="information-cart">
                             <div class="row">
                                 <div class="input-cart col-md-6">
-                                    <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Họ tên" value="<?= (!empty($flash->has('fullname'))) ? $flash->get('fullname') : '' ?>" required />
+                                    <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Họ tên" value="<?= !empty($_SESSION['account']['fullname']) ? $_SESSION['account']['fullname'] : '' ?>" required />
                                     <div class="invalid-feedback">Vui lòng nhập họ tên</div>
                                 </div>
                                 <div class="input-cart col-md-6">
-                                    <input type="number" class="form-control text-sm" id="phone" name="dataOrder[phone]" placeholder="Số điện thoại" value="<?= (!empty($flash->has('phone'))) ? $flash->get('phone') : '' ?>" required />
+                                    <input type="number" class="form-control text-sm" id="phone" name="dataOrder[phone]" placeholder="Số điện thoại" value="<?= !empty($_SESSION['account']['phone']) ? $_SESSION['account']['phone'] : '' ?>" required />
                                     <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
                                 </div>
                             </div>
                             <div class="input-cart">
-                                <input type="email" class="form-control text-sm" id="email" name="dataOrder[email]" placeholder="Email" value="<?= (!empty($flash->has('email'))) ? $flash->get('email') : '' ?>" required />
+                                <input type="email" class="form-control text-sm" id="email" name="dataOrder[email]" placeholder="Email" value="<?= !empty($_SESSION['account']['email']) ? $_SESSION['account']['email'] : '' ?>" required />
                                 <div class="invalid-feedback">Vui lòng nhập email</div>
                             </div>
                             <div class="form-row">
@@ -161,7 +161,7 @@
                                 </div>
                             </div>
                             <div class="input-cart">
-                                <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Địa chỉ" value="<?= (!empty($flash->has('address'))) ? $flash->get('address') : '' ?>" required />
+                                <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Địa chỉ" value="<?= !empty($_SESSION['account']['address']) ? $_SESSION['account']['address'] : '' ?>" required />
                                 <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
                             </div>
                             <div class="input-cart">

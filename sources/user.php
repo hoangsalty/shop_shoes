@@ -220,6 +220,7 @@ function login()
             $_SESSION['account']['id'] = $account['id'];
             $_SESSION['account']['username'] = $account['username'];
             $_SESSION['account']['fullname'] = $account['fullname'];
+            $_SESSION['account']['address'] = $account['address'];
             $_SESSION['account']['photo'] = $account['photo'];
             $_SESSION['account']['phone'] = $account['phone'];
             $_SESSION['account']['email'] = $account['email'];
@@ -355,18 +356,21 @@ function register()
     }
 
     /* Save data */
+    $data = array();
+    $data['date_created'] = time();
     $data['fullname'] = $fullname;
     $data['username'] = $username;
-    $data['password'] = md5($password);
+    $data['password'] = $passwordMD5;
     $data['email'] = $email;
     $data['phone'] = $phone;
     $data['address'] = $address;
     $data['gender'] = $gender;
     $data['birthday'] = strtotime(str_replace("/", "-", $birthday));
-    $data['status'] = '';
+    $data['status'] = 'hoatdong';
+    $data['permission'] = 'user';
 
-    if ($d->insert('member', $data)) {
-        $func->transfer2("Đăng ký thành viên thành công. Vui lòng kiểm tra email: " . $data['email'] . " để kích hoạt tài khoản", $configBase . "account/dang-nhap");
+    if ($d->insert('table_user', $data)) {
+        $func->transfer2("Đăng ký thành viên thành công.", $configBase . "account/dang-nhap");
     } else {
         $func->transfer2("Đăng ký thành viên thất bại. Vui lòng thử lại sau.", $configBase, false);
     }

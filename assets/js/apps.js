@@ -1,3 +1,12 @@
+FRAMEWORK.Random = function () {
+  $('.birth-date').datetimepicker({
+    timepicker: false,
+    format: 'd/m/Y',
+    formatDate: 'd/m/Y',
+    maxDate: TIMENOW,
+  });
+}
+
 FRAMEWORK.Menu = function () {
   /* Menu remove empty ul */
   if (isExist($(".menu"))) {
@@ -275,10 +284,16 @@ FRAMEWORK.Cart = function () {
     });
   });
   /* Add */
+  $('body').on('click', '.btn-cart', function () {
+    if (!IS_LOGIN) {
+      confirmDialog('force-login', 'Vui lòng đăng nhập để sử dụng chức năng giỏ hàng');
+      return false;
+    }
+  });
   $('body').on('click', '.addcart', function () {
     if (!IS_LOGIN) {
       confirmDialog('force-login', 'Vui lòng đăng nhập để sử dụng chức năng giỏ hàng');
-      return false;  
+      return false;
     }
 
     $this = $(this);
@@ -419,4 +434,6 @@ $(document).ready(function () {
   FRAMEWORK.Carousel();
   FRAMEWORK.Bootstrap();
   FRAMEWORK.Cart();
+  FRAMEWORK.Pagings();
+  FRAMEWORK.Random();
 });

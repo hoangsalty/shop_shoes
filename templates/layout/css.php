@@ -16,3 +16,4 @@
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/owlcarousel/owl.theme.default.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fotorama/fotorama.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/confirm/confirm.css" />
+<link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/datetimepicker/jquery.datetimepicker.min.css" />
