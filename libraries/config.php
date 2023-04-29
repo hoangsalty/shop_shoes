@@ -49,8 +49,8 @@ $config['slideshow']['height'] = 430;
 $config['video']['width'] = 300;
 $config['video']['height'] = 300;
 /*Ảnh logo*/
-$config['logo']['width'] = 100;
-$config['logo']['height'] = 100;
+$config['logo']['width'] = 98;
+$config['logo']['height'] = 31;
 /*Ảnh avatar user*/
 $config['user']['width'] = 100;
 $config['user']['height'] = 100;

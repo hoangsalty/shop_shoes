@@ -39,11 +39,7 @@ else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
 
         <div class="row">
             <div class="col-xl-8">
-                <?php if ($type == 'tin-tuc') {
-                    $slugchange = ($act == 'edit') ? 1 : 0;
-                    include TEMPLATE . LAYOUT . "slug.php";
-                } ?>
-                <div class=" card card-primary card-outline text-sm">
+                <div class="card card-primary card-outline text-sm">
                     <div class="card-header">
                         <h3 class="card-title">Nội dung <?= $name ?></h3>
                         <div class="card-tools">
@@ -67,6 +63,13 @@ else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
                 </div>
             </div>
             <div class="col-xl-4">
+                <div class="card card-primary card-outline text-sm">
+                    <?php if ($type == 'tin-tuc') {
+                        $slugchange = ($act == 'edit') ? 1 : 0;
+                        include TEMPLATE . LAYOUT . "slug.php";
+                    } ?>
+                </div>
+
                 <div class="card card-primary card-outline text-sm">
                     <div class="card-header">
                         <h3 class="card-title">Hình ảnh <?= $name ?></h3>

@@ -34,7 +34,7 @@
                                 <div class="row">
                                     <div class="pic-procart col-3 col-md-2">
                                         <a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>">
-                                            <?= $func->getImage(['class' => 'w-100', 'width' => 85, 'height' => 85, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name']]) ?>
+                                            <?= $func->getImage(['class' => 'w-100', 'width' => 85, 'height' => 60, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name']]) ?>
                                         </a>
                                         <a class="del-procart text-decoration-none" data-code="<?= $code ?>" href="javascript::void(0)">
                                             <i class="fa fa-times-circle"></i>
@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="quantity-counter-procart quantity-counter-procart-<?= $code ?>">
                                             <span class="counter-procart-minus counter-procart">-</span>
-                                            <input type="number" class="quantity-procart" min="1" value="<?= $quantity ?>" data-pid="<?= $pid ?>" data-code="<?= $code ?>" />
+                                            <input type="number" class="quantity-procart" min="1" value="<?= $quantity ?>" data-pid="<?= $pid ?>" data-code="<?= $code ?>" readonly />
                                             <span class="counter-procart-plus counter-procart">+</span>
                                         </div>
                                     </div>

@@ -9,7 +9,6 @@
 </script>
 <!-- Js Files -->
 <script type="text/javascript" src="<?= $configBase ?>assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="<?= $configBase ?>assets/js/lazyload.min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/jQuery.WCircleMenu-min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/bootstrap/bootstrap.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/owlcarousel/owl.carousel.js"></script>
@@ -21,5 +20,9 @@
 <script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/jquery.datetimepicker.min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/php-date-formatter.min.js"></script>
+
+<script type="text/javascript" src="<?= $configBase ?>assets/js/jquery.nicescroll.min.js"></script>
+
+
 <script type="text/javascript" src="<?= $configBase ?>assets/js/functions.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/apps.js"></script>

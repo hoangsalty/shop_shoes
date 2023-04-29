@@ -3,6 +3,7 @@ if (!defined('SOURCES')) die("Error");
 
 @$id = htmlspecialchars($_GET['id']);
 @$idl = htmlspecialchars($_GET['idl']);
+@$idb = htmlspecialchars($_GET['idb']);
 
 if ($id != '') {
     /* Lấy sản phẩm detail */
@@ -13,7 +14,7 @@ if ($id != '') {
     $d->where('id', $rowDetail['id']);
     $d->update('table_product', $views);
     /* Lấy danh mục */
-    $productList = $d->rawQueryOne("select id, name, slug from table_product_list where id = ? and find_in_set('hienthi',status) and date_deleted = 0 limit 0,1", array($rowDetail['id_list']));
+    $productList = $d->rawQueryOne("select * from table_product_list where id = ? and find_in_set('hienthi',status) and date_deleted = 0 limit 0,1", array($rowDetail['id_list']));
     /* Lấy thương hiệu */
     $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? and find_in_set('hienthi',status)", array($rowDetail['id_brand']));
     /* Lấy gallery */
@@ -55,7 +56,7 @@ if ($id != '') {
     $breadcrumbs = $breadcr->get();
 } else if ($idl != '') {
     /* Lấy cấp 1 detail */
-    $productList = $d->rawQueryOne("select id, name, slug, photo from table_product_list where id = ? limit 0,1", array($idl));
+    $productList = $d->rawQueryOne("select * from table_product_list where id = ? limit 0,1", array($idl));
 
     /* Lấy sản phẩm */
     $where = "";
@@ -66,7 +67,7 @@ if ($id != '') {
     $perPage = 20;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select photo, name, slug, sale_price, regular_price, id from table_product where $where order by numb,id desc $limit";
+    $sql = "select * from table_product where $where order by numb,id desc $limit";
     $product = $d->rawQuery($sql, $params);
     $sqlNum = "select count(*) as 'num' from table_product where $where order by numb,id desc";
     $count = $d->rawQueryOne($sqlNum, $params);
@@ -78,6 +79,31 @@ if ($id != '') {
     if (!empty($titleMain)) $breadcr->set($com, $titleMain);
     if (!empty($productList)) $breadcr->set($productList['slug'], $productList['name']);
     $breadcrumbs = $breadcr->get();
+} else if ($idb != '') {
+    /* Lấy brand detail */
+    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ?limit 0,1", array($idb));
+
+    /* Lấy sản phẩm */
+    $where = "";
+    $where = "id_brand = ? and find_in_set('hienthi',status)";
+    $params = array($productBrand['id']);
+
+    $curPage = $getPage;
+    $perPage = 20;
+    $startpoint = ($curPage * $perPage) - $perPage;
+    $limit = " limit " . $startpoint . "," . $perPage;
+    $sql = "select * from table_product where $where order by numb,id desc $limit";
+    $product = $d->rawQuery($sql, $params);
+    $sqlNum = "select count(*) as 'num' from table_product where $where order by numb,id desc";
+    $count = $d->rawQueryOne($sqlNum, $params);
+    $total = (!empty($count)) ? $count['num'] : 0;
+    $url = $func->getCurrentPageURL();
+    $paging = $func->pagination($total, $perPage, $curPage, $url);
+
+    /* breadCrumbs */
+    if (!empty($titleMain)) $breadcr->set($com, $titleMain);
+    if (!empty($productBrand)) $breadcr->set($productBrand['slug'], $productBrand['name']);
+    $breadcrumbs = $breadcr->get();
 } else {
     /* Lấy tất cả sản phẩm */
     $where = "";
@@ -88,7 +114,7 @@ if ($id != '') {
     $perPage = 8;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select photo, name, slug, sale_price, regular_price, id from table_product where $where order by numb,id desc $limit";
+    $sql = "select * from table_product where $where order by numb,id desc $limit";
     $product = $d->rawQuery($sql, $params);
     $sqlNum = "select count(*) as 'num' from table_product where $where order by numb,id desc";
     $count = $d->rawQueryOne($sqlNum, $params);

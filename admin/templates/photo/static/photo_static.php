@@ -33,7 +33,7 @@ $linkSave = "index.php?com=photo&act=save_static&type=" . $type;
                         <p>Upload hình ảnh:</p>
                         <label class="upload-file-label mb-2" for="file">
                             <div class="upload-file-image rounded mb-3">
-                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 200, 'height' => 200, 'upload' => UPLOAD_PHOTO_L, 'image' => (!empty($item['photo'])) ? $item['photo'] : '', 'alt' => (!empty($item['name'])) ? $item['name'] : '']) ?>
+                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 98, 'height' => 31, 'upload' => UPLOAD_PHOTO_L, 'image' => (!empty($item['photo'])) ? $item['photo'] : '', 'alt' => (!empty($item['name'])) ? $item['name'] : '']) ?>
                             </div>
                             <div class="custom-file my-custom-file">
                                 <input type="file" class="custom-file-input" name="file" id="file" lang="vi">

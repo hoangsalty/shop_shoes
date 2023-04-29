@@ -73,15 +73,15 @@
     </a>
 <?php } ?>
 
-<a class="btn-zalo btn-frame text-decoration-none" target="_blank" href="https://zalo.me/<?= preg_replace('/[^0-9]/', '', $optsetting['zalo']); ?>">
-    <div class="animated infinite zoomIn kenit-alo-circle"></div>
-    <div class="animated infinite pulse kenit-alo-circle-fill"></div>
-    <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'zl.png', 'alt' => 'Zalo']) ?></i>
-</a>
-<a class="btn-phone btn-frame text-decoration-none" href="tel:<?= preg_replace('/[^0-9]/', '', $optsetting['hotline']); ?>">
-    <div class="animated infinite zoomIn kenit-alo-circle"></div>
-    <div class="animated infinite pulse kenit-alo-circle-fill"></div>
-    <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'hl.png', 'alt' => 'Hotline']) ?></i>
-</a>
-
-
+<div class="wrap_network">
+    <a class="btn-zalo btn-frame" target="_blank" href="https://zalo.me/<?= preg_replace('/[^0-9]/', '', $optsetting['zalo']); ?>">
+        <div class="animated infinite zoomIn kenit-alo-circle"></div>
+        <div class="animated infinite pulse kenit-alo-circle-fill"></div>
+        <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'zl.png', 'alt' => 'Zalo']) ?></i>
+    </a>
+    <a class="btn-phone btn-frame" href="tel:<?= preg_replace('/[^0-9]/', '', $optsetting['hotline']); ?>">
+        <div class="animated infinite zoomIn kenit-alo-circle"></div>
+        <div class="animated infinite pulse kenit-alo-circle-fill"></div>
+        <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'hl.png', 'alt' => 'Hotline']) ?></i>
+    </a>
+</div>
