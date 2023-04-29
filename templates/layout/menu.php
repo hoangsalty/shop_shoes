@@ -5,7 +5,7 @@
                 <div class="menu-left">
                     <div class="left-dm">
                         <div class="title">
-                            <i class="fa-solid fa-bars"></i>
+                            <i class="fas fa-bars"></i>
                             <span>Danh mục sản phẩm</span>
                         </div>
                         <ul class="ul-menu list-inline scroll-maded <?= ($source != 'index') ? 'hidden-menu' : '' ?>">

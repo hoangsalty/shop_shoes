@@ -36,7 +36,6 @@ if ($id != '') {
     $breadcr->set($rowDetail['slug'], $rowDetail['name']);
     $breadcrumbs = $breadcr->get();
 } else {
-
     /* Lấy tất cả bài viết */
     $where = "";
     $where = "find_in_set('hienthi',status)";
@@ -46,8 +45,7 @@ if ($id != '') {
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    // $sql = "select id, name, slug, photo, date_created from table_news where $where order by numb,id desc $limit";
-    $sql = "select * from table_news where $where order by numb,id desc $limit";
+    $sql = "select * from table_news where $where and type='tin-tuc' order by numb,id desc $limit";
     $news = $d->rawQuery($sql, $params);
     $sqlNum = "select count(*) as 'num' from table_news where $where order by numb,id desc";
     $count = $d->rawQueryOne($sqlNum, $params);

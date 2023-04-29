@@ -1,18 +1,24 @@
-<div class="grid-pro-detail">
+<div class="product-details mb-5">
     <div class="row">
-        <div class="left-pro-detail col-md-6">
-            <div class="fotorama" data-width="100%" data-thumbmargin="10" data-height="400" data-fit="contain" data-thumbwidth="120" data-thumbheight="80" data-allowfullscreen="false" data-nav="thumbs">
-                <?= $func->getImage(['class' => 'w-100', 'width' => 280, 'height' => 280, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
-                <?php if (!empty($rowDetailPhoto)) { ?>
-                    <?php foreach ($rowDetailPhoto as $v) { ?>
-                        <?= $func->getImage(['class' => 'w-100', 'width' => 280, 'height' => 280, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
-                    <?php } ?>
+        <div class="col-lg-6 mb-4">
+            <div class="product__details__pic__right mb-1">
+                <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 400, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                <?php foreach ($rowDetailPhoto as $i => $v) { ?>
+                    <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 400, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
                 <?php } ?>
             </div>
+
+            <?php if (!empty($rowDetailPhoto)) { ?>
+                <div class="product__details__pic__left">
+                    <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                    <?php foreach ($rowDetailPhoto as $i => $v) { ?>
+                        <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
+                    <?php } ?>
+                </div>
+            <?php } ?>
         </div>
-        <div class="right-pro-detail col-md-6">
-            <p class="title-pro-detail mb-2"><?= $rowDetail['name'] ?></p>
-            <div class="desc-pro-detail"><?= nl2br($func->decodeHtmlChars($rowDetail['desc'])) ?></div>
+        <div class="col-lg-6 mb-4">
+            <p class="title-pro-detail"><?= $rowDetail['name'] ?></p>
             <ul class="attr-pro-detail">
                 <li class="">
                     <label class="attr-label-pro-detail">Lượt xem:</label>
@@ -44,8 +50,8 @@
 
                 <?php if (!empty($rowSize)) { ?>
                     <li class="size-block-pro-detail ">
-                        <label class="attr-label-pro-detail d-block">Size:</label>
-                        <div class="attr-content-pro-detail d-block">
+                        <label class="attr-label-pro-detail">Size:</label>
+                        <div class="attr-content-pro-detail">
                             <?php foreach ($rowSize as $k => $v) { ?>
                                 <label for="size-pro-detail-<?= $v['id'] ?>" class="size-pro-detail text-decoration-none">
                                     <input type="radio" value="<?= $v['id'] ?>" id="size-pro-detail-<?= $v['id'] ?>" name="size-pro-detail" data-id="<?= $v['id'] ?>"><?= $v['name'] ?>
@@ -56,8 +62,8 @@
                 <?php } ?>
                 <?php if (!empty($rowColor)) { ?>
                     <li class="color-block-pro-detail ">
-                        <label class="attr-label-pro-detail d-block">Color:</label>
-                        <div class="attr-content-pro-detail d-block">
+                        <label class="attr-label-pro-detail">Color:</label>
+                        <div class="attr-content-pro-detail">
                             <?php foreach ($rowColor as $k => $v) { ?>
                                 <label for="color-pro-detail-<?= $v['id'] ?>" class="color-pro-detail text-decoration-none" data-idproduct="<?= $rowDetail['id'] ?>" style="background-color: #<?= $v['color'] ?>">
                                     <input type="radio" value="<?= $v['id'] ?>" id="color-pro-detail-<?= $v['id'] ?>" name="color-pro-detail" data-id="<?= $v['id'] ?>">
@@ -67,8 +73,8 @@
                     </li>
                 <?php } ?>
                 <li class="">
-                    <label class="attr-label-pro-detail d-block">Số lượng:</label>
-                    <div class="attr-content-pro-detail d-block">
+                    <label class="attr-label-pro-detail">Số lượng:</label>
+                    <div class="attr-content-pro-detail">
                         <div class="quantity-pro-detail">
                             <span class="quantity-minus-pro-detail counter-procart">-</span>
                             <input type="number" class="qty-pro" min="1" value="1" readonly />
@@ -77,40 +83,48 @@
                     </div>
                 </li>
             </ul>
+            <div class="desc-pro-detail"><?= nl2br($func->decodeHtmlChars($rowDetail['desc'])) ?></div>
+
             <div class="cart-pro-detail">
-                <a class="btn btn-success addcart rounded-0 mr-2" data-id="<?= $rowDetail['id'] ?>" data-action="addnow">
+                <a class="btn_addcart addcart rounded-0 mr-2" data-id="<?= $rowDetail['id'] ?>" data-action="addnow">
                     <i class="fas fa-shopping-bag mr-1"></i>
                     <span>Thêm vào giỏ hàng</span>
                 </a>
-                <a class="btn btn-dark addcart rounded-0" data-id="<?= $rowDetail['id'] ?>" data-action="buynow">
+                <a class="btn_buynow addcart rounded-0" data-id="<?= $rowDetail['id'] ?>" data-action="buynow">
                     <i class="fas fa-shopping-bag mr-1"></i>
                     <span>Mua ngay</span>
                 </a>
             </div>
         </div>
-    </div>
-    <div class="tabs-pro-detail">
-        <ul class="nav nav-tabs" id="tabsProDetail">
-            <li class="nav-item">
-                <a class="nav-link active" id="info-pro-detail-tab" data-toggle="tab" href="#info-pro-detail">Thông tin sản phẩm</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="review-pro-detail-tab" data-toggle="tab" href="#review-pro-detail">Reviews</a>
-            </li>
-        </ul>
-        <div class="tab-content pt-4 pb-4" id="tabsProDetailContent">
-            <div class="tab-pane fade show autoHeight active" id="info-pro-detail" role="tabpanel">
-                <?= $func->decodeHtmlChars($rowDetail['content']) ?>
-            </div>
-            <div class="tab-pane fade" id="review-pro-detail" role="tabpanel">
+        <div class="col-lg-12">
+            <div class="tabs-pro-detail">
+                <ul class="nav nav-tabs" id="tabsProDetail">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="info-pro-detail-tab" data-toggle="tab" href="#info-pro-detail">Thông tin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="review-pro-detail-tab" data-toggle="tab" href="#review-pro-detail">Đánh giá</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="tabsProDetailContent">
+                    <div class="tab-pane fade show autoHeight active" id="info-pro-detail" role="tabpanel">
+                        <?= $func->decodeHtmlChars($rowDetail['content']) ?>
+                    </div>
+                    <div class="tab-pane fade" id="review-pro-detail" role="tabpanel">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="title-main"><span>Sản phẩm cùng loại</span></div>
 <div class="content-main ">
-    <?php if (!empty($product)) {
-    } else { ?>
+    <?php if (!empty($product)) { ?>
+        <div class="slick_more_product">
+            <?= $func->GetProducts($product) ?>
+        </div>
+    <?php } else { ?>
         <div class="col-12">
             <div class="alert alert-warning w-100" role="alert">
                 <strong>Khong tìm thấy kết quả</strong>

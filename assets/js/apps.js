@@ -98,6 +98,29 @@ FRAMEWORK.Search = function () {
 }
 
 FRAMEWORK.Carousel = function () {
+  $('.slick_more_product .boxProduct').slick({
+    lazyLoad: 'progressive', infinite: true, accessibility: true, vertical: false, verticalSwiping: false,
+    slidesToShow: 4, slidesToScroll: 1, autoplay: true, autoplaySpeed: 2000, speed: 1000, arrows: false,
+    centerMode: false, dots: false, draggable: true, responsive: [
+    ]
+  });
+
+  $('.product__details__pic__left').slick({
+    lazyLoad: 'progressive', infinite: true, accessibility: true, vertical: false, verticalSwiping: false,
+    slidesToShow: 5, slidesToScroll: 1, autoplay: true, autoplaySpeed: 2000, speed: 1000, arrows: false,
+    asNavFor: '.product__details__pic__right', focusOnSelect: true,
+    centerMode: false, dots: false, draggable: true, responsive: [
+    ]
+  });
+
+  $('.product__details__pic__right').slick({
+    lazyLoad: 'progressive', infinite: true, accessibility: true, vertical: false, verticalSwiping: false,
+    slidesToShow: 1, slidesToScroll: 1, autoplay: false, autoplaySpeed: 2000, speed: 1000, arrows: false,
+    asNavFor: '.product__details__pic__left',
+    centerMode: false, dots: false, draggable: true, responsive: [
+    ]
+  });
+
   $(".slideshow__slider").owlCarousel({
     loop: false,
     margin: 10,
@@ -182,53 +205,15 @@ FRAMEWORK.Carousel = function () {
       },
     },
   });
-
-  $(".gallery__slider").owlCarousel({
-    loop: true,
-    margin: 10,
-    items: 5,
-    dots: false,
-    nav: true,
-    navText: [
-      "<span class='fa fa-angle-left'><span/>",
-      "<span class='fa fa-angle-right'><span/>",
-    ],
-    animateOut: "fadeOut",
-    animateIn: "fadeIn",
-    smartSpeed: 1200,
-    autoHeight: true,
-    autoplay: true,
-    responsive: {
-      0: {
-        items: 1,
-      },
-
-      480: {
-        items: 3,
-      },
-
-      768: {
-        items: 4,
-      },
-
-      992: {
-        items: 5,
-      },
-    },
-  });
 }
 
 FRAMEWORK.Pagings = function () {
-  loadPaging("api/product.php?perpage=8", ".paging-product-list", 0);
-  $(".title-product-list .a-title-product").click(function () {
-    $(".title-product-list .a-title-product").removeClass("active");
+  loadPaging("api/product.php?perpage=8", ".page_splist", 0);
+  $(".list_splist a").click(function () {
+    $(".list_splist a").removeClass("active");
     $(this).addClass("active");
     var idList = $(this).data("list");
-    loadPaging(
-      "api/product.php?idList=" + idList + "&perpage=8",
-      ".paging-product-list",
-      0
-    );
+    loadPaging("api/product.php?idList=" + idList + "&perpage=8", ".page_splist", 0);
   });
 }
 
@@ -286,13 +271,13 @@ FRAMEWORK.Cart = function () {
   /* Add */
   $('body').on('click', '.btn-cart', function () {
     if (!IS_LOGIN) {
-      confirmDialog('force-login', 'Vui lòng đăng nhập để sử dụng chức năng giỏ hàng');
+      confirmDialog('force-login', 'Vui lòng đăng nhập');
       return false;
     }
   });
   $('body').on('click', '.addcart', function () {
     if (!IS_LOGIN) {
-      confirmDialog('force-login', 'Vui lòng đăng nhập để sử dụng chức năng giỏ hàng');
+      confirmDialog('force-login', 'Vui lòng đăng nhập');
       return false;
     }
 

@@ -1,5 +1,5 @@
 <?php if (!empty($productlist)) { ?>
-    <section class="wrap-categories">
+    <section class="wrap-categories spacing">
         <div class="wrap-content">
             <div class="categories__slider owl-carousel control-owl">
                 <?php foreach ($productlist as $k => $v) { ?>
@@ -22,22 +22,20 @@
 <?php } ?>
 
 <?php if (count($product)) { ?>
-    <section class="wrap-product">
+    <section class="wrap-product spacing">
         <div class="wrap-content">
-            <div class="title-product-main">
-                <div class="title-main">
-                    <span>sản phẩm nổi bật</span>
-                </div>
-                <?php if (count($productlist)) { ?>
-                    <div class="title-product-list d-flex justify-content-center align-items-center flex-wrap">
-                        <a class="text-decoration-none a-title-product active" data-list=""><span>Tất cả sản phẩm</span></a>
-                        <?php foreach ($productlist as $key => $vl) { ?>
-                            <a class="text-decoration-none a-title-product" data-list="<?= $vl['id'] ?>"><span><?= $vl['name'] ?></span></a>
-                        <?php } ?>
-                    </div>
-                <?php } ?>
+            <div class="title-main">
+                <span>sản phẩm nổi bật</span>
             </div>
-            <div class="paging-product-list"></div>
+            <?php if (count($productlist)) { ?>
+                <div class="list_monnb list_splist mb-4">
+                    <a class="d-inline-block active" role="button" data-list="0">Tất cả</a>
+                    <?php foreach ($productlist as $k => $v) { ?>
+                        <a class="d-inline-block" role="button" data-list="<?= $v['id'] ?>"><?= $v['name'] ?></a>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <div class="page_splist"></div>
         </div>
     </section>
 <?php } ?>
@@ -69,7 +67,7 @@
 <?php } ?>
 
 <?php if (!empty($newsnb)) { ?>
-    <section class="wrap-newsnb">
+    <section class="wrap-newsnb spacing">
         <div class="wrap-content">
             <div class="title-main">
                 <span>Tin tức</span>
@@ -82,10 +80,8 @@
                                 <?= $func->getImage(['class' => 'w-100', 'width' => $config['news']['width'], 'height' => $config['news']['height'], 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
                             </a>
                             <div class="info">
-                                <span class="ngaydang"><i class="fa-solid fa-calendar-days"></i><?= date("d/m/Y", $v['date_created']) ?></span>
-                                <h3 class="name">
-                                    <a class="text-decoration-none transition text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
-                                </h3>
+                                <a class="name text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
+                                <span class="ngaydang"><i class="fas fa-calendar-day"></i><?= date("d/m/Y", $v['date_created']) ?></span>
                                 <div class="desc text-split"><?= $v['desc'] ?></div>
                             </div>
                         </div>

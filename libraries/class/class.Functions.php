@@ -28,8 +28,7 @@ class Functions
     /* Is phone */
     public function isPhone($number)
     {
-        $number = str_replace(" ", "", $number);
-        ;
+        $number = str_replace(" ", "", $number);;
         if (preg_match_all('/^(0|84)(2(0[3-9]|1[0-6|8|9]|2[0-2|5-9]|3[2-9]|4[0-9]|5[1|2|4-9]|6[0-3|9]|7[0-7]|8[0-9]|9[0-4|6|7|9])|3[2-9]|5[5|6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])([0-9]{7})$/m', $number, $matches, PREG_SET_ORDER, 0)) {
             return true;
         } else {
@@ -291,7 +290,8 @@ class Functions
                         $_FILES[$file]['name'] = $name . $i . '.' . $ext;
                         break;
                     }
-                } else {
+                }
+            else {
                 $_FILES[$file]['name'] = $newname . '.' . $ext;
             }
             if (!copy($_FILES[$file]["tmp_name"], $folder . $_FILES[$file]['name'])) {
@@ -383,7 +383,7 @@ class Functions
         $urlpos = strpos($url, "?");
         $url = ($urlpos) ? $url . "&" : $url . "?";
         $total = $totalq;
-        $adjacents = "2";
+        $adjacents = 2;
         $firstlabel = "First";
         $prevlabel = "Prev";
         $nextlabel = "Next";
@@ -397,59 +397,57 @@ class Functions
 
         $pagination = "";
         if ($lastpage > 1) {
-            $pagination .= "<ul class='pagination flex-wrap justify-content-center mb-0'>";
-            if ($page > 1) {
-                $pagination .= "<li class='page-item'><a class='page-link' href='{$this->getCurrentPageURL()}'>{$firstlabel}</a></li>";
-                $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$prev}'>{$prevlabel}</a></li>";
-            }
-            if ($lastpage < 7 + ($adjacents * 2)) {
-                for ($counter = 1; $counter <= $lastpage; $counter++) {
-                    if ($counter == $page)
-                        $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
-                    else
-                        $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
+            $pagination .= "<div class='pagination flex-wrap justify-content-center mb-0'>";
+                $pagination .= "<a class='page-link first' href='{$this->getCurrentPageURL()}'>{$firstlabel}</a>";
+                $pagination .= "<a class='page-link prev' href='{$url}page={$prev}'>{$prevlabel}</a>";
+
+                if ($lastpage < 7 + ($adjacents * 2)) {
+                    for ($counter = 1; $counter <= $lastpage; $counter++) {
+                        if ($counter == $page)
+                            $pagination .= "<a class='page-link'>{$counter}</a>";
+                        else
+                            $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
+                    }
+                } elseif ($lastpage > 5 + ($adjacents * 2)) {
+                    if ($page < 1 + ($adjacents * 2)) {
+                        for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
+                            if ($counter == $page)
+                                $pagination .= "<a class='page-link'>{$counter}</a>";
+                            else
+                                $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
+                        }
+                        $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
+                        $pagination .= "<a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a>";
+                        $pagination .= "<a class='page-link' href='{$url}page={$lastpage}'>{$lastpage}</a>";
+                    } elseif ($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
+                        $pagination .= "<a class='page-link' href='{$url}page=1'>1</a>";
+                        $pagination .= "<a class='page-link' href='{$url}page=2'>2</a>";
+                        $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
+                        for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
+                            if ($counter == $page)
+                                $pagination .= "<a class='page-link'>{$counter}</a>";
+                            else
+                                $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
+                        }
+                        $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
+                        $pagination .= "<a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a>";
+                        $pagination .= "<a class='page-link' href='{$url}page={$lastpage}'>{$lastpage}</a>";
+                    } else {
+                        $pagination .= "<a class='page-link' href='{$url}page=1'>1</a>";
+                        $pagination .= "<a class='page-link' href='{$url}page=2'>2</a>";
+                        $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
+                        for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++) {
+                            if ($counter == $page)
+                                $pagination .= "<a class='page-link'>{$counter}</a>";
+                            else
+                                $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
+                        }
+                    }
                 }
-            } elseif ($lastpage > 5 + ($adjacents * 2)) {
-                if ($page < 1 + ($adjacents * 2)) {
-                    for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
-                        if ($counter == $page)
-                            $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
-                        else
-                            $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
-                    }
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>...</a></li>";
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a></li>";
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$lastpage}'>{$lastpage}</a></li>";
-                } elseif ($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>1</a></li>";
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=2'>2</a></li>";
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>...</a></li>";
-                    for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
-                        if ($counter == $page)
-                            $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
-                        else
-                            $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
-                    }
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>...</a></li>";
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a></li>";
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$lastpage}'>{$lastpage}</a></li>";
-                } else {
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>1</a></li>";
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=2'>2</a></li>";
-                    $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=1'>...</a></li>";
-                    for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++) {
-                        if ($counter == $page)
-                            $pagination .= "<li class='page-item active'><a class='page-link'>{$counter}</a></li>";
-                        else
-                            $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$counter}'>{$counter}</a></li>";
-                    }
-                }
-            }
-            if ($page < $counter - 1) {
-                $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page={$next}'>{$nextlabel}</a></li>";
-                $pagination .= "<li class='page-item'><a class='page-link' href='{$url}page=$lastpage'>{$lastlabel}</a></li>";
-            }
-            $pagination .= "</ul>";
+
+                $pagination .= "<a class='page-link next' href='{$url}page={$next}'>{$nextlabel}</a>";
+                $pagination .= "<a class='page-link last' href='{$url}page=$lastpage'>{$lastlabel}</a>";
+            $pagination .= "</div>";
         }
         return $pagination;
     }
@@ -706,51 +704,6 @@ class Functions
         $str .= '</select>';
         return $str;
     }
-    /* Get place by ajax */
-    public function getAjaxPlace($table = '', $title_select = 'Chọn danh mục')
-    {
-        global $d;
-
-        $where = '';
-        $params = array('0');
-        $id_parent = 'id_' . $table;
-        $data_level = '';
-        $data_table = '';
-        $data_child = '';
-        if ($table == 'city') {
-            $data_level = 'data-level="0"';
-            $data_table = 'data-table="table_district"';
-            $data_child = 'data-child="id_district"';
-        } else if ($table == 'district') {
-            $data_level = 'data-level="1"';
-            $data_table = 'data-table="table_ward"';
-            $data_child = 'data-child="id_ward"';
-            $idcity = (isset($_REQUEST['id_city'])) ? htmlspecialchars($_REQUEST['id_city']) : 0;
-            $where .= ' and id_city = ?';
-            array_push($params, $idcity);
-        } else if ($table == 'ward') {
-            $data_level = '';
-            $data_table = '';
-            $data_child = '';
-            $idcity = (isset($_REQUEST['id_city'])) ? htmlspecialchars($_REQUEST['id_city']) : 0;
-            $where .= ' and id_city = ?';
-            array_push($params, $idcity);
-            $iddistrict = (isset($_REQUEST['id_district'])) ? htmlspecialchars($_REQUEST['id_district']) : 0;
-            $where .= ' and id_district = ?';
-            array_push($params, $iddistrict);
-        }
-        $rows = $d->rawQuery("select name, id from table_" . $table . " where id <> ? " . $where . " order by id asc", $params, "result", 7200);
-        $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" ' . $data_level . ' ' . $data_table . ' ' . $data_child . ' class="form-control select2 select-place"><option value="0">' . $title_select . '</option>';
-        foreach ($rows as $v) {
-            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
-                $selected = "selected";
-            else
-                $selected = "";
-            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
-        }
-        $str .= '</select>';
-        return $str;
-    }
     /* Lấy thông tin chi tiết */
     public function getInfoDetail($cols = '', $table = '', $id = 0)
     {
@@ -786,4 +739,45 @@ class Functions
             setcookie('login_account_session', "", -1, '/');
         }
     }
+
+    public function GetProducts($items)
+    {
+        global $func, $config; ?>
+        <div class="boxProduct">
+            <?php foreach ($items as $k => $v) { ?>
+                <div class="product">
+                    <div class="box-product">
+                        <div class="box-image">
+                            <a class="pic-product scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
+                                <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                            </a>
+                            <p class="social-product transition">
+                                <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product text-decoration-none">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a class="cart-add addcart" data-id="<?= $v['id'] ?>" data-action="addnow">
+                                    <i class="fas fa-cart-plus"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="info-product">
+                            <a class="name-product text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
+                            <p class="price-product">
+                                <?php if ($v['sale_price'] > 0) { ?>
+                                    <span class="price-new"><?= $func->formatMoney($v['sale_price']) ?></span>
+                                    <span class="price-old"><?= $func->formatMoney($v['regular_price']) ?></span>
+                                    <span class="price-per"><?= '-' . round(100 - ($v['sale_price'] / $v['regular_price'] * 100)) . '%' ?></span>
+                                <?php } else { ?>
+                                    <?php if ($v['regular_price'] != 0) $giapro = $func->formatMoney($v['regular_price']);
+                                    else $giapro = 'Liên hệ'; ?>
+                                    <span class="price-text">Giá: </span>
+                                    <span class="price-new"><?= $giapro ?></span>
+                                <?php } ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+<?php }
 }

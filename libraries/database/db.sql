@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2023 at 04:22 PM
+-- Generation Time: Apr 29, 2023 at 09:23 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -1087,7 +1087,7 @@ CREATE TABLE `table_photo` (
 --
 
 INSERT INTO `table_photo` (`id`, `photo`, `content`, `desc`, `name`, `link`, `link_video`, `type`, `numb`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'a8bda916b774b719b1929d81bd06e69b-2608.jpg', NULL, NULL, NULL, NULL, NULL, 'logo', 0, 'hienthi', 1679828425, 1679828491, 0),
+(1, 'logo-4853.png', NULL, NULL, NULL, NULL, NULL, 'logo', 0, 'hienthi', 1679828425, 1682781895, 0),
 (2, 'qjrczhj4t9ikohj0k3veslide1-7577.png', NULL, '', 'Slide 1', '', NULL, 'slideshow', 0, 'hienthi', 1679828622, 0, 0),
 (3, 'whatsyourfavoritesneakerssimpletemplatesdesign302342-2956.jpg', NULL, '', 'Slide 2', '', NULL, 'slideshow', 0, 'hienthi', 1679828649, 0, 0),
 (4, 'nature29-4181-3974.jpg', NULL, '', 'Album 1', NULL, NULL, 'album', 0, 'hienthi', 1679828715, 0, 0),
@@ -1124,12 +1124,12 @@ CREATE TABLE `table_product` (
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 1, 305, 'hienthi,noibat', 1679827982, 1681648898, 0),
+(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 1, 454, 'hienthi,noibat', 1679827982, 1681648898, 0),
 (2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 2, 1, 'hienthi,noibat', 1679827990, 1680869938, 0),
 (3, 6, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 0, 'hienthi,noibat', 1679828000, 1680869946, 0),
 (4, 6, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 4, 0, 'hienthi,noibat', 1679828010, 1680869956, 0),
 (5, 6, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 5, 0, 'hienthi,noibat', 1679828021, 1680869965, 0),
-(6, 7, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 6, 0, 'hienthi,noibat', 1679828031, 1680869972, 0),
+(6, 7, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 6, 4, 'hienthi,noibat', 1679828031, 1680869972, 0),
 (7, 7, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 7, 0, 'hienthi,noibat', 1679828041, 1680869978, 0),
 (8, 7, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 8, 0, 'hienthi,noibat', 1679828051, 1680869987, 0),
 (9, 7, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 9, 1, 'hienthi,noibat', 1679828075, 1680869993, 0),
@@ -1351,7 +1351,7 @@ CREATE TABLE `table_user` (
 
 INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `photo`, `fullname`, `phone`, `address`, `gender`, `login_session`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, '', '1682261315', 'hoatdong', 1608051600, 0, 0, 0, 0),
-(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', '1-7945-6712.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '8da49514f3c99266bab9571d79c8afd6', '1682344524', 'hoatdong', 987544800, 1, 1682254418, 0, 0),
+(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', '1-7945-6712.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '2a27f615d61da2a8b10d34463920d25a', '1682794794', 'hoatdong', 987544800, 1, 1682254418, 0, 0),
 (150, 'user', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user@gmail.com', '2-7335-5701.jpg', 'User', '0909090909', 'Địa chỉ test 1', 1, '4500b7f3ae5302fbabe910b92f35b55c', '1682264613', 'hoatdong', 1044399600, 2, 1682254452, 0, 0),
 (151, 'user', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gmail.com', NULL, 'Test', '0909090909', 'Test 1', 1, 'ee14e8adb7c60582e31e4540c1b5bbdf', '1682342762', 'hoatdong', 987544800, 0, 0, 0, 0);
 
