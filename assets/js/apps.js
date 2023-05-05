@@ -1,3 +1,53 @@
+FRAMEWORK.PopupLogin = function () {
+  $('#form-user').submit(function (e) {
+    e.preventDefault();
+
+    var username = $(this).find('#username');
+    var password = $(this).find('#password');
+    if (isEmpty(username.val())) {
+      $('.login_response').html('<div class="alert alert-danger">Vui lòng nhập tài khoản</div>');
+      username.focus();
+      return false;
+    }
+    if (isEmpty(password.val())) {
+      $('.login_response').html('<div class="alert alert-danger">Vui lòng nhập mật khẩu</div>');
+      password.focus();
+      return false;
+    }
+
+    $.ajax({
+      url: 'api/login.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        username: username.val(),
+        password: password.val(),
+      },
+      beforeSend: function () {
+        holdonOpen();
+        $('#popup-login').find('.modal-body').css('opacity', '0.5');
+        $(this).find('.login-account').prop('disabled', true);
+      },
+      success: function (result) {
+        $('#popup-login').find('.modal-body').css('opacity', '1');
+        $(this).find('.login-account').prop('disabled', false);
+
+        if (result.status == 200) {
+          $("#form-user")[0].reset();
+          $('.login_response').html('<div class="alert alert-success">' + result.message + '</div>');
+
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
+        } else if (result.status == 404) {
+          $('.login_response').html('<div class="alert alert-danger">' + result.message + '</div>');
+        }
+        holdonClose();
+      }
+    });
+  });
+}
+
 FRAMEWORK.Random = function () {
   $('.birth-date').datetimepicker({
     timepicker: false,
@@ -257,7 +307,6 @@ FRAMEWORK.Cart = function () {
       url: 'api/cart.php',
       type: 'POST',
       dataType: 'html',
-      async: false,
       data: {
         cmd: 'popup-cart'
       },
@@ -288,7 +337,7 @@ FRAMEWORK.Cart = function () {
     var quantity = $parents.find('.quantity-pro-detail').find('.qty-pro').val();
     quantity = quantity ? quantity : 1;
 
-    /* size màu cơ bản*/
+    /* size màu*/
     var color = $parents.find('.color-block-pro-detail').find('.color-pro-detail input:checked').val();
     color = color ? color : 0;
     var size = $parents.find('.size-block-pro-detail').find('.size-pro-detail input:checked').val();
@@ -299,7 +348,6 @@ FRAMEWORK.Cart = function () {
         url: 'api/cart.php',
         type: 'POST',
         dataType: 'json',
-        async: false,
         data: {
           cmd: 'add-cart',
           id: id,
@@ -313,19 +361,16 @@ FRAMEWORK.Cart = function () {
         success: function (result) {
           if (action == 'addnow') {
             $('.count-cart').html(result.max);
+
             $.ajax({
               url: 'api/cart.php',
               type: 'POST',
               dataType: 'html',
-              async: false,
               data: {
                 cmd: 'popup-cart'
               },
               beforeSend: function () {
-                HoldOn.open({
-                  theme: "sk-bounce",
-                  message: 'Vui lòng chờ tí ...'
-                });
+                holdonOpen();
               },
               success: function (result) {
                 $('#popup-cart .modal-body').html(result);
@@ -421,4 +466,5 @@ $(document).ready(function () {
   FRAMEWORK.Cart();
   FRAMEWORK.Pagings();
   FRAMEWORK.Random();
+  FRAMEWORK.PopupLogin();
 });

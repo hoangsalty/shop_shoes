@@ -398,55 +398,55 @@ class Functions
         $pagination = "";
         if ($lastpage > 1) {
             $pagination .= "<div class='pagination flex-wrap justify-content-center mb-0'>";
-                $pagination .= "<a class='page-link first' href='{$this->getCurrentPageURL()}'>{$firstlabel}</a>";
-                $pagination .= "<a class='page-link prev' href='{$url}page={$prev}'>{$prevlabel}</a>";
+            $pagination .= "<a class='page-link first' href='{$this->getCurrentPageURL()}'>{$firstlabel}</a>";
+            $pagination .= "<a class='page-link prev' href='{$url}page={$prev}'>{$prevlabel}</a>";
 
-                if ($lastpage < 7 + ($adjacents * 2)) {
-                    for ($counter = 1; $counter <= $lastpage; $counter++) {
+            if ($lastpage < 7 + ($adjacents * 2)) {
+                for ($counter = 1; $counter <= $lastpage; $counter++) {
+                    if ($counter == $page)
+                        $pagination .= "<a class='page-link active'>{$counter}</a>";
+                    else
+                        $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
+                }
+            } elseif ($lastpage > 5 + ($adjacents * 2)) {
+                if ($page < 1 + ($adjacents * 2)) {
+                    for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
                         if ($counter == $page)
-                            $pagination .= "<a class='page-link'>{$counter}</a>";
+                            $pagination .= "<a class='page-link active'>{$counter}</a>";
                         else
                             $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
                     }
-                } elseif ($lastpage > 5 + ($adjacents * 2)) {
-                    if ($page < 1 + ($adjacents * 2)) {
-                        for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
-                            if ($counter == $page)
-                                $pagination .= "<a class='page-link'>{$counter}</a>";
-                            else
-                                $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
-                        }
-                        $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
-                        $pagination .= "<a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a>";
-                        $pagination .= "<a class='page-link' href='{$url}page={$lastpage}'>{$lastpage}</a>";
-                    } elseif ($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
-                        $pagination .= "<a class='page-link' href='{$url}page=1'>1</a>";
-                        $pagination .= "<a class='page-link' href='{$url}page=2'>2</a>";
-                        $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
-                        for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
-                            if ($counter == $page)
-                                $pagination .= "<a class='page-link'>{$counter}</a>";
-                            else
-                                $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
-                        }
-                        $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
-                        $pagination .= "<a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a>";
-                        $pagination .= "<a class='page-link' href='{$url}page={$lastpage}'>{$lastpage}</a>";
-                    } else {
-                        $pagination .= "<a class='page-link' href='{$url}page=1'>1</a>";
-                        $pagination .= "<a class='page-link' href='{$url}page=2'>2</a>";
-                        $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
-                        for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++) {
-                            if ($counter == $page)
-                                $pagination .= "<a class='page-link'>{$counter}</a>";
-                            else
-                                $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
-                        }
+                    $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
+                    $pagination .= "<a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a>";
+                    $pagination .= "<a class='page-link' href='{$url}page={$lastpage}'>{$lastpage}</a>";
+                } elseif ($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
+                    $pagination .= "<a class='page-link' href='{$url}page=1'>1</a>";
+                    $pagination .= "<a class='page-link' href='{$url}page=2'>2</a>";
+                    $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
+                    for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
+                        if ($counter == $page)
+                            $pagination .= "<a class='page-link active'>{$counter}</a>";
+                        else
+                            $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
+                    }
+                    $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
+                    $pagination .= "<a class='page-link' href='{$url}page={$lpm1}'>{$lpm1}</a>";
+                    $pagination .= "<a class='page-link' href='{$url}page={$lastpage}'>{$lastpage}</a>";
+                } else {
+                    $pagination .= "<a class='page-link' href='{$url}page=1'>1</a>";
+                    $pagination .= "<a class='page-link' href='{$url}page=2'>2</a>";
+                    $pagination .= "<a class='page-link' href='{$url}page=1'>...</a>";
+                    for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++) {
+                        if ($counter == $page)
+                            $pagination .= "<a class='page-link active'>{$counter}</a>";
+                        else
+                            $pagination .= "<a class='page-link' href='{$url}page={$counter}'>{$counter}</a>";
                     }
                 }
+            }
 
-                $pagination .= "<a class='page-link next' href='{$url}page={$next}'>{$nextlabel}</a>";
-                $pagination .= "<a class='page-link last' href='{$url}page=$lastpage'>{$lastlabel}</a>";
+            $pagination .= "<a class='page-link next' href='{$url}page={$next}'>{$nextlabel}</a>";
+            $pagination .= "<a class='page-link last' href='{$url}page=$lastpage'>{$lastlabel}</a>";
             $pagination .= "</div>";
         }
         return $pagination;

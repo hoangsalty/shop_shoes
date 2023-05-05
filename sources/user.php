@@ -5,14 +5,6 @@ if (!defined('SOURCES'))
 $action = htmlspecialchars($match['params']['action']);
 
 switch ($action) {
-    case 'dang-nhap':
-        $template = "account/login";
-        if (!empty($_SESSION['account']['active']))
-            $func->transfer2("Trang không tồn tại", $configBase, false);
-        if (!empty($_POST['login-account']))
-            login();
-        break;
-
     case 'dang-ky':
         $template = "account/register";
         if (!empty($_SESSION['account']['active']))
@@ -177,81 +169,6 @@ function infoMember()
         }
     } else {
         $func->transfer2("Trang không tồn tại", $configBase, false);
-    }
-}
-
-function login()
-{
-    global $d, $func, $flash, $configBase;
-
-    /* Data */
-    $username = (!empty($_POST['username'])) ? htmlspecialchars($_POST['username']) : '';
-    $password = (!empty($_POST['password'])) ? $_POST['password'] : '';
-    $passwordMD5 = md5($password);
-    $remember = (!empty($_POST['remember-user'])) ? htmlspecialchars($_POST['remember-user']) : false;
-
-    /* Valid data */
-    if (empty($username)) {
-        $response['messages'][] = 'Tên đăng nhập không được trống';
-    }
-
-    if (empty($password)) {
-        $response['messages'][] = 'Mật khẩu không được trống';
-    }
-
-    if (!empty($response)) {
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set("message", $message);
-        $func->redirect($configBase . "account/dang-nhap");
-    }
-
-    $account = $d->rawQueryOne("select * from table_user where username = ? and find_in_set('hoatdong',status) limit 0,1", array($username));
-    if (!empty($account)) {
-        if ($account['password'] == $passwordMD5) {
-            /* Tạo login session */
-            $id_user = $account['id'];
-            $lastlogin = time();
-            $login_session = md5($account['password'] . $lastlogin);
-            $d->rawQuery("update table_user set login_session = ?, lastlogin = ? where id = ?", array($login_session, $lastlogin, $id_user));
-
-            /* Tạo session login */
-            $_SESSION['account']['active'] = true;
-            $_SESSION['account']['id'] = $account['id'];
-            $_SESSION['account']['username'] = $account['username'];
-            $_SESSION['account']['fullname'] = $account['fullname'];
-            $_SESSION['account']['address'] = $account['address'];
-            $_SESSION['account']['photo'] = $account['photo'];
-            $_SESSION['account']['phone'] = $account['phone'];
-            $_SESSION['account']['email'] = $account['email'];
-            $_SESSION['account']['role'] = $account['permission'];
-            $_SESSION['account']['login_session'] = $login_session;
-            $_SESSION['account']['status'] = $account['status'];
-
-            /* Nhớ mật khẩu */
-            if ($remember) {
-                $time_expiry = time() + 3600 * 24;
-                setcookie('login_account_id', $account['id'], $time_expiry, '/');
-                setcookie('login_account_session', $login_session, $time_expiry, '/');
-            } else {
-                $time_expiry = time() + 1800;
-                setcookie('login_account_id', $account['id'], $time_expiry, '/');
-                setcookie('login_account_session', $login_session, $time_expiry, '/');
-            }
-
-            $func->transfer2("Đăng nhập thành công", $configBase);
-        } else {
-            $response['messages'][] = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
-        }
-    } else {
-        $response['messages'][] = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
-    }
-
-    if (!empty($response)) {
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set("message", $message);
-        $func->redirect($configBase . "account/dang-nhap");
     }
 }
 

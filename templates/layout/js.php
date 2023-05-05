@@ -9,8 +9,9 @@
 </script>
 <!-- Js Files -->
 <script type="text/javascript" src="<?= $configBase ?>assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="<?= $configBase ?>assets/js/jQuery.WCircleMenu-min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/bootstrap/bootstrap.js"></script>
+
+<script type="text/javascript" src="<?= $configBase ?>assets/js/jQuery.WCircleMenu-min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/owlcarousel/owl.carousel.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/holdon/HoldOn.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/slick/slick.js"></script>

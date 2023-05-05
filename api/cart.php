@@ -81,10 +81,7 @@ if ($cmd == 'add-cart' && $id > 0) {
                             <div class="form-row">
                                 <div class="pic-procart col-3 col-md-2">Hình ảnh</div>
                                 <div class="info-procart col-6 col-md-5">Tên sản phẩm</div>
-                                <div class="quantity-procart col-3 col-md-2">
-                                    <p>Số lượng</p>
-                                    <p>Thành tiền</p>
-                                </div>
+                                <div class="quantity-procart col-3 col-md-2">Số lượng</div>
                                 <div class="price-procart col-3 col-md-3">Thành tiền</div>
                             </div>
                         </div>
@@ -126,20 +123,6 @@ if ($cmd == 'add-cart' && $id > 0) {
                                         </div>
                                     </div>
                                     <div class="quantity-procart col-3 col-md-2">
-                                        <div class="price-procart price-procart-rp">
-                                            <?php if ($proinfo['sale_price']) { ?>
-                                                <p class="price-new-cart load-price-new-<?= $code ?>">
-                                                    <?= $func->formatMoney($pro_price_new_qty) ?>
-                                                </p>
-                                                <p class="price-old-cart load-price-<?= $code ?>">
-                                                    <?= $func->formatMoney($pro_price_qty) ?>
-                                                </p>
-                                            <?php } else { ?>
-                                                <p class="price-new-cart load-price-<?= $code ?>">
-                                                    <?= $func->formatMoney($pro_price_qty) ?>
-                                                </p>
-                                            <?php } ?>
-                                        </div>
                                         <div class="quantity-counter-procart quantity-counter-procart-<?= $code ?>">
                                             <span class="counter-procart-minus counter-procart">-</span>
                                             <input type="number" class="quantity-procart" min="1" value="<?= $quantity ?>" data-pid="<?= $pid ?>" data-code="<?= $code ?>" readonly />

@@ -9,7 +9,7 @@
                 <?php if (array_key_exists('account', $_SESSION) && $_SESSION['account']['active'] == true) { ?>
                     <div class="user-header">
                         <a href="account/thong-tin">
-                            <span>Hi, <?= $_SESSION['account']['username'] ?></span>
+                            <span>Hi, <?= $_SESSION['account']['fullname'] ?></span>
                         </a>
                         <a href="account/dang-xuat">
                             <i class="fas fa-sign-out-alt"></i>
@@ -18,7 +18,7 @@
                     </div>
                 <?php } else { ?>
                     <div class="user-header">
-                        <a href="account/dang-nhap">
+                        <a href="javascript::void()" type="button" data-toggle="modal" data-target="#popup-login">
                             <i class="fas fa-sign-in-alt"></i>
                             <span>Đăng nhập</span>
                         </a>
