@@ -159,30 +159,22 @@
 }
 
 .quantity-counter-procart .quantity-procart {
+  display: inline-block;
   width: 40%;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border: 0px;
   border-right: 1px solid #dfdfdf;
   border-left: 1px solid #dfdfdf;
   outline: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
   padding: 0px;
   color: #333;
   text-align: center;
+  text-indent: 10px;
 }
 
 .price-procart {
   width: 20%;
   text-align: right;
-}
-
-.price-procart-rp {
-  display: none;
-  width: 100%;
-  margin-bottom: 10px;
-  font-size: 13.5px;
 }
 
 .price-new-cart {
@@ -244,7 +236,7 @@
   color: #001973;
   border-bottom: 1px solid #eee;
   padding-bottom: 5px;
-  margin-bottom: 15px;
+  margin: 15px 0 10px 0;
 }
 
 .information-cart {
@@ -367,12 +359,6 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
-  .price-procart-rp {
-    display: block;
-  }
-}
-
 @media only screen and (max-width: 575px) {
   .procart-label {
     font-size: 13px;
@@ -428,7 +414,7 @@
 .cart-fixed {
   position: fixed;
   right: 20px;
-  bottom: 390px;
+  bottom: 250px;
   z-index: 997;
   background: #4b4f56;
   width: 50px;

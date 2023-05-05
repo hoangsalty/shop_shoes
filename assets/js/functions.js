@@ -2,6 +2,10 @@ function isExist(ele) {
     return ele.length;
 }
 
+function isEmpty(o, t) {
+    return "" == o && (void 0 !== t && alert(t), !0)
+}
+
 function showNotify(
     text = "Notify text",
     title = "Thông báo",
@@ -81,7 +85,6 @@ function confirmDialog(
                 btnClass: "btn-sm btn-primary",
                 action: function () {
                     if (action == "delete-procart") deleteCart(value);
-                    if (action == "force-login") window.location = CONFIG_BASE + 'account/dang-nhap';
                 },
             },
             cancel: {

@@ -1,19 +1,16 @@
 <form class="form-cart validation-cart" novalidate method="post" action="" enctype="multipart/form-data">
     <div class="wrap-cart">
         <?= $flash->getMessages("frontend") ?>
-        <div class="row">
+        <div class="form-row">
             <?php if (!empty($_SESSION['cart'])) { ?>
                 <div class="top-cart col-12 col-lg-7">
                     <p class="title-cart">Giỏ hàng của bạn:</p>
                     <div class="list-procart">
                         <div class="procart procart-label">
-                            <div class="row">
+                            <div class="form-row">
                                 <div class="pic-procart col-3 col-md-2">Hình ảnh</div>
                                 <div class="info-procart col-6 col-md-5">Tên sản phẩm</div>
-                                <div class="quantity-procart col-3 col-md-2">
-                                    <p>Số lượng</p>
-                                    <p>Thành tiền</p>
-                                </div>
+                                <div class="quantity-procart col-3 col-md-2">Số lượng</div>
                                 <div class="price-procart col-3 col-md-3">Thành tiền</div>
                             </div>
                         </div>
@@ -31,7 +28,7 @@
                             $pro_price_new_qty = $pro_price_new * $quantity; ?>
 
                             <div class="procart procart-<?= $code ?>">
-                                <div class="row">
+                                <div class="form-row">
                                     <div class="pic-procart col-3 col-md-2">
                                         <a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>">
                                             <?= $func->getImage(['class' => 'w-100', 'width' => 85, 'height' => 60, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name']]) ?>
@@ -55,20 +52,6 @@
                                         </div>
                                     </div>
                                     <div class="quantity-procart col-3 col-md-2">
-                                        <div class="price-procart price-procart-rp">
-                                            <?php if ($proinfo['sale_price']) { ?>
-                                                <p class="price-new-cart load-price-new-<?= $code ?>">
-                                                    <?= $func->formatMoney($pro_price_new_qty) ?>
-                                                </p>
-                                                <p class="price-old-cart load-price-<?= $code ?>">
-                                                    <?= $func->formatMoney($pro_price_qty) ?>
-                                                </p>
-                                            <?php } else { ?>
-                                                <p class="price-new-cart load-price-<?= $code ?>">
-                                                    <?= $func->formatMoney($pro_price_qty) ?>
-                                                </p>
-                                            <?php } ?>
-                                        </div>
                                         <div class="quantity-counter-procart quantity-counter-procart-<?= $code ?>">
                                             <span class="counter-procart-minus counter-procart">-</span>
                                             <input type="number" class="quantity-procart" min="1" value="<?= $quantity ?>" data-pid="<?= $pid ?>" data-code="<?= $code ?>" readonly />
@@ -123,7 +106,7 @@
                         </div>
                         <p class="title-cart">Thông tin giao hàng:</p>
                         <div class="information-cart">
-                            <div class="row">
+                            <div class="form-row">
                                 <div class="input-cart col-md-6">
                                     <input type="text" class="form-control text-sm" id="fullname" name="dataOrder[fullname]" placeholder="Họ tên" value="<?= !empty($_SESSION['account']['fullname']) ? $_SESSION['account']['fullname'] : '' ?>" required />
                                     <div class="invalid-feedback">Vui lòng nhập họ tên</div>
@@ -137,6 +120,8 @@
                                 <input type="email" class="form-control text-sm" id="email" name="dataOrder[email]" placeholder="Email" value="<?= !empty($_SESSION['account']['email']) ? $_SESSION['account']['email'] : '' ?>" required />
                                 <div class="invalid-feedback">Vui lòng nhập email</div>
                             </div>
+                            <p class="title-cart">Khu vực ship:</p>
+
                             <div class="form-row">
                                 <div class="input-cart col-md-4">
                                     <select class="select-city-cart custom-select text-sm" required id="city" name="dataOrder[city]">

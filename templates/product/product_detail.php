@@ -1,6 +1,6 @@
 <div class="product-details mb-5">
     <div class="row">
-        <div class="col-lg-6 mb-4">
+        <div class="left-pro-detail col-lg-6 mb-4">
             <div class="product__details__pic__right mb-1">
                 <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 400, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
                 <?php foreach ($rowDetailPhoto as $i => $v) { ?>
@@ -17,7 +17,7 @@
                 </div>
             <?php } ?>
         </div>
-        <div class="col-lg-6 mb-4">
+        <div class="right-pro-detail col-lg-6 mb-4">
             <p class="title-pro-detail"><?= $rowDetail['name'] ?></p>
             <ul class="attr-pro-detail">
                 <li class="">
