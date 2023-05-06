@@ -1,5 +1,5 @@
 FRAMEWORK.PopupLogin = function () {
-  $('#form-user').submit(function (e) {
+  $('#form-user-login').submit(function (e) {
     e.preventDefault();
 
     var username = $(this).find('#username');
@@ -33,7 +33,7 @@ FRAMEWORK.PopupLogin = function () {
         $(this).find('.login-account').prop('disabled', false);
 
         if (result.status == 200) {
-          $("#form-user")[0].reset();
+          $("#form-user-login")[0].reset();
           $('.login_response').html('<div class="alert alert-success">' + result.message + '</div>');
 
           setTimeout(function () {
@@ -41,6 +41,111 @@ FRAMEWORK.PopupLogin = function () {
           }, 1000);
         } else if (result.status == 404) {
           $('.login_response').html('<div class="alert alert-danger">' + result.message + '</div>');
+        }
+        holdonClose();
+      }
+    });
+  });
+}
+
+FRAMEWORK.PopupRegister = function () {
+  $('#form-user-register').submit(function (e) {
+    e.preventDefault();
+
+    var fullname = $(this).find('#fullname');
+    var username = $(this).find('#username');
+    var password = $(this).find('#password');
+    var birthday = $(this).find('#birthday');
+    var email = $(this).find('#email');
+    var phone = $(this).find('#phone');
+    var address = $(this).find('#address');
+
+    if (isEmpty(fullname.val())) {
+      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập họ tên</div>');
+      fullname.focus();
+      return false;
+    }
+
+    if (isEmpty(username.val())) {
+      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập tài khoản</div>');
+      username.focus();
+      return false;
+    }
+
+    if (isEmpty(password.val())) {
+      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập mật khẩu</div>');
+      password.focus();
+      return false;
+    }
+
+    if (isEmpty(birthday.val())) {
+      $('.register_response').html('<div class="alert alert-danger">Vui lòng chọn ngày sinh</div>');
+      birthday.focus();
+      return false;
+    }
+
+    if (isEmpty(email.val())) {
+      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập email</div>');
+      email.focus();
+      return false;
+    }
+
+    if (isEmpty(phone.val())) {
+      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập số điện thoại</div>');
+      phone.focus();
+      return false;
+    }
+
+    if (isEmpty(address.val())) {
+      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập địa chỉ</div>');
+      address.focus();
+      return false;
+    }
+
+    $.ajax({
+      url: 'api/register.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        fullname: fullname.val(),
+        username: username.val(),
+        password: password.val(),
+        birthday: birthday.val(),
+        email: email.val(),
+        phone: phone.val(),
+        address: address.val(),
+      },
+      beforeSend: function () {
+        holdonOpen();
+        $('#popup-register').find('.modal-body').css('opacity', '0.5');
+        $(this).find('.register-account').prop('disabled', true);
+      },
+      success: function (result) {
+        $('#popup-register').find('.modal-body').css('opacity', '1');
+        $(this).find('.register-account').prop('disabled', false);
+
+        if (result.status == 200) {
+          $('.register_response').html('<div class="alert alert-success">' + result.message + '</div>');
+
+          setTimeout(function () {
+            $.ajax({
+              url: 'api/login.php',
+              type: 'POST',
+              dataType: 'json',
+              data: {
+                username: username.val(),
+                password: password.val(),
+              },
+              success: function (result) {
+                if (result.status == 200) {
+                  location.reload();
+                }
+              }
+            });
+          }, 3000);
+
+        } else if (result.status == 404) {
+          $('.register_response').html('<div class="alert alert-danger">' + result.message + '</div>');
         }
         holdonClose();
       }
@@ -467,4 +572,5 @@ $(document).ready(function () {
   FRAMEWORK.Pagings();
   FRAMEWORK.Random();
   FRAMEWORK.PopupLogin();
+  FRAMEWORK.PopupRegister();
 });

@@ -89,10 +89,6 @@ else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label class="d-block" for="quantity">Số lượng tồn kho:</label>
-                                <input type="number" min="0" class="form-control quantity text-sm" name="data[quantity]" id="quantity" placeholder="Số lượng tồn kho" value="<?= (!empty($flash->has('quantity'))) ? $flash->get('quantity') : @$item['quantity'] ?>">
-                            </div>
                         </div>
                     </div>
                 </div>
