@@ -1390,26 +1390,35 @@ div.css_flex_baiviet {
   margin: 0 2.5px;
 }
 
+#popup-register .modal-header .close,
 #popup-login .modal-header .close {
   margin-top: -1.5rem;
 }
 
+#popup-register .form-title,
 #popup-login .form-title {
   margin: -2rem 0rem 2rem;
 }
 
+#popup-register .btn-round,
 #popup-login .btn-round {
-  border-radius: 3rem;
+  border-radius: 0.5rem;
 }
 
+#popup-register .delimiter,
 #popup-login .delimiter {
   padding: 1rem;
 }
 
+#popup-register .social-buttons .btn,
 #popup-login .social-buttons .btn {
   margin: 0 0.5rem 1rem;
 }
 
-#popup-login .signup-section {
-  padding: 0.3rem 0rem;
+.input-user {
+  margin-bottom: 15px;
+}
+
+.button-user {
+  margin-top: 15px;
 }

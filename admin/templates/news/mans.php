@@ -65,7 +65,9 @@ if ($type == 'tin-tuc') {
                             </div>
                         </th>
                         <th class="align-middle text-center" width="75px">STT</th>
-                        <th class="align-middle text-center" width="150px">Hình</th>
+                        <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
+                            <th class="align-middle text-center" width="150px">Hình</th>
+                        <?php } ?>
                         <th class="align-middle">Tiêu đề</th>
                         <?php foreach ($status as $key => $value) { ?>
                             <th class="align-middle text-center" width="120px"><?= $value ?></th>
@@ -91,11 +93,14 @@ if ($type == 'tin-tuc') {
                                 <td class="align-middle">
                                     <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="table_news">
                                 </td>
-                                <td class="align-middle">
-                                    <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                        <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 80, 'upload' => UPLOAD_NEWS_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
-                                    </a>
-                                </td>
+                                <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
+                                    <td class="align-middle">
+                                        <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
+                                            <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 80, 'upload' => UPLOAD_NEWS_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
+                                        </a>
+                                    </td>
+                                <?php } ?>
+
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
