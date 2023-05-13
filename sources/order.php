@@ -37,7 +37,7 @@ if (!empty($_POST['thanhtoan'])) {
         $city_text = $func->getInfoDetail('name', "city", $city);
         $district_text = $func->getInfoDetail('name', "district", $district);
         $ward_text = $func->getInfoDetail('name', "ward", $ward);
-        $address = htmlspecialchars($dataOrder['address']) . ', ' . $ward_text['name'] . ', ' . $district_text['name'] . ', ' . $city_text['name'];
+        $address = htmlspecialchars($dataOrder['address']);
 
         /* Payment */
         $order_payment = (!empty($dataOrder['payments'])) ? htmlspecialchars($dataOrder['payments']) : 0;
@@ -134,7 +134,7 @@ if (!empty($_POST['thanhtoan'])) {
     $data_donhang['city'] = $city;
     $data_donhang['district'] = $district;
     $data_donhang['ward'] = $ward;
-
+    
     /* lưu đơn hàng chi tiết */
     if ($d->insert('table_order', $data_donhang)) {
         $id_insert = $d->getLastInsertId();
@@ -167,9 +167,11 @@ if (!empty($_POST['thanhtoan'])) {
             $data_donhangchitiet['quantity'] = $q;
             $d->insert('table_order_detail', $data_donhangchitiet);
         }
-    }
 
-    /* Xóa giỏ hàng */
-    unset($_SESSION['cart']);
-    $func->transfer2("Thông tin đơn hàng đã được gửi thành công.", "index.php");
+        /* Xóa giỏ hàng */
+        unset($_SESSION['cart']);
+        $func->transfer2("Thông tin đơn hàng đã được gửi thành công.", "index.php");
+    } else {
+        $func->transfer2("Lỗi lưu đơn hàng.", "index.php", false);
+    }
 }

@@ -364,4 +364,117 @@ $(document).ready(function () {
             var id = $(this).val();
         });
     }
+    $('body').on('click', '.update-order', function (e) {
+        var id = $(this).attr('data-id');
+        var table = $(this).attr('data-table');
+        var newstatus = $(this).attr('data-newstatus');
+        $this = $(this);
+
+        $.ajax({
+            url: 'api/order_status.php',
+            type: 'POST',
+            dataType: 'html',
+            data: {
+                id: id,
+                table: table,
+                newstatus: newstatus
+            },
+            success: function () {
+                $this.parents('.order_table').find('.order_status').html('<span class="badge bg-info">Đã xác nhận</span>');
+            }
+        });
+    });
+
+    /* Comments */
+    $('body').on('click', '.btn-status-comment', function (e) {
+        e.preventDefault();
+        $this = $(this);
+        var id = $this.attr('data-id');
+        var status = $this.attr('data-status');
+        var newSibling = $this.attr('data-new-sibling');
+
+        $.ajax({
+            url: 'api/comment.php',
+            method: 'POST',
+            dataType: 'json',
+            async: false,
+            data: {
+                type: 'status',
+                id: id,
+                status: status,
+            },
+            success: function (response) {
+                if (response.errors) {
+                    notifyDialog(response.errors, 'Thông báo', 'fas fa-exclamation-triangle', 'red');
+                }
+                else {
+                    notifyDialog('Cập nhật trạng thái thành công', 'Thông báo', 'fas fa-exclamation-triangle', 'blue');
+                    $this.parents(".comment-action").prevAll("." + newSibling).find(".comment-new").remove();
+                    $this.text($this.text() == 'Duyệt' ? 'Bỏ duyệt' : 'Duyệt');
+                    $this.toggleClass('btn-warning btn-primary');
+                }
+            }
+        });
+    });
+    $('body').on('click', '.btn-delete-comment', function (e) {
+        e.preventDefault();
+        $this = $(this);
+        $loadControl = $this.parents("." + $this.attr("data-parents")).find(".comment-load-more-control");
+        var id = $this.attr('data-id');
+
+        $.confirm({
+            title: 'Thông báo',
+            icon: 'fas fa-exclamation-triangle', // font awesome
+            type: 'blue', // red, green, orange, blue, purple, dark
+            content: 'Bạn muốn xóa bình luận này ?', // html, text
+            backgroundDismiss: true,
+            animationSpeed: 600,
+            animation: 'zoom',
+            closeAnimation: 'scale',
+            typeAnimated: true,
+            animateFromElement: false,
+            autoClose: 'cancel|2000',
+            escapeKey: 'cancel',
+            buttons: {
+                success: {
+                    text: '<i class="fas fa-check align-middle mr-2"></i>Đồng ý',
+                    btnClass: 'btn-blue btn-sm bg-gradient-primary',
+                    action: function () {
+                        $.ajax({
+                            url: 'api/comment.php',
+                            method: 'POST',
+                            dataType: 'json',
+                            async: false,
+                            data: {
+                                type: 'delete',
+                                id: id
+                            },
+                            beforeSend: function () {
+                                holdonOpen();
+                            },
+                            error: function (e) {
+                                holdonClose();
+                                console('API Comment Delete bị lỗi. Vui lòng thử lại sau.');
+                            },
+                            success: function (response) {
+                                holdonClose();
+
+                                if (response.errors) {
+                                    console('API Comment Delete ' + response.errors);
+                                }
+                                else {
+                                    $this.parents('.' + $this.data('class')).remove();
+
+                                }
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '<i class="fas fa-times align-middle mr-2"></i>Hủy',
+                    btnClass: 'btn-red btn-sm bg-gradient-danger'
+                }
+            }
+        });
+    });
 });

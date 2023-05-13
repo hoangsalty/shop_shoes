@@ -37,6 +37,7 @@
 <script src="assets/jscolor/jscolor.js"></script>
 <script src="assets/sumoselect/jquery.sumoselect.js"></script>
 <script src="assets/rangeSlider/ion.rangeSlider.js"></script>
+<script src="assets/fancybox/fancybox.js"></script>
 <script src="assets/js/functions.js"></script>
 <script src="assets/js/apps.js"></script>
 <script src="assets/js/adminlte.js"></script>

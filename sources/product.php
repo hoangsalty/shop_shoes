@@ -49,6 +49,9 @@ if ($id != '') {
     $url = $func->getCurrentPageURL();
     $paging = $func->pagination($total, $perPage, $curPage, $url);
 
+    /* Comment */
+    $comment = new Comments($d, $func, $rowDetail['id']);
+
     /* breadCrumbs */
     if (!empty($titleMain)) $breadcr->set($com, $titleMain);
     if (!empty($productList)) $breadcr->set($productList['slug'], $productList['name']);

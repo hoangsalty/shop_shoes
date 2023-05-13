@@ -6,30 +6,6 @@ function isEmpty(o, t) {
     return "" == o && (void 0 !== t && alert(t), !0)
 }
 
-function showNotify(
-    text = "Notify text",
-    title = "Thông báo",
-    status = "success"
-) {
-    new Notify({
-        status: status, // success, warning, error
-        title: title,
-        text: text,
-        effect: "fade",
-        speed: 400,
-        customClass: null,
-        customIcon: null,
-        showIcon: true,
-        showCloseButton: true,
-        autoclose: true,
-        autotimeout: 3000,
-        gap: 10,
-        distance: 10,
-        type: 3,
-        position: "right top",
-    });
-}
-
 function notifyDialog(
     content = "",
     title = "Thông báo",

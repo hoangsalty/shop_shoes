@@ -263,7 +263,7 @@ class Functions
         return $result;
     }
     /* Upload images */
-    public function uploadImage($file = '', $folder = '', $newname = '')
+    public function uploadImage($file = '', $folder = '')
     {
         if (isset($_FILES[$file]) && !$_FILES[$file]['error']) {
             $postMaxSize = ini_get('post_max_size');
@@ -277,23 +277,22 @@ class Functions
 
             $ext = explode('.', $_FILES[$file]['name']);
             $ext = strtolower(end($ext));
-            $allowed_ext = ".jpg|.gif|.png|.jpeg|.gif";
+            $allowed_ext = ".jpg|.png|.jpeg";
             if (strpos($allowed_ext, $ext) === false) {
                 echo ('Chỉ hỗ trợ upload file dạng ' . $allowed_ext);
                 return false;
             }
 
             $name = basename($_FILES[$file]['name'], '.' . $ext);
-            if ($newname == '' && file_exists($folder . $_FILES[$file]['name']))
+            if (file_exists($folder . $_FILES[$file]['name'])) {
                 for ($i = 0; $i < 100; $i++) {
                     if (!file_exists($folder . $name . $i . '.' . $ext)) {
                         $_FILES[$file]['name'] = $name . $i . '.' . $ext;
                         break;
                     }
                 }
-            else {
-                $_FILES[$file]['name'] = $newname . '.' . $ext;
             }
+
             if (!copy($_FILES[$file]["tmp_name"], $folder . $_FILES[$file]['name'])) {
                 if (!move_uploaded_file($_FILES[$file]["tmp_name"], $folder . $_FILES[$file]['name'])) {
                     return false;
@@ -302,7 +301,6 @@ class Functions
 
             return $_FILES[$file]['name'];
         }
-        return false;
     }
     /* Get image */
     public function getImage($data = array())

@@ -260,21 +260,8 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-comments"></i>
-                        <p>Quản lý đánh giá</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file-signature"></i>
                         <p>Quản lý liên hệ</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-industry"></i>
-                        <p>Quản lý nhập hàng</p>
                     </a>
                 </li>
 

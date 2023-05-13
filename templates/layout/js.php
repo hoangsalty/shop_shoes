@@ -21,9 +21,11 @@
 <script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/jquery.datetimepicker.min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/datetimepicker/php-date-formatter.min.js"></script>
-
 <script type="text/javascript" src="<?= $configBase ?>assets/js/jquery.nicescroll.min.js"></script>
 
+<script type="text/javascript" src="<?= $configBase ?>assets/fileuploader/jquery.fileuploader.min.js"></script>
+
+<script type="text/javascript" src="<?= $configBase ?>assets/fancybox/fancybox.js"></script>
 
 <script type="text/javascript" src="<?= $configBase ?>assets/js/functions.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/apps.js"></script>
