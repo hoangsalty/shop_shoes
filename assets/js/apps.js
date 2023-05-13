@@ -1,3 +1,143 @@
+FRAMEWORK.Comments = function () {
+  var wrapper = $('#form-comment');
+  var wrapperLists = wrapper.find('.comment-lists');
+
+  wrapper.on('click', 'i.fa-star', function () {
+    $this = $(this);
+
+    var value = $this.data('value');
+    $this.parents('.review-rating-star').find('input').attr('value', value);
+
+    var onStar = parseInt($this.data('value'));
+    var stars = $this.parent().children('i');
+
+    for (i = 0; i < stars.length; i++) {
+      $(stars[i]).removeClass('star-not-empty');
+    }
+
+    for (i = 0; i < onStar; i++) {
+      $(stars[i]).addClass('star-not-empty');
+    }
+
+    return false;
+  });
+
+  if (isExist($('#review-file-photo'))) {
+    $('#review-file-photo').getEvali({
+      limit: 3,
+      maxSize: 30,
+      extensions: ['jpg', 'png', 'jpeg', 'JPG', 'PNG', 'JPEG', 'Png'],
+      editor: false,
+      addMore: true,
+      enableApi: false,
+      dragDrop: true,
+      changeInput: '<div class="review-fileuploader">' +
+        '<div class=review-fileuploader-caption><strong>${captions.feedback}</strong></div>' +
+        '<div class="review-fileuploader-text mx-3">${captions.or}</div>' +
+        '<div class="review-fileuploader-button btn btn-sm btn-primary text-capitalize font-weight-500 py-2 px-3">${captions.button}</div></div>',
+      theme: 'dragdrop',
+      captions: {
+        feedback: '(Kéo thả ảnh vào đây)',
+        or: '-hoặc-',
+        button: 'Chọn ảnh'
+      },
+      thumbnails: {
+        popup: false,
+        canvasImage: false
+      },
+      dialogs: {
+        alert: function (e) {
+          return notifyDialog(e);
+        },
+        confirm: function (e, t) {
+          $.confirm({
+            title: 'Thông báo',
+            icon: 'fas fa-exclamation-triangle',
+            type: 'orange',
+            content: e,
+            backgroundDismiss: true,
+            animationSpeed: 600,
+            animation: 'zoom',
+            closeAnimation: 'scale',
+            typeAnimated: true,
+            animateFromElement: false,
+            autoClose: 'cancel|3000',
+            escapeKey: 'cancel',
+            buttons: {
+              success: {
+                text: 'Đồng ý',
+                btnClass: 'btn-sm btn-warning',
+                action: function () {
+                  t();
+                }
+              },
+              cancel: {
+                text: 'Hủy',
+                btnClass: 'btn-sm btn-danger'
+              }
+            }
+          });
+        }
+      },
+      afterSelect: function () { },
+      onEmpty: function () { },
+      onRemove: function () { }
+    });
+  }
+
+  $(wrapper).submit(function (e) {
+    e.preventDefault();
+    $this = $(this);
+    var form = $this;
+    var formData = new FormData(form[0]);
+    var responseEle = form.find('.response-review');
+
+    var stars = $(this).find('#review-star');
+    var content = $(this).find('#review-content');
+    var amountError = 0;
+    if (isEmpty(stars.val())) {
+      responseEle.append('<div class="alert alert-danger">Vui lòng chọn đánh giá</div>');
+      amountError += 1;
+    }
+    if (isEmpty(content.val())) {
+      responseEle.append('<div class="alert alert-danger">Vui lòng nhập nội dung đánh giá</div>');
+      amountError += 1;
+    }
+
+    if (amountError > 0) {
+      return false;
+    }
+    $.ajax({
+      url: 'api/comment.php',
+      method: 'POST',
+      enctype: 'multipart/form-data',
+      dataType: 'json',
+      data: formData,
+      async: false,
+      processData: false,
+      contentType: false,
+      cache: false,
+      beforeSend: function (e) {
+        holdonOpen();
+        responseEle.html('');
+      },
+      error: function (e) {
+        holdonClose();
+        notifyDialog('Hệ thống bị lỗi. Vui lòng thử lại sau.', 'Thông báo', 'fas fa-exclamation-triangle', 'red');
+      },
+      success: function (response) {
+        form.trigger('reset');
+        holdonClose();
+        notifyDialog('Bình luận sẽ được hiển thị sau khi được Bản Quản Trị kiểm duyệt', 'Bình luận thành công', 'fa-solid fa-check', 'green');
+
+        setTimeout(function () {
+          location.reload();
+        }, 3000);
+      }
+    });
+  });
+}
+
 FRAMEWORK.PopupLogin = function () {
   $('#form-user-login').submit(function (e) {
     e.preventDefault();
@@ -573,4 +713,5 @@ $(document).ready(function () {
   FRAMEWORK.Random();
   FRAMEWORK.PopupLogin();
   FRAMEWORK.PopupRegister();
+  FRAMEWORK.Comments();
 });

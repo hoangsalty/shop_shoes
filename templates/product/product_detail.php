@@ -110,7 +110,8 @@
                     <div class="tab-pane fade show autoHeight active" id="info-pro-detail" role="tabpanel">
                         <?= $func->decodeHtmlChars($rowDetail['content']) ?>
                     </div>
-                    <div class="tab-pane fade" id="review-pro-detail" role="tabpanel">
+                    <div class="tab-pane fade autoHeight" id="review-pro-detail" role="tabpanel">
+                        <?php include TEMPLATE . "product/comment.php" ?>
                     </div>
                 </div>
             </div>

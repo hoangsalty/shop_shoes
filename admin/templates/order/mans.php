@@ -169,7 +169,7 @@ $linkDelete = "index.php?com=order&act=delete";
                 <?php } else { ?>
                     <tbody>
                         <?php for ($i = 0; $i < count($items); $i++) { ?>
-                            <tr>
+                            <tr class="order_table">
                                 <td class="align-middle">
                                     <div class="custom-control custom-checkbox my-checkbox">
                                         <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?= $items[$i]['id'] ?>" value="<?= $items[$i]['id'] ?>">
@@ -190,7 +190,7 @@ $linkDelete = "index.php?com=order&act=delete";
                                 <td class="align-middle">
                                     <span class="text-danger font-weight-bold"><?= $func->formatMoney($items[$i]['total_price']) ?></span>
                                 </td>
-                                <td class="align-middle">
+                                <td class="align-middle order_status">
                                     <?php if ($items[$i]['order_status'] == 'moidat') { ?>
                                         <span class="badge bg-primary">Mới đặt</span>
                                     <?php } else if ($items[$i]['order_status'] == 'daxacnhan') { ?>
@@ -204,6 +204,7 @@ $linkDelete = "index.php?com=order&act=delete";
                                     <?php } ?>
                                 </td>
                                 <td class="align-middle text-center text-md text-nowrap">
+                                    <a class="text-success update-order mr-2" href="javascript:void(0)" data-id="<?= $items[$i]['id'] ?>" data-table="table_order" data-newstatus="daxacnhan" title="Xác nhận"><i class="fas fa-check-square"></i></a>
                                     <a class="text-primary mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
                                     <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="Xóa"><i class="fas fa-trash-alt"></i></a>
                                 </td>

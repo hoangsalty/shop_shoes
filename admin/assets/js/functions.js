@@ -536,7 +536,7 @@ function actionOrder(url) {
 
     listid = listid.substr(1);
     if (listid) url += '&listid=' + listid;
-    if (order_status) url += '&order_status=' + order_status;
+    if (order_status) url += '&status=' + order_status;
     if (order_payment) url += '&order_payment=' + order_payment;
     if (order_date) url += '&order_date=' + order_date;
     if (range_price) url += '&range_price=' + range_price;

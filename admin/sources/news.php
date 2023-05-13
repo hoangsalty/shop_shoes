@@ -160,8 +160,7 @@ function saveNew()
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
-                $file_name = $func->uploadName($_FILES["file"]["name"]);
-                if ($photo = $func->uploadImage("file", UPLOAD_NEWS, $file_name)) {
+                if ($photo = $func->uploadImage("file", UPLOAD_NEWS)) {
                     $row = $d->rawQueryOne("select id, photo from table_news where id = ? limit 0,1", array($id));
                     if (!empty($row)) {
                         unlink(UPLOAD_NEWS . $row['photo']);
@@ -191,8 +190,7 @@ function saveNew()
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
-                $file_name = $func->uploadName($_FILES['file']["name"]);
-                if ($photo = $func->uploadImage("file", UPLOAD_NEWS, $file_name)) {
+                if ($photo = $func->uploadImage("file", UPLOAD_NEWS)) {
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id_insert);
                     $d->update('table_news', $photoUpdate);
