@@ -43,10 +43,10 @@ $requick = array(
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
     /* Thư viện ảnh */
-    // array("tbl" => "product", "field" => "id", "source" => "product", "com" => "thu-vien-anh", "type" => "thu-vien-anh", "menu" => true),
+    array("field" => "id", "source" => "album", "com" => "thu-vien-anh"),
 
     /* Video */
-    // array("tbl" => "photo", "field" => "id", "source" => "video", "com" => "video"),
+    array("field" => "id", "source" => "video", "com" => "video"),
 
     /* Bài viết */
     array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tin-tuc"),
@@ -101,6 +101,13 @@ switch ($com) {
         $template = isset($_GET['id']) ? "product/product_detail" : "product/product";
         $type = $com;
         $titleMain = "Sản phẩm";
+        break;
+
+    case 'thu-vien-anh':
+        $source = "album";
+        $template = isset($_GET['id']) ? "album/album_detail" : "album/album";
+        $type = $com;
+        $titleMain = "Thư viện ảnh";
         break;
 
     case 'tim-kiem':
