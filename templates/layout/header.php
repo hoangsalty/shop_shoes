@@ -22,7 +22,7 @@
                             <i class="fas fa-sign-in-alt"></i>
                             <span>Đăng nhập</span>
                         </a>
-                        <a href="account/dang-ky">
+                        <a href="javascript::void()" type="button" data-toggle="modal" data-target="#popup-register">
                             <i class="fas fa-user-plus"></i>
                             <span>Đăng ký</span>
                         </a>

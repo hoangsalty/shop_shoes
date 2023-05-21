@@ -274,8 +274,7 @@ function saveUser()
                 /* Photo */
                 if ($func->hasFile("file")) {
                     $photoUpdate = array();
-                    $file_name = $func->uploadName($_FILES["file"]["name"]);
-                    if ($photo = $func->uploadImage("file", UPLOAD_USER, $file_name)) {
+                    if ($photo = $func->uploadImage("file", UPLOAD_USER)) {
                         $row = $d->rawQueryOne("select id, photo from table_user where id = ? limit 0,1", array($id));
                         if (!empty($row) and !empty($row['photo'])) {
                             unlink(UPLOAD_USER . $row['photo']);
@@ -310,8 +309,7 @@ function saveUser()
                 /* Photo */
                 if ($func->hasFile("file")) {
                     $photoUpdate = array();
-                    $file_name = $func->uploadName($_FILES['file']["name"]);
-                    if ($photo = $func->uploadImage("file", UPLOAD_USER, $file_name)) {
+                    if ($photo = $func->uploadImage("file", UPLOAD_USER)) {
                         $photoUpdate['photo'] = $photo;
                         $d->where('id', $id_insert);
                         $d->update('table_user', $photoUpdate);

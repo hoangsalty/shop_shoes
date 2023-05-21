@@ -1,6 +1,7 @@
 <?php
 $linkMan = "index.php?com=order&act=man";
-$linkSave = "index.php?com=order&act=save";
+$linkSave = "index.php?com=order&act=save&id=" . $id;
+
 ?>
 <!-- Content Header -->
 <section class="content-header text-sm">
@@ -52,6 +53,14 @@ $linkSave = "index.php?com=order&act=save";
                 <div class="form-group col-md-3 col-sm-6">
                     <label>Địa chỉ:</label>
                     <p><?= @$item['address'] ?></p>
+                </div>
+                <div class="form-group col-md-3 col-sm-6">
+                    <label>Khu vực giao:</label>
+                    <p>
+                        <?= $func->getInfoDetail('name', 'ward', @$item['ward'])['name'] ?>,
+                        <?= $func->getInfoDetail('name', 'district', @$item['district'])['name'] ?>,
+                        <?= $func->getInfoDetail('name', 'city', @$item['city'])['name'] ?>
+                    </p>
                 </div>
                 <?php if (isset($config['order']['ship']) && $config['order']['ship'] == true) { ?>
                     <div class="form-group col-md-3 col-sm-6">
@@ -129,11 +138,11 @@ $linkSave = "index.php?com=order&act=save";
                                         <?php if ($v['id_size'] != '' || $v['id_size'] != '') { ?>
                                             <p class="mb-0">
                                                 <?php if ($v['id_size'] != '') { ?>
-                                                    <?php $size = $func->getInfoDetail('name', 'size', @$v['id_size']);?>
-                                                    <span class="pr-2">Size: <b><?=$size['name']?></b></span>
+                                                    <?php $size = $func->getInfoDetail('name', 'size', @$v['id_size']); ?>
+                                                    <span class="pr-2">Size: <b><?= $size['name'] ?></b></span>
                                                 <?php } ?>
                                                 <?php if ($v['id_color'] != '') { ?>
-                                                    <?php $color = $func->getInfoDetail('name', 'color', @$v['id_color']);?>
+                                                    <?php $color = $func->getInfoDetail('name', 'color', @$v['id_color']); ?>
                                                     <span>Màu: <b><?= $color['name'] ?></b> </span>
                                                 <?php } ?>
                                             </p>
@@ -141,13 +150,13 @@ $linkSave = "index.php?com=order&act=save";
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="price-cart-detail">
-                                                <span class="price-new-cart-detail"><?= $func->formatMoney($v['price']) ?></span>
+                                            <span class="price-new-cart-detail"><?= $func->formatMoney($v['price']) ?></span>
                                         </div>
                                     </td>
                                     <td class="align-middle text-right"><?= $v['quantity'] ?></td>
                                     <td class="align-middle text-right">
                                         <div class="price-cart-detail">
-                                                <span class="price-new-cart-detail"><?= $func->formatMoney($v['price'] * $v['quantity']) ?></span>
+                                            <span class="price-new-cart-detail"><?= $func->formatMoney($v['price'] * $v['quantity']) ?></span>
                                         </div>
                                     </td>
                                 </tr>

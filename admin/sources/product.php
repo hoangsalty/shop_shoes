@@ -107,12 +107,22 @@ switch ($act) {
 /* View man */
 function viewProducts()
 {
-    global $d, $func, $strUrl, $curPage, $paging, $items;
+    global $d, $func, $strUrl, $curPage, $paging, $items, $comment;
     $where = "";
     $idlist = (isset($_REQUEST['id_list'])) ? htmlspecialchars($_REQUEST['id_list']) : 0;
     $idbrand = (isset($_REQUEST['id_brand'])) ? htmlspecialchars($_REQUEST['id_brand']) : 0;
+    $comment_status = (!empty($_REQUEST['comment_status'])) ? htmlspecialchars($_REQUEST['comment_status']) : '';
+
     if ($idlist) $where .= " and id_list=$idlist";
     if ($idbrand) $where .= " and id_brand=$idbrand";
+
+    if ($comment_status == 'new') {
+        $comment = $d->rawQuery("select distinct id_parent from table_comment where find_in_set('new-admin',status)", array());
+        $idcomment = (!empty($comment)) ? $func->joinCols($comment, 'id_parent') : 0;
+        $where .= " and id in ($idcomment)";
+    }
+    
+
     if (isset($_REQUEST['keyword'])) {
         $keyword = htmlspecialchars($_REQUEST['keyword']);
         $where .= " and (name LIKE '%$keyword%')";
@@ -126,6 +136,8 @@ function viewProducts()
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=man" . $strUrl;
     $paging = $func->pagination($total, $perPage, $curPage, $url);
+    /* Comment */
+    $comment = new Comments($d, $func);
 }
 /* Edit man */
 function editProduct()
@@ -245,8 +257,7 @@ function saveProduct()
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
-                $file_name = $func->uploadName($_FILES["file"]["name"]);
-                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT, $file_name)) {
+                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
                     $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
                     if (!empty($row)) {
                         unlink(UPLOAD_PRODUCT . $row['photo']);
@@ -316,8 +327,7 @@ function saveProduct()
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
-                $file_name = $func->uploadName($_FILES['file']["name"]);
-                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT, $file_name)) {
+                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id_insert);
                     $d->update('table_product', $photoUpdate);
@@ -482,8 +492,7 @@ function saveList()
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
-                $file_name = $func->uploadName($_FILES["file"]["name"]);
-                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT, $file_name)) {
+                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
                     $row = $d->rawQueryOne("select id, photo from table_product_list where id = ? limit 0,1", array($id));
                     if (!empty($row)) {
                         unlink(UPLOAD_PRODUCT . $row['photo']);
@@ -513,8 +522,7 @@ function saveList()
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
-                $file_name = $func->uploadName($_FILES['file']["name"]);
-                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT, $file_name)) {
+                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id_insert);
                     $d->update('table_product_list', $photoUpdate);
@@ -679,8 +687,7 @@ function saveBrand()
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
-                $file_name = $func->uploadName($_FILES["file"]["name"]);
-                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT, $file_name)) {
+                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
                     $row = $d->rawQueryOne("select id, photo from table_product_brand where id = ? limit 0,1", array($id));
                     if (!empty($row)) {
                         unlink(UPLOAD_PRODUCT . $row['photo']);
@@ -710,8 +717,7 @@ function saveBrand()
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
-                $file_name = $func->uploadName($_FILES['file']["name"]);
-                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT, $file_name)) {
+                if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id_insert);
                     $d->update('table_product_brand', $photoUpdate);

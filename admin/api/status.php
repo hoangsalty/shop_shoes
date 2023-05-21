@@ -9,6 +9,7 @@ if (!empty($_POST['id'])) {
     $status_detail = $d->rawQueryOne("select status from $table where id = $id limit 0,1");
     
     $status_array = (!empty($status_detail['status'])) ? explode(',', $status_detail['status']) : array();
+    
     if (array_search($attr, $status_array) !== false) {
         $key = array_search($attr, $status_array);
         unset($status_array[$key]);

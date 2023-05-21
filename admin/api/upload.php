@@ -22,7 +22,6 @@ $_FILES['file'] = array(
     'error' => $myFile['error'][0],
     'size' => $myFile['size'][0]
 );
-$file_name = $func->uploadName($_FILES['file']['name']);
 
 /* Xử lý lưu image */
 $max_numb = $d->rawQueryOne("select max(numb) as max_numb from $table where id_parent = ?", array($id));
@@ -41,7 +40,7 @@ if ($d->insert($table, $data_file)) {
     if ($func->hasFile("file")) {
         $photoUpdate = array();
 
-        if ($photo = $func->uploadImage("file", '../' . UPLOAD_PRODUCT, $file_name)) {
+        if ($photo = $func->uploadImage("file", '../' . UPLOAD_PRODUCT)) {
             $photoUpdate['photo'] = $photo;
             $d->where('id', $id_insert);
             $d->update($table, $photoUpdate);

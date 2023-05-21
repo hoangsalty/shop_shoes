@@ -36,18 +36,6 @@
             <input type="password" class="form-control text-sm" id="repassword" name="repassword" placeholder="Nhập lại mất khẩu" required>
             <div class="invalid-feedback">Vui lòng nhập lại mật khẩu</div>
         </div>
-        <label>Giới tính</label>
-        <div class="input-group input-user">
-            <?php $flashGender = $flash->get('gender'); ?>
-            <div class="radio-user custom-control custom-radio">
-                <input type="radio" id="nam" name="gender" class="custom-control-input" value="1" <?= ($flashGender == 1) ? 'checked' : '' ?> required>
-                <label class="custom-control-label" for="nam">Nam</label>
-            </div>
-            <div class="radio-user custom-control custom-radio">
-                <input type="radio" id="nu" name="gender" class="custom-control-input" value="2" <?= ($flashGender == 2) ? 'checked' : '' ?> required>
-                <label class="custom-control-label" for="nu">Nữ</label>
-            </div>
-        </div>
         <label>Ngày sinh</label>
         <div class="input-group input-user">
             <div class="input-group-prepend">

@@ -15,6 +15,7 @@
 <link href="assets/filer/jquery.filer-dragdropbox-theme.css" rel="stylesheet">
 <link href="assets/sumoselect/sumoselect.css" rel="stylesheet">
 <link href="assets/rangeSlider/ion.rangeSlider.css" rel="stylesheet">
+<link href="assets/fancybox/fancybox.css" rel="stylesheet">
 <link href="assets/css/login-style.css" rel="stylesheet">
 <link href="assets/css/adminlte.css" rel="stylesheet">
 <link href="assets/css/adminlte-style.css" rel="stylesheet">
