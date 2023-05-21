@@ -40,7 +40,7 @@ $config['news']['height'] = 270;
 $config['static']['width'] = 270;
 $config['static']['height'] = 270;
 /*Ảnh album*/
-$config['album']['width'] = 270;
+$config['album']['width'] = 285;
 $config['album']['height'] = 270;
 /*Ảnh slideshow*/
 $config['slideshow']['width'] = 895;

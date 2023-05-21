@@ -397,7 +397,7 @@
   width: 13px;
   height: 13px;
   background-repeat: no-repeat;
-  background-image: url(../images/check-cart.png)
+  background-image: url(../images/check-cart.png);
 }
 
 .color-pro-detail.active:after {
@@ -408,7 +408,7 @@
   width: 13px;
   height: 13px;
   background-repeat: no-repeat;
-  background-image: url(../images/check-cart.png)
+  background-image: url(../images/check-cart.png);
 }
 
 .cart-fixed {
@@ -416,7 +416,7 @@
   right: 20px;
   bottom: 250px;
   z-index: 997;
-  background: #4b4f56;
+  background: #001973;
   width: 50px;
   height: 50px;
   text-align: center;
@@ -430,11 +430,11 @@
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center
+  justify-content: center;
 }
 
 .cart-fixed i {
-  font-size: 20px
+  font-size: 20px;
 }
 
 .cart-fixed span {
@@ -448,5 +448,5 @@
   text-align: center;
   line-height: 25px;
   font-size: 11px;
-  border-radius: 100%
+  border-radius: 100%;
 }
