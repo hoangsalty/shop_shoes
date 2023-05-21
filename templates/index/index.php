@@ -41,7 +41,7 @@
 <?php } ?>
 
 <?php if (count($albumnb)) { ?>
-    <section class="wrap-album">
+    <section class="wrap-album spacing">
         <div class="wrap-content">
             <div class="title-main">
                 <span>Thư viện ảnh</span>

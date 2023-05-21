@@ -12,7 +12,7 @@
     } else { ?>
         <div class="col-12">
             <div class="alert alert-warning w-100" role="alert">
-                <strong><?= khongtimthayketqua ?></strong>
+                <strong>Không tìm thấy kết quả</strong>
             </div>
         </div>
     <?php } ?>
