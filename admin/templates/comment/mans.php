@@ -18,7 +18,7 @@ $linkMan = "index.php?com=comment";
 <section class="content">
     <div class="card-footer text-sm sticky-top">
         <a class="btn btn-sm bg-gradient-danger mr-1" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
-        <a class="btn btn-sm bg-gradient-primary mr-1" href="<?= $configBase . $item['slugvi'] ?>" target="_blank" title="<?= $item['name'] ?>"><i class="far fa-eye mr-1"></i>Xem chi tiết</a>
+        <a class="btn btn-sm bg-gradient-primary mr-1" href="<?= $configBase . $item['slug'] ?>" target="_blank" title="<?= $item['name'] ?>"><i class="far fa-eye mr-1"></i>Xem chi tiết</a>
     </div>
 
     <div class="row">
