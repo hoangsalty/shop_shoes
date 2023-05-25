@@ -9,7 +9,7 @@ $router->map('GET', ADMIN, function () {
     $this->redirect($config['database']['url'] . ADMIN . "/index.php");
     exit;
 });
-$router->map('GET|POST', '', 'index', 'home');
+$router->map('GET|POST', '', 'index', '');
 $router->map('GET|POST', 'index.php', 'index', 'index');
 $router->map('GET|POST', '[a:com]', 'allpage', 'show');
 $router->map('GET|POST', '[a:com]/[a:action]', 'account', 'account');
@@ -130,6 +130,7 @@ switch ($com) {
 
     case 'account':
         $source = "user";
+        $titleMain = "Tài khoản";
         break;
 
     default:

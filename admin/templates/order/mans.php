@@ -204,7 +204,10 @@ $linkDelete = "index.php?com=order&act=delete";
                                     <?php } ?>
                                 </td>
                                 <td class="align-middle text-center text-md text-nowrap">
-                                    <a class="text-success update-order mr-2" href="javascript:void(0)" data-id="<?= $items[$i]['id'] ?>" data-table="table_order" data-newstatus="daxacnhan" title="Xác nhận"><i class="fas fa-check-square"></i></a>
+                                    <?php $arr = explode(',', $items[$i]['order_status']);
+                                    if (in_array('moidat', $arr)) { ?>
+                                        <a class="text-success update-order mr-2" href="javascript:void(0)" data-id="<?= $items[$i]['id'] ?>" data-table="table_order" data-newstatus="daxacnhan" title="Xác nhận"><i class="fas fa-check-square"></i></a>
+                                    <?php } ?>
                                     <a class="text-primary mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
                                     <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="Xóa"><i class="fas fa-trash-alt"></i></a>
                                 </td>
