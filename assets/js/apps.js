@@ -210,7 +210,6 @@ FRAMEWORK.PopupLogin = function () {
     });
   });
 };
-<<<<<<< HEAD
 
 FRAMEWORK.PopupRegister = function () {
   $("#form-user-register").submit(function (e) {
@@ -333,8 +332,6 @@ FRAMEWORK.PopupRegister = function () {
     });
   });
 };
-=======
->>>>>>> main
 
 FRAMEWORK.PopupRegister = function () {
   $("#form-user-register").submit(function (e) {
@@ -700,17 +697,34 @@ FRAMEWORK.Carousel = function () {
 };
 
 FRAMEWORK.Pagings = function () {
-  loadPaging("api/product.php?perpage=8", ".page_splist", 0);
-  $(".list_splist a").click(function () {
-    $(".list_splist a").removeClass("active");
-    $(this).addClass("active");
-    var idList = $(this).data("list");
-    loadPaging(
-      "api/product.php?idList=" + idList + "&perpage=8",
-      ".page_splist",
-      0
-    );
-  });
+  /* Products */
+  if (isExist($(".paging-product"))) {
+    loadPaging("api/product.php?perpage=8", ".paging-product");
+  }
+
+  /* Categories */
+  if (isExist($(".paging-product-category"))) {
+    $(".paging-product-category").each(function () {
+      var list = $(this).data("list");
+      loadPaging(
+        "api/product.php?perpage=8&idList=" + list,
+        ".paging-product-category-" + list
+      );
+    });
+  }
+  if (isExist($(".page_splist"))) {
+    loadPaging("api/product.php?perpage=8", ".page_splist", 0);
+    $(".list_splist a").click(function () {
+      $(".list_splist a").removeClass("active");
+      $(this).addClass("active");
+      var idList = $(this).data("list");
+      loadPaging(
+        "api/product.php?idList=" + idList + "&perpage=8",
+        ".page_splist",
+        0
+      );
+    });
+  }
 };
 
 FRAMEWORK.Bootstrap = function () {
@@ -937,9 +951,6 @@ $(document).ready(function () {
   FRAMEWORK.PopupLogin();
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
-<<<<<<< HEAD
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
-=======
->>>>>>> main
 });

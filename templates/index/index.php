@@ -1,6 +1,30 @@
+<div class="wrap-about spacing">
+    <div class="wrap-content">
+        <div class="flex-about d-flex justify-content-between align-items-center flex-wrap">
+            <div class="left">
+                <a class="image-about scale-img transition" href="gioi-thieu" title="Giới thiệu">
+                    <?= $func->getImage(['class' => '', 'width' => $config['about']['width'], 'height' => $config['about']['height'], 'upload' => UPLOAD_NEWS_L, 'image' => $static['photo'], 'alt' => $static['name']]) ?>
+                </a>
+            </div>
+            <div class="right">
+                <div class="main-about">
+                    <h3 class="name"><?= $static['name'] ?></h3>
+                    <div class="desc text-split"><?= $static['desc'] ?></div>
+                    <a class="btn-xemthem transition" href="gioi-thieu" title="Giới thiệu">
+                        Xem thêm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php if (!empty($productlist)) { ?>
     <section class="wrap-categories spacing">
         <div class="wrap-content">
+            <div class="title-main">
+                <span>Loại sản phẩm</span>
+            </div>
             <div class="categories__slider owl-carousel control-owl">
                 <?php foreach ($productlist as $k => $v) { ?>
                     <div>
@@ -20,6 +44,30 @@
         </div>
     </section>
 <?php } ?>
+
+<?php if (count($product)) { ?>
+    <div class="wrap-product spacing">
+        <div class="wrap-content">
+            <div class="title-main">
+                <span>Sản phẩm nổi bật</span>
+            </div>
+            <div class="paging-product"></div>
+        </div>
+    </div>
+<?php } ?>
+
+<?php if (count($productlist)) {
+    foreach ($productlist as $vlist) { ?>
+        <div class="wrap-product spacing">
+            <div class="wrap-content">
+                <div class="title-main">
+                    <span><?= $vlist['name'] ?></span>
+                </div>
+                <div class="paging-product-category paging-product-category-<?= $vlist['id'] ?>" data-list="<?= $vlist['id'] ?>"></div>
+            </div>
+        </div>
+<?php }
+} ?>
 
 <?php if (count($product)) { ?>
     <section class="wrap-product spacing">
