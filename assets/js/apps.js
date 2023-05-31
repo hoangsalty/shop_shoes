@@ -210,6 +210,7 @@ FRAMEWORK.PopupLogin = function () {
     });
   });
 };
+<<<<<<< HEAD
 
 FRAMEWORK.PopupRegister = function () {
   $("#form-user-register").submit(function (e) {
@@ -332,6 +333,8 @@ FRAMEWORK.PopupRegister = function () {
     });
   });
 };
+=======
+>>>>>>> main
 
 FRAMEWORK.PopupRegister = function () {
   $("#form-user-register").submit(function (e) {
@@ -934,6 +937,9 @@ $(document).ready(function () {
   FRAMEWORK.PopupLogin();
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
+<<<<<<< HEAD
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
+=======
+>>>>>>> main
 });

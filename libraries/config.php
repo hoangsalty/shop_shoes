@@ -14,18 +14,6 @@ $config = array(
         'port' => 3306,
         'charset' => 'utf8mb4'
     ),
-    'website' => array(
-        'video' => array(
-            'extension' => array('mp4'),
-            'poster' => array(
-                'width' => 700,
-                'height' => 610,
-                'extension' => '.jpg|.png|.jpeg'
-            ),
-            'allow-size' => '100Mb',
-            'max-size' => 100 * 1024 * 1024
-        ),
-    ),
 );
 /*Ảnh Categories*/
 $config['product_list']['width'] = 285;

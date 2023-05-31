@@ -7,7 +7,6 @@ class Comments
     public $star;
     public $lists = [];
     public $params = [];
-    public $hasMedia;
     private $d;
     private $func;
     private $id_parent;
@@ -18,7 +17,6 @@ class Comments
     {
         $this->d = $d;
         $this->func = $func;
-        $this->hasMedia = true;
 
         if (!empty($id)) {
             $this->id_parent = $id;
