@@ -4,7 +4,11 @@
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
             <div class="image">
-                <?= $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $_SESSION['account']['photo'], 'alt' => $_SESSION['account']['fullname']]) ?>
+                <?php
+                            $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($_SESSION['account']['id']));
+
+                 echo $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo'], 'alt' => $_SESSION['account']['fullname']]) 
+                ?>
             </div>
             <div class="info">
                 <a href="#" class="d-block">

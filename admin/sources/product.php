@@ -350,7 +350,7 @@ function deleteProduct()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("update table_product set date_deleted = ? where id = ?", array(time(), $id));
+            $d->rawQuery("delete from table_product where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man&page=" . $curPage . $strUrl);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
@@ -362,7 +362,7 @@ function deleteProduct()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("update table_product set date_deleted = ? where id = ?", array(time(), $id));
+                $d->rawQuery("delete from table_product where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man&page=" . $curPage . $strUrl);
@@ -545,7 +545,7 @@ function deleteList()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id, photo from table_product_list where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("update table_product_list set date_deleted = ? where id = ?", array(time(), $id));
+            $d->rawQuery("delete from table_product_list where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl, false);
@@ -557,7 +557,7 @@ function deleteList()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id, photo from table_product_list where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("update table_product_list set date_deleted = ? where id = ?", array(time(), $id));
+                $d->rawQuery("delete from table_product_list where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl);
@@ -740,7 +740,7 @@ function deleteBrand()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id, photo from table_product_brand where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("update table_product_brand set date_deleted = ? where id = ?", array(time(), $id));
+            $d->rawQuery("delete from table_product_brand where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl, false);
@@ -752,7 +752,7 @@ function deleteBrand()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id, photo from table_product_brand where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("update table_product_brand set date_deleted = ? where id = ?", array(time(), $id));
+                $d->rawQuery("delete from table_product_brand where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl);
@@ -891,7 +891,7 @@ function deleteSize()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id from table_size where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("update table_size set date_deleted = ? where id = ?", array(time(), $id));
+            $d->rawQuery("delete from table_size where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl, false);
@@ -903,7 +903,7 @@ function deleteSize()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id from table_size where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("update table_size set date_deleted = ? where id = ?", array(time(), $id));
+                $d->rawQuery("delete from table_size where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl);
@@ -1046,7 +1046,7 @@ function deleteColor()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id from table_color where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("update table_color set date_deleted = ? where id = ?", array(time(), $id));
+            $d->rawQuery("delete from table_color where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl, false);
@@ -1058,7 +1058,7 @@ function deleteColor()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id from table_color where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("update table_color set date_deleted = ? where id = ?", array(time(), $id));
+                $d->rawQuery("delete from table_color where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl);

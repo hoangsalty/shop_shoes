@@ -45,10 +45,6 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.top-cart {
-  border-right: 1px solid #eee;
-}
-
 .procart {
   padding: 20px 10px;
   border: 1px solid #eee;
@@ -80,6 +76,7 @@
   font-size: 14px;
   color: #000;
   display: block;
+  font-weight: bold;
 }
 
 .name-procart a:hover {
@@ -222,6 +219,7 @@
 
 .total-procart p:last-child {
   color: #001973;
+  font-weight: bold;
 }
 
 .section-cart {

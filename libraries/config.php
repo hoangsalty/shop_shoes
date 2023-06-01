@@ -14,6 +14,12 @@ $config = array(
         'port' => 3306,
         'charset' => 'utf8mb4'
     ),
+
+    "momo" => array(
+        "partnerCode" => "MOMOBKUN20180529",
+        "accessKey" => "klm05TvNBzhg7h7j",
+        "secretKey" => "at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa"
+    ),
 );
 /*Ảnh Categories*/
 $config['product_list']['width'] = 285;

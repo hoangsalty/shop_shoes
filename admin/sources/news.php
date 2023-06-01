@@ -213,7 +213,7 @@ function deleteNew()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id, photo from table_news where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("update table_news set date_deleted = ? where id = ?", array(time(), $id));
+            $d->rawQuery("delete from table_news where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
@@ -225,7 +225,7 @@ function deleteNew()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id, photo from table_news where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("update table_news set date_deleted = ? where id = ?", array(time(), $id));
+                $d->rawQuery("delete from table_news where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);

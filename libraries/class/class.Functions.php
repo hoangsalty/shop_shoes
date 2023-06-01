@@ -713,6 +713,16 @@ class Functions
         }
         return $row;
     }
+    public function getInfoDetailSlug($cols = '', $table = '', $slug = '')
+    {
+        global $d;
+
+        $row = array();
+        if (!empty($cols) && !empty($table) && !empty($slug)) {
+            $row = $d->rawQueryOne("select $cols from table_$table where slug = ? limit 0,1", array($slug));
+        }
+        return $row;
+    }
     /* String random */
     public function stringRandom($sokytu = 10)
     {
@@ -736,6 +746,39 @@ class Functions
             setcookie('login_account_id', "", -1, '/');
             setcookie('login_account_session', "", -1, '/');
         }
+    }
+
+    public function convertOrderStatus($status)
+    {
+        if ($status == 'moidat') return 'Mới đặt';
+        if ($status == 'daxacnhan') return 'Đã xác nhận';
+        if ($status == 'danggiaohang') return 'Đang giao hàng';
+        if ($status == 'dagiao') return 'Đã giao';
+        if ($status == 'dahuy') return 'Đã hủy';
+    }
+
+    //Momo
+    function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data)
+            )
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
+        return $result;
     }
 
     public function GetProducts($items)

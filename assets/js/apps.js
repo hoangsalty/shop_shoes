@@ -1,3 +1,39 @@
+FRAMEWORK.Momo = function () {
+  $('.btn_submit input').prop('disabled', true);
+
+  $(".form-cart")[0].onchange = function () {
+    if ($('.form-cart')[0].checkValidity() == true) {
+      $('.btn_submit input').prop('disabled', false);
+    }
+  };
+}
+
+FRAMEWORK.DatePicker = function () {
+  if (isExist($('#birthday'))) {
+    $('#birthday').datetimepicker({
+      timepicker: false,
+      format: 'd/m/Y',
+      formatDate: 'd/m/Y',
+      minDate: '01/01/1950',
+      maxDate: TIMENOW
+    });
+  }
+};
+
+FRAMEWORK.UserInfo = function () {
+  $(".container_load_info").hide();
+  $(".container_load_info.load1").show();
+
+  $(document).on('click', '.sty_list', function (event) {
+    $('.sty_list').removeClass('act');
+
+    var vitri = $(this).data('vitri');
+    $(".container_load_info").hide();
+    $(".load" + vitri).show();
+    $(this).addClass('act');
+  });
+};
+
 FRAMEWORK.Comments = function () {
   var wrapper = $("#form-comment");
   var wrapperLists = wrapper.find(".comment-lists");
@@ -80,9 +116,9 @@ FRAMEWORK.Comments = function () {
           });
         },
       },
-      afterSelect: function () {},
-      onEmpty: function () {},
-      onRemove: function () {},
+      afterSelect: function () { },
+      onEmpty: function () { },
+      onRemove: function () { },
     });
   }
 
@@ -453,9 +489,9 @@ FRAMEWORK.Carousel = function () {
     lazyLoad: "progressive",
     infinite: true,
     accessibility: true,
-    vertical: false,
-    verticalSwiping: false,
-    slidesToShow: 5,
+    vertical: true,
+    verticalSwiping: true,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -812,4 +848,7 @@ $(document).ready(function () {
   FRAMEWORK.PopupLogin();
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
+  FRAMEWORK.UserInfo();
+  FRAMEWORK.DatePicker();
+  FRAMEWORK.Momo();
 });

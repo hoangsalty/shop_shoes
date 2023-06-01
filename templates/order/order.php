@@ -98,11 +98,16 @@
                             <?php $flashPayment = $flash->get('payments'); ?>
                             <?php foreach ($payments_info as $key => $value) { ?>
                                 <div class="payments-cart custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="payments-<?= $value['id'] ?>" name="dataOrder[payments]" value="<?= $value['id'] ?>" <?= (!empty($flashPayment) && $flashPayment == $value['id']) ? 'checked' : '' ?> required>
-                                    <label class="payments-label custom-control-label" for="payments-<?= $value['id'] ?>" data-payments="<?= $value['id'] ?>"><?= $value['name'] ?></label>
-                                    <div class="payments-info payments-info-<?= $value['id'] ?> transition"><?= str_replace("\n", "<br>", $value['desc']) ?></div>
+                                    <input type="radio" class="custom-control-input" id="payments-<?= $value['slug'] ?>" name="dataOrder[payments]" value="<?= $value['slug'] ?>" <?= (!empty($flashPayment) && $flashPayment == $value['slug']) ? 'checked' : '' ?> required>
+                                    <label class="payments-label custom-control-label" for="payments-<?= $value['slug'] ?>" data-payments="<?= $value['slug'] ?>"><?= $value['name'] ?></label>
+                                    <div class="payments-info payments-info-<?= $value['slug'] ?> transition"><?= str_replace("\n", "<br>", $value['desc']) ?></div>
                                 </div>
                             <?php } ?>
+                            <div class="payments-cart custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" id="payments-momo" name="dataOrder[payments]" value="momo" <?= (!empty($flashPayment) && $flashPayment == 'momo') ? 'checked' : '' ?> required>
+                                <label class="payments-label custom-control-label" for="payments-momo" data-payments="momo">Thanh toán qua Momo</label>
+                                <div class="payments-info payments-info-momo transition"></div>
+                            </div>
                         </div>
                         <p class="title-cart">Thông tin giao hàng:</p>
                         <div class="information-cart">
@@ -153,7 +158,10 @@
                                 <textarea class="form-control text-sm" id="requirements" name="dataOrder[requirements]" placeholder="Yêu cầu khác"><?= (!empty($flash->has('requirements'))) ? $flash->get('requirements') : '' ?></textarea>
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan" value="Thanh toán" />
+
+                        <div class="btn_submit">
+                            <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan" value="Thanh toán" />
+                        </div>
                     </div>
                 </div>
             <?php } else { ?>

@@ -1850,3 +1850,11 @@ select.form-control option:disabled {
     background-color: #fffbf8;
     border: 1px solid #f9ede5;
 }
+
+.text-info.cap {
+    text-transform: capitalize;
+}
+
+.text-info.bold {
+    font-weight: bold;
+}

@@ -9,7 +9,7 @@ $breadcrumbs = $breadcr->get();
 $city = $d->rawQuery("select name, id from table_city order by id asc");
 
 /* Hình thức thanh toán */
-$payments_info = $d->rawQuery("select * from table_news where date_deleted = 0 and type = ? and find_in_set('hienthi',status) order by numb,id desc", array('hinh-thuc-thanh-toan'));
+$payments_info = $d->rawQuery("select * from table_news where type = ? and find_in_set('hienthi',status) order by numb,id desc", array('hinh-thuc-thanh-toan'));
 
 if (!empty($_POST['thanhtoan'])) {
     /* Check order */
@@ -19,7 +19,6 @@ if (!empty($_POST['thanhtoan'])) {
 
     /* Data */
     $dataOrder = (!empty($_POST['dataOrder'])) ? $_POST['dataOrder'] : null;
-
     /* Check data */
     if (!empty($dataOrder)) {
         /* Info */
@@ -40,9 +39,7 @@ if (!empty($_POST['thanhtoan'])) {
         $address = htmlspecialchars($dataOrder['address']);
 
         /* Payment */
-        $order_payment = (!empty($dataOrder['payments'])) ? htmlspecialchars($dataOrder['payments']) : 0;
-        $order_payment_data = $func->getInfoDetail('name', 'news', $order_payment);
-        $order_payment_text = $order_payment_data['name'];
+        $order_payment = (!empty($dataOrder['payments'])) ? htmlspecialchars($dataOrder['payments']) : '';
 
         /* Ship */
         $ship_data = (!empty($dataOrder['ward'])) ? $func->getInfoDetail('ship_price', "ward", $dataOrder['ward']) : array();
@@ -134,11 +131,12 @@ if (!empty($_POST['thanhtoan'])) {
     $data_donhang['city'] = $city;
     $data_donhang['district'] = $district;
     $data_donhang['ward'] = $ward;
-    
+
     /* lưu đơn hàng chi tiết */
     if ($d->insert('table_order', $data_donhang)) {
         $id_insert = $d->getLastInsertId();
 
+        //Order detail
         for ($i = 0; $i < $max; $i++) {
             $pid = $_SESSION['cart'][$i]['productid'];
             $q = $_SESSION['cart'][$i]['qty'];
@@ -166,6 +164,53 @@ if (!empty($_POST['thanhtoan'])) {
             }
             $data_donhangchitiet['quantity'] = $q;
             $d->insert('table_order_detail', $data_donhangchitiet);
+        }
+
+        //Momo
+        if ($order_payment == "momo") {
+            header('Content-type: text/html; charset=utf-8');
+
+            $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
+            $partnerCode = $config['momo']['partnerCode'];
+            $accessKey = $config['momo']['accessKey'];
+            $secretKey = $config['momo']['secretKey'];
+
+            $orderInfo = "Thanh toán qua mã QR MoMo";
+            $amount = $total_price;
+            $orderId = time() . "";
+
+            $redirectUrl = $configBase . 'momo-status';
+            $ipnUrl = $configBase . 'momo-status';
+            $requestId = time() . "";
+
+            $requestType = "payWithATM";
+            //$requestType = "captureWallet";
+
+            $extraData = $id_insert;
+
+            //before sign HMAC SHA256 signature
+            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+            $signature = hash_hmac("sha256", $rawHash, $secretKey);
+            $data = array(
+                'partnerCode' => $partnerCode,
+                'partnerName' => "Test",
+                "storeId" => "MomoTestStore",
+                'requestId' => $requestId,
+                'amount' => $amount,
+                'orderId' => $orderId,
+                'orderInfo' => $orderInfo,
+                'redirectUrl' => $redirectUrl,
+                'ipnUrl' => $ipnUrl,
+                'lang' => 'vi',
+                'extraData' => $extraData,
+                'requestType' => $requestType,
+                'signature' => $signature
+            );
+            $result = $func->execPostRequest($endpoint, json_encode($data));
+            $jsonResult = json_decode($result, true);
+
+            $func->transfer2("Di chuyển đến trang thanh toán MOMO", $jsonResult['payUrl']);
         }
 
         /* Xóa giỏ hàng */

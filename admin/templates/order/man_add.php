@@ -35,9 +35,15 @@ $linkSave = "index.php?com=order&act=save&id=" . $id;
                 </div>
                 <div class="form-group col-md-3 col-sm-6">
                     <label>Hình thức thanh toán:</label>
-                    <?php $order_payment = $func->getInfoDetail('name', 'news', @$item['order_payment']); ?>
-                    <p class="text-info"><?= $order_payment['name'] ?></p>
+                    <?php (@$item['order_payment'] == "momo") ? $order_payment['name'] = @$item['order_payment'] : $order_payment = $func->getInfoDetailSlug('name', 'news', @$item['order_payment']); ?>
+                    <p class="text-info cap"><?= $order_payment['name'] ?></p>
                 </div>
+
+                <div class="form-group col-md-3 col-sm-6">
+                    <label>Mã giao dịch (Momo):</label>
+                    <p class="text-info cap bold"><?= @$item['transId_momo'] ?></p>
+                </div>
+
                 <div class="form-group col-md-3 col-sm-6">
                     <label>Họ tên:</label>
                     <p class="font-weight-bold text-uppercase text-success"><?= @$item['fullname'] ?></p>

@@ -1,23 +1,23 @@
 <div class="product-details mb-5">
     <div class="row">
-        <div class="left-pro-detail col-lg-6 mb-4">
-            <div class="product__details__pic__right mb-1">
-                <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 400, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
-                <?php foreach ($rowDetailPhoto as $i => $v) { ?>
-                    <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 400, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
-                <?php } ?>
-            </div>
-
+        <div class="left-pro-detail col-lg-7 mb-4 row">
             <?php if (!empty($rowDetailPhoto)) { ?>
-                <div class="product__details__pic__left">
-                    <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                <div class="product__details__pic__left col-lg-3">
+                    <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 140, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
                     <?php foreach ($rowDetailPhoto as $i => $v) { ?>
-                        <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
+                        <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 140, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
                     <?php } ?>
                 </div>
             <?php } ?>
+
+            <div class="product__details__pic__right mb-1 col-lg-9">
+                <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 500, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                <?php foreach ($rowDetailPhoto as $i => $v) { ?>
+                    <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 500, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
+                <?php } ?>
+            </div>
         </div>
-        <div class="right-pro-detail col-lg-6 mb-4">
+        <div class="right-pro-detail col-lg-5 mb-4">
             <p class="title-pro-detail"><?= $rowDetail['name'] ?></p>
             <ul class="attr-pro-detail">
                 <li class="">
@@ -83,7 +83,8 @@
                     </div>
                 </li>
             </ul>
-            <div class="desc-pro-detail"><?= nl2br($func->decodeHtmlChars($rowDetail['desc'])) ?></div>
+            
+            <?php /* <div class="desc-pro-detail"><?= nl2br($func->decodeHtmlChars($rowDetail['desc'])) ?></div> */ ?>
 
             <div class="cart-pro-detail">
                 <a class="btn_addcart addcart rounded-0 mr-2" data-id="<?= $rowDetail['id'] ?>" data-action="addnow">

@@ -131,6 +131,10 @@ switch ($com) {
     case 'account':
         $source = "user";
         $titleMain = "Tài khoản";
+
+    case 'momo-status':
+        $source = "momo";
+        $template = "payment/momo";
         break;
 
     default:

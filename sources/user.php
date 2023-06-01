@@ -32,18 +32,11 @@ function infoMember()
     global $d, $func, $flash, $rowDetail, $configBase;
 
     $iduser = $_SESSION['account']['id'];
-
     if ($iduser) {
         $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($iduser));
-
         if (!empty($_POST['info-user'])) {
             $message = '';
             $response = array();
-            $old_password = (!empty($_POST['old-password'])) ? $_POST['old-password'] : '';
-            $old_passwordMD5 = md5($old_password);
-            $new_password = (!empty($_POST['new-password'])) ? $_POST['new-password'] : '';
-            $new_passwordMD5 = md5($new_password);
-            $new_password_confirm = (!empty($_POST['new-password-confirm'])) ? $_POST['new-password-confirm'] : '';
             $fullname = (!empty($_POST['fullname'])) ? htmlspecialchars($_POST['fullname']) : '';
             $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
             $phone = (!empty($_POST['phone'])) ? htmlspecialchars($_POST['phone']) : 0;
@@ -54,25 +47,6 @@ function infoMember()
             /* Valid data */
             if (empty($fullname)) {
                 $response['messages'][] = 'Họ tên không được trống';
-            }
-
-            if (!empty($old_password)) {
-                $isWrongPass = false;
-                $row = $d->rawQueryOne("select id from table_user where id = ? and password = ? limit 0,1", array($iduser, $old_passwordMD5));
-
-                if (empty($row['id'])) {
-                    $isWrongPass = true;
-                    $response['messages'][] = 'Mật khẩu cũ không chính xác';
-                } else if (empty($new_password)) {
-                    $isWrongPass = true;
-                    $response['messages'][] = 'Mật khẩu mới không được trống';
-                } else if (!empty($new_password) && empty($new_password_confirm)) {
-                    $isWrongPass = true;
-                    $response['messages'][] = 'Xác nhận mật khẩu mới không được trống';
-                } else if ($new_password != $new_password_confirm) {
-                    $isWrongPass = true;
-                    $response['messages'][] = 'Mật khẩu mới và xác nhận mật khẩu mới không chính xác';
-                }
             }
 
             if (empty($gender)) {
@@ -96,7 +70,7 @@ function infoMember()
                     $response['messages'][] = 'Email không hợp lệ';
                 }
 
-                if ($func->checkExist($email, 'email', 'account', $iduser)) {
+                if ($func->checkExist($email, 'email', 'user', $iduser)) {
                     $response['messages'][] = 'Email đã tồn tại';
                 }
             }
@@ -125,27 +99,31 @@ function infoMember()
                 $func->redirect($configBase . "account/thong-tin");
             }
 
-            if (!empty($old_password) && empty($isWrongPass)) {
-                $data['password'] = $new_passwordMD5;
-            }
-
             $data['fullname'] = $fullname;
             $data['email'] = $email;
             $data['phone'] = $phone;
             $data['address'] = $address;
             $data['gender'] = $gender;
             $data['birthday'] = strtotime(str_replace("/", "-", $birthday));
-
+            
             $d->where('id', $iduser);
-            if ($d->update('member', $data)) {
-                if ($old_password) {
-                    unset($_SESSION['user']);
-                    setcookie('login_member_id', "", -1, '/');
-                    setcookie('login_member_session', "", -1, '/');
-                    $func->transfer2("Cập nhật thông tin thành công", $configBase . "account/dang-nhap");
-                } else {
-                    $func->transfer2("Cập nhật thông tin thành công", $configBase . "account/thong-tin");
+            if ($d->update('table_user', $data)) {
+                /* Photo */
+                if ($func->hasFile("file")) {
+                    $photoUpdate = array();
+                    if ($photo = $func->uploadImage("file", './upload/user/')) {
+                        $row = $d->rawQueryOne("select id, photo from table_user where id = ? limit 0,1", array($iduser));
+                        if (!empty($row) and !empty($row['photo'])) {
+                            unlink('./upload/user/' . $row['photo']);
+                        }
+                        $photoUpdate['photo'] = $photo;
+                        $d->where('id', $iduser);
+                        $d->update('table_user', $photoUpdate);
+                        unset($photoUpdate);
+                    }
                 }
+
+                $func->transfer2("Cập nhật thông tin thành công", $configBase . "account/thong-tin");
             } else {
                 $func->transfer2("Cập nhật thông tin thất bại", $configBase . "account/thong-tin", false);
             }
