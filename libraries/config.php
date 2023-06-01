@@ -18,6 +18,9 @@ $config = array(
 /*Ảnh Ablout*/
 $config['about']['width'] = 600;
 $config['about']['height'] = 440;
+/*Ảnh Brand*/
+$config['product_brand']['width'] = 150;
+$config['product_brand']['height'] = 150;
 /*Ảnh Categories*/
 $config['product_list']['width'] = 285;
 $config['product_list']['height'] = 270;

@@ -629,8 +629,8 @@ FRAMEWORK.Carousel = function () {
 
   $(".categories__slider").owlCarousel({
     loop: false,
-    margin: 20,
-    items: 4,
+    margin: 10,
+    items: 2,
     dots: false,
     nav: true,
     navText: [
@@ -644,19 +644,19 @@ FRAMEWORK.Carousel = function () {
     autoplay: true,
     responsive: {
       0: {
-        items: 1,
-      },
-
-      480: {
         items: 2,
       },
 
-      768: {
+      480: {
         items: 3,
       },
 
-      992: {
+      768: {
         items: 4,
+      },
+
+      992: {
+        items: 6,
       },
     },
   });
@@ -939,6 +939,13 @@ FRAMEWORK.Cart = function () {
   }
 };
 
+/* Photobox */
+FRAMEWORK.Photobox = function () {
+  if (isExist($(".album-gallery"))) {
+    $(".album-gallery").photobox("a", { thumbs: true, loop: false });
+  }
+};
+
 /* Ready */
 $(document).ready(function () {
   FRAMEWORK.Menu();
@@ -953,4 +960,5 @@ $(document).ready(function () {
   FRAMEWORK.Comments();
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
+  FRAMEWORK.Photobox();
 });

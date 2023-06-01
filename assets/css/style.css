@@ -34,13 +34,6 @@ body {
   margin: auto;
 }
 
-button,
-input,
-select {
-  appearance: none;
-  box-shadow: none !important;
-}
-
 body {
   font-family: Arimo, sans-serif;
   font-size: 14px;
@@ -67,9 +60,18 @@ textarea {
   transition: 0.4s ease-in-out;
 }
 
-a {
+button,
+input,
+select {
+  appearance: none;
+  box-shadow: none !important;
+}
+
+a,
+a:hover {
   text-decoration: none !important;
   cursor: pointer;
+  color: inherit;
 }
 
 .text-split {
@@ -513,12 +515,19 @@ a {
   color: #fff;
 }
 
+/* Thuong hieu san pham */
+
 .item-categories {
   width: 100%;
   transition: 0.4s ease-in-out;
   display: block;
   position: relative;
   text-align: center;
+  border: 1px solid rgb(0 0 0 / 15%);
+}
+
+.item-categories:hover {
+  border-color: var(--color-main);
 }
 
 .item-categories .image {
@@ -527,18 +536,11 @@ a {
 }
 
 .item-categories .info {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
+  padding: 10px;
 }
 
 .item-categories .info h3 {
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   padding: 10px 20px;
   background: #fff;
   display: block;
@@ -558,6 +560,41 @@ a {
 }
 
 .item-categories:hover .info h3 a {
+  color: #fff;
+}
+
+.owl-nav button {
+  font-size: 18px;
+  color: #1c1c1c;
+  height: 70px;
+  width: 30px;
+  line-height: 70px;
+  text-align: center;
+  border: 1px solid #ebebeb;
+  position: absolute;
+  top: 50%;
+  background: #fff;
+  display: inline-block;
+  opacity: 1;
+}
+
+.owl-nav button.owl-prev {
+  right: auto;
+  left: 0;
+}
+
+.owl-nav button.owl-next {
+  left: auto;
+  right: 0;
+}
+
+.owl-nav button.owl-prev:hover {
+  background-color: var(--color-main);
+  color: #fff;
+}
+
+.owl-nav button.owl-next:hover {
+  background-color: var(--color-main);
   color: #fff;
 }
 
@@ -876,6 +913,37 @@ a {
   color: #6f6f6f;
   font-weight: 400;
   line-height: 26px;
+  margin-bottom: 10px;
+}
+
+.item-newsnb .info .view {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: right;
+  color: #8d8d8d;
+  text-transform: uppercase;
+  line-height: 1.5em;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.item-newsnb .info .view:hover {
+  color: var(--color-main);
+}
+
+.item-newsnb .info .view i {
+  vertical-align: center;
+  line-height: 26px;
+  margin-left: 5px;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.item-newsnb .info .view:hover i {
+  margin-left: 10px;
 }
 
 .breadCrumbs {
