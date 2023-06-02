@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2023 at 05:13 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Generation Time: Jun 02, 2023 at 04:31 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -151,13 +151,6 @@ CREATE TABLE `table_comment` (
   `date_posted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `table_comment`
---
-
-INSERT INTO `table_comment` (`id`, `id_parent`, `id_user`, `star`, `content`, `fullname`, `status`, `date_posted`) VALUES
-(1, 1, 149, 4, 'Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một văn bản chuẩn cho ngành công nghiệp in ấn từ những năm 1500, khi một họa sĩ vô danh ghép nhiều đoạn văn bản với nhau để tạo thành một bản mẫu văn bản. Đoạn văn bản này không những đã tồn tại năm thế kỉ, mà khi được áp dụng vào tin học văn phòng, nội dung của nó vẫn không hề bị thay đổi. Nó đã được phổ biến trong những năm 1960 nhờ việc bán những bản giấy Letraset in những đoạn Lorem Ipsum, và gần đây hơn, được sử dụng trong các ứng dụng dàn trang, như Aldus PageMaker.', 'Hoàng Phạm', 'hienthi', 1683985964);
-
 -- --------------------------------------------------------
 
 --
@@ -169,15 +162,6 @@ CREATE TABLE `table_comment_photo` (
   `id_parent` int(11) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `table_comment_photo`
---
-
-INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
-(1, 1, 'blog-43.jpg'),
-(2, 1, 'blog-53.jpg'),
-(3, 1, 'blog-63.jpg');
 
 -- --------------------------------------------------------
 
@@ -1007,6 +991,23 @@ INSERT INTO `table_gallery_album` (`id`, `id_parent`, `photo`, `name`, `numb`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `table_momo`
+--
+
+CREATE TABLE `table_momo` (
+  `id` int(11) NOT NULL,
+  `partner_code` varchar(255) NOT NULL,
+  `order_id` int(11) UNSIGNED NOT NULL,
+  `amount` int(11) NOT NULL,
+  `order_info` varchar(255) NOT NULL,
+  `order_type` varchar(255) NOT NULL,
+  `trans_id` int(11) NOT NULL,
+  `pay_type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `table_news`
 --
 
@@ -1034,9 +1035,9 @@ INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `num
 (1, '3-4271-7500.jpg', 'tin-tuc-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'Tin tức 1', 1, 'hienthi,noibat', 'tin-tuc', 0, 1680708586, 0, 0),
 (2, '6783025-cool-wallpapers-hd-2600-7890.jpg', 'tin-tuc-2', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'Tin tức 2', 2, 'hienthi,noibat', 'tin-tuc', 0, 1680708610, 0, 0),
 (3, '6783077-cool-wallpapers-hd-3332-8999.jpg', 'tin-tuc-3', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'Tin tức 3', 3, 'hienthi,noibat', 'tin-tuc', 0, 1680866906, 0, 0),
-(4, NULL, '', '', '- Quý khách hàng vui lòng thanh toán trực tiếp tại công ty ngay khi mua hàng tại\r\nShowroom 1 : Số 103 - 105 Lê Thanh Nghị– Đồng Tâm - Hai Bà Trưng– Hà Nội.\r\nShowroom 2 : Số 58 Hồ Tùng Mậu  – Cầu Giấy – Hà Nội.\r\n- Ngay khi quý khách thanh toán xong, nhân viên kế toán sẽ gửi lại quý khách hóa đơn tài chính và nhân viên kinh doanh sẽ hướng dẫn quý khách hình thức giao nhận hàng.', 'Thanh toán tại công ty', 4, 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869409, 1680870661, 0),
-(5, NULL, '', '', '- Nếu địa điểm giao hàng là ngoại thành, ngoại tỉnh hoặc nội thành thành phố Hà Nội nhưng khác với địa điểm thanh toán (trong trường hợp Quý khách gửi quà, gửi hàng cho bạn bè, đối tác …) chúng tôi sẽ thu tiền trước 100% giá trị đơn hàng + phí vận chuyển theo cước phí tính trong chinh sách vận chuyển bằng phương thức chuyển khoản trước khi giao hàng', 'Thanh toán bằng chuyển khoản', 5, 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869600, 0, 0),
-(6, NULL, '', '', '- Quý khách thanh toán cho nhân viên giao nhận toàn bộ hoặc phần còn lại của giá trị đơn hàng đã mua (nếu đã đặt cọc)\r\n- Hình thức thanh toán này chỉ thực hiện với các đơn hàng có địa chỉ giao hàng tại nội thành thành phố Hà Nội (trong phạm vi bán kính 30 km tính từ nơi mua hàng).\r\n- Nếu địa điểm giao hàng ngay tại nơi thanh toán, nhân viên giao hàng của chúng tôi sẽ thu tiền khi giao hàng.', 'Thanh toán tại điểm giao hàng', 6, 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869615, 0, 0);
+(4, NULL, 'thanh-toan-tai-cong-ty', '', '- Quý khách hàng vui lòng thanh toán trực tiếp tại công ty ngay khi mua hàng tại\r\nShowroom 1 : Số 103 - 105 Lê Thanh Nghị– Đồng Tâm - Hai Bà Trưng– Hà Nội.\r\nShowroom 2 : Số 58 Hồ Tùng Mậu  – Cầu Giấy – Hà Nội.\r\n- Ngay khi quý khách thanh toán xong, nhân viên kế toán sẽ gửi lại quý khách hóa đơn tài chính và nhân viên kinh doanh sẽ hướng dẫn quý khách hình thức giao nhận hàng.', 'Thanh toán tại công ty', 4, 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869409, 1685610085, 0),
+(5, NULL, 'thanh-toan-bang-chuyen-khoan', '', '- Nếu địa điểm giao hàng là ngoại thành, ngoại tỉnh hoặc nội thành thành phố Hà Nội nhưng khác với địa điểm thanh toán (trong trường hợp Quý khách gửi quà, gửi hàng cho bạn bè, đối tác …) chúng tôi sẽ thu tiền trước 100% giá trị đơn hàng + phí vận chuyển theo cước phí tính trong chinh sách vận chuyển bằng phương thức chuyển khoản trước khi giao hàng', 'Thanh toán bằng chuyển khoản', 5, 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869600, 1685610101, 0),
+(6, NULL, 'thanh-toan-tai-diem-giao-hang', '', '- Quý khách thanh toán cho nhân viên giao nhận toàn bộ hoặc phần còn lại của giá trị đơn hàng đã mua (nếu đã đặt cọc)\r\n- Hình thức thanh toán này chỉ thực hiện với các đơn hàng có địa chỉ giao hàng tại nội thành thành phố Hà Nội (trong phạm vi bán kính 30 km tính từ nơi mua hàng).\r\n- Nếu địa điểm giao hàng ngay tại nơi thanh toán, nhân viên giao hàng của chúng tôi sẽ thu tiền khi giao hàng.', 'Thanh toán tại điểm giao hàng', 6, 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869615, 1685610110, 0);
 
 -- --------------------------------------------------------
 
@@ -1046,8 +1047,9 @@ INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `num
 
 CREATE TABLE `table_order` (
   `id` int(11) UNSIGNED NOT NULL,
+  `transId_momo` int(11) DEFAULT 0,
   `id_user` int(11) UNSIGNED DEFAULT NULL,
-  `order_payment` int(11) UNSIGNED DEFAULT 0,
+  `order_payment` varchar(255) DEFAULT NULL,
   `code` varchar(25) DEFAULT NULL,
   `fullname` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -1065,14 +1067,6 @@ CREATE TABLE `table_order` (
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_order`
---
-
-INSERT INTO `table_order` (`id`, `id_user`, `order_payment`, `code`, `fullname`, `phone`, `address`, `email`, `requirements`, `city`, `district`, `ward`, `temp_price`, `ship_price`, `total_price`, `order_status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 149, 4, 'GGVL6V', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 'hoang@gmail.com', '', 1, 1, 1, 1432323, 0, 1432323, 'daxacnhan', 1683986023, 0, 0),
-(2, 149, 6, 'IPEEVH', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 'hoang@gmail.com', '', 2, 32, 589, 800000, 0, 800000, 'daxacnhan', 1683989944, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1092,15 +1086,6 @@ CREATE TABLE `table_order_detail` (
   `quantity` int(11) DEFAULT 0,
   `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_order_detail`
---
-
-INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `id_size`, `photo`, `name`, `code`, `quantity`, `price`) VALUES
-(1, 1, 1, 8, 8, '1-5039.png', 'Sản phẩm 1', 'GGVL6V', 3, 400000),
-(2, 1, 6, NULL, NULL, '6-9563.png', 'Sản phẩm 6', 'GGVL6V', 1, 232323),
-(3, 2, 1, 7, 8, '1-5039.png', 'Sản phẩm 1', 'IPEEVH', 2, 400000);
 
 -- --------------------------------------------------------
 
@@ -1166,11 +1151,11 @@ CREATE TABLE `table_product` (
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `numb`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 1, 701, 'hienthi,noibat', 1679827982, 1681648898, 0),
-(2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 2, 1, 'hienthi,noibat', 1679827990, 1680869938, 0),
+(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 1, 762, 'hienthi,noibat', 1679827982, 1681648898, 0),
+(2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 2, 2, 'hienthi,noibat', 1679827990, 1680869938, 0),
 (3, 6, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 0, 'hienthi,noibat', 1679828000, 1680869946, 0),
 (4, 6, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 4, 2, 'hienthi,noibat', 1679828010, 1680869956, 0),
-(5, 6, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 5, 0, 'hienthi,noibat', 1679828021, 1680869965, 0),
+(5, 6, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 5, 1, 'hienthi,noibat', 1679828021, 1680869965, 0),
 (6, 7, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 6, 5, 'hienthi,noibat', 1679828031, 1680869972, 0),
 (7, 7, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 7, 1, 'hienthi,noibat', 1679828041, 1680869978, 0),
 (8, 7, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 8, 0, 'hienthi,noibat', 1679828051, 1680869987, 0),
@@ -1393,7 +1378,7 @@ CREATE TABLE `table_user` (
 
 INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `photo`, `fullname`, `phone`, `address`, `gender`, `login_session`, `lastlogin`, `status`, `birthday`, `numb`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, '', '1682261315', 'hoatdong', 1608051600, 0, 0, 0, 0),
-(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', '1-7945-6712.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '7b187acb748850ee64ed9efc8608a317', '1683989670', 'hoatdong', 987544800, 1, 1682254418, 0, 0),
+(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', 'nature35-5158-6128.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '278ceb560cc1c03f4570ffbfc6ccce0d', '1685672161', 'hoatdong', 990136800, 1, 1682254418, 1685591349, 0),
 (150, 'user', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user@gmail.com', '2-7335-5701.jpg', 'User', '0909090909', 'Địa chỉ test 1', 1, 'af98095aefc0fa845d7e9e14031c261d', '1683379089', 'khoa', 1044399600, 2, 1682254452, 1683220756, 0),
 (159, 'user', 'cuong', 'cf4d87e50be6390ee9bd8ad6e7498cae', 'cuong@gmail.com', 'product-1.jpg', 'Cường', '0909090909', 'Bình Trị Đông A, Bình Tân, TP. HCM', 1, 'cc42b3fef37d9e927d117f68563a5776', '1683981915', 'hoatdong', 1092261600, 0, 1683906702, 1683909972, 0);
 
@@ -12124,6 +12109,12 @@ ALTER TABLE `table_gallery_album`
   ADD KEY `gallery_album` (`id_parent`);
 
 --
+-- Indexes for table `table_momo`
+--
+ALTER TABLE `table_momo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `table_news`
 --
 ALTER TABLE `table_news`
@@ -12134,8 +12125,7 @@ ALTER TABLE `table_news`
 --
 ALTER TABLE `table_order`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order_user` (`id_user`),
-  ADD KEY `order_news` (`order_payment`);
+  ADD KEY `order_user` (`id_user`);
 
 --
 -- Indexes for table `table_order_detail`
@@ -12247,13 +12237,13 @@ ALTER TABLE `table_color`
 -- AUTO_INCREMENT for table `table_comment`
 --
 ALTER TABLE `table_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `table_contact`
@@ -12286,6 +12276,12 @@ ALTER TABLE `table_gallery_album`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `table_momo`
+--
+ALTER TABLE `table_momo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `table_news`
 --
 ALTER TABLE `table_news`
@@ -12295,13 +12291,13 @@ ALTER TABLE `table_news`
 -- AUTO_INCREMENT for table `table_order`
 --
 ALTER TABLE `table_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `table_photo`
@@ -12414,7 +12410,6 @@ ALTER TABLE `table_gallery_album`
 -- Constraints for table `table_order`
 --
 ALTER TABLE `table_order`
-  ADD CONSTRAINT `order_news` FOREIGN KEY (`order_payment`) REFERENCES `table_news` (`id`),
   ADD CONSTRAINT `order_user` FOREIGN KEY (`id_user`) REFERENCES `table_user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --

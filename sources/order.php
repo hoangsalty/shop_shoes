@@ -18,7 +18,8 @@ if (!empty($_POST['thanhtoan'])) {
     }
 
     /* Data */
-    $dataOrder = (!empty($_POST['dataOrder'])) ? $_POST['dataOrder'] : null;
+    $dataOrder = (!empty($_POST['dataOrder'])) ? $_POST['dataOrder'] : array();
+
     /* Check data */
     if (!empty($dataOrder)) {
         /* Info */
@@ -113,6 +114,55 @@ if (!empty($_POST['thanhtoan'])) {
         $func->redirect("gio-hang");
     }
 
+    //Momo
+    $_SESSION['dataOrder'] = $dataOrder;
+    if ($order_payment == "momo") {
+        header('Content-type: text/html; charset=utf-8');
+
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
+        $partnerCode = $config['momo']['partnerCode'];
+        $accessKey = $config['momo']['accessKey'];
+        $secretKey = $config['momo']['secretKey'];
+
+        $orderInfo = "Thanh toán qua mã QR MoMo";
+        $amount = $total_price;
+        $orderId = time() . "";
+
+        $redirectUrl = $configBase . 'momo-status';
+        $ipnUrl = $configBase . 'momo-status';
+        $requestId = time() . "";
+
+        $requestType = "payWithATM";
+        //$requestType = "captureWallet";
+
+        $extraData = '';
+
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array(
+            'partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature
+        );
+        $result = $func->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);
+
+        $func->transfer2("Di chuyển đến trang thanh toán MOMO", $jsonResult['payUrl']);
+        return;
+    }
+
     /* lưu đơn hàng */
     $data_donhang = array();
     $data_donhang['id_user'] = (!empty($_SESSION['account']['id'])) ? $_SESSION['account']['id'] : 0;
@@ -164,53 +214,6 @@ if (!empty($_POST['thanhtoan'])) {
             }
             $data_donhangchitiet['quantity'] = $q;
             $d->insert('table_order_detail', $data_donhangchitiet);
-        }
-
-        //Momo
-        if ($order_payment == "momo") {
-            header('Content-type: text/html; charset=utf-8');
-
-            $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-
-            $partnerCode = $config['momo']['partnerCode'];
-            $accessKey = $config['momo']['accessKey'];
-            $secretKey = $config['momo']['secretKey'];
-
-            $orderInfo = "Thanh toán qua mã QR MoMo";
-            $amount = $total_price;
-            $orderId = time() . "";
-
-            $redirectUrl = $configBase . 'momo-status';
-            $ipnUrl = $configBase . 'momo-status';
-            $requestId = time() . "";
-
-            $requestType = "payWithATM";
-            //$requestType = "captureWallet";
-
-            $extraData = $id_insert;
-
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $secretKey);
-            $data = array(
-                'partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature
-            );
-            $result = $func->execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);
-
-            $func->transfer2("Di chuyển đến trang thanh toán MOMO", $jsonResult['payUrl']);
         }
 
         /* Xóa giỏ hàng */

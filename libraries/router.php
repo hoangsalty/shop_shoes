@@ -131,6 +131,7 @@ switch ($com) {
     case 'account':
         $source = "user";
         $titleMain = "Tài khoản";
+        break;
 
     case 'momo-status':
         $source = "momo";

@@ -1,11 +1,13 @@
 FRAMEWORK.Momo = function () {
   $('.btn_submit input').prop('disabled', true);
 
-  $(".form-cart")[0].onchange = function () {
-    if ($('.form-cart')[0].checkValidity() == true) {
-      $('.btn_submit input').prop('disabled', false);
-    }
-  };
+  if (isExist($('.form-cart'))) {
+    $(".form-cart")[0].onchange = function () {
+      if ($('.form-cart')[0].checkValidity() == true) {
+        $('.btn_submit input').prop('disabled', false);
+      }
+    };
+  }
 }
 
 FRAMEWORK.DatePicker = function () {
