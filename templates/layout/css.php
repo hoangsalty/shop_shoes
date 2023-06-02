@@ -19,6 +19,8 @@
 
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fancybox/fancybox.css" />
 
+<link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/photobox/photobox.css" />
+
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/cart.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/style-responsive.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/style.css" />

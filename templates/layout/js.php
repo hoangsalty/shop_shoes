@@ -27,5 +27,8 @@
 
 <script type="text/javascript" src="<?= $configBase ?>assets/fancybox/fancybox.js"></script>
 
+<script type="text/javascript" src="<?= $configBase ?>assets/photobox/photobox.js"></script>
+
+
 <script type="text/javascript" src="<?= $configBase ?>assets/js/functions.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/apps.js"></script>
