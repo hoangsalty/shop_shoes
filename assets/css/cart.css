@@ -45,10 +45,6 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.top-cart {
-  border-right: 1px solid #eee;
-}
-
 .procart {
   padding: 20px 10px;
   border: 1px solid #eee;
@@ -80,6 +76,7 @@
   font-size: 14px;
   color: #000;
   display: block;
+  font-weight: bold;
 }
 
 .name-procart a:hover {
@@ -222,6 +219,7 @@
 
 .total-procart p:last-child {
   color: #001973;
+  font-weight: bold;
 }
 
 .section-cart {
@@ -274,11 +272,18 @@
 .payments-label {
   cursor: pointer;
   background: #eee;
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 10px 15px;
   border-radius: 3px;
   margin-bottom: 0px;
   color: #313131 !important;
+}
+
+.payments-label img {
+  width: 30px;
+  display: inline-block;
+  margin-right: 7px;
 }
 
 .payments-label::before,

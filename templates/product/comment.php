@@ -166,7 +166,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="review-content">3. Viết nhận xét của bạn vào bên dưới:</label>
+                                    <label for="review-content">2. Viết nhận xét của bạn vào bên dưới:</label>
                                     <textarea class="form-control text-sm" name="dataReview[content]" id="review-content" placeholder="Nhận xét của bạn về sản phẩm này" rows="5"></textarea>
                                 </div>
                             </div>

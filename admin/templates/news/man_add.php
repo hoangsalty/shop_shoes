@@ -64,10 +64,10 @@ else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
             </div>
             <div class="col-xl-4">
                 <div class="card card-primary card-outline text-sm">
-                    <?php if ($type == 'tin-tuc') {
-                        $slugchange = ($act == 'edit') ? 1 : 0;
-                        include TEMPLATE . LAYOUT . "slug.php";
-                    } ?>
+                    <?php
+                    $slugchange = ($act == 'edit') ? 1 : 0;
+                    include TEMPLATE . LAYOUT . "slug.php";
+                    ?>
                 </div>
 
                 <div class="card card-primary card-outline text-sm">

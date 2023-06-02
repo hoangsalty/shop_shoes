@@ -29,7 +29,7 @@ if (!empty($account)) {
         $_SESSION['account']['status'] = $account['status'];
 
         /* Cookie user */
-        $time_expiry = time() + 1800;
+        $time_expiry = time() + 3600;
         setcookie('login_account_id', $account['id'], $time_expiry, '/');
         setcookie('login_account_session', $login_session, $time_expiry, '/');
 

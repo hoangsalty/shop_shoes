@@ -296,7 +296,7 @@ function deletePhoto()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id from table_photo where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("update table_photo set date_deleted = ? where id = ?", array(time(), $id));
+            $d->rawQuery("delete from table_photo where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
@@ -308,7 +308,7 @@ function deletePhoto()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id from table_photo where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("update table_photo set date_deleted = ? where id = ?", array(time(), $id));
+                $d->rawQuery("delete from table_photo where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);

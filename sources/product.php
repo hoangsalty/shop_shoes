@@ -16,25 +16,25 @@ if ($id != '') {
     /* Lấy danh mục */
     $productList = $d->rawQueryOne("select * from table_product_list where id = ? and find_in_set('hienthi',status) and date_deleted = 0 limit 0,1", array($rowDetail['id_list']));
     /* Lấy thương hiệu */
-    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? and find_in_set('hienthi',status)", array($rowDetail['id_brand']));
+    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? and find_in_set('hienthi',status) and date_deleted = 0", array($rowDetail['id_brand']));
     /* Lấy gallery */
-    $rowDetailPhoto = $d->rawQuery("select photo from table_gallery where id_parent = ? order by numb,id desc", array($rowDetail['id']));
+    $rowDetailPhoto = $d->rawQuery("select photo from table_gallery where id_parent = ? and date_deleted = 0 order by numb,id desc", array($rowDetail['id']));
     /* Lấy màu */
     $productColor = $d->rawQuery("select id_color from table_product_color where id_product = ? and id_color > 0", array($rowDetail['id']));
     $productColor = (!empty($productColor)) ? $func->joinCols($productColor, 'id_color') : array();
     if (!empty($productColor)) {
-        $rowColor = $d->rawQuery("select * from table_color where id in ($productColor) and find_in_set('hienthi',status) order by numb,id desc");
+        $rowColor = $d->rawQuery("select * from table_color where id in ($productColor) and find_in_set('hienthi',status) and date_deleted = 0 order by numb,id desc");
     }
     /* Lấy size */
     $productSize = $d->rawQuery("select id_size from table_product_size where id_product = ? and id_size > 0", array($rowDetail['id']));
     $productSize = (!empty($productSize)) ? $func->joinCols($productSize, 'id_size') : array();
     if (!empty($productSize)) {
-        $rowSize = $d->rawQuery("select id, name from table_size where id in ($productSize) and find_in_set('hienthi',status) order by numb,id desc");
+        $rowSize = $d->rawQuery("select id, name from table_size where id in ($productSize) and find_in_set('hienthi',status) and date_deleted = 0 order by numb,id desc");
     }
 
     /* Lấy sản phẩm cùng loại */
     $where = "";
-    $where = "id <> ? and id_list = ? and find_in_set('hienthi',status)";
+    $where = "id <> ? and id_list = ? and find_in_set('hienthi',status) and date_deleted = 0";
     $params = array($id, $rowDetail['id_list']);
 
     $curPage = $getPage;
@@ -63,7 +63,7 @@ if ($id != '') {
 
     /* Lấy sản phẩm */
     $where = "";
-    $where = "id_list = ? and find_in_set('hienthi',status)";
+    $where = "id_list = ? and find_in_set('hienthi',status) and date_deleted = 0";
     $params = array($idl);
 
     $curPage = $getPage;
@@ -84,11 +84,11 @@ if ($id != '') {
     $breadcrumbs = $breadcr->get();
 } else if ($idb != '') {
     /* Lấy brand detail */
-    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ?limit 0,1", array($idb));
+    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? limit 0,1", array($idb));
 
     /* Lấy sản phẩm */
     $where = "";
-    $where = "id_brand = ? and find_in_set('hienthi',status)";
+    $where = "id_brand = ? and find_in_set('hienthi',status) and date_deleted = 0";
     $params = array($productBrand['id']);
 
     $curPage = $getPage;
@@ -110,7 +110,7 @@ if ($id != '') {
 } else {
     /* Lấy tất cả sản phẩm */
     $where = "";
-    $where = "find_in_set('hienthi',status)";
+    $where = "find_in_set('hienthi',status) and date_deleted = 0";
     $params = array();
 
     $curPage = $getPage;

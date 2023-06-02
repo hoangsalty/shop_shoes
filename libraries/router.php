@@ -133,6 +133,11 @@ switch ($com) {
         $titleMain = "Tài khoản";
         break;
 
+    case 'momo-status':
+        $source = "momo";
+        $template = "payment/momo";
+        break;
+
     default:
         header('HTTP/1.0 404 Not Found', true, 404);
         include("404.php");

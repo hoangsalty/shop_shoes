@@ -1,49 +1,88 @@
-FRAMEWORK.Comments = function () {
-  var wrapper = $('#form-comment');
-  var wrapperLists = wrapper.find('.comment-lists');
+FRAMEWORK.Momo = function () {
+  $('.btn_submit input').prop('disabled', true);
 
-  wrapper.on('click', 'i.fa-star', function () {
+  if (isExist($('.form-cart'))) {
+    $(".form-cart")[0].onchange = function () {
+      if ($('.form-cart')[0].checkValidity() == true) {
+        $('.btn_submit input').prop('disabled', false);
+      }
+    };
+  }
+}
+
+FRAMEWORK.DatePicker = function () {
+  if (isExist($('#birthday'))) {
+    $('#birthday').datetimepicker({
+      timepicker: false,
+      format: 'd/m/Y',
+      formatDate: 'd/m/Y',
+      minDate: '01/01/1950',
+      maxDate: TIMENOW
+    });
+  }
+};
+
+FRAMEWORK.UserInfo = function () {
+  $(".container_load_info").hide();
+  $(".container_load_info.load1").show();
+
+  $(document).on('click', '.sty_list', function (event) {
+    $('.sty_list').removeClass('act');
+
+    var vitri = $(this).data('vitri');
+    $(".container_load_info").hide();
+    $(".load" + vitri).show();
+    $(this).addClass('act');
+  });
+};
+
+FRAMEWORK.Comments = function () {
+  var wrapper = $("#form-comment");
+  var wrapperLists = wrapper.find(".comment-lists");
+
+  wrapper.on("click", "i.fa-star", function () {
     $this = $(this);
 
-    var value = $this.data('value');
-    $this.parents('.review-rating-star').find('input').attr('value', value);
+    var value = $this.data("value");
+    $this.parents(".review-rating-star").find("input").attr("value", value);
 
-    var onStar = parseInt($this.data('value'));
-    var stars = $this.parent().children('i');
+    var onStar = parseInt($this.data("value"));
+    var stars = $this.parent().children("i");
 
     for (i = 0; i < stars.length; i++) {
-      $(stars[i]).removeClass('star-not-empty');
+      $(stars[i]).removeClass("star-not-empty");
     }
 
     for (i = 0; i < onStar; i++) {
-      $(stars[i]).addClass('star-not-empty');
+      $(stars[i]).addClass("star-not-empty");
     }
 
     return false;
   });
 
-  if (isExist($('#review-file-photo'))) {
-    $('#review-file-photo').getEvali({
+  if (isExist($("#review-file-photo"))) {
+    $("#review-file-photo").getEvali({
       limit: 3,
       maxSize: 30,
-      extensions: ['jpg', 'png', 'jpeg', 'JPG', 'PNG', 'JPEG', 'Png'],
+      extensions: ["jpg", "png", "jpeg", "JPG", "PNG", "JPEG", "Png"],
       editor: false,
       addMore: true,
       enableApi: false,
       dragDrop: true,
-      changeInput: '<div class="review-fileuploader">' +
-        '<div class=review-fileuploader-caption><strong>${captions.feedback}</strong></div>' +
+      changeInput:
+        '<div class="review-fileuploader">' +
+        "<div class=review-fileuploader-caption><strong>${captions.feedback}</strong></div>" +
         '<div class="review-fileuploader-text mx-3">${captions.or}</div>' +
         '<div class="review-fileuploader-button btn btn-sm btn-primary text-capitalize font-weight-500 py-2 px-3">${captions.button}</div></div>',
-      theme: 'dragdrop',
+      theme: "dragdrop",
       captions: {
-        feedback: '(Kéo thả ảnh vào đây)',
-        or: '-hoặc-',
-        button: 'Chọn ảnh'
+        feedback: "(Kéo thả ảnh vào đây)",
+        or: "-hoặc-",
+        button: "Chọn ảnh",
       },
       thumbnails: {
         popup: false,
-        canvasImage: false
+        canvasImage: false,
       },
       dialogs: {
         alert: function (e) {
@@ -51,37 +90,37 @@ FRAMEWORK.Comments = function () {
         },
         confirm: function (e, t) {
           $.confirm({
-            title: 'Thông báo',
-            icon: 'fas fa-exclamation-triangle',
-            type: 'orange',
+            title: "Thông báo",
+            icon: "fas fa-exclamation-triangle",
+            type: "orange",
             content: e,
             backgroundDismiss: true,
             animationSpeed: 600,
-            animation: 'zoom',
-            closeAnimation: 'scale',
+            animation: "zoom",
+            closeAnimation: "scale",
             typeAnimated: true,
             animateFromElement: false,
-            autoClose: 'cancel|3000',
-            escapeKey: 'cancel',
+            autoClose: "cancel|3000",
+            escapeKey: "cancel",
             buttons: {
               success: {
-                text: 'Đồng ý',
-                btnClass: 'btn-sm btn-warning',
+                text: "Đồng ý",
+                btnClass: "btn-sm btn-warning",
                 action: function () {
                   t();
-                }
+                },
               },
               cancel: {
-                text: 'Hủy',
-                btnClass: 'btn-sm btn-danger'
-              }
-            }
+                text: "Hủy",
+                btnClass: "btn-sm btn-danger",
+              },
+            },
           });
-        }
+        },
       },
       afterSelect: function () { },
       onEmpty: function () { },
-      onRemove: function () { }
+      onRemove: function () { },
     });
   }
 
@@ -90,17 +129,21 @@ FRAMEWORK.Comments = function () {
     $this = $(this);
     var form = $this;
     var formData = new FormData(form[0]);
-    var responseEle = form.find('.response-review');
+    var responseEle = form.find(".response-review");
 
-    var stars = $(this).find('#review-star');
-    var content = $(this).find('#review-content');
+    var stars = $(this).find("#review-star");
+    var content = $(this).find("#review-content");
     var amountError = 0;
     if (isEmpty(stars.val())) {
-      responseEle.append('<div class="alert alert-danger">Vui lòng chọn đánh giá</div>');
+      responseEle.append(
+        '<div class="alert alert-danger">Vui lòng chọn đánh giá</div>'
+      );
       amountError += 1;
     }
     if (isEmpty(content.val())) {
-      responseEle.append('<div class="alert alert-danger">Vui lòng nhập nội dung đánh giá</div>');
+      responseEle.append(
+        '<div class="alert alert-danger">Vui lòng nhập nội dung đánh giá</div>'
+      );
       amountError += 1;
     }
 
@@ -108,10 +151,10 @@ FRAMEWORK.Comments = function () {
       return false;
     }
     $.ajax({
-      url: 'api/comment.php',
-      method: 'POST',
-      enctype: 'multipart/form-data',
-      dataType: 'json',
+      url: "api/comment.php",
+      method: "POST",
+      enctype: "multipart/form-data",
+      dataType: "json",
       data: formData,
       async: false,
       processData: false,
@@ -119,27 +162,37 @@ FRAMEWORK.Comments = function () {
       cache: false,
       beforeSend: function (e) {
         holdonOpen();
-        responseEle.html('');
+        responseEle.html("");
       },
       error: function (e) {
         holdonClose();
-        notifyDialog('Hệ thống bị lỗi. Vui lòng thử lại sau.', 'Thông báo', 'fas fa-exclamation-triangle', 'red');
+        notifyDialog(
+          "Hệ thống bị lỗi. Vui lòng thử lại sau.",
+          "Thông báo",
+          "fas fa-exclamation-triangle",
+          "red"
+        );
       },
       success: function (response) {
-        form.trigger('reset');
+        form.trigger("reset");
         holdonClose();
-        notifyDialog('Bình luận sẽ được hiển thị sau khi được Bản Quản Trị kiểm duyệt', 'Bình luận thành công', 'fa-solid fa-check', 'green');
+        notifyDialog(
+          "Bình luận sẽ được hiển thị sau khi được Bản Quản Trị kiểm duyệt",
+          "Bình luận thành công",
+          "fa-solid fa-check",
+          "green"
+        );
 
         setTimeout(function () {
           location.reload();
         }, 3000);
-      }
+      },
     });
   });
-}
+};
 
 FRAMEWORK.PopupLogin = function () {
-  $('#form-user-login').submit(function (e) {
+  $("#form-user-login").submit(function (e) {
     e.preventDefault();
 
     var username = $(this).find("#username");
@@ -178,7 +231,9 @@ FRAMEWORK.PopupLogin = function () {
 
         if (result.status == 200) {
           $("#form-user-login")[0].reset();
-          $('.login_response').html('<div class="alert alert-success">' + result.message + '</div>');
+          $(".login_response").html(
+            '<div class="alert alert-success">' + result.message + "</div>"
+          );
 
           setTimeout(function () {
             location.reload();
@@ -195,63 +250,77 @@ FRAMEWORK.PopupLogin = function () {
 };
 
 FRAMEWORK.PopupRegister = function () {
-  $('#form-user-register').submit(function (e) {
+  $("#form-user-register").submit(function (e) {
     e.preventDefault();
 
-    var fullname = $(this).find('#fullname');
-    var username = $(this).find('#username');
-    var password = $(this).find('#password');
-    var birthday = $(this).find('#birthday');
-    var email = $(this).find('#email');
-    var phone = $(this).find('#phone');
-    var address = $(this).find('#address');
+    var fullname = $(this).find("#fullname");
+    var username = $(this).find("#username");
+    var password = $(this).find("#password");
+    var birthday = $(this).find("#birthday");
+    var email = $(this).find("#email");
+    var phone = $(this).find("#phone");
+    var address = $(this).find("#address");
 
     if (isEmpty(fullname.val())) {
-      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập họ tên</div>');
+      $(".register_response").html(
+        '<div class="alert alert-danger">Vui lòng nhập họ tên</div>'
+      );
       fullname.focus();
       return false;
     }
 
     if (isEmpty(username.val())) {
-      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập tài khoản</div>');
+      $(".register_response").html(
+        '<div class="alert alert-danger">Vui lòng nhập tài khoản</div>'
+      );
       username.focus();
       return false;
     }
 
     if (isEmpty(password.val())) {
-      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập mật khẩu</div>');
+      $(".register_response").html(
+        '<div class="alert alert-danger">Vui lòng nhập mật khẩu</div>'
+      );
       password.focus();
       return false;
     }
 
     if (isEmpty(birthday.val())) {
-      $('.register_response').html('<div class="alert alert-danger">Vui lòng chọn ngày sinh</div>');
+      $(".register_response").html(
+        '<div class="alert alert-danger">Vui lòng chọn ngày sinh</div>'
+      );
       birthday.focus();
       return false;
     }
 
     if (isEmpty(email.val())) {
-      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập email</div>');
+      $(".register_response").html(
+        '<div class="alert alert-danger">Vui lòng nhập email</div>'
+      );
       email.focus();
       return false;
     }
 
     if (isEmpty(phone.val())) {
-      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập số điện thoại</div>');
+      $(".register_response").html(
+        '<div class="alert alert-danger">Vui lòng nhập số điện thoại</div>'
+      );
       phone.focus();
       return false;
     }
 
     if (isEmpty(address.val())) {
-      $('.register_response').html('<div class="alert alert-danger">Vui lòng nhập địa chỉ</div>');
+      $(".register_response").html(
+        '<div class="alert alert-danger">Vui lòng nhập địa chỉ</div>'
+      );
       address.focus();
       return false;
     }
 
     $.ajax({
-      url: 'api/register.php',
-      type: 'POST',
-      dataType: 'json',
+      url: "api/register.php",
+      type: "POST",
+      dataType: "json",
       data: {
         fullname: fullname.val(),
         username: username.val(),
@@ -263,21 +332,23 @@ FRAMEWORK.PopupRegister = function () {
       },
       beforeSend: function () {
         holdonOpen();
-        $('#popup-register').find('.modal-body').css('opacity', '0.5');
-        $(this).find('.register-account').prop('disabled', true);
+        $("#popup-register").find(".modal-body").css("opacity", "0.5");
+        $(this).find(".register-account").prop("disabled", true);
       },
       success: function (result) {
-        $('#popup-register').find('.modal-body').css('opacity', '1');
-        $(this).find('.register-account').prop('disabled', false);
+        $("#popup-register").find(".modal-body").css("opacity", "1");
+        $(this).find(".register-account").prop("disabled", false);
 
         if (result.status == 200) {
-          $('.register_response').html('<div class="alert alert-success">' + result.message + '</div>');
+          $(".register_response").html(
+            '<div class="alert alert-success">' + result.message + "</div>"
+          );
 
           setTimeout(function () {
             $.ajax({
-              url: 'api/login.php',
-              type: 'POST',
-              dataType: 'json',
+              url: "api/login.php",
+              type: "POST",
+              dataType: "json",
               data: {
                 username: username.val(),
                 password: password.val(),
@@ -286,18 +357,19 @@ FRAMEWORK.PopupRegister = function () {
                 if (result.status == 200) {
                   location.reload();
                 }
-              }
+              },
             });
           }, 3000);
-
         } else if (result.status == 404) {
-          $('.register_response').html('<div class="alert alert-danger">' + result.message + '</div>');
+          $(".register_response").html(
+            '<div class="alert alert-danger">' + result.message + "</div>"
+          );
         }
         holdonClose();
-      }
+      },
     });
   });
-}
+};
 
 FRAMEWORK.Random = function () {
   $(".birth-date").datetimepicker({
@@ -419,9 +491,9 @@ FRAMEWORK.Carousel = function () {
     lazyLoad: "progressive",
     infinite: true,
     accessibility: true,
-    vertical: false,
-    verticalSwiping: false,
-    slidesToShow: 5,
+    vertical: true,
+    verticalSwiping: true,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -473,8 +545,8 @@ FRAMEWORK.Carousel = function () {
 
   $(".categories__slider").owlCarousel({
     loop: false,
-    margin: 20,
-    items: 4,
+    margin: 10,
+    items: 2,
     dots: false,
     nav: true,
     navText: [
@@ -488,19 +560,19 @@ FRAMEWORK.Carousel = function () {
     autoplay: true,
     responsive: {
       0: {
-        items: 1,
-      },
-
-      480: {
         items: 2,
       },
 
-      768: {
+      480: {
         items: 3,
       },
 
-      992: {
+      768: {
         items: 4,
+      },
+
+      992: {
+        items: 6,
       },
     },
   });
@@ -541,17 +613,34 @@ FRAMEWORK.Carousel = function () {
 };
 
 FRAMEWORK.Pagings = function () {
-  loadPaging("api/product.php?perpage=8", ".page_splist", 0);
-  $(".list_splist a").click(function () {
-    $(".list_splist a").removeClass("active");
-    $(this).addClass("active");
-    var idList = $(this).data("list");
-    loadPaging(
-      "api/product.php?idList=" + idList + "&perpage=8",
-      ".page_splist",
-      0
-    );
-  });
+  /* Products */
+  if (isExist($(".paging-product"))) {
+    loadPaging("api/product.php?perpage=8", ".paging-product");
+  }
+
+  /* Categories */
+  if (isExist($(".paging-product-category"))) {
+    $(".paging-product-category").each(function () {
+      var list = $(this).data("list");
+      loadPaging(
+        "api/product.php?perpage=8&idList=" + list,
+        ".paging-product-category-" + list
+      );
+    });
+  }
+  if (isExist($(".page_splist"))) {
+    loadPaging("api/product.php?perpage=8", ".page_splist", 0);
+    $(".list_splist a").click(function () {
+      $(".list_splist a").removeClass("active");
+      $(this).addClass("active");
+      var idList = $(this).data("list");
+      loadPaging(
+        "api/product.php?idList=" + idList + "&perpage=8",
+        ".page_splist",
+        0
+      );
+    });
+  }
 };
 
 FRAMEWORK.Bootstrap = function () {
@@ -766,6 +855,13 @@ FRAMEWORK.Cart = function () {
   }
 };
 
+/* Photobox */
+FRAMEWORK.Photobox = function () {
+  if (isExist($(".album-gallery"))) {
+    $(".album-gallery").photobox("a", { thumbs: true, loop: false });
+  }
+};
+
 /* Ready */
 $(document).ready(function () {
   FRAMEWORK.Menu();
@@ -778,4 +874,8 @@ $(document).ready(function () {
   FRAMEWORK.PopupLogin();
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
+  FRAMEWORK.UserInfo();
+  FRAMEWORK.DatePicker();
+  FRAMEWORK.Momo();
+  FRAMEWORK.Photobox();
 });

@@ -14,13 +14,28 @@ $config = array(
         'port' => 3306,
         'charset' => 'utf8mb4'
     ),
+
+    "momo" => array(
+        "partnerCode" => "MOMOBKUN20180529",
+        "accessKey" => "klm05TvNBzhg7h7j",
+        "secretKey" => "at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa"
+    ),
 );
+/*Ảnh Ablout*/
+$config['about']['width'] = 600;
+$config['about']['height'] = 440;
+/*Ảnh Brand*/
+$config['product_brand']['width'] = 150;
+$config['product_brand']['height'] = 150;
 /*Ảnh Categories*/
 $config['product_list']['width'] = 285;
 $config['product_list']['height'] = 270;
+/*Ảnh product admin*/
+$config['product_admin']['width'] = 800;
+$config['product_admin']['height'] = 800;
 /*Ảnh product*/
 $config['product']['width'] = 285;
-$config['product']['height'] = 270;
+$config['product']['height'] = 285;
 /*Ảnh news*/
 $config['news']['width'] = 386;
 $config['news']['height'] = 270;
