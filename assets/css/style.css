@@ -510,6 +510,8 @@ a {
 }
 
 .item-categories {
+  width: 100%;
+  transition: 0.4s ease-in-out;
   display: block;
   position: relative;
   text-align: center;
@@ -1421,16 +1423,16 @@ div.css_flex_baiviet {
 }
 
 .comment-title {
-  font-size: 18px
+  font-size: 18px;
 }
 
 .comment-show {
-  display: block !important
+  display: block !important;
 }
 
 .comment-point {
   font-size: 45px;
-  color: var(--color-main)
+  color: var(--color-main);
 }
 
 .comment-star {
@@ -1438,7 +1440,7 @@ div.css_flex_baiviet {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  margin-bottom: .5rem
+  margin-bottom: 0.5rem;
 }
 
 .comment-star span {
@@ -1450,29 +1452,29 @@ div.css_flex_baiviet {
   z-index: 1;
   overflow: hidden;
   text-align: left;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 .comment-star i {
   background-color: #fff;
   display: inline-block;
-  margin: .1rem;
+  margin: 0.1rem;
   color: #b8b8b8;
   text-rendering: auto;
-  font-size: 20px
+  font-size: 20px;
 }
 
 .comment-star i:nth-child(1) {
-  margin-left: 0
+  margin-left: 0;
 }
 
 .comment-star span i {
-  color: #ffc120
+  color: #ffc120;
 }
 
 .comment-progress {
   width: 100%;
-  margin-bottom: .375rem;
+  margin-bottom: 0.375rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1481,11 +1483,11 @@ div.css_flex_baiviet {
   align-items: center;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .comment-progress:last-child {
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .comment-progress .progress {
@@ -1499,7 +1501,7 @@ div.css_flex_baiviet {
 }
 
 .comment-progress .progress-bar#has-rate {
-  background-color: var(-)
+  background-color: var(-);
 }
 
 .comment-progress .progress-num {
@@ -1514,33 +1516,33 @@ div.css_flex_baiviet {
   font-weight: 600;
   text-align: left;
   color: #787878;
-  width: 50px
+  width: 50px;
 }
 
 .review-rating-star {
-  font-size: 0
+  font-size: 0;
 }
 
 .review-rating-star-icon .fa {
   font-weight: 400;
   font-style: normal;
   display: inline-block;
-  margin: .1rem;
+  margin: 0.1rem;
   font-size: 21px;
   cursor: pointer;
-  color: #f0c808
+  color: #f0c808;
 }
 
 .review-rating-star-icon .fa.star-empty {
-  color: #dedddc
+  color: #dedddc;
 }
 
 .review-rating-star-icon .fa.star-not-empty {
-  color: #f0c808
+  color: #f0c808;
 }
 
 .review-rating-star-icon .fa:nth-child(1) {
-  margin-left: 0
+  margin-left: 0;
 }
 
 .review-fileuploader {
@@ -1559,49 +1561,55 @@ div.css_flex_baiviet {
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center
+  justify-content: center;
 }
 
 .review-fileuploader .review-fileuploader-text {
-  color: #90a0bc
+  color: #90a0bc;
 }
 
 .review-file-uploader .fileuploader {
   padding: 0;
   margin: 0;
-  background: 0 0
+  background: 0 0;
 }
 
 .review-file-uploader .fileuploader-items .fileuploader-items-list {
-  margin: 1rem -5px 0 -5px
+  margin: 1rem -5px 0 -5px;
 }
 
 .review-file-uploader .fileuploader-items .fileuploader-items-list:after {
   display: block;
   content: "";
-  clear: both
+  clear: both;
 }
 
-.review-file-uploader .fileuploader-items .fileuploader-items-list .fileuploader-item {
+.review-file-uploader
+  .fileuploader-items
+  .fileuploader-items-list
+  .fileuploader-item {
   padding: 0;
   width: calc(100% / 7 - 10px);
   float: left;
   margin: 0 5px 5px 5px;
-  border-bottom: 0
+  border-bottom: 0;
 }
 
-.review-file-uploader .fileuploader-items .fileuploader-items-list .fileuploader-item .columns {
-  display: block
+.review-file-uploader
+  .fileuploader-items
+  .fileuploader-items-list
+  .fileuploader-item
+  .columns {
+  display: block;
 }
 
-.review-file-uploader .fileuploader-items .fileuploader-items-list .fileuploader-item .column-thumbnail {
+.review-file-uploader
+  .fileuploader-items
+  .fileuploader-items-list
+  .fileuploader-item
+  .column-thumbnail {
   width: auto;
-  height: auto
-}
-
-.review-file-uploader .fileuploader-items .fileuploader-items-list .fileuploader-item .column-thumbnail .fileuploader-item-image {
   height: auto;
-  padding: 50% 0
 }
 
 .review-file-uploader .fileuploader-items .fileuploader-items-list .fileuploader-item .column-thumbnail .fileuploader-item-image img {
@@ -1614,26 +1622,39 @@ div.css_flex_baiviet {
   -o-object-fit: cover;
   object-fit: cover;
   -webkit-transform: none;
-  transform: none
+  transform: none;
 }
 
-.review-file-uploader .fileuploader-items .fileuploader-items-list .fileuploader-item .column-title {
+.review-file-uploader
+  .fileuploader-items
+  .fileuploader-items-list
+  .fileuploader-item
+  .column-title {
   padding: 0;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   text-align: center;
-  display: none
+  display: none;
 }
 
-.review-file-uploader .fileuploader-items .fileuploader-items-list .fileuploader-item .column-actions {
+.review-file-uploader
+  .fileuploader-items
+  .fileuploader-items-list
+  .fileuploader-item
+  .column-actions {
   margin: 0;
   position: absolute;
   top: 0;
-  right: -5px
+  right: -5px;
 }
 
-.review-file-uploader .fileuploader-items .fileuploader-items-list .fileuploader-item .column-infos input {
+.review-file-uploader
+  .fileuploader-items
+  .fileuploader-items-list
+  .fileuploader-item
+  .column-infos
+  input {
   border: 1px solid #ddd;
-  border-radius: .25rem
+  border-radius: 0.25rem;
 }
 
 .review-poster-video-avatar {
@@ -1645,7 +1666,7 @@ div.css_flex_baiviet {
   align-items: center;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
-  justify-content: flex-start
+  justify-content: flex-start;
 }
 
 .review-poster-video-avatar .avatar-detail {
@@ -1659,12 +1680,12 @@ div.css_flex_baiviet {
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center
+  justify-content: center;
 }
 
 .review-poster-video-avatar .avatar-detail img {
   max-width: 95px;
-  max-height: 95px
+  max-height: 95px;
 }
 
 .carousel-comment-media .carousel-control a {
@@ -1672,7 +1693,7 @@ div.css_flex_baiviet {
   width: 45px;
   height: 45px;
   top: calc(50% - 45px / 2);
-  bottom: inherit
+  bottom: inherit;
 }
 
 .carousel-comment-media .carousel-control a span {
@@ -1683,8 +1704,8 @@ div.css_flex_baiviet {
   padding: 5px;
   text-align: center;
   background-color: #fff;
-  -webkit-box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .12);
-  box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .12);
+  -webkit-box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.12);
   border-radius: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1694,30 +1715,30 @@ div.css_flex_baiviet {
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center
+  justify-content: center;
 }
 
 .carousel-comment-media .carousel-control a.carousel-control-prev {
-  left: 20px
+  left: 20px;
 }
 
 .carousel-comment-media .carousel-control a.carousel-control-prev span {
-  padding-right: 9px
+  padding-right: 9px;
 }
 
 .carousel-comment-media .carousel-control a.carousel-control-next {
-  right: 20px
+  right: 20px;
 }
 
 .carousel-comment-media .carousel-control a.carousel-control-next span {
-  padding-left: 8px
+  padding-left: 8px;
 }
 
 .carousel-comment-media .carousel-indicators {
   position: static;
-  margin: 0 0 .75rem 0;
+  margin: 0 0 0.75rem 0;
   text-align: left;
-  display: block
+  display: block;
 }
 
 .carousel-comment-media .carousel-indicators li {
@@ -1732,7 +1753,7 @@ div.css_flex_baiviet {
   border: 2px solid transparent;
   opacity: 1;
   cursor: -webkit-zoom-in;
-  cursor: zoom-in
+  cursor: zoom-in;
 }
 
 .carousel-comment-media .carousel-indicators li.active {
@@ -1740,36 +1761,40 @@ div.css_flex_baiviet {
   cursor: -webkit-zoom-out;
   cursor: zoom-out;
   -webkit-transform: scale(1.05);
-  transform: scale(1.05)
+  transform: scale(1.05);
 }
 
 .carousel-comment-media .carousel-inner {
   max-width: 550px;
-  -webkit-box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .12);
-  box-shadow: 0 1px 12px 0 rgba(0, 0, 0, .12)
+  -webkit-box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.12);
 }
 
-.carousel-comment-media .carousel-inner .carousel-lists .carousel-comment-media-item-video #file-video {
+.carousel-comment-media
+  .carousel-inner
+  .carousel-lists
+  .carousel-comment-media-item-video
+  #file-video {
   max-width: 100%;
   width: 100%;
   height: 500px;
   vertical-align: top;
   display: inline-block;
-  background-color: #000
+  background-color: #000;
 }
 
 #form-reply {
-  display: none
+  display: none;
 }
 
 .comment-item {
-  margin-bottom: 2rem
+  margin-bottom: 2rem;
 }
 
 .comment-item-poster {
   /* width: 200px;
   margin-right: 30px; */
-  text-align: center
+  text-align: center;
 }
 
 .comment-item-letter {
@@ -1785,17 +1810,17 @@ div.css_flex_baiviet {
   line-height: 67px;
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: .5rem
+  margin-bottom: 0.5rem;
 }
 
 .comment-item-name {
-  margin-bottom: .25rem;
-  text-transform: capitalize
+  margin-bottom: 0.25rem;
+  text-transform: capitalize;
 }
 
 .comment-item-posttime {
   font-size: 12px;
-  color: #999
+  color: #999;
 }
 
 /* .comment-item-information {
@@ -1804,28 +1829,28 @@ div.css_flex_baiviet {
 
 .comment-item-star {
   float: left;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
 .comment-item-star i {
-  font-size: 17px
+  font-size: 17px;
 }
 
 .comment-item-title {
   font-size: 15px;
-  font-weight: 500
+  font-weight: 500;
 }
 
 .comment-replies {
   position: relative;
   background: #f8f9fa;
   border: 1px solid #dfdfdf;
-  padding: 1.75rem 1.5rem
+  padding: 1.75rem 1.5rem;
 }
 
 .comment-replies:after {
   content: "";
-  position: absolute
+  position: absolute;
 }
 
 .comment-replies:before {
@@ -1836,7 +1861,7 @@ div.css_flex_baiviet {
   left: 10px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 13px solid #f8f9fa
+  border-bottom: 13px solid #f8f9fa;
 }
 
 .comment-replies:after {
@@ -1844,7 +1869,7 @@ div.css_flex_baiviet {
   left: 9px;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
-  border-bottom: 14px solid #dfdfdf
+  border-bottom: 14px solid #dfdfdf;
 }
 
 .comment-replies-item {
@@ -1857,11 +1882,11 @@ div.css_flex_baiviet {
   align-items: flex-start;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
-  justify-content: flex-start
+  justify-content: flex-start;
 }
 
 .comment-replies-item:last-child {
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .comment-replies-letter {
@@ -1879,14 +1904,14 @@ div.css_flex_baiviet {
   vertical-align: top;
   font-weight: 500;
   text-align: center;
-  margin-top: .125rem
+  margin-top: 0.125rem;
 }
 
 .comment-replies-letter.admin {
   position: relative;
   background-color: #189eff;
   text-indent: 9999px;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .comment-replies-letter.admin:before {
@@ -1900,23 +1925,23 @@ div.css_flex_baiviet {
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .comment-replies-info {
-  width: calc(100% - 55px)
+  width: calc(100% - 55px);
 }
 
 .comment-replies-name {
   font-weight: 500;
-  margin-bottom: .125rem
+  margin-bottom: 0.125rem;
 }
 
-.comment-replies [class*=btn-load-more-] {
+.comment-replies [class*="btn-load-more-"] {
   border: 0;
   outline: 0;
   padding: 0;
-  background: 0 0
+  background: 0 0;
 }
 
 .comment-media-play {
@@ -1925,14 +1950,14 @@ div.css_flex_baiviet {
   top: 50%;
   left: 50%;
   -webkit-transform: translateY(-50%) translateX(-50%);
-  transform: translateY(-50%) translateX(-50%)
+  transform: translateY(-50%) translateX(-50%);
 }
 
 .comment-media-play svg {
-  -webkit-box-shadow: 1px 1px 15px rgba(0, 0, 0, .3);
-  box-shadow: 1px 1px 15px rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, .15)
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .comment-media-play svg .comment-media-play-stroke-dotted {
@@ -1944,7 +1969,7 @@ div.css_flex_baiviet {
   -webkit-animation: spin 4s infinite linear;
   animation: spin 4s infinite linear;
   -webkit-transition: opacity 1s ease, stroke-width 1s ease;
-  transition: opacity 1s ease, stroke-width 1s ease
+  transition: opacity 1s ease, stroke-width 1s ease;
 }
 
 .comment-media-play svg .comment-media-play-stroke-solid {
@@ -1952,29 +1977,29 @@ div.css_flex_baiviet {
   stroke-dasharray: 300;
   stroke-width: 4px;
   -webkit-transition: stroke-dashoffset 1s ease, opacity 1s ease;
-  transition: stroke-dashoffset 1s ease, opacity 1s ease
+  transition: stroke-dashoffset 1s ease, opacity 1s ease;
 }
 
 .comment-media-play svg .comment-media-play-icon {
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-  -webkit-transition: -webkit-transform .2s ease-out;
-  transition: -webkit-transform .2s ease-out
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  transition: -webkit-transform 0.2s ease-out;
 }
 
 .comment-media-play:hover svg .comment-media-play-stroke-dotted {
   stroke-width: 4px;
-  opacity: 1
+  opacity: 1;
 }
 
 .comment-media-play:hover svg .comment-media-play-stroke-solid {
   opacity: 0;
-  stroke-dashoffset: 300
+  stroke-dashoffset: 300;
 }
 
 .comment-media-play:hover svg .comment-media-play-icon {
   -webkit-transform: scale(1.05);
-  transform: scale(1.05)
+  transform: scale(1.05);
 }
 
 .commentColor {

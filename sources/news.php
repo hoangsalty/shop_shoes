@@ -14,7 +14,7 @@ if ($id != '') {
 } else {
     /* Lấy tất cả bài viết */
     $where = "";
-    $where = "find_in_set('hienthi',status)";
+    $where = "find_in_set('hienthi',status) and date_deleted = 0";
     $params = array();
 
     $curPage = $getPage;
