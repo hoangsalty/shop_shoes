@@ -1,8 +1,10 @@
 <?php
-if (!defined('SOURCES')) die("Error");
+if (!defined('SOURCES'))
+    die("Error");
 
 /* breadCrumbs */
-if (!empty($titleMain)) $breadcr->set($com, $titleMain);
+if (!empty($titleMain))
+    $breadcr->set($com, $titleMain);
 $breadcrumbs = $breadcr->get();
 
 /* Tỉnh thành */
@@ -133,8 +135,8 @@ if (!empty($_POST['thanhtoan'])) {
         $ipnUrl = $configBase . 'momo-status';
         $requestId = time() . "";
 
-        $requestType = "payWithATM";
-        //$requestType = "captureWallet";
+        //$requestType = "payWithATM";
+        $requestType = "captureWallet";
 
         $extraData = '';
 
@@ -157,6 +159,7 @@ if (!empty($_POST['thanhtoan'])) {
             'signature' => $signature
         );
         $result = $func->execPostRequest($endpoint, json_encode($data));
+        var_dump($result);die();
         $jsonResult = json_decode($result, true);
 
         $func->transfer2("Di chuyển đến trang thanh toán MOMO", $jsonResult['payUrl']);
@@ -197,7 +200,8 @@ if (!empty($_POST['thanhtoan'])) {
             $size = ($_SESSION['cart'][$i]['size'] > 0) ? $_SESSION['cart'][$i]['size'] : NULL;
             $code_order = $_SESSION['cart'][$i]['code'];
 
-            if ($q == 0) continue;
+            if ($q == 0)
+                continue;
 
             $data_donhangchitiet = array();
             $data_donhangchitiet['id_product'] = $pid;
