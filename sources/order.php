@@ -159,7 +159,6 @@ if (!empty($_POST['thanhtoan'])) {
             'signature' => $signature
         );
         $result = $func->execPostRequest($endpoint, json_encode($data));
-        var_dump($result);die();
         $jsonResult = json_decode($result, true);
 
         $func->transfer2("Di chuyển đến trang thanh toán MOMO", $jsonResult['payUrl']);
