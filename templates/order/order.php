@@ -105,8 +105,8 @@
                             <?php } ?>
                             <div class="payments-cart custom-control custom-radio">
                                 <input type="radio" class="custom-control-input" id="payments-momo" name="dataOrder[payments]" value="momo" <?= (!empty($flashPayment) && $flashPayment == 'momo') ? 'checked' : '' ?> required>
-                                <label class="payments-label custom-control-label" for="payments-momo" data-payments="momo">Thanh toán qua Momo</label>
-                                <div class="payments-info payments-info-momo transition"></div>
+                                <label class="payments-label custom-control-label" for="payments-momo" data-payments="momo"><img src="assets/images/momo_icon.png" alt=""> Thanh toán qua Momo</label>
+                                <div class="payments-info payments-info-momo transition">Thanh toán qua cổng thanh toán momo</div>
                             </div>
                         </div>
                         <p class="title-cart">Thông tin giao hàng:</p>

@@ -84,7 +84,7 @@ if ($id != '') {
     $breadcrumbs = $breadcr->get();
 } else if ($idb != '') {
     /* Lấy brand detail */
-    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ?limit 0,1", array($idb));
+    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? limit 0,1", array($idb));
 
     /* Lấy sản phẩm */
     $where = "";

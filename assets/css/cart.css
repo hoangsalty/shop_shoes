@@ -272,11 +272,18 @@
 .payments-label {
   cursor: pointer;
   background: #eee;
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 10px 15px;
   border-radius: 3px;
   margin-bottom: 0px;
   color: #313131 !important;
+}
+
+.payments-label img {
+  width: 30px;
+  display: inline-block;
+  margin-right: 7px;
 }
 
 .payments-label::before,
