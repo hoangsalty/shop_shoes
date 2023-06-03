@@ -142,7 +142,7 @@ else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
                         $photoDetail = array();
                         $photoDetail['upload'] = UPLOAD_PRODUCT_L;
                         $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                        $photoDetail['dimension'] = "Width: " . $config['product']['width'] . " px - Height: " . $config['product']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
+                        $photoDetail['dimension'] = "Width: " . $config['product_admin']['width'] . " px - Height: " . $config['product_admin']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
                         /* Image */
                         include TEMPLATE . LAYOUT . "image.php";
                         ?>
