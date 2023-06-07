@@ -60,9 +60,9 @@ function ViewUsers()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_user where date_deleted = 0 and id <> 1 $where order by numb,id desc $limit";
+    $sql = "select * from table_user where date_deleted = 0 and id <> 1 $where order by id desc $limit";
     $items = $d->rawQuery($sql);
-    $sqlNum = "select count(*) as 'num' from table_user where date_deleted = 0 and id <> 1 $where order by numb,id desc";
+    $sqlNum = "select count(*) as 'num' from table_user where date_deleted = 0 and id <> 1 $where order by id desc";
     $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=user&act=man";
@@ -292,9 +292,6 @@ function saveUser()
             }
         } else {
             $data['date_created'] = time();
-            /*lay stt*/
-            $list_numb = $d->rawQuery("select numb from table_user order by numb desc ", array());
-            $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : 1;
 
             if (!empty($data['password'])) {
                 $data['password'] = md5($data['password']);
@@ -302,9 +299,6 @@ function saveUser()
 
             if ($d->insert('table_user', $data)) {
                 $id_insert = $d->getLastInsertId();
-
-                /*update stt*/
-                $d->rawQuery("update table_user set numb = ? where id = " . $id_insert, array($new_numb));
 
                 /* Photo */
                 if ($func->hasFile("file")) {

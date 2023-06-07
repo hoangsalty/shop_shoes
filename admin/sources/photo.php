@@ -133,10 +133,10 @@ function viewPhotos()
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
 
-    $sql = "select * from table_photo where type = ? and date_deleted = 0 order by numb,id desc $limit";
+    $sql = "select * from table_photo where type = ? order by id desc $limit";
     $items = $d->rawQuery($sql, array($type));
 
-    $sqlNum = "select count(*) as 'num' from table_photo where type = ? and date_deleted = 0 order by numb,id desc";
+    $sqlNum = "select count(*) as 'num' from table_photo where type = ? order by id desc";
     $count = $d->rawQueryOne($sqlNum, array($type));
 
     $total = (!empty($count)) ? $count['num'] : 0;
@@ -160,7 +160,7 @@ function editPhoto()
         if (empty($item)) {
             $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
         } else {
-            $gallery = $d->rawQuery("select * from table_gallery_album where id_parent = ? order by numb,id desc", array($id));
+            $gallery = $d->rawQuery("select * from table_gallery_album where id_parent = ? order by id desc", array($id));
         }
     }
 }

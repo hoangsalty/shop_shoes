@@ -8,6 +8,8 @@ else if ($act == 'edit') $linkFilter = "index.php?com=product&act=edit&id=" . $i
 
 if ($act == 'add') $linkSave = "index.php?com=product&act=save";
 else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
+
+$status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 ?>
 
 <!-- Content Header -->
@@ -67,6 +69,31 @@ else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <div class="form-group col-md-12">
+                                <?php $status_array = (!empty($item['status'])) ? explode(',', $item['status']) : array(); ?>
+                                <?php if ($_GET['act'] == 'add') {
+                                    foreach ($status as $key => $value) { ?>
+                                        <div class="form-group d-inline-block mb-2 mr-2">
+                                            <label for="<?= $key ?>-checkbox" class="d-inline-block align-middle mb-0 mr-2"><?= $value ?>:</label>
+                                            <div class="custom-control custom-checkbox d-inline-block align-middle">
+                                                <input type="checkbox" class="custom-control-input <?= $key ?>-checkbox" name="status[<?= $key ?>]" id="<?= $key ?>-checkbox" <?= ($key == 'hienthi') ? 'checked' : '' ?> value="<?= $key ?>">
+                                                <label for="<?= $key ?>-checkbox" class="custom-control-label"></label>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                <?php } else { ?>
+                                    <?php foreach ($status as $key => $value) { ?>
+                                        <div class="form-group d-inline-block mb-2 mr-2">
+                                            <label for="<?= $key ?>-checkbox" class="d-inline-block align-middle mb-0 mr-2"><?= $value ?>:</label>
+                                            <div class="custom-control custom-checkbox d-inline-block align-middle">
+                                                <input type="checkbox" class="custom-control-input <?= $key ?>-checkbox" name="status[<?= $key ?>]" id="<?= $key ?>-checkbox" <?= (empty($status_array) && empty($item['id']) ? 'checked' : in_array($key, $status_array)) ? 'checked' : '' ?> value="<?= $key ?>">
+                                                <label for="<?= $key ?>-checkbox" class="custom-control-label"></label>
+                                            </div>
+                                        </div>
+                                <?php }
+                                } ?>
+                            </div>
+
                             <div class="form-group col-md-4">
                                 <label class="d-block" for="code">Mã sản phẩm:</label>
                                 <input type="text" class="form-control text-sm" name="data[code]" id="code" placeholder="Mã sản phẩm" value="<?= (!empty($flash->has('code'))) ? $flash->get('code') : @$item['code'] ?>">
@@ -110,11 +137,11 @@ else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
                         <div class="form-group-category row">
                             <div class="col-xl-6 col-sm-4">
                                 <label class="d-block" for="id_list">Loại sản phẩm:</label>
-                                <?= $func->getAjaxCategory('product', 'list', 'Chọn loại') ?>
+                                <?= $func->getAjaxCategory('list', 'Chọn loại') ?>
                             </div>
                             <div class="form-group col-xl-6 col-sm-4">
                                 <label class="d-block" for="id_brand">Danh mục hãng:</label>
-                                <?= $func->getAjaxCategory('product', 'brand', 'Chọn hãng') ?>
+                                <?= $func->getAjaxCategory('brand', 'Chọn hãng') ?>
                             </div>
 
                             <div class="form-group col-xl-6 col-sm-4">
@@ -198,7 +225,6 @@ else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="number" class="form-control form-control-sm my-jFiler-item-info rounded mb-1 text-sm" value="<?= $v['numb'] ?>" placeholder="Số thứ tự" data-info="numb" data-id="<?= $v['id'] ?>" />
                                                         <input type="text" class="form-control form-control-sm my-jFiler-item-info rounded text-sm" value="<?= $v['name'] ?>" placeholder="Tiêu đề" data-info="name" data-id="<?= $v['id'] ?>" />
                                                     </div>
                                                 </div>

@@ -65,7 +65,7 @@ class Comments
     private function total($is_admin = false)
     {
         $where = (!empty($is_admin)) ? "" : "find_in_set('hienthi',status) and";
-        $rows = $this->d->rawQuery("select * from table_comment where $where id_parent = ? order by date_posted desc", array($this->id_parent));
+        $rows = $this->d->rawQuery("select * from table_comment where $where id_parent = ? order by date_created desc", array($this->id_parent));
         return (!empty($rows)) ? count($rows) : 0;
     }
 
@@ -85,7 +85,7 @@ class Comments
     public function lists($is_admin = false)
     {
         $where = (!empty($is_admin)) ? "" : "find_in_set('hienthi',status) and";
-        $rows = $this->d->rawQuery("select * from table_comment where $where id_parent = ? order by date_posted desc", array($this->id_parent));
+        $rows = $this->d->rawQuery("select * from table_comment where $where id_parent = ? order by date_created desc", array($this->id_parent));
         return $rows;
     }
 
@@ -150,7 +150,7 @@ class Comments
             }
 
             $data['status'] = 'new-admin';
-            $data['date_posted'] = time();
+            $data['date_created'] = time();
 
             if ($this->d->insert('table_comment', $data)) {
                 $id_insert = $this->d->getLastInsertId();
@@ -209,6 +209,7 @@ class Comments
 
                 /* Update status */
                 $data = array();
+                $data['date_updated'] = time();
                 $data['status'] = (!empty($status_array)) ? implode(',', $status_array) : "";
                 $this->d->where('id', $id);
                 if (!$this->d->update('table_comment', $data)) {

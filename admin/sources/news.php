@@ -45,8 +45,8 @@ function viewNews()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_news where id > 0 and type = ? $where and date_deleted = 0 order by numb,id desc $limit", array($type));
-    $sqlNum = "select count(*) as 'num' from table_news where id > 0 and type = ? $where and date_deleted = 0 order by numb,id desc";
+    $items = $d->rawQuery("select * from table_news where id > 0 and type = ? $where order by id desc $limit", array($type));
+    $sqlNum = "select count(*) as 'num' from table_news where id > 0 and type = ? $where order by id desc";
     $count = $d->rawQueryOne($sqlNum, array($type));
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=news&act=man" . $strUrl;
@@ -178,15 +178,10 @@ function saveNew()
         }
     } else {
         $data['date_created'] = time();
-        /*lay stt*/
-        $list_numb = $d->rawQuery("select numb from table_news order by numb desc ", array());
-        $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : 1;
 
         if ($d->insert('table_news', $data)) {
             $id_insert = $d->getLastInsertId();
 
-            /*update stt*/
-            $d->rawQuery("update table_news set numb = ? where id = " . $id_insert, array($new_numb));
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();

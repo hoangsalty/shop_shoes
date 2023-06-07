@@ -61,6 +61,8 @@ function confirmDialog(
                 btnClass: "btn-sm btn-primary",
                 action: function () {
                     if (action == "delete-procart") deleteCart(value);
+                    if (action == "change-order-status") changeOrderStatus(value);
+
                 },
             },
             cancel: {
@@ -221,6 +223,28 @@ function loadWard(id = 0) {
         },
         success: function (result) {
             $(".select-ward").html(result);
+            holdonClose();
+        },
+    });
+}
+
+function changeOrderStatus(obj) {
+    var id = obj.data("id");
+    var status = obj.data("status");
+
+    $.ajax({
+        type: "POST",
+        url: "api/order.php",
+        data: {
+            cmd: "change-status",
+            id: id,
+            status: status,
+        },
+        beforeSend: function () {
+            holdonOpen();
+        },
+        success: function (result) {
+            location.reload();
             holdonClose();
         },
     });

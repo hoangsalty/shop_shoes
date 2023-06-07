@@ -100,7 +100,7 @@
                                         <?php } ?>
                                     </div>
                                     <div class="comment-item-name"><?= $params['lists']['fullname'] ?></div>
-                                    <div class="comment-item-posttime"><?= $comment->timeAgo($params['lists']['date_posted']) ?></div>
+                                    <div class="comment-item-posttime"><?= $comment->timeAgo($params['lists']['date_created']) ?></div>
                                 </div>
                                 <div class="comment-item-information col-10">
                                     <div class="comment-item-rating mb-2 w-clear">

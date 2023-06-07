@@ -1,10 +1,12 @@
 FRAMEWORK.Momo = function () {
-  $('.btn_submit input').prop('disabled', true);
+  $('#thanhtoan').prop('disabled', true);
+  $('#thanhtoan').addClass('disabled');
 
   if (isExist($('.form-cart'))) {
     $(".form-cart")[0].onchange = function () {
       if ($('.form-cart')[0].checkValidity() == true) {
-        $('.btn_submit input').prop('disabled', false);
+        $('#thanhtoan').prop('disabled', false);
+        $('#thanhtoan').removeClass('disabled');
       }
     };
   }
@@ -33,6 +35,11 @@ FRAMEWORK.UserInfo = function () {
     $(".container_load_info").hide();
     $(".load" + vitri).show();
     $(this).addClass('act');
+  });
+
+  /* Cancel order */
+  $("body").on("click", "#cancel-order", function () {
+    confirmDialog("change-order-status", "Bạn muốn hủy đơn hàng này ?", $(this));
   });
 };
 
@@ -372,6 +379,8 @@ FRAMEWORK.PopupRegister = function () {
 };
 
 FRAMEWORK.Random = function () {
+  $('#popup-order .input-select select').select2();
+
   $(".birth-date").datetimepicker({
     timepicker: false,
     format: "d/m/Y",
@@ -770,11 +779,7 @@ FRAMEWORK.Cart = function () {
   });
   /* Delete */
   $("body").on("click", ".del-procart", function () {
-    confirmDialog(
-      "delete-procart",
-      "Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?",
-      $(this)
-    );
+    confirmDialog("delete-procart", "Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?", $(this));
   });
   /* Counter */
   $("body").on("click", ".counter-procart", function () {
@@ -870,7 +875,6 @@ $(document).ready(function () {
   FRAMEWORK.Bootstrap();
   FRAMEWORK.Cart();
   FRAMEWORK.Pagings();
-  FRAMEWORK.Random();
   FRAMEWORK.PopupLogin();
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
@@ -878,4 +882,5 @@ $(document).ready(function () {
   FRAMEWORK.DatePicker();
   FRAMEWORK.Momo();
   FRAMEWORK.Photobox();
+  FRAMEWORK.Random();
 });

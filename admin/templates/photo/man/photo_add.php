@@ -148,7 +148,6 @@ else if ($type == 'album') $name = 'Album';
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <input type="number" class="form-control form-control-sm my-jFiler-item-info rounded mb-1 text-sm" value="<?= $v['numb'] ?>" placeholder="Số thứ tự" data-info="numb" data-id="<?= $v['id'] ?>" />
                                                     <input type="text" class="form-control form-control-sm my-jFiler-item-info rounded text-sm" value="<?= $v['name'] ?>" placeholder="Tiêu đề" data-info="name" data-id="<?= $v['id'] ?>" />
                                                 </div>
                                             </div>

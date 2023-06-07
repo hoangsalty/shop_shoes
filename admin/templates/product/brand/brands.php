@@ -80,8 +80,8 @@ $status = array("hienthi" => "Hiển thị");
                                         <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                     </div>
                                 </td>
-                                <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="table_product_list">
+                                <td class="align-middle text-center">
+                                    <?= $i+1 ?>
                                 </td>
                                 <td class="align-middle">
                                     <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
@@ -100,7 +100,7 @@ $status = array("hienthi" => "Hiển thị");
                                 <?php foreach ($status as $key => $value) { ?>
                                     <td class="align-middle text-center">
                                         <div class="custom-control custom-checkbox my-checkbox">
-                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_product_brand" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
+                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_brand" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
                                             <label for="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                         </div>
                                     </td>

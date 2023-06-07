@@ -451,14 +451,14 @@ class Functions
     }
 
     /* Get category by link */
-    public function getLinkCategory($table = '', $level = '', $title_select = 'Chọn danh mục')
+    public function getLinkCategory($level = '', $title_select = 'Chọn danh mục')
     {
         global $d;
 
         $where = '';
         $id_parent = 'id_' . $level;
 
-        $rows = $d->rawQuery("select name, id from table_" . $table . "_" . $level . " where id > 0 " . $where . " order by numb,id desc", array());
+        $rows = $d->rawQuery("select name, id from table_" . $level . " where id > 0 " . $where . " order by id desc", array());
         $str = '<select id="' . $id_parent . '" name="' . $id_parent . '" onchange="onchangeCategory($(this))" class="form-control filter-category select2"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
             if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
@@ -471,14 +471,14 @@ class Functions
         return $str;
     }
     /* Get category by ajax */
-    public function getAjaxCategory($table = '', $level = '', $title_select = 'Chọn danh mục', $class_select = 'select-category')
+    public function getAjaxCategory($level = '', $title_select = 'Chọn danh mục', $class_select = 'select-category')
     {
         global $d;
 
         $where = '';
         $id_parent = 'id_' . $level;
 
-        $rows = $d->rawQuery("select name, id from table_" . $table . "_" . $level . " where id > 0 " . $where . " order by numb,id desc", array());
+        $rows = $d->rawQuery("select name, id from table_" . $level . " where id > 0 " . $where . " order by id desc", array());
         $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" class="form-control select2 ' . $class_select . '"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
             if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
@@ -517,8 +517,8 @@ class Functions
             $slug = trim($data['slug']);
             if (!empty($slug)) {
                 $table = array(
-                    "table_product_list",
-                    "table_product_brand",
+                    "table_list",
+                    "table_brand",
                     "table_product",
                     "table_news",
                     "table_static",
@@ -564,7 +564,7 @@ class Functions
             $temps = (!empty($temps)) ? $this->joinCols($temps, 'id_color') : array();
             $temps = (!empty($temps)) ? explode(",", $temps) : array();
         }
-        $row_color = $d->rawQuery("select * from table_color where date_deleted = 0 order by numb,id desc", array());
+        $row_color = $d->rawQuery("select * from table_color where date_deleted = 0 order by id desc", array());
 
         $str = '<select id="dataColor" name="dataColor[]" class="select multiselect" multiple="multiple" >';
         for ($i = 0; $i < count($row_color); $i++) {
@@ -590,7 +590,7 @@ class Functions
             $temps = (!empty($temps)) ? $this->joinCols($temps, 'id_size') : array();
             $temps = (!empty($temps)) ? explode(",", $temps) : array();
         }
-        $row_size = $d->rawQuery("select * from table_size where date_deleted = 0 order by numb,id desc", array());
+        $row_size = $d->rawQuery("select * from table_size where date_deleted = 0 order by id desc", array());
 
         $str = '<select id="dataSize" name="dataSize[]" class="select multiselect" multiple="multiple" >';
         for ($i = 0; $i < count($row_size); $i++) {
@@ -690,14 +690,20 @@ class Functions
     {
         global $d;
 
-        $row = $d->rawQuery("select * from table_news where type = ? and date_deleted = 0 order by numb,id desc", array('hinh-thuc-thanh-toan'));
+        $momoPayment = array('slug' => 'momo', 'name' => 'Momo');
+        $vnpayPayment = array('slug' => 'vnpay', 'name' => 'VNPAY');
+
+        $row = $d->rawQuery("select * from table_news where type = ? order by id desc", array('hinh-thuc-thanh-toan'));
+        array_push($row, $momoPayment);
+        array_push($row, $vnpayPayment);
+
         $str = '<select id="order_payment" name="order_payment" class="form-control select2"><option value="0">Chọn hình thức thanh toán</option>';
         foreach ($row as $v) {
-            if (isset($_REQUEST['order_payment']) && ($v["id"] == (int) $_REQUEST['order_payment']))
+            if (isset($_REQUEST['order_payment']) && ($v["slug"] == $_REQUEST['order_payment']))
                 $selected = "selected";
             else
                 $selected = "";
-            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
+            $str .= '<option value=' . $v["slug"] . ' ' . $selected . '>' . $v["name"] . '</option>';
         }
         $str .= '</select>';
         return $str;

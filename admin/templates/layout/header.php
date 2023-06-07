@@ -1,3 +1,16 @@
+<?php
+$countNotify = 0;
+
+/* Order */
+$orderNotify = $d->rawQuery("select id from table_order where order_status = 'moidat'");
+$countNotify += count($orderNotify);
+
+/* Comment */
+$commentNotify = $d->rawQuery("select id from table_comment where find_in_set('new-admin',status)", array());
+$countNotify += count($commentNotify);
+
+?>
+
 <!-- Header -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
@@ -20,7 +33,7 @@
             </a>
             <ul aria-labelledby="dropdownSubMenu-info" class="dropdown-menu dropdown-menu-right border-0 shadow">
                 <li>
-                    <a href="index.php?com=user&act=edit&id=<?=$_SESSION['account']['id']?>" class="dropdown-item">
+                    <a href="index.php?com=user&act=edit&id=<?= $_SESSION['account']['id'] ?>" class="dropdown-item">
                         <i class="fas fa-user-cog"></i>
                         <span>Thông tin tài khoản</span>
                     </a>
@@ -39,7 +52,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-bs-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
+                <span class="badge badge-danger navbar-badge text-bold"><?= $countNotify ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Thông báo</span>
@@ -49,14 +62,14 @@
                     <span class="float-right text-muted text-sm">3 mins</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> Đơn hàng
-                    <span class="float-right text-muted text-sm">12 hours</span>
+                <a href="index.php?com=order&act=man" class="dropdown-item">
+                    <i class="fas fa-cart-arrow-down"></i> Đơn hàng
+                    <span class="float-right text-danger text-sm text-bold"><?= count($orderNotify) ?> đơn hàng mới</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
+                <a href="index.php?com=product&act=man&comment_status=new" class="dropdown-item">
+                <i class="fas fa-comment-dots"></i> Comments
+                    <span class="float-right text-danger text-sm text-bold"><?= count($commentNotify) ?> bình luận mới</span>
                 </a>
                 <div class="dropdown-divider"></div>
             </div>

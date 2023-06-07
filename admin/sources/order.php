@@ -37,7 +37,7 @@ function viewOrders()
 
     $where = "";
     $order_status = (isset($_REQUEST['order_status'])) ? htmlspecialchars($_REQUEST['order_status']) : '';
-    $order_payment = (isset($_REQUEST['order_payment'])) ? htmlspecialchars($_REQUEST['order_payment']) : 0;
+    $order_payment = (isset($_REQUEST['order_payment'])) ? htmlspecialchars($_REQUEST['order_payment']) : '';
     $order_date = (isset($_REQUEST['order_date'])) ? htmlspecialchars($_REQUEST['order_date']) : 0;
     $range_price = (isset($_REQUEST['range_price'])) ? htmlspecialchars($_REQUEST['range_price']) : 0;
     $city = (isset($_REQUEST['id_city'])) ? htmlspecialchars($_REQUEST['id_city']) : 0;
@@ -46,7 +46,7 @@ function viewOrders()
     if ($order_status)
         $where .= " and order_status='$order_status'";
     if ($order_payment)
-        $where .= " and order_payment=$order_payment";
+        $where .= " and order_payment='$order_payment'";
     if ($order_date) {
         $order_date = explode("-", $order_date);
         $date_from = trim($order_date[0] . ' 12:00:00 AM');
@@ -75,9 +75,9 @@ function viewOrders()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_order where id > 0 and date_deleted = 0 $where order by date_created desc $limit";
+    $sql = "select * from table_order where id > 0 $where order by date_created desc $limit";
     $items = $d->rawQuery($sql);
-    $sqlNum = "select count(*) as 'num' from table_order where id > 0 and date_deleted = 0 $where order by date_created desc";
+    $sqlNum = "select count(*) as 'num' from table_order where id > 0 $where order by date_created desc";
     $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=order&act=man" . $strUrl;

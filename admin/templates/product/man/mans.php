@@ -38,8 +38,8 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
         </div>
     </div>
     <div class="card-footer form-group-category text-sm bg-light row">
-        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('product', 'list', 'Chọn loại sản phẩm') ?></div>
-        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('product', 'brand', 'Chọn hãng') ?></div>
+        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('list', 'Chọn loại sản phẩm') ?></div>
+        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('brand', 'Chọn hãng') ?></div>
     </div>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
@@ -90,8 +90,8 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                         <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                     </div>
                                 </td>
-                                <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="table_product">
+                                <td class="align-middle text-center">
+                                    <?= $i+1 ?>
                                 </td>
                                 <td class="align-middle">
                                     <a href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>&album_table=gallery" title="<?= $items[$i]['name'] ?>">

@@ -5,7 +5,9 @@ if (!defined('SOURCES')) die("Error");
 $strUrl = "";
 $strUrl .= (isset($_REQUEST['id_list'])) ? "&id_list=" . htmlspecialchars($_REQUEST['id_list']) : "";
 $strUrl .= (isset($_REQUEST['id_brand'])) ? "&id_brand=" . htmlspecialchars($_REQUEST['id_brand']) : "";
+$strUrl .= (isset($_REQUEST['album_table'])) ? "&album_table=" . htmlspecialchars($_REQUEST['album_table']) : "";
 $strUrl .= (isset($_REQUEST['keyword'])) ? "&keyword=" . htmlspecialchars($_REQUEST['keyword']) : "";
+if (!empty($_REQUEST['comment_status'])) $strUrl .= "&comment_status=" . htmlspecialchars($_REQUEST['comment_status']);
 
 switch ($act) {
         /* Product */
@@ -121,7 +123,7 @@ function viewProducts()
         $idcomment = (!empty($comment)) ? $func->joinCols($comment, 'id_parent') : 0;
         $where .= " and id in ($idcomment)";
     }
-    
+
 
     if (isset($_REQUEST['keyword'])) {
         $keyword = htmlspecialchars($_REQUEST['keyword']);
@@ -130,8 +132,8 @@ function viewProducts()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_product where id > 0 $where and date_deleted = 0 order by numb,id desc $limit", array());
-    $sqlNum = "select count(*) as 'num' from table_product where id > 0 $where and date_deleted = 0 order by numb,id desc";
+    $items = $d->rawQuery("select * from table_product where id > 0 $where order by id desc $limit", array());
+    $sqlNum = "select count(*) as 'num' from table_product where id > 0 $where order by id desc";
     $count = $d->rawQueryOne($sqlNum, array());
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=man" . $strUrl;
@@ -155,7 +157,7 @@ function editProduct()
         if (empty($item)) {
             $func->transfer("Không có dữ liệu", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
         } else {
-            $gallery = $d->rawQuery("select * from table_gallery where id_parent = ? order by numb,id desc", array($id));
+            $gallery = $d->rawQuery("select * from table_gallery where id_parent = ? order by id desc", array($id));
         }
     }
 }
@@ -309,21 +311,16 @@ function saveProduct()
                 $d->rawQuery("delete from table_product_color where id_product = ?", array($id));
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id);
+            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit" . $strUrl . "&id=" . $id);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id, false);
+            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit" . $strUrl . "&id=" . $id, false);
         }
     } else {
         $data['date_created'] = time();
-        /*lay stt*/
-        /* $list_numb = $d->rawQuery("select numb from table_product order by numb desc ", array());
-        $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : 1; */
 
         if ($d->insert('table_product', $data)) {
             $id_insert = $d->getLastInsertId();
 
-            /*update stt*/
-            /* $d->rawQuery("update table_product set numb = ? where id = " . $id_insert, array($new_numb)); */
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
@@ -335,7 +332,7 @@ function saveProduct()
                 }
             }
 
-            $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit&page=" . $curPage . $strUrl . "&id=" . $id_insert);
+            $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit" . $strUrl . "&id=" . $id_insert);
         } else {
             $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
         }
@@ -383,8 +380,8 @@ function viewLists()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_product_list where id > 0 $where and date_deleted = 0 order by numb,id desc $limit", array());
-    $sqlNum = "select count(*) as 'num' from table_product_list where id > 0 $where and date_deleted = 0 order by numb,id desc";
+    $items = $d->rawQuery("select * from table_list where id > 0 $where order by id desc $limit", array());
+    $sqlNum = "select count(*) as 'num' from table_list where id > 0 $where order by id desc";
     $count = $d->rawQueryOne($sqlNum, array());
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=man_list" . $strUrl;
@@ -402,7 +399,7 @@ function editList()
     if (empty($id)) {
         $func->transfer("Không nhận được dữ liệu", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl, false);
     } else {
-        $item = $d->rawQueryOne("select * from table_product_list where id = ? limit 0,1", array($id));
+        $item = $d->rawQueryOne("select * from table_list where id = ? limit 0,1", array($id));
         if (empty($item)) {
             $func->transfer("Không có dữ liệu", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl, false);
         }
@@ -488,18 +485,18 @@ function saveList()
         $data['date_updated'] = time();
         $d->where('id', $id);
 
-        if ($d->update('table_product_list', $data)) {
+        if ($d->update('table_list', $data)) {
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
                 if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
-                    $row = $d->rawQueryOne("select id, photo from table_product_list where id = ? limit 0,1", array($id));
+                    $row = $d->rawQueryOne("select id, photo from table_list where id = ? limit 0,1", array($id));
                     if (!empty($row)) {
                         unlink(UPLOAD_PRODUCT . $row['photo']);
                     }
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id);
-                    $d->update('table_product_list', $photoUpdate);
+                    $d->update('table_list', $photoUpdate);
                     unset($photoUpdate);
                 }
             }
@@ -510,22 +507,17 @@ function saveList()
         }
     } else {
         $data['date_created'] = time();
-        /*lay stt*/
-        $list_numb = $d->rawQuery("select numb from table_product_list order by numb desc ", array());
-        $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : 1;
 
-        if ($d->insert('table_product_list', $data)) {
+        if ($d->insert('table_list', $data)) {
             $id_insert = $d->getLastInsertId();
 
-            /*update stt*/
-            $d->rawQuery("update table_product_list set numb = ? where id = " . $id_insert, array($new_numb));
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
                 if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id_insert);
-                    $d->update('table_product_list', $photoUpdate);
+                    $d->update('table_list', $photoUpdate);
                     unset($photoUpdate);
                 }
             }
@@ -543,9 +535,9 @@ function deleteList()
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     if ($id) {
         /* Lấy dữ liệu */
-        $row = $d->rawQueryOne("select id, photo from table_product_list where id = ? limit 0,1", array($id));
+        $row = $d->rawQueryOne("select id, photo from table_list where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("delete from table_product_list where id = ?", array($id));
+            $d->rawQuery("delete from table_list where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl, false);
@@ -555,9 +547,9 @@ function deleteList()
         for ($i = 0; $i < count($listid); $i++) {
             $id = htmlspecialchars($listid[$i]);
             /* Lấy dữ liệu */
-            $row = $d->rawQueryOne("select id, photo from table_product_list where id = ? limit 0,1", array($id));
+            $row = $d->rawQueryOne("select id, photo from table_list where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("delete from table_product_list where id = ?", array($id));
+                $d->rawQuery("delete from table_list where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_list&page=" . $curPage . $strUrl);
@@ -578,8 +570,8 @@ function viewBrands()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_product_brand where id > 0 $where and date_deleted = 0 order by numb,id desc $limit", array());
-    $sqlNum = "select count(*) as 'num' from table_product_brand where id > 0 $where and date_deleted = 0 order by numb,id desc";
+    $items = $d->rawQuery("select * from table_brand where id > 0 $where order by id desc $limit", array());
+    $sqlNum = "select count(*) as 'num' from table_brand where id > 0 $where order by id desc";
     $count = $d->rawQueryOne($sqlNum, array());
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=man_brand" . $strUrl;
@@ -597,7 +589,7 @@ function editBrand()
     if (empty($id)) {
         $func->transfer("Không nhận được dữ liệu", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl, false);
     } else {
-        $item = $d->rawQueryOne("select * from table_product_brand where id = ? limit 0,1", array($id));
+        $item = $d->rawQueryOne("select * from table_brand where id = ? limit 0,1", array($id));
         if (empty($item)) {
             $func->transfer("Không có dữ liệu", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl, false);
         }
@@ -683,18 +675,18 @@ function saveBrand()
         $data['date_updated'] = time();
         $d->where('id', $id);
 
-        if ($d->update('table_product_brand', $data)) {
+        if ($d->update('table_brand', $data)) {
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
                 if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
-                    $row = $d->rawQueryOne("select id, photo from table_product_brand where id = ? limit 0,1", array($id));
+                    $row = $d->rawQueryOne("select id, photo from table_brand where id = ? limit 0,1", array($id));
                     if (!empty($row)) {
                         unlink(UPLOAD_PRODUCT . $row['photo']);
                     }
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id);
-                    $d->update('table_product_brand', $photoUpdate);
+                    $d->update('table_brand', $photoUpdate);
                     unset($photoUpdate);
                 }
             }
@@ -705,22 +697,17 @@ function saveBrand()
         }
     } else {
         $data['date_created'] = time();
-        /*lay stt*/
-        $brand_numb = $d->rawQuery("select numb from table_product_brand order by numb desc ", array());
-        $new_numb = (!empty($brand_numb)) ? $brand_numb[0]['numb'] + 1 : 1;
 
-        if ($d->insert('table_product_brand', $data)) {
+        if ($d->insert('table_brand', $data)) {
             $id_insert = $d->getLastInsertId();
 
-            /*update stt*/
-            $d->rawQuery("update table_product_brand set numb = ? where id = " . $id_insert, array($new_numb));
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
                 if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id_insert);
-                    $d->update('table_product_brand', $photoUpdate);
+                    $d->update('table_brand', $photoUpdate);
                     unset($photoUpdate);
                 }
             }
@@ -738,9 +725,9 @@ function deleteBrand()
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     if ($id) {
         /* Lấy dữ liệu */
-        $row = $d->rawQueryOne("select id, photo from table_product_brand where id = ? limit 0,1", array($id));
+        $row = $d->rawQueryOne("select id, photo from table_brand where id = ? limit 0,1", array($id));
         if (!empty($row)) {
-            $d->rawQuery("delete from table_product_brand where id = ?", array($id));
+            $d->rawQuery("delete from table_brand where id = ?", array($id));
             $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl);
         } else {
             $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl, false);
@@ -750,9 +737,9 @@ function deleteBrand()
         for ($i = 0; $i < count($listid); $i++) {
             $id = htmlspecialchars($listid[$i]);
             /* Lấy dữ liệu */
-            $row = $d->rawQueryOne("select id, photo from table_product_brand where id = ? limit 0,1", array($id));
+            $row = $d->rawQueryOne("select id, photo from table_brand where id = ? limit 0,1", array($id));
             if (!empty($row)) {
-                $d->rawQuery("delete from table_product_brand where id = ?", array($id));
+                $d->rawQuery("delete from table_brand where id = ?", array($id));
             }
         }
         $func->transfer("Xóa dữ liệu thành công", "index.php?com=product&act=man_brand&page=" . $curPage . $strUrl);
@@ -774,8 +761,8 @@ function viewSizes()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_size where id > 0 $where and date_deleted = 0 order by numb,id desc $limit", array());
-    $sqlNum = "select count(*) as 'num' from table_size where id > 0 $where and date_deleted = 0 order by numb,id desc";
+    $items = $d->rawQuery("select * from table_size where id > 0 $where order by id desc $limit", array());
+    $sqlNum = "select count(*) as 'num' from table_size where id > 0 $where order by id desc";
     $count = $d->rawQueryOne($sqlNum, array());
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=man_size" . $strUrl;
@@ -866,15 +853,9 @@ function saveSize()
         }
     } else {
         $data['date_created'] = time();
-        /*lay stt*/
-        $size_numb = $d->rawQuery("select numb from table_size order by numb desc ", array());
-        $new_numb = (!empty($size_numb)) ? $size_numb[0]['numb'] + 1 : 1;
 
         if ($d->insert('table_size', $data)) {
             $id_insert = $d->getLastInsertId();
-
-            /*update stt*/
-            $d->rawQuery("update table_size set numb = ? where id = " . $id_insert, array($new_numb));
 
             $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_size&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
@@ -925,8 +906,8 @@ function viewColors()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_color where id > 0 $where and date_deleted = 0 order by numb,id desc $limit", array());
-    $sqlNum = "select count(*) as 'num' from table_color where id > 0 $where and date_deleted = 0 order by numb,id desc";
+    $items = $d->rawQuery("select * from table_color where id > 0 $where order by id desc $limit", array());
+    $sqlNum = "select count(*) as 'num' from table_color where id > 0 $where order by id desc";
     $count = $d->rawQueryOne($sqlNum, array());
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=man_color" . $strUrl;
@@ -1021,15 +1002,10 @@ function saveColor()
         }
     } else {
         $data['date_created'] = time();
-        /*lay stt*/
-        $color_numb = $d->rawQuery("select numb from table_color order by numb desc ", array());
-        $new_numb = (!empty($color_numb)) ? $color_numb[0]['numb'] + 1 : 1;
 
         if ($d->insert('table_color', $data)) {
             $id_insert = $d->getLastInsertId();
 
-            /*update stt*/
-            $d->rawQuery("update table_color set numb = ? where id = " . $id_insert, array($new_numb));
 
             $func->transfer("Lưu dữ liệu thành công", "index.php?com=product&act=edit_color&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
