@@ -1,7 +1,7 @@
 <?php
 
 if (empty($_GET["partnerCode"])) {
-    $func->transfer2("Dữ liệu không có thực.", $configBase, false);
+    $func->transfer("Dữ liệu không có thực.", $configBase, false);
 }
 
 if (!empty($_GET["partnerCode"])) {

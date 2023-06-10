@@ -5,9 +5,9 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
             <div class="image">
                 <?php
-                            $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($_SESSION['account']['id']));
+                $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($_SESSION['account']['id']));
 
-                 echo $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo'], 'alt' => $_SESSION['account']['fullname']]) 
+                echo $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo'], 'alt' => $_SESSION['account']['fullname']])
                 ?>
             </div>
             <div class="info">
@@ -54,7 +54,18 @@
                         <li class="nav-item">
                             <a href="index.php?com=product&act=man_list" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Loại sản phẩm</p>
+                                <p>Loại sản phẩm (C1)</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'product' && ($act == 'man_cat' || $act == 'add_cat' || $act == 'edit_cat'))
+                            $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=product&act=man_cat" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Loại sản phẩm (C2)</p>
                             </a>
                         </li>
 

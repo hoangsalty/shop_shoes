@@ -9,9 +9,8 @@ $router->setBasePath($config['database']['url']);
 
 /* Default admin route (admin index)*/
 $router->map('GET', ADMIN, function () {
-    global $config;
-
-    $this->redirect($config['database']['url'] . ADMIN . "/index.php");
+    global $func, $config;
+    $func->redirect($config['database']['url'] . ADMIN . "/index.php");
     exit;
 });
 
@@ -45,8 +44,8 @@ $optsetting = (!empty($setting['options'])) ? json_decode($setting['options'], t
 /* Tối ưu link */
 $requick = array(
     /* Sản phẩm */
-    array("tbl" => "list", "field" => "id_list", "source" => "product", "com" => "san-pham"),
-    array("tbl" => "brand", "field" => "id_brand", "source" => "product", "com" => "san-pham"),
+    array("tbl" => "product_list", "field" => "id_list", "source" => "product", "com" => "san-pham"),
+    array("tbl" => "product_brand", "field" => "id_brand", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
     /* Thư viện ảnh */

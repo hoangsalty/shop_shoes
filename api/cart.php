@@ -37,10 +37,8 @@ if ($cmd == 'add-cart' && $id > 0) {
 
     echo json_encode($data);
 } else if ($cmd == 'delete-cart' && $code != '') {
-    if (!empty($config['order']['ship'])) {
         $shipData = (!empty($ward)) ? $func->getInfoDetail('ship_price', "ward", $ward) : array();
         $ship = (!empty($shipData)) ? $shipData['ship_price'] : 0;
-    }
 
     $cart->removeProduct($code);
     $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
@@ -170,5 +168,4 @@ if ($cmd == 'add-cart' && $id > 0) {
             <?php } ?>
         </div>
     </form>
-<?php }
-?>
+<?php } ?>

@@ -26,7 +26,7 @@ function saveStatic()
 
     /* Check post */
     if (empty($_REQUEST)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=static&act=update&type=" . $type, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=static&act=update&type=" . $type, false);
     }
 
     /* Post dữ liệu */
@@ -112,9 +112,9 @@ function saveStatic()
                 }
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
         } else {
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
         }
     } else {
         $data['date_created'] = time();
@@ -133,9 +133,9 @@ function saveStatic()
                 }
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=static&act=update&type=" . $type, false);
+            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=static&act=update&type=" . $type, false);
         }
     }
 }

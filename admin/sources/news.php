@@ -62,11 +62,11 @@ function editNew()
         $id = 0;
 
     if (empty($id)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
     } else {
         $item = $d->rawQueryOne("select * from table_news where id = ? limit 0,1", array($id));
         if (empty($item)) {
-            $func->transfer("Không có dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+            $func->transferAdmin("Không có dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
         }
     }
 }
@@ -76,7 +76,7 @@ function saveNew()
     global $d, $strUrl, $func, $flash, $curPage, $type;
     /* Check post */
     if (empty($_REQUEST)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
     }
 
     /* Post dữ liệu */
@@ -172,9 +172,9 @@ function saveNew()
                 }
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id);
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id, false);
+            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id, false);
         }
     } else {
         $data['date_created'] = time();
@@ -193,9 +193,9 @@ function saveNew()
                 }
             }
 
-            $func->transfer("Lưu dữ liệu thành công", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id_insert);
+            $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
-            $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+            $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
         }
     }
 }
@@ -209,9 +209,9 @@ function deleteNew()
         $row = $d->rawQueryOne("select id, photo from table_news where id = ? limit 0,1", array($id));
         if (!empty($row)) {
             $d->rawQuery("delete from table_news where id = ?", array($id));
-            $func->transfer("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
+            $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
         } else {
-            $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+            $func->transferAdmin("Xóa dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
         }
     } elseif (isset($_REQUEST['listid'])) {
         $listid = explode(",", $_REQUEST['listid']);
@@ -223,8 +223,8 @@ function deleteNew()
                 $d->rawQuery("delete from table_news where id = ?", array($id));
             }
         }
-        $func->transfer("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
+        $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
     } else {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
     }
 }

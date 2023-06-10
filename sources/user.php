@@ -8,13 +8,13 @@ switch ($action) {
     case 'thong-tin':
         $template = "account/info";
         if (empty($_SESSION['account']['active']))
-            $func->transfer2("Trang không tồn tại", $configBase, false);
+            $func->transfer("Trang không tồn tại", $configBase, false);
         infoMember();
         break;
 
     case 'dang-xuat':
         if (empty($_SESSION['account']['active']))
-            $func->transfer2("Trang không tồn tại", $configBase, false);
+            $func->transfer("Trang không tồn tại", $configBase, false);
         logout();
 
     default:
@@ -123,13 +123,13 @@ function infoMember()
                     }
                 }
 
-                $func->transfer2("Cập nhật thông tin thành công", $configBase . "account/thong-tin");
+                $func->transfer("Cập nhật thông tin thành công", $configBase . "account/thong-tin");
             } else {
-                $func->transfer2("Cập nhật thông tin thất bại", $configBase . "account/thong-tin", false);
+                $func->transfer("Cập nhật thông tin thất bại", $configBase . "account/thong-tin", false);
             }
         }
     } else {
-        $func->transfer2("Trang không tồn tại", $configBase, false);
+        $func->transfer("Trang không tồn tại", $configBase, false);
     }
 }
 

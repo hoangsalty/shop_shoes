@@ -1,11 +1,11 @@
 <?php
 $linkView = $configBase;
-$linkMan = $linkFilter = "index.php?com=product&act=man_brand";
-$linkAdd = "index.php?com=product&act=add_brand";
-$linkEdit = "index.php?com=product&act=edit_brand";
-$linkDelete = "index.php?com=product&act=delete_brand";
+$linkMan = $linkFilter = "index.php?com=product&act=man_cat";
+$linkAdd = "index.php?com=product&act=add_cat";
+$linkEdit = "index.php?com=product&act=edit_cat";
+$linkDelete = "index.php?com=product&act=delete_cat";
 
-$status = array("hienthi" => "Hiển thị");
+$status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 ?>
 
 <!-- Content Header -->
@@ -14,7 +14,7 @@ $status = array("hienthi" => "Hiển thị");
         <div class="row">
             <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý hãng sản phẩm</li>
+                <li class="breadcrumb-item active">Quản lý loại sản phẩm category</li>
             </ol>
         </div>
     </div>
@@ -38,7 +38,7 @@ $status = array("hienthi" => "Hiển thị");
     </div>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
-            <h3 class="card-title">Danh sách hãng sản phẩm</h3>
+            <h3 class="card-title">Danh sách loại sản phẩm category</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -72,7 +72,9 @@ $status = array("hienthi" => "Hiển thị");
                     </tbody>
                 <?php } else { ?>
                     <tbody>
-                        <?php for ($i = 0; $i < count($items); $i++) { ?>
+                        <?php for ($i = 0; $i < count($items); $i++) {
+                            $linkID = "";
+                            if ($items[$i]['id_list']) $linkID .= "&id_list=" . $items[$i]['id_list']; ?>
                             <tr>
                                 <td class="align-middle">
                                     <div class="custom-control custom-checkbox my-checkbox">
@@ -81,18 +83,18 @@ $status = array("hienthi" => "Hiển thị");
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <?= $i+1 ?>
+                                    <?= $i + 1 ?>
                                 </td>
                                 <td class="align-middle">
-                                    <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
+                                    <a href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
                                         <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 80, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
                                     </a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
                                         <a class="text-primary mr-3" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
-                                        <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                        <a class="text-info mr-3" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                         <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>
@@ -100,7 +102,7 @@ $status = array("hienthi" => "Hiển thị");
                                 <?php foreach ($status as $key => $value) { ?>
                                     <td class="align-middle text-center">
                                         <div class="custom-control custom-checkbox my-checkbox">
-                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_product_brand" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
+                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_product_cat" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
                                             <label for="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                         </div>
                                     </td>

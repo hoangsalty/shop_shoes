@@ -9,7 +9,7 @@ $id = (!empty($params['id'])) ? $params['id'] : 0;
 $com = (!empty($params['com'])) ? $params['com'] : '';
 $data = array('success' => true, 'msg' => 'Upload thành công');
 
-$album_table = (!empty($params['album_table'])) ? $params['album_table'] : '';
+$album_table = (!empty($_POST['album_table'])) ? $_POST['album_table'] : '';
 $table = "table_" . $album_table;
 
 /* Xử lý $_FILE - Path image */

@@ -18,7 +18,7 @@ if ($cmd == 'change-status' && $id > 0) {
         <?php
         $iduser = $_SESSION["account"]['id'];
         if ($where_select !== 'undefined') $where .= " and order_status = '$where_select'";
-        $donhang = $d->rawQuery("select * from table_order where id_user = ? $where", array($iduser));
+        $donhang = $d->rawQuery("select * from table_order where id_user = ? $where order by date_created desc", array($iduser));
         if (!empty($donhang)) { ?>
             <?php foreach ($donhang as $v1) {
                 $chitiet = $d->rawQuery("select * from table_order_detail where id_order = ?", array($v1['id']));

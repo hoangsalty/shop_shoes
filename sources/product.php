@@ -14,9 +14,9 @@ if ($id != '') {
     $d->where('id', $rowDetail['id']);
     $d->update('table_product', $views);
     /* Lấy danh mục */
-    $productList = $d->rawQueryOne("select * from table_list where id = ? and find_in_set('hienthi',status) limit 0,1", array($rowDetail['id_list']));
+    $productList = $d->rawQueryOne("select * from table_product_list where id = ? and find_in_set('hienthi',status) limit 0,1", array($rowDetail['id_list']));
     /* Lấy thương hiệu */
-    $productBrand = $d->rawQueryOne("select * from table_brand where id = ? and find_in_set('hienthi',status)", array($rowDetail['id_brand']));
+    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? and find_in_set('hienthi',status)", array($rowDetail['id_brand']));
     /* Lấy gallery */
     $rowDetailPhoto = $d->rawQuery("select photo from table_gallery where id_parent = ? order by id desc", array($rowDetail['id']));
     /* Lấy màu */
@@ -59,7 +59,7 @@ if ($id != '') {
     $breadcrumbs = $breadcr->get();
 } else if ($idl != '') {
     /* Lấy cấp 1 detail */
-    $productList = $d->rawQueryOne("select * from table_list where id = ? limit 0,1", array($idl));
+    $productList = $d->rawQueryOne("select * from table_product_list where id = ? limit 0,1", array($idl));
     $titleCate = $productList['name'];
 
     /* Lấy sản phẩm */
@@ -85,7 +85,7 @@ if ($id != '') {
     $breadcrumbs = $breadcr->get();
 } else if ($idb != '') {
     /* Lấy brand detail */
-    $productBrand = $d->rawQueryOne("select * from table_brand where id = ? limit 0,1", array($idb));
+    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? limit 0,1", array($idb));
     $titleCate = $productBrand['name'];
 
     /* Lấy sản phẩm */

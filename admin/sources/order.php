@@ -131,12 +131,12 @@ function editOrder()
     $id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
 
     if (empty($id)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=order&act=man&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=order&act=man&page=" . $curPage, false);
     } else {
         $item = $d->rawQueryOne("select * from table_order where id = ? limit 0,1", array($id));
 
         if (empty($item)) {
-            $func->transfer("Dữ liệu không có thực", "index.php?com=order&act=man&page=" . $curPage, false);
+            $func->transferAdmin("Dữ liệu không có thực", "index.php?com=order&act=man&page=" . $curPage, false);
         } else {
             /* Lấy chi tiết đơn hàng */
             $order_detail = $d->rawQuery("select * from table_order_detail where id_order = ? order by id desc", array($id));
@@ -150,7 +150,7 @@ function saveOrder()
 
     /* Check post */
     if (empty($_REQUEST)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=order&act=man&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=order&act=man&page=" . $curPage, false);
     }
 
     /* Post dữ liệu */
@@ -166,11 +166,11 @@ function saveOrder()
     if ($id) {
         $d->where('id', $id);
         if ($d->update('table_order', $data)) {
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=order&act=man&page=" . $curPage);
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=order&act=man&page=" . $curPage);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=order&act=man&page=" . $curPage, false);
+            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=order&act=man&page=" . $curPage, false);
         }
     } else {
-        $func->transfer("Dữ liệu rỗng", "index.php?com=order&act=man&page=" . $curPage, false);
+        $func->transferAdmin("Dữ liệu rỗng", "index.php?com=order&act=man&page=" . $curPage, false);
     }
 }

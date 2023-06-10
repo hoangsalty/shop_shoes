@@ -698,7 +698,6 @@ FRAMEWORK.Cart = function () {
       success: function (result) {
         $("#popup-cart .modal-body").html(result);
         $("#popup-cart").modal("show");
-        holdonClose();
       },
     });
   });

@@ -345,17 +345,17 @@ class Functions
         exit();
     }
     /* Transfer */
-    public function transfer($msg = '', $page = '', $numb1 = true)
+    public function transferAdmin($msg = '', $page = '', $numb1 = true)
     {
         global $configBase;
         $basehref = $configBase;
         $showtext = $msg;
-        $page_transfer = ADMIN . "/" . $page;
+        $page_transfer = ADMIN . '/' . $page;
         $numb = $numb1;
         include("../templates/layout/transfer.php");
         exit();
     }
-    public function transfer2($msg = '', $page = '', $numb1 = true)
+    public function transfer($msg = '', $page = '', $numb1 = true)
     {
         global $configBase;
         $basehref = $configBase;
@@ -458,7 +458,7 @@ class Functions
         $where = '';
         $id_parent = 'id_' . $level;
 
-        $rows = $d->rawQuery("select name, id from table_" . $level . " where id > 0 " . $where . " order by id desc", array());
+        $rows = $d->rawQuery("select name, id from table_product_" . $level . " where id > 0 " . $where . " order by id desc", array());
         $str = '<select id="' . $id_parent . '" name="' . $id_parent . '" onchange="onchangeCategory($(this))" class="form-control filter-category select2"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
             if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
@@ -478,7 +478,7 @@ class Functions
         $where = '';
         $id_parent = 'id_' . $level;
 
-        $rows = $d->rawQuery("select name, id from table_" . $level . " where id > 0 " . $where . " order by id desc", array());
+        $rows = $d->rawQuery("select name, id from table_product_" . $level . " where id > 0 " . $where . " order by id desc", array());
         $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" class="form-control select2 ' . $class_select . '"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
             if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
@@ -517,8 +517,8 @@ class Functions
             $slug = trim($data['slug']);
             if (!empty($slug)) {
                 $table = array(
-                    "table_list",
-                    "table_brand",
+                    "table_product_list",
+                    "table_product_brand",
                     "table_product",
                     "table_news",
                     "table_static",
@@ -564,7 +564,7 @@ class Functions
             $temps = (!empty($temps)) ? $this->joinCols($temps, 'id_color') : array();
             $temps = (!empty($temps)) ? explode(",", $temps) : array();
         }
-        $row_color = $d->rawQuery("select * from table_color where date_deleted = 0 order by id desc", array());
+        $row_color = $d->rawQuery("select * from table_color where find_in_set('hienthi',status) order by id desc", array());
 
         $str = '<select id="dataColor" name="dataColor[]" class="select multiselect" multiple="multiple" >';
         for ($i = 0; $i < count($row_color); $i++) {
@@ -590,7 +590,7 @@ class Functions
             $temps = (!empty($temps)) ? $this->joinCols($temps, 'id_size') : array();
             $temps = (!empty($temps)) ? explode(",", $temps) : array();
         }
-        $row_size = $d->rawQuery("select * from table_size where date_deleted = 0 order by id desc", array());
+        $row_size = $d->rawQuery("select * from table_size where find_in_set('hienthi',status) order by id desc", array());
 
         $str = '<select id="dataSize" name="dataSize[]" class="select multiselect" multiple="multiple" >';
         for ($i = 0; $i < count($row_size); $i++) {

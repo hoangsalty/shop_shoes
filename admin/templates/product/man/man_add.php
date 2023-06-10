@@ -6,8 +6,7 @@ $linkMan = "index.php?com=product&act=man";
 if ($act == 'add') $linkFilter = "index.php?com=product&act=add";
 else if ($act == 'edit') $linkFilter = "index.php?com=product&act=edit&id=" . $id;
 
-if ($act == 'add') $linkSave = "index.php?com=product&act=save";
-else if ($act == 'edit') $linkSave = "index.php?com=product&act=save&id=" . $id;
+$linkSave = "index.php?com=product&act=save";
 
 $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 ?>
@@ -31,6 +30,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
+            <input type="hidden" name="id" value="<?= (isset($item['id']) && $item['id'] > 0) ? $item['id'] : '' ?>">
         </div>
 
         <?= $flash->getMessages('admin') ?>
@@ -135,9 +135,13 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                     </div>
                     <div class="card-body">
                         <div class="form-group-category row">
-                            <div class="col-xl-6 col-sm-4">
-                                <label class="d-block" for="id_list">Loại sản phẩm:</label>
+                            <div class="form-group col-xl-6 col-sm-4">
+                                <label class="d-block" for="id_list">Loại sản phẩm (C1):</label>
                                 <?= $func->getAjaxCategory('list', 'Chọn loại') ?>
+                            </div>
+                            <div class="form-group col-xl-6 col-sm-4">
+                                <label class="d-block" for="id_cat">Loại sản phẩm (C2):</label>
+                                <?= $func->getAjaxCategory('cat', 'Chọn loại') ?>
                             </div>
                             <div class="form-group col-xl-6 col-sm-4">
                                 <label class="d-block" for="id_brand">Danh mục hãng:</label>
@@ -186,9 +190,11 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                         </div>
                     </div>
                     <div class="card-body">
+                        <input type="hidden" name="gallery_table" id="gallery_table" value="gallery">
+
                         <div class="form-group">
                             <label for="filer-gallery" class="label-filer-gallery mb-3">Album hình: (.jpg|.gif|.png|.jpeg|.gif)</label>
-                            <input type="file" name="files[]" id="filer-gallery" multiple="multiple">
+                            <input type="file" name="files[]" id="filer-gallery" data-table="gallery" multiple="multiple">
                             <input type="hidden" class="col-filer" value="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
                         </div>
                         <div class="form-group form-group-gallery">

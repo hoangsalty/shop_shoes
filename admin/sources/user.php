@@ -5,7 +5,7 @@ if (!defined('SOURCES'))
 switch ($act) {
     case "login":
         if (!empty($_SESSION['account']['active']))
-            $func->transfer("Trang không tồn tại", "index.php", false);
+            $func->transferAdmin("Trang không tồn tại", "index.php", false);
         else
             $template = "user/login";
         break;
@@ -60,9 +60,9 @@ function ViewUsers()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_user where date_deleted = 0 and id <> 1 $where order by id desc $limit";
+    $sql = "select * from table_user where id <> 1 $where order by id desc $limit";
     $items = $d->rawQuery($sql);
-    $sqlNum = "select count(*) as 'num' from table_user where date_deleted = 0 and id <> 1 $where order by id desc";
+    $sqlNum = "select count(*) as 'num' from table_user where id <> 1 $where order by id desc";
     $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=user&act=man";
@@ -76,7 +76,7 @@ function editUser()
     $id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
 
     if ($act == 'edit' && empty($id)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
     } else {
         if ($act == 'info' && !empty($_SESSION['account']['username'])) {
             $item = $d->rawQueryOne("select * from table_user where username = ? limit 0,1", array($_SESSION['account']['username']));
@@ -84,7 +84,7 @@ function editUser()
             $item = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($id));
         }
         if (empty($item)) {
-            $func->transfer("Dữ liệu không có thực", "index.php?com=user&act=man&page=" . $curPage, false);
+            $func->transferAdmin("Dữ liệu không có thực", "index.php?com=user&act=man&page=" . $curPage, false);
         }
     }
 }
@@ -95,7 +95,7 @@ function saveUser()
 
     /* Check post */
     if (empty($_POST)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
     }
 
     /* Post dữ liệu */
@@ -151,9 +151,9 @@ function saveUser()
         $d->where('username', $_SESSION['account']['username']);
         if ($d->update('table_user', $data)) {
             unset($_SESSION['account']);
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=user&act=login");
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=user&act=login");
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=info");
+            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=info");
         }
     } else {
         if ($data) {
@@ -286,9 +286,9 @@ function saveUser()
                     }
                 }
 
-                $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=user&act=man&page=" . $curPage);
+                $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=user&act=man&page=" . $curPage);
             } else {
-                $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=man&page=" . $curPage, false);
+                $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=man&page=" . $curPage, false);
             }
         } else {
             $data['date_created'] = time();
@@ -311,9 +311,9 @@ function saveUser()
                     }
                 }
 
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=user&act=man&page=" . $curPage);
+                $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=user&act=man&page=" . $curPage);
             } else {
-                $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=user&act=man", false);
+                $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=user&act=man", false);
             }
         }
     }

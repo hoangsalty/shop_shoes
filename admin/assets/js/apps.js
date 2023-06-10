@@ -172,6 +172,8 @@ $(document).ready(function () {
     }
     /* Filer */
     if ($('#filer-gallery').length) {
+        var table = $("#gallery_table")[0].value;        ;
+
         $('#filer-gallery').filer({
             limit: null,
             maxSize: null,
@@ -205,6 +207,7 @@ $(document).ready(function () {
                 url: 'api/upload.php',
                 data: {
                     'params': QUERY_STRING,
+                    'album_table': table,
                 },
                 type: 'POST',
                 enctype: 'multipart/form-data',

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 06:51 AM
+-- Generation Time: Jun 10, 2023 at 06:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,35 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `db`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `table_brand`
---
-
-CREATE TABLE `table_brand` (
-  `id` int(11) NOT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `date_created` int(11) DEFAULT 0,
-  `date_updated` int(11) DEFAULT 0,
-  `date_deleted` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_brand`
---
-
-INSERT INTO `table_brand` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(9, 'nike', '', 'Nike', 'brand-1-5394-2516-5979.jpg', 'hienthi', 1679827424, 1685950295, 0),
-(10, 'adidas', '', 'Adidas', 'brand-3-1828-5079-3631.jpg', 'hienthi', 1679827434, 0, 0),
-(11, 'converse', '', 'Converse', 'brand-4-3020-1744-9516.jpg', 'hienthi', 1679827445, 0, 0),
-(12, 'reebok', '', 'Reebok', 'brand-5-3471-2234-2531.jpg', 'hienthi', 1679827457, 0, 0),
-(13, 'puma', '', 'Puma', 'brand-7-2941-8624-7136.jpg', 'hienthi', 1679827467, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -159,7 +130,7 @@ CREATE TABLE `table_color` (
 
 INSERT INTO `table_color` (`id`, `name`, `color`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (7, 'Đen', '000000', 'hienthi', 1679827474, 0, 0),
-(8, 'Hồng', 'FC98FF', 'hienthi', 1679827483, 0, 0);
+(8, 'Hồng', 'FC98FF', 'hienthi', 1679827483, 1686413557, 0);
 
 -- --------------------------------------------------------
 
@@ -992,12 +963,16 @@ CREATE TABLE `table_gallery` (
 --
 
 INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(31, 1, '10-8910.png', '', 'hienthi', 1679832226, 0, 0),
-(32, 1, '11-6285.png', '', 'hienthi', 1679832226, 0, 0),
-(34, 1, '1-1281.png', '', 'hienthi', 1679832226, 0, 0),
-(35, 1, '2-6455.png', '', 'hienthi', 1679832226, 0, 0),
-(36, 1, '3-7640.png', '', 'hienthi', 1679832226, 0, 0),
-(37, 1, '4-6223.png', '', 'hienthi', 1679832226, 0, 0);
+(50, 1, 'poduct-9-5006-2691.jpg', '', 'hienthi', 1686412347, 0, 0),
+(51, 1, 'poduct-1-1318-4164.jpg', '', 'hienthi', 1686412347, 0, 0),
+(52, 1, 'poduct-1-1758-1072.jpeg', '', 'hienthi', 1686412347, 0, 0),
+(53, 1, 'poduct-2-3013-1627.jpg', '', 'hienthi', 1686412347, 0, 0),
+(54, 1, 'poduct-3-5224-6755.jpg', '', 'hienthi', 1686412347, 0, 0),
+(55, 1, 'poduct-4-1646-2779.jpg', '', 'hienthi', 1686412347, 0, 0),
+(56, 1, 'poduct-5-3937-3600.jpg', '', 'hienthi', 1686412347, 0, 0),
+(57, 1, 'poduct-6-8870-7717.jpg', '', 'hienthi', 1686412347, 0, 0),
+(58, 1, 'poduct-7-3820-1176.jpg', '', 'hienthi', 1686412347, 0, 0),
+(59, 1, 'poduct-8-2281-2890.jpg', '', 'hienthi', 1686412348, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1027,32 +1002,6 @@ INSERT INTO `table_gallery_album` (`id`, `id_parent`, `photo`, `name`, `status`,
 (4, 4, 'nature32-2173-5148.jpg', '', 'hienthi', 1679830543, 0, 0),
 (5, 4, 'nature35-5158-4279.jpg', '', 'hienthi', 1679830543, 0, 0),
 (6, 4, 'nature34-7605-4530.jpg', '', 'hienthi', 1679830543, 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `table_list`
---
-
-CREATE TABLE `table_list` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `date_created` int(11) DEFAULT 0,
-  `date_updated` int(11) DEFAULT 0,
-  `date_deleted` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_list`
---
-
-INSERT INTO `table_list` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(6, 'giay-nam', '', 'Giày nam', '1-8598.jpg', 'hienthi,noibat', 1679827339, 0, 0),
-(7, 'giay-nu', '', 'Giày nữ', '2-8403.jpg', 'hienthi,noibat', 1679827370, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1106,7 +1055,7 @@ CREATE TABLE `table_news` (
 INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `status`, `type`, `view`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (1, '3-4271-7500.jpg', 'tin-tuc-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'Tin tức 1', 'hienthi,noibat', 'tin-tuc', 0, 1680708586, 0, 0),
 (2, '6783025-cool-wallpapers-hd-2600-7890.jpg', 'tin-tuc-2', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'Tin tức 2', 'hienthi,noibat', 'tin-tuc', 0, 1680708610, 0, 0),
-(3, '6783077-cool-wallpapers-hd-3332-8999.jpg', 'tin-tuc-3', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'Tin tức 3', 'hienthi,noibat', 'tin-tuc', 0, 1680866906, 0, 0),
+(3, '6783077-cool-wallpapers-hd-3332-8999.jpg', 'tin-tuc-3', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'Tin tức 3', 'hienthi', 'tin-tuc', 0, 1680866906, 1686410151, 0),
 (4, NULL, 'thanh-toan-tai-cong-ty', '', '- Quý khách hàng vui lòng thanh toán trực tiếp tại công ty ngay khi mua hàng tại\r\nShowroom 1 : Số 103 - 105 Lê Thanh Nghị– Đồng Tâm - Hai Bà Trưng– Hà Nội.\r\nShowroom 2 : Số 58 Hồ Tùng Mậu  – Cầu Giấy – Hà Nội.\r\n- Ngay khi quý khách thanh toán xong, nhân viên kế toán sẽ gửi lại quý khách hóa đơn tài chính và nhân viên kinh doanh sẽ hướng dẫn quý khách hình thức giao nhận hàng.', 'Thanh toán tại công ty', 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869409, 1685610085, 0),
 (5, NULL, 'thanh-toan-bang-chuyen-khoan', '', '- Nếu địa điểm giao hàng là ngoại thành, ngoại tỉnh hoặc nội thành thành phố Hà Nội nhưng khác với địa điểm thanh toán (trong trường hợp Quý khách gửi quà, gửi hàng cho bạn bè, đối tác …) chúng tôi sẽ thu tiền trước 100% giá trị đơn hàng + phí vận chuyển theo cước phí tính trong chinh sách vận chuyển bằng phương thức chuyển khoản trước khi giao hàng', 'Thanh toán bằng chuyển khoản', 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869600, 1685610101, 0),
 (6, NULL, 'thanh-toan-tai-diem-giao-hang', '', '- Quý khách thanh toán cho nhân viên giao nhận toàn bộ hoặc phần còn lại của giá trị đơn hàng đã mua (nếu đã đặt cọc)\r\n- Hình thức thanh toán này chỉ thực hiện với các đơn hàng có địa chỉ giao hàng tại nội thành thành phố Hà Nội (trong phạm vi bán kính 30 km tính từ nơi mua hàng).\r\n- Nếu địa điểm giao hàng ngay tại nơi thanh toán, nhân viên giao hàng của chúng tôi sẽ thu tiền khi giao hàng.', 'Thanh toán tại điểm giao hàng', 'hienthi', 'hinh-thuc-thanh-toan', 0, 1680869615, 1685610110, 0);
@@ -1146,7 +1095,9 @@ CREATE TABLE `table_order` (
 
 INSERT INTO `table_order` (`id`, `id_user`, `transId`, `order_payment`, `code`, `fullname`, `phone`, `address`, `email`, `requirements`, `city`, `district`, `ward`, `temp_price`, `ship_price`, `total_price`, `order_status`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (1, 149, 14032016, 'vnpay', 'CQFJN5', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 'hoang@gmail.com', '', 3, 46, 848, 1200000, 0, 1200000, 'daxacnhan', 1686032820, 0, 0),
-(2, 149, 0, 'thanh-toan-tai-diem-giao-hang', 'OWLY1C', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 'hoang@gmail.com', '', 2, 31, 581, 1600000, 0, 1600000, 'moidat', 1686113333, 0, 0);
+(2, 149, 0, 'thanh-toan-tai-diem-giao-hang', 'OWLY1C', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 'hoang@gmail.com', '', 2, 31, 581, 1600000, 0, 1600000, 'moidat', 1686113333, 0, 0),
+(3, 149, 0, 'thanh-toan-tai-cong-ty', 'N3E9SY', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 'hoang@gmail.com', '', 2, 33, 608, 400000, 0, 400000, 'dahuy', 1686225667, 0, 0),
+(4, 149, 14034176, 'vnpay', 'LTLPU', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 'hoang@gmail.com', '', 1, 2, 17, 1200000, 0, 1200000, 'daxacnhan', 1686227473, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1173,7 +1124,9 @@ CREATE TABLE `table_order_detail` (
 
 INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `id_size`, `photo`, `name`, `code`, `quantity`, `price`) VALUES
 (1, 1, 1, 7, 16, '1-5039.png', 'Sản phẩm 1', 'CQFJN5', 3, 400000),
-(2, 2, 1, 8, 17, '1-5039.png', 'Sản phẩm 1', 'OWLY1C', 4, 400000);
+(2, 2, 1, 8, 17, '1-5039.png', 'Sản phẩm 1', 'OWLY1C', 4, 400000),
+(3, 3, 1, 7, 8, '1-5039.png', 'Sản phẩm 1', 'N3E9SY', 1, 400000),
+(4, 4, 1, 8, 17, '1-5039.png', 'Sản phẩm 1', 'LTLPU', 3, 400000);
 
 -- --------------------------------------------------------
 
@@ -1215,6 +1168,7 @@ INSERT INTO `table_photo` (`id`, `photo`, `desc`, `name`, `link`, `link_video`, 
 CREATE TABLE `table_product` (
   `id` int(11) UNSIGNED NOT NULL,
   `id_list` int(10) UNSIGNED DEFAULT NULL,
+  `id_cat` int(10) UNSIGNED DEFAULT NULL,
   `id_brand` int(11) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
@@ -1235,18 +1189,66 @@ CREATE TABLE `table_product` (
 -- Dumping data for table `table_product`
 --
 
-INSERT INTO `table_product` (`id`, `id_list`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 873, 'noibat,hienthi', 1679827982, 1685950927, 0),
-(2, 6, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 4, 'hienthi,noibat', 1679827990, 1685950336, 0),
-(3, 6, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 'hienthi,noibat', 1679828000, 1685950341, 0),
-(4, 6, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 2, 'hienthi,noibat', 1679828010, 1685950349, 0),
-(5, 6, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 1, 'hienthi,noibat', 1679828021, 1685950357, 0),
-(6, 6, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 5, 'hienthi,noibat', 1679828031, 1685950372, 0),
-(7, 7, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 2, 'hienthi,noibat', 1679828041, 1685950377, 0),
-(8, 7, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 0, 'hienthi,noibat', 1679828051, 1685950382, 0),
-(9, 7, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 1, 'noibat,hienthi', 1679828075, 1686018063, 0),
-(10, 7, NULL, '10-2976.png', 'san-pham-10', '', '', 'Sản phẩm 10', '', 723433, 231423, 2, 'hienthi,noibat', 1679828083, 1685950531, 0),
-(11, 7, NULL, '11-3977.png', 'san-pham-11', '', '', 'Sản phẩm 11', '', 888464, 231122, 17, 'hienthi,noibat', 1679828093, 1685950542, 0);
+INSERT INTO `table_product` (`id`, `id_list`, `id_cat`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(1, 6, NULL, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 884, 'noibat,hienthi', 1679827982, 1686413126, 0),
+(2, 6, NULL, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 4, 'hienthi,noibat', 1679827990, 1685950336, 0),
+(3, 6, NULL, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 'hienthi,noibat', 1679828000, 1685950341, 0),
+(4, 6, NULL, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 2, 'hienthi,noibat', 1679828010, 1685950349, 0),
+(5, 6, NULL, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 1, 'hienthi,noibat', 1679828021, 1685950357, 0),
+(6, 6, NULL, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 5, 'hienthi,noibat', 1679828031, 1685950372, 0),
+(7, 7, NULL, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 2, 'hienthi,noibat', 1679828041, 1685950377, 0),
+(8, 7, NULL, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 0, 'hienthi,noibat', 1679828051, 1685950382, 0),
+(9, 7, NULL, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 1, 'noibat,hienthi', 1679828075, 1686018063, 0),
+(10, 7, NULL, NULL, '10-2976.png', 'san-pham-10', '', '', 'Sản phẩm 10', '', 723433, 231423, 2, 'hienthi,noibat', 1679828083, 1685950531, 0),
+(11, 7, NULL, NULL, '11-3977.png', 'san-pham-11', '', '', 'Sản phẩm 11', '', 888464, 231122, 17, 'noibat,hienthi', 1679828093, 1686413569, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_product_brand`
+--
+
+CREATE TABLE `table_product_brand` (
+  `id` int(11) NOT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `desc` mediumtext DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `table_product_brand`
+--
+
+INSERT INTO `table_product_brand` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(9, 'nike', '', 'Nike', 'brand-1-5394-2516-5979.jpg', 'hienthi', 1679827424, 1685950295, 0),
+(10, 'adidas', '', 'Adidas', 'brand-3-1828-5079-3631.jpg', 'hienthi', 1679827434, 0, 0),
+(11, 'converse', '', 'Converse', 'brand-4-3020-1744-9516.jpg', 'hienthi', 1679827445, 0, 0),
+(12, 'reebok', '', 'Reebok', 'brand-5-3471-2234-2531.jpg', 'hienthi', 1679827457, 0, 0),
+(13, 'puma', '', 'Puma', 'brand-7-2941-8624-7136.jpg', 'hienthi', 1679827467, 1686413552, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_product_cat`
+--
+
+CREATE TABLE `table_product_cat` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `id_list` int(10) UNSIGNED DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `desc` mediumtext DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1260,13 +1262,31 @@ CREATE TABLE `table_product_color` (
   `id_color` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `table_product_color`
+-- Table structure for table `table_product_list`
 --
 
-INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
-(16, 1, 7),
-(17, 1, 8);
+CREATE TABLE `table_product_list` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `desc` mediumtext DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `table_product_list`
+--
+
+INSERT INTO `table_product_list` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(6, 'giay-nam', '', 'Giày nam', '1-8598.jpg', 'hienthi,noibat', 1679827339, 0, 0),
+(7, 'giay-nu', '', 'Giày nữ', '2-8403.jpg', 'hienthi', 1679827370, 1686413545, 0);
 
 -- --------------------------------------------------------
 
@@ -1279,22 +1299,6 @@ CREATE TABLE `table_product_size` (
   `id_product` int(10) UNSIGNED DEFAULT NULL,
   `id_size` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `table_product_size`
---
-
-INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
-(72, 1, 8),
-(73, 1, 9),
-(74, 1, 10),
-(75, 1, 11),
-(76, 1, 12),
-(77, 1, 13),
-(78, 1, 14),
-(79, 1, 15),
-(80, 1, 16),
-(81, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -1344,7 +1348,7 @@ INSERT INTO `table_size` (`id`, `name`, `status`, `date_created`, `date_updated`
 (14, '40', 'hienthi', 1679827534, 0, 0),
 (15, '41', 'hienthi', 1679827539, 0, 0),
 (16, '42', 'hienthi', 1679827542, 0, 0),
-(17, '43', 'hienthi', 1679827545, 0, 0);
+(17, '43', 'hienthi', 1679827545, 1686413561, 0);
 
 -- --------------------------------------------------------
 
@@ -1406,7 +1410,7 @@ CREATE TABLE `table_user` (
 
 INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `photo`, `fullname`, `phone`, `address`, `gender`, `login_session`, `lastlogin`, `status`, `birthday`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, '', '1682261315', 'hoatdong', 1608051600, 0, 0, 0),
-(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', 'nature35-5158-6128.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '93336efe64e9623f558c63badc2b53dc', '1686111790', 'hoatdong', 990136800, 1682254418, 1685591349, 0),
+(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', 'nature35-5158-6128.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '9bea46bd54a20c6c7e774e791eb23328', '1686410980', 'hoatdong', 990136800, 1682254418, 1685591349, 0),
 (150, 'user', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user@gmail.com', '2-7335-5701.jpg', 'User', '0909090909', 'Địa chỉ test 1', 1, 'af98095aefc0fa845d7e9e14031c261d', '1683379089', 'khoa', 1044399600, 1682254452, 1683220756, 0),
 (159, 'user', 'cuong', 'cf4d87e50be6390ee9bd8ad6e7498cae', 'cuong@gmail.com', 'product-1.jpg', 'Cường', '0909090909', 'Bình Trị Đông A, Bình Tân, TP. HCM', 1, 'fcce87bae0a2aa224dcf6ee1508a1fe1', '1686014824', 'hoatdong', 1092261600, 1683906702, 1683909972, 0),
 (160, 'user', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gmail.com', 'product-10.jpg', 'Test', '0909090925', 'Địa chỉ test 123', 1, '22ddbec4e7eda70761d8be8f87f6b3f7', '1685939648', 'hoatdong', 1005001200, 1685939644, 0, 0);
@@ -1451,7 +1455,8 @@ CREATE TABLE `table_vnpay` (
 --
 
 INSERT INTO `table_vnpay` (`id`, `order_id`, `vnp_amount`, `vnp_bankcode`, `vnp_banktranno`, `vnp_cardtype`, `vnp_orderinfo`, `vnp_paydate`, `vnp_tmncode`, `vnp_transactionno`) VALUES
-(1, 1, '120000000', 'NCB', 'VNP14032016', 'ATM', 'Thanh toan GD:CQFJN5', '20230606132656', '7XEELYTQ', '14032016');
+(1, 1, '120000000', 'NCB', 'VNP14032016', 'ATM', 'Thanh toan GD:CQFJN5', '20230606132656', '7XEELYTQ', '14032016'),
+(2, 4, '120000000', 'NCB', 'VNP14034176', 'ATM', 'Thanh toan GD:LTLPU', '20230608193112', '7XEELYTQ', '14034176');
 
 -- --------------------------------------------------------
 
@@ -12102,12 +12107,6 @@ INSERT INTO `table_ward` (`id`, `id_city`, `id_district`, `name`, `slug`, `code`
 --
 
 --
--- Indexes for table `table_brand`
---
-ALTER TABLE `table_brand`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `table_city`
 --
 ALTER TABLE `table_city`
@@ -12168,12 +12167,6 @@ ALTER TABLE `table_gallery_album`
   ADD KEY `gallery_album` (`id_parent`);
 
 --
--- Indexes for table `table_list`
---
-ALTER TABLE `table_list`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `table_momo`
 --
 ALTER TABLE `table_momo`
@@ -12215,7 +12208,21 @@ ALTER TABLE `table_photo`
 ALTER TABLE `table_product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_brand` (`id_brand`),
-  ADD KEY `product_list` (`id_list`);
+  ADD KEY `product_list` (`id_list`),
+  ADD KEY `product_cat` (`id_cat`);
+
+--
+-- Indexes for table `table_product_brand`
+--
+ALTER TABLE `table_product_brand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_product_cat`
+--
+ALTER TABLE `table_product_cat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `asdsad` (`id_list`);
 
 --
 -- Indexes for table `table_product_color`
@@ -12224,6 +12231,12 @@ ALTER TABLE `table_product_color`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_color` (`id_color`),
   ADD KEY `product1` (`id_product`);
+
+--
+-- Indexes for table `table_product_list`
+--
+ALTER TABLE `table_product_list`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `table_product_size`
@@ -12283,12 +12296,6 @@ ALTER TABLE `table_ward`
 --
 
 --
--- AUTO_INCREMENT for table `table_brand`
---
-ALTER TABLE `table_brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
 -- AUTO_INCREMENT for table `table_city`
 --
 ALTER TABLE `table_city`
@@ -12334,19 +12341,13 @@ ALTER TABLE `table_district`
 -- AUTO_INCREMENT for table `table_gallery`
 --
 ALTER TABLE `table_gallery`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `table_list`
---
-ALTER TABLE `table_list`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `table_momo`
@@ -12364,13 +12365,13 @@ ALTER TABLE `table_news`
 -- AUTO_INCREMENT for table `table_order`
 --
 ALTER TABLE `table_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `table_photo`
@@ -12382,19 +12383,37 @@ ALTER TABLE `table_photo`
 -- AUTO_INCREMENT for table `table_product`
 --
 ALTER TABLE `table_product`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `table_product_brand`
+--
+ALTER TABLE `table_product_brand`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `table_product_cat`
+--
+ALTER TABLE `table_product_cat`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `table_product_list`
+--
+ALTER TABLE `table_product_list`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
 
 --
 -- AUTO_INCREMENT for table `table_setting`
@@ -12430,7 +12449,7 @@ ALTER TABLE `table_variants`
 -- AUTO_INCREMENT for table `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `table_ward`
@@ -12498,8 +12517,15 @@ ALTER TABLE `table_order_detail`
 -- Constraints for table `table_product`
 --
 ALTER TABLE `table_product`
-  ADD CONSTRAINT `product_brand` FOREIGN KEY (`id_brand`) REFERENCES `table_brand` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `product_list` FOREIGN KEY (`id_list`) REFERENCES `table_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `product_brand` FOREIGN KEY (`id_brand`) REFERENCES `table_product_brand` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `product_cat` FOREIGN KEY (`id_cat`) REFERENCES `table_product_cat` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `product_list` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
+-- Constraints for table `table_product_cat`
+--
+ALTER TABLE `table_product_cat`
+  ADD CONSTRAINT `asdsad` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `table_product_color`

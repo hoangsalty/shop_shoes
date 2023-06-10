@@ -1,7 +1,7 @@
 <?php
 
 if (empty($_GET["vnp_Amount"])) {
-    $func->transfer2("Dữ liệu không có thực.", $configBase, false);
+    $func->transfer("Dữ liệu không có thực.", $configBase, false);
 }
 
 if (!empty($_GET["vnp_Amount"])) {
@@ -128,14 +128,14 @@ if (!empty($_GET["vnp_Amount"])) {
                 unset($_SESSION['cart']);
                 unset($_SESSION['dataOrder']);
                 $message = 'Thanh toán qua VNPay Thành Công!';
-                //$func->transfer2("Thanh toán qua VNPay Thành Công!", $configBase);
+                //$func->transfer("Thanh toán qua VNPay Thành Công!", $configBase);
             } else {
                 $message = 'Lỗi lưu đơn hàng';
-                //$func->transfer2("Lỗi lưu đơn hàng.", $configBase, false);
+                //$func->transfer("Lỗi lưu đơn hàng.", $configBase, false);
             }
         }
     } else {
-        $func->transfer2("Lỗi thanh toán thất bại.", $configBase, false);
+        $func->transfer("Lỗi thanh toán thất bại.", $configBase, false);
         //Lỗi nếu thanh toán thất bại
     }
 }

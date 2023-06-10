@@ -185,9 +185,7 @@ function deleteCart(obj) {
                 $(".form-cart").find(".load-price-total").html(result.totalText);
                 $(".form-cart").find(".procart-" + code).remove();
             } else {
-                $(".wrap-cart").html(
-                    '<a href="" class="empty-cart text-decoration-none"><i class="fas fa-cart-plus"></i><p>Không tồn tại sản phẩm trong giỏ hàng</p><span class="btn btn-warning">Về trang chủ</span></a>'
-                );
+                location.reload();
             }
             holdonClose();
         },

@@ -92,9 +92,9 @@ function savePhotoStatic()
                 }
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=photo&act=photo_static&type=" . $type);
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=photo&act=photo_static&type=" . $type);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=photo_static&type=" . $type, false);
+            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=photo_static&type=" . $type, false);
         }
     } else {
         $data['date_created'] = time();
@@ -114,12 +114,12 @@ function savePhotoStatic()
                     }
                 }
 
-                $func->transfer("Lưu dữ liệu thành công", "index.php?com=photo&act=photo_static&type=" . $type);
+                $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=photo&act=photo_static&type=" . $type);
             } else {
-                $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=photo&act=photo_static&type=" . $type, false);
+                $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=photo&act=photo_static&type=" . $type, false);
             }
         } else {
-            $func->transfer("Dữ liệu rỗng", "index.php?com=photo&act=photo_static&type=" . $type, false);
+            $func->transferAdmin("Dữ liệu rỗng", "index.php?com=photo&act=photo_static&type=" . $type, false);
         }
     }
 }
@@ -154,11 +154,11 @@ function editPhoto()
         $id = 0;
 
     if (empty($id)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
     } else {
         $item = $d->rawQueryOne("select * from table_photo where id = ? limit 0,1", array($id));
         if (empty($item)) {
-            $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+            $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
         } else {
             $gallery = $d->rawQuery("select * from table_gallery_album where id_parent = ? order by id desc", array($id));
         }
@@ -173,7 +173,7 @@ function savePhoto()
     /* Check post */
     if (!empty($_REQUEST)) {
     } else {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
     }
 
     /* Post dữ liệu */
@@ -259,9 +259,9 @@ function savePhoto()
                 }
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
         }
     } else {
         $data['date_created'] = time();
@@ -280,9 +280,9 @@ function savePhoto()
                 }
             }
 
-            $func->transfer("Thêm dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type);
+            $func->transferAdmin("Thêm dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type);
         } else {
-            $func->transfer("Thêm dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type, false);
+            $func->transferAdmin("Thêm dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type, false);
         }
     }
 }
@@ -297,9 +297,9 @@ function deletePhoto()
         $row = $d->rawQueryOne("select id from table_photo where id = ? limit 0,1", array($id));
         if (!empty($row)) {
             $d->rawQuery("delete from table_photo where id = ?", array($id));
-            $func->transfer("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
+            $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
         } else {
-            $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+            $func->transferAdmin("Xóa dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
         }
     } elseif (isset($_REQUEST['listid'])) {
         $listid = explode(",", $_REQUEST['listid']);
@@ -311,8 +311,8 @@ function deletePhoto()
                 $d->rawQuery("delete from table_photo where id = ?", array($id));
             }
         }
-        $func->transfer("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
+        $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
     } else {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
     }
 }

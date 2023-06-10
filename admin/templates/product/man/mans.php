@@ -38,7 +38,8 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
         </div>
     </div>
     <div class="card-footer form-group-category text-sm bg-light row">
-        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('list', 'Chọn loại sản phẩm') ?></div>
+        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('list', 'Chọn loại sản phẩm (C1)') ?></div>
+        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('cat', 'Chọn loại sản phẩm (C2)') ?></div>
         <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('brand', 'Chọn hãng') ?></div>
     </div>
     <div class="card card-primary card-outline text-sm mb-0">
@@ -82,6 +83,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                         <?php for ($i = 0; $i < count($items); $i++) {
                             $linkID = "";
                             if ($items[$i]['id_list']) $linkID .= "&id_list=" . $items[$i]['id_list'];
+                            if ($items[$i]['id_cat']) $linkID .= "&id_cat=" . $items[$i]['id_cat'];
                             if ($items[$i]['id_brand']) $linkID .= "&id_brand=" . $items[$i]['id_brand']; ?>
                             <tr>
                                 <td class="align-middle">
@@ -91,15 +93,15 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <?= $i+1 ?>
+                                    <?= $i + 1 ?>
                                 </td>
                                 <td class="align-middle">
-                                    <a href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>&album_table=gallery" title="<?= $items[$i]['name'] ?>">
+                                    <a href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
                                         <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 130, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
                                     </a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>&album_table=gallery" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
                                         <?php
                                         $items[$i]['totalComment'] = $comment->totalByID($items[$i]['id'], true);
@@ -107,15 +109,15 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                         ?>
                                         <a class="text-primary mr-3" href="<?= $linkComment ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="fas fa-comments mr-1"></i>(<?= $items[$i]['totalComment'] ?>) Comment <?= (!empty($items[$i]['newComment'])) ? '<span class="badge badge-danger align-top">' . $items[$i]['newComment'] . '</span>' : '' ?></a>
                                         <a class="text-primary mr-3" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
-                                        <a class="text-info mr-3" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>&album_table=gallery" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                        <a class="text-info mr-3" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                         <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>&album_table=gallery" title="<?= $func->formatMoney($items[$i]['regular_price']) ?>"><?= $func->formatMoney($items[$i]['regular_price']) ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['regular_price']) ?>"><?= $func->formatMoney($items[$i]['regular_price']) ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>&album_table=gallery" title="<?= $func->formatMoney($items[$i]['sale_price']) ?>"><?= $func->formatMoney($items[$i]['sale_price']) ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['sale_price']) ?>"><?= $func->formatMoney($items[$i]['sale_price']) ?></a>
                                 </td>
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                                 <?php foreach ($status as $key => $value) { ?>

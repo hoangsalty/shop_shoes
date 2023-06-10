@@ -16,7 +16,7 @@ $payments_info = $d->rawQuery("select * from table_news where type = ? and find_
 if (!empty($_POST['thanhtoan'])) {
     /* Check order */
     if (empty($_SESSION['cart'])) {
-        $func->transfer("Đơn hàng không hợp lệ. Vui lòng thử lại sau.", "index.php", false);
+        $func->transferAdmin("Đơn hàng không hợp lệ. Vui lòng thử lại sau.", "index.php", false);
     }
 
     /* Data */
@@ -162,9 +162,9 @@ if (!empty($_POST['thanhtoan'])) {
 
         if (!empty($jsonResult)) {
             $_SESSION['dataOrder'] = $dataOrder;
-            $func->transfer2("Di chuyển đến trang thanh toán MOMO", $jsonResult['payUrl']);
+            $func->transfer("Di chuyển đến trang thanh toán MOMO", $jsonResult['payUrl']);
         } else {
-            $func->transfer2("Phát sinh lỗi với thanh toán MOMO", $configBase, false);
+            $func->transfer("Phát sinh lỗi với thanh toán MOMO", $configBase, false);
         }
         return;
     } else if ($order_payment == "vnpay") {
@@ -215,7 +215,7 @@ if (!empty($_POST['thanhtoan'])) {
         }
 
         $_SESSION['dataOrder'] = $dataOrder;
-        $func->transfer2("Di chuyển đến trang thanh toán VNPay", $vnp_Url);
+        $func->transfer("Di chuyển đến trang thanh toán VNPay", $vnp_Url);
         return;
     }
 
@@ -277,8 +277,8 @@ if (!empty($_POST['thanhtoan'])) {
 
         /* Xóa giỏ hàng */
         unset($_SESSION['cart']);
-        $func->transfer2("Thông tin đơn hàng đã được gửi thành công.", $configBase);
+        $func->transfer("Thông tin đơn hàng đã được gửi thành công.", $configBase);
     } else {
-        $func->transfer2("Lỗi lưu đơn hàng.", $configBase, false);
+        $func->transfer("Lỗi lưu đơn hàng.", $configBase, false);
     }
 }
