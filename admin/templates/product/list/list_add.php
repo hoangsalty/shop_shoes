@@ -35,10 +35,6 @@ else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&i
 
         <div class="row">
             <div class="col-xl-8">
-                <?php
-                $slugchange = ($act == 'edit_list') ? 1 : 0;
-                include TEMPLATE . LAYOUT . "slug.php";
-                ?>
                 <div class=" card card-primary card-outline text-sm">
                     <div class="card-header">
                         <h3 class="card-title">Nội dung loại sản phẩm</h3>
@@ -59,6 +55,11 @@ else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&i
                 </div>
             </div>
             <div class="col-xl-4">
+                <?php
+                $slugchange = ($act == 'edit_list') ? 1 : 0;
+                include TEMPLATE . LAYOUT . "slug.php";
+                ?>
+
                 <div class="card card-primary card-outline text-sm">
                     <div class="card-header">
                         <h3 class="card-title">Hình ảnh loại sản phẩm</h3>

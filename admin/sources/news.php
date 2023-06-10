@@ -45,8 +45,8 @@ function viewNews()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_news where id > 0 and type = ? $where and date_deleted = 0 order by numb,id desc $limit", array($type));
-    $sqlNum = "select count(*) as 'num' from table_news where id > 0 and type = ? $where and date_deleted = 0 order by numb,id desc";
+    $items = $d->rawQuery("select * from table_news where id > 0 and type = ? $where order by id desc $limit", array($type));
+    $sqlNum = "select count(*) as 'num' from table_news where id > 0 and type = ? $where order by id desc";
     $count = $d->rawQueryOne($sqlNum, array($type));
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=news&act=man" . $strUrl;
@@ -62,11 +62,11 @@ function editNew()
         $id = 0;
 
     if (empty($id)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
     } else {
         $item = $d->rawQueryOne("select * from table_news where id = ? limit 0,1", array($id));
         if (empty($item)) {
-            $func->transfer("Không có dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+            $func->transferAdmin("Không có dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
         }
     }
 }
@@ -76,7 +76,7 @@ function saveNew()
     global $d, $strUrl, $func, $flash, $curPage, $type;
     /* Check post */
     if (empty($_REQUEST)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
     }
 
     /* Post dữ liệu */
@@ -172,21 +172,16 @@ function saveNew()
                 }
             }
 
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id);
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id);
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id, false);
+            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id, false);
         }
     } else {
         $data['date_created'] = time();
-        /*lay stt*/
-        $list_numb = $d->rawQuery("select numb from table_news order by numb desc ", array());
-        $new_numb = (!empty($list_numb)) ? $list_numb[0]['numb'] + 1 : 1;
 
         if ($d->insert('table_news', $data)) {
             $id_insert = $d->getLastInsertId();
 
-            /*update stt*/
-            $d->rawQuery("update table_news set numb = ? where id = " . $id_insert, array($new_numb));
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
@@ -198,9 +193,9 @@ function saveNew()
                 }
             }
 
-            $func->transfer("Lưu dữ liệu thành công", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id_insert);
+            $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=news&act=edit&type=" . $type . "&page=" . $curPage . $strUrl . "&id=" . $id_insert);
         } else {
-            $func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+            $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
         }
     }
 }
@@ -214,9 +209,9 @@ function deleteNew()
         $row = $d->rawQueryOne("select id, photo from table_news where id = ? limit 0,1", array($id));
         if (!empty($row)) {
             $d->rawQuery("delete from table_news where id = ?", array($id));
-            $func->transfer("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
+            $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
         } else {
-            $func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+            $func->transferAdmin("Xóa dữ liệu bị lỗi", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
         }
     } elseif (isset($_REQUEST['listid'])) {
         $listid = explode(",", $_REQUEST['listid']);
@@ -228,8 +223,8 @@ function deleteNew()
                 $d->rawQuery("delete from table_news where id = ?", array($id));
             }
         }
-        $func->transfer("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
+        $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl);
     } else {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=news&act=man&type=" . $type . "&page=" . $curPage . $strUrl, false);
     }
 }

@@ -136,73 +136,23 @@
         </div>
 
         <div class="container_load_info load2">
-            <div class="title-user">
-                <span>Thông tin đơn hàng</span>
-            </div>
-            <?php if (array_key_exists("account", $_SESSION) && $_SESSION["account"]['active'] == true) { ?>
-                <?php
-                $iduser = $_SESSION["account"]['id'];
-                $donhang = $d->rawQuery("select * from table_order where id_user = ?", array($iduser));
-                if (!empty($donhang)) { ?>
-                    <?php foreach ($donhang as $v1) {
-                        $chitiet = $d->rawQuery("select * from table_order_detail where id_order = ?", array($v1['id']));
-                        $tinhtrang = $v1["order_status"];
-                    ?>
-                        <div class="wrap-cart box-ql-donhang">
-                            <div class="top-cart">
-                                <div class="title-cart">
-                                    <p>Đơn hàng: <span><?= $v1['code'] ?></span></p>
-                                    <p><?= $func->convertOrderStatus($tinhtrang) ?></p>
-                                </div>
-                                <div class="list-procart">
-                                    <table class="table">
-                                        <thead>
-                                            <th scope="col" width="50">STT</th>
-                                            <th scope="col" width="150px">Hình ảnh</th>
-                                            <th scope="col">Tên sản phẩm</th>
-                                            <th scope="col" width="100px">Ngày đặt</th>
-                                            <th scope="col" class="text-center">Số lượng</th>
-                                            <th scope="col">Thành tiền</th>
-                                        </thead>
-                                        <?php foreach ($chitiet as $k2 => $v2) {
-                                            $pid = $v2['id_product'];
-                                            $quantity = $v2['quantity'];
-                                            $proinfo = $cart->getProductInfo($pid);
-                                            $pro_price = $v2['price'];
-                                            $pro_price_qty = $pro_price * $quantity;
-                                        ?>
-                                            <tbody>
-                                                <th><?= $k2 ?></th>
-                                                <th><?= $func->getImage(['class' => 'rounded img-preview', 'width' => 150, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v2['photo'], 'alt' => $v2['name']]) ?></th>
-                                                <th>
-                                                    <h3 class="name-procart"><a class="text-decoration-none" target="_blank" title="<?= $v2['name'] ?>" href="<?= $proinfo['slug'] ?>"><?= $v2['name'] ?></a></h3>
-                                                </th>
-                                                <th><?= date("d/m/Y", $v1['date_created']) ?></th>
-                                                <th class="text-center"><?= $quantity ?></th>
-                                                <th>
-                                                    <p class="total-price load-price-total"><?= $func->formatMoney($pro_price_qty) ?></p>
-                                                </th>
-                                            </tbody>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                                <div class="money-procart">
-                                    <div class="total-procart d-flex align-items-center justify-content-between">
-                                        <p>Tổng tiền:</p>
-                                        <p class="total-price load-price-total"><?= $func->formatMoney($v1['total_price']) ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                <?php } else { ?>
-                    <a href="san-pham" class="sty_btn_info empty-cart">
-                        <i class="fa fa-cart-arrow-down"></i>
-                        <p>Bạn chưa có đơn hàng nào</p>
-                        <span>Vào mua hàng</span>
-                    </a>
+            <?php
+            $row_status = array(
+                array('id' => 'moidat', 'name' => 'Mới đặt'),
+                array('id' => 'daxacnhan', 'name' => 'Đã xác nhận'),
+                array('id' => 'danggiaohang', 'name' => 'Đang giao hàng'),
+                array('id' => 'dagiao', 'name' => 'Đã giao'),
+                array('id' => 'dahuy', 'name' => 'Đã hủy'),
+            );
+            ?>
+            <div class="nav_status_order">
+                <a href="javascript:void()" data-status="" title="Tất cả"><span>Tất cả</span></a>
+                <?php foreach ($row_status as $i => $status) { ?>
+                    <a href="javascript:void()" data-id="<?= $status['id'] ?>" title="<?= $status['name'] ?>"><span><?= $status['name'] ?></span></a>
                 <?php } ?>
-            <?php } ?>
+            </div>
+
+            <div class="status_order"></div>
         </div>
     </div>
 </div>

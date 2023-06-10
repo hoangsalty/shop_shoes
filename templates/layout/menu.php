@@ -39,9 +39,6 @@
                         <?php } ?>
                     </li>
                     <li>
-                        <a class="<?php if ($com == 'thu-vien-anh') echo 'active'; ?> transition" href="thu-vien-anh" title="Thư viện ảnh">Thư viện ảnh</a>
-                    </li>
-                    <li>
                         <a class="<?php if ($com == 'video') echo 'active'; ?> transition" href="video" title="Video">Video</a>
                     </li>
                     <li>

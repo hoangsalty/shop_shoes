@@ -7,10 +7,9 @@ $params = (!empty($_POST['params'])) ? $_POST['params'] : null;
 if ($params) parse_str($params, $params);
 $id = (!empty($params['id'])) ? $params['id'] : 0;
 $com = (!empty($params['com'])) ? $params['com'] : '';
-$numb = (!empty($_POST['numb'])) ? $_POST['numb'] : 0;
 $data = array('success' => true, 'msg' => 'Upload thành công');
 
-$album_table = (!empty($params['album_table'])) ? $params['album_table'] : '';
+$album_table = (!empty($_POST['album_table'])) ? $_POST['album_table'] : '';
 $table = "table_" . $album_table;
 
 /* Xử lý $_FILE - Path image */
@@ -24,15 +23,13 @@ $_FILES['file'] = array(
 );
 
 /* Xử lý lưu image */
-$max_numb = $d->rawQueryOne("select max(numb) as max_numb from $table where id_parent = ?", array($id));
+$max_numb = $d->rawQueryOne("select max(id) as max_numb from $table where id_parent = ?", array($id));
 
 $data_file = array();
-$data_file['numb'] = 0;
 $data_file['name'] = "";
 $data_file['id_parent'] = $id;
 $data_file['status'] = 'hienthi';
 $data_file['date_created'] = time();
-$data_file['numb'] = $max_numb['max_numb'] + 1;
 
 if ($d->insert($table, $data_file)) {
     $id_insert = $d->getLastInsertId();

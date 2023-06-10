@@ -522,7 +522,7 @@ function loadWard(id = 0) {
 function actionOrder(url) {
     var listid = '';
     var order_status = $('#order_status').val();
-    var order_payment = parseInt($('#order_payment').val());
+    var order_payment = $('#order_payment').val();
     var order_date = $('#order_date').val();
     var range_price = $('#range_price').val();
     var city = parseInt($('#id_city').val());

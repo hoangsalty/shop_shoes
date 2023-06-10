@@ -1,5 +1,9 @@
 <?php
 
+if (empty($_GET["partnerCode"])) {
+    $func->transfer("Dữ liệu không có thực.", $configBase, false);
+}
+
 if (!empty($_GET["partnerCode"])) {
     $secretKey = $config['momo']["secretKey"]; //Put your secret key in there
     $accessKey = $config['momo']['accessKey'];
@@ -32,7 +36,7 @@ if (!empty($_GET["partnerCode"])) {
             /* Check data */
             if (!empty($dataOrder)) {
                 /* Info */
-                $code = strtoupper($func->stringRandom(6));
+                $code = $orderId;
                 $order_date = time();
                 $fullname = (!empty($dataOrder['fullname'])) ? htmlspecialchars($dataOrder['fullname']) : '';
                 $email = (!empty($dataOrder['email'])) ? htmlspecialchars($dataOrder['email']) : '';
@@ -60,12 +64,11 @@ if (!empty($_GET["partnerCode"])) {
                 $total_price = (!empty($ship_price)) ? $cart->getOrderTotal() + $ship_price : $cart->getOrderTotal();
 
                 /* Cart */
-                $order_detail = '';
-                $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
+                $orderDetails = (!empty($_SESSION['cart'])) ? $_SESSION['cart'] : array();
 
                 /* lưu đơn hàng */
                 $data_donhang = array();
-                $data_donhang['transId_momo'] = $transId;
+                $data_donhang['transId'] = $transId;
                 $data_donhang['id_user'] = (!empty($_SESSION['account']['id'])) ? $_SESSION['account']['id'] : 0;
                 $data_donhang['code'] = $code;
                 $data_donhang['fullname'] = $fullname;
@@ -88,33 +91,35 @@ if (!empty($_GET["partnerCode"])) {
                     $id_insert = $d->getLastInsertId();
 
                     //Order detail
-                    for ($i = 0; $i < $max; $i++) {
-                        $pid = $_SESSION['cart'][$i]['productid'];
-                        $q = $_SESSION['cart'][$i]['qty'];
-                        $proinfo = $cart->getProductInfo($pid);
-                        $regular_price = $proinfo['regular_price'];
-                        $sale_price = $proinfo['sale_price'];
-                        $color = ($_SESSION['cart'][$i]['color'] > 0) ? $_SESSION['cart'][$i]['color'] : NULL;
-                        $size = ($_SESSION['cart'][$i]['size'] > 0) ? $_SESSION['cart'][$i]['size'] : NULL;
-                        $code_order = $_SESSION['cart'][$i]['code'];
+                    if (!empty($orderDetails)) {
+                        foreach ($orderDetails as $key => $value) {
+                            $pid = $value['productid'];
+                            $q = $value['qty'];
+                            $proinfo = $cart->getProductInfo($pid);
+                            $regular_price = $proinfo['regular_price'];
+                            $sale_price = $proinfo['sale_price'];
+                            $color = ($value['color'] > 0) ? $value['color'] : NULL;
+                            $size = ($value['size'] > 0) ? $value['size'] : NULL;
+                            $code_order = $value['code'];
 
-                        if ($q == 0) continue;
+                            if ($q == 0) continue;
 
-                        $data_donhangchitiet = array();
-                        $data_donhangchitiet['id_product'] = $pid;
-                        $data_donhangchitiet['id_order'] = $id_insert;
-                        $data_donhangchitiet['photo'] = $proinfo['photo'];
-                        $data_donhangchitiet['name'] = $proinfo['name'];
-                        $data_donhangchitiet['code'] = $code;
-                        $data_donhangchitiet['id_color'] = $color;
-                        $data_donhangchitiet['id_size'] = $size;
-                        if ($sale_price > 0) {
-                            $data_donhangchitiet['price'] = $sale_price;
-                        } else {
-                            $data_donhangchitiet['price'] = $regular_price;
+                            $data_orderdetail = array();
+                            $data_orderdetail['id_product'] = $pid;
+                            $data_orderdetail['id_order'] = $id_insert;
+                            $data_orderdetail['photo'] = $proinfo['photo'];
+                            $data_orderdetail['name'] = $proinfo['name'];
+                            $data_orderdetail['code'] = $code;
+                            $data_orderdetail['id_color'] = $color;
+                            $data_orderdetail['id_size'] = $size;
+                            if ($sale_price > 0) {
+                                $data_orderdetail['price'] = $sale_price;
+                            } else {
+                                $data_orderdetail['price'] = $regular_price;
+                            }
+                            $data_orderdetail['quantity'] = $q;
+                            $d->insert('table_order_detail', $data_orderdetail);
                         }
-                        $data_donhangchitiet['quantity'] = $q;
-                        $d->insert('table_order_detail', $data_donhangchitiet);
                     }
 
                     //Momo detail
@@ -123,22 +128,23 @@ if (!empty($_GET["partnerCode"])) {
                     $data['amount'] = $amount;
                     $data['order_info'] = $orderInfo;
                     $data['order_type'] = $orderType;
-                    $data['trans_id'] = $transId;
+                    $data['transId'] = $transId;
                     $data['pay_type'] = $payType;
                     $d->insert('table_momo', $data);
 
                     /* Xóa giỏ hàng và đơn hàng session */
                     unset($_SESSION['cart']);
                     unset($_SESSION['dataOrder']);
-                    $func->transfer2("Giao Dịch MOMO Thành Công!", $configBase);
+                    $message = 'Thanh toán qua MOMO Thành Công!';
                 } else {
-                    $func->transfer2("Lỗi lưu đơn hàng.", $configBase, false);
+                    $message = 'Lỗi lưu đơn hàng.';
                 }
             }
         } else {
             //Lỗi nếu thanh toán thất bại
         }
     } else {
+        $message = 'Lỗi $m2signature != $partnerSignature (bảo mật)';
         //Lỗi khi $m2signature != $partnerSignature (bảo mật)
     }
 }

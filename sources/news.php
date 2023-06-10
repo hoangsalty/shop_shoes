@@ -14,16 +14,16 @@ if ($id != '') {
 } else {
     /* Lấy tất cả bài viết */
     $where = "";
-    $where = "find_in_set('hienthi',status) and date_deleted = 0";
+    $where = "find_in_set('hienthi',status)";
     $params = array();
 
     $curPage = $getPage;
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_news where $where and type='tin-tuc' order by numb,id desc $limit";
+    $sql = "select * from table_news where $where and type='tin-tuc' order by id desc $limit";
     $news = $d->rawQuery($sql, $params);
-    $sqlNum = "select count(*) as 'num' from table_news where $where order by numb,id desc";
+    $sqlNum = "select count(*) as 'num' from table_news where $where order by id desc";
     $count = $d->rawQueryOne($sqlNum, $params);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = $func->getCurrentPageURL();

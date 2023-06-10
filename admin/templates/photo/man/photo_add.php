@@ -109,6 +109,8 @@ else if ($type == 'album') $name = 'Album';
                     </div>
                 </div>
                 <div class="card-body">
+                    <input type="hidden" name="gallery_table" id="gallery_table" value="gallery_album">
+
                     <div class="form-group">
                         <label for="filer-gallery" class="label-filer-gallery mb-3">Album hình: (.jpg|.gif|.png|.jpeg|.gif)</label>
                         <input type="file" name="files[]" id="filer-gallery" multiple="multiple">
@@ -148,7 +150,6 @@ else if ($type == 'album') $name = 'Album';
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <input type="number" class="form-control form-control-sm my-jFiler-item-info rounded mb-1 text-sm" value="<?= $v['numb'] ?>" placeholder="Số thứ tự" data-info="numb" data-id="<?= $v['id'] ?>" />
                                                     <input type="text" class="form-control form-control-sm my-jFiler-item-info rounded text-sm" value="<?= $v['name'] ?>" placeholder="Tiêu đề" data-info="name" data-id="<?= $v['id'] ?>" />
                                                 </div>
                                             </div>

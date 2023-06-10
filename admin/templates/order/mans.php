@@ -184,7 +184,7 @@ $linkDelete = "index.php?com=order&act=delete";
                                 </td>
                                 <td class="align-middle"><?= date("h:i:s A - d/m/Y", $items[$i]['date_created']) ?></td>
                                 <td class="align-middle">
-                                    <?php ($items[$i]['order_payment'] == "momo") ? $order_payment['name'] = $items[$i]['order_payment'] :  $order_payment = $func->getInfoDetailSlug('name', 'news', $items[$i]['order_payment']); ?>
+                                    <?php ($items[$i]['order_payment'] == "momo" || $items[$i]['order_payment'] == "vnpay") ? $order_payment['name'] = $items[$i]['order_payment'] :  $order_payment = $func->getInfoDetailSlug('name', 'news', $items[$i]['order_payment']); ?>
                                     <span class="text-info cap"><?= $order_payment['name'] ?></span>
                                 </td>
                                 <td class="align-middle">

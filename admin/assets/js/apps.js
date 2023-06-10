@@ -170,29 +170,10 @@ $(document).ready(function () {
             return false;
         });
     }
-    /* Change numb jax */
-    if ($('input.update-numb').length) {
-        $('body').on('change', 'input.update-numb', function () {
-            var id = $(this).attr('data-id');
-            var table = $(this).attr('data-table');
-            var value = $(this).val();
-
-            $.ajax({
-                url: 'api/numb.php',
-                type: 'POST',
-                dataType: 'html',
-                data: {
-                    id: id,
-                    table: table,
-                    value: value
-                }
-            });
-
-            return false;
-        });
-    }
     /* Filer */
     if ($('#filer-gallery').length) {
+        var table = $("#gallery_table")[0].value;        ;
+
         $('#filer-gallery').filer({
             limit: null,
             maxSize: null,
@@ -226,6 +207,7 @@ $(document).ready(function () {
                 url: 'api/upload.php',
                 data: {
                     'params': QUERY_STRING,
+                    'album_table': table,
                 },
                 type: 'POST',
                 enctype: 'multipart/form-data',
@@ -373,15 +355,18 @@ $(document).ready(function () {
         $.ajax({
             url: 'api/order_status.php',
             type: 'POST',
-            dataType: 'html',
             data: {
                 id: id,
                 table: table,
                 newstatus: newstatus
             },
-            success: function () {
-                $this.parents('.order_table').find('.order_status').html('<span class="badge bg-info">Đã xác nhận</span>');
-            }
+            beforeSend: function () {
+                holdonOpen();
+            },
+            success: function (result) {
+                location.reload();
+                holdonClose();
+            },
         });
     });
 

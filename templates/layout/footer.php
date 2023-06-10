@@ -16,7 +16,7 @@
 </div>
 
 <?php if ($com != 'gio-hang') { ?>
-    <a class="popup_cart cart-fixed" href="javascript::void(0)" title="Giỏ hàng">
+    <a class="popup_cart cart-fixed" title="Giỏ hàng">
         <i class="fas fa-shopping-bag"></i>
         <span class="count-cart"><?= (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0 ?></span>
     </a>

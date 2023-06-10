@@ -37,10 +37,8 @@ if ($cmd == 'add-cart' && $id > 0) {
 
     echo json_encode($data);
 } else if ($cmd == 'delete-cart' && $code != '') {
-    if (!empty($config['order']['ship'])) {
         $shipData = (!empty($ward)) ? $func->getInfoDetail('ship_price', "ward", $ward) : array();
         $ship = (!empty($shipData)) ? $shipData['ship_price'] : 0;
-    }
 
     $cart->removeProduct($code);
     $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
@@ -102,7 +100,7 @@ if ($cmd == 'add-cart' && $id > 0) {
                                 <div class="form-row">
                                     <div class="pic-procart col-3 col-md-2">
                                         <a class="text-decoration-none" href="<?= $proinfo['slug'] ?>" target="_blank" title="<?= $proinfo['name'] ?>">
-                                            <?= $func->getImage(['class' => 'w-100', 'width' => 85, 'height' => 85, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name']]) ?>
+                                            <?= $func->getImage(['class' => 'w-100', 'width' => 85, 'height' => 90, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name']]) ?>
                                         </a>
                                         <a class="del-procart text-decoration-none" data-code="<?= $code ?>">
                                             <i class="fa fa-times-circle"></i>
@@ -170,5 +168,4 @@ if ($cmd == 'add-cart' && $id > 0) {
             <?php } ?>
         </div>
     </form>
-<?php }
-?>
+<?php } ?>

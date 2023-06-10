@@ -90,8 +90,8 @@ if ($type == 'tin-tuc') {
                                         <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                     </div>
                                 </td>
-                                <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="table_news">
+                                <td class="align-middle text-center">
+                                    <?= $i+1 ?>
                                 </td>
                                 <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
                                     <td class="align-middle">

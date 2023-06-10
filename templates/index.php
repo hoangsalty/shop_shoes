@@ -9,7 +9,7 @@
 <body>
     <div class="wap_main">
         <?php
-        if ($com != 'momo-status') {
+        if ($com != 'payment-momo' && $com != 'payment-vnpay' && $com != 'gio-hang') {
             include TEMPLATE . LAYOUT . "header.php";
             include TEMPLATE . LAYOUT . "menu.php";
             include TEMPLATE . LAYOUT . "mmenu.php";
@@ -21,9 +21,10 @@
             <?php include TEMPLATE . $template . ".php"; ?>
         </div>
         <?php
-
-        include TEMPLATE . LAYOUT . "footer.php";
-        include TEMPLATE . LAYOUT . "modal.php";
+        if ($com != 'gio-hang') {
+            include TEMPLATE . LAYOUT . "footer.php";
+            include TEMPLATE . LAYOUT . "modal.php";
+        }
         include TEMPLATE . LAYOUT . "js.php";
         ?>
     </div>
