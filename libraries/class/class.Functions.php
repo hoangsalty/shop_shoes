@@ -750,7 +750,7 @@ class Functions
                                 <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
                             </a>
                             <p class="social-product transition">
-                                <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product text-decoration-none">
+                                <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a class="cart-add addcart" data-id="<?= $v['id'] ?>" data-action="addnow">
