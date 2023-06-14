@@ -61,6 +61,8 @@ function confirmDialog(
                 btnClass: "btn-sm btn-primary",
                 action: function () {
                     if (action == "delete-procart") deleteCart(value);
+                    if (action == "change-order-status") changeOrderStatus(value);
+
                 },
             },
             cancel: {
@@ -183,9 +185,7 @@ function deleteCart(obj) {
                 $(".form-cart").find(".load-price-total").html(result.totalText);
                 $(".form-cart").find(".procart-" + code).remove();
             } else {
-                $(".wrap-cart").html(
-                    '<a href="" class="empty-cart text-decoration-none"><i class="fas fa-cart-plus"></i><p>Không tồn tại sản phẩm trong giỏ hàng</p><span class="btn btn-warning">Về trang chủ</span></a>'
-                );
+                location.reload();
             }
             holdonClose();
         },
@@ -221,6 +221,28 @@ function loadWard(id = 0) {
         },
         success: function (result) {
             $(".select-ward").html(result);
+            holdonClose();
+        },
+    });
+}
+
+function changeOrderStatus(obj) {
+    var id = obj.data("id");
+    var status = obj.data("status");
+
+    $.ajax({
+        type: "POST",
+        url: "api/order.php",
+        data: {
+            cmd: "change-status",
+            id: id,
+            status: status,
+        },
+        beforeSend: function () {
+            holdonOpen();
+        },
+        success: function (result) {
+            location.reload();
             holdonClose();
         },
     });

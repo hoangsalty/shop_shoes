@@ -14,7 +14,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
         <div class="row">
             <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý loại sản phẩm</li>
+                <li class="breadcrumb-item active">Quản lý loại sản phẩm list</li>
             </ol>
         </div>
     </div>
@@ -38,7 +38,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
     </div>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
-            <h3 class="card-title">Danh sách loại sản phẩm</h3>
+            <h3 class="card-title">Danh sách loại sản phẩm list</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -80,8 +80,8 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                         <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                     </div>
                                 </td>
-                                <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="table_product_list">
+                                <td class="align-middle text-center">
+                                    <?= $i+1 ?>
                                 </td>
                                 <td class="align-middle">
                                     <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">

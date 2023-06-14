@@ -3,16 +3,22 @@
 $func->checkLogin();
 
 /* Router */
+
+/* Set default route (index)*/
 $router->setBasePath($config['database']['url']);
+
+/* Default admin route (admin index)*/
 $router->map('GET', ADMIN, function () {
-    global $config;
-    $this->redirect($config['database']['url'] . ADMIN . "/index.php");
+    global $func, $config;
+    $func->redirect($config['database']['url'] . ADMIN . "/index.php");
     exit;
 });
-$router->map('GET|POST', '', 'index', '');
-$router->map('GET|POST', 'index.php', 'index', 'index');
-$router->map('GET|POST', '[a:com]', 'allpage', 'show');
-$router->map('GET|POST', '[a:com]/[a:action]', 'account', 'account');
+
+/* Route com = index */
+$router->map('GET|POST', '', 'index');
+
+$router->map('GET|POST', '[a:com]', '[a:com]');
+$router->map('GET|POST', '[a:com]/[a:action]', '[a:com]');
 
 /* Router match */
 $match = $router->match();
@@ -38,15 +44,15 @@ $optsetting = (!empty($setting['options'])) ? json_decode($setting['options'], t
 /* Tối ưu link */
 $requick = array(
     /* Sản phẩm */
-    array("tbl" => "product_list", "field" => "idl", "source" => "product", "com" => "san-pham"),
-    array("tbl" => "product_brand", "field" => "idb", "source" => "product", "com" => "san-pham"),
+    array("tbl" => "product_list", "field" => "id_list", "source" => "product", "com" => "san-pham"),
+    array("tbl" => "product_brand", "field" => "id_brand", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
     /* Thư viện ảnh */
-    array("field" => "id", "source" => "album", "com" => "thu-vien-anh"),
+    array("tbl" => "", "field" => "id", "source" => "album", "com" => "thu-vien-anh"),
 
     /* Video */
-    array("field" => "id", "source" => "video", "com" => "video"),
+    array("tbl" => "", "field" => "id", "source" => "video", "com" => "video"),
 
     /* Bài viết */
     array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tin-tuc"),
@@ -64,6 +70,7 @@ if (!empty($com) && !in_array($com, ['tim-kiem', 'account'])) {
         $urlType = (!empty($v['type'])) ? $v['type'] : '';
         $urlField = (!empty($v['field'])) ? $v['field'] : '';
         $urlCom = (!empty($v['com'])) ? $v['com'] : '';
+
         if (!empty($urlTbl)) {
             $row = $d->rawQueryOne("select id from table_$urlTbl where slug = ? and find_in_set('hienthi',status) limit 0,1", array($com));
 
@@ -103,13 +110,6 @@ switch ($com) {
         $titleMain = "Sản phẩm";
         break;
 
-    case 'thu-vien-anh':
-        $source = "album";
-        $template = isset($_GET['id']) ? "album/album_detail" : "album/album";
-        $type = $com;
-        $titleMain = "Thư viện ảnh";
-        break;
-
     case 'tim-kiem':
         $source = "search";
         $template = "product/product";
@@ -131,6 +131,16 @@ switch ($com) {
     case 'account':
         $source = "user";
         $titleMain = "Tài khoản";
+        break;
+
+    case 'payment-momo':
+        $source = "momo";
+        $template = "payment/momo";
+        break;
+
+    case 'payment-vnpay':
+        $source = "vnpay";
+        $template = "payment/vnpay";
         break;
 
     default:

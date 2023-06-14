@@ -20,7 +20,7 @@
 </div>
 
 <?php if (!empty($brand)) { ?>
-    <section class="wrap-categories spacing">
+    <div class="wrap-categories spacing">
         <div class="wrap-content">
             <div class="title-main">
                 <span>Thương hiệu sản phẩm</span>
@@ -30,7 +30,7 @@
                     <div>
                         <div class="item-categories">
                             <a class="image scale-img transition" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
-                                <?= $func->getImage(['class' => '', 'width' => $config['product_brand']['width'], 'height' => $config['product_brand']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                <?= $func->getImage(['class' => '', 'width' => $config['brand']['width'], 'height' => $config['brand']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
                             </a>
                             <div class="info">
                                 <h3 class="name">
@@ -42,7 +42,7 @@
                 <?php } ?>
             </div>
         </div>
-    </section>
+    </div>
 <?php } ?>
 
 <?php if (count($product)) { ?>

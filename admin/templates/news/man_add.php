@@ -6,8 +6,7 @@ $linkMan = "index.php?com=news&act=man&type=" . $type;
 if ($act == 'add') $linkFilter = "index.php?com=news&act=add&type=" . $type;
 else if ($act == 'edit') $linkFilter = "index.php?com=news&act=edit&type=" . $type . "&id=" . $id;
 
-if ($act == 'add') $linkSave = "index.php?com=news&act=save&type=" . $type;
-else if ($act == 'edit') $linkSave = "index.php?com=news&act=save&type=" . $type . "&id=" . $id;
+$linkSave = "index.php?com=news&act=save&type=" . $type;
 
 $name = '';
 if ($type == 'tin-tuc') $name = 'Tin tức';
@@ -33,6 +32,7 @@ else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
+            <input type="hidden" name="id" value="<?= (isset($item['id']) && $item['id'] > 0) ? $item['id'] : '' ?>">
         </div>
 
         <?= $flash->getMessages('admin') ?>
@@ -64,10 +64,10 @@ else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
             </div>
             <div class="col-xl-4">
                 <div class="card card-primary card-outline text-sm">
-                    <?php if ($type == 'tin-tuc') {
-                        $slugchange = ($act == 'edit') ? 1 : 0;
-                        include TEMPLATE . LAYOUT . "slug.php";
-                    } ?>
+                    <?php
+                    $slugchange = ($act == 'edit') ? 1 : 0;
+                    include TEMPLATE . LAYOUT . "slug.php";
+                    ?>
                 </div>
 
                 <div class="card card-primary card-outline text-sm">

@@ -35,9 +35,15 @@ $linkSave = "index.php?com=order&act=save&id=" . $id;
                 </div>
                 <div class="form-group col-md-3 col-sm-6">
                     <label>Hình thức thanh toán:</label>
-                    <?php $order_payment = $func->getInfoDetail('name', 'news', @$item['order_payment']); ?>
-                    <p class="text-info"><?= $order_payment['name'] ?></p>
+                    <?php (@$item['order_payment'] == "momo" || @$item['order_payment'] == "vnpay") ? $order_payment['name'] = @$item['order_payment'] : $order_payment = $func->getInfoDetailSlug('name', 'news', @$item['order_payment']); ?>
+                    <p class="text-info cap"><?= $order_payment['name'] ?></p>
                 </div>
+
+                <div class="form-group col-md-3 col-sm-6">
+                    <label>Mã giao dịch:</label>
+                    <p class="text-info cap bold"><?= @$item['transId'] ?></p>
+                </div>
+
                 <div class="form-group col-md-3 col-sm-6">
                     <label>Họ tên:</label>
                     <p class="font-weight-bold text-uppercase text-success"><?= @$item['fullname'] ?></p>
@@ -161,26 +167,18 @@ $linkSave = "index.php?com=order&act=save&id=" . $id;
                                     </td>
                                 </tr>
                             <?php } ?>
-                            <?php if (
-                                (isset($config['order']['ship']) && $config['order']['ship'] == true)
-                            ) { ?>
-                                <tr>
-                                    <td colspan="5" class="title-money-cart-detail">Tạm tính:</td>
-                                    <td colspan="1" class="cast-money-cart-detail"><?= $func->formatMoney($item['temp_price']) ?></td>
-                                </tr>
-                            <?php } ?>
-                            <?php if (isset($config['order']['ship']) && $config['order']['ship'] == true) { ?>
-                                <tr>
-                                    <td colspan="5" class="title-money-cart-detail">Phí vận chuyển:</td>
-                                    <td colspan="1" class="cast-money-cart-detail">
-                                        <?php if ($item['ship_price']) { ?>
-                                            <?= $func->formatMoney($item['ship_price']) ?>
-                                        <?php } else { ?>
-                                            Không
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                            <?php } ?>
+                            <tr>
+                                <td colspan="5" class="title-money-cart-detail">Tạm tính:</td>
+                                <td colspan="1" class="cast-money-cart-detail"><?= $func->formatMoney($item['temp_price']) ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="title-money-cart-detail">Phí vận chuyển:</td>
+                                <td colspan="1" class="cast-money-cart-detail">
+                                    <?php if ($item['ship_price']) { ?>
+                                        <?= $func->formatMoney($item['ship_price']) ?>
+                                    <?php } ?>
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan="5" class="title-money-cart-detail">Tổng giá trị đơn hàng:</td>
                                 <td colspan="1" class="cast-money-cart-detail"><?= $func->formatMoney($item['total_price']) ?></td>

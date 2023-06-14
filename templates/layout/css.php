@@ -21,6 +21,11 @@
 
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/photobox/photobox.css" />
 
+<!-- <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/select2/select2.min.css" />
+<script type="text/javascript" src="<?= $configBase ?>assets/select2/select2.min.js"></script> -->
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/cart.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/style-responsive.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/style.css" />

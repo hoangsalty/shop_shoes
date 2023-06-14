@@ -45,10 +45,6 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.top-cart {
-  border-right: 1px solid #eee;
-}
-
 .procart {
   padding: 20px 10px;
   border: 1px solid #eee;
@@ -77,9 +73,10 @@
 }
 
 .name-procart a {
-  font-size: 14px;
+  font-size: 15px;
   color: #000;
   display: block;
+  font-weight: bold;
 }
 
 .name-procart a:hover {
@@ -169,7 +166,6 @@
   padding: 0px;
   color: #333;
   text-align: center;
-  text-indent: 10px;
 }
 
 .price-procart {
@@ -196,13 +192,13 @@
 }
 
 .money-procart {
-  margin-top: 15px;
+  border-top: 1px solid #dddfe2;
+  padding: 10px 0;
 }
 
 .total-procart {
-  background: #eee;
-  padding: 7px 10px;
-  border: 1px solid #dddfe2;
+  padding: 15px 20px;
+  border-top: 1px solid #dddfe2;
   margin-bottom: -1px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -215,6 +211,17 @@
   justify-content: space-between;
 }
 
+.money-procart .total-procart {
+  border-top: none;
+  padding: 10px 0 !important;
+  margin-left: auto;
+}
+
+.money-procart p:last-child {
+  font-size: 20px !important;
+  line-height: normal;
+}
+
 .total-procart p {
   margin-bottom: 0px;
   font-size: 15px;
@@ -222,6 +229,8 @@
 
 .total-procart p:last-child {
   color: #001973;
+  font-size: 24px;
+  line-height: 30px;
 }
 
 .section-cart {
@@ -244,7 +253,6 @@
 }
 
 .input-cart {
-  margin-bottom: 0.5rem;
   position: relative;
 }
 
@@ -274,11 +282,18 @@
 .payments-label {
   cursor: pointer;
   background: #eee;
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 10px 15px;
   border-radius: 3px;
   margin-bottom: 0px;
   color: #313131 !important;
+}
+
+.payments-label img {
+  width: 30px;
+  display: inline-block;
+  margin-right: 7px;
 }
 
 .payments-label::before,

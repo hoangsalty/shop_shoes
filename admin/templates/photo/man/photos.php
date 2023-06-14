@@ -72,18 +72,18 @@ else if ($type == 'album') $name = 'Album';
                                         <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                     </div>
                                 </td>
-                                <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $items[$i]['numb'] ?>" data-id="<?= $items[$i]['id'] ?>" data-table="photo">
+                                <td class="align-middle text-center">
+                                    <?= $i+1 ?>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?> <?= ($type == 'album') ? '&album_table=gallery_album' : '' ?>" title="<?= $items[$i]['name'] ?>">
+                                    <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
                                         <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 80, 'upload' => UPLOAD_PHOTO_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
                                     </a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?> <?= ($type == 'album') ? '&album_table=gallery_album' : '' ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
-                                        <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?> <?= ($type == 'album') ? '&album_table=gallery_album' : '' ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                        <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                         <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>

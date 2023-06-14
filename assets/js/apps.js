@@ -1,3 +1,48 @@
+FRAMEWORK.Momo = function () {
+  $('#thanhtoan').prop('disabled', true);
+  $('#thanhtoan').addClass('disabled');
+
+  if (isExist($('.form-cart'))) {
+    $(".form-cart")[0].onchange = function () {
+      if ($('.form-cart')[0].checkValidity() == true) {
+        $('#thanhtoan').prop('disabled', false);
+        $('#thanhtoan').removeClass('disabled');
+      }
+    };
+  }
+}
+
+FRAMEWORK.DatePicker = function () {
+  if (isExist($('#birthday'))) {
+    $('#birthday').datetimepicker({
+      timepicker: false,
+      format: 'd/m/Y',
+      formatDate: 'd/m/Y',
+      minDate: '01/01/1950',
+      maxDate: TIMENOW
+    });
+  }
+};
+
+FRAMEWORK.UserInfo = function () {
+  $(".container_load_info").hide();
+  $(".container_load_info.load1").show();
+
+  $(document).on('click', '.sty_list', function (event) {
+    $('.sty_list').removeClass('act');
+
+    var vitri = $(this).data('vitri');
+    $(".container_load_info").hide();
+    $(".load" + vitri).show();
+    $(this).addClass('act');
+  });
+
+  /* Cancel order */
+  $("body").on("click", "#cancel-order", function () {
+    confirmDialog("change-order-status", "Bạn muốn hủy đơn hàng này ?", $(this));
+  });
+};
+
 FRAMEWORK.Comments = function () {
   var wrapper = $("#form-comment");
   var wrapperLists = wrapper.find(".comment-lists");
@@ -80,9 +125,9 @@ FRAMEWORK.Comments = function () {
           });
         },
       },
-      afterSelect: function () {},
-      onEmpty: function () {},
-      onRemove: function () {},
+      afterSelect: function () { },
+      onEmpty: function () { },
+      onRemove: function () { },
     });
   }
 
@@ -333,129 +378,9 @@ FRAMEWORK.PopupRegister = function () {
   });
 };
 
-FRAMEWORK.PopupRegister = function () {
-  $("#form-user-register").submit(function (e) {
-    e.preventDefault();
-
-    var fullname = $(this).find("#fullname");
-    var username = $(this).find("#username");
-    var password = $(this).find("#password");
-    var birthday = $(this).find("#birthday");
-    var email = $(this).find("#email");
-    var phone = $(this).find("#phone");
-    var address = $(this).find("#address");
-
-    if (isEmpty(fullname.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập họ tên</div>'
-      );
-      fullname.focus();
-      return false;
-    }
-
-    if (isEmpty(username.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập tài khoản</div>'
-      );
-      username.focus();
-      return false;
-    }
-
-    if (isEmpty(password.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập mật khẩu</div>'
-      );
-      password.focus();
-      return false;
-    }
-
-    if (isEmpty(birthday.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng chọn ngày sinh</div>'
-      );
-      birthday.focus();
-      return false;
-    }
-
-    if (isEmpty(email.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập email</div>'
-      );
-      email.focus();
-      return false;
-    }
-
-    if (isEmpty(phone.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập số điện thoại</div>'
-      );
-      phone.focus();
-      return false;
-    }
-
-    if (isEmpty(address.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập địa chỉ</div>'
-      );
-      address.focus();
-      return false;
-    }
-
-    $.ajax({
-      url: "api/register.php",
-      type: "POST",
-      dataType: "json",
-      data: {
-        fullname: fullname.val(),
-        username: username.val(),
-        password: password.val(),
-        birthday: birthday.val(),
-        email: email.val(),
-        phone: phone.val(),
-        address: address.val(),
-      },
-      beforeSend: function () {
-        holdonOpen();
-        $("#popup-register").find(".modal-body").css("opacity", "0.5");
-        $(this).find(".register-account").prop("disabled", true);
-      },
-      success: function (result) {
-        $("#popup-register").find(".modal-body").css("opacity", "1");
-        $(this).find(".register-account").prop("disabled", false);
-
-        if (result.status == 200) {
-          $(".register_response").html(
-            '<div class="alert alert-success">' + result.message + "</div>"
-          );
-
-          setTimeout(function () {
-            $.ajax({
-              url: "api/login.php",
-              type: "POST",
-              dataType: "json",
-              data: {
-                username: username.val(),
-                password: password.val(),
-              },
-              success: function (result) {
-                if (result.status == 200) {
-                  location.reload();
-                }
-              },
-            });
-          }, 3000);
-        } else if (result.status == 404) {
-          $(".register_response").html(
-            '<div class="alert alert-danger">' + result.message + "</div>"
-          );
-        }
-        holdonClose();
-      },
-    });
-  });
-};
-
 FRAMEWORK.Random = function () {
+  $('#popup-order .input-select select').select2();
+
   $(".birth-date").datetimepicker({
     timepicker: false,
     format: "d/m/Y",
@@ -575,9 +500,9 @@ FRAMEWORK.Carousel = function () {
     lazyLoad: "progressive",
     infinite: true,
     accessibility: true,
-    vertical: false,
-    verticalSwiping: false,
-    slidesToShow: 5,
+    vertical: true,
+    verticalSwiping: true,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -773,7 +698,6 @@ FRAMEWORK.Cart = function () {
       success: function (result) {
         $("#popup-cart .modal-body").html(result);
         $("#popup-cart").modal("show");
-        holdonClose();
       },
     });
   });
@@ -854,11 +778,7 @@ FRAMEWORK.Cart = function () {
   });
   /* Delete */
   $("body").on("click", ".del-procart", function () {
-    confirmDialog(
-      "delete-procart",
-      "Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?",
-      $(this)
-    );
+    confirmDialog("delete-procart", "Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?", $(this));
   });
   /* Counter */
   $("body").on("click", ".counter-procart", function () {
@@ -954,11 +874,12 @@ $(document).ready(function () {
   FRAMEWORK.Bootstrap();
   FRAMEWORK.Cart();
   FRAMEWORK.Pagings();
-  FRAMEWORK.Random();
   FRAMEWORK.PopupLogin();
   FRAMEWORK.PopupRegister();
   FRAMEWORK.Comments();
-  FRAMEWORK.PopupRegister();
-  FRAMEWORK.Comments();
+  FRAMEWORK.UserInfo();
+  FRAMEWORK.DatePicker();
+  FRAMEWORK.Momo();
   FRAMEWORK.Photobox();
+  FRAMEWORK.Random();
 });

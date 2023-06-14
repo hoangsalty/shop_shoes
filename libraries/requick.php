@@ -14,12 +14,12 @@ $func->checkLogin();
 
 /* Kiểm tra trạng thái */
 if ((!empty($_SESSION['account']['status']) && $_SESSION['account']['status'] == 'khoa')) {
-    $func->transfer("Tài khoản của bạn hiện tại đang bị KHÓA, bạn vui lòng liên hệ với phía quản trị viên để được hỗ trợ", "../index.php", false);
+    $func->transferAdmin("Tài khoản của bạn hiện tại đang bị KHÓA, bạn vui lòng liên hệ với phía quản trị viên để được hỗ trợ", "../", false);
 }
 
 /* Kiểm tra quyền */
 if ((!empty($_SESSION['account']['role']) && $_SESSION['account']['role'] == 'user')) {
-    $func->transfer("Bạn không có quyền truy cập vào khu vực này", "../index.php", false);
+    $func->transferAdmin("Bạn không có quyền truy cập vào khu vực này", "../", false);
 }
 
 

@@ -29,6 +29,39 @@
 
 <script type="text/javascript" src="<?= $configBase ?>assets/photobox/photobox.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script type="text/javascript" src="<?= $configBase ?>assets/js/functions.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/apps.js"></script>
+
+<script>
+    function inti_order_status(tab_class = '', tab_return = '', table_select = '') {
+        if (tab_class != '') {
+            if ($('.' + tab_class + ' a.active').length == 0) {
+                $('.' + tab_class + ' a').eq(0).addClass('active');
+            }
+            var where_select = '' + $('.' + tab_class + ' a.active').data('id');
+        }
+
+        $.ajax({
+            url: 'api/order.php',
+            type: 'post',
+            data: {
+                cmd: "show-order-by-status",
+                where_select: where_select,
+            },
+        }).done(function(result) {
+            $('.' + tab_return).html(result);
+        });
+    }
+
+    $(document).ready(function() {
+        $(document).on('click', '.nav_status_order a', function(event) {
+            event.preventDefault();
+            $(this).parent('.nav_status_order').find('a').removeClass('active');
+            $(this).addClass('active');
+            inti_order_status('nav_status_order', 'status_order', 'table_order_detail');
+        });
+        inti_order_status('nav_status_order', 'status_order', 'table_order_detail');
+    });
+</script>

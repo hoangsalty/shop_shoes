@@ -523,7 +523,8 @@
 }
 
 .main-header .navbar-nav .nav-item .dropdown-menu {
-    max-width: 250px
+    max-width: 250px;
+    min-height: 160px;
 }
 
 .main-header .navbar-nav .nav-item .dropdown-menu .dropdown-item {
@@ -1046,18 +1047,17 @@
 
 .jFiler-items-grid .jFiler-item .jFiler-item-container .jFiler-item-thumb {
     width: 100%;
-    height: auto;
-    min-height: inherit
 }
 
 .jFiler-items-grid .jFiler-item .jFiler-item-container .jFiler-item-thumb .jFiler-item-thumb-image {
-    max-height: 150px;
-    position: relative
+    position: relative;
+    background-color: #eee;
 }
 
 .jFiler-items-grid .jFiler-item .jFiler-item-container .jFiler-item-thumb .jFiler-item-thumb-image img {
     max-width: 100%;
-    width: 100% !important
+    width: 80% !important;
+    height: 100% !important;
 }
 
 .jFiler-items-grid .jFiler-item .jFiler-item-container .jFiler-item-thumb .jFiler-item-thumb-image i {
@@ -1849,4 +1849,22 @@ select.form-control option:disabled {
 .commentColor {
     background-color: #fffbf8;
     border: 1px solid #f9ede5;
+}
+
+.text-info.cap {
+    text-transform: uppercase;
+}
+
+.text-info.bold {
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.main-footer a {
+    margin-left: 3px;
+    display: inline-block;
+    font-size: 17px;
 }

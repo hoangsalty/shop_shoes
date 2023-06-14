@@ -25,7 +25,7 @@ function saveSetting()
 
     /* Check post */
     if (empty($_POST)) {
-        $func->transfer("Không nhận được dữ liệu", "index.php?com=setting&act=update", false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=setting&act=update", false);
     }
 
     /* Post dữ liệu */
@@ -121,15 +121,15 @@ function saveSetting()
     if (!empty($row)) {
         $d->where('id', $id);
         if ($d->update('table_setting', $data)) {
-            $func->transfer("Cập nhật dữ liệu thành công", "index.php?com=setting&act=update");
+            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=setting&act=update");
         } else {
-            $func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=setting&act=update", false);
+            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=setting&act=update", false);
         }
     } else {
         if ($d->insert('table_setting', $data)) {
-            $func->transfer("Thêm dữ liệu thành công", "index.php?com=setting&act=update");
+            $func->transferAdmin("Thêm dữ liệu thành công", "index.php?com=setting&act=update");
         } else {
-            $func->transfer("Thêm dữ liệu bị lỗi", "index.php?com=setting&act=update", false);
+            $func->transferAdmin("Thêm dữ liệu bị lỗi", "index.php?com=setting&act=update", false);
         }
     }
 }

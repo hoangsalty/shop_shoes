@@ -24,7 +24,7 @@ $tempLink .= "&page=";
 $pageLink .= $tempLink;
 
 /* Get data */
-$sql = "select * from table_product where date_deleted = 0 $where and find_in_set('noibat',status) and find_in_set('hienthi',status) order by numb,id desc";
+$sql = "select * from table_product where find_in_set('noibat',status) and find_in_set('hienthi',status) $where order by id desc";
 $sqlCache = $sql . " limit $start, $pagingAjax->perpage";
 $items = $d->rawQuery($sqlCache, $params);
 

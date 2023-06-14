@@ -6,7 +6,7 @@
         <?php } else { ?>
             <div class="col-12">
                 <div class="alert alert-warning" role="alert">
-                    <strong>"Không tìm thấy kết quả</strong>
+                    <strong>Không tìm thấy kết quả</strong>
                 </div>
             </div>
         <?php } ?>

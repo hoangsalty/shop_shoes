@@ -28,8 +28,8 @@ if (!empty($account)) {
         $_SESSION['account']['login_session'] = $login_session;
         $_SESSION['account']['status'] = $account['status'];
 
-        /* Cookie user */
-        $time_expiry = time() + 1800;
+        /* Nhớ mật khẩu */
+        $time_expiry = time() + 3600;
         setcookie('login_account_id', $account['id'], $time_expiry, '/');
         setcookie('login_account_session', $login_session, $time_expiry, '/');
 
