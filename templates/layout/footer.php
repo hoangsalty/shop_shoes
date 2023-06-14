@@ -1,16 +1,46 @@
 <div class="footer">
     <div class="footer-article">
         <div class="wrap-content">
+            <div class="row">
+                <div class="footer-news col-lg-5 col-md-5 col-12">
+                    <h2 class="footer-title"><?= $footer['name'] ?></h2>
+                    <div class="footer-info"><?= $func->decodeHtmlChars($footer['content']) ?></div>
+                </div>
+                <div class="footer-news col-lg-3 col-md-3 col-12">
+                    <h2 class="footer-title">Chính sách</h2>
+                    <ul class="footer-ul">
+                        <li>
+                            <a href="">
+                                Chính sách 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                Chính sách 2
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                Chính sách 3
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                Chính sách 4
+                            </a>
+                        </li>
 
+                    </ul>
+                </div>
+                <div class="footer-news col-lg-4 col-md-4 col-12">
+                    <h2 class="footer-title">Fanpage facebook</h2>
+                </div>
+            </div>
         </div>
     </div>
     <div class="footer-powered">
         <div class="wrap-content">
-            <div class="footer__copyright">
-                <div class="row">
-                    <div class="copyright col-md-6">Copyright © 2023 CKC. Design by CKC</div>
-                </div>
-            </div>
+            <div class="copyright text-center">Copyright © 2023 CKC. Design by CKC</div>
         </div>
     </div>
 </div>

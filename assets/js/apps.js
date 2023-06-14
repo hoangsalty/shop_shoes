@@ -1,25 +1,25 @@
 FRAMEWORK.Momo = function () {
-  $('#thanhtoan').prop('disabled', true);
-  $('#thanhtoan').addClass('disabled');
+  $("#thanhtoan").prop("disabled", true);
+  $("#thanhtoan").addClass("disabled");
 
-  if (isExist($('.form-cart'))) {
+  if (isExist($(".form-cart"))) {
     $(".form-cart")[0].onchange = function () {
-      if ($('.form-cart')[0].checkValidity() == true) {
-        $('#thanhtoan').prop('disabled', false);
-        $('#thanhtoan').removeClass('disabled');
+      if ($(".form-cart")[0].checkValidity() == true) {
+        $("#thanhtoan").prop("disabled", false);
+        $("#thanhtoan").removeClass("disabled");
       }
     };
   }
-}
+};
 
 FRAMEWORK.DatePicker = function () {
-  if (isExist($('#birthday'))) {
-    $('#birthday').datetimepicker({
+  if (isExist($("#birthday"))) {
+    $("#birthday").datetimepicker({
       timepicker: false,
-      format: 'd/m/Y',
-      formatDate: 'd/m/Y',
-      minDate: '01/01/1950',
-      maxDate: TIMENOW
+      format: "d/m/Y",
+      formatDate: "d/m/Y",
+      minDate: "01/01/1950",
+      maxDate: TIMENOW,
     });
   }
 };
@@ -28,18 +28,22 @@ FRAMEWORK.UserInfo = function () {
   $(".container_load_info").hide();
   $(".container_load_info.load1").show();
 
-  $(document).on('click', '.sty_list', function (event) {
-    $('.sty_list').removeClass('act');
+  $(document).on("click", ".sty_list", function (event) {
+    $(".sty_list").removeClass("act");
 
-    var vitri = $(this).data('vitri');
+    var vitri = $(this).data("vitri");
     $(".container_load_info").hide();
     $(".load" + vitri).show();
-    $(this).addClass('act');
+    $(this).addClass("act");
   });
 
   /* Cancel order */
   $("body").on("click", "#cancel-order", function () {
-    confirmDialog("change-order-status", "Bạn muốn hủy đơn hàng này ?", $(this));
+    confirmDialog(
+      "change-order-status",
+      "Bạn muốn hủy đơn hàng này ?",
+      $(this)
+    );
   });
 };
 
@@ -125,9 +129,9 @@ FRAMEWORK.Comments = function () {
           });
         },
       },
-      afterSelect: function () { },
-      onEmpty: function () { },
-      onRemove: function () { },
+      afterSelect: function () {},
+      onEmpty: function () {},
+      onRemove: function () {},
     });
   }
 
@@ -379,7 +383,7 @@ FRAMEWORK.PopupRegister = function () {
 };
 
 FRAMEWORK.Random = function () {
-  $('#popup-order .input-select select').select2();
+  $("#popup-order .input-select select").select2();
 
   $(".birth-date").datetimepicker({
     timepicker: false,
@@ -409,52 +413,31 @@ FRAMEWORK.Menu = function () {
   }
 
   /* Fixed menu */
-  $(window).scroll(function () {
-    if ($(window).width() > 991) {
-      if (
-        $(window).scrollTop() >=
-        $(".header").height() + $(".slideshow").height()
-      ) {
-        $(".menu").addClass("fixed animate__fadeInDown animate__animated");
-        $(".header").css({ "margin-bottom": $(".menu").height() });
-        $(".ul-menu").addClass("hidden-menu");
+  if (isExist($(".header"))) {
+    $(window).scroll(function () {
+      if ($(window).width() > 991) {
+        if ($(window).scrollTop() >= $(".header").height()) {
+          $(".header").height($(".header").height());
+          $(".menu").addClass("fixed animate__fadeInDown animate__animated");
+        } else {
+          $(".header").height("");
+          $(".menu").removeClass("fixed animate__fadeInDown animate__animated");
+        }
       } else {
-        $(".menu").removeClass("fixed animate__fadeInDown animate__animated");
-        $(".header").css({ "margin-bottom": "" });
-        $(".ul-menu").removeClass("hidden-menu");
+        if ($(window).scrollTop() >= $(".header").height()) {
+          $(".header").height($(".header").height());
+          $(".menu-res").addClass(
+            "fixed animate__fadeInDown animate__animated"
+          );
+        } else {
+          $(".header").height();
+          $(".menu-res").removeClass(
+            "fixed animate__fadeInDown animate__animated"
+          );
+        }
       }
-    } else {
-      if ($(window).scrollTop() >= $(".header").height()) {
-        $(".menu-res").addClass("fixed animate__fadeInDown animate__animated");
-
-        $(".header").css({ "margin-bottom": $(".menu-res").height() });
-      } else {
-        $(".menu-res").removeClass(
-          "fixed animate__fadeInDown animate__animated"
-        );
-
-        $(".header").css({ "margin-bottom": "" });
-      }
-    }
-  });
-
-  $(".menu-left .title").click(function () {
-    if ($(".ul-menu").hasClass("hidden-menu")) {
-      $(".ul-menu").removeClass("hidden-menu");
-    } else {
-      $(".ul-menu").addClass("hidden-menu");
-    }
-  });
-
-  $(window).bind("load resize", function () {
-    if (isExist($(".slideshow"))) {
-      heigth = $(".slideshow").height();
-    } else {
-      heigth = 350;
-    }
-
-    $(".ul-menu").height(heigth);
-  });
+    });
+  }
 };
 
 FRAMEWORK.Search = function () {
@@ -778,7 +761,11 @@ FRAMEWORK.Cart = function () {
   });
   /* Delete */
   $("body").on("click", ".del-procart", function () {
-    confirmDialog("delete-procart", "Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?", $(this));
+    confirmDialog(
+      "delete-procart",
+      "Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?",
+      $(this)
+    );
   });
   /* Counter */
   $("body").on("click", ".counter-procart", function () {
