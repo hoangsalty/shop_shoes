@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 10, 2023 at 06:18 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th6 14, 2023 lúc 07:56 PM
+-- Phiên bản máy phục vụ: 10.4.25-MariaDB
+-- Phiên bản PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,29 +18,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db`
+-- Cơ sở dữ liệu: `db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_city`
+-- Cấu trúc bảng cho bảng `table_city`
 --
 
 CREATE TABLE `table_city` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `level` varchar(100) DEFAULT NULL,
-  `code` varchar(2) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `level` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_city`
+-- Đang đổ dữ liệu cho bảng `table_city`
 --
 
 INSERT INTO `table_city` (`id`, `name`, `slug`, `level`, `code`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -111,21 +111,21 @@ INSERT INTO `table_city` (`id`, `name`, `slug`, `level`, `code`, `status`, `date
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_color`
+-- Cấu trúc bảng cho bảng `table_color`
 --
 
 CREATE TABLE `table_color` (
   `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `color` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_color`
+-- Đang đổ dữ liệu cho bảng `table_color`
 --
 
 INSERT INTO `table_color` (`id`, `name`, `color`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -135,7 +135,7 @@ INSERT INTO `table_color` (`id`, `name`, `color`, `status`, `date_created`, `dat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_comment`
+-- Cấu trúc bảng cho bảng `table_comment`
 --
 
 CREATE TABLE `table_comment` (
@@ -143,16 +143,16 @@ CREATE TABLE `table_comment` (
   `id_parent` int(11) UNSIGNED DEFAULT NULL,
   `id_user` int(11) UNSIGNED DEFAULT NULL,
   `star` int(11) DEFAULT 0,
-  `content` text DEFAULT NULL,
-  `fullname` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT NULL,
   `date_updated` int(11) DEFAULT NULL,
   `date_deleted` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_comment`
+-- Đang đổ dữ liệu cho bảng `table_comment`
 --
 
 INSERT INTO `table_comment` (`id`, `id_parent`, `id_user`, `star`, `content`, `fullname`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -161,17 +161,17 @@ INSERT INTO `table_comment` (`id`, `id_parent`, `id_user`, `star`, `content`, `f
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_comment_photo`
+-- Cấu trúc bảng cho bảng `table_comment_photo`
 --
 
 CREATE TABLE `table_comment_photo` (
   `id` int(11) NOT NULL,
   `id_parent` int(11) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `table_comment_photo`
+-- Đang đổ dữ liệu cho bảng `table_comment_photo`
 --
 
 INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
@@ -182,18 +182,18 @@ INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_contact`
+-- Cấu trúc bảng cho bảng `table_contact`
 --
 
 CREATE TABLE `table_contact` (
   `id` int(11) UNSIGNED NOT NULL,
-  `fullname` varchar(255) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `subject` varchar(255) DEFAULT NULL,
-  `content` mediumtext DEFAULT NULL,
-  `address` mediumtext DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -201,36 +201,36 @@ CREATE TABLE `table_contact` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_counter`
+-- Cấu trúc bảng cho bảng `table_counter`
 --
 
 CREATE TABLE `table_counter` (
   `id` int(11) NOT NULL,
   `tm` int(11) DEFAULT 0,
-  `ip` varchar(16) DEFAULT '0.0.0.0'
+  `ip` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT '0.0.0.0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_district`
+-- Cấu trúc bảng cho bảng `table_district`
 --
 
 CREATE TABLE `table_district` (
   `id` int(11) NOT NULL,
   `id_city` int(11) DEFAULT 0,
-  `name` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `code` varchar(3) DEFAULT NULL,
-  `level` varchar(100) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `level` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_district`
+-- Đang đổ dữ liệu cho bảng `table_district`
 --
 
 INSERT INTO `table_district` (`id`, `id_city`, `name`, `slug`, `code`, `level`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -944,22 +944,22 @@ INSERT INTO `table_district` (`id`, `id_city`, `name`, `slug`, `code`, `level`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_gallery`
+-- Cấu trúc bảng cho bảng `table_gallery`
 --
 
 CREATE TABLE `table_gallery` (
   `id` int(11) UNSIGNED NOT NULL,
   `id_parent` int(11) UNSIGNED DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_gallery`
+-- Đang đổ dữ liệu cho bảng `table_gallery`
 --
 
 INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -977,7 +977,7 @@ INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `status`, `date
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_gallery_album`
+-- Cấu trúc bảng cho bảng `table_gallery_album`
 --
 
 CREATE TABLE `table_gallery_album` (
@@ -989,10 +989,10 @@ CREATE TABLE `table_gallery_album` (
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `table_gallery_album`
+-- Đang đổ dữ liệu cho bảng `table_gallery_album`
 --
 
 INSERT INTO `table_gallery_album` (`id`, `id_parent`, `photo`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1006,7 +1006,7 @@ INSERT INTO `table_gallery_album` (`id`, `id_parent`, `photo`, `name`, `status`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_momo`
+-- Cấu trúc bảng cho bảng `table_momo`
 --
 
 CREATE TABLE `table_momo` (
@@ -1018,10 +1018,10 @@ CREATE TABLE `table_momo` (
   `order_type` varchar(255) NOT NULL,
   `transId` int(11) NOT NULL,
   `pay_type` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `table_momo`
+-- Đang đổ dữ liệu cho bảng `table_momo`
 --
 
 INSERT INTO `table_momo` (`id`, `order_id`, `partner_code`, `amount`, `order_info`, `order_type`, `transId`, `pay_type`) VALUES
@@ -1030,18 +1030,18 @@ INSERT INTO `table_momo` (`id`, `order_id`, `partner_code`, `amount`, `order_inf
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_news`
+-- Cấu trúc bảng cho bảng `table_news`
 --
 
 CREATE TABLE `table_news` (
   `id` int(11) UNSIGNED NOT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `content` mediumtext DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `view` int(11) DEFAULT 0,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
@@ -1049,7 +1049,7 @@ CREATE TABLE `table_news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_news`
+-- Đang đổ dữ liệu cho bảng `table_news`
 --
 
 INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `status`, `type`, `view`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1063,34 +1063,34 @@ INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `sta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_order`
+-- Cấu trúc bảng cho bảng `table_order`
 --
 
 CREATE TABLE `table_order` (
   `id` int(11) UNSIGNED NOT NULL,
   `id_user` int(11) UNSIGNED DEFAULT NULL,
   `transId` int(11) DEFAULT 0,
-  `order_payment` varchar(255) DEFAULT NULL,
-  `code` varchar(25) DEFAULT NULL,
-  `fullname` varchar(255) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `requirements` mediumtext DEFAULT NULL,
+  `order_payment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `requirements` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city` int(11) DEFAULT 0,
   `district` int(11) DEFAULT 0,
   `ward` int(11) DEFAULT 0,
   `temp_price` double DEFAULT 0,
   `ship_price` double DEFAULT 0,
   `total_price` double DEFAULT 0,
-  `order_status` varchar(255) DEFAULT NULL,
+  `order_status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_order`
+-- Đang đổ dữ liệu cho bảng `table_order`
 --
 
 INSERT INTO `table_order` (`id`, `id_user`, `transId`, `order_payment`, `code`, `fullname`, `phone`, `address`, `email`, `requirements`, `city`, `district`, `ward`, `temp_price`, `ship_price`, `total_price`, `order_status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1102,7 +1102,7 @@ INSERT INTO `table_order` (`id`, `id_user`, `transId`, `order_payment`, `code`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_order_detail`
+-- Cấu trúc bảng cho bảng `table_order_detail`
 --
 
 CREATE TABLE `table_order_detail` (
@@ -1111,15 +1111,15 @@ CREATE TABLE `table_order_detail` (
   `id_product` int(11) UNSIGNED DEFAULT NULL,
   `id_color` int(11) UNSIGNED DEFAULT 0,
   `id_size` int(11) UNSIGNED DEFAULT 0,
-  `photo` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `quantity` int(11) DEFAULT 0,
   `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_order_detail`
+-- Đang đổ dữ liệu cho bảng `table_order_detail`
 --
 
 INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `id_size`, `photo`, `name`, `code`, `quantity`, `price`) VALUES
@@ -1131,38 +1131,38 @@ INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `i
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_photo`
+-- Cấu trúc bảng cho bảng `table_photo`
 --
 
 CREATE TABLE `table_photo` (
   `id` int(11) UNSIGNED NOT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `link` mediumtext DEFAULT NULL,
-  `link_video` mediumtext DEFAULT NULL,
-  `type` varchar(30) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link_video` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_photo`
+-- Đang đổ dữ liệu cho bảng `table_photo`
 --
 
 INSERT INTO `table_photo` (`id`, `photo`, `desc`, `name`, `link`, `link_video`, `type`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (1, 'logo-4853.png', NULL, NULL, NULL, NULL, 'logo', 'hienthi', 1679828425, 1682781895, 0),
-(2, 'qjrczhj4t9ikohj0k3veslide1-7577.png', '', 'Slide 1', '', NULL, 'slideshow', 'hienthi', 1679828622, 0, 0),
-(3, 'whatsyourfavoritesneakerssimpletemplatesdesign302342-2956.jpg', '', 'Slide 2', '', NULL, 'slideshow', 'hienthi', 1679828649, 0, 0),
+(2, 'hinh10.png', '', 'Slide 1', '', NULL, 'slideshow', 'hienthi', 1679828622, 1686762830, 0),
+(3, 'hinh1.png', '', 'Slide 2', '', NULL, 'slideshow', 'hienthi', 1679828649, 1686762824, 0),
 (4, 'nature29-4181-3974.jpg', '', 'Album 1', NULL, NULL, 'album', 'hienthi', 1679828715, 0, 0),
 (5, 'nature32-2173-6417.jpg', '', 'Album 2', NULL, NULL, 'album', 'hienthi', 1679828724, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product`
+-- Cấu trúc bảng cho bảng `table_product`
 --
 
 CREATE TABLE `table_product` (
@@ -1170,32 +1170,32 @@ CREATE TABLE `table_product` (
   `id_list` int(10) UNSIGNED DEFAULT NULL,
   `id_cat` int(10) UNSIGNED DEFAULT NULL,
   `id_brand` int(11) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `content` mediumtext DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `code` varchar(30) DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `regular_price` double DEFAULT 0,
   `sale_price` double DEFAULT 0,
   `view` int(11) DEFAULT 0,
-  `status` varchar(255) DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_product`
+-- Đang đổ dữ liệu cho bảng `table_product`
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_cat`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, NULL, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 884, 'noibat,hienthi', 1679827982, 1686413126, 0),
+(1, 6, NULL, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 885, 'noibat,hienthi', 1679827982, 1686413126, 0),
 (2, 6, NULL, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 4, 'hienthi,noibat', 1679827990, 1685950336, 0),
 (3, 6, NULL, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 'hienthi,noibat', 1679828000, 1685950341, 0),
 (4, 6, NULL, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 2, 'hienthi,noibat', 1679828010, 1685950349, 0),
 (5, 6, NULL, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 1, 'hienthi,noibat', 1679828021, 1685950357, 0),
-(6, 6, NULL, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 5, 'hienthi,noibat', 1679828031, 1685950372, 0),
+(6, 6, NULL, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 6, 'hienthi,noibat', 1679828031, 1685950372, 0),
 (7, 7, NULL, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 2, 'hienthi,noibat', 1679828041, 1685950377, 0),
 (8, 7, NULL, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 0, 'hienthi,noibat', 1679828051, 1685950382, 0),
 (9, 7, NULL, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 1, 'noibat,hienthi', 1679828075, 1686018063, 0),
@@ -1205,23 +1205,23 @@ INSERT INTO `table_product` (`id`, `id_list`, `id_cat`, `id_brand`, `photo`, `sl
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_brand`
+-- Cấu trúc bảng cho bảng `table_product_brand`
 --
 
 CREATE TABLE `table_product_brand` (
   `id` int(11) NOT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_product_brand`
+-- Đang đổ dữ liệu cho bảng `table_product_brand`
 --
 
 INSERT INTO `table_product_brand` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1234,86 +1234,110 @@ INSERT INTO `table_product_brand` (`id`, `slug`, `desc`, `name`, `photo`, `statu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_cat`
+-- Cấu trúc bảng cho bảng `table_product_cat`
 --
 
 CREATE TABLE `table_product_cat` (
   `id` int(11) UNSIGNED NOT NULL,
   `id_list` int(10) UNSIGNED DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `table_product_cat`
+--
+
+INSERT INTO `table_product_cat` (`id`, `id_list`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(13, 7, 'nam', '', 'Nam', NULL, 'hienthi,noibat', 1686764603, 0, 0),
+(14, 7, 'nu', '', 'Nữ', NULL, 'hienthi,noibat', 1686764617, 0, 0),
+(15, 6, 'nam-adidas', '', 'Nam adidas', NULL, 'hienthi', 1686764767, 0, 0),
+(16, 6, 'nu-adidas', '', 'Nữ adidas', NULL, 'hienthi', 1686764775, 0, 0),
+(17, 10, 'air-jordan', '', 'AIR JORDAN', NULL, 'hienthi', 1686764788, 0, 0),
+(18, 11, 'yeezy-boost-350', '', 'YEEZY BOOST 350', NULL, 'hienthi', 1686764800, 0, 0),
+(19, 11, 'yeezy-boost-700', '', 'YEEZY BOOST 700', NULL, 'hienthi', 1686764807, 0, 0),
+(20, 12, 'sneaker-authentic', '', 'SNEAKER AUTHENTIC', NULL, 'hienthi', 1686764819, 0, 0),
+(21, 12, 'giay-the-thao-chay-bo-tap-gym', '', 'Giày thể thao chạy bộ -tập gym', NULL, 'hienthi', 1686764827, 0, 0),
+(22, 12, 'giay-tennis-nike-chinh-hang', '', 'Giày tennis nike chính hãng', NULL, 'hienthi', 1686764838, 0, 0),
+(23, 12, 'dep-authentic', '', 'Dép Authentic', NULL, 'hienthi', 1686764852, 0, 0),
+(24, 12, 'crep-protect-ve-sinh-giay-sneaker', '', 'Crep Protect vệ sinh giày Sneaker', NULL, 'hienthi', 1686764859, 0, 0),
+(25, 12, 'giay-thanh-ly', '', 'Giày Thanh Lý', NULL, 'hienthi', 1686764866, 0, 0);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_color`
+-- Cấu trúc bảng cho bảng `table_product_color`
 --
 
 CREATE TABLE `table_product_color` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_product` int(10) UNSIGNED DEFAULT NULL,
   `id_color` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_list`
+-- Cấu trúc bảng cho bảng `table_product_list`
 --
 
 CREATE TABLE `table_product_list` (
   `id` int(11) UNSIGNED NOT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_product_list`
+-- Đang đổ dữ liệu cho bảng `table_product_list`
 --
 
 INSERT INTO `table_product_list` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(6, 'giay-nam', '', 'Giày nam', '1-8598.jpg', 'hienthi,noibat', 1679827339, 0, 0),
-(7, 'giay-nu', '', 'Giày nữ', '2-8403.jpg', 'hienthi', 1679827370, 1686413545, 0);
+(6, 'giay-nam', '', 'Adidas', '1-8598.jpg', 'hienthi,noibat', 1679827339, 1686764431, 0),
+(7, 'giay-nu', '', 'Nike', '2-8403.jpg', 'hienthi,noibat', 1679827370, 1686764415, 0),
+(10, 'jordan', '', 'Jordan', NULL, 'hienthi', 1686764463, 0, 0),
+(11, 'yeezy', '', 'Yeezy', NULL, 'hienthi', 1686764474, 0, 0),
+(12, 'other-brands', '', 'Other Brands', NULL, 'hienthi', 1686764486, 0, 0),
+(13, 'day-giay', '', 'Dây Giày', NULL, '', 1686764502, 0, 0),
+(14, 'spa-giay', '', 'Spa Giày', NULL, '', 1686764511, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_size`
+-- Cấu trúc bảng cho bảng `table_product_size`
 --
 
 CREATE TABLE `table_product_size` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_product` int(10) UNSIGNED DEFAULT NULL,
   `id_size` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_setting`
+-- Cấu trúc bảng cho bảng `table_setting`
 --
 
 CREATE TABLE `table_setting` (
   `id` int(11) NOT NULL,
-  `options` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `options` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_setting`
+-- Đang đổ dữ liệu cho bảng `table_setting`
 --
 
 INSERT INTO `table_setting` (`id`, `options`, `name`) VALUES
@@ -1322,20 +1346,20 @@ INSERT INTO `table_setting` (`id`, `options`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_size`
+-- Cấu trúc bảng cho bảng `table_size`
 --
 
 CREATE TABLE `table_size` (
   `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_size`
+-- Đang đổ dữ liệu cho bảng `table_size`
 --
 
 INSERT INTO `table_size` (`id`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1353,25 +1377,25 @@ INSERT INTO `table_size` (`id`, `name`, `status`, `date_created`, `date_updated`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_static`
+-- Cấu trúc bảng cho bảng `table_static`
 --
 
 CREATE TABLE `table_static` (
   `id` int(11) UNSIGNED NOT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `content` mediumtext DEFAULT NULL,
-  `desc` mediumtext DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `type` varchar(30) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_static`
+-- Đang đổ dữ liệu cho bảng `table_static`
 --
 
 INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `type`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1381,23 +1405,23 @@ INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_user`
+-- Cấu trúc bảng cho bảng `table_user`
 --
 
 CREATE TABLE `table_user` (
   `id` int(11) UNSIGNED NOT NULL,
-  `permission` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(225) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `fullname` varchar(225) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `address` varchar(225) DEFAULT NULL,
+  `permission` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullname` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` tinyint(1) DEFAULT 0,
-  `login_session` varchar(255) DEFAULT NULL,
-  `lastlogin` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `login_session` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastlogin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birthday` int(11) DEFAULT 0,
   `date_created` int(11) DEFAULT 0,
   `date_updated` int(11) DEFAULT 0,
@@ -1405,11 +1429,11 @@ CREATE TABLE `table_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_user`
+-- Đang đổ dữ liệu cho bảng `table_user`
 --
 
 INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `photo`, `fullname`, `phone`, `address`, `gender`, `login_session`, `lastlogin`, `status`, `birthday`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, '', '1682261315', 'hoatdong', 1608051600, 0, 0, 0),
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, 'b3a5573ab2ebda8a8d6367c7c9eaa3b7', '1686761372', 'hoatdong', 1608051600, 0, 0, 0),
 (149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', 'nature35-5158-6128.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '9bea46bd54a20c6c7e774e791eb23328', '1686410980', 'hoatdong', 990136800, 1682254418, 1685591349, 0),
 (150, 'user', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user@gmail.com', '2-7335-5701.jpg', 'User', '0909090909', 'Địa chỉ test 1', 1, 'af98095aefc0fa845d7e9e14031c261d', '1683379089', 'khoa', 1044399600, 1682254452, 1683220756, 0),
 (159, 'user', 'cuong', 'cf4d87e50be6390ee9bd8ad6e7498cae', 'cuong@gmail.com', 'product-1.jpg', 'Cường', '0909090909', 'Bình Trị Đông A, Bình Tân, TP. HCM', 1, 'fcce87bae0a2aa224dcf6ee1508a1fe1', '1686014824', 'hoatdong', 1092261600, 1683906702, 1683909972, 0),
@@ -1418,7 +1442,7 @@ INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_variants`
+-- Cấu trúc bảng cho bảng `table_variants`
 --
 
 CREATE TABLE `table_variants` (
@@ -1429,12 +1453,12 @@ CREATE TABLE `table_variants` (
   `price_new` double DEFAULT NULL,
   `price_old` double DEFAULT NULL,
   `photo` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_vnpay`
+-- Cấu trúc bảng cho bảng `table_vnpay`
 --
 
 CREATE TABLE `table_vnpay` (
@@ -1448,10 +1472,10 @@ CREATE TABLE `table_vnpay` (
   `vnp_paydate` varchar(255) DEFAULT NULL,
   `vnp_tmncode` varchar(255) DEFAULT NULL,
   `vnp_transactionno` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `table_vnpay`
+-- Đang đổ dữ liệu cho bảng `table_vnpay`
 --
 
 INSERT INTO `table_vnpay` (`id`, `order_id`, `vnp_amount`, `vnp_bankcode`, `vnp_banktranno`, `vnp_cardtype`, `vnp_orderinfo`, `vnp_paydate`, `vnp_tmncode`, `vnp_transactionno`) VALUES
@@ -1461,25 +1485,25 @@ INSERT INTO `table_vnpay` (`id`, `order_id`, `vnp_amount`, `vnp_bankcode`, `vnp_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_ward`
+-- Cấu trúc bảng cho bảng `table_ward`
 --
 
 CREATE TABLE `table_ward` (
   `id` int(11) UNSIGNED NOT NULL,
   `id_city` int(11) DEFAULT 0,
   `id_district` int(11) DEFAULT 0,
-  `name` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `code` varchar(5) DEFAULT NULL,
-  `level` varchar(100) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `level` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_updated` int(11) DEFAULT 0,
   `date_created` int(11) DEFAULT 0,
   `ship_price` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_ward`
+-- Đang đổ dữ liệu cho bảng `table_ward`
 --
 
 INSERT INTO `table_ward` (`id`, `id_city`, `id_district`, `name`, `slug`, `code`, `level`, `status`, `date_updated`, `date_created`, `ship_price`) VALUES
@@ -12103,23 +12127,23 @@ INSERT INTO `table_ward` (`id`, `id_city`, `id_district`, `name`, `slug`, `code`
 (10599, 63, 705, 'Xã Đất Mũi', 'xa-dat-mui', '32248', 'Xã', 'hienthi', 0, 1640319968, 0);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `table_city`
+-- Chỉ mục cho bảng `table_city`
 --
 ALTER TABLE `table_city`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_color`
+-- Chỉ mục cho bảng `table_color`
 --
 ALTER TABLE `table_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_comment`
+-- Chỉ mục cho bảng `table_comment`
 --
 ALTER TABLE `table_comment`
   ADD PRIMARY KEY (`id`),
@@ -12127,67 +12151,67 @@ ALTER TABLE `table_comment`
   ADD KEY `comment_user` (`id_user`);
 
 --
--- Indexes for table `table_comment_photo`
+-- Chỉ mục cho bảng `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `comment_photo` (`id_parent`);
 
 --
--- Indexes for table `table_contact`
+-- Chỉ mục cho bảng `table_contact`
 --
 ALTER TABLE `table_contact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_counter`
+-- Chỉ mục cho bảng `table_counter`
 --
 ALTER TABLE `table_counter`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_district`
+-- Chỉ mục cho bảng `table_district`
 --
 ALTER TABLE `table_district`
   ADD PRIMARY KEY (`id`),
   ADD KEY `district_city` (`id_city`);
 
 --
--- Indexes for table `table_gallery`
+-- Chỉ mục cho bảng `table_gallery`
 --
 ALTER TABLE `table_gallery`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gallery_product` (`id_parent`);
 
 --
--- Indexes for table `table_gallery_album`
+-- Chỉ mục cho bảng `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gallery_album` (`id_parent`);
 
 --
--- Indexes for table `table_momo`
+-- Chỉ mục cho bảng `table_momo`
 --
 ALTER TABLE `table_momo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `momo order` (`order_id`);
 
 --
--- Indexes for table `table_news`
+-- Chỉ mục cho bảng `table_news`
 --
 ALTER TABLE `table_news`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_order`
+-- Chỉ mục cho bảng `table_order`
 --
 ALTER TABLE `table_order`
   ADD PRIMARY KEY (`id`),
   ADD KEY `order_user` (`id_user`);
 
 --
--- Indexes for table `table_order_detail`
+-- Chỉ mục cho bảng `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
   ADD PRIMARY KEY (`id`),
@@ -12197,13 +12221,13 @@ ALTER TABLE `table_order_detail`
   ADD KEY `order_detail_color` (`id_color`);
 
 --
--- Indexes for table `table_photo`
+-- Chỉ mục cho bảng `table_photo`
 --
 ALTER TABLE `table_photo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_product`
+-- Chỉ mục cho bảng `table_product`
 --
 ALTER TABLE `table_product`
   ADD PRIMARY KEY (`id`),
@@ -12212,20 +12236,20 @@ ALTER TABLE `table_product`
   ADD KEY `product_cat` (`id_cat`);
 
 --
--- Indexes for table `table_product_brand`
+-- Chỉ mục cho bảng `table_product_brand`
 --
 ALTER TABLE `table_product_brand`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_product_cat`
+-- Chỉ mục cho bảng `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
   ADD PRIMARY KEY (`id`),
   ADD KEY `asdsad` (`id_list`);
 
 --
--- Indexes for table `table_product_color`
+-- Chỉ mục cho bảng `table_product_color`
 --
 ALTER TABLE `table_product_color`
   ADD PRIMARY KEY (`id`),
@@ -12233,13 +12257,13 @@ ALTER TABLE `table_product_color`
   ADD KEY `product1` (`id_product`);
 
 --
--- Indexes for table `table_product_list`
+-- Chỉ mục cho bảng `table_product_list`
 --
 ALTER TABLE `table_product_list`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_product_size`
+-- Chỉ mục cho bảng `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD PRIMARY KEY (`id`),
@@ -12247,44 +12271,44 @@ ALTER TABLE `table_product_size`
   ADD KEY `product` (`id_product`);
 
 --
--- Indexes for table `table_setting`
+-- Chỉ mục cho bảng `table_setting`
 --
 ALTER TABLE `table_setting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_size`
+-- Chỉ mục cho bảng `table_size`
 --
 ALTER TABLE `table_size`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_static`
+-- Chỉ mục cho bảng `table_static`
 --
 ALTER TABLE `table_static`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_user`
+-- Chỉ mục cho bảng `table_user`
 --
 ALTER TABLE `table_user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_variants`
+-- Chỉ mục cho bảng `table_variants`
 --
 ALTER TABLE `table_variants`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_vnpay`
+-- Chỉ mục cho bảng `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
   ADD PRIMARY KEY (`id`),
   ADD KEY `erdfgdfgd` (`order_id`);
 
 --
--- Indexes for table `table_ward`
+-- Chỉ mục cho bảng `table_ward`
 --
 ALTER TABLE `table_ward`
   ADD PRIMARY KEY (`id`),
@@ -12292,220 +12316,220 @@ ALTER TABLE `table_ward`
   ADD KEY `ward_district` (`id_district`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `table_city`
+-- AUTO_INCREMENT cho bảng `table_city`
 --
 ALTER TABLE `table_city`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
--- AUTO_INCREMENT for table `table_color`
+-- AUTO_INCREMENT cho bảng `table_color`
 --
 ALTER TABLE `table_color`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `table_comment`
+-- AUTO_INCREMENT cho bảng `table_comment`
 --
 ALTER TABLE `table_comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `table_comment_photo`
+-- AUTO_INCREMENT cho bảng `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `table_contact`
+-- AUTO_INCREMENT cho bảng `table_contact`
 --
 ALTER TABLE `table_contact`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `table_counter`
+-- AUTO_INCREMENT cho bảng `table_counter`
 --
 ALTER TABLE `table_counter`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `table_district`
+-- AUTO_INCREMENT cho bảng `table_district`
 --
 ALTER TABLE `table_district`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=706;
 
 --
--- AUTO_INCREMENT for table `table_gallery`
+-- AUTO_INCREMENT cho bảng `table_gallery`
 --
 ALTER TABLE `table_gallery`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
--- AUTO_INCREMENT for table `table_gallery_album`
+-- AUTO_INCREMENT cho bảng `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `table_momo`
+-- AUTO_INCREMENT cho bảng `table_momo`
 --
 ALTER TABLE `table_momo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `table_news`
+-- AUTO_INCREMENT cho bảng `table_news`
 --
 ALTER TABLE `table_news`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `table_order`
+-- AUTO_INCREMENT cho bảng `table_order`
 --
 ALTER TABLE `table_order`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `table_order_detail`
+-- AUTO_INCREMENT cho bảng `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `table_photo`
+-- AUTO_INCREMENT cho bảng `table_photo`
 --
 ALTER TABLE `table_photo`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `table_product`
+-- AUTO_INCREMENT cho bảng `table_product`
 --
 ALTER TABLE `table_product`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `table_product_brand`
+-- AUTO_INCREMENT cho bảng `table_product_brand`
 --
 ALTER TABLE `table_product_brand`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `table_product_cat`
+-- AUTO_INCREMENT cho bảng `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `table_product_color`
+-- AUTO_INCREMENT cho bảng `table_product_color`
 --
 ALTER TABLE `table_product_color`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT for table `table_product_list`
+-- AUTO_INCREMENT cho bảng `table_product_list`
 --
 ALTER TABLE `table_product_list`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `table_product_size`
+-- AUTO_INCREMENT cho bảng `table_product_size`
 --
 ALTER TABLE `table_product_size`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
 
 --
--- AUTO_INCREMENT for table `table_setting`
+-- AUTO_INCREMENT cho bảng `table_setting`
 --
 ALTER TABLE `table_setting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `table_size`
+-- AUTO_INCREMENT cho bảng `table_size`
 --
 ALTER TABLE `table_size`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `table_static`
+-- AUTO_INCREMENT cho bảng `table_static`
 --
 ALTER TABLE `table_static`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `table_user`
+-- AUTO_INCREMENT cho bảng `table_user`
 --
 ALTER TABLE `table_user`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
--- AUTO_INCREMENT for table `table_variants`
+-- AUTO_INCREMENT cho bảng `table_variants`
 --
 ALTER TABLE `table_variants`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
 
 --
--- AUTO_INCREMENT for table `table_vnpay`
+-- AUTO_INCREMENT cho bảng `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `table_ward`
+-- AUTO_INCREMENT cho bảng `table_ward`
 --
 ALTER TABLE `table_ward`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10600;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `table_comment`
+-- Các ràng buộc cho bảng `table_comment`
 --
 ALTER TABLE `table_comment`
   ADD CONSTRAINT `comment_product` FOREIGN KEY (`id_parent`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `comment_user` FOREIGN KEY (`id_user`) REFERENCES `table_user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_comment_photo`
+-- Các ràng buộc cho bảng `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
   ADD CONSTRAINT `comment_photo` FOREIGN KEY (`id_parent`) REFERENCES `table_comment` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_district`
+-- Các ràng buộc cho bảng `table_district`
 --
 ALTER TABLE `table_district`
   ADD CONSTRAINT `district_city` FOREIGN KEY (`id_city`) REFERENCES `table_city` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_gallery`
+-- Các ràng buộc cho bảng `table_gallery`
 --
 ALTER TABLE `table_gallery`
   ADD CONSTRAINT `gallery_product` FOREIGN KEY (`id_parent`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_gallery_album`
+-- Các ràng buộc cho bảng `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   ADD CONSTRAINT `gallery_album` FOREIGN KEY (`id_parent`) REFERENCES `table_photo` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_momo`
+-- Các ràng buộc cho bảng `table_momo`
 --
 ALTER TABLE `table_momo`
   ADD CONSTRAINT `momo order` FOREIGN KEY (`order_id`) REFERENCES `table_order` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_order`
+-- Các ràng buộc cho bảng `table_order`
 --
 ALTER TABLE `table_order`
   ADD CONSTRAINT `order_user` FOREIGN KEY (`id_user`) REFERENCES `table_user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_order_detail`
+-- Các ràng buộc cho bảng `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
   ADD CONSTRAINT `order_detail_color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
@@ -12514,7 +12538,7 @@ ALTER TABLE `table_order_detail`
   ADD CONSTRAINT `order_detail_size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_product`
+-- Các ràng buộc cho bảng `table_product`
 --
 ALTER TABLE `table_product`
   ADD CONSTRAINT `product_brand` FOREIGN KEY (`id_brand`) REFERENCES `table_product_brand` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
@@ -12522,33 +12546,33 @@ ALTER TABLE `table_product`
   ADD CONSTRAINT `product_list` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_product_cat`
+-- Các ràng buộc cho bảng `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
   ADD CONSTRAINT `asdsad` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_product_color`
+-- Các ràng buộc cho bảng `table_product_color`
 --
 ALTER TABLE `table_product_color`
   ADD CONSTRAINT `product1` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `product_color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_product_size`
+-- Các ràng buộc cho bảng `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `product_size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_vnpay`
+-- Các ràng buộc cho bảng `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
   ADD CONSTRAINT `erdfgdfgd` FOREIGN KEY (`order_id`) REFERENCES `table_order` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_ward`
+-- Các ràng buộc cho bảng `table_ward`
 --
 ALTER TABLE `table_ward`
   ADD CONSTRAINT `ward_city` FOREIGN KEY (`id_city`) REFERENCES `table_city` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,

@@ -45,8 +45,8 @@ $config['static']['height'] = 270;
 $config['album']['width'] = 285;
 $config['album']['height'] = 270;
 /*Ảnh slideshow*/
-$config['slideshow']['width'] = 895;
-$config['slideshow']['height'] = 430;
+$config['slideshow']['width'] = 1366;
+$config['slideshow']['height'] = 600;
 /*Ảnh video*/
 $config['video']['width'] = 300;
 $config['video']['height'] = 300;
