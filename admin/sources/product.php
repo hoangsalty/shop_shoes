@@ -377,6 +377,8 @@ function deleteProduct()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
         if (!empty($row)) {
+            $d->rawQuery("delete from table_product_color where id_product = ?", array($id));
+            $d->rawQuery("delete from table_product_size where id_product = ?", array($id));
             $d->rawQuery("delete from table_product where id = ?", array($id));
             $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=product&act=man&page=" . $curPage . $strUrl);
         } else {
@@ -389,6 +391,8 @@ function deleteProduct()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
             if (!empty($row)) {
+                $d->rawQuery("delete from table_product_color where id_product = ?", array($id));
+                $d->rawQuery("delete from table_product_size where id_product = ?", array($id));
                 $d->rawQuery("delete from table_product where id = ?", array($id));
             }
         }

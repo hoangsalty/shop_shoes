@@ -1,12 +1,4 @@
 $(document).ready(function () {
-    /* Validation form chung */
-    validateForm('validation-form');
-    /* Loader */
-    if ($('.loader-wrapper').length) {
-        setTimeout(function () {
-            $('.loader-wrapper').fadeOut('medium');
-        }, 300);
-    }
     /* Login */
     if (LOGIN_PAGE) {
         $('#username, #password').keypress(function (event) {
@@ -56,59 +48,6 @@ $(document).ready(function () {
         $('.form-control-ckeditor').each(function () {
             var id = $(this).attr('id');
             CKEDITOR.replace(id);
-        });
-    }
-    /* Check required form */
-    if ($('.submit-check').length) {
-        $('.submit-check').click(function () {
-            var formCheck = $(this).parents('form.validation-form');
-
-            /* Holdon */
-            holdonOpen();
-
-            /* Check slug */
-            slugCheck();
-
-            /* Elements */
-            var flag = true;
-            var slugs = '';
-            var slugOffset = $('.card-slug');
-            var slugsInValid = $('.card-slug :required:invalid');
-            var slugsError = $('.card-slug .text-danger').not('.d-none');
-            var cardOffset = 0;
-            var elementsInValid = $('.card :required:invalid');
-
-            /* Check if has slug vs name */
-            if (slugsInValid.length || slugsError.length) {
-                flag = false;
-                slugs = slugsError.length ? slugsError : slugsInValid;
-
-                /* Scroll to error */
-                setTimeout(function () {
-                    $('html,body').animate({ scrollTop: slugOffset.offset().top - 40 }, 'medium');
-                }, 500);
-            } else if (elementsInValid.length) {
-                flag = false;
-
-                /* Scroll to error */
-                if (cardOffset) {
-                    setTimeout(function () {
-                        $('html,body').animate({ scrollTop: cardOffset.offset().top - 100 }, 'medium');
-                    }, 500);
-                }
-            }
-
-            /* Holdon close */
-            holdonClose();
-
-            /* Check form validated */
-            if (!flag) {
-                formCheck.addClass('was-validated');
-            } else {
-                formCheck.removeClass('was-validated');
-            }
-
-            return flag;
         });
     }
     /* Check all */

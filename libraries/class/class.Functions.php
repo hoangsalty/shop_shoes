@@ -283,16 +283,6 @@ class Functions
                 return false;
             }
 
-            $name = basename($_FILES[$file]['name'], '.' . $ext);
-            if (file_exists($folder . $_FILES[$file]['name'])) {
-                for ($i = 0; $i < 100; $i++) {
-                    if (!file_exists($folder . $name . $i . '.' . $ext)) {
-                        $_FILES[$file]['name'] = $name . $i . '.' . $ext;
-                        break;
-                    }
-                }
-            }
-
             if (!copy($_FILES[$file]["tmp_name"], $folder . $_FILES[$file]['name'])) {
                 if (!move_uploaded_file($_FILES[$file]["tmp_name"], $folder . $_FILES[$file]['name'])) {
                     return false;
@@ -334,6 +324,7 @@ class Functions
         $info['src'] = "src='" . $info['pathSrc'] . "'";
         /* Class */
         $info['class'] = (!empty($info['class'])) ? "class='" . $info['class'] . "'" : "";
+
         /* Image */
         $result = "<img " . $info['class'] . " style='width:" . $info['width'] . "px; height:" . $info['height'] . "px' onerror=\"this.src='" . $info['pathError'] . "';\" " . $info['src'] . " alt='" . $info['alt'] . "'/>";
         return $result;
