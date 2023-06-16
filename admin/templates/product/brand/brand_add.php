@@ -70,7 +70,7 @@ else if ($act == 'edit_brand') $linkSave = "index.php?com=product&act=save_brand
                         $photoDetail = array();
                         $photoDetail['upload'] = UPLOAD_PRODUCT_L;
                         $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                        $photoDetail['dimension'] = "Width: " . $config['product']['width'] . " px - Height: " . $config['product']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
+                        $photoDetail['dimension'] = "Width: " . $config['brand']['width'] . " px - Height: " . $config['brand']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
                         /* Image */
                         include TEMPLATE . LAYOUT . "image.php";
                         ?>

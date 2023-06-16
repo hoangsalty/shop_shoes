@@ -129,9 +129,9 @@ FRAMEWORK.Comments = function () {
           });
         },
       },
-      afterSelect: function () {},
-      onEmpty: function () {},
-      onRemove: function () {},
+      afterSelect: function () { },
+      onEmpty: function () { },
+      onRemove: function () { },
     });
   }
 
@@ -485,7 +485,7 @@ FRAMEWORK.Carousel = function () {
     accessibility: true,
     vertical: true,
     verticalSwiping: true,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -519,7 +519,7 @@ FRAMEWORK.Carousel = function () {
   });
 
   $(".slideshow__slider").owlCarousel({
-    loop: false,
+    loop: true,
     margin: 10,
     items: 1,
     dots: false,

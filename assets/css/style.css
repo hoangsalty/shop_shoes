@@ -50,6 +50,7 @@ select {
 a:hover {
   cursor: pointer;
   color: var(--color-main);
+  text-decoration: none;
 }
 
 .text-split {
@@ -119,7 +120,7 @@ a:hover {
 }
 
 .header {
-  padding: 15px 0;
+  padding: 5px 0;
   position: relative;
   z-index: 100;
 }
@@ -144,7 +145,6 @@ a:hover {
 .search {
   position: relative;
   width: 40px;
-  margin-right: 10px;
 }
 
 .search .icon-search {
@@ -222,6 +222,10 @@ a:hover {
   color: #ccc;
 }
 
+.menu_container .center {
+  width: 70%;
+}
+
 .menu .wrap-content > div {
   background-color: #fff;
 }
@@ -272,8 +276,6 @@ a:hover {
 .menu ul li {
   position: relative;
   z-index: 99;
-  /* -ms-flex: 1 1 auto;
-  flex: 1 1 auto; */
 }
 
 .menu ul li a {
@@ -283,10 +285,10 @@ a:hover {
   text-align: center;
   width: 100%;
   color: #000;
-  padding: 15px 20px;
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
+  line-height: 48px;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: capitalize;
 }
 
 .menu ul li a.active,
@@ -336,7 +338,7 @@ a:hover {
   text-align: left;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 14px;
-  padding: 13px 12px;
+  padding: 10px 12px;
   line-height: 24px;
   height: auto;
 }
@@ -362,6 +364,77 @@ a:hover {
 .slideshow-item {
   display: block;
   cursor: pointer;
+  position: relative;
+}
+
+.slideshow .slideshow-item .info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  right: 60px;
+  width: 100%;
+  z-index: 9;
+  max-width: 400px;
+}
+
+.slideshow .slideshow-item .info label {
+  font-size: 15px;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 0.75rem;
+}
+
+.slideshow .slideshow-item .info span {
+  font-size: 30px;
+  font-weight: 700;
+  color: #4c4029;
+  margin-bottom: 0.75rem;
+}
+
+.slideshow .slideshow-item .info p {
+  font-size: 15px;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 0.75rem;
+}
+
+.slideshow .slideshow-item .info a {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 10px 20px;
+  color: #fff;
+  background: #4c4029;
+  text-transform: uppercase;
+  transition: 0.3s ease;
+  width: 120px;
+}
+
+.slideshow .slideshow-item .info a:hover {
+  color: #000000;
+  box-shadow: inset 120px 0 #ffffff;
+}
+
+.slideshow .owl-item.active .slideshow-item .info label {
+  animation-name: fadeInDown;
+  animation-duration: 1s;
+}
+.slideshow .owl-item.active .slideshow-item .info span {
+  animation-name: fadeInLeft;
+  animation-duration: 1s;
+}
+.slideshow .owl-item.active .slideshow-item .info p {
+  animation-name: fadeInRight;
+  animation-duration: 1s;
+}
+.slideshow .owl-item.active .slideshow-item .info a {
+  animation-name: fadeInUp;
+  animation-duration: 1s;
+  display: inline-block;
 }
 
 .slideshow:hover .slideshow__slider.owl-carousel .owl-nav button {
@@ -371,9 +444,9 @@ a:hover {
 .slideshow .slideshow__slider.owl-carousel .owl-nav button {
   font-size: 18px;
   color: #1c1c1c;
-  height: 70px;
-  width: 30px;
-  line-height: 70px;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
   text-align: center;
   border: 1px solid #ebebeb;
   position: absolute;
@@ -381,16 +454,17 @@ a:hover {
   background: #fff;
   display: inline-block;
   opacity: 0;
+  border-radius: 50%;
 }
 
 .slideshow .slideshow__slider.owl-carousel .owl-nav button.owl-prev {
   right: auto;
-  left: 0;
+  left: 15px;
 }
 
 .slideshow .slideshow__slider.owl-carousel .owl-nav button.owl-next {
   left: auto;
-  right: 0;
+  right: 15px;
 }
 
 .slideshow .slideshow__slider.owl-carousel .owl-nav button.owl-prev:hover {
@@ -402,8 +476,6 @@ a:hover {
   background-color: var(--color-main);
   color: #fff;
 }
-
-/* Thuong hieu san pham */
 
 .item-categories {
   width: 100%;
@@ -429,8 +501,8 @@ a:hover {
 }
 
 .item-categories .info h3 {
-  letter-spacing: 1px;
-  padding: 10px 20px;
+  letter-spacing: 0px;
+  padding: 5px 10px;
   background: #fff;
   display: block;
   margin-bottom: 0;

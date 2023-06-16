@@ -1,39 +1,18 @@
-<div class="wrap-about spacing">
-    <div class="wrap-content">
-        <div class="flex-about d-flex justify-content-between align-items-center flex-wrap">
-            <div class="left">
-                <a class="image-about scale-img transition" href="gioi-thieu" title="Giới thiệu">
-                    <?= $func->getImage(['class' => '', 'width' => $config['about']['width'], 'height' => $config['about']['height'], 'upload' => UPLOAD_NEWS_L, 'image' => $static['photo'], 'alt' => $static['name']]) ?>
-                </a>
-            </div>
-            <div class="right">
-                <div class="main-about">
-                    <h3 class="name"><?= $static['name'] ?></h3>
-                    <div class="desc text-split"><?= $static['desc'] ?></div>
-                    <a class="btn-xemthem transition" href="gioi-thieu" title="Giới thiệu">
-                        Xem thêm
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php if (!empty($brand)) { ?>
+<?php if (!empty($productlist)) { ?>
     <div class="wrap-categories spacing">
         <div class="wrap-content">
             <div class="title-main">
-                <span>Thương hiệu sản phẩm</span>
+                <span>Loại sản phẩm</span>
             </div>
             <div class="categories__slider owl-carousel control-owl">
-                <?php foreach ($brand as $k => $v) { ?>
+                <?php foreach ($productlist as $k => $v) { ?>
                     <div>
                         <div class="item-categories">
-                            <a class="image scale-img transition" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
-                                <?= $func->getImage(['class' => '', 'width' => $config['brand']['width'], 'height' => $config['brand']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                            <a class="image scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
+                                <?= $func->getImage(['class' => '', 'width' => $config['product_list']['width'], 'height' => $config['product_list']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
                             </a>
                             <div class="info">
-                                <h3 class="name">
+                                <h3 class="name transition">
                                     <a class="transition text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
                                 </h3>
                             </div>

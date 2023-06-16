@@ -70,7 +70,7 @@ else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&i
                         $photoDetail = array();
                         $photoDetail['upload'] = UPLOAD_PRODUCT_L;
                         $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                        $photoDetail['dimension'] = "Width: " . $config['product']['width'] . " px - Height: " . $config['product']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
+                        $photoDetail['dimension'] = "Width: " . $config['product_list']['width'] . " px - Height: " . $config['product_list']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
                         /* Image */
                         include TEMPLATE . LAYOUT . "image.php";
                         ?>

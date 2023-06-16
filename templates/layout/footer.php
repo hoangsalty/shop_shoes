@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="footer-news col-lg-5 col-md-5 col-12">
                     <h2 class="footer-title"><?= $footer['name'] ?></h2>
-                    <div class="footer-info"><?= $func->decodeHtmlChars($footer['content']) ?></div>
+                    <div class="footer-info"><?= htmlspecialchars_decode($footer['content']) ?></div>
                 </div>
                 <div class="footer-news col-lg-3 col-md-3 col-12">
                     <h2 class="footer-title">Chính sách</h2>
