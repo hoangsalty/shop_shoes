@@ -1,3 +1,33 @@
+FRAMEWORK.Select2 = function () {
+    /* Ajax category */
+    if ($('.select-category')) {
+        $('body').on('change', '.select-category', function () {
+            var id = $(this).val();
+            var child = $(this).data('child');
+            var table = $(this).data('table');
+
+            if ($('#' + child).length) {
+                $.ajax({
+                    url: 'api/category.php',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        table: table,
+                    },
+                    success: function (result) {
+                        var op = "<option value='0'>Chọn danh mục</option>";
+
+                        $('#id_cat').html(op);
+                        $('#' + child).html(result);
+                    }
+                });
+
+                return false;
+            }
+        });
+    }
+}
+
 FRAMEWORK.DbSize = function () {
     $("#form_product_size").submit(function (e) {
         e.preventDefault();
@@ -52,6 +82,7 @@ FRAMEWORK.DbSize = function () {
         });
     }
 };
+
 FRAMEWORK.DbColor = function () {
     $("#form_product_color").submit(function (e) {
         e.preventDefault();
@@ -508,4 +539,5 @@ $(document).ready(function () {
 
     FRAMEWORK.Order();
     FRAMEWORK.Comments();
+    FRAMEWORK.Select2();
 });

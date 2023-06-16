@@ -21,11 +21,13 @@
         <span style="color: <?= $vnp_ResponseCode == '00' ? '#63C000' : '#f5222d' ?>;"><?= $message ?></span>
     </div>
 
-    <div class="item-box">
-        <div class="box-info col-lg-1 col-offset-6 centered item-info">
-            <span class="m-1"><?= $vnp_OrderInfo ?></span>
+    <?php if (isset($vnp_OrderInfo)) { ?>
+        <div class="item-box">
+            <div class="box-info col-lg-1 col-offset-6 centered item-info">
+                <span class="m-1"><?= $vnp_OrderInfo ?></span>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 
     <div class="item-info">
         <a class="hover-momo-color hover-none-decoration" href="<?= $configBase ?>">Quay về</a>

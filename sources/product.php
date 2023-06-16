@@ -3,6 +3,7 @@ if (!defined('SOURCES')) die("Error");
 
 @$id = htmlspecialchars($_GET['id']);
 @$idl = htmlspecialchars($_GET['id_list']);
+@$idc = htmlspecialchars($_GET['id_cat']);
 @$idb = htmlspecialchars($_GET['id_brand']);
 
 if ($id != '') {
@@ -66,6 +67,32 @@ if ($id != '') {
     $where = "";
     $where = "id_list = ? and find_in_set('hienthi',status)";
     $params = array($idl);
+
+    $curPage = $getPage;
+    $perPage = 20;
+    $startpoint = ($curPage * $perPage) - $perPage;
+    $limit = " limit " . $startpoint . "," . $perPage;
+    $sql = "select * from table_product where $where order by id desc $limit";
+    $product = $d->rawQuery($sql, $params);
+    $sqlNum = "select count(*) as 'num' from table_product where $where order by id desc";
+    $count = $d->rawQueryOne($sqlNum, $params);
+    $total = (!empty($count)) ? $count['num'] : 0;
+    $url = $func->getCurrentPageURL();
+    $paging = $func->pagination($total, $perPage, $curPage, $url);
+
+    /* breadCrumbs */
+    if (!empty($titleMain)) $breadcr->set($com, $titleMain);
+    if (!empty($productList)) $breadcr->set($productList['slug'], $productList['name']);
+    $breadcrumbs = $breadcr->get();
+} else if ($idc != '') {
+    /* Lấy cấp 1 detail */
+    $productCat = $d->rawQueryOne("select * from table_product_cat where id = ? limit 0,1", array($idc));
+    $titleCate = $productCat['name'];
+
+    /* Lấy sản phẩm */
+    $where = "";
+    $where = "id_cat = ? and find_in_set('hienthi',status)";
+    $params = array($idc);
 
     $curPage = $getPage;
     $perPage = 20;

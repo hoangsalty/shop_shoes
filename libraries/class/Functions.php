@@ -447,10 +447,22 @@ class Functions
         global $d;
 
         $where = '';
+        $params = array();
         $id_parent = 'id_' . $level;
+        $data_table = '';
+        $data_child = '';
 
-        $rows = $d->rawQuery("select name, id from table_product_" . $level . " where id > 0 " . $where . " order by id desc", array());
-        $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" class="form-control select2 ' . $class_select . '"><option value="0">' . $title_select . '</option>';
+        if ($level == 'list') {
+            $data_table = 'data-table="table_product_cat"';
+            $data_child = 'data-child="id_cat"';
+        } else if ($level == 'cat') {
+            $idlist = (isset($_REQUEST['id_list'])) ? htmlspecialchars($_REQUEST['id_list']) : 0;
+            $where .= ' and id_list = ?';
+            array_push($params, $idlist);
+        }
+
+        $rows = $d->rawQuery("select name, id from table_product_" . $level . " where id > 0 " . $where . " order by id desc", $params);
+        $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" ' . $data_table . ' ' . $data_child . ' class="form-control select2 ' . $class_select . '"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
             if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
                 $selected = "selected";

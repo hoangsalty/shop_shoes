@@ -36,6 +36,7 @@ $optsetting = (!empty($setting['options'])) ? json_decode($setting['options'], t
 $requick = array(
     /* Sản phẩm */
     array("tbl" => "product_list", "field" => "id_list", "source" => "product", "com" => "san-pham"),
+    array("tbl" => "product_cat", "field" => "id_cat", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product_brand", "field" => "id_brand", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
