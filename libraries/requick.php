@@ -22,7 +22,6 @@ if ((!empty($_SESSION['account']['role']) && $_SESSION['account']['role'] == 'us
     $func->transferAdmin("Bạn không có quyền truy cập vào khu vực này", "../", false);
 }
 
-
 /* Include sources */
 if (file_exists(SOURCES . $com . '.php'))
     include SOURCES . $com . ".php";

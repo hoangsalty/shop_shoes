@@ -96,7 +96,7 @@ function onSearch(obj) {
     var keyword = $("#" + obj).val();
 
     if (keyword == "") {
-        notifyDialog(LANG["no_keywords"]);
+        notifyDialog('Test');
         return false;
     } else {
         location.href = "tim-kiem?keyword=" + encodeURI(keyword);

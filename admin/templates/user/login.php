@@ -1,5 +1,3 @@
-<div class="login-view-website text-sm"><a href="../" target="_blank" title="Xem website"><i class="fas fa-reply mr-2"></i>Xem website</a></div>
-
 <div class="container-login100">
     <div class="wrap-login100">
         <form class="login100-form" enctype="multipart/form-data" method="post">

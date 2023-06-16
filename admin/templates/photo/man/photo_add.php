@@ -26,9 +26,9 @@ else if ($type == 'album') $name = 'Album';
 
 <!-- Main content -->
 <section class="content">
-    <form class="validation-form" novalidate method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
+    <form  method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
         <div class="card-footer text-sm sticky-top">
-            <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
+            <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
         </div>
@@ -48,13 +48,13 @@ else if ($type == 'album') $name = 'Album';
                         <?php if ($type != 'video' && $type != 'album') { ?>
                             <div class="form-group">
                                 <label for="link">Link:</label>
-                                <input type="text" class="form-control text-sm" name="data[link]" id="link" placeholder="Link" value="<?= (!empty($flash->has('link'))) ? $flash->get('link') : @$item['link'] ?>">
+                                <input type="text" class="form-control text-sm" name="data[link]" id="link" placeholder="Link" value="<?= @$item['link'] ?>">
                             </div>
                         <?php } ?>
                         <?php if ($type == 'video') { ?>
                             <div class="form-group">
                                 <label for="link_video">Link Video (Youtube):</label>
-                                <input type="text" class="form-control text-sm" name="data[link_video]" id="link_video" onchange="youtubePreview(this.value,'#loadVideo');" placeholder="Video" value="<?= (!empty($flash->has('link_video'))) ? $flash->get('link_video') : @$item['link_video'] ?>">
+                                <input type="text" class="form-control text-sm" name="data[link_video]" id="link_video" onchange="youtubePreview(this.value,'#loadVideo');" placeholder="Video" value="<?= @$item['link_video'] ?>">
                             </div>
                             <div class="form-group">
                                 <label for="link_video">Video preview:</label>
@@ -68,7 +68,7 @@ else if ($type == 'album') $name = 'Album';
 
                         <div class="form-group">
                             <label for="name">Tiêu đề:</label>
-                            <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
+                            <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>

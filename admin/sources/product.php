@@ -1,5 +1,10 @@
 <?php
-if (!defined('SOURCES')) die("Error");
+if (!defined('SOURCES')) {
+    require_once "../api/config.php";
+    /* die("Error"); */
+}
+
+$act = (isset($_REQUEST['act'])) ? htmlspecialchars($_REQUEST['act']) : '';
 
 /* Cấu hình đường dẫn trả về */
 $strUrl = "";
@@ -362,6 +367,46 @@ function saveProduct()
                 }
             }
 
+            if (!empty($dataSize)) {
+                $d->rawQuery("delete from table_product_size where id_product = ?", array($id_insert));
+
+                $dataSale_detail = array(
+                    'id' => 'id_size',
+                    'data' => $dataSize
+                );
+
+                foreach ($dataSale_detail['data'] as $v_sale) {
+                    $dataSale = array(
+                        'id_product' => $id_insert,
+                        $dataSale_detail['id'] => $v_sale
+                    );
+
+                    $d->insert('table_product_size', $dataSale);
+                }
+            } else {
+                $d->rawQuery("delete from table_product_size where id_product = ?", array($id_insert));
+            }
+
+            if (!empty($dataColor)) {
+                $d->rawQuery("delete from table_product_color where id_product = ?", array($id_insert));
+
+                $dataSale_detail = array(
+                    'id' => 'id_color',
+                    'data' => $dataColor
+                );
+
+                foreach ($dataSale_detail['data'] as $v_sale) {
+                    $dataSale = array(
+                        'id_product' => $id_insert,
+                        $dataSale_detail['id'] => $v_sale
+                    );
+
+                    $d->insert('table_product_color', $dataSale);
+                }
+            } else {
+                $d->rawQuery("delete from table_product_color where id_product = ?", array($id_insert));
+            }
+
             $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=product&act=edit" . $strUrl . "&id=" . $id_insert);
         } else {
             $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man&page=" . $curPage . $strUrl, false);
@@ -377,6 +422,8 @@ function deleteProduct()
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
         if (!empty($row)) {
+            $d->rawQuery("delete from table_product_color where id_product = ?", array($id));
+            $d->rawQuery("delete from table_product_size where id_product = ?", array($id));
             $d->rawQuery("delete from table_product where id = ?", array($id));
             $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=product&act=man&page=" . $curPage . $strUrl);
         } else {
@@ -389,6 +436,8 @@ function deleteProduct()
             /* Lấy dữ liệu */
             $row = $d->rawQueryOne("select id, photo from table_product where id = ? limit 0,1", array($id));
             if (!empty($row)) {
+                $d->rawQuery("delete from table_product_color where id_product = ?", array($id));
+                $d->rawQuery("delete from table_product_size where id_product = ?", array($id));
                 $d->rawQuery("delete from table_product where id = ?", array($id));
             }
         }
@@ -973,29 +1022,18 @@ function viewSizes()
 /* Edit size */
 function editSize()
 {
-    global $d, $func, $strUrl, $curPage, $item;
-    if (!empty($_REQUEST['id']))
-        $id = htmlspecialchars($_REQUEST['id']);
-    else
-        $id = 0;
+    global $d, $func;
 
-    if (empty($id)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl, false);
-    } else {
-        $item = $d->rawQueryOne("select * from table_size where id = ? limit 0,1", array($id));
-        if (empty($item)) {
-            $func->transferAdmin("Không có dữ liệu", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl, false);
-        }
-    }
+    $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
+    $item = $d->rawQueryOne("select * from table_size where id = ? limit 0,1", array($id));
+
+    echo json_encode($item);
+    return;
 }
 /* Save size */
 function saveSize()
 {
-    global $d, $strUrl, $func, $flash, $curPage;
-    /* Check post */
-    if (empty($_REQUEST)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl, false);
-    }
+    global $d, $func;
 
     /* Post dữ liệu */
     $message = '';
@@ -1024,23 +1062,12 @@ function saveSize()
     }
 
     if (!empty($response)) {
-        /* Flash data */
-        if (!empty($data)) {
-            foreach ($data as $k => $v) {
-                if (!empty($v)) {
-                    $flash->set($k, $v);
-                }
-            }
-        }
         /* Errors */
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set('message', $message);
-        if ($id) {
-            $func->redirect("index.php?com=product&act=edit_size" . $strUrl . "&id=" . $id);
-        } else {
-            $func->redirect("index.php?com=product&act=add_size&page=" . $curPage . $strUrl);
-        }
+        $response['status'] = '404';
+        $message = json_encode($response);
+
+        echo json_encode($message);
+        return;
     }
 
     /* Save data */
@@ -1049,9 +1076,11 @@ function saveSize()
         $d->where('id', $id);
 
         if ($d->update('table_size', $data)) {
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_size" . $strUrl . "&id=" . $id);
+            $response['messages'][] = 'Cập nhật dữ liệu thành công';
+            $response['status'] = '200';
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_size" . $strUrl . "&id=" . $id, false);
+            $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
+            $response['status'] = '404';
         }
     } else {
         $data['date_created'] = time();
@@ -1059,11 +1088,17 @@ function saveSize()
         if ($d->insert('table_size', $data)) {
             $id_insert = $d->getLastInsertId();
 
-            $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=product&act=edit_size" . $strUrl . "&id=" . $id_insert);
+            $response['messages'][] = 'Lưu dữ liệu thành công';
+            $response['status'] = '200';
         } else {
-            $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man_size&page=" . $curPage . $strUrl, false);
+            $response['messages'][] = 'Lưu dữ liệu bị lỗi';
+            $response['status'] = '404';
         }
     }
+
+    $message = json_encode($response);
+    echo $message;
+    return;
 }
 /* Delete size */
 function deleteSize()
@@ -1118,29 +1153,18 @@ function viewColors()
 /* Edit color */
 function editColor()
 {
-    global $d, $func, $strUrl, $curPage, $item;
-    if (!empty($_REQUEST['id']))
-        $id = htmlspecialchars($_REQUEST['id']);
-    else
-        $id = 0;
+    global $d, $func;
 
-    if (empty($id)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl, false);
-    } else {
-        $item = $d->rawQueryOne("select * from table_color where id = ? limit 0,1", array($id));
-        if (empty($item)) {
-            $func->transferAdmin("Không có dữ liệu", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl, false);
-        }
-    }
+    $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
+    $item = $d->rawQueryOne("select * from table_color where id = ? limit 0,1", array($id));
+
+    echo json_encode($item);
+    return;
 }
 /* Save color */
 function saveColor()
 {
-    global $d, $strUrl, $func, $flash, $curPage;
-    /* Check post */
-    if (empty($_REQUEST)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl, false);
-    }
+    global $d, $func;
 
     /* Post dữ liệu */
     $message = '';
@@ -1173,23 +1197,12 @@ function saveColor()
     }
 
     if (!empty($response)) {
-        /* Flash data */
-        if (!empty($data)) {
-            foreach ($data as $k => $v) {
-                if (!empty($v)) {
-                    $flash->set($k, $v);
-                }
-            }
-        }
         /* Errors */
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set('message', $message);
-        if ($id) {
-            $func->redirect("index.php?com=product&act=edit_color" . $strUrl . "&id=" . $id);
-        } else {
-            $func->redirect("index.php?com=product&act=add_color&page=" . $curPage . $strUrl);
-        }
+        $response['status'] = '404';
+        $message = json_encode($response);
+
+        echo json_encode($message);
+        return;
     }
 
     /* Save data */
@@ -1198,9 +1211,11 @@ function saveColor()
         $d->where('id', $id);
 
         if ($d->update('table_color', $data)) {
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=product&act=edit_color" . $strUrl . "&id=" . $id);
+            $response['messages'][] = 'Cập nhật dữ liệu thành công';
+            $response['status'] = '200';
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=product&act=edit_color" . $strUrl . "&id=" . $id, false);
+            $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
+            $response['status'] = '404';
         }
     } else {
         $data['date_created'] = time();
@@ -1208,12 +1223,17 @@ function saveColor()
         if ($d->insert('table_color', $data)) {
             $id_insert = $d->getLastInsertId();
 
-
-            $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=product&act=edit_color" . $strUrl . "&id=" . $id_insert);
+            $response['messages'][] = 'Lưu dữ liệu thành công';
+            $response['status'] = '200';
         } else {
-            $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=product&act=man_color&page=" . $curPage . $strUrl, false);
+            $response['messages'][] = 'Lưu dữ liệu bị lỗi';
+            $response['status'] = '404';
         }
     }
+
+    $message = json_encode($response);
+    echo $message;
+    return;
 }
 /* Delete color */
 function deleteColor()

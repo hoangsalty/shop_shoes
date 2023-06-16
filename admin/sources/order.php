@@ -8,9 +8,6 @@ $strUrl .= (isset($_REQUEST['order_status'])) ? "&order_status=" . htmlspecialch
 $strUrl .= (isset($_REQUEST['order_payment'])) ? "&order_payment=" . htmlspecialchars($_REQUEST['order_payment']) : "";
 $strUrl .= (isset($_REQUEST['order_date'])) ? "&order_date=" . htmlspecialchars($_REQUEST['order_date']) : "";
 $strUrl .= (isset($_REQUEST['range_price'])) ? "&range_price=" . htmlspecialchars($_REQUEST['range_price']) : "";
-$strUrl .= (isset($_REQUEST['city'])) ? "&city=" . htmlspecialchars($_REQUEST['city']) : "";
-$strUrl .= (isset($_REQUEST['district'])) ? "&district=" . htmlspecialchars($_REQUEST['district']) : "";
-$strUrl .= (isset($_REQUEST['ward'])) ? "&ward=" . htmlspecialchars($_REQUEST['ward']) : "";
 $strUrl .= (isset($_REQUEST['keyword'])) ? "&keyword=" . htmlspecialchars($_REQUEST['keyword']) : "";
 
 switch ($act) {
@@ -40,9 +37,6 @@ function viewOrders()
     $order_payment = (isset($_REQUEST['order_payment'])) ? htmlspecialchars($_REQUEST['order_payment']) : '';
     $order_date = (isset($_REQUEST['order_date'])) ? htmlspecialchars($_REQUEST['order_date']) : 0;
     $range_price = (isset($_REQUEST['range_price'])) ? htmlspecialchars($_REQUEST['range_price']) : 0;
-    $city = (isset($_REQUEST['id_city'])) ? htmlspecialchars($_REQUEST['id_city']) : 0;
-    $district = (isset($_REQUEST['id_district'])) ? htmlspecialchars($_REQUEST['id_district']) : 0;
-    $ward = (isset($_REQUEST['id_ward'])) ? htmlspecialchars($_REQUEST['id_ward']) : 0;
     if ($order_status)
         $where .= " and order_status='$order_status'";
     if ($order_payment)
@@ -61,12 +55,7 @@ function viewOrders()
         $price_to = trim($range_price[1]);
         $where .= " and total_price<=$price_to and total_price>=$price_from";
     }
-    if ($city)
-        $where .= " and city=$city";
-    if ($district)
-        $where .= " and district=$district";
-    if ($ward)
-        $where .= " and ward=$ward";
+
     if (isset($_REQUEST['keyword'])) {
         $keyword = htmlspecialchars($_REQUEST['keyword']);
         $where .= " and (fullname LIKE '%$keyword%' or email LIKE '%$keyword%' or phone LIKE '%$keyword%' or code LIKE '%$keyword%')";

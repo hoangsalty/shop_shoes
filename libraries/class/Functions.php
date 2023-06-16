@@ -283,16 +283,6 @@ class Functions
                 return false;
             }
 
-            $name = basename($_FILES[$file]['name'], '.' . $ext);
-            if (file_exists($folder . $_FILES[$file]['name'])) {
-                for ($i = 0; $i < 100; $i++) {
-                    if (!file_exists($folder . $name . $i . '.' . $ext)) {
-                        $_FILES[$file]['name'] = $name . $i . '.' . $ext;
-                        break;
-                    }
-                }
-            }
-
             if (!copy($_FILES[$file]["tmp_name"], $folder . $_FILES[$file]['name'])) {
                 if (!move_uploaded_file($_FILES[$file]["tmp_name"], $folder . $_FILES[$file]['name'])) {
                     return false;
@@ -334,6 +324,7 @@ class Functions
         $info['src'] = "src='" . $info['pathSrc'] . "'";
         /* Class */
         $info['class'] = (!empty($info['class'])) ? "class='" . $info['class'] . "'" : "";
+
         /* Image */
         $result = "<img " . $info['class'] . " style='width:" . $info['width'] . "px; height:" . $info['height'] . "px' onerror=\"this.src='" . $info['pathError'] . "';\" " . $info['src'] . " alt='" . $info['alt'] . "'/>";
         return $result;
@@ -450,36 +441,28 @@ class Functions
         return $pagination;
     }
 
-    /* Get category by link */
-    public function getLinkCategory($level = '', $title_select = 'Chọn danh mục')
-    {
-        global $d;
-
-        $where = '';
-        $id_parent = 'id_' . $level;
-
-        $rows = $d->rawQuery("select name, id from table_product_" . $level . " where id > 0 " . $where . " order by id desc", array());
-        $str = '<select id="' . $id_parent . '" name="' . $id_parent . '" onchange="onchangeCategory($(this))" class="form-control filter-category select2"><option value="0">' . $title_select . '</option>';
-        foreach ($rows as $v) {
-            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
-                $selected = "selected";
-            else
-                $selected = "";
-            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
-        }
-        $str .= '</select>';
-        return $str;
-    }
     /* Get category by ajax */
     public function getAjaxCategory($level = '', $title_select = 'Chọn danh mục', $class_select = 'select-category')
     {
         global $d;
 
         $where = '';
+        $params = array();
         $id_parent = 'id_' . $level;
+        $data_table = '';
+        $data_child = '';
 
-        $rows = $d->rawQuery("select name, id from table_product_" . $level . " where id > 0 " . $where . " order by id desc", array());
-        $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" class="form-control select2 ' . $class_select . '"><option value="0">' . $title_select . '</option>';
+        if ($level == 'list') {
+            $data_table = 'data-table="table_product_cat"';
+            $data_child = 'data-child="id_cat"';
+        } else if ($level == 'cat') {
+            $idlist = (isset($_REQUEST['id_list'])) ? htmlspecialchars($_REQUEST['id_list']) : 0;
+            $where .= ' and id_list = ?';
+            array_push($params, $idlist);
+        }
+
+        $rows = $d->rawQuery("select name, id from table_product_" . $level . " where id > 0 " . $where . " order by id desc", $params);
+        $str = '<select id="' . $id_parent . '" name="data[' . $id_parent . ']" ' . $data_table . ' ' . $data_child . ' class="form-control select2 ' . $class_select . '"><option value="0">' . $title_select . '</option>';
         foreach ($rows as $v) {
             if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
                 $selected = "selected";
@@ -690,11 +673,11 @@ class Functions
     {
         global $d;
 
-        $momoPayment = array('slug' => 'momo', 'name' => 'Momo');
+        //$momoPayment = array('slug' => 'momo', 'name' => 'Momo');
         $vnpayPayment = array('slug' => 'vnpay', 'name' => 'VNPAY');
 
         $row = $d->rawQuery("select * from table_news where type = ? order by id desc", array('hinh-thuc-thanh-toan'));
-        array_push($row, $momoPayment);
+        //array_push($row, $momoPayment);
         array_push($row, $vnpayPayment);
 
         $str = '<select id="order_payment" name="order_payment" class="form-control select2"><option value="0">Chọn hình thức thanh toán</option>';
@@ -799,7 +782,7 @@ class Functions
                                 <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
                             </a>
                             <p class="social-product transition">
-                                <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product text-decoration-none">
+                                <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a class="cart-add addcart" data-id="<?= $v['id'] ?>" data-action="addnow">

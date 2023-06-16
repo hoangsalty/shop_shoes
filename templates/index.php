@@ -21,7 +21,7 @@
             <?php include TEMPLATE . $template . ".php"; ?>
         </div>
         <?php
-        if ($com != 'gio-hang') {
+        if ($com != 'payment-momo' && $com != 'payment-vnpay' && $com != 'gio-hang') {
             include TEMPLATE . LAYOUT . "footer.php";
             include TEMPLATE . LAYOUT . "modal.php";
         }

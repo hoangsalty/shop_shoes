@@ -3,9 +3,6 @@ if ($act == "add") $labelAct = "Thêm mới";
 else if ($act == "edit") $labelAct = "Chỉnh sửa";
 
 $linkMan = "index.php?com=product&act=man";
-if ($act == 'add') $linkFilter = "index.php?com=product&act=add";
-else if ($act == 'edit') $linkFilter = "index.php?com=product&act=edit&id=" . $id;
-
 $linkSave = "index.php?com=product&act=save";
 
 $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
@@ -25,9 +22,9 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 
 <!-- Main content -->
 <section class="content">
-    <form class="validation-form" novalidate method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
+    <form  method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
         <div class="card-footer text-sm sticky-top">
-            <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
+            <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
             <input type="hidden" name="id" value="<?= (isset($item['id']) && $item['id'] > 0) ? $item['id'] : '' ?>">
@@ -47,7 +44,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tiêu đề:</label>
-                            <input type="text" class="form-control text-sm for-seo" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
+                            <input type="text" class="form-control text-sm for-slug" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>
@@ -96,12 +93,12 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 
                             <div class="form-group col-md-4">
                                 <label class="d-block" for="code">Mã sản phẩm:</label>
-                                <input type="text" class="form-control text-sm" name="data[code]" id="code" placeholder="Mã sản phẩm" value="<?= (!empty($flash->has('code'))) ? $flash->get('code') : @$item['code'] ?>">
+                                <input type="text" class="form-control text-sm" name="data[code]" id="code" placeholder="Mã sản phẩm" value="<?=  @$item['code'] ?>">
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="d-block" for="regular_price">Giá bán:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control format-price regular_price text-sm" name="data[regular_price]" id="regular_price" placeholder="Giá bán" value="<?= (!empty($flash->has('regular_price'))) ? $flash->get('regular_price') : @$item['regular_price'] ?>">
+                                    <input type="text" class="form-control format-price regular_price text-sm" name="data[regular_price]" id="regular_price" placeholder="Giá bán" value="<?= @$item['regular_price'] ?>">
                                     <div class="input-group-append">
                                         <div class="input-group-text"><strong>VNĐ</strong></div>
                                     </div>
@@ -110,7 +107,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                             <div class="form-group col-md-4">
                                 <label class="d-block" for="sale_price">Giá mới:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control format-price sale_price text-sm" name="data[sale_price]" id="sale_price" placeholder="Giá mới" value="<?= (!empty($flash->has('sale_price'))) ? $flash->get('sale_price') : @$item['sale_price'] ?>">
+                                    <input type="text" class="form-control format-price sale_price text-sm" name="data[sale_price]" id="sale_price" placeholder="Giá mới" value="<?= @$item['sale_price'] ?>">
                                     <div class="input-group-append">
                                         <div class="input-group-text"><strong>VNĐ</strong></div>
                                     </div>

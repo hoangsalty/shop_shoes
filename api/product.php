@@ -2,7 +2,6 @@
 include "config.php";
 
 /* Paginations */
-include LIBRARIES . "class/class.PaginationsAjax.php";
 $pagingAjax = new PaginationsAjax();
 $pagingAjax->perpage = (!empty($_GET['perpage'])) ? htmlspecialchars($_GET['perpage']) : 1;
 $eShow = htmlspecialchars($_GET['eShow']);

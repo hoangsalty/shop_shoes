@@ -14,8 +14,6 @@ function validateForm(e) {
                 form.classList.add('was-validated');
             });
         });
-
-        $('.' + e).find('input[type=submit],button[type=submit]').removeAttr('disabled');
     });
 }
 /* Login */
@@ -46,7 +44,6 @@ function login() {
         type: 'POST',
         dataType: 'json',
         url: 'api/login.php',
-        async: false,
         data: {
             username: username,
             password: password,
@@ -101,7 +98,10 @@ function notifyDialog(content = '', title = 'Thông báo', icon = 'fas fa-exclam
         buttons: {
             accept: {
                 text: '<i class="fas fa-check align-middle mr-2"></i>Đồng ý',
-                btnClass: 'btn-blue btn-sm bg-gradient-primary'
+                btnClass: 'btn-blue btn-sm bg-gradient-primary',
+                action: function () {
+                    location.reload();
+                }
             }
         }
     });
@@ -141,7 +141,6 @@ function confirmDialog(action, text, value, table = '', title = 'Thông báo', i
 }
 /* Delete item */
 function deleteItem(url) {
-    holdonOpen();
     document.location = url;
 }
 /* Delete all */
@@ -243,7 +242,7 @@ function slugPreview(title, focus = false) {
     $('#slugurlpreview' + ' strong').html(slug);
 }
 function slugPress() {
-    var inputArticle = $('input.for-seo');
+    var inputArticle = $('input.for-slug');
     var id = $('.slug-id').val();
 
     inputArticle.each(function () {
@@ -293,7 +292,7 @@ function slugChange(obj) {
     }
 }
 function slugStatus(status) {
-    var inputArticle = $('.card-article input.for-seo');
+    var inputArticle = $('input.for-slug');
 
     inputArticle.each(function (index) {
         var name = $(this).attr('id');
@@ -422,50 +421,12 @@ function onSearch(obj, url) {
         return false;
     } else {
         var keyword = $('#' + obj).val();
-        url = filterCategory(url);
-
         if (keyword) {
             url += '&keyword=' + encodeURI(keyword);
         }
 
-        window.location = filterCategory(url);
+        window.location = url;
     }
-}
-/* onChange Category */
-function filterCategory(url) {
-    if ($('.filter-category').length > 0 && url != '') {
-        $('.filter-category').each(function () {
-            var id = $(this).attr('id');
-            if (id) {
-                var value = parseInt($('#' + id).val());
-                if (value) {
-                    url += '&' + id + '=' + value;
-                }
-            }
-        });
-    }
-
-    return url;
-}
-function onchangeCategory(obj) {
-    var name = '';
-    var keyword = $('#keyword').val();
-    var url = LINK_FILTER;
-
-    obj.parents('.form-group').nextAll().each(function () {
-        name = $(this).find('.filter-category').attr('name');
-        if ($(this) != obj) {
-            $(this).find('.filter-category').val(0);
-        }
-    });
-
-    url = filterCategory(url);
-
-    if (keyword) {
-        url += '&keyword=' + encodeURI(keyword);
-    }
-
-    return (window.location = url);
 }
 /* Youtube preview */
 function youtubePreview(url, element) {
@@ -476,73 +437,18 @@ function youtubePreview(url, element) {
     $(element).attr('src', '//www.youtube.com/embed/' + url).css({ width: '500', height: '300' });
 }
 
-/* Get District From City */
-function loadDistrict(id = 0) {
-    $.ajax({
-        type: "post",
-        url: "api/district.php",
-        data: {
-            id_city: id,
-        },
-        beforeSend: function () {
-            HoldOn.open({
-                theme: "sk-bounce",
-                message: 'Vui lòng chờ tí ...'
-            });
-        },
-        success: function (result) {
-            $(".select-place_district").html(result);
-            holdonClose();
-        },
-    });
-}
-
-/* Get Ward From District */
-function loadWard(id = 0) {
-    $.ajax({
-        type: "post",
-        url: "api/ward.php",
-        data: {
-            id_district: id,
-        },
-        beforeSend: function () {
-            HoldOn.open({
-                theme: "sk-bounce",
-                message: 'Vui lòng chờ tí ...'
-            });
-        },
-        success: function (result) {
-            $(".select-place_ward").html(result);
-            holdonClose();
-        },
-    });
-}
-
 /* Search order */
 function actionOrder(url) {
-    var listid = '';
     var order_status = $('#order_status').val();
     var order_payment = $('#order_payment').val();
     var order_date = $('#order_date').val();
     var range_price = $('#range_price').val();
-    var city = parseInt($('#id_city').val());
-    var district = parseInt($('#id_district').val());
-    var ward = parseInt($('#id_ward').val());
     var keyword = $('#keyword').val();
 
-    $('input.select-checkbox').each(function () {
-        if (this.checked) listid = listid + ',' + this.value;
-    });
-
-    listid = listid.substr(1);
-    if (listid) url += '&listid=' + listid;
-    if (order_status) url += '&status=' + order_status;
+    if (order_status) url += '&order_status=' + order_status;
     if (order_payment) url += '&order_payment=' + order_payment;
     if (order_date) url += '&order_date=' + order_date;
     if (range_price) url += '&range_price=' + range_price;
-    if (city) url += '&city=' + city;
-    if (district) url += '&district=' + district;
-    if (ward) url += '&ward=' + ward;
     if (keyword) url += '&keyword=' + encodeURI(keyword);
 
     window.location = url;

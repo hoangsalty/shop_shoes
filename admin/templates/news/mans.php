@@ -1,6 +1,6 @@
 <?php
 $linkView = $configBase;
-$linkMan = $linkFilter = "index.php?com=news&act=man&type=" . $type;
+$linkMan = "index.php?com=news&act=man&type=" . $type;
 $linkAdd = "index.php?com=news&act=add&type=" . $type;
 $linkEdit = "index.php?com=news&act=edit&type=" . $type;
 $linkDelete = "index.php?com=news&act=delete&type=" . $type;

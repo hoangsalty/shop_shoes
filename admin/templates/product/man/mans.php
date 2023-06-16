@@ -1,6 +1,6 @@
 <?php
 $linkView = $configBase;
-$linkMan = $linkFilter = "index.php?com=product&act=man";
+$linkMan = "index.php?com=product&act=man";
 $linkAdd = "index.php?com=product&act=add";
 $linkEdit = "index.php?com=product&act=edit";
 $linkDelete = "index.php?com=product&act=delete";
@@ -36,11 +36,6 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-footer form-group-category text-sm bg-light row">
-        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('list', 'Chọn loại sản phẩm (C1)') ?></div>
-        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('cat', 'Chọn loại sản phẩm (C2)') ?></div>
-        <div class="form-group col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-2"><?= $func->getLinkCategory('brand', 'Chọn hãng') ?></div>
     </div>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">

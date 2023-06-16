@@ -30,7 +30,7 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
 
 <!-- Main content -->
 <section class="content">
-    <form class="validation-form" novalidate method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
+    <form  method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
         <?= $flash->getMessages('admin') ?>
 
         <div class="row">
@@ -67,7 +67,7 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
+                        <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
                         <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
                         <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
                         <input type="hidden" name="id" value="<?= (isset($item['id']) && $item['id'] > 0) ? $item['id'] : '' ?>">
@@ -112,11 +112,11 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="username">Tài khoản: <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control text-sm" name="data[username]" id="username" placeholder="Tài khoản" value="<?= (!empty($flash->has('username'))) ? $flash->get('username') : @$item['username'] ?>" required>
+                                    <input type="text" class="form-control text-sm" name="data[username]" id="username" placeholder="Tài khoản" value="<?= @$item['username'] ?>" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="fullname">Họ tên: <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control text-sm" name="data[fullname]" id="fullname" placeholder="Họ tên" value="<?= (!empty($flash->has('fullname'))) ? $flash->get('fullname') : @$item['fullname'] ?>" required>
+                                    <input type="text" class="form-control text-sm" name="data[fullname]" id="fullname" placeholder="Họ tên" value="<?= @$item['fullname'] ?>" required>
                                 </div>
                                 <?php if ($act == 'add') { ?>
                                     <div class="form-group col-md-6">
@@ -130,11 +130,11 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                                 <?php } ?>
                                 <div class="form-group col-md-6">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control text-sm" name="data[email]" id="email" placeholder="Email" value="<?= (!empty($flash->has('email'))) ? $flash->get('email') : @$item['email'] ?>" required>
+                                    <input type="email" class="form-control text-sm" name="data[email]" id="email" placeholder="Email" value="<?= @$item['email'] ?>" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="phone">Điện thoại:</label>
-                                    <input type="text" class="form-control text-sm" name="data[phone]" id="phone" placeholder="Điện thoại" value="<?= (!empty($flash->has('phone'))) ? $flash->get('phone') : @$item['phone'] ?>">
+                                    <input type="text" class="form-control text-sm" name="data[phone]" id="phone" placeholder="Điện thoại" value="<?= @$item['phone'] ?>">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="gender">Giới tính:</label>
@@ -147,11 +147,11 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="birthday">Ngày sinh:</label>
-                                    <input type="text" class="form-control text-sm max-date" name="data[birthday]" id="birthday" placeholder="Ngày sinh" value="<?= (!empty($flash->has('birthday'))) ? date("d/m/Y", $flash->get('birthday')) : ((!empty($item['birthday'])) ? date("d/m/Y", $item['birthday']) : '') ?>" autocomplete="off">
+                                    <input type="text" class="form-control text-sm max-date" name="data[birthday]" id="birthday" placeholder="Ngày sinh" value="<?= ((!empty($item['birthday'])) ? date("d/m/Y", $item['birthday']) : '') ?>" autocomplete="off">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="address">Địa chỉ:</label>
-                                    <input type="text" class="form-control text-sm" name="data[address]" id="address" placeholder="Địa chỉ" value="<?= (!empty($flash->has('address'))) ? $flash->get('address') : @$item['address'] ?>">
+                                    <input type="text" class="form-control text-sm" name="data[address]" id="address" placeholder="Địa chỉ" value="<?= @$item['address'] ?>">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="status">Trạng thái:</label>
@@ -168,7 +168,7 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
+                        <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
                         <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
                         <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
                         <input type="hidden" name="id" value="<?= (isset($item['id']) && $item['id'] > 0) ? $item['id'] : '' ?>">

@@ -1,6 +1,6 @@
 <?php
 $linkView = $configBase;
-$linkMan = $linkFilter = "index.php?com=product&act=man_brand";
+$linkMan = "index.php?com=product&act=man_brand";
 $linkAdd = "index.php?com=product&act=add_brand";
 $linkEdit = "index.php?com=product&act=edit_brand";
 $linkDelete = "index.php?com=product&act=delete_brand";
@@ -100,7 +100,7 @@ $status = array("hienthi" => "Hiển thị");
                                 <?php foreach ($status as $key => $value) { ?>
                                     <td class="align-middle text-center">
                                         <div class="custom-control custom-checkbox my-checkbox">
-                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_product_brand" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
+                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_brand" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
                                             <label for="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                         </div>
                                     </td>

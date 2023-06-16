@@ -3,9 +3,6 @@ if ($act == "add_cat") $labelAct = "Thêm mới";
 else if ($act == "edit_cat") $labelAct = "Chỉnh sửa";
 
 $linkMan = "index.php?com=product&act=man_cat";
-if ($act == 'add_cat') $linkFilter = "index.php?com=product&act=add_cat";
-else if ($act == 'edit_cat') $linkFilter = "index.php?com=product&act=edit_cat&id=" . $id;
-
 if ($act == 'add_cat') $linkSave = "index.php?com=product&act=save_cat";
 else if ($act == 'edit_cat') $linkSave = "index.php?com=product&act=save_cat&id=" . $id;
 ?>
@@ -24,9 +21,9 @@ else if ($act == 'edit_cat') $linkSave = "index.php?com=product&act=save_cat&id=
 
 <!-- Main content -->
 <section class="content">
-    <form class="validation-form" novalidate method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
+    <form  method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
         <div class="card-footer text-sm sticky-top">
-            <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>
+            <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
         </div>
@@ -45,7 +42,7 @@ else if ($act == 'edit_cat') $linkSave = "index.php?com=product&act=save_cat&id=
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tiêu đề:</label>
-                            <input type="text" class="form-control text-sm for-seo" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
+                            <input type="text" class="form-control text-sm for-slug" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>

@@ -6,17 +6,8 @@ $func->checkLogin();
 
 /* Set default route (index)*/
 $router->setBasePath($config['database']['url']);
-
-/* Default admin route (admin index)*/
-$router->map('GET', ADMIN, function () {
-    global $func, $config;
-    $func->redirect($config['database']['url'] . ADMIN . "/index.php");
-    exit;
-});
-
 /* Route com = index */
 $router->map('GET|POST', '', 'index');
-
 $router->map('GET|POST', '[a:com]', '[a:com]');
 $router->map('GET|POST', '[a:com]/[a:action]', '[a:com]');
 
@@ -45,6 +36,7 @@ $optsetting = (!empty($setting['options'])) ? json_decode($setting['options'], t
 $requick = array(
     /* Sản phẩm */
     array("tbl" => "product_list", "field" => "id_list", "source" => "product", "com" => "san-pham"),
+    array("tbl" => "product_cat", "field" => "id_cat", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product_brand", "field" => "id_brand", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
@@ -67,7 +59,6 @@ $requick = array(
 if (!empty($com) && !in_array($com, ['tim-kiem', 'account'])) {
     foreach ($requick as $k => $v) {
         $urlTbl = (!empty($v['tbl'])) ? $v['tbl'] : '';
-        $urlType = (!empty($v['type'])) ? $v['type'] : '';
         $urlField = (!empty($v['field'])) ? $v['field'] : '';
         $urlCom = (!empty($v['com'])) ? $v['com'] : '';
 

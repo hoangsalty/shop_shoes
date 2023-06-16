@@ -1,12 +1,9 @@
 <!-- Js Config -->
 <script type="text/javascript">
-    var PHP_VERSION = parseFloat('<?= phpversion() ?>'.replaceAll('.', ','));
     var CONFIG_BASE = '<?= $configBase ?>';
     var ADMIN = '<?= ADMIN ?>';
     var MAX_DATE = '<?= date("Y/m/d", time()) ?>';
-
-    /* Search */
-    var LINK_FILTER = '<?= (!empty($linkFilter)) ? $linkFilter : '' ?>';
+    var FRAMEWORK = FRAMEWORK || {};
 
     /* Get all paramters from website */
     var QUERY_STRING = '<?= ($_SERVER['QUERY_STRING']) ?>';

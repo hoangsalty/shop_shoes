@@ -215,7 +215,7 @@ if (!empty($_POST['thanhtoan'])) {
         }
 
         $_SESSION['dataOrder'] = $dataOrder;
-        $func->transfer("Di chuyển đến trang thanh toán VNPay", $vnp_Url);
+        $func->redirect($vnp_Url);
         return;
     }
 
