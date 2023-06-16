@@ -441,26 +441,6 @@ class Functions
         return $pagination;
     }
 
-    /* Get category by link */
-    public function getLinkCategory($level = '', $title_select = 'Chọn danh mục')
-    {
-        global $d;
-
-        $where = '';
-        $id_parent = 'id_' . $level;
-
-        $rows = $d->rawQuery("select name, id from table_product_" . $level . " where id > 0 " . $where . " order by id desc", array());
-        $str = '<select id="' . $id_parent . '" name="' . $id_parent . '" onchange="onchangeCategory($(this))" class="form-control filter-category select2"><option value="0">' . $title_select . '</option>';
-        foreach ($rows as $v) {
-            if (isset($_REQUEST[$id_parent]) && ($v["id"] == (int) $_REQUEST[$id_parent]))
-                $selected = "selected";
-            else
-                $selected = "";
-            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
-        }
-        $str .= '</select>';
-        return $str;
-    }
     /* Get category by ajax */
     public function getAjaxCategory($level = '', $title_select = 'Chọn danh mục', $class_select = 'select-category')
     {
@@ -681,11 +661,11 @@ class Functions
     {
         global $d;
 
-        $momoPayment = array('slug' => 'momo', 'name' => 'Momo');
+        //$momoPayment = array('slug' => 'momo', 'name' => 'Momo');
         $vnpayPayment = array('slug' => 'vnpay', 'name' => 'VNPAY');
 
         $row = $d->rawQuery("select * from table_news where type = ? order by id desc", array('hinh-thuc-thanh-toan'));
-        array_push($row, $momoPayment);
+        //array_push($row, $momoPayment);
         array_push($row, $vnpayPayment);
 
         $str = '<select id="order_payment" name="order_payment" class="form-control select2"><option value="0">Chọn hình thức thanh toán</option>';

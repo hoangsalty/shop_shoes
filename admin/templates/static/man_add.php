@@ -37,7 +37,7 @@ $linkSave = "index.php?com=static&act=save&type=" . $type;
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tiêu đề:</label>
-                            <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
+                            <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>

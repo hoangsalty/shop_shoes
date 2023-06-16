@@ -8,8 +8,10 @@ define('LAYOUT', 'layout/');
 define('ASSETS', './assets/');
 
 require_once LIBRARIES . "config.php";
-require_once LIBRARIES . 'autoload.php';
-new AutoLoad();
+/* Load all files in folder class */
+$files = glob(LIBRARIES . '/class/*.php');
+foreach ($files as $file) require_once $file;
+
 $d = new PDODb($config['database']);
 $flash = new Flash();
 $func = new Functions($d);

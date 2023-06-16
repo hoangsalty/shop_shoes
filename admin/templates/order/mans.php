@@ -1,5 +1,5 @@
 <?php
-$linkMan = $linkFilter = "index.php?com=order&act=man";
+$linkMan = "index.php?com=order&act=man";
 $linkEdit = "index.php?com=order&act=edit";
 $linkDelete = "index.php?com=order&act=delete";
 ?>
@@ -95,38 +95,11 @@ $linkDelete = "index.php?com=order&act=delete";
                 <?= $func->orderPayments() ?>
             </div>
             <div class="form-group col-md-3 col-sm-3">
-                <label>Tỉnh thành:</label>
-                <select class="select-place_city form-control select2" id="id_city" name="data[id_city]">
-                    <option value="0">Chọn danh mục</option>
-                    <?php foreach ($list_city as $k => $v) { ?>
-                        <option value="<?= $v['id'] ?>" <?php if (isset($_REQUEST['city']) && ($v["id"] == (int)$_REQUEST['city'])) echo "selected"; ?>><?= $v['name'] ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Quận huyện:</label>
-                <select class="select-place_district form-control select2" id="id_district" name="data[id_district]">
-                    <option value="0">Chọn danh mục</option>
-                    <?php foreach ($list_district as $k => $v) { ?>
-                        <option value="<?= $v['id'] ?>" <?php if (isset($_REQUEST['district']) && ($v["id"] == (int)$_REQUEST['district'])) echo "selected"; ?>><?= $v['name'] ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Phường xã:</label>
-                <select class="select-place_ward form-control select2" id="id_ward" name="data[id_ward]">
-                    <option value="0">Chọn danh mục</option>
-                    <?php foreach ($list_ward as $k => $v) { ?>
-                        <option value="<?= $v['id'] ?>" <?php if (isset($_REQUEST['ward']) && ($v["id"] == (int)$_REQUEST['ward'])) echo "selected"; ?>><?= $v['name'] ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="form-group col-md-6 col-sm-6">
                 <label>Khoảng giá:</label>
                 <input type="text" class="primary" id="range_price" name="range_price">
             </div>
             <div class="form-group text-center mt-2 mb-0 col-12">
-                <a class="btn btn-sm bg-gradient-success text-white" onclick="actionOrder('<?= $linkFilter ?>')" title="Tìm kiếm"><i class="fas fa-search mr-1"></i>Tìm kiếm</a>
+                <a class="btn btn-sm bg-gradient-success text-white" onclick="actionOrder('<?= $linkMan ?>')" title="Tìm kiếm"><i class="fas fa-search mr-1"></i>Tìm kiếm</a>
                 <a class="btn btn-sm bg-gradient-danger text-white ml-1" href="<?= $linkMan ?>" title="Hủy lọc"><i class="fas fa-times mr-1"></i>Hủy lọc</a>
             </div>
         </div>
@@ -134,12 +107,6 @@ $linkDelete = "index.php?com=order&act=delete";
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
             <h3 class="card-title card-title-order d-inline-block align-middle float-none">Danh sách đơn hàng</h3>
-            <?php if (isset($config['order']['excelall']) && $config['order']['excelall'] == true) { ?>
-                <a class="btn btn-sm bg-gradient-success btn-export-excel btn-sm d-inline-block align-middle ml-2 text-white" onclick="actionOrder('<?= $linkExcel ?>')" title="Xuất file Excel"><i class="far fa-file-excel mr-1"></i>Xuất file Excel</a>
-            <?php } ?>
-            <?php if (isset($config['order']['wordall']) && $config['order']['wordall'] == true) { ?>
-                <a class="btn btn-sm bg-gradient-primary btn-export-word btn-sm d-inline-block align-middle ml-2 text-white" onclick="actionOrder('<?= $linkWord ?>')" title="Xuất file Word"><i class="far fa-file-word mr-1"></i>Xuất file Word</a>
-            <?php } ?>
         </div>
         <div class="card-body table-responsive p-0">
             <table class="table table-hover">
@@ -184,7 +151,7 @@ $linkDelete = "index.php?com=order&act=delete";
                                 </td>
                                 <td class="align-middle"><?= date("h:i:s A - d/m/Y", $items[$i]['date_created']) ?></td>
                                 <td class="align-middle">
-                                    <?php ($items[$i]['order_payment'] == "momo" || $items[$i]['order_payment'] == "vnpay") ? $order_payment['name'] = $items[$i]['order_payment'] :  $order_payment = $func->getInfoDetailSlug('name', 'news', $items[$i]['order_payment']); ?>
+                                    <?php /* $items[$i]['order_payment'] == "momo" */ ($items[$i]['order_payment'] == "vnpay") ? $order_payment['name'] = $items[$i]['order_payment'] :  $order_payment = $func->getInfoDetailSlug('name', 'news', $items[$i]['order_payment']); ?>
                                     <span class="text-info cap"><?= $order_payment['name'] ?></span>
                                 </td>
                                 <td class="align-middle">

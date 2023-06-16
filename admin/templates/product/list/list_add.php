@@ -3,9 +3,6 @@ if ($act == "add_list") $labelAct = "Thêm mới";
 else if ($act == "edit_list") $labelAct = "Chỉnh sửa";
 
 $linkMan = "index.php?com=product&act=man_list";
-if ($act == 'add_list') $linkFilter = "index.php?com=product&act=add_list";
-else if ($act == 'edit_list') $linkFilter = "index.php?com=product&act=edit_list&id=" . $id;
-
 if ($act == 'add_list') $linkSave = "index.php?com=product&act=save_list";
 else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&id=" . $id;
 ?>
@@ -45,7 +42,7 @@ else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&i
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tiêu đề:</label>
-                            <input type="text" class="form-control text-sm for-seo" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
+                            <input type="text" class="form-control text-sm for-slug" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>

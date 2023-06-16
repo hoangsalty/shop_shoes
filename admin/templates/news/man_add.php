@@ -3,8 +3,6 @@ if ($act == "add") $labelAct = "Thêm mới";
 else if ($act == "edit") $labelAct = "Chỉnh sửa";
 
 $linkMan = "index.php?com=news&act=man&type=" . $type;
-if ($act == 'add') $linkFilter = "index.php?com=news&act=add&type=" . $type;
-else if ($act == 'edit') $linkFilter = "index.php?com=news&act=edit&type=" . $type . "&id=" . $id;
 
 $linkSave = "index.php?com=news&act=save&type=" . $type;
 
@@ -49,7 +47,7 @@ else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tiêu đề:</label>
-                            <input type="text" class="form-control text-sm for-seo" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
+                            <input type="text" class="form-control text-sm for-slug" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>

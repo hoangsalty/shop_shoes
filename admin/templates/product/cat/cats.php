@@ -1,6 +1,6 @@
 <?php
 $linkView = $configBase;
-$linkMan = $linkFilter = "index.php?com=product&act=man_cat";
+$linkMan = "index.php?com=product&act=man_cat";
 $linkAdd = "index.php?com=product&act=add_cat";
 $linkEdit = "index.php?com=product&act=edit_cat";
 $linkDelete = "index.php?com=product&act=delete_cat";

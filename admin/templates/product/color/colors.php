@@ -1,8 +1,6 @@
 <?php
 $linkView = $configBase;
-$linkMan = $linkFilter = "index.php?com=product&act=man_color";
-$linkAdd = "index.php?com=product&act=add_color";
-$linkEdit = "index.php?com=product&act=edit_color";
+$linkMan = "index.php?com=product&act=man_color";
 $linkDelete = "index.php?com=product&act=delete_color";
 
 $status = array("hienthi" => "Hiển thị");
@@ -23,7 +21,7 @@ $status = array("hienthi" => "Hiển thị");
 <!-- Main content -->
 <section class="content">
     <div class="d-flex card-footer text-sm">
-        <a class="btn btn-sm bg-gradient-primary text-white mr-2" href="<?= $linkAdd ?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-primary text-white mr-2" type="button" data-bs-toggle="modal" data-bs-target="#popup_product_color" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
         <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?= $linkDelete ?><?= $strUrl ?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-auto">
             <div class="input-group input-group-sm">
@@ -80,12 +78,12 @@ $status = array("hienthi" => "Hiển thị");
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <?= $i+1 ?>
+                                    <?= $i + 1 ?>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
+                                    <span class="text-dark text-break" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></span>
                                     <div class="tool-action mt-2 w-clear">
-                                        <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                        <a class="text-info mr-3" id="edit-color" data-id="<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                         <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>
@@ -93,7 +91,7 @@ $status = array("hienthi" => "Hiển thị");
                                 <?php foreach ($status as $key => $value) { ?>
                                     <td class="align-middle text-center">
                                         <div class="custom-control custom-checkbox my-checkbox">
-                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_product_color" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
+                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_color" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
                                             <label for="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                                         </div>
                                     </td>

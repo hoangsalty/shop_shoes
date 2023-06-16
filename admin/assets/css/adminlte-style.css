@@ -1868,3 +1868,19 @@ select.form-control option:disabled {
     display: inline-block;
     font-size: 17px;
 }
+
+.modal-header {
+    padding: 0;
+    border: none;
+}
+
+.modal-content button.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+}

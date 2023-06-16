@@ -3,9 +3,6 @@ if ($act == "add_brand") $labelAct = "Thêm mới";
 else if ($act == "edit_brand") $labelAct = "Chỉnh sửa";
 
 $linkMan = "index.php?com=product&act=man_brand";
-if ($act == 'add_brand') $linkFilter = "index.php?com=product&act=add_brand";
-else if ($act == 'edit_brand') $linkFilter = "index.php?com=product&act=edit_brand&id=" . $id;
-
 if ($act == 'add_brand') $linkSave = "index.php?com=product&act=save_brand";
 else if ($act == 'edit_brand') $linkSave = "index.php?com=product&act=save_brand&id=" . $id;
 ?>
@@ -45,7 +42,7 @@ else if ($act == 'edit_brand') $linkSave = "index.php?com=product&act=save_brand
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tiêu đề:</label>
-                            <input type="text" class="form-control text-sm for-seo" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>" required>
+                            <input type="text" class="form-control text-sm for-slug" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>
