@@ -20,6 +20,20 @@
             </div>
             <div class="right-pro-detail col-lg-6 mb-4">
                 <p class="title-pro-detail"><?= $rowDetail['name'] ?></p>
+                <div class="comment-star">
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span style="width: <?= $comment->avgStar() ?>%">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
+                </div>
                 <ul class="attr-pro-detail">
                     <li class="">
                         <label class="attr-label-pro-detail">Lượt xem:</label>
@@ -85,7 +99,7 @@
                     </li>
                 </ul>
 
-                <?php /* <div class="desc-pro-detail"><?= nl2br($func->decodeHtmlChars($rowDetail['desc'])) ?></div> */ ?>
+                <?php /* <div class="desc-pro-detail"><?= $func->decodeHtmlChars($rowDetail['desc']) ?></div> */ ?>
 
                 <div class="cart-pro-detail">
                     <a class="btn_addcart addcart rounded-0 mr-2" data-id="<?= $rowDetail['id'] ?>" data-action="addnow">

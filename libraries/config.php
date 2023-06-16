@@ -27,8 +27,8 @@ $config['about']['height'] = 440;
 $config['brand']['width'] = 150;
 $config['brand']['height'] = 150;
 /*Ảnh Categories*/
-$config['product_list']['width'] = 285;
-$config['product_list']['height'] = 270;
+$config['product_list']['width'] = 150;
+$config['product_list']['height'] = 150;
 /*Ảnh product admin*/
 $config['product_admin']['width'] = 800;
 $config['product_admin']['height'] = 800;
@@ -46,13 +46,13 @@ $config['album']['width'] = 285;
 $config['album']['height'] = 270;
 /*Ảnh slideshow*/
 $config['slideshow']['width'] = 1366;
-$config['slideshow']['height'] = 600;
+$config['slideshow']['height'] = 770;
 /*Ảnh video*/
 $config['video']['width'] = 300;
 $config['video']['height'] = 300;
 /*Ảnh logo*/
-$config['logo']['width'] = 98;
-$config['logo']['height'] = 31;
+$config['logo']['width'] = 209;
+$config['logo']['height'] = 96;
 /*Ảnh avatar user*/
 $config['user']['width'] = 100;
 $config['user']['height'] = 100;

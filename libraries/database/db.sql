@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 14, 2023 lúc 07:56 PM
--- Phiên bản máy phục vụ: 10.4.25-MariaDB
--- Phiên bản PHP: 8.1.10
+-- Host: 127.0.0.1
+-- Generation Time: Jun 16, 2023 at 11:26 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `db`
+-- Database: `db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_city`
+-- Table structure for table `table_city`
 --
 
 CREATE TABLE `table_city` (
@@ -40,7 +40,7 @@ CREATE TABLE `table_city` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_city`
+-- Dumping data for table `table_city`
 --
 
 INSERT INTO `table_city` (`id`, `name`, `slug`, `level`, `code`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -111,7 +111,7 @@ INSERT INTO `table_city` (`id`, `name`, `slug`, `level`, `code`, `status`, `date
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_color`
+-- Table structure for table `table_color`
 --
 
 CREATE TABLE `table_color` (
@@ -125,17 +125,23 @@ CREATE TABLE `table_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_color`
+-- Dumping data for table `table_color`
 --
 
 INSERT INTO `table_color` (`id`, `name`, `color`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (7, 'Đen', '000000', 'hienthi', 1679827474, 0, 0),
-(8, 'Hồng', 'FC98FF', 'hienthi', 1679827483, 1686413557, 0);
+(8, 'Hồng', 'FC98FF', 'hienthi', 1679827483, 1686413557, 0),
+(9, 'Trắng', 'FFFFFF', 'hienthi', 1686891449, 0, 0),
+(10, 'Đỏ', 'FF0000', 'hienthi', 1686891465, 0, 0),
+(11, 'Xanh', '00FF00', 'hienthi', 1686891494, 0, 0),
+(12, 'Xanh biển', '0000FF', 'hienthi', 1686891510, 0, 0),
+(13, 'Xám', '808080', 'hienthi', 1686891522, 1686891540, 0),
+(14, 'Vàng', 'FFFF00', 'hienthi', 1686891563, 1686891570, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_comment`
+-- Table structure for table `table_comment`
 --
 
 CREATE TABLE `table_comment` (
@@ -152,16 +158,16 @@ CREATE TABLE `table_comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_comment`
+-- Dumping data for table `table_comment`
 --
 
 INSERT INTO `table_comment` (`id`, `id_parent`, `id_user`, `star`, `content`, `fullname`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 1, 149, 4, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Hoàng Phạm', 'hienthi', 1685952489, 1685953493, NULL);
+(1, NULL, 149, 4, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Hoàng Phạm', 'hienthi', 1685952489, 1685953493, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_comment_photo`
+-- Table structure for table `table_comment_photo`
 --
 
 CREATE TABLE `table_comment_photo` (
@@ -171,7 +177,7 @@ CREATE TABLE `table_comment_photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `table_comment_photo`
+-- Dumping data for table `table_comment_photo`
 --
 
 INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
@@ -182,7 +188,7 @@ INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_contact`
+-- Table structure for table `table_contact`
 --
 
 CREATE TABLE `table_contact` (
@@ -201,7 +207,7 @@ CREATE TABLE `table_contact` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_counter`
+-- Table structure for table `table_counter`
 --
 
 CREATE TABLE `table_counter` (
@@ -213,7 +219,7 @@ CREATE TABLE `table_counter` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_district`
+-- Table structure for table `table_district`
 --
 
 CREATE TABLE `table_district` (
@@ -230,7 +236,7 @@ CREATE TABLE `table_district` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_district`
+-- Dumping data for table `table_district`
 --
 
 INSERT INTO `table_district` (`id`, `id_city`, `name`, `slug`, `code`, `level`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -944,7 +950,7 @@ INSERT INTO `table_district` (`id`, `id_city`, `name`, `slug`, `code`, `level`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_gallery`
+-- Table structure for table `table_gallery`
 --
 
 CREATE TABLE `table_gallery` (
@@ -959,25 +965,69 @@ CREATE TABLE `table_gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_gallery`
+-- Dumping data for table `table_gallery`
 --
 
 INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(50, 1, 'poduct-9-5006-2691.jpg', '', 'hienthi', 1686412347, 0, 0),
-(51, 1, 'poduct-1-1318-4164.jpg', '', 'hienthi', 1686412347, 0, 0),
-(52, 1, 'poduct-1-1758-1072.jpeg', '', 'hienthi', 1686412347, 0, 0),
-(53, 1, 'poduct-2-3013-1627.jpg', '', 'hienthi', 1686412347, 0, 0),
-(54, 1, 'poduct-3-5224-6755.jpg', '', 'hienthi', 1686412347, 0, 0),
-(55, 1, 'poduct-4-1646-2779.jpg', '', 'hienthi', 1686412347, 0, 0),
-(56, 1, 'poduct-5-3937-3600.jpg', '', 'hienthi', 1686412347, 0, 0),
-(57, 1, 'poduct-6-8870-7717.jpg', '', 'hienthi', 1686412347, 0, 0),
-(58, 1, 'poduct-7-3820-1176.jpg', '', 'hienthi', 1686412347, 0, 0),
-(59, 1, 'poduct-8-2281-2890.jpg', '', 'hienthi', 1686412348, 0, 0);
+(50, NULL, 'poduct-9-5006-2691.jpg', '', 'hienthi', 1686412347, 0, 0),
+(51, NULL, 'poduct-1-1318-4164.jpg', '', 'hienthi', 1686412347, 0, 0),
+(52, NULL, 'poduct-1-1758-1072.jpeg', '', 'hienthi', 1686412347, 0, 0),
+(53, NULL, 'poduct-2-3013-1627.jpg', '', 'hienthi', 1686412347, 0, 0),
+(54, NULL, 'poduct-3-5224-6755.jpg', '', 'hienthi', 1686412347, 0, 0),
+(55, NULL, 'poduct-4-1646-2779.jpg', '', 'hienthi', 1686412347, 0, 0),
+(56, NULL, 'poduct-5-3937-3600.jpg', '', 'hienthi', 1686412347, 0, 0),
+(57, NULL, 'poduct-6-8870-7717.jpg', '', 'hienthi', 1686412347, 0, 0),
+(58, NULL, 'poduct-7-3820-1176.jpg', '', 'hienthi', 1686412347, 0, 0),
+(59, NULL, 'poduct-8-2281-2890.jpg', '', 'hienthi', 1686412348, 0, 0),
+(60, 18, 'air-force-1-07-shoes-WrLlWX (5).png', '', 'hienthi', 1686903025, 0, 0),
+(61, 18, 'air-force-1-07-shoes-WrLlWX (3).png', '', 'hienthi', 1686903025, 0, 0),
+(62, 18, 'air-force-1-07-shoes-WrLlWX (4).png', '', 'hienthi', 1686903025, 0, 0),
+(63, 18, 'air-force-1-07-shoes-WrLlWX (6).png', '', 'hienthi', 1686903025, 0, 0),
+(64, 18, 'air-force-1-07-shoes-WrLlWX (1).png', '', 'hienthi', 1686903025, 0, 0),
+(65, 18, 'air-force-1-07-shoes-WrLlWX (2).png', '', 'hienthi', 1686903025, 0, 0),
+(66, 18, 'air-force-1-07-shoes-WrLlWX (7).png', '', 'hienthi', 1686903025, 0, 0),
+(74, 19, 'jordan-series-es-shoes-FDtg9v (2).png', '', 'hienthi', 1686905143, 0, 0),
+(75, 19, 'jordan-series-es-shoes-FDtg9v (3).png', '', 'hienthi', 1686905143, 0, 0),
+(76, 19, 'jordan-series-es-shoes-FDtg9v (1).png', '', 'hienthi', 1686905143, 0, 0),
+(77, 19, 'jordan-series-es-shoes-FDtg9v (4).png', '', 'hienthi', 1686905143, 0, 0),
+(78, 19, 'jordan-series-es-shoes-FDtg9v (6).png', '', 'hienthi', 1686905143, 0, 0),
+(79, 19, 'jordan-series-es-shoes-FDtg9v (5).png', '', 'hienthi', 1686905143, 0, 0),
+(80, 19, 'jordan-series-es-shoes-FDtg9v (7).png', '', 'hienthi', 1686905143, 0, 0),
+(81, 20, 'blazer-mid-77-shoes-fW78R7 (2).png', '', 'hienthi', 1686905885, 0, 0),
+(82, 20, 'blazer-mid-77-shoes-fW78R7 (5).png', '', 'hienthi', 1686905885, 0, 0),
+(83, 20, 'blazer-mid-77-shoes-fW78R7 (6).png', '', 'hienthi', 1686905885, 0, 0),
+(84, 20, 'blazer-mid-77-shoes-fW78R7 (4).png', '', 'hienthi', 1686905885, 0, 0),
+(85, 20, 'blazer-mid-77-shoes-fW78R7 (3).png', '', 'hienthi', 1686905885, 0, 0),
+(86, 20, 'blazer-mid-77-shoes-fW78R7 (1).png', '', 'hienthi', 1686905885, 0, 0),
+(87, 20, 'blazer-mid-77-shoes-fW78R7 (7).png', '', 'hienthi', 1686905885, 0, 0),
+(88, 20, 'blazer-mid-77-shoes-fW78R7 (8).png', '', 'hienthi', 1686905885, 0, 0),
+(89, 20, 'blazer-mid-77-shoes-fW78R7 (9).png', '', 'hienthi', 1686905885, 0, 0),
+(90, 20, 'blazer-mid-77-shoes-fW78R7 (10).png', '', 'hienthi', 1686905885, 0, 0),
+(91, 21, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx (2).png', '', 'hienthi', 1686906296, 0, 0),
+(92, 21, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx (1).png', '', 'hienthi', 1686906296, 0, 0),
+(93, 21, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx (5).png', '', 'hienthi', 1686906296, 0, 0),
+(94, 21, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx (6).png', '', 'hienthi', 1686906296, 0, 0),
+(95, 21, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx (3).png', '', 'hienthi', 1686906296, 0, 0),
+(96, 21, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx (4).png', '', 'hienthi', 1686906296, 0, 0),
+(97, 21, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx (7).png', '', 'hienthi', 1686906296, 0, 0),
+(105, 22, 'jumpman-two-trey-shoes-rhmBzG (3).png', '', 'hienthi', 1686906603, 0, 0),
+(106, 22, 'jumpman-two-trey-shoes-rhmBzG (5).png', '', 'hienthi', 1686906603, 0, 0),
+(107, 22, 'jumpman-two-trey-shoes-rhmBzG (4).png', '', 'hienthi', 1686906603, 0, 0),
+(108, 22, 'jumpman-two-trey-shoes-rhmBzG (2).png', '', 'hienthi', 1686906603, 0, 0),
+(109, 22, 'jumpman-two-trey-shoes-rhmBzG (1).png', '', 'hienthi', 1686906603, 0, 0),
+(110, 22, 'jumpman-two-trey-shoes-rhmBzG (6).png', '', 'hienthi', 1686906604, 0, 0),
+(111, 22, 'jumpman-two-trey-shoes-rhmBzG (7).png', '', 'hienthi', 1686906604, 0, 0),
+(112, 23, 'air-jordan-1-mid-shoes-SQf7DM (3).png', '', 'hienthi', 1686907514, 0, 0),
+(113, 23, 'air-jordan-1-mid-shoes-SQf7DM (2).png', '', 'hienthi', 1686907514, 0, 0),
+(114, 23, 'air-jordan-1-mid-shoes-SQf7DM (1).png', '', 'hienthi', 1686907514, 0, 0),
+(115, 23, 'air-jordan-1-mid-shoes-SQf7DM (4).png', '', 'hienthi', 1686907514, 0, 0),
+(116, 23, 'air-jordan-1-mid-shoes-SQf7DM (6).png', '', 'hienthi', 1686907515, 0, 0),
+(117, 23, 'air-jordan-1-mid-shoes-SQf7DM (5).png', '', 'hienthi', 1686907515, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_gallery_album`
+-- Table structure for table `table_gallery_album`
 --
 
 CREATE TABLE `table_gallery_album` (
@@ -992,21 +1042,21 @@ CREATE TABLE `table_gallery_album` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `table_gallery_album`
+-- Dumping data for table `table_gallery_album`
 --
 
 INSERT INTO `table_gallery_album` (`id`, `id_parent`, `photo`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 4, 'nature29-4181-6079.jpg', '', 'hienthi', 1679830543, 0, 0),
-(2, 4, 'nature19-5997-8815.jpg', '', 'hienthi', 1679830543, 0, 0),
-(3, 4, 'nature37-9108-1942.jpg', '', 'hienthi', 1679830543, 0, 0),
-(4, 4, 'nature32-2173-5148.jpg', '', 'hienthi', 1679830543, 0, 0),
-(5, 4, 'nature35-5158-4279.jpg', '', 'hienthi', 1679830543, 0, 0),
-(6, 4, 'nature34-7605-4530.jpg', '', 'hienthi', 1679830543, 0, 0);
+(1, NULL, 'nature29-4181-6079.jpg', '', 'hienthi', 1679830543, 0, 0),
+(2, NULL, 'nature19-5997-8815.jpg', '', 'hienthi', 1679830543, 0, 0),
+(3, NULL, 'nature37-9108-1942.jpg', '', 'hienthi', 1679830543, 0, 0),
+(4, NULL, 'nature32-2173-5148.jpg', '', 'hienthi', 1679830543, 0, 0),
+(5, NULL, 'nature35-5158-4279.jpg', '', 'hienthi', 1679830543, 0, 0),
+(6, NULL, 'nature34-7605-4530.jpg', '', 'hienthi', 1679830543, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_momo`
+-- Table structure for table `table_momo`
 --
 
 CREATE TABLE `table_momo` (
@@ -1021,7 +1071,7 @@ CREATE TABLE `table_momo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `table_momo`
+-- Dumping data for table `table_momo`
 --
 
 INSERT INTO `table_momo` (`id`, `order_id`, `partner_code`, `amount`, `order_info`, `order_type`, `transId`, `pay_type`) VALUES
@@ -1030,7 +1080,7 @@ INSERT INTO `table_momo` (`id`, `order_id`, `partner_code`, `amount`, `order_inf
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_news`
+-- Table structure for table `table_news`
 --
 
 CREATE TABLE `table_news` (
@@ -1049,7 +1099,7 @@ CREATE TABLE `table_news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_news`
+-- Dumping data for table `table_news`
 --
 
 INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `status`, `type`, `view`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1063,7 +1113,7 @@ INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `sta
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_order`
+-- Table structure for table `table_order`
 --
 
 CREATE TABLE `table_order` (
@@ -1090,7 +1140,7 @@ CREATE TABLE `table_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_order`
+-- Dumping data for table `table_order`
 --
 
 INSERT INTO `table_order` (`id`, `id_user`, `transId`, `order_payment`, `code`, `fullname`, `phone`, `address`, `email`, `requirements`, `city`, `district`, `ward`, `temp_price`, `ship_price`, `total_price`, `order_status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1102,7 +1152,7 @@ INSERT INTO `table_order` (`id`, `id_user`, `transId`, `order_payment`, `code`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_order_detail`
+-- Table structure for table `table_order_detail`
 --
 
 CREATE TABLE `table_order_detail` (
@@ -1119,19 +1169,19 @@ CREATE TABLE `table_order_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_order_detail`
+-- Dumping data for table `table_order_detail`
 --
 
 INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `id_size`, `photo`, `name`, `code`, `quantity`, `price`) VALUES
-(1, 1, 1, 7, 16, '1-5039.png', 'Sản phẩm 1', 'CQFJN5', 3, 400000),
-(2, 2, 1, 8, 17, '1-5039.png', 'Sản phẩm 1', 'OWLY1C', 4, 400000),
-(3, 3, 1, 7, 8, '1-5039.png', 'Sản phẩm 1', 'N3E9SY', 1, 400000),
-(4, 4, 1, 8, 17, '1-5039.png', 'Sản phẩm 1', 'LTLPU', 3, 400000);
+(1, 1, NULL, 7, 16, '1-5039.png', 'Sản phẩm 1', 'CQFJN5', 3, 400000),
+(2, 2, NULL, 8, 17, '1-5039.png', 'Sản phẩm 1', 'OWLY1C', 4, 400000),
+(3, 3, NULL, 7, 8, '1-5039.png', 'Sản phẩm 1', 'N3E9SY', 1, 400000),
+(4, 4, NULL, 8, 17, '1-5039.png', 'Sản phẩm 1', 'LTLPU', 3, 400000);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_photo`
+-- Table structure for table `table_photo`
 --
 
 CREATE TABLE `table_photo` (
@@ -1149,20 +1199,22 @@ CREATE TABLE `table_photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_photo`
+-- Dumping data for table `table_photo`
 --
 
 INSERT INTO `table_photo` (`id`, `photo`, `desc`, `name`, `link`, `link_video`, `type`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'logo-4853.png', NULL, NULL, NULL, NULL, 'logo', 'hienthi', 1679828425, 1682781895, 0),
-(2, 'hinh10.png', '', 'Slide 1', '', NULL, 'slideshow', 'hienthi', 1679828622, 1686762830, 0),
-(3, 'hinh1.png', '', 'Slide 2', '', NULL, 'slideshow', 'hienthi', 1679828649, 1686762824, 0),
-(4, 'nature29-4181-3974.jpg', '', 'Album 1', NULL, NULL, 'album', 'hienthi', 1679828715, 0, 0),
-(5, 'nature32-2173-6417.jpg', '', 'Album 2', NULL, NULL, 'album', 'hienthi', 1679828724, 0, 0);
+(1, 'logo.png', NULL, NULL, NULL, NULL, 'logo', 'hienthi', 1679828425, 1686888392, 0),
+(2, 'slide.png', 'Ullamcorper eget nulla facilisi etiam dignissim. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis. Scelerisque eu ultrices', 'Slide 1', 'https://www.google.com.vn/?hl=vi', NULL, 'slideshow', 'hienthi', 1679828622, 1686889590, 0),
+(3, 'slide2.png', '', 'Slide 2', '', NULL, 'slideshow', 'hienthi', 1679828649, 1686888385, 0),
+(6, 'poduct-2-3013-4492.jpg', '', 'Hình ảnh giày Nike Air Max', NULL, NULL, 'album', 'hienthi', 1686900262, 0, 0),
+(7, 'poduct-1-1758-8192.jpeg', '', 'Hình ảnh giày Nike Zoom', NULL, NULL, 'album', 'hienthi', 1686900281, 0, 0),
+(8, 'poduct-1-1318-8006.jpg', '', 'Hình ảnh giày Nike Air Force', NULL, NULL, 'album', 'hienthi', 1686900294, 0, 0),
+(9, 'poduct-5-3937-5589-3198.jpg', '', 'Hình ảnh giày Nike Phantom', NULL, NULL, 'album', 'hienthi', 1686900307, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product`
+-- Table structure for table `table_product`
 --
 
 CREATE TABLE `table_product` (
@@ -1186,26 +1238,21 @@ CREATE TABLE `table_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product`
+-- Dumping data for table `table_product`
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_cat`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 6, NULL, 10, '1-5039.png', 'san-pham-1', '&lt;p&gt;&lt;strong&gt;Lorem Ipsum&lt;/strong&gt;&amp;nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&lt;/p&gt;\r\n', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Sản phẩm 1', 'SP-01', 500000, 400000, 885, 'noibat,hienthi', 1679827982, 1686413126, 0),
-(2, 6, NULL, NULL, '2-4369.png', 'san-pham-2', '', '', 'Sản phẩm 2', '', 309939, 122222, 4, 'hienthi,noibat', 1679827990, 1685950336, 0),
-(3, 6, NULL, NULL, '3-9404.png', 'san-pham-3', '', '', 'Sản phẩm 3', '', 412322, 55555, 3, 'hienthi,noibat', 1679828000, 1685950341, 0),
-(4, 6, NULL, NULL, '4-1298.png', 'san-pham-4', '', '', 'Sản phẩm 4', '', 3323242, 51232, 2, 'hienthi,noibat', 1679828010, 1685950349, 0),
-(5, 6, NULL, NULL, '5-2218.png', 'san-pham-5', '', '', 'Sản phẩm 5', '', 1232323, 544444, 1, 'hienthi,noibat', 1679828021, 1685950357, 0),
-(6, 6, NULL, NULL, '6-9563.png', 'san-pham-6', '', '', 'Sản phẩm 6', '', 4525555, 232323, 6, 'hienthi,noibat', 1679828031, 1685950372, 0),
-(7, 7, NULL, NULL, '7-9857.png', 'san-pham-7', '', '', 'Sản phẩm 7', '', 526666, 232322, 2, 'hienthi,noibat', 1679828041, 1685950377, 0),
-(8, 7, NULL, NULL, '8-2825.png', 'san-pham-8', '', '', 'Sản phẩm 8', '', 843534, 235234, 0, 'hienthi,noibat', 1679828051, 1685950382, 0),
-(9, 7, NULL, NULL, '9-7771.png', 'san-pham-9', '', '', 'Sản phẩm 9', '', 874345, 421322, 1, 'noibat,hienthi', 1679828075, 1686018063, 0),
-(10, 7, NULL, NULL, '10-2976.png', 'san-pham-10', '', '', 'Sản phẩm 10', '', 723433, 231423, 2, 'hienthi,noibat', 1679828083, 1685950531, 0),
-(11, 7, NULL, NULL, '11-3977.png', 'san-pham-11', '', '', 'Sản phẩm 11', '', 888464, 231122, 17, 'noibat,hienthi', 1679828093, 1686413569, 0);
+(18, 21, 42, NULL, 'air-force-1-07-shoes-WrLlWX.png', 'nike-air-force-1-07', '&lt;p&gt;The radiance lives on with the b-ball original. Crossing hardwood comfort with off-court flair, it puts a fresh spin on what you know best: &amp;#39;80s-inspired construction, bold details and nothin&amp;#39;-but-net style.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;From tough stitching to pristine leather, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circles adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/University Blue&lt;/li&gt;\r\n	&lt;li&gt;Style: DV0788-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '\r\n', 'Nike Air Force 1 &#039;07', 'CW2288-111', 2929000, 0, 16, 'noibat,hienthi', 1686902948, 1686906017, 0),
+(19, 21, 42, NULL, 'jordan-series-es-shoes-FDtg9v.png', 'jordan-series-es', '&lt;p&gt;Inspired by Mike&amp;#39;s backyard battles with his older brother Larry, the Jordan Series references their legendary sibling rivalry throughout the design. The rubber sole offers more than just impressive traction&amp;mdash;it also tells the story of how MJ came to be #23. Look for the hidden reminder to &amp;quot;Swing for the Fence&amp;quot;, a direct quote from Larry to his little bro.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Circular traction inspired by the Air Jordan 1 adds durability.&lt;/li&gt;\r\n	&lt;li&gt;Suede and smooth leather are combined with a sleek, low-cut silhouette for versatile styling.&lt;/li&gt;\r\n	&lt;li&gt;Stretchy, triangular cut-outs add flex to accommodate wider feet.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Woven tongue and label&lt;/li&gt;\r\n	&lt;li&gt;Embroidered graphics&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Grey Fog/University Red&lt;/li&gt;\r\n	&lt;li&gt;Style: DN1856-160&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Jordan Series ES', 'DN1856-002', 2499000, 0, 3, 'noibat,hienthi', 1686905082, 1686905939, 0),
+(20, 21, 42, NULL, 'blazer-mid-77-shoes-fW78R7.png', 'nike-blazer-mid-77', '&lt;p&gt;50 years after the birth of the genre, hip-hop is still influencing streetwear. Nike shoes have always been an integral part of this culture&amp;mdash;both influencing and being influenced by iconic musicians, artists and fans. Celebrate half a century of art and culture with platinum details like a microphone charm. Lace up and get spinning.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nThrow Ya Hands Up&lt;/p&gt;\r\n\r\n&lt;p&gt;11 August 1973 is known as the day hip-hop was born. Music makers and lovers came together at 1520 Sedgwick Avenue for the now famous &amp;quot;Back to School Jam&amp;quot;, which changed the course of music history and helped kick off the movement that became hip-hop as we know it.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nWalk This Way&lt;/p&gt;\r\n\r\n&lt;p&gt;Elevate your look to platinum status with a microphone charm and a metallic grey Swoosh.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nRapper&amp;#39;s Delight&lt;/p&gt;\r\n\r\n&lt;p&gt;The sockliner features a Nike logo inspired by the &amp;quot;Parental Advisory&amp;quot; label, and the tongue features a logo that pays homage to classic performer posters.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nMore Benefits&lt;/p&gt;\r\n\r\n&lt;p&gt;The leather upper and exposed needlework create a clean look that&amp;#39;s easy to style.&lt;br /&gt;\r\nVulcanised construction fuses the sole to the upper for a flexible, broken-in feel.&lt;br /&gt;\r\nRubber sole with herringbone pattern adds traction and durability.&lt;/p&gt;\r\n\r\n&lt;p&gt;Product Details&lt;/p&gt;\r\n\r\n&lt;p&gt;Padded collar&lt;br /&gt;\r\nFoam midsole&lt;br /&gt;\r\nRubber sole&lt;br /&gt;\r\nColour Shown: White/Black/White/Smoke Grey&lt;br /&gt;\r\nStyle: DV7194-100&lt;br /&gt;\r\nCountry/Region of Origin: Vietnam&lt;/p&gt;\r\n\r\n&lt;p&gt;Blazer Origins&lt;/p&gt;\r\n\r\n&lt;p&gt;Originally introduced in 1972 as a basketball shoe, the Blazer has since transformed into a modern staple for skaters and sneakerheads alike. Maturing from a simple canvas high top to a leather mid top and casual low top, this shoe just gets better with age.&lt;/p&gt;\r\n', '', 'Nike Blazer Mid &#039;77', 'DV7194-100', 3239000, 0, 3, 'noibat,hienthi', 1686905828, 1686905890, 0),
+(21, 21, 42, NULL, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx0.png', 'air-jordan-1-zoom-cmft-2', '&lt;p&gt;Premium suede and Jordan Brand&amp;#39;s signature Formula 23 foam come together to give you an extra luxurious (and extra cosy) AJ1. You don&amp;#39;t need to play &amp;quot;either or&amp;quot; when it comes to choosing style or comfort with this one&amp;mdash;which is nice, &amp;#39;cause you deserve both.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Suede on the upper and toe breaks in easily and contours to your feet.&lt;/li&gt;\r\n	&lt;li&gt;Jordan Formula 23 foam keeps your feet extra padded.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: Light Orewood Brown/Sail/Celestial Gold/Bright Citrus&lt;/li&gt;\r\n	&lt;li&gt;Style: DV1307-180&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Indonesia&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Zoom CMFT 2', 'DV1307-180', 4259000, 0, 5, 'noibat,hienthi', 1686906249, 1686906404, 0),
+(22, 21, 42, NULL, 'jumpman-two-trey-shoes-rhmBzG.png', 'jumpman-two-trey', '&lt;p&gt;Like &amp;quot;Two Trey&amp;quot; on MJ&amp;#39;s licence plate, let your presence be known. This new generation of Jordan celebrates Mike&amp;#39;s time in Chicago, complete with high-quality leather uppers and Air cushioned soles. Made as an homage to the on-court styles worn during his championship years, the Two Trey&amp;#39;s midsole design references both the AJ11 and the AJ12.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Genuine leather offers durable support with a premium look.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole delivers lasting traction where you need it.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Padded collar with fabric lining&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with herringbone traction at the forefoot&lt;/li&gt;\r\n	&lt;li&gt;Heel pull tab&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Black/Lucky Green&lt;/li&gt;\r\n	&lt;li&gt;Style: DO1925-130&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Jumpman Two Trey', 'DO1925-130', 4909000, 0, 1, 'noibat,hienthi', 1686906470, 1686906606, 0),
+(23, 21, 42, NULL, 'air-jordan-1-mid-shoes-SQf7DM.png', 'air-jordan-1-mid', '&lt;p&gt;Inspired by the original AJ1, this mid-top edition maintains the iconic look you love while choice colours and crisp leather give it a distinct identity.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Leather, synthetic leather and textile upper for a supportive feel.&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole and Nike Air cushioning provide lightweight comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circle gives you durable traction.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: University Blue/White/Black&lt;/li&gt;\r\n	&lt;li&gt;Style: DQ8426-401&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Mid', 'DQ8426-401', 3669000, 0, 1, 'noibat,hienthi', 1686907505, 1686907516, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_brand`
+-- Table structure for table `table_product_brand`
 --
 
 CREATE TABLE `table_product_brand` (
@@ -1220,21 +1267,10 @@ CREATE TABLE `table_product_brand` (
   `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `table_product_brand`
---
-
-INSERT INTO `table_product_brand` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(9, 'nike', '', 'Nike', 'brand-1-5394-2516-5979.jpg', 'hienthi', 1679827424, 1685950295, 0),
-(10, 'adidas', '', 'Adidas', 'brand-3-1828-5079-3631.jpg', 'hienthi', 1679827434, 0, 0),
-(11, 'converse', '', 'Converse', 'brand-4-3020-1744-9516.jpg', 'hienthi', 1679827445, 0, 0),
-(12, 'reebok', '', 'Reebok', 'brand-5-3471-2234-2531.jpg', 'hienthi', 1679827457, 0, 0),
-(13, 'puma', '', 'Puma', 'brand-7-2941-8624-7136.jpg', 'hienthi', 1679827467, 1686413552, 0);
-
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_cat`
+-- Table structure for table `table_product_cat`
 --
 
 CREATE TABLE `table_product_cat` (
@@ -1251,28 +1287,34 @@ CREATE TABLE `table_product_cat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product_cat`
+-- Dumping data for table `table_product_cat`
 --
 
 INSERT INTO `table_product_cat` (`id`, `id_list`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(13, 7, 'nam', '', 'Nam', NULL, 'hienthi,noibat', 1686764603, 0, 0),
-(14, 7, 'nu', '', 'Nữ', NULL, 'hienthi,noibat', 1686764617, 0, 0),
-(15, 6, 'nam-adidas', '', 'Nam adidas', NULL, 'hienthi', 1686764767, 0, 0),
-(16, 6, 'nu-adidas', '', 'Nữ adidas', NULL, 'hienthi', 1686764775, 0, 0),
-(17, 10, 'air-jordan', '', 'AIR JORDAN', NULL, 'hienthi', 1686764788, 0, 0),
-(18, 11, 'yeezy-boost-350', '', 'YEEZY BOOST 350', NULL, 'hienthi', 1686764800, 0, 0),
-(19, 11, 'yeezy-boost-700', '', 'YEEZY BOOST 700', NULL, 'hienthi', 1686764807, 0, 0),
-(20, 12, 'sneaker-authentic', '', 'SNEAKER AUTHENTIC', NULL, 'hienthi', 1686764819, 0, 0),
-(21, 12, 'giay-the-thao-chay-bo-tap-gym', '', 'Giày thể thao chạy bộ -tập gym', NULL, 'hienthi', 1686764827, 0, 0),
-(22, 12, 'giay-tennis-nike-chinh-hang', '', 'Giày tennis nike chính hãng', NULL, 'hienthi', 1686764838, 0, 0),
-(23, 12, 'dep-authentic', '', 'Dép Authentic', NULL, 'hienthi', 1686764852, 0, 0),
-(24, 12, 'crep-protect-ve-sinh-giay-sneaker', '', 'Crep Protect vệ sinh giày Sneaker', NULL, 'hienthi', 1686764859, 0, 0),
-(25, 12, 'giay-thanh-ly', '', 'Giày Thanh Lý', NULL, 'hienthi', 1686764866, 0, 0);
+(26, 19, 'nam-adidas', '', 'NAM ADIDAS', 'poduct-1-1758-10720.jpeg', 'hienthi', 1686897564, 1686898155, 0),
+(27, 19, 'nu-adidas', '', 'NỮ ADIDAS', 'poduct-2-3013-4492.jpg', 'hienthi', 1686897584, 1686898168, 0),
+(28, 19, 'kids-adidas', '', 'KIDS ADIDAS', 'poduct-1-1318-1352.jpg', 'hienthi', 1686897625, 1686898185, 0),
+(29, 15, 'men-puma', '', 'MEN PUMA', 'poduct-5-3937-3609.jpg', 'hienthi', 1686897827, 1686898141, 0),
+(30, 15, 'women-puma', '', 'WOMEN PUMA', 'poduct-6-4025-8782.jpg', 'hienthi', 1686897838, 1686898200, 0),
+(31, 15, 'kids-puma', '', 'KIDS PUMA', 'poduct-1-1318-13520.jpg', 'hienthi', 1686897864, 1686898215, 0),
+(32, 16, 'men-new-balance', '', 'MEN NEW BALANCE', 'poduct-1-1318-13521.jpg', 'hienthi', 1686897928, 1686898236, 0),
+(33, 16, 'women-new-balance', '', 'WOMEN NEW BALANCE', 'poduct-1-1758-10721.jpeg', 'hienthi', 1686897937, 1686898255, 0),
+(34, 16, 'kids-new-balance', '', 'KIDS NEW BALANCE', 'poduct-1-1758-10722.jpeg', 'hienthi', 1686898050, 1686898279, 0),
+(35, 17, 'men-reebok', '', 'MEN REEBOK', 'poduct-1-1318-13522.jpg', 'hienthi', 1686898645, 1686898656, 0),
+(36, 17, 'women-reebok', '', 'WOMEN REEBOK', 'poduct-1-1758-10723.jpeg', 'hienthi', 1686898676, 0, 0),
+(37, 17, 'unisex-reebok', '', 'UNISEX REEBOK', 'poduct-4-9840-6158.jpg', 'hienthi', 1686898688, 0, 0),
+(38, 18, 'men-converse', '', 'MEN CONVERSE', 'poduct-1-1318-7485.jpg', 'hienthi', 1686898819, 0, 0),
+(39, 18, 'women-converse', '', 'WOMEN CONVERSE', 'poduct-1-1318-74850.jpg', 'hienthi', 1686898829, 0, 0),
+(40, 18, 'kids-converse', '', 'KIDS CONVERSE', 'poduct-1-1318-74851.jpg', 'hienthi', 1686898835, 0, 0),
+(41, 20, 'air-jordan', '', 'AIR JORDAN', 'poduct-3-5224-9280.jpg', 'hienthi', 1686898920, 0, 0),
+(42, 21, 'men-nike', '', 'MEN NIKE', 'poduct-3-5224-92800.jpg', 'hienthi', 1686898940, 0, 0),
+(43, 21, 'women-nike', '', 'WOMEN NIKE', 'poduct-1-1318-7456.jpg', 'hienthi', 1686898950, 0, 0),
+(44, 21, 'kids-nike', '', 'KIDS NIKE', 'poduct-2-3013-44920.jpg', 'hienthi', 1686898959, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_color`
+-- Table structure for table `table_product_color`
 --
 
 CREATE TABLE `table_product_color` (
@@ -1281,10 +1323,30 @@ CREATE TABLE `table_product_color` (
   `id_color` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `table_product_color`
+--
+
+INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
+(72, 18, 14),
+(73, 18, 13),
+(74, 18, 12),
+(75, 18, 11),
+(76, 18, 10),
+(77, 18, 9),
+(78, 18, 8),
+(79, 18, 7),
+(86, 21, 13),
+(87, 21, 12),
+(88, 21, 10),
+(98, 22, 14),
+(99, 22, 11),
+(100, 22, 9);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_list`
+-- Table structure for table `table_product_list`
 --
 
 CREATE TABLE `table_product_list` (
@@ -1300,22 +1362,22 @@ CREATE TABLE `table_product_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product_list`
+-- Dumping data for table `table_product_list`
 --
 
 INSERT INTO `table_product_list` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(6, 'giay-nam', '', 'Adidas', '1-8598.jpg', 'hienthi,noibat', 1679827339, 1686764431, 0),
-(7, 'giay-nu', '', 'Nike', '2-8403.jpg', 'hienthi,noibat', 1679827370, 1686764415, 0),
-(10, 'jordan', '', 'Jordan', NULL, 'hienthi', 1686764463, 0, 0),
-(11, 'yeezy', '', 'Yeezy', NULL, 'hienthi', 1686764474, 0, 0),
-(12, 'other-brands', '', 'Other Brands', NULL, 'hienthi', 1686764486, 0, 0),
-(13, 'day-giay', '', 'Dây Giày', NULL, '', 1686764502, 0, 0),
-(14, 'spa-giay', '', 'Spa Giày', NULL, '', 1686764511, 0, 0);
+(15, 'puma', '', 'Puma', 'brand-7-2941-86240.jpg', 'hienthi', 1686897329, 0, 0),
+(16, 'new-balance', '', 'New balance', 'brand-6-8551-10390.jpg', 'hienthi', 1686897346, 0, 0),
+(17, 'reebok', '', 'Reebok', 'brand-5-3471-22340.jpg', 'hienthi', 1686897360, 1686898623, 0),
+(18, 'converse', '', 'Converse', 'brand-4-3020-17440.jpg', 'hienthi', 1686897381, 0, 0),
+(19, 'adidas', '', 'Adidas', 'brand-3-1828-50791.jpg', 'hienthi', 1686897411, 0, 0),
+(20, 'jordan', '', 'Jordan', 'brand-2-9477-75040.jpg', 'hienthi,noibat', 1686897422, 0, 0),
+(21, 'nike', '', 'Nike', 'brand-1-5394-25161.jpg', 'hienthi,noibat', 1686897433, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_size`
+-- Table structure for table `table_product_size`
 --
 
 CREATE TABLE `table_product_size` (
@@ -1324,10 +1386,34 @@ CREATE TABLE `table_product_size` (
   `id_size` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `table_product_size`
+--
+
+INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
+(263, 18, 17),
+(264, 18, 16),
+(265, 18, 15),
+(266, 18, 14),
+(267, 18, 13),
+(268, 18, 12),
+(269, 18, 11),
+(270, 18, 10),
+(271, 18, 9),
+(272, 18, 8),
+(279, 21, 17),
+(280, 21, 16),
+(281, 21, 14),
+(297, 22, 17),
+(298, 22, 15),
+(299, 22, 14),
+(300, 22, 13),
+(301, 22, 12);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_setting`
+-- Table structure for table `table_setting`
 --
 
 CREATE TABLE `table_setting` (
@@ -1337,7 +1423,7 @@ CREATE TABLE `table_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_setting`
+-- Dumping data for table `table_setting`
 --
 
 INSERT INTO `table_setting` (`id`, `options`, `name`) VALUES
@@ -1346,7 +1432,7 @@ INSERT INTO `table_setting` (`id`, `options`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_size`
+-- Table structure for table `table_size`
 --
 
 CREATE TABLE `table_size` (
@@ -1359,7 +1445,7 @@ CREATE TABLE `table_size` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_size`
+-- Dumping data for table `table_size`
 --
 
 INSERT INTO `table_size` (`id`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -1377,7 +1463,7 @@ INSERT INTO `table_size` (`id`, `name`, `status`, `date_created`, `date_updated`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_static`
+-- Table structure for table `table_static`
 --
 
 CREATE TABLE `table_static` (
@@ -1395,17 +1481,17 @@ CREATE TABLE `table_static` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_static`
+-- Dumping data for table `table_static`
 --
 
 INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `type`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (9, 'xe-moto-chopper-7223-7952.jpg', 've-chung-toi', '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tortor in ex posuere, euismod pretium justo sodales. Morbi sit amet neque porttitor, ullamcorper nisi sed, malesuada augue. Nunc eu orci neque. Duis sed ultricies ex. Sed lorem neque, elementum quis porta eget, malesuada eget massa. Aenean rhoncus justo vel nunc rutrum hendrerit. Nam et nulla magna. Duis auctor ante at lectus luctus bibendum. In eleifend, nibh efficitur molestie pulvinar, elit turpis finibus lorem, ac aliquet quam metus sed justo. Curabitur tempor mollis ex ut feugiat. Duis varius ligula quam. Donec vehicula dui nec velit lacinia, vel porta dolor suscipit. In suscipit lacinia maximus. Praesent a turpis quis ante laoreet tincidunt. Donec et lectus turpis.&lt;/p&gt;\r\n\r\n&lt;p&gt;Morbi imperdiet gravida risus. Fusce volutpat enim eget porta tempus. Pellentesque vehicula suscipit ipsum. Nunc ut tellus leo. Sed rhoncus augue quis est posuere dignissim. Etiam mollis elit odio, vel luctus mauris blandit sit amet. Nullam sed vulputate eros. Etiam tincidunt turpis non mi luctus ultricies. Sed mattis lacus non nibh iaculis viverra. Aenean malesuada mauris quis risus viverra tristique. Curabitur quis iaculis libero. Quisque pharetra vitae eros bibendum egestas. Nam id urna ut ligula suscipit porttitor sit amet sollicitudin tellus. Sed rutrum luctus mauris, id tristique massa scelerisque eu. Mauris lacus mauris, porta nec quam quis, efficitur imperdiet lacus. Mauris suscipit elit eget rhoncus sollicitudin.&lt;/p&gt;\r\n', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tortor in ex posuere, euismod pretium justo sodales. Morbi sit amet neque porttitor, ullamcorper nisi sed, malesuada augue. Nunc eu orci neque. Duis sed ultricies ex. Sed lorem neque, elementum quis porta eget, malesuada eget massa. Aenean rhoncus justo vel nunc rutrum hendrerit. Nam et nulla magna. Duis auctor ante at lectus luctus bibendum. In eleifend, nibh efficitur molestie pulvinar, elit turpis finibus lorem, ac aliquet quam metus sed justo. Curabitur tempor mollis ex ut feugiat. Duis varius ligula quam. Donec vehicula dui nec velit lacinia, vel porta dolor suscipit. In suscipit lacinia maximus. Praesent a turpis quis ante laoreet tincidunt. Donec et lectus turpis.\r\n\r\nMorbi imperdiet gravida risus. Fusce volutpat enim eget porta tempus. Pellentesque vehicula suscipit ipsum. Nunc ut tellus leo. Sed rhoncus augue quis est posuere dignissim. Etiam mollis elit odio, vel luctus mauris blandit sit amet. Nullam sed vulputate eros. Etiam tincidunt turpis non mi luctus ultricies. Sed mattis lacus non nibh iaculis viverra. Aenean malesuada mauris quis risus viverra tristique. Curabitur quis iaculis libero. Quisque pharetra vitae eros bibendum egestas. Nam id urna ut ligula suscipit porttitor sit amet sollicitudin tellus. Sed rutrum luctus mauris, id tristique massa scelerisque eu. Mauris lacus mauris, porta nec quam quis, efficitur imperdiet lacus. Mauris suscipit elit eget rhoncus sollicitudin.', 'Về chúng tôi', 'gioi-thieu', 'hienthi', 1679828407, 1682263089, 0),
-(10, NULL, 'footer-cua-chung-toi', '', '', 'Footer của chúng tôi', 'footer', 'hienthi', 1685940614, 0, 0);
+(10, NULL, 'thong-tin', '&lt;p&gt;&lt;a href=&quot;https://www.nike.com/vn/register&quot; target=&quot;_self&quot;&gt;BECOME A MEMBER&lt;/a&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Send Us Feedback&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n', '', 'Thông tin', 'footer', 'hienthi', 1685940614, 1686904380, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_user`
+-- Table structure for table `table_user`
 --
 
 CREATE TABLE `table_user` (
@@ -1429,11 +1515,11 @@ CREATE TABLE `table_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_user`
+-- Dumping data for table `table_user`
 --
 
 INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `photo`, `fullname`, `phone`, `address`, `gender`, `login_session`, `lastlogin`, `status`, `birthday`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, 'b3a5573ab2ebda8a8d6367c7c9eaa3b7', '1686761372', 'hoatdong', 1608051600, 0, 0, 0),
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, '30d64ef3f800540181ed1ec91c7b23de', '1686907405', 'hoatdong', 1608051600, 0, 0, 0),
 (149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoang@gmail.com', 'nature35-5158-6128.jpg', 'Hoàng Phạm', '0909090909', 'Địa chỉ test', 1, '9bea46bd54a20c6c7e774e791eb23328', '1686410980', 'hoatdong', 990136800, 1682254418, 1685591349, 0),
 (150, 'user', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user@gmail.com', '2-7335-5701.jpg', 'User', '0909090909', 'Địa chỉ test 1', 1, 'af98095aefc0fa845d7e9e14031c261d', '1683379089', 'khoa', 1044399600, 1682254452, 1683220756, 0),
 (159, 'user', 'cuong', 'cf4d87e50be6390ee9bd8ad6e7498cae', 'cuong@gmail.com', 'product-1.jpg', 'Cường', '0909090909', 'Bình Trị Đông A, Bình Tân, TP. HCM', 1, 'fcce87bae0a2aa224dcf6ee1508a1fe1', '1686014824', 'hoatdong', 1092261600, 1683906702, 1683909972, 0),
@@ -1442,7 +1528,7 @@ INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_variants`
+-- Table structure for table `table_variants`
 --
 
 CREATE TABLE `table_variants` (
@@ -1458,7 +1544,7 @@ CREATE TABLE `table_variants` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_vnpay`
+-- Table structure for table `table_vnpay`
 --
 
 CREATE TABLE `table_vnpay` (
@@ -1475,7 +1561,7 @@ CREATE TABLE `table_vnpay` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `table_vnpay`
+-- Dumping data for table `table_vnpay`
 --
 
 INSERT INTO `table_vnpay` (`id`, `order_id`, `vnp_amount`, `vnp_bankcode`, `vnp_banktranno`, `vnp_cardtype`, `vnp_orderinfo`, `vnp_paydate`, `vnp_tmncode`, `vnp_transactionno`) VALUES
@@ -1485,7 +1571,7 @@ INSERT INTO `table_vnpay` (`id`, `order_id`, `vnp_amount`, `vnp_bankcode`, `vnp_
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_ward`
+-- Table structure for table `table_ward`
 --
 
 CREATE TABLE `table_ward` (
@@ -1503,7 +1589,7 @@ CREATE TABLE `table_ward` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_ward`
+-- Dumping data for table `table_ward`
 --
 
 INSERT INTO `table_ward` (`id`, `id_city`, `id_district`, `name`, `slug`, `code`, `level`, `status`, `date_updated`, `date_created`, `ship_price`) VALUES
@@ -12127,23 +12213,23 @@ INSERT INTO `table_ward` (`id`, `id_city`, `id_district`, `name`, `slug`, `code`
 (10599, 63, 705, 'Xã Đất Mũi', 'xa-dat-mui', '32248', 'Xã', 'hienthi', 0, 1640319968, 0);
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `table_city`
+-- Indexes for table `table_city`
 --
 ALTER TABLE `table_city`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_color`
+-- Indexes for table `table_color`
 --
 ALTER TABLE `table_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_comment`
+-- Indexes for table `table_comment`
 --
 ALTER TABLE `table_comment`
   ADD PRIMARY KEY (`id`),
@@ -12151,67 +12237,67 @@ ALTER TABLE `table_comment`
   ADD KEY `comment_user` (`id_user`);
 
 --
--- Chỉ mục cho bảng `table_comment_photo`
+-- Indexes for table `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `comment_photo` (`id_parent`);
 
 --
--- Chỉ mục cho bảng `table_contact`
+-- Indexes for table `table_contact`
 --
 ALTER TABLE `table_contact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_counter`
+-- Indexes for table `table_counter`
 --
 ALTER TABLE `table_counter`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_district`
+-- Indexes for table `table_district`
 --
 ALTER TABLE `table_district`
   ADD PRIMARY KEY (`id`),
   ADD KEY `district_city` (`id_city`);
 
 --
--- Chỉ mục cho bảng `table_gallery`
+-- Indexes for table `table_gallery`
 --
 ALTER TABLE `table_gallery`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gallery_product` (`id_parent`);
 
 --
--- Chỉ mục cho bảng `table_gallery_album`
+-- Indexes for table `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gallery_album` (`id_parent`);
 
 --
--- Chỉ mục cho bảng `table_momo`
+-- Indexes for table `table_momo`
 --
 ALTER TABLE `table_momo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `momo order` (`order_id`);
 
 --
--- Chỉ mục cho bảng `table_news`
+-- Indexes for table `table_news`
 --
 ALTER TABLE `table_news`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_order`
+-- Indexes for table `table_order`
 --
 ALTER TABLE `table_order`
   ADD PRIMARY KEY (`id`),
   ADD KEY `order_user` (`id_user`);
 
 --
--- Chỉ mục cho bảng `table_order_detail`
+-- Indexes for table `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
   ADD PRIMARY KEY (`id`),
@@ -12221,13 +12307,13 @@ ALTER TABLE `table_order_detail`
   ADD KEY `order_detail_color` (`id_color`);
 
 --
--- Chỉ mục cho bảng `table_photo`
+-- Indexes for table `table_photo`
 --
 ALTER TABLE `table_photo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_product`
+-- Indexes for table `table_product`
 --
 ALTER TABLE `table_product`
   ADD PRIMARY KEY (`id`),
@@ -12236,20 +12322,20 @@ ALTER TABLE `table_product`
   ADD KEY `product_cat` (`id_cat`);
 
 --
--- Chỉ mục cho bảng `table_product_brand`
+-- Indexes for table `table_product_brand`
 --
 ALTER TABLE `table_product_brand`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_product_cat`
+-- Indexes for table `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
   ADD PRIMARY KEY (`id`),
   ADD KEY `asdsad` (`id_list`);
 
 --
--- Chỉ mục cho bảng `table_product_color`
+-- Indexes for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
   ADD PRIMARY KEY (`id`),
@@ -12257,13 +12343,13 @@ ALTER TABLE `table_product_color`
   ADD KEY `product1` (`id_product`);
 
 --
--- Chỉ mục cho bảng `table_product_list`
+-- Indexes for table `table_product_list`
 --
 ALTER TABLE `table_product_list`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_product_size`
+-- Indexes for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD PRIMARY KEY (`id`),
@@ -12271,44 +12357,44 @@ ALTER TABLE `table_product_size`
   ADD KEY `product` (`id_product`);
 
 --
--- Chỉ mục cho bảng `table_setting`
+-- Indexes for table `table_setting`
 --
 ALTER TABLE `table_setting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_size`
+-- Indexes for table `table_size`
 --
 ALTER TABLE `table_size`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_static`
+-- Indexes for table `table_static`
 --
 ALTER TABLE `table_static`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_user`
+-- Indexes for table `table_user`
 --
 ALTER TABLE `table_user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_variants`
+-- Indexes for table `table_variants`
 --
 ALTER TABLE `table_variants`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_vnpay`
+-- Indexes for table `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
   ADD PRIMARY KEY (`id`),
   ADD KEY `erdfgdfgd` (`order_id`);
 
 --
--- Chỉ mục cho bảng `table_ward`
+-- Indexes for table `table_ward`
 --
 ALTER TABLE `table_ward`
   ADD PRIMARY KEY (`id`),
@@ -12316,220 +12402,220 @@ ALTER TABLE `table_ward`
   ADD KEY `ward_district` (`id_district`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `table_city`
+-- AUTO_INCREMENT for table `table_city`
 --
 ALTER TABLE `table_city`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
--- AUTO_INCREMENT cho bảng `table_color`
+-- AUTO_INCREMENT for table `table_color`
 --
 ALTER TABLE `table_color`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT cho bảng `table_comment`
+-- AUTO_INCREMENT for table `table_comment`
 --
 ALTER TABLE `table_comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `table_comment_photo`
+-- AUTO_INCREMENT for table `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `table_contact`
+-- AUTO_INCREMENT for table `table_contact`
 --
 ALTER TABLE `table_contact`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT cho bảng `table_counter`
+-- AUTO_INCREMENT for table `table_counter`
 --
 ALTER TABLE `table_counter`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `table_district`
+-- AUTO_INCREMENT for table `table_district`
 --
 ALTER TABLE `table_district`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=706;
 
 --
--- AUTO_INCREMENT cho bảng `table_gallery`
+-- AUTO_INCREMENT for table `table_gallery`
 --
 ALTER TABLE `table_gallery`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
--- AUTO_INCREMENT cho bảng `table_gallery_album`
+-- AUTO_INCREMENT for table `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT cho bảng `table_momo`
+-- AUTO_INCREMENT for table `table_momo`
 --
 ALTER TABLE `table_momo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `table_news`
+-- AUTO_INCREMENT for table `table_news`
 --
 ALTER TABLE `table_news`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `table_order`
+-- AUTO_INCREMENT for table `table_order`
 --
 ALTER TABLE `table_order`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `table_order_detail`
+-- AUTO_INCREMENT for table `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `table_photo`
+-- AUTO_INCREMENT for table `table_photo`
 --
 ALTER TABLE `table_photo`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT cho bảng `table_product`
+-- AUTO_INCREMENT for table `table_product`
 --
 ALTER TABLE `table_product`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT cho bảng `table_product_brand`
+-- AUTO_INCREMENT for table `table_product_brand`
 --
 ALTER TABLE `table_product_brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT cho bảng `table_product_cat`
+-- AUTO_INCREMENT for table `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT cho bảng `table_product_color`
+-- AUTO_INCREMENT for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT cho bảng `table_product_list`
+-- AUTO_INCREMENT for table `table_product_list`
 --
 ALTER TABLE `table_product_list`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT cho bảng `table_product_size`
+-- AUTO_INCREMENT for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
 
 --
--- AUTO_INCREMENT cho bảng `table_setting`
+-- AUTO_INCREMENT for table `table_setting`
 --
 ALTER TABLE `table_setting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `table_size`
+-- AUTO_INCREMENT for table `table_size`
 --
 ALTER TABLE `table_size`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT cho bảng `table_static`
+-- AUTO_INCREMENT for table `table_static`
 --
 ALTER TABLE `table_static`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `table_user`
+-- AUTO_INCREMENT for table `table_user`
 --
 ALTER TABLE `table_user`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
--- AUTO_INCREMENT cho bảng `table_variants`
+-- AUTO_INCREMENT for table `table_variants`
 --
 ALTER TABLE `table_variants`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
 
 --
--- AUTO_INCREMENT cho bảng `table_vnpay`
+-- AUTO_INCREMENT for table `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `table_ward`
+-- AUTO_INCREMENT for table `table_ward`
 --
 ALTER TABLE `table_ward`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10600;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `table_comment`
+-- Constraints for table `table_comment`
 --
 ALTER TABLE `table_comment`
   ADD CONSTRAINT `comment_product` FOREIGN KEY (`id_parent`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `comment_user` FOREIGN KEY (`id_user`) REFERENCES `table_user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_comment_photo`
+-- Constraints for table `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
   ADD CONSTRAINT `comment_photo` FOREIGN KEY (`id_parent`) REFERENCES `table_comment` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_district`
+-- Constraints for table `table_district`
 --
 ALTER TABLE `table_district`
   ADD CONSTRAINT `district_city` FOREIGN KEY (`id_city`) REFERENCES `table_city` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_gallery`
+-- Constraints for table `table_gallery`
 --
 ALTER TABLE `table_gallery`
   ADD CONSTRAINT `gallery_product` FOREIGN KEY (`id_parent`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_gallery_album`
+-- Constraints for table `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   ADD CONSTRAINT `gallery_album` FOREIGN KEY (`id_parent`) REFERENCES `table_photo` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_momo`
+-- Constraints for table `table_momo`
 --
 ALTER TABLE `table_momo`
   ADD CONSTRAINT `momo order` FOREIGN KEY (`order_id`) REFERENCES `table_order` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_order`
+-- Constraints for table `table_order`
 --
 ALTER TABLE `table_order`
   ADD CONSTRAINT `order_user` FOREIGN KEY (`id_user`) REFERENCES `table_user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_order_detail`
+-- Constraints for table `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
   ADD CONSTRAINT `order_detail_color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
@@ -12538,7 +12624,7 @@ ALTER TABLE `table_order_detail`
   ADD CONSTRAINT `order_detail_size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_product`
+-- Constraints for table `table_product`
 --
 ALTER TABLE `table_product`
   ADD CONSTRAINT `product_brand` FOREIGN KEY (`id_brand`) REFERENCES `table_product_brand` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
@@ -12546,33 +12632,33 @@ ALTER TABLE `table_product`
   ADD CONSTRAINT `product_list` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_product_cat`
+-- Constraints for table `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
   ADD CONSTRAINT `asdsad` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_product_color`
+-- Constraints for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
   ADD CONSTRAINT `product1` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `product_color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_product_size`
+-- Constraints for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `product_size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_vnpay`
+-- Constraints for table `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
   ADD CONSTRAINT `erdfgdfgd` FOREIGN KEY (`order_id`) REFERENCES `table_order` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Các ràng buộc cho bảng `table_ward`
+-- Constraints for table `table_ward`
 --
 ALTER TABLE `table_ward`
   ADD CONSTRAINT `ward_city` FOREIGN KEY (`id_city`) REFERENCES `table_city` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
