@@ -569,6 +569,40 @@ FRAMEWORK.Carousel = function () {
     },
   });
 
+  $(".product__slider").owlCarousel({
+    loop: false,
+    margin: 20,
+    items: 2,
+    dots: false,
+    nav: true,
+    navText: [
+      "<span class='fa fa-angle-left'><span/>",
+      "<span class='fa fa-angle-right'><span/>",
+    ],
+    animateOut: "fadeOut",
+    animateIn: "fadeIn",
+    smartSpeed: 1200,
+    autoHeight: false,
+    autoplay: true,
+    responsive: {
+      0: {
+        items: 2,
+      },
+
+      480: {
+        items: 2,
+      },
+
+      768: {
+        items: 3,
+      },
+
+      992: {
+        items: 4,
+      },
+    },
+  });
+
   $(".newsnb__owl").owlCarousel({
     loop: false,
     margin: 30,

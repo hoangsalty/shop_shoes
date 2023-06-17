@@ -30,7 +30,44 @@
             <div class="title-main">
                 <span>Sản phẩm nổi bật</span>
             </div>
-            <div class="paging-product"></div>
+            <div class="product__slider owl-carousel control-owl">
+                <?php foreach ($product as $k => $v) { ?>
+                    <div>
+                        <div class="product">
+                            <div class="box-product">
+                                <div class="box-image">
+                                    <a class="pic-product scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
+                                        <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                    </a>
+                                    <p class="social-product transition">
+                                        <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a class="cart-add addcart" data-id="<?= $v['id'] ?>" data-action="addnow">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="info-product">
+                                    <a class="name-product text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
+                                    <p class="price-product">
+                                        <?php if ($v['sale_price'] > 0) { ?>
+                                            <span class="price-new"><?= $func->formatMoney($v['sale_price']) ?></span>
+                                            <span class="price-old"><?= $func->formatMoney($v['regular_price']) ?></span>
+                                            <span class="price-per"><?= '-' . round(100 - ($v['sale_price'] / $v['regular_price'] * 100)) . '%' ?></span>
+                                        <?php } else { ?>
+                                            <?php if ($v['regular_price'] != 0) $giapro = $func->formatMoney($v['regular_price']);
+                                            else $giapro = 'Liên hệ'; ?>
+                                            <span class="price-text">Giá: </span>
+                                            <span class="price-new"><?= $giapro ?></span>
+                                        <?php } ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
     </div>
 <?php } ?>
@@ -55,11 +92,11 @@
                 <span>Thư viện ảnh</span>
             </div>
             <div class="main-album album-gallery">
-                <div class="row">
+                <div class="grid_album grid_container">
                     <?php foreach ($albumnb as $k => $v) { ?>
-                        <div class="album col-lg-3 col-md-4 col-6">
-                            <a class="album-item text-decoration-none transition" href="<?= UPLOAD_PHOTO_L . $v['photo'] ?>" title="<?= $v['name'] ?>">
-                                <div class="image scale-img">
+                        <div class="grid-item">
+                            <a class="album_item transition" href="<?= UPLOAD_PHOTO_L . $v['photo'] ?>" title="<?= $v['name'] ?>">
+                                <div class="images transition">
                                     <?= $func->getImage(['class' => 'w-100', 'width' => $config['album']['width'], 'height' => $config['album']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
                                 </div>
                                 <div class="info">
