@@ -605,8 +605,8 @@ FRAMEWORK.Carousel = function () {
 
   $(".newsnb__owl").owlCarousel({
     loop: false,
-    margin: 30,
-    items: 3,
+    margin: 20,
+    items: 1,
     dots: false,
     nav: true,
     navText: [
@@ -632,7 +632,7 @@ FRAMEWORK.Carousel = function () {
       },
 
       992: {
-        items: 3,
+        items: 4,
       },
     },
   });

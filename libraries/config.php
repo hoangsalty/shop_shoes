@@ -36,8 +36,8 @@ $config['product_admin']['height'] = 800;
 $config['product']['width'] = 280;
 $config['product']['height'] = 260;
 /*Ảnh news*/
-$config['news']['width'] = 386;
-$config['news']['height'] = 270;
+$config['news']['width'] = 330;
+$config['news']['height'] = 330;
 /*Ảnh static*/
 $config['static']['width'] = 270;
 $config['static']['height'] = 270;
@@ -46,7 +46,7 @@ $config['album']['width'] = 285;
 $config['album']['height'] = 270;
 /*Ảnh slideshow*/
 $config['slideshow']['width'] = 1366;
-$config['slideshow']['height'] = 770;
+$config['slideshow']['height'] = 620;
 /*Ảnh video*/
 $config['video']['width'] = 300;
 $config['video']['height'] = 300;

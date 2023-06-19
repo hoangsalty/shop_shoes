@@ -837,17 +837,15 @@ a:hover {
 
 .item-newsnb .image {
   display: block;
-}
-
-.item-newsnb .info {
-  padding-top: 10px;
+  margin-bottom: 1rem;
 }
 
 .item-newsnb .info .name {
   font-weight: 600;
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 16px;
+  color: #000000;
+  height: 48px;
+  margin-bottom: 0.5rem;
   -webkit-line-clamp: 2;
 }
 
@@ -856,36 +854,22 @@ a:hover {
 }
 
 .item-newsnb .info .ngaydang {
+  font-size: 14px;
   color: #333333;
   display: inline-block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 }
 
 .item-newsnb .info .ngaydang i {
   margin-right: 5px;
 }
 
-.item-newsnb .info h3 {
-  margin-bottom: 10px;
-}
-
-.item-newsnb .info h3 a {
-  font-size: 20px;
-  color: #1c1c1c;
-  font-weight: 700;
-  -webkit-line-clamp: 1;
-}
-
-.item-newsnb:hover .info h3 a {
-  color: var(--color-main);
-}
-
 .item-newsnb .info .desc {
-  font-size: 16px;
-  color: #6f6f6f;
+  font-size: 14px;
+  color: #333333;
   font-weight: 400;
   line-height: 26px;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .item-newsnb .info .view {
@@ -893,7 +877,7 @@ a:hover {
   font-size: 16px;
   font-weight: 700;
   text-align: right;
-  color: #8d8d8d;
+  color: #333333;
   text-transform: uppercase;
   line-height: 1.5em;
   -webkit-transition: all 0.4s ease;
