@@ -112,10 +112,6 @@ function infoMember()
                 if ($func->hasFile("file")) {
                     $photoUpdate = array();
                     if ($photo = $func->uploadImage("file", './upload/user/')) {
-                        $row = $d->rawQueryOne("select id, photo from table_user where id = ? limit 0,1", array($iduser));
-                        if (!empty($row) and !empty($row['photo'])) {
-                            unlink('./upload/user/' . $row['photo']);
-                        }
                         $photoUpdate['photo'] = $photo;
                         $d->where('id', $iduser);
                         $d->update('table_user', $photoUpdate);

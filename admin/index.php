@@ -13,7 +13,6 @@ $files = glob(LIBRARIES . '/class/*.php');
 foreach ($files as $file) require_once $file;
 
 $d = new PDODb($config['database']);
-$flash = new Flash();
 $func = new Functions($d);
 
 /* Setting */

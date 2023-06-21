@@ -9,11 +9,7 @@ $table = (!empty($_POST['table'])) ? htmlspecialchars($_POST['table']) : '';
 
 if ($cmd == 'delete' && $id > 0) {
     $row = $d->rawQueryOne("select photo from table_$table where id = ? limit 0,1", array($id));
-
     $path = "../../upload/product/" . $row['photo'];
-
-    unlink($path);
-
     $d->rawQuery("delete from table_$table where id = ?", array($id));
 } else if ($cmd == 'delete-all' && $listid != '') {
     $listid = array_map('intval', explode(',', $listid));
@@ -22,9 +18,6 @@ if ($cmd == 'delete' && $id > 0) {
 
     for ($i = 0; $i < count($row); $i++) {
         $path = "../../upload/product/" . $row[$i]['photo'];
-
-        unlink($path);
-
         $id = $row[$i]['id'];
         $d->rawQuery("delete from table_$table where id = ?", array($id));
     }

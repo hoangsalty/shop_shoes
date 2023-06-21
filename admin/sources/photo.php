@@ -1,18 +1,25 @@
 <?php
-if (!defined('SOURCES')) die("Error");
+if (!defined('SOURCES')) {
+    require_once "../api/config.php";
+    /* die("Error"); */
+}
+
+$act = (isset($_REQUEST['act'])) ? htmlspecialchars($_REQUEST['act']) : '';
+$cur_Page = (isset($_REQUEST['cur_Page'])) ? htmlspecialchars($_REQUEST['cur_Page']) : '';
+$cur_Type = (isset($_REQUEST['cur_Type'])) ? htmlspecialchars($_REQUEST['cur_Type']) : '';
 
 switch ($act) {
         /* Photos */
-    case "man_photo":
+    case "list":
         viewPhotos();
-        $template = "photo/man/photos";
+        $template = "photo/photos";
         break;
     case "add_photo":
-        $template = "photo/man/photo_add";
+        $template = "photo/photo_add";
         break;
     case "edit_photo":
         editPhoto();
-        $template = "photo/man/photo_add";
+        $template = "photo/photo_add";
         break;
     case "save_photo":
         savePhoto();
@@ -24,7 +31,7 @@ switch ($act) {
         /* Photo static */
     case "photo_static":
         viewPhotoStatic();
-        $template = "photo/static/photo_static";
+        $template = "photo/photo_static";
         break;
     case "save_static":
         savePhotoStatic();
@@ -42,32 +49,23 @@ function viewPhotoStatic()
 /* Save photo static */
 function savePhotoStatic()
 {
-    global $d, $func, $flash, $type;
+    global $d, $func, $cur_Type;
 
     /* Post dữ liệu */
-    $row = $d->rawQueryOne("select id from table_photo where type = ? limit 0,1", array($type));
     $message = '';
     $response = array();
+    $row = $d->rawQueryOne("select id from table_photo where type = ? limit 0,1", array($cur_Type));
     $id = (!empty($row['id']) && $row['id'] > 0) ? $row['id'] : 0;
-
     $data['status'] = "hienthi";
-    $data['type'] = $type;
+    $data['type'] = $cur_Type;
 
     if (!empty($response)) {
-        /* Flash data */
-        if (!empty($data)) {
-            foreach ($data as $k => $v) {
-                if (!empty($v)) {
-                    $flash->set($k, $v);
-                }
-            }
-        }
-
         /* Errors */
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set('message', $message);
-        $func->redirect("index.php?com=photo&act=photo_static&type=" . $type);
+        $response['status'] = 404;
+        $response['link'] = "index.php?com=photo&act=photo_static&type=" . $cur_Type;
+        $message = json_encode($response);
+        echo $message;
+        return;
     }
 
     /* Save data */
@@ -75,16 +73,12 @@ function savePhotoStatic()
         $data['date_updated'] = time();
 
         $d->where('id', $id);
-        $d->where('type', $type);
+        $d->where('type', $cur_Type);
         if ($d->update('table_photo', $data)) {
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
                 if ($photo = $func->uploadImage("file", UPLOAD_PHOTO)) {
-                    $row = $d->rawQueryOne("select id, photo from table_photo where id = ? limit 0,1", array($id));
-                    if (!empty($row)) {
-                        unlink(UPLOAD_PHOTO . $row['photo']);
-                    }
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id);
                     $d->update('table_photo', $photoUpdate);
@@ -92,9 +86,11 @@ function savePhotoStatic()
                 }
             }
 
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=photo&act=photo_static&type=" . $type);
+            $response['status'] = 200;
+            $response['messages'][] = 'Cập nhật dữ liệu thành công';
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=photo_static&type=" . $type, false);
+            $response['status'] = 404;
+            $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
         }
     } else {
         $data['date_created'] = time();
@@ -114,14 +110,22 @@ function savePhotoStatic()
                     }
                 }
 
-                $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=photo&act=photo_static&type=" . $type);
+                $response['status'] = 200;
+                $response['messages'][] = 'Lưu dữ liệu thành công';
             } else {
-                $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=photo&act=photo_static&type=" . $type, false);
+                $response['status'] = 404;
+                $response['messages'][] = 'Lưu dữ liệu bị lỗi';
             }
         } else {
-            $func->transferAdmin("Dữ liệu rỗng", "index.php?com=photo&act=photo_static&type=" . $type, false);
+            $response['status'] = 404;
+            $response['messages'][] = 'Dữ liệu rỗng';
         }
     }
+
+    $response['link'] = "index.php?com=photo&act=photo_static&type=" . $cur_Type;
+    $message = json_encode($response);
+    echo $message;
+    return;
 }
 
 /* View photo */
@@ -140,7 +144,7 @@ function viewPhotos()
     $count = $d->rawQueryOne($sqlNum, array($type));
 
     $total = (!empty($count)) ? $count['num'] : 0;
-    $url = "index.php?com=photo&act=man_photo&type=" . $type;
+    $url = "index.php?com=photo&act=list&type=" . $type;
     $paging = $func->pagination($total, $perPage, $curPage, $url);
 }
 
@@ -154,11 +158,11 @@ function editPhoto()
         $id = 0;
 
     if (empty($id)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=list&type=" . $type . "&page=" . $curPage, false);
     } else {
         $item = $d->rawQueryOne("select * from table_photo where id = ? limit 0,1", array($id));
         if (empty($item)) {
-            $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+            $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=list&type=" . $type . "&page=" . $curPage, false);
         } else {
             $gallery = $d->rawQuery("select * from table_gallery_album where id_parent = ? order by id desc", array($id));
         }
@@ -168,13 +172,7 @@ function editPhoto()
 /* Save photo */
 function savePhoto()
 {
-    global $d, $func, $flash, $curPage, $type;
-
-    /* Check post */
-    if (!empty($_REQUEST)) {
-    } else {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
-    }
+    global $d, $strUrl, $func, $cur_Page, $cur_Type;
 
     /* Post dữ liệu */
     $message = '';
@@ -198,7 +196,7 @@ function savePhoto()
             $data['status'] = "hienthi";
         }
 
-        $data['type'] = $type;
+        $data['type'] = $cur_Type;
     }
 
     /* Valid data link */
@@ -206,7 +204,7 @@ function savePhoto()
         $response['messages'][] = 'Đường dẫn không hợp lệ';
     }
 
-    if ($type == 'video') {
+    if ($cur_Type == 'video') {
         /* Valid data video */
         if (empty($data['link_video'])) {
             $response['messages'][] = 'Đường dẫn video không được trống';
@@ -217,24 +215,16 @@ function savePhoto()
     }
 
     if (!empty($response)) {
-        /* Flash data */
-        if (!empty($data)) {
-            foreach ($data as $k => $v) {
-                if (!empty($v)) {
-                    $flash->set($k, $v);
-                }
-            }
-        }
-
         /* Errors */
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set('message', $message);
+        $response['status'] = 404;
         if ($id) {
-            $func->redirect("index.php?com=photo&act=edit_photo&type=" . $type . "&id=" . $id);
+            $response['link'] = "index.php?com=photo&act=edit_photo&type=" . $cur_Type . "&id=" . $id;
         } else {
-            $func->redirect("index.php?com=photo&act=edit_photo&type=" . $type);
+            $response['link'] = "index.php?com=photo&act=add_photo&type=" . $cur_Type;
         }
+        $message = json_encode($response);
+        echo $message;
+        return;
     }
 
     /* Save data */
@@ -242,16 +232,12 @@ function savePhoto()
         $data['date_updated'] = time();
 
         $d->where('id', $id);
-        $d->where('type', $type);
+        $d->where('type', $cur_Type);
         if ($d->update('table_photo', $data)) {
             /* Photo */
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
                 if ($photo = $func->uploadImage("file", UPLOAD_PHOTO)) {
-                    $row = $d->rawQueryOne("select id, photo from table_photo where id = ? limit 0,1", array($id));
-                    if (!empty($row)) {
-                        unlink(UPLOAD_PHOTO . $row['photo']);
-                    }
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $id);
                     $d->update('table_photo', $photoUpdate);
@@ -259,9 +245,12 @@ function savePhoto()
                 }
             }
 
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
+            $response['status'] = 200;
+            $response['messages'][] = 'Cập nhật dữ liệu thành công';
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+
+            $response['status'] = 404;
+            $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
         }
     } else {
         $data['date_created'] = time();
@@ -280,26 +269,38 @@ function savePhoto()
                 }
             }
 
-            $func->transferAdmin("Thêm dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type);
+            $response['status'] = 200;
+            $response['messages'][] = 'Thêm dữ liệu thành công';
+            $response['link'] = "index.php?com=photo&act=edit_photo&type=" . $cur_Type . "&id=" . $id_insert;
         } else {
-            $func->transferAdmin("Thêm dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type, false);
+            $response['status'] = 404;
+            $response['messages'][] = 'Thêm dữ liệu bị lỗi';
+            $response['link'] = "index.php?com=photo&act=photos&type=" . $cur_Type . "&page=" . $cur_Page;
         }
     }
+
+    $message = json_encode($response);
+    echo $message;
+    return;
 }
 
 /* Delete photo */
 function deletePhoto()
 {
-    global $d, $func, $curPage, $type;
+    global $d, $strUrl, $cur_Page, $cur_Type;
+
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     if ($id) {
         /* Lấy dữ liệu */
         $row = $d->rawQueryOne("select id from table_photo where id = ? limit 0,1", array($id));
         if (!empty($row)) {
             $d->rawQuery("delete from table_photo where id = ?", array($id));
-            $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
+
+            $response['status'] = 200;
+            $response['messages'][] = 'Xóa dữ liệu thành công';
         } else {
-            $func->transferAdmin("Xóa dữ liệu bị lỗi", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+            $response['status'] = 404;
+            $response['messages'][] = 'Xóa dữ liệu bị lỗi';
         }
     } elseif (isset($_REQUEST['listid'])) {
         $listid = explode(",", $_REQUEST['listid']);
@@ -311,8 +312,15 @@ function deletePhoto()
                 $d->rawQuery("delete from table_photo where id = ?", array($id));
             }
         }
-        $func->transferAdmin("Xóa dữ liệu thành công", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage);
+        $response['status'] = 200;
+        $response['messages'][] = 'Xóa dữ liệu thành công';
     } else {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=photo&act=man_photo&type=" . $type . "&page=" . $curPage, false);
+        $response['status'] = 404;
+        $response['messages'][] = 'Không nhận được dữ liệu';
     }
+    
+    $response['link'] = "index.php?com=photo&act=list&type=" . $cur_Type . "&page=" . $cur_Page;
+    $message = json_encode($response);
+    echo $message;
+    return;
 }

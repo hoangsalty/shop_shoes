@@ -21,10 +21,9 @@
                                 <div class="title">Hình thức thanh toán</div>
 
                                 <div class="payment-box">
-                                    <?php $flashPayment = $flash->get('payments'); ?>
                                     <?php foreach ($payments_info as $key => $value) { ?>
                                         <div class="payments-cart custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="payments-<?= $value['slug'] ?>" name="dataOrder[payments]" value="<?= $value['slug'] ?>" <?= (!empty($flashPayment) && $flashPayment == $value['slug']) ? 'checked' : '' ?> required>
+                                            <input type="radio" class="custom-control-input" id="payments-<?= $value['slug'] ?>" name="dataOrder[payments]" value="<?= $value['slug'] ?>" required>
                                             <label class="payments-label custom-control-label" for="payments-<?= $value['slug'] ?>" data-payments="<?= $value['slug'] ?>"><?= $value['name'] ?></label>
                                             <div class="payments-info payments-info-<?= $value['slug'] ?> transition"><?= str_replace("\n", "<br>", $value['desc']) ?></div>
                                         </div>
@@ -39,7 +38,7 @@
                                */ ?>
 
                                     <div class="payments-cart custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" <?= (!empty($flashPayment) && $flashPayment == 'vnpay') ? 'checked' : '' ?> required>
+                                        <input type="radio" class="custom-control-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" required>
                                         <label class="payments-label custom-control-label" for="payments-vnpay" data-payments="vnpay"><img src="assets/images/vnpay_icon.png" alt=""> Thanh toán qua
                                             VNPay</label>
                                         <div class="payments-info payments-info-vnpay transition">Thanh toán qua cổng thanh toán

@@ -1,6 +1,11 @@
 <?php
-if (!defined('SOURCES'))
-    die("Error");
+if (!defined('SOURCES')) {
+    require_once "../api/config.php";
+    /* die("Error"); */
+}
+
+$act = (isset($_REQUEST['act'])) ? htmlspecialchars($_REQUEST['act']) : '';
+$cur_Type = (isset($_REQUEST['cur_Type'])) ? htmlspecialchars($_REQUEST['cur_Type']) : '';
 
 switch ($act) {
     case "update":
@@ -22,17 +27,12 @@ function viewStatic()
 /* Save man */
 function saveStatic()
 {
-    global $d, $func, $flash, $type;
-
-    /* Check post */
-    if (empty($_REQUEST)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=static&act=update&type=" . $type, false);
-    }
+    global $d, $func, $cur_Type;
 
     /* Post dữ liệu */
     $message = '';
     $response = array();
-    $static = $d->rawQueryOne("select * from table_static where type = ? limit 0,1", array($type));
+    $static = $d->rawQueryOne("select * from table_static where type = ? limit 0,1", array($cur_Type));
     $data = (!empty($_REQUEST['data'])) ? $_REQUEST['data'] : null;
 
     if ($data) {
@@ -40,23 +40,8 @@ function saveStatic()
             $data[$column] = htmlspecialchars($func->checkInput($value));
         }
 
-        if (!empty($_REQUEST['slug']))
-            $data['slug'] = $func->changeTitle(htmlspecialchars($_REQUEST['slug']));
-        else
-            $data['slug'] = (!empty($data['name'])) ? $func->changeTitle($data['name']) : '';
-
-        if (isset($_REQUEST['status'])) {
-            $status = '';
-            foreach ($_REQUEST['status'] as $attr_column => $attr_value)
-                if ($attr_value != "")
-                    $status .= $attr_value . ',';
-
-            $data['status'] = (!empty($status)) ? rtrim($status, ",") : "";
-        } else {
-            $data['status'] = "hienthi";
-        }
-
-        $data['type'] = $type;
+        $data['status'] = "hienthi";
+        $data['type'] = $cur_Type;
     }
     /* Valid data */
     $checkTitle = $func->checkTitle($data);
@@ -65,30 +50,14 @@ function saveStatic()
             $response['messages'][] = $v;
         }
     }
-    $dataSlug = array();
-    $dataSlug['slug'] = $data['slug'];
-    $dataSlug['id'] = isset($static['id']) ? $static['id'] : 0;
-    $checkSlug = $func->checkSlug($dataSlug);
-    if ($checkSlug == 'exist') {
-        $response['messages'][] = 'Đường dẫn đã tồn tại';
-    } else if ($checkSlug == 'empty') {
-        $response['messages'][] = 'Đường dẫn không được trống';
-    }
 
     if (!empty($response)) {
-        /* Flash data */
-        if (!empty($data)) {
-            foreach ($data as $k => $v) {
-                if (!empty($v)) {
-                    $flash->set($k, $v);
-                }
-            }
-        }
         /* Errors */
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set('message', $message);
-        $func->redirect("index.php?com=static&act=update&type=" . $type);
+        $response['status'] = 404;
+        $response['link'] = "index.php?com=static&act=update&type=" . $cur_Type;
+        $message = json_encode($response);
+        echo $message;
+        return;
     }
 
     /* Save data */
@@ -101,10 +70,6 @@ function saveStatic()
             if ($func->hasFile("file")) {
                 $photoUpdate = array();
                 if ($photo = $func->uploadImage("file", UPLOAD_NEWS)) {
-                    $row = $d->rawQueryOne("select id, photo from table_static where id = ? limit 0,1", array($static['id']));
-                    if (!empty($row)) {
-                        unlink(UPLOAD_NEWS . $row['photo']);
-                    }
                     $photoUpdate['photo'] = $photo;
                     $d->where('id', $static['id']);
                     $d->update('table_static', $photoUpdate);
@@ -112,9 +77,11 @@ function saveStatic()
                 }
             }
 
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
+            $response['status'] = 200;
+            $response['messages'][] = 'Cập nhật dữ liệu thành công';
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
+            $response['status'] = 404;
+            $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
         }
     } else {
         $data['date_created'] = time();
@@ -133,9 +100,16 @@ function saveStatic()
                 }
             }
 
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=static&act=update&type=" . $type);
+            $response['status'] = 200;
+            $response['messages'][] = 'Lưu dữ liệu thành công';
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=static&act=update&type=" . $type, false);
+            $response['status'] = 404;
+            $response['messages'][] = 'Lưu dữ liệu thất bại';
         }
     }
+
+    $response['link'] = "index.php?com=static&act=update&type=" . $cur_Type;
+    $message = json_encode($response);
+    echo $message;
+    return;
 }

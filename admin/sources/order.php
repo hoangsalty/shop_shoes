@@ -11,7 +11,7 @@ $strUrl .= (isset($_REQUEST['range_price'])) ? "&range_price=" . htmlspecialchar
 $strUrl .= (isset($_REQUEST['keyword'])) ? "&keyword=" . htmlspecialchars($_REQUEST['keyword']) : "";
 
 switch ($act) {
-    case "man":
+    case "list":
         viewOrders();
         $template = "order/mans";
         break;

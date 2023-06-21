@@ -59,7 +59,7 @@ $linkDelete = "index.php?com=order&act=delete";
             </div>
         </div>
     </div>
-    <div class="card-footer text-sm sticky-top">
+    <div class="card-header text-sm sticky-top">
         <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?= $linkDelete ?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
@@ -104,7 +104,7 @@ $linkDelete = "index.php?com=order&act=delete";
             </div>
         </div>
     </div>
-    <div class="card card-primary card-outline text-sm mb-0">
+    <div class="card card-primary card-outline text-sm">
         <div class="card-header">
             <h3 class="card-title card-title-order d-inline-block align-middle float-none">Danh sách đơn hàng</h3>
         </div>
@@ -186,6 +186,6 @@ $linkDelete = "index.php?com=order&act=delete";
         </div>
     </div>
     <?php if ($paging) { ?>
-        <div class="card-footer text-sm pb-0"><?= $paging ?></div>
+        <div class="card-header text-sm pb-0"><?= $paging ?></div>
     <?php } ?>
 </section>

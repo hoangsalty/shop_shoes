@@ -1884,3 +1884,7 @@ select.form-control option:disabled {
     height: 40px;
     z-index: 1;
 }
+
+input#color {
+    padding: 0;
+}

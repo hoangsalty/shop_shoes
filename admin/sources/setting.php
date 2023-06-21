@@ -1,5 +1,10 @@
 <?php
-if (!defined('SOURCES')) die("Error");
+if (!defined('SOURCES')) {
+    require_once "../api/config.php";
+    /* die("Error"); */
+}
+
+$act = (isset($_REQUEST['act'])) ? htmlspecialchars($_REQUEST['act']) : '';
 
 switch ($act) {
     case "update":
@@ -21,12 +26,7 @@ function viewSetting()
 /* Save setting */
 function saveSetting()
 {
-    global $d, $func, $flash, $config, $com;
-
-    /* Check post */
-    if (empty($_POST)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=setting&act=update", false);
-    }
+    global $d, $func;
 
     /* Post dữ liệu */
     $message = '';
@@ -93,43 +93,36 @@ function saveSetting()
     }
 
     if (!empty($response)) {
-        /* Flash data */
-        if (!empty($data)) {
-            foreach ($data as $k => $v) {
-                if (!empty($v)) {
-                    $flash->set($k, $v);
-                }
-            }
-        }
-
-        if (!empty($option)) {
-            foreach ($option as $k => $v) {
-                if (!empty($v)) {
-                    $flash->set($k, $v);
-                }
-            }
-        }
-
         /* Errors */
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set('message', $message);
-        $func->redirect("index.php?com=setting&act=update");
+        $response['status'] = 404;
+        $response['link'] = "index.php?com=setting&act=update";
+        $message = json_encode($response);
+        echo $message;
+        return;
     }
 
     /* Save data */
     if (!empty($row)) {
         $d->where('id', $id);
         if ($d->update('table_setting', $data)) {
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=setting&act=update");
+            $response['status'] = 200;
+            $response['messages'][] = 'Cập nhật dữ liệu thành công';
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=setting&act=update", false);
+            $response['status'] = 404;
+            $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
         }
     } else {
         if ($d->insert('table_setting', $data)) {
-            $func->transferAdmin("Thêm dữ liệu thành công", "index.php?com=setting&act=update");
+            $response['status'] = 200;
+            $response['messages'][] = 'Lưu dữ liệu thành công';
         } else {
-            $func->transferAdmin("Thêm dữ liệu bị lỗi", "index.php?com=setting&act=update", false);
+            $response['status'] = 404;
+            $response['messages'][] = 'Lưu dữ liệu thất bại';
         }
     }
+
+    $response['link'] = "index.php?com=setting&act=update";
+    $message = json_encode($response);
+    echo $message;
+    return;
 }
