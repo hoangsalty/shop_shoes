@@ -7,18 +7,6 @@ if ($act == 'add_cat') $linkSave = "index.php?com=product&act=save_cat";
 else if ($act == 'edit_cat') $linkSave = "index.php?com=product&act=save_cat&id=" . $id;
 ?>
 
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active"><?= $labelAct ?> loại sản phẩm</li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
     <form id="form_product_cat" method="post" class="validation-form" novalidate enctype="multipart/form-data">
@@ -86,7 +74,6 @@ else if ($act == 'edit_cat') $linkSave = "index.php?com=product&act=save_cat&id=
                         $photoDetail = array();
                         $photoDetail['upload'] = UPLOAD_PRODUCT_L;
                         $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                        $photoDetail['dimension'] = "Width: " . $config['product']['width'] . " px - Height: " . $config['product']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
                         /* Image */
                         include TEMPLATE . LAYOUT . "image.php";
                         ?>

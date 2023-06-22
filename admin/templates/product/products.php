@@ -9,18 +9,6 @@ $linkComment = "index.php?com=comment&act=list";
 $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 ?>
 
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý sản phẩm</li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
     <div class="d-flex card-header text-sm">
@@ -96,7 +84,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                     </a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
+                                    <a class="text-white text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
                                         <?php
                                         $items[$i]['totalComment'] = $comment->totalByID($items[$i]['id'], true);
@@ -109,10 +97,10 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                     </div>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['regular_price']) ?>"><?= $func->formatMoney($items[$i]['regular_price']) ?></a>
+                                    <a class="text-white text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['regular_price']) ?>"><?= $func->formatMoney($items[$i]['regular_price']) ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['sale_price']) ?>"><?= $func->formatMoney($items[$i]['sale_price']) ?></a>
+                                    <a class="text-white text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['sale_price']) ?>"><?= $func->formatMoney($items[$i]['sale_price']) ?></a>
                                 </td>
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                                 <?php foreach ($status as $key => $value) { ?>

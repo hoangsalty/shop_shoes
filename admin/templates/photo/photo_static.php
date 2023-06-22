@@ -1,18 +1,6 @@
 <?php
 $linkSave = "index.php?com=photo&act=save_static&type=" . $type;
 ?>
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý hình ảnh</li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
     <form id="form_static_photo" class="validation-form" novalidate method="post" enctype="multipart/form-data">

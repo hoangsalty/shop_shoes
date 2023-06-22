@@ -3,19 +3,6 @@ $linkMan = "index.php?com=order&act=man";
 $linkSave = "index.php?com=order&act=save&id=" . $id;
 
 ?>
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item"><a href="<?= $linkMan ?>" title="Quản lý đơn hàng">Quản lý đơn hàng</a></li>
-                <li class="breadcrumb-item active">Thông tin đơn hàng <span class="text-primary">#<?= $item['code'] ?></span></li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
     <form method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">

@@ -1,18 +1,6 @@
 <?php
-$linkSave = "index.php?com=setting&act=save";
 $options = (isset($item['options']) && $item['options'] != '') ? json_decode($item['options'], true) : null;
 ?>
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Thông tin chung</li>
-            </ol>
-        </div>
-    </div>
-</section>
 <!-- Main content -->
 <section class="content">
     <form id="form_setting" class="validation-form" novalidate method="post" enctype="multipart/form-data">

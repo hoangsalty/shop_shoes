@@ -10,19 +10,7 @@ $name = '';
 if ($type == 'logo') $name = 'Logo';
 else if ($type == 'slideshow') $name = 'Slideshow';
 else if ($type == 'album') $name = 'Album';
-?>
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý <?= $name ?></li>
-            </ol>
-        </div>
-    </div>
-</section>
-
+?> 
 <!-- Main content -->
 <section class="content">
     <div class="card-header text-sm sticky-top">
@@ -81,7 +69,7 @@ else if ($type == 'album') $name = 'Album';
                                     </a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
+                                    <a class="text-white text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
                                         <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                         <a class="text-danger" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/photo.php" data-act="delete_photo" data-type="<?= $type ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>

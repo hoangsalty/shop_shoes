@@ -6,28 +6,8 @@ else if ($act == "edit" || $act == 'info')
 
 $linkMan = "index.php?com=user&act=man";
 
-/* if ($act == 'add')
-    $linkSave = "index.php?com=user&act=save";
-else if ($act == 'edit')
-    $linkSave = "index.php?com=user&act=save&id=" . $id;
-else if (isset($_REQUEST['changepass']) && $_REQUEST['changepass'] == 1)
-    $linkSave = "index.php?com=user&act=save&changepass=1"; */
-
-
 $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" => "Chưa kích hoạt");
 ?>
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Chi tiết tài khoản</li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
     <form id="form_user" class="validation-form" novalidate method="post" enctype="multipart/form-data">
@@ -93,7 +73,6 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                             $photoDetail = array();
                             $photoDetail['upload'] = UPLOAD_USER_L;
                             $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                            $photoDetail['dimension'] = "Width: " . $config['user']['width'] . " px - Height: " . $config['user']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
                             /* Image */
                             include TEMPLATE . LAYOUT . "image.php";
                             ?>

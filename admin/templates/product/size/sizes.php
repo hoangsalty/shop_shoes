@@ -1,22 +1,9 @@
 <?php
 $linkView = $configBase;
 $linkMan = "index.php?com=product&act=man_size";
-$linkDelete = "index.php?com=product&act=delete_size";
 
 $status = array("hienthi" => "Hiển thị");
 ?>
-
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý size sản phẩm</li>
-            </ol>
-        </div>
-    </div>
-</section>
 
 <!-- Main content -->
 <section class="content">
@@ -82,7 +69,7 @@ $status = array("hienthi" => "Hiển thị");
                                     <?= $i + 1 ?>
                                 </td>
                                 <td class="align-middle">
-                                    <span class="text-dark text-break" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></span>
+                                    <span class="text-white text-break" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></span>
                                     <div class="tool-action mt-2 w-clear">
                                         <a class="text-info mr-3" id="edit-size" data-id="<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                         <a class="text-danger" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete_size" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>

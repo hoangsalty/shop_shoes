@@ -3,18 +3,6 @@ $linkMan = "index.php?com=order&act=man";
 $linkEdit = "index.php?com=order&act=edit";
 $linkDelete = "index.php?com=order&act=delete";
 ?>
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý đơn hàng</li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
     <div class="row">

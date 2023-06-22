@@ -1,15 +1,3 @@
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý bình luận - <strong class="text-uppercase"><?= $item['name'] ?></strong></li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
     <div class="card-header text-sm sticky-top">
@@ -140,7 +128,7 @@
                                                 </div>
                                                 <div class="d-flex justify-content-between">
                                                     <div class="comment-item-title"><?= (strpos($params['lists']['status'], 'new-admin') !== false) ? '<strong class="comment-new bg-danger rounded text-white small ml-2 px-2 py-1">Mới</strong>' : '' ?></div>
-                                                    
+
                                                     <div class="comment-action">
                                                         <a class="btn btn-sm <?= (strpos($params['lists']['status'], 'hienthi') !== false) ? 'btn-warning' : 'btn-primary' ?> btn-status-comment mr-1" href="javascript:void(0)" data-id="<?= $params['lists']['id'] ?>" data-new-sibling="comment-item-rating" data-status="hienthi"><?= (strpos($params['lists']['status'], 'hienthi') !== false) ? 'Bỏ duyệt' : 'Duyệt' ?></a>
                                                         <a class="btn btn-sm btn-danger btn-delete-comment" href="javascript:void(0)" data-id="<?= $params['lists']['id'] ?>" data-class="comment-item" data-parents="comment-lists">Xóa</a>

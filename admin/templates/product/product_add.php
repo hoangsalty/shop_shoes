@@ -8,18 +8,6 @@ $linkSave = "index.php?com=product&act=save";
 $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 ?>
 
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active"><?= $labelAct ?> sản phẩm</li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
     <?php /* action="<?= $linkSave ?>" */ ?>
@@ -172,7 +160,6 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                         $photoDetail = array();
                         $photoDetail['upload'] = UPLOAD_PRODUCT_L;
                         $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                        $photoDetail['dimension'] = "Width: " . $config['product_admin']['width'] . " px - Height: " . $config['product_admin']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
                         /* Image */
                         include TEMPLATE . LAYOUT . "image.php";
                         ?>
