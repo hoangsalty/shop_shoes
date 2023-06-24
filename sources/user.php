@@ -1,15 +1,28 @@
 <?php
-if (!defined('SOURCES'))
-    die("Error");
+if (!defined('SOURCES')) {
+    require_once "../api/config.php";
+    /* die("Error"); */
+}
 
-$action = htmlspecialchars($match['params']['action']);
+$action = '';
+if (isset($match)) {
+    $action = htmlspecialchars($match['params']['action']);
+} else {
+    if (isset($_REQUEST['act'])) {
+        $action = htmlspecialchars($_REQUEST['act']);
+    }
+}
 
 switch ($action) {
     case 'thong-tin':
-        $template = "account/info";
         if (empty($_SESSION['account']['active']))
             $func->transfer("Trang không tồn tại", $configBase, false);
+        $template = "account/info";
         infoMember();
+        break;
+
+    case 'luu-thong-tin':
+        saveMemer();
         break;
 
     case 'dang-xuat':
@@ -23,109 +36,120 @@ switch ($action) {
         exit();
 }
 
-/* breadCrumbs */
-if (!empty($titleMain)) $breadcr->set('', $titleMain);
-$breadcrumbs = $breadcr->get();
+function saveMemer()
+{
+    global $d, $func, $configBase;
+
+    $message = '';
+    $response = array();
+    $iduser = $_SESSION['account']['id'];
+
+    if ($iduser) {
+        $message = '';
+        $response = array();
+        $fullname = (!empty($_POST['fullname'])) ? htmlspecialchars($_POST['fullname']) : '';
+        $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
+        $phone = (!empty($_POST['phone'])) ? htmlspecialchars($_POST['phone']) : 0;
+        $address = (!empty($_POST['address'])) ? htmlspecialchars($_POST['address']) : '';
+        $gender = (!empty($_POST['gender'])) ? htmlspecialchars($_POST['gender']) : 0;
+        $birthday = (!empty($_POST['birthday'])) ? htmlspecialchars($_POST['birthday']) : '';
+
+        /* Valid data */
+        if (empty($fullname)) {
+            $response['messages'][] = 'Họ tên không được trống';
+        }
+
+        if (empty($gender)) {
+            $response['messages'][] = 'Chưa chọn giới tính';
+        }
+
+        if (empty($birthday)) {
+            $response['messages'][] = 'Ngày sinh không được trống';
+        }
+
+        if (!empty($birthday) && !$func->isDate($birthday)) {
+            $response['messages'][] = 'Ngày sinh không hợp lệ';
+        }
+
+        if (empty($email)) {
+            $response['messages'][] = 'Email không được trống';
+        }
+
+        if (!empty($email)) {
+            if (!$func->isEmail($email)) {
+                $response['messages'][] = 'Email không hợp lệ';
+            }
+
+            if ($func->checkExist($email, 'email', 'user', $iduser)) {
+                $response['messages'][] = 'Email đã tồn tại';
+            }
+        }
+
+        if (!empty($phone) && !$func->isPhone($phone)) {
+            $response['messages'][] = 'Số điện thoại không hợp lệ';
+        }
+
+        if (empty($address)) {
+            $response['messages'][] = 'Địa chỉ không được trống';
+        }
+
+        if (!empty($response)) {
+            /* Errors */
+            $response['status'] = 404;
+            $response['link'] = $configBase . "account/thong-tin";
+            $message = json_encode($response);
+            echo $message;
+            return;
+        }
+
+        $data['fullname'] = $fullname;
+        $data['email'] = $email;
+        $data['phone'] = $phone;
+        $data['address'] = $address;
+        $data['gender'] = $gender;
+        $data['birthday'] = strtotime(str_replace("/", "-", $birthday));
+
+        $d->where('id', $iduser);
+        if ($d->update('table_user', $data)) {
+            /* Photo */
+            if ($func->hasFile("file")) {
+                $photoUpdate = array();
+                if ($photo = $func->uploadImage("file", '../upload/user/')) {
+                    $photoUpdate['photo'] = $photo;
+                    $d->where('id', $iduser);
+                    $d->update('table_user', $photoUpdate);
+                }
+            }
+
+            $response['status'] = 200;
+            $response['messages'][] = 'Cập nhật thông tin thành công';
+        } else {
+            $response['status'] = 404;
+            $response['messages'][] = 'Cập nhật thông tin thất bại';
+        }
+    } else {
+        $response['status'] = 404;
+        $response['messages'][] = 'Trang không tồn tại';
+    }
+
+    $response['link'] = $configBase . "account/thong-tin";
+    $message = json_encode($response);
+    echo $message;
+    return;
+}
 
 function infoMember()
 {
-    global $d, $func, $flash, $rowDetail, $configBase;
+    global $d, $func, $configBase, $rowDetail;
 
     $iduser = $_SESSION['account']['id'];
-    if ($iduser) {
-        $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($iduser));
-        if (!empty($_POST['info-user'])) {
-            $message = '';
-            $response = array();
-            $fullname = (!empty($_POST['fullname'])) ? htmlspecialchars($_POST['fullname']) : '';
-            $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
-            $phone = (!empty($_POST['phone'])) ? htmlspecialchars($_POST['phone']) : 0;
-            $address = (!empty($_POST['address'])) ? htmlspecialchars($_POST['address']) : '';
-            $gender = (!empty($_POST['gender'])) ? htmlspecialchars($_POST['gender']) : 0;
-            $birthday = (!empty($_POST['birthday'])) ? htmlspecialchars($_POST['birthday']) : '';
-
-            /* Valid data */
-            if (empty($fullname)) {
-                $response['messages'][] = 'Họ tên không được trống';
-            }
-
-            if (empty($gender)) {
-                $response['messages'][] = 'Chưa chọn giới tính';
-            }
-
-            if (empty($birthday)) {
-                $response['messages'][] = 'Ngày sinh không được trống';
-            }
-
-            if (!empty($birthday) && !$func->isDate($birthday)) {
-                $response['messages'][] = 'Ngày sinh không hợp lệ';
-            }
-
-            if (empty($email)) {
-                $response['messages'][] = 'Email không được trống';
-            }
-
-            if (!empty($email)) {
-                if (!$func->isEmail($email)) {
-                    $response['messages'][] = 'Email không hợp lệ';
-                }
-
-                if ($func->checkExist($email, 'email', 'user', $iduser)) {
-                    $response['messages'][] = 'Email đã tồn tại';
-                }
-            }
-
-            if (!empty($phone) && !$func->isPhone($phone)) {
-                $response['messages'][] = 'Số điện thoại không hợp lệ';
-            }
-
-            if (empty($address)) {
-                $response['messages'][] = 'Địa chỉ không được trống';
-            }
-
-            if (!empty($response)) {
-                /* Flash data */
-                $flash->set('fullname', $fullname);
-                $flash->set('gender', $gender);
-                $flash->set('birthday', $birthday);
-                $flash->set('email', $email);
-                $flash->set('phone', $phone);
-                $flash->set('address', $address);
-
-                /* Errors */
-                $response['status'] = 'danger';
-                $message = base64_encode(json_encode($response));
-                $flash->set('message', $message);
-                $func->redirect($configBase . "account/thong-tin");
-            }
-
-            $data['fullname'] = $fullname;
-            $data['email'] = $email;
-            $data['phone'] = $phone;
-            $data['address'] = $address;
-            $data['gender'] = $gender;
-            $data['birthday'] = strtotime(str_replace("/", "-", $birthday));
-            
-            $d->where('id', $iduser);
-            if ($d->update('table_user', $data)) {
-                /* Photo */
-                if ($func->hasFile("file")) {
-                    $photoUpdate = array();
-                    if ($photo = $func->uploadImage("file", './upload/user/')) {
-                        $photoUpdate['photo'] = $photo;
-                        $d->where('id', $iduser);
-                        $d->update('table_user', $photoUpdate);
-                        unset($photoUpdate);
-                    }
-                }
-
-                $func->transfer("Cập nhật thông tin thành công", $configBase . "account/thong-tin");
-            } else {
-                $func->transfer("Cập nhật thông tin thất bại", $configBase . "account/thong-tin", false);
-            }
-        }
+    if (empty($iduser)) {
+        $func->transfer("Không nhận được dữ liệu", $configBase, false);
     } else {
-        $func->transfer("Trang không tồn tại", $configBase, false);
+        $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($iduser));
+        if (empty($rowDetail)) {
+            $func->transfer("Không có dữ liệu", $configBase, false);
+        }
     }
 }
 

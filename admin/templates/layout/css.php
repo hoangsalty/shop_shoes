@@ -16,6 +16,6 @@
 <link href="assets/rangeSlider/ion.rangeSlider.css" rel="stylesheet">
 <link href="assets/fancybox/fancybox.css" rel="stylesheet">
 <link href="assets/css/login-style.css" rel="stylesheet">
-<link href="assets/css/adminlte.css" rel="stylesheet">
+<link href="assets/css/adminlte.min.css" rel="stylesheet">
 <link href="assets/css/adminlte-style.css" rel="stylesheet">
 <link href="assets/sweetalert/sweetalert.min.css" rel="stylesheet">

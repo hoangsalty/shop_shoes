@@ -67,16 +67,16 @@ $linkEdit = "index.php?com=user&act=edit";
                                     <?= $i + 1 ?>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-white text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['username'] ?>"><?= $items[$i]['username'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['username'] ?>"><?= $items[$i]['username'] ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-white text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['fullname'] ?>"><?= $items[$i]['fullname'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['fullname'] ?>"><?= $items[$i]['fullname'] ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-white text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['email'] ?>"><?= $items[$i]['email'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['email'] ?>"><?= $items[$i]['email'] ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-white text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->getPermissionName($items[$i]['permission']) ?>"><?= $func->getPermissionName($items[$i]['permission']) ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->getPermissionName($items[$i]['permission']) ?>"><?= $func->getPermissionName($items[$i]['permission']) ?></a>
                                 </td>
                                 <td class="align-middle text-center">
                                     <?php if ($items[$i]['status'] == 'hoatdong') { ?>
@@ -88,8 +88,8 @@ $linkEdit = "index.php?com=user&act=edit";
                                     <?php } ?>
                                 </td>
                                 <td class="align-middle text-center text-md text-nowrap">
-                                    <a class="text-primary mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                                    <a class="text-danger" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/user.php" data-act="delete" title="<?= $items[$i]['fullname'] ?>"><i class="far fa-trash-alt mr-1"></i></a>
+                                    <a class="btn btn-primary btn-sm mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/user.php" data-act="delete" title="<?= $items[$i]['fullname'] ?>"><i class="far fa-trash-alt mr-1"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

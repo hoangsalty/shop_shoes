@@ -69,10 +69,10 @@ else if ($type == 'album') $name = 'Album';
                                     </a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-white text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
-                                        <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
-                                        <a class="text-danger" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/photo.php" data-act="delete_photo" data-type="<?= $type ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
+                                        <a class="btn btn-info btn-sm mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                        <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/photo.php" data-act="delete_photo" data-type="<?= $type ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>
                                 <td class="align-middle"><?= $items[$i]['link'] ?></td>

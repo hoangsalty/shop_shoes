@@ -641,6 +641,59 @@ FRAMEWORK.DbUser = function () {
     });
 }
 
+FRAMEWORK.DbOrder = function () {
+    $("#form_order").submit(function (e) {
+        e.preventDefault();
+
+        data = new FormData($(this)[0]);
+        data.append('act', 'save');
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/order.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
 FRAMEWORK.CustomSelect = function () {
     /* Sumoselect */
     if ($('.multiselect').length) {
@@ -1037,6 +1090,8 @@ $(document).ready(function () {
     FRAMEWORK.DbStaticPhoto();
     FRAMEWORK.DbPhoto();
     FRAMEWORK.DbUser();
+    FRAMEWORK.DbOrder();
+
     FRAMEWORK.AlbumFiler();
     FRAMEWORK.Login();
     FRAMEWORK.Slug();

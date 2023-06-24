@@ -1,5 +1,5 @@
 <?php
-$linkMan = "index.php?com=order&act=man";
+$linkMan = "index.php?com=order&act=list";
 $linkEdit = "index.php?com=order&act=edit";
 $linkDelete = "index.php?com=order&act=delete";
 ?>
@@ -137,7 +137,7 @@ $linkDelete = "index.php?com=order&act=delete";
                                 <td class="align-middle">
                                     <a class="text-primary" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['fullname'] ?>"><?= $items[$i]['fullname'] ?></a>
                                 </td>
-                                <td class="align-middle"><?= date("h:i:s A - d/m/Y", $items[$i]['date_created']) ?></td>
+                                <td class="align-middle"><?= date("d/m/Y - h:i:s A", $items[$i]['date_created']) ?></td>
                                 <td class="align-middle">
                                     <?php /* $items[$i]['order_payment'] == "momo" */ ($items[$i]['order_payment'] == "vnpay") ? $order_payment['name'] = $items[$i]['order_payment'] :  $order_payment = $func->getInfoDetailSlug('name', 'news', $items[$i]['order_payment']); ?>
                                     <span class="text-info cap"><?= $order_payment['name'] ?></span>
@@ -161,10 +161,10 @@ $linkDelete = "index.php?com=order&act=delete";
                                 <td class="align-middle text-center text-md text-nowrap">
                                     <?php $arr = explode(',', $items[$i]['order_status']);
                                     if (in_array('moidat', $arr)) { ?>
-                                        <a class="text-success update-order mr-2" href="javascript:void(0)" data-id="<?= $items[$i]['id'] ?>" data-table="table_order" data-newstatus="daxacnhan" title="Xác nhận"><i class="fas fa-check-square"></i></a>
+                                        <a class="btn btn-success btn-sm update-order mr-2" href="javascript:void(0)" data-id="<?= $items[$i]['id'] ?>" data-table="table_order" data-newstatus="daxacnhan" title="Xác nhận"><i class="fas fa-check-square"></i></a>
                                     <?php } ?>
-                                    <a class="text-primary mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                                    <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                    <a class="btn btn-primary btn-sm mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/order.php" data-act="delete" title="Xóa"><i class="far fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

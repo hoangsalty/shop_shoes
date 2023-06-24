@@ -770,6 +770,62 @@ class Functions
         return $result;
     }
 
+
+    function getProvince()
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://online-gateway.ghn.vn/shiip/public-api/master-data/province',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'token: 534caacb-1284-11ee-b0c6-a260851ba65c'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($response, true)["data"];
+    }
+
+    function getDistrict($province_id)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://online-gateway.ghn.vn/shiip/public-api/master-data/district',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_POSTFIELDS => array('province_id' => $province_id),
+            CURLOPT_HTTPHEADER => array(
+                'token: 534caacb-1284-11ee-b0c6-a260851ba65c'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($response, true)["data"];
+    }
+
+    function getWard($district_id)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=' . $district_id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'token: 534caacb-1284-11ee-b0c6-a260851ba65c'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($response, true)["data"];
+    }
+
     public function GetProducts($items)
     {
         global $func, $config; ?>

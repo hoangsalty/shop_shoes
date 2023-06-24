@@ -2,13 +2,8 @@
 if (!defined('SOURCES'))
     die("Error");
 
-/* breadCrumbs */
-if (!empty($titleMain))
-    $breadcr->set($com, $titleMain);
-$breadcrumbs = $breadcr->get();
-
 /* Tỉnh thành */
-$city = $d->rawQuery("select name, id from table_city order by id asc");
+$city = $func->getProvince();
 
 /* Hình thức thanh toán */
 $payments_info = $d->rawQuery("select * from table_news where type = ? and find_in_set('hienthi',status) order by id desc", array('hinh-thuc-thanh-toan'));
@@ -33,13 +28,11 @@ if (!empty($_POST['thanhtoan'])) {
         $requirements = (!empty($dataOrder['requirements'])) ? htmlspecialchars($dataOrder['requirements']) : '';
 
         /* Place */
-        $city = (!empty($dataOrder['city'])) ? htmlspecialchars($dataOrder['city']) : 0;
-        $district = (!empty($dataOrder['district'])) ? htmlspecialchars($dataOrder['district']) : 0;
-        $ward = (!empty($dataOrder['ward'])) ? htmlspecialchars($dataOrder['ward']) : 0;
-        $city_text = $func->getInfoDetail('name', "city", $city);
-        $district_text = $func->getInfoDetail('name', "district", $district);
-        $ward_text = $func->getInfoDetail('name', "ward", $ward);
-        $address = htmlspecialchars($dataOrder['address']);
+        $city = (!empty($dataOrder['city'])) ? htmlspecialchars($dataOrder['city']) : '';
+        $district = (!empty($dataOrder['district'])) ? htmlspecialchars($dataOrder['district']) : '';
+        $ward = (!empty($dataOrder['ward'])) ? htmlspecialchars($dataOrder['ward']) : '';
+
+        $address = htmlspecialchars($dataOrder['address']) . ', ' . strtok($ward, '__') . ', ' . strtok($district, '__') . ', ' . strtok($city, '__');
 
         /* Payment */
         $order_payment = (!empty($dataOrder['payments'])) ? htmlspecialchars($dataOrder['payments']) : '';

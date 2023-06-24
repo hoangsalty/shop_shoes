@@ -84,23 +84,23 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                     </a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-white text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
                                         <?php
                                         $items[$i]['totalComment'] = $comment->totalByID($items[$i]['id'], true);
                                         $items[$i]['newComment'] = $comment->newPost($items[$i]['id'], 'new-admin');
                                         ?>
-                                        <a class="text-primary mr-3" href="<?= $linkComment ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="fas fa-comments mr-1"></i>(<?= $items[$i]['totalComment'] ?>) Comment <?= (!empty($items[$i]['newComment'])) ? '<span class="badge badge-danger align-top">' . $items[$i]['newComment'] . '</span>' : '' ?></a>
-                                        <a class="text-primary mr-3" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
-                                        <a class="text-info mr-3" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
-                                        <a class="text-danger" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
+                                        <a class="btn btn-primary btn-sm mr-2" href="<?= $linkComment ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="fas fa-comments mr-1"></i>(<?= $items[$i]['totalComment'] ?>) Comment <?= (!empty($items[$i]['newComment'])) ? '<span class="badge badge-danger align-top">' . $items[$i]['newComment'] . '</span>' : '' ?></a>
+                                        <a class="btn btn-primary btn-sm mr-2" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
+                                        <a class="btn btn-info btn-sm mr-2" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                        <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-white text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['regular_price']) ?>"><?= $func->formatMoney($items[$i]['regular_price']) ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['regular_price']) ?>"><?= $func->formatMoney($items[$i]['regular_price']) ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-white text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['sale_price']) ?>"><?= $func->formatMoney($items[$i]['sale_price']) ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->formatMoney($items[$i]['sale_price']) ?>"><?= $func->formatMoney($items[$i]['sale_price']) ?></a>
                                 </td>
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                                 <?php foreach ($status as $key => $value) { ?>

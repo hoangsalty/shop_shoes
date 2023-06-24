@@ -1,7 +1,83 @@
-FRAMEWORK.Momo = function () {
+FRAMEWORK.DbUser = function () {
+  $("#form_user").submit(function (e) {
+    e.preventDefault();
+
+    data = new FormData($(this)[0]);
+    data.append('act', 'luu-thong-tin');
+
+    $.ajax({
+      type: "POST",
+      url: 'sources/user.php',
+      processData: false,
+      cache: false,
+      contentType: false,
+      dataType: "json",
+      data: data,
+      success: function (result) {
+        if (result["status"] == 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Thông báo!',
+            text: result["messages"][0],
+            allowOutsideClick: false,
+          }).then((state) => {
+            if (state.isConfirmed) {
+              location.href = result['link'];
+            }
+          });
+        } else {
+          var myHTML = '';
+          result["messages"].forEach(e => {
+            myHTML += '<p class="mb-1">' + e + '</p>';
+          });
+
+          $('.box_response').html(
+            '<div class="card bg-gradient-red">' +
+            '<div class="card-header">' +
+            '<h3 class="card-title">Thông báo</h3>' +
+            '</div>' +
+            '<div class="card-body">' +
+            myHTML +
+            '</div>' +
+            '</div>'
+          )
+        }
+      }
+    });
+  });
+}
+
+FRAMEWORK.Order = function () {
+  function inti_order_status(tab_class = '', tab_return = '', table_select = '') {
+    if (tab_class != '') {
+      if ($('.' + tab_class + ' a.active').length == 0) {
+        $('.' + tab_class + ' a').eq(0).addClass('active');
+      }
+      var where_select = '' + $('.' + tab_class + ' a.active').data('id');
+    }
+
+    $.ajax({
+      url: 'api/order.php',
+      type: 'post',
+      data: {
+        cmd: "show-order-by-status",
+        where_select: where_select,
+      },
+    }).done(function (result) {
+      $('.' + tab_return).html(result);
+    });
+  }
+
+  $(document).on('click', '.nav_status_order a', function (event) {
+    event.preventDefault();
+    $(this).parent('.nav_status_order').find('a').removeClass('active');
+    $(this).addClass('active');
+    inti_order_status('nav_status_order', 'status_order', 'table_order_detail');
+  });
+  inti_order_status('nav_status_order', 'status_order', 'table_order_detail');
+
   $("#thanhtoan").prop("disabled", true);
   $("#thanhtoan").addClass("disabled");
-
   if (isExist($(".form-cart"))) {
     $(".form-cart")[0].onchange = function () {
       if ($(".form-cart")[0].checkValidity() == true) {
@@ -10,7 +86,7 @@ FRAMEWORK.Momo = function () {
       }
     };
   }
-};
+}
 
 FRAMEWORK.DatePicker = function () {
   if (isExist($("#birthday"))) {
@@ -817,21 +893,21 @@ FRAMEWORK.Cart = function () {
   /* City */
   if (isExist($(".select-city-cart"))) {
     $(".select-city-cart").change(function () {
-      var id = $(this).val();
+      var id = $(this).val().split('__')[1];
       loadDistrict(id);
     });
   }
   /* District */
   if (isExist($(".select-district-cart"))) {
     $(".select-district-cart").change(function () {
-      var id = $(this).val();
+      var id = $(this).val().split('__')[1];
       loadWard(id);
     });
   }
   /* Ward */
   if (isExist($(".select-ward-cart"))) {
     $(".select-ward-cart").change(function () {
-      var id = $(this).val();
+      var id = $(this).val().split('__')[1];
     });
   }
   /* Payments */
@@ -900,7 +976,8 @@ $(document).ready(function () {
   FRAMEWORK.Comments();
   FRAMEWORK.UserInfo();
   FRAMEWORK.DatePicker();
-  FRAMEWORK.Momo();
   FRAMEWORK.Photobox();
   FRAMEWORK.Random();
+  FRAMEWORK.Order();
+  FRAMEWORK.DbUser();
 });

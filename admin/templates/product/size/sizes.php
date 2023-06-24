@@ -69,10 +69,10 @@ $status = array("hienthi" => "Hiển thị");
                                     <?= $i + 1 ?>
                                 </td>
                                 <td class="align-middle">
-                                    <span class="text-white text-break" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></span>
+                                    <span class="text-dark text-break" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></span>
                                     <div class="tool-action mt-2 w-clear">
-                                        <a class="text-info mr-3" id="edit-size" data-id="<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
-                                        <a class="text-danger" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete_size" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
+                                        <a class="btn btn-info btn-sm mr-2" id="edit-size" data-id="<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                        <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete_size" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>

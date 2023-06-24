@@ -39,7 +39,7 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                                 <div class="form-group col-xl-4 col-lg-6 col-md-6">
                                     <label for="new-password">
                                         <span class="d-inline-block align-middle">Mật khẩu mới:</span>
-                                        <span class="text-danger ml-2" id="show-password"></span>
+                                        <span class="btn btn-danger btn-sm ml-2" id="show-password"></span>
                                     </label>
                                     <div class="row align-items-center">
                                         <input type="password" class="form-control text-sm" name="new-password" id="new-password" placeholder="Mật khẩu mới">

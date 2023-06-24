@@ -26,11 +26,12 @@
                     <h1>Hồ sơ của tôi</h1>
                     <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
                 </div>
-                <form class="form-user validation-user" novalidate method="post" action="account/thong-tin" enctype="multipart/form-data">
-
+                <form id="form_user" class="form-user validation-form" novalidate method="post" enctype="multipart/form-data">
                     <div class="bottom_info_user">
                         <div class="form_user">
-                            <?= $flash->getMessages("frontend") ?>
+                            
+                            <div class="box_response"></div>
+
                             <table class="table_form">
                                 <tr>
                                     <td><label>Tên</label></td>
@@ -126,7 +127,6 @@
                                     <input type="file" name="file" id="file-zone">
                                     <p class="photoUpload-choose btn btn-sm">Chọn Ảnh</p>
                                 </label>
-                                <div class="photoUpload-dimension">Width: 100 px - Height: 100 px (.jpg|.gif|.png|.jpeg|.gif)</div>
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,10 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-start align-items-center">
         <div class="image">
             <?php $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($_SESSION['account']['id'])); ?>
             <?= $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo'], 'alt' => $_SESSION['account']['fullname']]) ?>
         </div>
-        <div class="info">
-            <a href="#" class="d-block"><?= $_SESSION['account']['fullname'] ?></a>
-        </div>
+        <a href="#" class="d-block ml-3 text-light font-weight"><?= $_SESSION['account']['fullname'] ?></a>
     </div>
 
     <nav class="mt-2">

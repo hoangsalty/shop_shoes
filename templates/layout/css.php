@@ -1,7 +1,6 @@
 <!-- Css Files -->
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/bootstrap/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fontawesome6/all.css" />
-
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/animate.min.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/holdon/HoldOn-style.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/holdon/HoldOn.css" />
@@ -12,20 +11,13 @@
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fotorama/fotorama.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/confirm/confirm.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/datetimepicker/jquery.datetimepicker.min.css" />
-
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fileuploader/font-fileuploader.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fileuploader/jquery.fileuploader.min.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fileuploader/jquery.fileuploader-theme-dragdrop.css" />
-
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fancybox/fancybox.css" />
-
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/photobox/photobox.css" />
-
-<!-- <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/select2/select2.min.css" />
-<script type="text/javascript" src="<?= $configBase ?>assets/select2/select2.min.js"></script> -->
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
+<link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/select2/select2.min.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/cart.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/style-responsive.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/style.css" />
+<link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/sweetalert/sweetalert.min.css" />

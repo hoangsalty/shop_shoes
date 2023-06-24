@@ -524,6 +524,7 @@
 
 .main-header .navbar-nav .nav-item .dropdown-menu {
     max-width: 250px;
+    left: -150px;
 }
 
 .main-header .navbar-nav .nav-item .dropdown-menu .dropdown-item {

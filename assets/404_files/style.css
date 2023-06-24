@@ -10760,12 +10760,12 @@ a.text-warning:hover {
   color: #ffa415 !important
 }
 
-.text-danger {
+.btn btn-danger btn-sm {
   color: #da542e !important
 }
 
-a.text-danger:focus,
-a.text-danger:hover {
+a.btn btn-danger btn-sm:focus,
+a.btn btn-danger btn-sm:hover {
   color: #b54120 !important
 }
 

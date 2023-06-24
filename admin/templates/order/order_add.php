@@ -1,15 +1,18 @@
 <?php
 $linkMan = "index.php?com=order&act=man";
 $linkSave = "index.php?com=order&act=save&id=" . $id;
-
 ?>
 <!-- Main content -->
 <section class="content">
-    <form method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
+    <form id="form_order" class="validation-form" novalidate method="post" enctype="multipart/form-data">
         <div class="card-header text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
+            <input type="hidden" name="id" value="<?= @$item['id'] ?>">
         </div>
+
+        <div class="box_response"></div>
+
         <div class="card card-primary card-outline text-sm">
             <div class="card-header">
                 <h3 class="card-title">Thông tin chính</h3>
@@ -47,42 +50,9 @@ $linkSave = "index.php?com=order&act=save&id=" . $id;
                     <p><?= @$item['address'] ?></p>
                 </div>
                 <div class="form-group col-md-3 col-sm-6">
-                    <label>Khu vực giao:</label>
-                    <p>
-                        <?= $func->getInfoDetail('name', 'ward', @$item['ward'])['name'] ?>,
-                        <?= $func->getInfoDetail('name', 'district', @$item['district'])['name'] ?>,
-                        <?= $func->getInfoDetail('name', 'city', @$item['city'])['name'] ?>
-                    </p>
-                </div>
-                <?php if (isset($config['order']['ship']) && $config['order']['ship'] == true) { ?>
-                    <div class="form-group col-md-3 col-sm-6">
-                        <label>Phí vận chuyển:</label>
-                        <p class="font-weight-bold text-danger">
-                            <?php if (isset($item['ship_price']) && $item['ship_price'] > 0) { ?>
-                                <?= $func->formatMoney($item['ship_price']) ?>
-                            <?php } else { ?>
-                                Không
-                            <?php } ?>
-                        </p>
-                    </div>
-                <?php } ?>
-                <div class="form-group col-md-3 col-sm-6">
                     <label>Ngày đặt:</label>
-                    <p><?= date("h:i:s A - d/m/Y", @$item['date_created']) ?></p>
+                    <p><?= date("d/m/Y - h:i:s A", @$item['date_created']) ?></p>
                 </div>
-                <?php if (isset($config['order']['coupon']) && $config['order']['coupon'] == true) { ?>
-                    <div class="form-group col-md-3 col-sm-6">
-                        <label>Mã ưu đãi:</label>
-                        <p class="font-weight-bold text-danger">
-                            <?php if (isset($item['coupon']) && $item['coupon'] > 0) { ?>
-                                <?php $coupon = $d->rawQueryOne("select * from table_coupon where id = ?", array($item['coupon'])); ?>
-                                <?= $coupon['ma'] ?>
-                            <?php } else { ?>
-                                Không
-                            <?php } ?>
-                        </p>
-                    </div>
-                <?php } ?>
                 <div class="form-group col-12">
                     <label for="requirements">Yêu cầu khác:</label>
                     <textarea class="form-control text-sm" name="data[requirements]" id="requirements" rows="5" placeholder="Yêu cầu khác"><?= @$item['requirements'] ?></textarea>

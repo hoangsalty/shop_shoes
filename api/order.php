@@ -29,7 +29,7 @@ if ($cmd == 'change-status' && $id > 0) {
                 if ($tinhtrang == 'daxacnhan') $orderColor = 'text-info';
                 if ($tinhtrang == 'danggiaohang') $orderColor = 'text-warning';
                 if ($tinhtrang == 'dagiao') $orderColor = 'text-success';
-                if ($tinhtrang == 'dahuy') $orderColor = 'text-danger';
+                if ($tinhtrang == 'dahuy') $orderColor = 'btn btn-danger btn-sm';
 
             ?>
                 <div class="box-ql-donhang">
@@ -88,7 +88,7 @@ if ($cmd == 'change-status' && $id > 0) {
             <div class="wrap_empty-cart">
                 <a href="san-pham" class="sty_btn_info empty-cart">
                     <i class="fa fa-cart-arrow-down"></i>
-                    <p>Bạn chưa có đơn hàng nào</p>
+                    <p>Bạn chưa có đơn hàng <?= $func->convertOrderStatus($where_select) ?> nào</p>
                     <span>Vào mua hàng</span>
                 </a>
             </div>

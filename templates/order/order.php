@@ -47,6 +47,49 @@
                                 </div>
                             </div>
                             <div class="infoBox">
+                                <div class="title">Phương thức giao hàng (Giao Hàng Nhanh)</div>
+
+                                <div class="form-input-user">
+                                    <div class="form-input">
+                                        <div class="input-select">
+                                            <select class="select-city-cart" id="city" name="dataOrder[city]" required>
+                                                <option value="" selected disabled>Tỉnh thành *</option>
+                                                <?php foreach ($city as $k => $v) { ?>
+                                                    <option value="<?= $v['ProvinceName'] ?>__<?= $v['ProvinceID'] ?>"><?= $v['ProvinceName'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <div class="trigger-select">Lựa chọn</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-input">
+                                        <div class="input-select">
+                                            <select class="select-district-cart select-district" id="district" name="dataOrder[district]" required>
+                                                <option value="" selected disabled>Quận huyện *</option>
+                                            </select>
+                                            <div class="trigger-select">Lựa chọn</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-input">
+                                        <div class="input-select">
+                                            <select class="select-ward-cart select-ward" id="ward" name="dataOrder[ward]" required>
+                                                <option value="" selected disabled>Phường xã *</option>
+                                            </select>
+                                            <div class="trigger-select">Lựa chọn</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-input">
+                                        <div class="input-cart">
+                                            <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Số nhà, ngõ (ngách, hẻm), đường phố, tổ (thôn, xóm, ấp)" value="<?= !empty($_SESSION['account']['address']) ? $_SESSION['account']['address'] : '' ?>" required />
+                                            <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="infoBox">
                                 <div class="title">Thông tin người nhận</div>
 
                                 <div class="form-input-user">
@@ -74,41 +117,6 @@
                                         <div class="invalid-feedback">Vui lòng nhập email</div>
                                     </div>
 
-                                    <div class="form-input">
-                                        <div class="input-select">
-                                            <select class="select-city-cart" id="city" name="dataOrder[city]" required>
-                                                <option value="" selected disabled>Tỉnh thành *</option>
-                                                <?php foreach ($city as $k => $v) { ?>
-                                                    <option value="<?= $v['id'] ?>"><?= $v['name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                            <div class="trigger-select">Lựa chọn</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-input">
-                                        <div class="input-select">
-                                            <select class="select-district-cart select-district" id="district" name="dataOrder[district]" required>
-                                                <option value="" selected disabled>Quận huyện *</option>
-                                            </select>
-                                            <div class="trigger-select">Lựa chọn</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-input">
-                                        <div class="input-select">
-                                            <select class="select-ward-cart select-ward" id="ward" name="dataOrder[ward]" required>
-                                                <option value="" selected disabled>Phường xã *</option>
-                                            </select>
-                                            <div class="trigger-select">Lựa chọn</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-input">
-                                        <div class="input-cart">
-                                            <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Địa chỉ" value="<?= !empty($_SESSION['account']['address']) ? $_SESSION['account']['address'] : '' ?>" required />
-                                            <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
-                                        </div>
-                                    </div>
                                     <div class="form-input">
                                         <textarea rows="5" class="form-control text-sm" id="requirements" name="dataOrder[requirements]" placeholder="Yêu cầu khác"></textarea>
                                     </div>
