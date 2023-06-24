@@ -524,7 +524,7 @@
 
 .main-header .navbar-nav .nav-item .dropdown-menu {
     max-width: 250px;
-    min-height: 160px;
+    left: -150px;
 }
 
 .main-header .navbar-nav .nav-item .dropdown-menu .dropdown-item {
@@ -1883,4 +1883,8 @@ select.form-control option:disabled {
     width: 40px;
     height: 40px;
     z-index: 1;
+}
+
+input#color {
+    padding: 0;
 }

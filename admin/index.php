@@ -13,7 +13,6 @@ $files = glob(LIBRARIES . '/class/*.php');
 foreach ($files as $file) require_once $file;
 
 $d = new PDODb($config['database']);
-$flash = new Flash();
 $func = new Functions($d);
 
 /* Setting */
@@ -35,7 +34,7 @@ require_once LIBRARIES . "requick.php";
     <?php include TEMPLATE . LAYOUT . "css.php"; ?>
 </head>
 
-<body class="hold-transition <?= (!isset($_SESSION['account']['active']) || $_SESSION['account']['active'] == false) ? 'login-page' : '' ?>">
+<body class="layout-fixed layout-navbar-fixed layout-footer-fixed <?= (!isset($_SESSION['account']['active']) || $_SESSION['account']['active'] == false) ? 'login-page' : '' ?>">
     <?php if (isset($_SESSION['account']['active']) && ($_SESSION['account']['active'] == true)) { ?>
         <!-- Main -->
         <div class=" wrapper">

@@ -22,7 +22,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-title text-center">
-                    <h4>Login</h4>
+                    <h4>Đăng nhập</h4>
                 </div>
                 <div class="d-flex flex-column text-center">
                     <form class="validation-user" id="form-user-login" novalidate method="post" action="" enctype="multipart/form-data">
@@ -62,7 +62,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-title text-center">
-                    <h4>Register</h4>
+                    <h4>Đăng ký</h4>
                 </div>
                 <div class="d-flex flex-column text-center">
                     <form class="validation-user" id="form-user-register" novalidate method="post" action="" enctype="multipart/form-data">

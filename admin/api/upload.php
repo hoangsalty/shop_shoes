@@ -37,7 +37,7 @@ if ($d->insert($table, $data_file)) {
     if ($func->hasFile("file")) {
         $photoUpdate = array();
 
-        if ($photo = $func->uploadImage("file", '../' . UPLOAD_PRODUCT)) {
+        if ($photo = $func->uploadImage("file", UPLOAD_PRODUCT)) {
             $photoUpdate['photo'] = $photo;
             $d->where('id', $id_insert);
             $d->update($table, $photoUpdate);

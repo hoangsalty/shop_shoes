@@ -1,6 +1,11 @@
 <?php
-if (!defined('SOURCES'))
-    die("Error");
+if (!defined('SOURCES')) {
+    require_once "../api/config.php";
+    /* die("Error"); */
+}
+
+$act = (isset($_REQUEST['act'])) ? htmlspecialchars($_REQUEST['act']) : '';
+$cur_Page = (isset($_REQUEST['cur_Page'])) ? htmlspecialchars($_REQUEST['cur_Page']) : '';
 
 /* Cấu hình đường dẫn trả về */
 $strUrl = "";
@@ -11,13 +16,13 @@ $strUrl .= (isset($_REQUEST['range_price'])) ? "&range_price=" . htmlspecialchar
 $strUrl .= (isset($_REQUEST['keyword'])) ? "&keyword=" . htmlspecialchars($_REQUEST['keyword']) : "";
 
 switch ($act) {
-    case "man":
+    case "list":
         viewOrders();
-        $template = "order/mans";
+        $template = "order/orders";
         break;
     case "edit":
         editOrder();
-        $template = "order/man_add";
+        $template = "order/order_add";
         break;
     case "save":
         saveOrder();
@@ -30,7 +35,7 @@ switch ($act) {
 /* View order */
 function viewOrders()
 {
-    global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal, $price_from, $price_to, $allNewOrder, $totalNewOrder, $allConfirmOrder, $totalConfirmOrder, $allDeliveriedOrder, $totalDeliveriedOrder, $allCanceledOrder, $totalCanceledOrder, $list_city, $list_district, $list_ward;
+    global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal, $price_from, $price_to, $allNewOrder, $totalNewOrder, $allConfirmOrder, $totalConfirmOrder, $allDeliveriedOrder, $totalDeliveriedOrder, $allCanceledOrder, $totalCanceledOrder;
 
     $where = "";
     $order_status = (isset($_REQUEST['order_status'])) ? htmlspecialchars($_REQUEST['order_status']) : '';
@@ -105,11 +110,6 @@ function viewOrders()
     $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'dahuy'");
     $allCanceledOrder = $order_count['count(id)'];
     $totalCanceledOrder = $order_count['sum(total_price)'];
-
-    /* Lấy thông tin khu vực */
-    $list_city = $d->rawQuery("select name, id from table_city order by id asc");
-    $list_district = $d->rawQuery("select name, id from table_district order by id asc");
-    $list_ward = $d->rawQuery("select name, id from table_ward order by id asc");
 }
 
 /* Edit order */
@@ -135,14 +135,11 @@ function editOrder()
 /* Save order */
 function saveOrder()
 {
-    global $d, $func, $curPage;
-
-    /* Check post */
-    if (empty($_REQUEST)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=order&act=man&page=" . $curPage, false);
-    }
+    global $d, $func, $cur_Page, $strUrl;
 
     /* Post dữ liệu */
+    $message = '';
+    $response = array();
     $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
     $data = (!empty($_REQUEST['data'])) ? $_REQUEST['data'] : null;
     if ($data) {
@@ -155,11 +152,66 @@ function saveOrder()
     if ($id) {
         $d->where('id', $id);
         if ($d->update('table_order', $data)) {
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=order&act=man&page=" . $curPage);
+            $response['status'] = 200;
+            $response['messages'][] = 'Cập nhật dữ liệu thành công';
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=order&act=man&page=" . $curPage, false);
+            $response['status'] = 404;
+            $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
         }
+        $response['link'] = "index.php?com=order&act=edit" . $strUrl . "&id=" . $id;
     } else {
-        $func->transferAdmin("Dữ liệu rỗng", "index.php?com=order&act=man&page=" . $curPage, false);
+        $response['status'] = 404;
+        $response['messages'][] = 'Dữ liệu rỗng';
+        $response['link'] = "index.php?com=order&act=list&page=" . $cur_Page;
     }
+
+    $message = json_encode($response);
+    echo $message;
+    return;
+}
+/* Delete order */
+function deleteOrder()
+{
+    global $d, $func, $cur_Page;
+
+    $message = '';
+    $response = array();
+    $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
+    if ($id) {
+        $row = $d->rawQueryOne("select id from table_order where id = ? limit 0,1", array($id));
+
+        if (!empty($row)) {
+            $d->rawQuery("delete from table_vnpay where order_id = ?", array($id));
+            $d->rawQuery("delete from table_order_detail where id_order = ?", array($id));
+            $d->rawQuery("delete from table_order where id = ?", array($id));
+
+            $response['status'] = 200;
+            $response['messages'][] = 'Xóa dữ liệu thành công';
+        } else {
+            $response['status'] = 404;
+            $response['messages'][] = 'Xóa dữ liệu bị lỗi 1';
+        }
+    } elseif (isset($_REQUEST['listid'])) {
+        $listid = explode(",", $_REQUEST['listid']);
+        for ($i = 0; $i < count($listid); $i++) {
+            $id = htmlspecialchars($listid[$i]);
+            $row = $d->rawQueryOne("select id from table_order where id = ? limit 0,1", array($id));
+            if (!empty($row)) {
+                $d->rawQuery("delete from table_vnpay where order_id = ?", array($id));
+                $d->rawQuery("delete from table_order_detail where id_order = ?", array($id));
+                $d->rawQuery("delete from table_order where id = ?", array($id));
+            }
+        }
+
+        $response['status'] = 200;
+        $response['messages'][] = 'Xóa dữ liệu thành công';
+    } else {
+        $response['status'] = 404;
+        $response['messages'][] = 'Xóa dữ liệu bị lỗi';
+    }
+
+    $response['link'] = "index.php?com=order&act=list&page=" . $cur_Page;
+    $message = json_encode($response);
+    echo $message;
+    return;
 }

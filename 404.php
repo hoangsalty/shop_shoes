@@ -23,7 +23,7 @@
         </div>
         <div class="error-box">
             <div class="error-body text-center">
-                <h1 class="error-title text-danger">404</h1>
+                <h1 class="error-title btn btn-danger btn-sm">404</h1>
                 <h3 class="text-uppercase error-subtitle">PAGE NOT FOUND !</h3>
                 <p class="text-muted m-t-30 m-b-30">YOU SEEM TO BE TRYING TO FIND THIS WAY HOME</p>
                 <a href="<?= $configBase ?>" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">Back to home</a>

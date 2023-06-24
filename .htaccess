@@ -6,4 +6,4 @@
 	RewriteRule . index.php [L]
 </IfModule>
 
-Options -Indexes
+Options All -Indexes

@@ -126,6 +126,18 @@ if (!empty($_GET["vnp_Amount"])) {
                 $d->insert('table_vnpay', $data_vnpay);
 
                 /* Xóa giỏ hàng và đơn hàng session */
+                $tempCart = $_SESSION['cart'];
+                $currentOrder = $d->rawQueryOne("select * from table_order where transId=? limit 0,1", array($vnp_TransactionNo));
+                /* Place */
+                $city = (!empty($currentOrder['city'])) ? htmlspecialchars($currentOrder['city']) : 0;
+                $district = (!empty($currentOrder['district'])) ? htmlspecialchars($currentOrder['district']) : 0;
+                $ward = (!empty($currentOrder['ward'])) ? htmlspecialchars($currentOrder['ward']) : 0;
+                $city_text = $func->getInfoDetail('name', "city", $city);
+                $district_text = $func->getInfoDetail('name', "district", $district);
+                $ward_text = $func->getInfoDetail('name', "ward", $ward);
+                $address = htmlspecialchars($currentOrder['address']) . ', ' . $ward_text['name'] . ', ' . $district_text['name'] . ', ' . $city_text['name'];
+
+
                 unset($_SESSION['cart']);
                 unset($_SESSION['dataOrder']);
                 $message = 'Thanh toán qua VNPay Thành Công!';

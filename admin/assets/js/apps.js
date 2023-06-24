@@ -1,4 +1,713 @@
-FRAMEWORK.Select2 = function () {
+FRAMEWORK.DbSizeColor = function () {
+    $('.modal').on('hidden.bs.modal', function (e) {
+        $(this)
+            .find("input,textarea,select")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end();
+    });
+
+    $("#form_product_size").submit(function (e) {
+        e.preventDefault();
+
+        id = $(this).find('#id').val();
+        data = new FormData($(this)[0]);
+        data.append('act', 'save_size');
+        data.append('id', id);
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/product.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    $('.modal').modal('hide');
+                    $('.modal').on('hidden.bs.modal', function () {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thông báo!',
+                            text: result["messages"][0],
+                            allowOutsideClick: false,
+                        }).then((state) => {
+                            if (state.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Có lỗi phát sinh...',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.reload();
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    if ($('#edit-size').length) {
+        $('body').on('click', '#edit-size', function () {
+            var id = $(this).data('id');
+
+            $.ajax({
+                type: "GET",
+                url: 'sources/product.php',
+                dataType: "json",
+                data: {
+                    act: 'edit_size',
+                    id: id,
+                },
+                success: function (result) {
+                    $("#form_product_size #id").val(result.id);
+                    $("#form_product_size #name").val(result.name);
+                    $('#popup_product_size').modal('show');
+                }
+            });
+        });
+    }
+
+    $("#form_product_color").submit(function (e) {
+        e.preventDefault();
+
+        id = $(this).find('#id').val();
+        data = new FormData($(this)[0]);
+        data.append('act', 'save_color');
+        data.append('id', id);
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/product.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    $('.modal').modal('hide');
+                    $('.modal').on('hidden.bs.modal', function () {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thông báo!',
+                            text: result["messages"][0],
+                            allowOutsideClick: false,
+                        }).then((state) => {
+                            if (state.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Có lỗi phát sinh...',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.reload();
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    if ($('#edit-color').length) {
+        $('body').on('click', '#edit-color', function () {
+            var id = $(this).data('id');
+
+            $.ajax({
+                type: "GET",
+                url: 'sources/product.php',
+                dataType: "json",
+                data: {
+                    act: 'edit_color',
+                    id: id,
+                },
+                success: function (result) {
+                    $("#form_product_color #id").val(result.id);
+                    $("#form_product_color #name").val(result.name);
+                    $("#form_product_color #color").val(result.color);
+                    $('#popup_product_color').modal('show');
+                }
+            });
+        });
+    }
+};
+
+FRAMEWORK.DbProduct = function () {
+    $("#form_product").submit(function (e) {
+        e.preventDefault();
+
+        data = new FormData($(this)[0]);
+        value = CKEDITOR.instances['content'].getData();
+        data.set('data[content]', value);
+        data.append('act', 'save');
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/product.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbProductList = function () {
+    $("#form_product_list").submit(function (e) {
+        e.preventDefault();
+
+        data = new FormData($(this)[0]);
+        data.append('act', 'save_list');
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/product.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbProductCat = function () {
+    $("#form_product_cat").submit(function (e) {
+        e.preventDefault();
+
+        data = new FormData($(this)[0]);
+        data.append('act', 'save_cat');
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/product.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbNews = function () {
+    $("#form_news").submit(function (e) {
+        e.preventDefault();
+
+        type = $("#form_news #type").val();
+        data = new FormData($(this)[0]);
+        value = CKEDITOR.instances['content'].getData();
+        data.set('data[content]', value);
+        data.append('act', 'save');
+        data.append('cur_Page', CUR_PAGE);
+        data.append('cur_Type', type);
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/news.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbStatic = function () {
+    $("#form_static").submit(function (e) {
+        e.preventDefault();
+
+        type = $("#form_static #type").val();
+        data = new FormData($(this)[0]);
+        value = CKEDITOR.instances['content'].getData();
+        data.set('data[content]', value);
+        data.append('act', 'save');
+        data.append('cur_Type', type);
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/static.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbSetting = function () {
+    $("#form_setting").submit(function (e) {
+        e.preventDefault();
+
+        data = new FormData($(this)[0]);
+        data.append('act', 'save');
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/setting.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbStaticPhoto = function () {
+    $("#form_static_photo").submit(function (e) {
+        e.preventDefault();
+
+        type = $("#form_static_photo #type").val();
+        data = new FormData($(this)[0]);
+        data.append('act', 'save_static');
+        data.append('cur_Type', type);
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/photo.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbPhoto = function () {
+    $("#form_photo").submit(function (e) {
+        e.preventDefault();
+
+        type = $("#form_photo #type").val();
+        data = new FormData($(this)[0]);
+        data.append('act', 'save_photo');
+        data.append('cur_Page', CUR_PAGE);
+        data.append('cur_Type', type);
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/photo.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbUser = function () {
+    $("#form_user").submit(function (e) {
+        e.preventDefault();
+
+        data = new FormData($(this)[0]);
+        data.append('act', 'save');
+        data.append('cur_Page', CUR_PAGE);
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/user.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.DbOrder = function () {
+    $("#form_order").submit(function (e) {
+        e.preventDefault();
+
+        data = new FormData($(this)[0]);
+        data.append('act', 'save');
+
+        $.ajax({
+            type: "POST",
+            url: 'sources/order.php',
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            data: data,
+            success: function (result) {
+                if (result["status"] == 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: result["messages"][0],
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.href = result['link'];
+                        }
+                    });
+                } else {
+                    var myHTML = '';
+                    result["messages"].forEach(e => {
+                        myHTML += '<p class="mb-1">' + e + '</p>';
+                    });
+
+                    $('.box_response').html(
+                        '<div class="card bg-gradient-red">' +
+                        '<div class="card-header">' +
+                        '<h3 class="card-title">Thông báo</h3>' +
+                        '<div class="card-tools">' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>' +
+                        '<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="card-body">' +
+                        myHTML +
+                        '</div>' +
+                        '</div>'
+                    )
+                }
+            }
+        });
+    });
+}
+
+FRAMEWORK.CustomSelect = function () {
+    /* Sumoselect */
+    if ($('.multiselect').length) {
+        $('.multiselect').SumoSelect({
+            placeholder: 'Chọn danh mục',
+            selectAll: true,
+            search: true,
+            searchText: 'Tìm kiếm',
+            locale: ['OK', 'Hủy', 'Chọn hết'],
+            captionFormat: 'Đã chọn {0} mục',
+            captionFormatAllSelected: 'Đã chọn tất cả {0} mục'
+        });
+    }
+
     /* Ajax category */
     if ($('.select-category')) {
         $('body').on('change', '.select-category', function () {
@@ -28,117 +737,6 @@ FRAMEWORK.Select2 = function () {
     }
 }
 
-FRAMEWORK.DbSize = function () {
-    $("#form_product_size").submit(function (e) {
-        e.preventDefault();
-
-        var id = $(this).find('#id').val();
-        var data = {};
-        $.each($('#form_product_size input[name^="data["]').serializeArray(), function () {
-            var vv = this.name.replace("data[", '');
-            data[vv] = this.value;
-        });
-
-        $.ajax({
-            type: "POST",
-            url: 'sources/product.php',
-            dataType: "json",
-            data: {
-                act: 'save_size',
-                id: id,
-                data: data,
-            },
-            success: function (result) {
-                if (result["status"] == 200) {
-                    $('.modal').modal('hide');
-                    $('.modal').on('hidden.bs.modal', function () {
-                        notifyDialog(result["messages"][0], 'Thông báo', 'fas fa-check-square', 'green');
-                    });
-                } else {
-
-                }
-            }
-        });
-    });
-
-    if ($('#edit-size').length) {
-        $('body').on('click', '#edit-size', function () {
-            var id = $(this).data('id');
-
-            $.ajax({
-                type: "GET",
-                url: 'sources/product.php',
-                dataType: "json",
-                data: {
-                    act: 'edit_size',
-                    id: id,
-                },
-                success: function (result) {
-                    $("#form_product_size #id").val(result.id);
-                    $("#form_product_size #name").val(result.name);
-                    $('#popup_product_size').modal('show');
-                }
-            });
-        });
-    }
-};
-
-FRAMEWORK.DbColor = function () {
-    $("#form_product_color").submit(function (e) {
-        e.preventDefault();
-
-        var id = $(this).find('#id').val();
-        var data = {};
-        $.each($('#form_product_color input[name^="data["]').serializeArray(), function () {
-            var vv = this.name.replace("data[", '');
-            data[vv] = this.value;
-        });
-
-        $.ajax({
-            type: "POST",
-            url: 'sources/product.php',
-            dataType: "json",
-            data: {
-                act: 'save_color',
-                id: id,
-                data: data,
-            },
-            success: function (result) {
-                if (result["status"] == 200) {
-                    $('.modal').modal('hide');
-                    $('.modal').on('hidden.bs.modal', function () {
-                        notifyDialog(result["messages"][0], 'Thông báo', 'fas fa-check-square', 'green');
-                    });
-                } else {
-
-                }
-            }
-        });
-    });
-
-    if ($('#edit-color').length) {
-        $('body').on('click', '#edit-color', function () {
-            var id = $(this).data('id');
-
-            $.ajax({
-                type: "GET",
-                url: 'sources/product.php',
-                dataType: "json",
-                data: {
-                    act: 'edit_color',
-                    id: id,
-                },
-                success: function (result) {
-                    $("#form_product_color #id").val(result.id);
-                    $("#form_product_color #name").val(result.name);
-                    $("#form_product_color #color").val(result.color);
-                    $('#popup_product_color').modal('show');
-                }
-            });
-        });
-    }
-};
-
 FRAMEWORK.Comments = function () {
     $('body').on('click', '.btn-status-comment', function (e) {
         e.preventDefault();
@@ -159,13 +757,27 @@ FRAMEWORK.Comments = function () {
             },
             success: function (response) {
                 if (response.errors) {
-                    notifyDialog(response.errors, 'Thông báo', 'fas fa-exclamation-triangle', 'red');
-                }
-                else {
-                    notifyDialog('Cập nhật trạng thái thành công', 'Thông báo', 'fas fa-exclamation-triangle', 'blue');
-                    $this.parents(".comment-action").prevAll("." + newSibling).find(".comment-new").remove();
-                    $this.text($this.text() == 'Duyệt' ? 'Bỏ duyệt' : 'Duyệt');
-                    $this.toggleClass('btn-warning btn-primary');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Có lỗi phát sinh...',
+                        text: response.errors,
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.reload();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thông báo!',
+                        text: 'Cập nhật trạng thái thành công',
+                        allowOutsideClick: false,
+                    }).then((state) => {
+                        if (state.isConfirmed) {
+                            location.reload();
+                        }
+                    });
                 }
             }
         });
@@ -424,25 +1036,22 @@ FRAMEWORK.Order = function () {
     });
 }
 
-$(document).ready(function () {
-    validateForm('validation-form');
-
-    FRAMEWORK.DbSize();
-    FRAMEWORK.DbColor();
-    FRAMEWORK.AlbumFiler();
-    FRAMEWORK.Login();
-    /* Slug */
+FRAMEWORK.Slug = function () {
     slugPress();
     if ($('#slugchange').length) {
         $('body').on('click', '#slugchange', function () {
             slugChange($(this));
         });
     }
-    /* PhotoZone */
+}
+
+FRAMEWORK.PhotoZone = function () {
     if ($('#photo-zone').length) {
         photoZone('#photo-zone', '#file-zone', '#photoUpload-preview img');
     }
-    /* Format price */
+}
+
+FRAMEWORK.FormatInput = function () {
     if ($('.format-price').length) {
         $('.format-price').priceFormat({
             limit: 13,
@@ -450,13 +1059,46 @@ $(document).ready(function () {
             centsLimit: 0
         });
     }
-    /* Ckeditor */
+
+    $('.max-date').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y',
+        formatDate: 'd/m/Y',
+        maxDate: MAX_DATE,
+    });
+}
+
+FRAMEWORK.CKeditor = function () {
     if ($('.form-control-ckeditor').length) {
         $('.form-control-ckeditor').each(function () {
             var id = $(this).attr('id');
             CKEDITOR.replace(id);
         });
     }
+}
+
+$(document).ready(function () {
+    validateForm('validation-form');
+
+    FRAMEWORK.DbProduct();
+    FRAMEWORK.DbProductList();
+    FRAMEWORK.DbProductCat();
+    FRAMEWORK.DbSizeColor();
+    FRAMEWORK.DbNews();
+    FRAMEWORK.DbStatic();
+    FRAMEWORK.DbSetting()
+    FRAMEWORK.DbStaticPhoto();
+    FRAMEWORK.DbPhoto();
+    FRAMEWORK.DbUser();
+    FRAMEWORK.DbOrder();
+
+    FRAMEWORK.AlbumFiler();
+    FRAMEWORK.Login();
+    FRAMEWORK.Slug();
+    FRAMEWORK.PhotoZone();
+    FRAMEWORK.FormatInput();
+    FRAMEWORK.CKeditor();
+
     /* Check all */
     if ($('#selectall-checkbox').length) {
         $('body').on('click', '#selectall-checkbox', function () {
@@ -477,15 +1119,134 @@ $(document).ready(function () {
     /* Delete all */
     if ($('#delete-all').length) {
         $('body').on('click', '#delete-all', function () {
-            var url = $(this).data('url');
-            confirmDialog('delete-all', 'Bạn có chắc muốn xóa những mục này ?', url);
+            var listid = '';
+
+            $('input.select-checkbox').each(function () {
+                if (this.checked) {
+                    listid = listid + ',' + this.value;
+                }
+            });
+
+            listid = listid.substring(1);
+
+            if (listid == '') {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Hãy chọn ít nhất 1 mục để xóa',
+                })
+                return false;
+            }
+
+            url = $(this).data('url');
+            act = $(this).data('act');
+            type = $(this).data('type');
+
+            Swal.fire({
+                title: 'Bạn có chắc muốn xóa mục này ?',
+                text: "Bạn sẽ không thể hoàn tác dữ liệu này!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Chấp nhận xóa dữ liệu'
+            }).then((state) => {
+                if (state.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        dataType: "json",
+                        data: {
+                            cur_Type: type,
+                            act: act,
+                            listid: listid,
+                            cur_Page: CUR_PAGE,
+                        },
+                        success: function (result) {
+                            if (result["status"] == 200) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Thông báo!',
+                                    text: result['messages'][0],
+                                    allowOutsideClick: false,
+                                }).then((state) => {
+                                    if (state.isConfirmed) {
+                                        location.href = result['link'];
+                                    }
+                                });
+                            } else if (result["status"] == 404) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Có lỗi phát sinh...',
+                                    text: result['messages'][0],
+                                    allowOutsideClick: false,
+                                }).then((state) => {
+                                    if (state.isConfirmed) {
+                                        location.href = result['link'];
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
         });
     }
     /* Delete item */
     if ($('#delete-item').length) {
         $('body').on('click', '#delete-item', function () {
-            var url = $(this).data('url');
-            confirmDialog('delete-item', 'Bạn có chắc muốn xóa mục này ?', url);
+            id = $(this).data('id');
+            url = $(this).data('url');
+            act = $(this).data('act');
+            type = $(this).data('type');
+
+            Swal.fire({
+                title: 'Bạn có chắc muốn xóa mục này ?',
+                text: "Bạn sẽ không thể hoàn tác dữ liệu này!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Chấp nhận xóa dữ liệu'
+            }).then((state) => {
+                if (state.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        dataType: "json",
+                        data: {
+                            cur_Type: type,
+                            act: act,
+                            id: id,
+                            cur_Page: CUR_PAGE,
+                        },
+                        success: function (result) {
+                            if (result["status"] == 200) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Thông báo!',
+                                    text: result['messages'][0],
+                                    allowOutsideClick: false,
+                                }).then((state) => {
+                                    if (state.isConfirmed) {
+                                        location.href = result['link'];
+                                    }
+                                });
+                            } else if (result["status"] == 404) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Có lỗi phát sinh...',
+                                    text: result['messages'][0],
+                                    allowOutsideClick: false,
+                                }).then((state) => {
+                                    if (state.isConfirmed) {
+                                        location.href = result['link'];
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
         });
     }
     /* Change status ajax */
@@ -517,27 +1278,7 @@ $(document).ready(function () {
         });
     }
 
-    /* Sumoselect */
-    if ($('.multiselect').length) {
-        $('.multiselect').SumoSelect({
-            placeholder: 'Chọn danh mục',
-            selectAll: true,
-            search: true,
-            searchText: 'Tìm kiếm',
-            locale: ['OK', 'Hủy', 'Chọn hết'],
-            captionFormat: 'Đã chọn {0} mục',
-            captionFormatAllSelected: 'Đã chọn tất cả {0} mục'
-        });
-    }
-
-    $('.max-date').datetimepicker({
-        timepicker: false,
-        format: 'd/m/Y',
-        formatDate: 'd/m/Y',
-        maxDate: MAX_DATE,
-    });
-
     FRAMEWORK.Order();
     FRAMEWORK.Comments();
-    FRAMEWORK.Select2();
+    FRAMEWORK.CustomSelect();
 });

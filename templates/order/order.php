@@ -21,10 +21,9 @@
                                 <div class="title">Hình thức thanh toán</div>
 
                                 <div class="payment-box">
-                                    <?php $flashPayment = $flash->get('payments'); ?>
                                     <?php foreach ($payments_info as $key => $value) { ?>
                                         <div class="payments-cart custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="payments-<?= $value['slug'] ?>" name="dataOrder[payments]" value="<?= $value['slug'] ?>" <?= (!empty($flashPayment) && $flashPayment == $value['slug']) ? 'checked' : '' ?> required>
+                                            <input type="radio" class="custom-control-input" id="payments-<?= $value['slug'] ?>" name="dataOrder[payments]" value="<?= $value['slug'] ?>" required>
                                             <label class="payments-label custom-control-label" for="payments-<?= $value['slug'] ?>" data-payments="<?= $value['slug'] ?>"><?= $value['name'] ?></label>
                                             <div class="payments-info payments-info-<?= $value['slug'] ?> transition"><?= str_replace("\n", "<br>", $value['desc']) ?></div>
                                         </div>
@@ -39,7 +38,7 @@
                                */ ?>
 
                                     <div class="payments-cart custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" <?= (!empty($flashPayment) && $flashPayment == 'vnpay') ? 'checked' : '' ?> required>
+                                        <input type="radio" class="custom-control-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" required>
                                         <label class="payments-label custom-control-label" for="payments-vnpay" data-payments="vnpay"><img src="assets/images/vnpay_icon.png" alt=""> Thanh toán qua
                                             VNPay</label>
                                         <div class="payments-info payments-info-vnpay transition">Thanh toán qua cổng thanh toán
@@ -47,6 +46,49 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="infoBox">
+                                <div class="title">Phương thức giao hàng (Giao Hàng Nhanh)</div>
+
+                                <div class="form-input-user">
+                                    <div class="form-input">
+                                        <div class="input-select">
+                                            <select class="select-city-cart" id="city" name="dataOrder[city]" required>
+                                                <option value="" selected disabled>Tỉnh thành *</option>
+                                                <?php foreach ($city as $k => $v) { ?>
+                                                    <option value="<?= $v['ProvinceName'] ?>__<?= $v['ProvinceID'] ?>"><?= $v['ProvinceName'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <div class="trigger-select">Lựa chọn</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-input">
+                                        <div class="input-select">
+                                            <select class="select-district-cart select-district" id="district" name="dataOrder[district]" required>
+                                                <option value="" selected disabled>Quận huyện *</option>
+                                            </select>
+                                            <div class="trigger-select">Lựa chọn</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-input">
+                                        <div class="input-select">
+                                            <select class="select-ward-cart select-ward" id="ward" name="dataOrder[ward]" required>
+                                                <option value="" selected disabled>Phường xã *</option>
+                                            </select>
+                                            <div class="trigger-select">Lựa chọn</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-input">
+                                        <div class="input-cart">
+                                            <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Số nhà, ngõ (ngách, hẻm), đường phố, tổ (thôn, xóm, ấp)" value="<?= !empty($_SESSION['account']['address']) ? $_SESSION['account']['address'] : '' ?>" required />
+                                            <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="infoBox">
                                 <div class="title">Thông tin người nhận</div>
 
@@ -75,41 +117,6 @@
                                         <div class="invalid-feedback">Vui lòng nhập email</div>
                                     </div>
 
-                                    <div class="form-input">
-                                        <div class="input-select">
-                                            <select class="select-city-cart" id="city" name="dataOrder[city]" required>
-                                                <option value="" selected disabled>Tỉnh thành *</option>
-                                                <?php foreach ($city as $k => $v) { ?>
-                                                    <option value="<?= $v['id'] ?>"><?= $v['name'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                            <div class="trigger-select">Lựa chọn</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-input">
-                                        <div class="input-select">
-                                            <select class="select-district-cart select-district" id="district" name="dataOrder[district]" required>
-                                                <option value="" selected disabled>Quận huyện *</option>
-                                            </select>
-                                            <div class="trigger-select">Lựa chọn</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-input">
-                                        <div class="input-select">
-                                            <select class="select-ward-cart select-ward" id="ward" name="dataOrder[ward]" required>
-                                                <option value="" selected disabled>Phường xã *</option>
-                                            </select>
-                                            <div class="trigger-select">Lựa chọn</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-input">
-                                        <div class="input-cart">
-                                            <input type="text" class="form-control text-sm" id="address" name="dataOrder[address]" placeholder="Địa chỉ" value="<?= !empty($_SESSION['account']['address']) ? $_SESSION['account']['address'] : '' ?>" required />
-                                            <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
-                                        </div>
-                                    </div>
                                     <div class="form-input">
                                         <textarea rows="5" class="form-control text-sm" id="requirements" name="dataOrder[requirements]" placeholder="Yêu cầu khác"></textarea>
                                     </div>

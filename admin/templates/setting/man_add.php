@@ -1,27 +1,16 @@
 <?php
-$linkSave = "index.php?com=setting&act=save";
 $options = (isset($item['options']) && $item['options'] != '') ? json_decode($item['options'], true) : null;
 ?>
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Thông tin chung</li>
-            </ol>
-        </div>
-    </div>
-</section>
 <!-- Main content -->
 <section class="content">
-    <form  method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
-        <div class="card-footer text-sm sticky-top">
+    <form id="form_setting" class="validation-form" novalidate method="post" enctype="multipart/form-data">
+        <div class="card-header text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
-            <input type="hidden" name="id" value="<?= (isset($item['id']) && $item['id'] > 0) ? $item['id'] : '' ?>">
+            <input type="hidden" name="id" value="<?= @$item['id'] ?>">
         </div>
-        <?= $flash->getMessages('admin') ?>
+
+        <div class="box_response"></div>
 
         <div class="card card-primary card-outline text-sm">
             <div class="card-header">
@@ -36,7 +25,7 @@ $options = (isset($item['options']) && $item['options'] != '') ? json_decode($it
 
                     <div class="form-group col-md-4 col-sm-6">
                         <label for="address">Địa chỉ:</label>
-                        <input type="text" class="form-control text-sm" name="data[options][address]" id="address" placeholder="Địa chỉ" value="<?=  @$options['address'] ?>" required>
+                        <input type="text" class="form-control text-sm" name="data[options][address]" id="address" placeholder="Địa chỉ" value="<?= @$options['address'] ?>" required>
                     </div>
                     <div class="form-group col-md-4 col-sm-6">
                         <label for="email">Email:</label>

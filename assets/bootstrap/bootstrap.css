@@ -9383,11 +9383,11 @@ a.text-warning:focus,
 a.text-warning:hover {
   color: #ba8b00 !important;
 }
-.text-danger {
+.btn btn-danger btn-sm {
   color: #dc3545 !important;
 }
-a.text-danger:focus,
-a.text-danger:hover {
+a.btn btn-danger btn-sm:focus,
+a.btn btn-danger btn-sm:hover {
   color: #a71d2a !important;
 }
 .text-light {

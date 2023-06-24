@@ -2,9 +2,9 @@
 if (!defined('SOURCES')) die("Error");
 
 switch ($act) {
-    case "man":
+    case "list":
         viewMans();
-        $template = "comment/mans";
+        $template = "comment/comments";
         break;
 }
 

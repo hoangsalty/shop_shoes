@@ -1,32 +1,40 @@
 <?php
-if (!defined('SOURCES'))
-    die("Error");
+if (!defined('SOURCES')) {
+    require_once "../api/config.php";
+    /* die("Error"); */
+}
+
+$act = (isset($_REQUEST['act'])) ? htmlspecialchars($_REQUEST['act']) : '';
+$cur_Page = (isset($_REQUEST['cur_Page'])) ? htmlspecialchars($_REQUEST['cur_Page']) : '';
 
 switch ($act) {
     case "login":
-        if (!empty($_SESSION['account']['active']))
-            $func->transferAdmin("Trang không tồn tại", "index.php", false);
-        else
+        if (!empty($_SESSION['account']['active'])) {
+            header('Location: ' . $configBase . ADMIN);
+        } else
             $template = "user/login";
         break;
     case "logout":
         logout();
         break;
 
-    case "man":
+    case "list":
         ViewUsers();
-        $template = "user/mans";
+        $template = "user/users";
         break;
     case "add":
-        $template = "user/man_add";
+        $template = "user/user_add";
         break;
     case "edit":
     case "info":
         editUser();
-        $template = "user/man_add";
+        $template = "user/user_add";
         break;
     case "save":
         saveUser();
+        break;
+    case "delete":
+        deleteUser();
         break;
 }
 
@@ -91,19 +99,14 @@ function editUser()
 /* Save user */
 function saveUser()
 {
-    global $d, $func, $flash, $curPage, $config;
-
-    /* Check post */
-    if (empty($_POST)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
-    }
+    global $d, $strUrl, $func, $cur_Page;
 
     /* Post dữ liệu */
     $message = '';
     $response = array();
     $id = (!empty($_POST['id'])) ? htmlspecialchars($_POST['id']) : 0;
     $data = (!empty($_POST['data'])) ? $_POST['data'] : null;
-    $changepass = (!empty($_REQUEST['changepass']) && ($_REQUEST['changepass'] == 1)) ? true : false;
+    $changepass = (!empty($_POST['changepass']) && ($_POST['changepass'] == 1)) ? true : false;
     if ($changepass) {
         $old_pass = (!empty($_POST['old-password'])) ? $_POST['old-password'] : '';
         $new_pass = (!empty($_POST['new-password'])) ? $_POST['new-password'] : '';
@@ -139,10 +142,12 @@ function saveUser()
         }
 
         if (!empty($response)) {
-            $response['status'] = 'danger';
-            $message = base64_encode(json_encode($response));
-            $flash->set('message', $message);
-            $func->redirect("index.php?com=user&act=info&changepass=1");
+            /* Errors */
+            $response['status'] = 404;
+            $response['link'] = "index.php?com=user&act=info&changepass=1";
+            $message = json_encode($response);
+            echo $message;
+            return;
         }
 
         /* Change to new password */
@@ -151,9 +156,13 @@ function saveUser()
         $d->where('username', $_SESSION['account']['username']);
         if ($d->update('table_user', $data)) {
             unset($_SESSION['account']);
-            $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=user&act=login");
+            $response['status'] = 200;
+            $response['messages'][] = 'Cập nhật dữ liệu thành công';
+            $response['link'] = "index.php?com=user&act=login";
         } else {
-            $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=info");
+            $response['status'] = 404;
+            $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
+            $response['link'] = "index.php?com=user&act=info";
         }
     } else {
         if ($data) {
@@ -237,25 +246,16 @@ function saveUser()
         }
 
         if (!empty($response)) {
-            /* Flash data */
-            if (!empty($data)) {
-                foreach ($data as $k => $v) {
-                    if (!empty($v)) {
-                        $flash->set($k, $v);
-                    }
-                }
-            }
-
             /* Errors */
-            $response['status'] = 'danger';
-            $message = base64_encode(json_encode($response));
-            $flash->set('message', $message);
-
-            if (empty($id)) {
-                $func->redirect("index.php?com=user&act=add");
+            $response['status'] = 404;
+            if ($id) {
+                $response['link'] = "index.php?com=user&act=edit&id=" . $id;
             } else {
-                $func->redirect("index.php?com=user&act=edit&id=" . $id);
+                $response['link'] = "index.php?com=user&act=add";
             }
+            $message = json_encode($response);
+            echo $message;
+            return;
         }
 
         /* Save data */
@@ -275,10 +275,6 @@ function saveUser()
                 if ($func->hasFile("file")) {
                     $photoUpdate = array();
                     if ($photo = $func->uploadImage("file", UPLOAD_USER)) {
-                        $row = $d->rawQueryOne("select id, photo from table_user where id = ? limit 0,1", array($id));
-                        if (!empty($row) and !empty($row['photo'])) {
-                            unlink(UPLOAD_USER . $row['photo']);
-                        }
                         $photoUpdate['photo'] = $photo;
                         $d->where('id', $id);
                         $d->update('table_user', $photoUpdate);
@@ -286,10 +282,13 @@ function saveUser()
                     }
                 }
 
-                $func->transferAdmin("Cập nhật dữ liệu thành công", "index.php?com=user&act=man&page=" . $curPage);
+                $response['status'] = 200;
+                $response['messages'][] = 'Cập nhật dữ liệu thành công';
             } else {
-                $func->transferAdmin("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=man&page=" . $curPage, false);
+                $response['status'] = 404;
+                $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
             }
+            $response['link'] = "index.php?com=user&act=edit&id=" . $id;
         } else {
             $data['date_created'] = time();
 
@@ -311,10 +310,61 @@ function saveUser()
                     }
                 }
 
-                $func->transferAdmin("Lưu dữ liệu thành công", "index.php?com=user&act=man&page=" . $curPage);
+                $response['status'] = 200;
+                $response['messages'][] = 'Lưu dữ liệu thành công';
+                $response['link'] = "index.php?com=user&act=edit&id=" . $id_insert;
             } else {
-                $func->transferAdmin("Lưu dữ liệu bị lỗi", "index.php?com=user&act=man", false);
+                $response['status'] = 404;
+                $response['messages'][] = 'Lưu dữ liệu thất bại';
+                $response['link'] = "index.php?com=user&act=list&page=" . $cur_Page;
             }
         }
     }
+
+    $message = json_encode($response);
+    echo $message;
+    return;
+}
+
+/* Delete admin */
+function deleteUser()
+{
+    global $d, $strUrl, $func, $cur_Page;
+
+    $message = '';
+    $response = array();
+    $id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : 0;
+    if ($id) {
+        /* Lấy dữ liệu */
+        $row = $d->rawQueryOne("select id from table_user where id = ? limit 0,1", array($id));
+        if (!empty($row)) {
+            $d->rawQuery("delete from table_user where id = ?", array($id));
+
+            $response['status'] = 200;
+            $response['messages'][] = 'Xóa dữ liệu thành công';
+        } else {
+            $response['status'] = 404;
+            $response['messages'][] = 'Xóa dữ liệu bị lỗi';
+        }
+    } elseif (isset($_REQUEST['listid'])) {
+        $listid = explode(",", $_REQUEST['listid']);
+        for ($i = 0; $i < count($listid); $i++) {
+            $id = htmlspecialchars($listid[$i]);
+            /* Lấy dữ liệu */
+            $row = $d->rawQueryOne("select id from table_user where id = ? limit 0,1", array($id));
+            if (!empty($row)) {
+                $d->rawQuery("delete from table_user where id = ?", array($id));
+            }
+        }
+        $response['status'] = 200;
+        $response['messages'][] = 'Xóa dữ liệu thành công';
+    } else {
+        $response['status'] = 404;
+        $response['messages'][] = 'Không nhận được dữ liệu';
+    }
+
+    $response['link'] = "index.php?com=user&act=list&page=" . $cur_Page . $strUrl;
+    $message = json_encode($response);
+    echo $message;
+    return;
 }

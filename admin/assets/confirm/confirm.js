@@ -1,1 +1,1379 @@
-!function(i){"function"==typeof define&&define.amd?define(["jquery"],i):"object"==typeof module&&module.exports?module.exports=function(t,n){return void 0===n&&(n="undefined"!=typeof window?require("jquery"):require("jquery")(t)),i(n),n}:i(jQuery)}(function(r){"use strict";var l=window;r.fn.confirm=function(s,t){return void 0===s&&(s={}),"string"==typeof s&&(s={content:s,title:t||!1}),r(this).each(function(){var e=r(this);e.attr("jc-attached")?console.warn("jConfirm has already been attached to this element ",e[0]):(e.on("click",function(t){t.preventDefault();var n,i,o=r.extend({},s);e.attr("data-title")&&(o.title=e.attr("data-title")),e.attr("data-content")&&(o.content=e.attr("data-content")),void 0===o.buttons&&(o.buttons={}),(o.$target=e).attr("href")&&0===Object.keys(o.buttons).length&&(n=r.extend(!0,{},l.jconfirm.pluginDefaults.defaultButtons,(l.jconfirm.defaults||{}).defaultButtons||{}),i=Object.keys(n)[0],o.buttons=n,o.buttons[i].action=function(){location.href=e.attr("href")}),o.closeIcon=!1;r.confirm(o)}),e.attr("jc-attached",!0))}),r(this)},r.confirm=function(t,n){void 0===t&&(t={}),"string"==typeof t&&(t={content:t,title:n||!1});var i,o=!(!1===t.buttons);return"object"!=typeof t.buttons&&(t.buttons={}),0===Object.keys(t.buttons).length&&o&&(i=r.extend(!0,{},l.jconfirm.pluginDefaults.defaultButtons,(l.jconfirm.defaults||{}).defaultButtons||{}),t.buttons=i),l.jconfirm(t)},r.alert=function(t,n){void 0===t&&(t={}),"string"==typeof t&&(t={content:t,title:n||!1});var i,o,e=!(!1===t.buttons);return"object"!=typeof t.buttons&&(t.buttons={}),0===Object.keys(t.buttons).length&&e&&(i=r.extend(!0,{},l.jconfirm.pluginDefaults.defaultButtons,(l.jconfirm.defaults||{}).defaultButtons||{}),o=Object.keys(i)[0],t.buttons[o]=i[o]),l.jconfirm(t)},r.dialog=function(t,n){return void 0===t&&(t={}),"string"==typeof t&&(t={content:t,title:n||!1,closeIcon:function(){}}),t.buttons={},void 0===t.closeIcon&&(t.closeIcon=function(){}),t.confirmKeys=[13],l.jconfirm(t)},l.jconfirm=function(t){void 0===t&&(t={});var n=r.extend(!0,{},l.jconfirm.pluginDefaults);l.jconfirm.defaults&&(n=r.extend(!0,n,l.jconfirm.defaults)),n=r.extend(!0,{},n,t);var i=new l.Jconfirm(n);return l.jconfirm.instances.push(i),i},l.Jconfirm=function(t){r.extend(this,t),this._init()},l.Jconfirm.prototype={_init:function(){var t=this;l.jconfirm.instances.length||(l.jconfirm.lastFocused=r("body").find(":focus")),this._id=Math.round(99999*Math.random()),this.contentParsed=r(document.createElement("div")),this.lazyOpen||setTimeout(function(){t.open()},0)},_buildHTML:function(){var t=this;this._parseAnimation(this.animation,"o"),this._parseAnimation(this.closeAnimation,"c"),this._parseBgDismissAnimation(this.backgroundDismissAnimation),this._parseColumnClass(this.columnClass),this._parseTheme(this.theme),this._parseType(this.type);var n=r(this.template);n.find(".jconfirm-box").addClass(this.animationParsed).addClass(this.backgroundDismissAnimationParsed).addClass(this.typeParsed),this.typeAnimated&&n.find(".jconfirm-box").addClass("jconfirm-type-animated"),this.useBootstrap?(n.find(".jc-bs3-row").addClass(this.bootstrapClasses.row),n.find(".jc-bs3-row").addClass("justify-content-md-center justify-content-sm-center justify-content-xs-center justify-content-lg-center"),n.find(".jconfirm-box-container").addClass(this.columnClassParsed),this.containerFluid?n.find(".jc-bs3-container").addClass(this.bootstrapClasses.containerFluid):n.find(".jc-bs3-container").addClass(this.bootstrapClasses.container)):n.find(".jconfirm-box").css("width",this.boxWidth),this.titleClass&&n.find(".jconfirm-title-c").addClass(this.titleClass),n.addClass(this.themeParsed);var i="jconfirm-box"+this._id;n.find(".jconfirm-box").attr("aria-labelledby",i).attr("tabindex",-1),n.find(".jconfirm-content").attr("id",i),null!==this.bgOpacity&&n.find(".jconfirm-bg").css("opacity",this.bgOpacity),this.rtl&&n.addClass("jconfirm-rtl"),this.$el=n.appendTo(this.container),this.$jconfirmBoxContainer=this.$el.find(".jconfirm-box-container"),this.$jconfirmBox=this.$body=this.$el.find(".jconfirm-box"),this.$jconfirmBg=this.$el.find(".jconfirm-bg"),this.$title=this.$el.find(".jconfirm-title"),this.$titleContainer=this.$el.find(".jconfirm-title-c"),this.$content=this.$el.find("div.jconfirm-content"),this.$contentPane=this.$el.find(".jconfirm-content-pane"),this.$icon=this.$el.find(".jconfirm-icon-c"),this.$closeIcon=this.$el.find(".jconfirm-closeIcon"),this.$holder=this.$el.find(".jconfirm-holder"),this.$btnc=this.$el.find(".jconfirm-buttons"),this.$scrollPane=this.$el.find(".jconfirm-scrollpane"),t.setStartingPoint(),this._contentReady=r.Deferred(),this._modalReady=r.Deferred(),this.$holder.css({"padding-top":this.offsetTop,"padding-bottom":this.offsetBottom}),this.setTitle(),this.setIcon(),this._setButtons(),this._parseContent(),this.initDraggable(),this.isAjax&&this.showLoading(!1),r.when(this._contentReady,this._modalReady).then(function(){t.isAjaxLoading?setTimeout(function(){t.isAjaxLoading=!1,t.setContent(),t.setTitle(),t.setIcon(),setTimeout(function(){t.hideLoading(!1),t._updateContentMaxHeight()},100),"function"==typeof t.onContentReady&&t.onContentReady()},50):(t._updateContentMaxHeight(),t.setTitle(),t.setIcon(),"function"==typeof t.onContentReady&&t.onContentReady()),t.autoClose&&t._startCountDown()}).then(function(){t._watchContent()}),"none"===this.animation&&(this.animationSpeed=1,this.animationBounce=1),this.$body.css(this._getCSS(this.animationSpeed,this.animationBounce)),this.$contentPane.css(this._getCSS(this.animationSpeed,1)),this.$jconfirmBg.css(this._getCSS(this.animationSpeed,1)),this.$jconfirmBoxContainer.css(this._getCSS(this.animationSpeed,1))},_typePrefix:"jconfirm-type-",typeParsed:"",_parseType:function(t){this.typeParsed=this._typePrefix+t},setType:function(t){var n=this.typeParsed;this._parseType(t),this.$jconfirmBox.removeClass(n).addClass(this.typeParsed)},themeParsed:"",_themePrefix:"jconfirm-",setTheme:function(t){var n=this.theme;this.theme=t||this.theme,this._parseTheme(this.theme),n&&this.$el.removeClass(n),this.$el.addClass(this.themeParsed),this.theme=t},_parseTheme:function(i){var o=this;i=i.split(","),r.each(i,function(t,n){-1===n.indexOf(o._themePrefix)&&(i[t]=o._themePrefix+r.trim(n))}),this.themeParsed=i.join(" ").toLowerCase()},backgroundDismissAnimationParsed:"",_bgDismissPrefix:"jconfirm-hilight-",_parseBgDismissAnimation:function(t){var i=t.split(","),o=this;r.each(i,function(t,n){-1===n.indexOf(o._bgDismissPrefix)&&(i[t]=o._bgDismissPrefix+r.trim(n))}),this.backgroundDismissAnimationParsed=i.join(" ").toLowerCase()},animationParsed:"",closeAnimationParsed:"",_animationPrefix:"jconfirm-animation-",setAnimation:function(t){this.animation=t||this.animation,this._parseAnimation(this.animation,"o")},_parseAnimation:function(t,n){n=n||"o";var i=t.split(","),o=this;r.each(i,function(t,n){-1===n.indexOf(o._animationPrefix)&&(i[t]=o._animationPrefix+r.trim(n))});var e=i.join(" ").toLowerCase();return"o"===n?this.animationParsed=e:this.closeAnimationParsed=e,e},setCloseAnimation:function(t){this.closeAnimation=t||this.closeAnimation,this._parseAnimation(this.closeAnimation,"c")},setAnimationSpeed:function(t){this.animationSpeed=t||this.animationSpeed},columnClassParsed:"",setColumnClass:function(t){this.useBootstrap?(this.columnClass=t||this.columnClass,this._parseColumnClass(this.columnClass),this.$jconfirmBoxContainer.addClass(this.columnClassParsed)):console.warn("cannot set columnClass, useBootstrap is set to false")},_updateContentMaxHeight:function(){var t=r(window).height()-(this.$jconfirmBox.outerHeight()-this.$contentPane.outerHeight())-(this.offsetTop+this.offsetBottom);this.$contentPane.css({"max-height":t+"px"})},setBoxWidth:function(t){this.useBootstrap?console.warn("cannot set boxWidth, useBootstrap is set to true"):(this.boxWidth=t,this.$jconfirmBox.css("width",t))},_parseColumnClass:function(t){var n;switch(t=t.toLowerCase()){case"xl":case"xlarge":n="col-md-12";break;case"l":case"large":n="col-md-8 col-md-offset-2";break;case"m":case"medium":n="col-md-6 col-md-offset-3";break;case"s":case"small":n="col-md-4 col-md-offset-4";break;case"xs":case"xsmall":n="col-md-2 col-md-offset-5";break;default:n=t}this.columnClassParsed=n},initDraggable:function(){var n=this,i=this.$titleContainer;this.resetDrag(),this.draggable&&(i.on("mousedown",function(t){i.addClass("jconfirm-hand"),n.mouseX=t.clientX,n.mouseY=t.clientY,n.isDrag=!0}),r(window).on("mousemove."+this._id,function(t){n.isDrag&&(n.movingX=t.clientX-n.mouseX+n.initialX,n.movingY=t.clientY-n.mouseY+n.initialY,n.setDrag())}),r(window).on("mouseup."+this._id,function(){i.removeClass("jconfirm-hand"),n.isDrag&&(n.isDrag=!1,n.initialX=n.movingX,n.initialY=n.movingY)}))},resetDrag:function(){this.isDrag=!1,this.initialX=0,this.initialY=0,this.movingX=0,this.movingY=0,this.mouseX=0,this.mouseY=0,this.$jconfirmBoxContainer.css("transform","translate(0px, 0px)")},setDrag:function(){var t,n,i,o,e,s,a;this.draggable&&(this.alignMiddle=!1,t=this.$jconfirmBox.outerWidth(),n=this.$jconfirmBox.outerHeight(),i=r(window).width(),o=r(window).height(),(e=this).movingX%1!=0&&e.movingY%1!=0||(e.dragWindowBorder&&(s=i/2-t/2,a=o/2-n/2,a-=e.dragWindowGap,(s-=e.dragWindowGap)+e.movingX<0?e.movingX=-s:s-e.movingX<0&&(e.movingX=s),a+e.movingY<0?e.movingY=-a:a-e.movingY<0&&(e.movingY=a)),e.$jconfirmBoxContainer.css("transform","translate("+e.movingX+"px, "+e.movingY+"px)")))},_scrollTop:function(){if("undefined"!=typeof pageYOffset)return pageYOffset;var t=document.body,n=document.documentElement;return(n=n.clientHeight?n:t).scrollTop},_watchContent:function(){var i=this;this._timer&&clearInterval(this._timer);var o=0;this._timer=setInterval(function(){var t,n;i.smoothContent&&((t=i.$content.outerHeight()||0)!==o&&(o=t),n=r(window).height(),i.offsetTop+i.offsetBottom+i.$jconfirmBox.height()-i.$contentPane.height()+i.$content.height()<n?i.$contentPane.addClass("no-scroll"):i.$contentPane.removeClass("no-scroll"))},this.watchInterval)},_overflowClass:"jconfirm-overflow",_hilightAnimating:!1,highlight:function(){this.hiLightModal()},hiLightModal:function(){var t,n=this;this._hilightAnimating||(n.$body.addClass("hilight"),t=parseFloat(n.$body.css("animation-duration"))||2,this._hilightAnimating=!0,setTimeout(function(){n._hilightAnimating=!1,n.$body.removeClass("hilight")},1e3*t))},_bindEvents:function(){var s=this;this.boxClicked=!1,this.$scrollPane.click(function(t){var n,i,o,e;s.boxClicked||(o=n=!1,o="string"==typeof(e="function"==typeof s.backgroundDismiss?s.backgroundDismiss():s.backgroundDismiss)&&void 0!==s.buttons[e]?(n=e,!1):void 0===e||!0==!!e,n&&(o=void 0===(i=s.buttons[n].action.apply(s))||!!i),o?s.close():s.hiLightModal()),s.boxClicked=!1}),this.$jconfirmBox.click(function(t){s.boxClicked=!0});var n=!1;r(window).on("jcKeyDown."+s._id,function(t){n=n||!0}),r(window).on("keyup."+s._id,function(t){n&&(s.reactOnKey(t),n=!1)}),r(window).on("resize."+this._id,function(){s._updateContentMaxHeight(),setTimeout(function(){s.resetDrag()},100)})},_cubic_bezier:"0.36, 0.55, 0.19",_getCSS:function(t,n){return{"-webkit-transition-duration":t/1e3+"s","transition-duration":t/1e3+"s","-webkit-transition-timing-function":"cubic-bezier("+this._cubic_bezier+", "+n+")","transition-timing-function":"cubic-bezier("+this._cubic_bezier+", "+n+")"}},_setButtons:function(){var t,s=this,o=0;"object"!=typeof this.buttons&&(this.buttons={}),r.each(this.buttons,function(i,t){o+=1,"function"==typeof t&&(s.buttons[i]=t={action:t}),s.buttons[i].text=t.text||i,s.buttons[i].btnClass=t.btnClass||"btn-default",s.buttons[i].action=t.action||function(){},s.buttons[i].keys=t.keys||[],s.buttons[i].isHidden=t.isHidden||!1,s.buttons[i].isDisabled=t.isDisabled||!1,r.each(s.buttons[i].keys,function(t,n){s.buttons[i].keys[t]=n.toLowerCase()});var n=r('<button type="button" class="btn"></button>').html(s.buttons[i].text).addClass(s.buttons[i].btnClass).prop("disabled",s.buttons[i].isDisabled).css("display",s.buttons[i].isHidden?"none":"").click(function(t){t.preventDefault();var n=s.buttons[i].action.apply(s,[s.buttons[i]]);s.onAction.apply(s,[i,s.buttons[i]]),s._stopCountDown(),void 0!==n&&!n||s.close()});s.buttons[i].el=n,s.buttons[i].setText=function(t){n.html(t)},s.buttons[i].addClass=function(t){n.addClass(t)},s.buttons[i].removeClass=function(t){n.removeClass(t)},s.buttons[i].disable=function(){s.buttons[i].isDisabled=!0,n.prop("disabled",!0)},s.buttons[i].enable=function(){s.buttons[i].isDisabled=!1,n.prop("disabled",!1)},s.buttons[i].show=function(){s.buttons[i].isHidden=!1,n.css("display","")},s.buttons[i].hide=function(){s.buttons[i].isHidden=!0,n.css("display","none")},s["$_"+i]=s["$$"+i]=n,s.$btnc.append(n)}),0===o&&this.$btnc.hide(),null===this.closeIcon&&0===o&&(this.closeIcon=!0),this.closeIcon?(this.closeIconClass&&(t='<i class="'+this.closeIconClass+'"></i>',this.$closeIcon.html(t)),this.$closeIcon.click(function(t){t.preventDefault();var n,i=!1,o=!1,e="function"==typeof s.closeIcon?s.closeIcon():s.closeIcon;o="string"==typeof e&&void 0!==s.buttons[e]?(i=e,!1):void 0===e||!0==!!e,i&&(o=void 0===(n=s.buttons[i].action.apply(s))||!!n),o&&s.close()}),this.$closeIcon.show()):this.$closeIcon.hide()},setTitle:function(t,n){var i;n=n||!1,void 0!==t&&("string"==typeof t?this.title=t:"function"==typeof t?("function"==typeof t.promise&&console.error("Promise was returned from title function, this is not supported."),i=t(),this.title="string"==typeof i&&i):this.title=!1),this.isAjaxLoading&&!n||(this.$title.html(this.title||""),this.updateTitleContainer())},setIcon:function(t,n){var i;n=n||!1,void 0!==t&&("string"==typeof t?this.icon=t:"function"==typeof t?(i=t(),this.icon="string"==typeof i&&i):this.icon=!1),this.isAjaxLoading&&!n||(this.$icon.html(this.icon?'<i class="'+this.icon+'"></i>':""),this.updateTitleContainer())},updateTitleContainer:function(){this.title||this.icon?this.$titleContainer.show():this.$titleContainer.hide()},setContentPrepend:function(t,n){t&&this.contentParsed.prepend(t)},setContentAppend:function(t){t&&this.contentParsed.append(t)},setContent:function(t,n){n=!!n;var i=this;t&&this.contentParsed.html("").append(t),this.isAjaxLoading&&!n||(this.$content.html(""),this.$content.append(this.contentParsed),setTimeout(function(){i.$body.find("input[autofocus]:visible:first").focus()},100))},loadingSpinner:!1,showLoading:function(t){this.loadingSpinner=!0,this.$jconfirmBox.addClass("loading"),t&&this.$btnc.find("button").prop("disabled",!0)},hideLoading:function(t){this.loadingSpinner=!1,this.$jconfirmBox.removeClass("loading"),t&&this.$btnc.find("button").prop("disabled",!1)},ajaxResponse:!1,contentParsed:"",isAjax:!1,isAjaxLoading:!1,_parseContent:function(){var t,n,o=this,i="&nbsp;";"function"==typeof this.content&&("string"==typeof(t=this.content.apply(this))?this.content=t:("object"==typeof t&&"function"==typeof t.always&&(this.isAjax=!0,this.isAjaxLoading=!0,t.always(function(t,n,i){o.ajaxResponse={data:t,status:n,xhr:i},o._contentReady.resolve(t,n,i),"function"==typeof o.contentLoaded&&o.contentLoaded(t,n,i)})),this.content=i)),"string"==typeof this.content&&"url:"===this.content.substr(0,4).toLowerCase()&&(this.isAjax=!0,this.isAjaxLoading=!0,n=this.content.substring(4,this.content.length),r.get(n).done(function(t){o.contentParsed.html(t)}).always(function(t,n,i){o.ajaxResponse={data:t,status:n,xhr:i},o._contentReady.resolve(t,n,i),"function"==typeof o.contentLoaded&&o.contentLoaded(t,n,i)})),this.content||(this.content=i),this.isAjax||(this.contentParsed.html(this.content),this.setContent(),o._contentReady.resolve())},_stopCountDown:function(){clearInterval(this.autoCloseInterval),this.$cd&&this.$cd.remove()},_startCountDown:function(){var t=this,n=this.autoClose.split("|");if(2!==n.length)return console.error("Invalid option for autoClose. example 'close|10000'"),!1;var i=n[0],o=parseInt(n[1]);if(void 0===this.buttons[i])return console.error("Invalid button key '"+i+"' for autoClose"),!1;var e=Math.ceil(o/1e3);this.$cd=r('<span class="countdown"> ('+e+")</span>").appendTo(this["$_"+i]),this.autoCloseInterval=setInterval(function(){t.$cd.html(" ("+--e+") "),e<=0&&(t["$$"+i].trigger("click"),t._stopCountDown())},1e3)},_getKey:function(t){switch(t){case 192:return"tilde";case 13:return"enter";case 16:return"shift";case 9:return"tab";case 20:return"capslock";case 17:return"ctrl";case 91:return"win";case 18:return"alt";case 27:return"esc";case 32:return"space"}var n=String.fromCharCode(t);return!!/^[A-z0-9]+$/.test(n)&&n.toLowerCase()},reactOnKey:function(t){var i=this,n=r(".jconfirm");if(n.eq(n.length-1)[0]!==this.$el[0])return!1;var o=t.which;if(this.$content.find(":input").is(":focus")&&/13|32/.test(o))return!1;var e,s=this._getKey(o);"esc"===s&&this.escapeKey&&(!0===this.escapeKey?this.$scrollPane.trigger("click"):"string"!=typeof this.escapeKey&&"function"!=typeof this.escapeKey||(e="function"==typeof this.escapeKey?this.escapeKey():this.escapeKey)&&(void 0===this.buttons[e]?console.warn("Invalid escapeKey, no buttons found with key "+e):this["$_"+e].trigger("click"))),r.each(this.buttons,function(t,n){-1!==n.keys.indexOf(s)&&i["$_"+t].trigger("click")})},setDialogCenter:function(){console.info("setDialogCenter is deprecated, dialogs are centered with CSS3 tables")},_unwatchContent:function(){clearInterval(this._timer)},close:function(t){var a=this;return"function"==typeof this.onClose&&this.onClose(t),this._unwatchContent(),r(window).unbind("resize."+this._id),r(window).unbind("keyup."+this._id),r(window).unbind("jcKeyDown."+this._id),this.draggable&&(r(window).unbind("mousemove."+this._id),r(window).unbind("mouseup."+this._id),this.$titleContainer.unbind("mousedown")),a.$el.removeClass(a.loadedClass),r("body").removeClass("jconfirm-no-scroll-"+a._id),a.$jconfirmBoxContainer.removeClass("jconfirm-no-transition"),setTimeout(function(){a.$body.addClass(a.closeAnimationParsed),a.$jconfirmBg.addClass("jconfirm-bg-h");var t="none"===a.closeAnimation?1:a.animationSpeed;setTimeout(function(){a.$el.remove();l.jconfirm.instances;for(var t,n,i,o,e,s=l.jconfirm.instances.length-1;0<=s;s--)l.jconfirm.instances[s]._id===a._id&&l.jconfirm.instances.splice(s,1);l.jconfirm.instances.length||a.scrollToPreviousElement&&l.jconfirm.lastFocused&&l.jconfirm.lastFocused.length&&r.contains(document,l.jconfirm.lastFocused[0])&&(t=l.jconfirm.lastFocused,a.scrollToPreviousElementAnimate?(n=r(window).scrollTop(),i=l.jconfirm.lastFocused.offset().top,o=r(window).height(),n<i&&i<n+o?t.focus():(e=i-Math.round(o/3),r("html, body").animate({scrollTop:e},a.animationSpeed,"swing",function(){t.focus()}))):t.focus(),l.jconfirm.lastFocused=!1),"function"==typeof a.onDestroy&&a.onDestroy()},.4*t)},50),!0},open:function(){return!this.isOpen()&&(this._buildHTML(),this._bindEvents(),this._open(),!0)},setStartingPoint:function(){var t=!1;if(!0!==this.animateFromElement&&this.animateFromElement)t=this.animateFromElement,l.jconfirm.lastClicked=!1;else{if(!l.jconfirm.lastClicked||!0!==this.animateFromElement)return!1;t=l.jconfirm.lastClicked,l.jconfirm.lastClicked=!1}if(!t)return!1;var n=t.offset(),i=t.outerHeight()/2,o=t.outerWidth()/2;i-=this.$jconfirmBox.outerHeight()/2,o-=this.$jconfirmBox.outerWidth()/2;var e=n.top+i;e-=this._scrollTop();var s=n.left+o,a=r(window).height()/2,c=r(window).width()/2;if(e-=a-this.$jconfirmBox.outerHeight()/2,s-=c-this.$jconfirmBox.outerWidth()/2,Math.abs(e)>a||Math.abs(s)>c)return!1;this.$jconfirmBoxContainer.css("transform","translate("+s+"px, "+e+"px)")},_open:function(){var t=this;"function"==typeof t.onOpenBefore&&t.onOpenBefore(),this.$body.removeClass(this.animationParsed),this.$jconfirmBg.removeClass("jconfirm-bg-h"),this.$body.focus(),t.$jconfirmBoxContainer.css("transform","translate(0px, 0px)"),setTimeout(function(){t.$body.css(t._getCSS(t.animationSpeed,1)),t.$body.css({"transition-property":t.$body.css("transition-property")+", margin"}),t.$jconfirmBoxContainer.addClass("jconfirm-no-transition"),t._modalReady.resolve(),"function"==typeof t.onOpen&&t.onOpen(),t.$el.addClass(t.loadedClass)},this.animationSpeed)},loadedClass:"jconfirm-open",isClosed:function(){return!this.$el||0===this.$el.parent().length},isOpen:function(){return!this.isClosed()},toggle:function(){this.isOpen()?this.close():this.open()}},l.jconfirm.instances=[],l.jconfirm.lastFocused=!1;var i=!(l.jconfirm.pluginDefaults={template:'<div class="jconfirm"><div class="jconfirm-bg jconfirm-bg-h"></div><div class="jconfirm-scrollpane"><div class="jconfirm-row"><div class="jconfirm-cell"><div class="jconfirm-holder"><div class="jc-bs3-container"><div class="jc-bs3-row"><div class="jconfirm-box-container jconfirm-animated"><div class="jconfirm-box" role="dialog" aria-labelledby="labelled" tabindex="-1"><div class="jconfirm-closeIcon">&times;</div><div class="jconfirm-title-c"><span class="jconfirm-icon-c"></span><span class="jconfirm-title"></span></div><div class="jconfirm-content-pane"><div class="jconfirm-content"></div></div><div class="jconfirm-buttons"></div><div class="jconfirm-clear"></div></div></div></div></div></div></div></div></div></div>',title:"Hello",titleClass:"",type:"default",typeAnimated:!0,draggable:!0,dragWindowGap:15,dragWindowBorder:!0,animateFromElement:!0,alignMiddle:!0,smoothContent:!0,content:"Are you sure to continue?",buttons:{},defaultButtons:{ok:{action:function(){}},close:{action:function(){}}},contentLoaded:function(){},icon:"",lazyOpen:!1,bgOpacity:null,theme:"light",animation:"scale",closeAnimation:"scale",animationSpeed:400,animationBounce:1,escapeKey:!0,rtl:!1,container:"body",containerFluid:!1,backgroundDismiss:!1,backgroundDismissAnimation:"shake",autoClose:!1,closeIcon:null,closeIconClass:!1,watchInterval:100,columnClass:"col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1",boxWidth:"50%",scrollToPreviousElement:!0,scrollToPreviousElementAnimate:!0,useBootstrap:!0,offsetTop:40,offsetBottom:40,bootstrapClasses:{container:"container",containerFluid:"container-fluid",row:"row"},onContentReady:function(){},onOpenBefore:function(){},onOpen:function(){},onClose:function(){},onDestroy:function(){},onAction:function(){}});r(window).on("keydown",function(t){var n;i||(n=!1,r(t.target).closest(".jconfirm-box").length&&(n=!0),n&&r(window).trigger("jcKeyDown"),i=!0)}),r(window).on("keyup",function(){i=!1}),l.jconfirm.lastClicked=!1,r(document).on("mousedown","button, a, [jc-source]",function(){l.jconfirm.lastClicked=r(this)})});
+/*!
+ * jquery-confirm v3.3.4 (http://craftpip.github.io/jquery-confirm/)
+ * Author: Boniface Pereira
+ * Website: www.craftpip.com
+ * Contact: hey@craftpip.com
+ *
+ * Copyright 2013-2019 jquery-confirm
+ * Licensed under MIT (https://github.com/craftpip/jquery-confirm/blob/master/LICENSE)
+ */
+
+
+/**
+ * UMD (Universal Module Definition) to support CommonJS, AMD and browser
+ * Thanks to https://github.com/umdjs/umd
+ */
+(function(factory){
+    if(typeof define === 'function' && define.amd){
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    }else if(typeof module === 'object' && module.exports){
+        // Node/CommonJS
+        module.exports = function(root, jQuery){
+            if(jQuery === undefined){
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if(typeof window !== 'undefined'){
+                    jQuery = require('jquery');
+                }
+                else{
+                    jQuery = require('jquery')(root);
+                }
+            }
+            factory(jQuery);
+            return jQuery;
+        };
+    }else{
+        // Browser globals
+        factory(jQuery);
+    }
+}(function($){
+    "use strict";
+
+    // locally assign window
+    var w = window;
+    // w.jconfirm
+    // w.Jconfirm;
+
+    $.fn.confirm = function(options, option2){
+        if(typeof options === 'undefined') options = {};
+        if(typeof options === 'string'){
+            options = {
+                content: options,
+                title: (option2) ? option2 : false
+            };
+        }
+        /*
+         *  Alias of $.confirm to emulate native confirm()
+         */
+        $(this).each(function(){
+            var $this = $(this);
+            if($this.attr('jc-attached')){
+                console.warn('jConfirm has already been attached to this element ', $this[0]);
+                return;
+            }
+
+            $this.on('click', function(e){
+                e.preventDefault();
+                var jcOption = $.extend({}, options);
+                if($this.attr('data-title'))
+                    jcOption['title'] = $this.attr('data-title');
+                if($this.attr('data-content'))
+                    jcOption['content'] = $this.attr('data-content');
+                if(typeof jcOption['buttons'] === 'undefined')
+                    jcOption['buttons'] = {};
+
+                jcOption['$target'] = $this;
+                if($this.attr('href') && Object.keys(jcOption['buttons']).length === 0){
+                    var buttons = $.extend(true, {}, w.jconfirm.pluginDefaults.defaultButtons, (w.jconfirm.defaults || {}).defaultButtons || {});
+                    var firstBtn = Object.keys(buttons)[0];
+                    jcOption['buttons'] = buttons;
+                    jcOption.buttons[firstBtn].action = function(){
+                        location.href = $this.attr('href');
+                    };
+                }
+                jcOption['closeIcon'] = false;
+                var instance = $.confirm(jcOption);
+            });
+
+            $this.attr('jc-attached', true);
+        });
+        return $(this);
+    };
+    $.confirm = function(options, option2){
+        if(typeof options === 'undefined') options = {};
+        if(typeof options === 'string'){
+            options = {
+                content: options,
+                title: (option2) ? option2 : false
+            };
+        }
+
+        var putDefaultButtons = !(options['buttons'] === false);
+
+        if(typeof options['buttons'] !== 'object')
+            options['buttons'] = {};
+
+        if(Object.keys(options['buttons']).length === 0 && putDefaultButtons){
+            var buttons = $.extend(true, {}, w.jconfirm.pluginDefaults.defaultButtons, (w.jconfirm.defaults || {}).defaultButtons || {});
+            options['buttons'] = buttons;
+        }
+
+        /*
+         *  Alias of jconfirm
+         */
+        return w.jconfirm(options);
+    };
+    $.alert = function(options, option2){
+        if(typeof options === 'undefined') options = {};
+        if(typeof options === 'string'){
+            options = {
+                content: options,
+                title: (option2) ? option2 : false
+            };
+        }
+
+        var putDefaultButtons = !(options['buttons'] === false);
+
+        if(typeof options.buttons !== 'object')
+            options.buttons = {};
+
+        if(Object.keys(options['buttons']).length === 0 && putDefaultButtons){
+            var buttons = $.extend(true, {}, w.jconfirm.pluginDefaults.defaultButtons, (w.jconfirm.defaults || {}).defaultButtons || {});
+            var firstBtn = Object.keys(buttons)[0];
+            options['buttons'][firstBtn] = buttons[firstBtn];
+        }
+        /*
+         *  Alias of jconfirm
+         */
+        return w.jconfirm(options);
+    };
+    $.dialog = function(options, option2){
+        if(typeof options === 'undefined') options = {};
+        if(typeof options === 'string'){
+            options = {
+                content: options,
+                title: (option2) ? option2 : false,
+                closeIcon: function(){
+                    // Just close the modal
+                }
+            };
+        }
+
+        options['buttons'] = {}; // purge buttons
+
+        if(typeof options['closeIcon'] === 'undefined'){
+            // Dialog must have a closeIcon.
+            options['closeIcon'] = function(){
+            }
+        }
+        /*
+         *  Alias of jconfirm
+         */
+        options.confirmKeys = [13];
+        return w.jconfirm(options);
+    };
+
+    w.jconfirm = function(options){
+        if(typeof options === 'undefined') options = {};
+        /*
+         * initial function for calling.
+         */
+        var pluginOptions = $.extend(true, {}, w.jconfirm.pluginDefaults);
+        if(w.jconfirm.defaults){
+            pluginOptions = $.extend(true, pluginOptions, w.jconfirm.defaults);
+        }
+
+        /*
+         * merge options with plugin defaults.
+         */
+        pluginOptions = $.extend(true, {}, pluginOptions, options);
+        var instance = new w.Jconfirm(pluginOptions);
+        w.jconfirm.instances.push(instance);
+        return instance;
+    };
+    w.Jconfirm = function(options){
+        /*
+         * constructor function Jconfirm,
+         * options = user options.
+         */
+        $.extend(this, options);
+        this._init();
+    };
+    w.Jconfirm.prototype = {
+        _init: function(){
+            var that = this;
+
+            if(!w.jconfirm.instances.length)
+                w.jconfirm.lastFocused = $('body').find(':focus');
+
+            this._id = Math.round(Math.random() * 99999);
+            /**
+             * contentParsed maintains the contents for $content, before it is put in DOM
+             */
+            this.contentParsed = $(document.createElement('div'));
+
+            if(!this.lazyOpen){
+                setTimeout(function(){
+                    that.open();
+                }, 0);
+            }
+        },
+        _buildHTML: function(){
+            var that = this;
+
+            // prefix the animation string and store in animationParsed
+            this._parseAnimation(this.animation, 'o');
+            this._parseAnimation(this.closeAnimation, 'c');
+            this._parseBgDismissAnimation(this.backgroundDismissAnimation);
+            this._parseColumnClass(this.columnClass);
+            this._parseTheme(this.theme);
+            this._parseType(this.type);
+
+            /*
+             * Append html.
+             */
+            var template = $(this.template);
+            template.find('.jconfirm-box').addClass(this.animationParsed).addClass(this.backgroundDismissAnimationParsed).addClass(this.typeParsed);
+
+            if(this.typeAnimated)
+                template.find('.jconfirm-box').addClass('jconfirm-type-animated');
+
+            if(this.useBootstrap){
+                template.find('.jc-bs3-row').addClass(this.bootstrapClasses.row);
+                template.find('.jc-bs3-row').addClass('justify-content-md-center justify-content-sm-center justify-content-xs-center justify-content-lg-center');
+
+                template.find('.jconfirm-box-container').addClass(this.columnClassParsed);
+
+                if(this.containerFluid)
+                    template.find('.jc-bs3-container').addClass(this.bootstrapClasses.containerFluid);
+                else
+                    template.find('.jc-bs3-container').addClass(this.bootstrapClasses.container);
+            }else{
+                template.find('.jconfirm-box').css('width', this.boxWidth);
+            }
+
+            if(this.titleClass)
+                template.find('.jconfirm-title-c').addClass(this.titleClass);
+
+            template.addClass(this.themeParsed);
+            var ariaLabel = 'jconfirm-box' + this._id;
+            template.find('.jconfirm-box').attr('aria-labelledby', ariaLabel).attr('tabindex', -1);
+            template.find('.jconfirm-content').attr('id', ariaLabel);
+            if(this.bgOpacity !== null)
+                template.find('.jconfirm-bg').css('opacity', this.bgOpacity);
+            if(this.rtl)
+                template.addClass('jconfirm-rtl');
+
+            this.$el = template.appendTo(this.container);
+            this.$jconfirmBoxContainer = this.$el.find('.jconfirm-box-container');
+            this.$jconfirmBox = this.$body = this.$el.find('.jconfirm-box');
+            this.$jconfirmBg = this.$el.find('.jconfirm-bg');
+            this.$title = this.$el.find('.jconfirm-title');
+            this.$titleContainer = this.$el.find('.jconfirm-title-c');
+            this.$content = this.$el.find('div.jconfirm-content');
+            this.$contentPane = this.$el.find('.jconfirm-content-pane');
+            this.$icon = this.$el.find('.jconfirm-icon-c');
+            this.$closeIcon = this.$el.find('.jconfirm-closeIcon');
+            this.$holder = this.$el.find('.jconfirm-holder');
+            // this.$content.css(this._getCSS(this.animationSpeed, this.animationBounce));
+            this.$btnc = this.$el.find('.jconfirm-buttons');
+            this.$scrollPane = this.$el.find('.jconfirm-scrollpane');
+
+            that.setStartingPoint();
+
+            // for loading content via URL
+            this._contentReady = $.Deferred();
+            this._modalReady = $.Deferred();
+            this.$holder.css({
+                'padding-top': this.offsetTop,
+                'padding-bottom': this.offsetBottom,
+            });
+
+            this.setTitle();
+            this.setIcon();
+            this._setButtons();
+            this._parseContent();
+            this.initDraggable();
+
+            if(this.isAjax)
+                this.showLoading(false);
+
+            $.when(this._contentReady, this._modalReady).then(function(){
+                if(that.isAjaxLoading)
+                    setTimeout(function(){
+                        that.isAjaxLoading = false;
+                        that.setContent();
+                        that.setTitle();
+                        that.setIcon();
+                        setTimeout(function(){
+                            that.hideLoading(false);
+                            that._updateContentMaxHeight();
+                        }, 100);
+                        if(typeof that.onContentReady === 'function')
+                            that.onContentReady();
+                    }, 50);
+                else{
+                    // that.setContent();
+                    that._updateContentMaxHeight();
+                    that.setTitle();
+                    that.setIcon();
+                    if(typeof that.onContentReady === 'function')
+                        that.onContentReady();
+                }
+
+                // start countdown after content has loaded.
+                if(that.autoClose)
+                    that._startCountDown();
+            }).then(function(){
+                that._watchContent();
+            });
+
+            if(this.animation === 'none'){
+                this.animationSpeed = 1;
+                this.animationBounce = 1;
+            }
+
+            this.$body.css(this._getCSS(this.animationSpeed, this.animationBounce));
+            this.$contentPane.css(this._getCSS(this.animationSpeed, 1));
+            this.$jconfirmBg.css(this._getCSS(this.animationSpeed, 1));
+            this.$jconfirmBoxContainer.css(this._getCSS(this.animationSpeed, 1));
+        },
+        _typePrefix: 'jconfirm-type-',
+        typeParsed: '',
+        _parseType: function(type){
+            this.typeParsed = this._typePrefix + type;
+        },
+        setType: function(type){
+            var oldClass = this.typeParsed;
+            this._parseType(type);
+            this.$jconfirmBox.removeClass(oldClass).addClass(this.typeParsed);
+        },
+        themeParsed: '',
+        _themePrefix: 'jconfirm-',
+        setTheme: function(theme){
+            var previous = this.theme;
+            this.theme = theme || this.theme;
+            this._parseTheme(this.theme);
+            if(previous)
+                this.$el.removeClass(previous);
+            this.$el.addClass(this.themeParsed);
+            this.theme = theme;
+        },
+        _parseTheme: function(theme){
+            var that = this;
+            theme = theme.split(',');
+            $.each(theme, function(k, a){
+                if(a.indexOf(that._themePrefix) === -1)
+                    theme[k] = that._themePrefix + $.trim(a);
+            });
+            this.themeParsed = theme.join(' ').toLowerCase();
+        },
+        backgroundDismissAnimationParsed: '',
+        _bgDismissPrefix: 'jconfirm-hilight-',
+        _parseBgDismissAnimation: function(bgDismissAnimation){
+            var animation = bgDismissAnimation.split(',');
+            var that = this;
+            $.each(animation, function(k, a){
+                if(a.indexOf(that._bgDismissPrefix) === -1)
+                    animation[k] = that._bgDismissPrefix + $.trim(a);
+            });
+            this.backgroundDismissAnimationParsed = animation.join(' ').toLowerCase();
+        },
+        animationParsed: '',
+        closeAnimationParsed: '',
+        _animationPrefix: 'jconfirm-animation-',
+        setAnimation: function(animation){
+            this.animation = animation || this.animation;
+            this._parseAnimation(this.animation, 'o');
+        },
+        _parseAnimation: function(animation, which){
+            which = which || 'o'; // parse what animation and store where. open or close?
+            var animations = animation.split(',');
+            var that = this;
+            $.each(animations, function(k, a){
+                if(a.indexOf(that._animationPrefix) === -1)
+                    animations[k] = that._animationPrefix + $.trim(a);
+            });
+            var a_string = animations.join(' ').toLowerCase();
+            if(which === 'o')
+                this.animationParsed = a_string;
+            else
+                this.closeAnimationParsed = a_string;
+
+            return a_string;
+        },
+        setCloseAnimation: function(closeAnimation){
+            this.closeAnimation = closeAnimation || this.closeAnimation;
+            this._parseAnimation(this.closeAnimation, 'c');
+        },
+        setAnimationSpeed: function(speed){
+            this.animationSpeed = speed || this.animationSpeed;
+            // this.$body.css(this._getCSS(this.animationSpeed, this.animationBounce));
+        },
+        columnClassParsed: '',
+        setColumnClass: function(colClass){
+            if(!this.useBootstrap){
+                console.warn("cannot set columnClass, useBootstrap is set to false");
+                return;
+            }
+            this.columnClass = colClass || this.columnClass;
+            this._parseColumnClass(this.columnClass);
+            this.$jconfirmBoxContainer.addClass(this.columnClassParsed);
+        },
+        _updateContentMaxHeight: function(){
+            var height = $(window).height() - (this.$jconfirmBox.outerHeight() - this.$contentPane.outerHeight()) - (this.offsetTop + this.offsetBottom);
+            this.$contentPane.css({
+                'max-height': height + 'px'
+            });
+        },
+        setBoxWidth: function(width){
+            if(this.useBootstrap){
+                console.warn("cannot set boxWidth, useBootstrap is set to true");
+                return;
+            }
+            this.boxWidth = width;
+            this.$jconfirmBox.css('width', width);
+        },
+        _parseColumnClass: function(colClass){
+            colClass = colClass.toLowerCase();
+            var p;
+            switch(colClass){
+                case 'xl':
+                case 'xlarge':
+                    p = 'col-md-12';
+                    break;
+                case 'l':
+                case 'large':
+                    p = 'col-md-8 col-md-offset-2';
+                    break;
+                case 'm':
+                case 'medium':
+                    p = 'col-md-6 col-md-offset-3';
+                    break;
+                case 's':
+                case 'small':
+                    p = 'col-md-4 col-md-offset-4';
+                    break;
+                case 'xs':
+                case 'xsmall':
+                    p = 'col-md-2 col-md-offset-5';
+                    break;
+                default:
+                    p = colClass;
+            }
+            this.columnClassParsed = p;
+        },
+        initDraggable: function(){
+            var that = this;
+            var $t = this.$titleContainer;
+
+            this.resetDrag();
+            if(this.draggable){
+                $t.on('mousedown', function(e){
+                    $t.addClass('jconfirm-hand');
+                    that.mouseX = e.clientX;
+                    that.mouseY = e.clientY;
+                    that.isDrag = true;
+                });
+                $(window).on('mousemove.' + this._id, function(e){
+                    if(that.isDrag){
+                        that.movingX = e.clientX - that.mouseX + that.initialX;
+                        that.movingY = e.clientY - that.mouseY + that.initialY;
+                        that.setDrag();
+                    }
+                });
+
+                $(window).on('mouseup.' + this._id, function(){
+                    $t.removeClass('jconfirm-hand');
+                    if(that.isDrag){
+                        that.isDrag = false;
+                        that.initialX = that.movingX;
+                        that.initialY = that.movingY;
+                    }
+                })
+            }
+        },
+        resetDrag: function(){
+            this.isDrag = false;
+            this.initialX = 0;
+            this.initialY = 0;
+            this.movingX = 0;
+            this.movingY = 0;
+            this.mouseX = 0;
+            this.mouseY = 0;
+            this.$jconfirmBoxContainer.css('transform', 'translate(' + 0 + 'px, ' + 0 + 'px)');
+        },
+        setDrag: function(){
+            if(!this.draggable)
+                return;
+
+            this.alignMiddle = false;
+            var boxWidth = this.$jconfirmBox.outerWidth();
+            var boxHeight = this.$jconfirmBox.outerHeight();
+            var windowWidth = $(window).width();
+            var windowHeight = $(window).height();
+            var that = this;
+            var dragUpdate = 1;
+            if(that.movingX % dragUpdate === 0 || that.movingY % dragUpdate === 0){
+                if(that.dragWindowBorder){
+                    var leftDistance = (windowWidth / 2) - boxWidth / 2;
+                    var topDistance = (windowHeight / 2) - boxHeight / 2;
+                    topDistance -= that.dragWindowGap;
+                    leftDistance -= that.dragWindowGap;
+
+                    if(leftDistance + that.movingX < 0){
+                        that.movingX = -leftDistance;
+                    }else if(leftDistance - that.movingX < 0){
+                        that.movingX = leftDistance;
+                    }
+
+                    if(topDistance + that.movingY < 0){
+                        that.movingY = -topDistance;
+                    }else if(topDistance - that.movingY < 0){
+                        that.movingY = topDistance;
+                    }
+                }
+
+                that.$jconfirmBoxContainer.css('transform', 'translate(' + that.movingX + 'px, ' + that.movingY + 'px)');
+            }
+        },
+        _scrollTop: function(){
+            if(typeof pageYOffset !== 'undefined'){
+                //most browsers except IE before #9
+                return pageYOffset;
+            }
+            else{
+                var B = document.body; //IE 'quirks'
+                var D = document.documentElement; //IE with doctype
+                D = (D.clientHeight) ? D : B;
+                return D.scrollTop;
+            }
+        },
+        _watchContent: function(){
+            var that = this;
+            if(this._timer) clearInterval(this._timer);
+
+            var prevContentHeight = 0;
+            this._timer = setInterval(function(){
+                if(that.smoothContent){
+                    var contentHeight = that.$content.outerHeight() || 0;
+                    if(contentHeight !== prevContentHeight){
+
+                        // Commented out to prevent scroll to top when updating the content
+                        // (for example when using ajax in forms in content)
+                        // that.$contentPane.css({
+                        //     'height': contentHeight
+                        // }).scrollTop(0);
+                        prevContentHeight = contentHeight;
+                    }
+                    var wh = $(window).height();
+                    var total = that.offsetTop + that.offsetBottom + that.$jconfirmBox.height() - that.$contentPane.height() + that.$content.height();
+                    if(total < wh){
+                        that.$contentPane.addClass('no-scroll');
+                    }else{
+                        that.$contentPane.removeClass('no-scroll');
+                    }
+                }
+            }, this.watchInterval);
+        },
+        _overflowClass: 'jconfirm-overflow',
+        _hilightAnimating: false,
+        highlight: function(){
+            this.hiLightModal();
+        },
+        hiLightModal: function(){
+            var that = this;
+            if(this._hilightAnimating)
+                return;
+
+            that.$body.addClass('hilight');
+            var duration = parseFloat(that.$body.css('animation-duration')) || 2;
+            this._hilightAnimating = true;
+            setTimeout(function(){
+                that._hilightAnimating = false;
+                that.$body.removeClass('hilight');
+            }, duration * 1000);
+        },
+        _bindEvents: function(){
+            var that = this;
+            this.boxClicked = false;
+
+            this.$scrollPane.click(function(e){ // Ignore propagated clicks
+                if(!that.boxClicked){ // Background clicked
+                    /*
+                     If backgroundDismiss is a function and its return value is truthy
+                     proceed to close the modal.
+                     */
+                    var buttonName = false;
+                    var shouldClose = false;
+                    var str;
+
+                    if(typeof that.backgroundDismiss === 'function')
+                        str = that.backgroundDismiss();
+                    else
+                        str = that.backgroundDismiss;
+
+                    if(typeof str === 'string' && typeof that.buttons[str] !== 'undefined'){
+                        buttonName = str;
+                        shouldClose = false;
+                    }else if(typeof str === 'undefined' || !!(str) === true){
+                        shouldClose = true;
+                    }else{
+                        shouldClose = false;
+                    }
+
+                    if(buttonName){
+                        var btnResponse = that.buttons[buttonName].action.apply(that);
+                        shouldClose = (typeof btnResponse === 'undefined') || !!(btnResponse);
+                    }
+
+                    if(shouldClose)
+                        that.close();
+                    else
+                        that.hiLightModal();
+                }
+                that.boxClicked = false;
+            });
+
+            this.$jconfirmBox.click(function(e){
+                that.boxClicked = true;
+            });
+
+            var isKeyDown = false;
+            $(window).on('jcKeyDown.' + that._id, function(e){
+                if(!isKeyDown){
+                    isKeyDown = true;
+                }
+            });
+            $(window).on('keyup.' + that._id, function(e){
+                if(isKeyDown){
+                    that.reactOnKey(e);
+                    isKeyDown = false;
+                }
+            });
+
+            $(window).on('resize.' + this._id, function(){
+                that._updateContentMaxHeight();
+                setTimeout(function(){
+                    that.resetDrag();
+                }, 100);
+            });
+        },
+        _cubic_bezier: '0.36, 0.55, 0.19',
+        _getCSS: function(speed, bounce){
+            return {
+                '-webkit-transition-duration': speed / 1000 + 's',
+                'transition-duration': speed / 1000 + 's',
+                '-webkit-transition-timing-function': 'cubic-bezier(' + this._cubic_bezier + ', ' + bounce + ')',
+                'transition-timing-function': 'cubic-bezier(' + this._cubic_bezier + ', ' + bounce + ')'
+            };
+        },
+        _setButtons: function(){
+            var that = this;
+            /*
+             * Settings up buttons
+             */
+
+            var total_buttons = 0;
+            if(typeof this.buttons !== 'object')
+                this.buttons = {};
+
+            $.each(this.buttons, function(key, button){
+                total_buttons += 1;
+                if(typeof button === 'function'){
+                    that.buttons[key] = button = {
+                        action: button
+                    };
+                }
+
+                that.buttons[key].text = button.text || key;
+                that.buttons[key].btnClass = button.btnClass || 'btn-default';
+                that.buttons[key].action = button.action || function(){
+                };
+                that.buttons[key].keys = button.keys || [];
+                that.buttons[key].isHidden = button.isHidden || false;
+                that.buttons[key].isDisabled = button.isDisabled || false;
+
+                $.each(that.buttons[key].keys, function(i, a){
+                    that.buttons[key].keys[i] = a.toLowerCase();
+                });
+
+                var button_element = $('<button type="button" class="btn"></button>')
+                    .html(that.buttons[key].text)
+                    .addClass(that.buttons[key].btnClass)
+                    .prop('disabled', that.buttons[key].isDisabled)
+                    .css('display', that.buttons[key].isHidden ? 'none' : '')
+                    .click(function(e){
+                        e.preventDefault();
+                        var res = that.buttons[key].action.apply(that, [that.buttons[key]]);
+                        that.onAction.apply(that, [key, that.buttons[key]]);
+                        that._stopCountDown();
+                        if(typeof res === 'undefined' || res)
+                            that.close();
+                    });
+
+                that.buttons[key].el = button_element;
+                that.buttons[key].setText = function(text){
+                    button_element.html(text);
+                };
+                that.buttons[key].addClass = function(className){
+                    button_element.addClass(className);
+                };
+                that.buttons[key].removeClass = function(className){
+                    button_element.removeClass(className);
+                };
+                that.buttons[key].disable = function(){
+                    that.buttons[key].isDisabled = true;
+                    button_element.prop('disabled', true);
+                };
+                that.buttons[key].enable = function(){
+                    that.buttons[key].isDisabled = false;
+                    button_element.prop('disabled', false);
+                };
+                that.buttons[key].show = function(){
+                    that.buttons[key].isHidden = false;
+                    button_element.css('display', '');
+                };
+                that.buttons[key].hide = function(){
+                    that.buttons[key].isHidden = true;
+                    button_element.css('display', 'none');
+                };
+                /*
+                 Buttons are prefixed with $_ or $$ for quick access
+                 */
+                that['$_' + key] = that['$$' + key] = button_element;
+                that.$btnc.append(button_element);
+            });
+
+            if(total_buttons === 0) this.$btnc.hide();
+            if(this.closeIcon === null && total_buttons === 0){
+                /*
+                 in case when no buttons are present & closeIcon is null, closeIcon is set to true,
+                 set closeIcon to true to explicitly tell to hide the close icon
+                 */
+                this.closeIcon = true;
+            }
+
+            if(this.closeIcon){
+                if(this.closeIconClass){
+                    // user requires a custom class.
+                    var closeHtml = '<i class="' + this.closeIconClass + '"></i>';
+                    this.$closeIcon.html(closeHtml);
+                }
+
+                this.$closeIcon.click(function(e){
+                    e.preventDefault();
+
+                    var buttonName = false;
+                    var shouldClose = false;
+                    var str;
+
+                    if(typeof that.closeIcon === 'function'){
+                        str = that.closeIcon();
+                    }else{
+                        str = that.closeIcon;
+                    }
+
+                    if(typeof str === 'string' && typeof that.buttons[str] !== 'undefined'){
+                        buttonName = str;
+                        shouldClose = false;
+                    }else if(typeof str === 'undefined' || !!(str) === true){
+                        shouldClose = true;
+                    }else{
+                        shouldClose = false;
+                    }
+                    if(buttonName){
+                        var btnResponse = that.buttons[buttonName].action.apply(that);
+                        shouldClose = (typeof btnResponse === 'undefined') || !!(btnResponse);
+                    }
+                    if(shouldClose){
+                        that.close();
+                    }
+                });
+                this.$closeIcon.show();
+            }else{
+                this.$closeIcon.hide();
+            }
+        },
+        setTitle: function(string, force){
+            force = force || false;
+
+            if(typeof string !== 'undefined')
+                if(typeof string === 'string')
+                    this.title = string;
+                else if(typeof string === 'function'){
+                    if(typeof string.promise === 'function')
+                        console.error('Promise was returned from title function, this is not supported.');
+
+                    var response = string();
+                    if(typeof response === 'string')
+                        this.title = response;
+                    else
+                        this.title = false;
+                }else
+                    this.title = false;
+
+            if(this.isAjaxLoading && !force)
+                return;
+
+            this.$title.html(this.title || '');
+            this.updateTitleContainer();
+        },
+        setIcon: function(iconClass, force){
+            force = force || false;
+
+            if(typeof iconClass !== 'undefined')
+                if(typeof iconClass === 'string')
+                    this.icon = iconClass;
+                else if(typeof iconClass === 'function'){
+                    var response = iconClass();
+                    if(typeof response === 'string')
+                        this.icon = response;
+                    else
+                        this.icon = false;
+                }
+                else
+                    this.icon = false;
+
+            if(this.isAjaxLoading && !force)
+                return;
+
+            this.$icon.html(this.icon ? '<i class="' + this.icon + '"></i>' : '');
+            this.updateTitleContainer();
+        },
+        updateTitleContainer: function(){
+            if(!this.title && !this.icon){
+                this.$titleContainer.hide();
+            }else{
+                this.$titleContainer.show();
+            }
+        },
+        setContentPrepend: function(content, force){
+            if(!content)
+                return;
+
+            this.contentParsed.prepend(content);
+        },
+        setContentAppend: function(content){
+            if(!content)
+                return;
+
+            this.contentParsed.append(content);
+        },
+        setContent: function(content, force){
+            force = !!force;
+            var that = this;
+            if(content)
+                this.contentParsed.html('').append(content);
+            if(this.isAjaxLoading && !force)
+                return;
+
+            this.$content.html('');
+            this.$content.append(this.contentParsed);
+            setTimeout(function(){
+                that.$body.find('input[autofocus]:visible:first').focus();
+            }, 100);
+        },
+        loadingSpinner: false,
+        showLoading: function(disableButtons){
+            this.loadingSpinner = true;
+            this.$jconfirmBox.addClass('loading');
+            if(disableButtons)
+                this.$btnc.find('button').prop('disabled', true);
+
+        },
+        hideLoading: function(enableButtons){
+            this.loadingSpinner = false;
+            this.$jconfirmBox.removeClass('loading');
+            if(enableButtons)
+                this.$btnc.find('button').prop('disabled', false);
+
+        },
+        ajaxResponse: false,
+        contentParsed: '',
+        isAjax: false,
+        isAjaxLoading: false,
+        _parseContent: function(){
+            var that = this;
+            var e = '&nbsp;';
+
+            if(typeof this.content === 'function'){
+                var res = this.content.apply(this);
+                if(typeof res === 'string'){
+                    this.content = res;
+                }
+                else if(typeof res === 'object' && typeof res.always === 'function'){
+                    // this is ajax loading via promise
+                    this.isAjax = true;
+                    this.isAjaxLoading = true;
+                    res.always(function(data, status, xhr){
+                        that.ajaxResponse = {
+                            data: data,
+                            status: status,
+                            xhr: xhr
+                        };
+                        that._contentReady.resolve(data, status, xhr);
+                        if(typeof that.contentLoaded === 'function')
+                            that.contentLoaded(data, status, xhr);
+                    });
+                    this.content = e;
+                }else{
+                    this.content = e;
+                }
+            }
+
+            if(typeof this.content === 'string' && this.content.substr(0, 4).toLowerCase() === 'url:'){
+                this.isAjax = true;
+                this.isAjaxLoading = true;
+                var u = this.content.substring(4, this.content.length);
+                $.get(u).done(function(html){
+                    that.contentParsed.html(html);
+                }).always(function(data, status, xhr){
+                    that.ajaxResponse = {
+                        data: data,
+                        status: status,
+                        xhr: xhr
+                    };
+                    that._contentReady.resolve(data, status, xhr);
+                    if(typeof that.contentLoaded === 'function')
+                        that.contentLoaded(data, status, xhr);
+                });
+            }
+
+            if(!this.content)
+                this.content = e;
+
+            if(!this.isAjax){
+                this.contentParsed.html(this.content);
+                this.setContent();
+                that._contentReady.resolve();
+            }
+        },
+        _stopCountDown: function(){
+            clearInterval(this.autoCloseInterval);
+            if(this.$cd)
+                this.$cd.remove();
+        },
+        _startCountDown: function(){
+            var that = this;
+            var opt = this.autoClose.split('|');
+            if(opt.length !== 2){
+                console.error('Invalid option for autoClose. example \'close|10000\'');
+                return false;
+            }
+
+            var button_key = opt[0];
+            var time = parseInt(opt[1]);
+            if(typeof this.buttons[button_key] === 'undefined'){
+                console.error('Invalid button key \'' + button_key + '\' for autoClose');
+                return false;
+            }
+
+            var seconds = Math.ceil(time / 1000);
+            this.$cd = $('<span class="countdown"> (' + seconds + ')</span>')
+                .appendTo(this['$_' + button_key]);
+
+            this.autoCloseInterval = setInterval(function(){
+                that.$cd.html(' (' + (seconds -= 1) + ') ');
+                if(seconds <= 0){
+                    that['$$' + button_key].trigger('click');
+                    that._stopCountDown();
+                }
+            }, 1000);
+        },
+        _getKey: function(key){
+            // very necessary keys.
+            switch(key){
+                case 192:
+                    return 'tilde';
+                case 13:
+                    return 'enter';
+                case 16:
+                    return 'shift';
+                case 9:
+                    return 'tab';
+                case 20:
+                    return 'capslock';
+                case 17:
+                    return 'ctrl';
+                case 91:
+                    return 'win';
+                case 18:
+                    return 'alt';
+                case 27:
+                    return 'esc';
+                case 32:
+                    return 'space';
+            }
+
+            // only trust alphabets with this.
+            var initial = String.fromCharCode(key);
+            if(/^[A-z0-9]+$/.test(initial))
+                return initial.toLowerCase();
+            else
+                return false;
+        },
+        reactOnKey: function(e){
+            var that = this;
+
+            /*
+             Prevent keyup event if the dialog is not last!
+             */
+            var a = $('.jconfirm');
+            if(a.eq(a.length - 1)[0] !== this.$el[0])
+                return false;
+
+            var key = e.which;
+            /*
+             Do not react if Enter or Space is pressed on input elements
+             */
+            if(this.$content.find(':input').is(':focus') && /13|32/.test(key))
+                return false;
+
+            var keyChar = this._getKey(key);
+
+            // If esc is pressed
+            if(keyChar === 'esc' && this.escapeKey){
+                if(this.escapeKey === true){
+                    this.$scrollPane.trigger('click');
+                }
+                else if(typeof this.escapeKey === 'string' || typeof this.escapeKey === 'function'){
+                    var buttonKey;
+                    if(typeof this.escapeKey === 'function'){
+                        buttonKey = this.escapeKey();
+                    }else{
+                        buttonKey = this.escapeKey;
+                    }
+
+                    if(buttonKey)
+                        if(typeof this.buttons[buttonKey] === 'undefined'){
+                            console.warn('Invalid escapeKey, no buttons found with key ' + buttonKey);
+                        }else{
+                            this['$_' + buttonKey].trigger('click');
+                        }
+                }
+            }
+
+            // check if any button is listening to this key.
+            $.each(this.buttons, function(key, button){
+                if(button.keys.indexOf(keyChar) !== -1){
+                    that['$_' + key].trigger('click');
+                }
+            });
+        },
+        setDialogCenter: function(){
+            console.info('setDialogCenter is deprecated, dialogs are centered with CSS3 tables');
+        },
+        _unwatchContent: function(){
+            clearInterval(this._timer);
+        },
+        close: function(onClosePayload){
+            var that = this;
+
+            if(typeof this.onClose === 'function')
+                this.onClose(onClosePayload);
+
+            this._unwatchContent();
+
+            /*
+             unbind the window resize & keyup event.
+             */
+            $(window).unbind('resize.' + this._id);
+            $(window).unbind('keyup.' + this._id);
+            $(window).unbind('jcKeyDown.' + this._id);
+
+            if(this.draggable){
+                $(window).unbind('mousemove.' + this._id);
+                $(window).unbind('mouseup.' + this._id);
+                this.$titleContainer.unbind('mousedown');
+            }
+
+            that.$el.removeClass(that.loadedClass);
+            $('body').removeClass('jconfirm-no-scroll-' + that._id);
+            that.$jconfirmBoxContainer.removeClass('jconfirm-no-transition');
+
+            setTimeout(function(){
+                that.$body.addClass(that.closeAnimationParsed);
+                that.$jconfirmBg.addClass('jconfirm-bg-h');
+                var closeTimer = (that.closeAnimation === 'none') ? 1 : that.animationSpeed;
+
+                setTimeout(function(){
+                    that.$el.remove();
+
+                    var l = w.jconfirm.instances;
+                    var i = w.jconfirm.instances.length - 1;
+                    for(i; i >= 0; i--){
+                        if(w.jconfirm.instances[i]._id === that._id){
+                            w.jconfirm.instances.splice(i, 1);
+                        }
+                    }
+
+                    // Focusing a element, scrolls automatically to that element.
+                    // no instances should be open, lastFocused should be true, the lastFocused element must exists in DOM
+                    if(!w.jconfirm.instances.length){
+                        if(that.scrollToPreviousElement && w.jconfirm.lastFocused && w.jconfirm.lastFocused.length && $.contains(document, w.jconfirm.lastFocused[0])){
+                            var $lf = w.jconfirm.lastFocused;
+                            if(that.scrollToPreviousElementAnimate){
+                                var st = $(window).scrollTop();
+                                var ot = w.jconfirm.lastFocused.offset().top;
+                                var wh = $(window).height();
+                                if(!(ot > st && ot < (st + wh))){
+                                    var scrollTo = (ot - Math.round((wh / 3)));
+                                    $('html, body').animate({
+                                        scrollTop: scrollTo
+                                    }, that.animationSpeed, 'swing', function(){
+                                        // gracefully scroll and then focus.
+                                        $lf.focus();
+                                    });
+                                }else{
+                                    // the element to be focused is already in view.
+                                    $lf.focus();
+                                }
+                            }else{
+                                $lf.focus();
+                            }
+                            w.jconfirm.lastFocused = false;
+                        }
+                    }
+
+                    if(typeof that.onDestroy === 'function')
+                        that.onDestroy();
+
+                }, closeTimer * 0.40);
+            }, 50);
+
+            return true;
+        },
+        open: function(){
+            if(this.isOpen())
+                return false;
+
+            // var that = this;
+            this._buildHTML();
+            this._bindEvents();
+            this._open();
+
+            return true;
+        },
+        setStartingPoint: function(){
+            var el = false;
+
+            if(this.animateFromElement !== true && this.animateFromElement){
+                el = this.animateFromElement;
+                w.jconfirm.lastClicked = false;
+            }else if(w.jconfirm.lastClicked && this.animateFromElement === true){
+                el = w.jconfirm.lastClicked;
+                w.jconfirm.lastClicked = false;
+            }else{
+                return false;
+            }
+
+            if(!el)
+                return false;
+
+            var offset = el.offset();
+
+            var iTop = el.outerHeight() / 2;
+            var iLeft = el.outerWidth() / 2;
+
+            // placing position of jconfirm modal in center of clicked element
+            iTop -= this.$jconfirmBox.outerHeight() / 2;
+            iLeft -= this.$jconfirmBox.outerWidth() / 2;
+
+            // absolute position on screen
+            var sourceTop = offset.top + iTop;
+            sourceTop = sourceTop - this._scrollTop();
+            var sourceLeft = offset.left + iLeft;
+
+            // window halved
+            var wh = $(window).height() / 2;
+            var ww = $(window).width() / 2;
+
+            var targetH = wh - this.$jconfirmBox.outerHeight() / 2;
+            var targetW = ww - this.$jconfirmBox.outerWidth() / 2;
+
+            sourceTop -= targetH;
+            sourceLeft -= targetW;
+
+            // Check if the element is inside the viewable window.
+            if(Math.abs(sourceTop) > wh || Math.abs(sourceLeft) > ww)
+                return false;
+
+            this.$jconfirmBoxContainer.css('transform', 'translate(' + sourceLeft + 'px, ' + sourceTop + 'px)');
+        },
+        _open: function(){
+            var that = this;
+            if(typeof that.onOpenBefore === 'function')
+                that.onOpenBefore();
+
+            this.$body.removeClass(this.animationParsed);
+            this.$jconfirmBg.removeClass('jconfirm-bg-h');
+            this.$body.focus();
+
+            that.$jconfirmBoxContainer.css('transform', 'translate(' + 0 + 'px, ' + 0 + 'px)');
+
+            setTimeout(function(){
+                that.$body.css(that._getCSS(that.animationSpeed, 1));
+                that.$body.css({
+                    'transition-property': that.$body.css('transition-property') + ', margin'
+                });
+                that.$jconfirmBoxContainer.addClass('jconfirm-no-transition');
+                that._modalReady.resolve();
+                if(typeof that.onOpen === 'function')
+                    that.onOpen();
+
+                that.$el.addClass(that.loadedClass);
+            }, this.animationSpeed);
+        },
+        loadedClass: 'jconfirm-open',
+        isClosed: function(){
+            return !this.$el || this.$el.parent().length === 0;
+        },
+        isOpen: function(){
+            return !this.isClosed();
+        },
+        toggle: function(){
+            if(!this.isOpen())
+                this.open();
+            else
+                this.close();
+        }
+    };
+
+    w.jconfirm.instances = [];
+    w.jconfirm.lastFocused = false;
+    w.jconfirm.pluginDefaults = {
+        template: '' +
+            '<div class="jconfirm">' +
+            '<div class="jconfirm-bg jconfirm-bg-h"></div>' +
+            '<div class="jconfirm-scrollpane">' +
+            '<div class="jconfirm-row">' +
+            '<div class="jconfirm-cell">' +
+            '<div class="jconfirm-holder">' +
+            '<div class="jc-bs3-container">' +
+            '<div class="jc-bs3-row">' +
+            '<div class="jconfirm-box-container jconfirm-animated">' +
+            '<div class="jconfirm-box" role="dialog" aria-labelledby="labelled" tabindex="-1">' +
+            '<div class="jconfirm-closeIcon">&times;</div>' +
+            '<div class="jconfirm-title-c">' +
+            '<span class="jconfirm-icon-c"></span>' +
+            '<span class="jconfirm-title"></span>' +
+            '</div>' +
+            '<div class="jconfirm-content-pane">' +
+            '<div class="jconfirm-content"></div>' +
+            '</div>' +
+            '<div class="jconfirm-buttons">' +
+            '</div>' +
+            '<div class="jconfirm-clear">' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div></div>',
+        title: 'Hello',
+        titleClass: '',
+        type: 'default',
+        typeAnimated: true,
+        draggable: true,
+        dragWindowGap: 15,
+        dragWindowBorder: true,
+        animateFromElement: true,
+        /**
+         * @deprecated
+         */
+        alignMiddle: true,
+        smoothContent: true,
+        content: 'Are you sure to continue?',
+        buttons: {},
+        defaultButtons: {
+            ok: {
+                action: function(){
+                }
+            },
+            close: {
+                action: function(){
+                }
+            }
+        },
+        contentLoaded: function(){
+        },
+        icon: '',
+        lazyOpen: false,
+        bgOpacity: null,
+        theme: 'light',
+        animation: 'scale',
+        closeAnimation: 'scale',
+        animationSpeed: 400,
+        animationBounce: 1,
+        escapeKey: true,
+        rtl: false,
+        container: 'body',
+        containerFluid: false,
+        backgroundDismiss: false,
+        backgroundDismissAnimation: 'shake',
+        autoClose: false,
+        closeIcon: null,
+        closeIconClass: false,
+        watchInterval: 100,
+        columnClass: 'col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1',
+        boxWidth: '50%',
+        scrollToPreviousElement: true,
+        scrollToPreviousElementAnimate: true,
+        useBootstrap: true,
+        offsetTop: 40,
+        offsetBottom: 40,
+        bootstrapClasses: {
+            container: 'container',
+            containerFluid: 'container-fluid',
+            row: 'row'
+        },
+        onContentReady: function(){
+
+        },
+        onOpenBefore: function(){
+
+        },
+        onOpen: function(){
+
+        },
+        onClose: function(){
+
+        },
+        onDestroy: function(){
+
+        },
+        onAction: function(){
+
+        }
+    };
+
+    /**
+     * This refers to the issue #241 and #246
+     *
+     * Problem:
+     * Button A is clicked (keydown) using the Keyboard ENTER key
+     * A opens the jconfirm modal B,
+     * B has registered ENTER key for one of its button C
+     * A is released (keyup), B gets the keyup event and triggers C.
+     *
+     * Solution:
+     * Register a global keydown event, that tells jconfirm if the keydown originated inside jconfirm
+     */
+    var keyDown = false;
+    $(window).on('keydown', function(e){
+        if(!keyDown){
+            var $target = $(e.target);
+            var pass = false;
+            if($target.closest('.jconfirm-box').length)
+                pass = true;
+            if(pass)
+                $(window).trigger('jcKeyDown');
+
+            keyDown = true;
+        }
+    });
+    $(window).on('keyup', function(){
+        keyDown = false;
+    });
+    w.jconfirm.lastClicked = false;
+    $(document).on('mousedown', 'button, a, [jc-source]', function(){
+        w.jconfirm.lastClicked = $(this);
+    });
+}));

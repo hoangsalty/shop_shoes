@@ -4,9 +4,9 @@
             <div class="left-pro-detail d-flex col-lg-6 mb-4">
                 <?php if (!empty($rowDetailPhoto)) { ?>
                     <div class="product__details__pic__left col-lg-3">
-                        <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 110, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                        <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 120, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
                         <?php foreach ($rowDetailPhoto as $i => $v) { ?>
-                            <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 110, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
+                            <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 120, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
                         <?php } ?>
                     </div>
                 <?php } ?>

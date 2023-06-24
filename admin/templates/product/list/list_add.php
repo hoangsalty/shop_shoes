@@ -7,32 +7,19 @@ if ($act == 'add_list') $linkSave = "index.php?com=product&act=save_list";
 else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&id=" . $id;
 ?>
 
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active"><?= $labelAct ?> loại sản phẩm</li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
-    <form  method="post" action="<?= $linkSave ?>" enctype="multipart/form-data">
-        <div class="card-footer text-sm sticky-top">
+    <form id="form_product_list" method="post" class="validation-form" novalidate enctype="multipart/form-data">
+        <div class="card-header text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
-            <a class="btn btn-sm bg-gradient-danger" href="<?= $linkMan ?>" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
         </div>
 
-        <?= $flash->getMessages('admin') ?>
+        <div class="box_response"></div>
 
         <div class="row">
             <div class="col-xl-8">
-                <div class=" card card-primary card-outline text-sm">
+                <div class="card card-primary card-outline text-sm">
                     <div class="card-header">
                         <h3 class="card-title">Nội dung loại sản phẩm</h3>
                         <div class="card-tools">
@@ -46,7 +33,7 @@ else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&i
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>
-                            <textarea class="form-control text-sm <?= (isset($config['product']['desc_cke']) && $config['product']['desc_cke'] == true) ? 'form-control-ckeditor' : '' ?>" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars($flash->get('desc')) ?: $func->decodeHtmlChars(@$item['desc']) ?></textarea>
+                            <textarea class="form-control text-sm <?= (isset($config['product']['desc_cke']) && $config['product']['desc_cke'] == true) ? 'form-control-ckeditor' : '' ?>" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -70,7 +57,6 @@ else if ($act == 'edit_list') $linkSave = "index.php?com=product&act=save_list&i
                         $photoDetail = array();
                         $photoDetail['upload'] = UPLOAD_PRODUCT_L;
                         $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                        $photoDetail['dimension'] = "Width: " . $config['product_list']['width'] . " px - Height: " . $config['product_list']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)";
                         /* Image */
                         include TEMPLATE . LAYOUT . "image.php";
                         ?>

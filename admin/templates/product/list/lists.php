@@ -3,28 +3,15 @@ $linkView = $configBase;
 $linkMan = "index.php?com=product&act=man_list";
 $linkAdd = "index.php?com=product&act=add_list";
 $linkEdit = "index.php?com=product&act=edit_list";
-$linkDelete = "index.php?com=product&act=delete_list";
 
 $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
 ?>
 
-<!-- Content Header -->
-<section class="content-header text-sm">
-    <div class="container-fluid">
-        <div class="row">
-            <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item"><a href="index.php" title="Bảng điều khiển">Bảng điều khiển</a></li>
-                <li class="breadcrumb-item active">Quản lý loại sản phẩm list</li>
-            </ol>
-        </div>
-    </div>
-</section>
-
 <!-- Main content -->
 <section class="content">
-    <div class="d-flex card-footer text-sm">
+    <div class="d-flex card-header text-sm">
         <a class="btn btn-sm bg-gradient-primary text-white mr-2" href="<?= $linkAdd ?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?= $linkDelete ?><?= $strUrl ?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
+        <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="sources/product.php" data-act="delete_list" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-auto">
             <div class="input-group input-group-sm">
                 <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?= (isset($_GET['keyword'])) ? $_GET['keyword'] : '' ?>" onkeypress="doEnter(event,'keyword','<?= $linkMan ?>')">
@@ -36,7 +23,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
             </div>
         </div>
     </div>
-    <div class="card card-primary card-outline text-sm mb-0">
+    <div class="card card-primary card-outline text-sm">
         <div class="card-header">
             <h3 class="card-title">Danh sách loại sản phẩm list</h3>
 
@@ -81,7 +68,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <?= $i+1 ?>
+                                    <?= $i + 1 ?>
                                 </td>
                                 <td class="align-middle">
                                     <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
@@ -91,9 +78,10 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>
                                     <div class="tool-action mt-2 w-clear">
-                                        <a class="text-primary mr-3" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
-                                        <a class="text-info mr-3" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
-                                        <a class="text-danger" id="delete-item" data-url="<?= $linkDelete ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
+                                        <a class="btn btn-primary btn-sm mr-2" href="<?= $linkView ?><?= $items[$i]['slug'] ?>" target="_blank" title="<?= $items[$i]['name'] ?>"><i class="far fa-eye mr-1"></i>View</a>
+                                        <a class="btn btn-info btn-sm mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                        <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete_list" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
+
                                     </div>
                                 </td>
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
@@ -113,6 +101,6 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
         </div>
     </div>
     <?php if ($paging) { ?>
-        <div class="card-footer text-sm pb-0"><?= $paging ?></div>
+        <div class="card-header text-sm pb-0"><?= $paging ?></div>
     <?php } ?>
 </section>

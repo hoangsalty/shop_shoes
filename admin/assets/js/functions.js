@@ -87,7 +87,8 @@ function notifyDialog(content = '', title = 'Thông báo', icon = 'fas fa-exclam
         icon: icon, // font awesome
         type: type, // red, green, orange, blue, purple, dark
         content: content, // html, text
-        backgroundDismiss: true,
+        backgroundDismiss: false,
+        backgroundDismissAnimation: 'shake',
         animationSpeed: 600,
         animation: 'zoom',
         closeAnimation: 'scale',
@@ -113,7 +114,8 @@ function confirmDialog(action, text, value, table = '', title = 'Thông báo', i
         icon: icon, // font awesome
         type: type, // red, green, orange, blue, purple, dark
         content: text, // html, text
-        backgroundDismiss: true,
+        backgroundDismiss: false,
+        backgroundDismissAnimation: 'shake',
         animationSpeed: 600,
         animation: 'zoom',
         closeAnimation: 'scale',
@@ -126,8 +128,6 @@ function confirmDialog(action, text, value, table = '', title = 'Thông báo', i
                 text: '<i class="fas fa-check align-middle mr-2"></i>Đồng ý',
                 btnClass: 'btn-blue btn-sm bg-gradient-primary',
                 action: function () {
-                    if (action == 'delete-item') deleteItem(value);
-                    if (action == 'delete-all') deleteAll(value);
                     if (action == 'delete-filer') deleteFiler(value, table);
                     if (action == 'delete-all-filer') deleteAllFiler(value);
                 }
@@ -138,30 +138,6 @@ function confirmDialog(action, text, value, table = '', title = 'Thông báo', i
             }
         }
     });
-}
-/* Delete item */
-function deleteItem(url) {
-    document.location = url;
-}
-/* Delete all */
-function deleteAll(url) {
-    var listid = '';
-
-    $('input.select-checkbox').each(function () {
-        if (this.checked) {
-            listid = listid + ',' + this.value;
-        }
-    });
-
-    listid = listid.substring(1);
-
-    if (listid == '') {
-        notifyDialog('Bạn hãy chọn ít nhất 1 mục để xóa');
-        return false;
-    }
-
-    holdonOpen();
-    document.location = url + '&listid=' + listid;
 }
 /* Delete filer */
 function deleteFiler(id, table) {

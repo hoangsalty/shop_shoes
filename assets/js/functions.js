@@ -197,7 +197,7 @@ function loadDistrict(id = 0) {
         type: "post",
         url: "api/district.php",
         data: {
-            id_city: id,
+            province_id: id,
         },
         beforeSend: function () {
             holdonOpen();
@@ -214,7 +214,7 @@ function loadWard(id = 0) {
         type: "post",
         url: "api/ward.php",
         data: {
-            id_district: id,
+            district_id: id,
         },
         beforeSend: function () {
             holdonOpen();

@@ -168,7 +168,7 @@ class Comments
                             'error' => $myFile['error'][$i],
                             'size' => $myFile['size'][$i]
                         );
-                        if ($photo = $this->func->uploadImage("file-uploader-temp", UPLOAD_PHOTO)) {
+                        if ($photo = $this->func->uploadImage("file-uploader-temp", '../upload/photo/')) {
                             $dataTemp = array();
                             $dataTemp['id_parent'] = $id_insert;
                             $dataTemp['photo'] = $photo;
