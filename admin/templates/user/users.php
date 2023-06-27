@@ -1,5 +1,5 @@
 <?php
-$linkMan = "index.php?com=user&act=man";
+$linkMan = "index.php?com=user&act=list";
 $linkAdd = "index.php?com=user&act=add";
 $linkEdit = "index.php?com=user&act=edit";
 ?>

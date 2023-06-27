@@ -1,76 +1,25 @@
+/* Validation form */
+function validateForm(e) {
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName(e);
+        Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            });
+        });
+    });
+}
+
 function isExist(ele) {
     return ele.length;
 }
 
 function isEmpty(o, t) {
     return "" == o && (void 0 !== t && alert(t), !0)
-}
-
-function notifyDialog(
-    content = "",
-    title = "Thông báo",
-    icon = "fas fa-exclamation-triangle",
-    type = "blue"
-) {
-    $.alert({
-        title: title,
-        icon: icon, // font awesome
-        type: type, // red, green, orange, blue, purple, dark
-        content: content, // html, text
-        backgroundDismiss: true,
-        animationSpeed: 600,
-        animation: "zoom",
-        closeAnimation: "scale",
-        typeAnimated: true,
-        animateFromElement: false,
-        autoClose: "accept|3000",
-        escapeKey: "accept",
-        buttons: {
-            accept: {
-                text: "Đồng ý",
-                btnClass: "btn-sm btn-primary",
-            },
-        },
-    });
-}
-
-function confirmDialog(
-    action,
-    text,
-    value,
-    title = "Thông báo",
-    icon = "fas fa-exclamation-triangle",
-    type = "blue"
-) {
-    $.confirm({
-        title: title,
-        icon: icon, // font awesome
-        type: type, // red, green, orange, blue, purple, dark
-        content: text, // html, text
-        backgroundDismiss: true,
-        animationSpeed: 600,
-        animation: "zoom",
-        closeAnimation: "scale",
-        typeAnimated: true,
-        animateFromElement: false,
-        autoClose: "cancel|5000",
-        escapeKey: "cancel",
-        buttons: {
-            success: {
-                text: "Đồng ý",
-                btnClass: "btn-sm btn-primary",
-                action: function () {
-                    if (action == "delete-procart") deleteCart(value);
-                    if (action == "change-order-status") changeOrderStatus(value);
-
-                },
-            },
-            cancel: {
-                text: "Hủy",
-                btnClass: "btn-sm btn-danger",
-            },
-        },
-    });
 }
 
 function loadPaging(url = "", eShow = "") {
@@ -96,7 +45,12 @@ function onSearch(obj) {
     var keyword = $("#" + obj).val();
 
     if (keyword == "") {
-        notifyDialog('Test');
+        Swal.fire({
+            icon: 'error',
+            title: 'Có lỗi phát sinh...',
+            text: 'Đường dẫn không hợp lệ',
+            allowOutsideClick: false,
+        });
         return false;
     } else {
         location.href = "tim-kiem?keyword=" + encodeURI(keyword);
@@ -221,6 +175,53 @@ function loadWard(id = 0) {
         },
         success: function (result) {
             $(".select-ward").html(result);
+            holdonClose();
+        },
+    });
+}
+
+function loadShipPrice(districtID = 0, wardID = 0) {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+
+    $.ajax({
+        type: "post",
+        url: "api/ship_price.php",
+        data: {
+            district_id: districtID,
+            ward_id: wardID,
+        },
+        beforeSend: function () {
+            holdonOpen();
+        },
+        success: function (result) {
+            $("#price-ship").html(formatter.format(result));
+
+            $.ajax({
+                type: "POST",
+                url: "api/cart.php",
+                dataType: "json",
+                data: {
+                    cmd: 'update-ship-total',
+                    ship_price: result,
+                },
+                beforeSend: function () {
+                    holdonOpen();
+                },
+                success: function (result) {
+                    if (result) {
+                        $(".form-cart").find("#ship_price").val(result.shipPrice);
+                        $(".form-cart").find("#temp_price").val(result.tempPrice);
+                        $(".form-cart").find("#total_price").val(result.totalPrice);
+                        $(".form-cart").find(".load-price-temp").html(result.tempText);
+                        $(".form-cart").find(".load-price-total").html(result.totalText);
+                    }
+                    holdonClose();
+                },
+            });
+
             holdonClose();
         },
     });

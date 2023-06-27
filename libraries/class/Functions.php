@@ -592,7 +592,7 @@ class Functions
     }
 
     /* Format money */
-    public function formatMoney($price = 0, $unit = 'đ', $html = false)
+    public function formatMoney($price = 0, $unit = ' ₫', $html = false)
     {
         $str = '';
 
@@ -770,7 +770,6 @@ class Functions
         return $result;
     }
 
-
     function getProvince()
     {
         $curl = curl_init();
@@ -824,6 +823,57 @@ class Functions
         curl_close($curl);
 
         return json_decode($response, true)["data"];
+    }
+
+    function currentGHNShop()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://online-gateway.ghn.vn/shiip/public-api/v2/shop/all',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_POSTFIELDS => array('offset' => '0', 'limit' => '1', 'client_phone' => ''),
+            CURLOPT_HTTPHEADER => array(
+                'token: 534caacb-1284-11ee-b0c6-a260851ba65c'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($response, true)["data"]['shops'][0];
+    }
+
+    function getGHNShipPrice($districtID, $wardID)
+    {
+        $shopDistrict = $this->currentGHNShop()['district_id'];
+        $shopWard = $this->currentGHNShop()['ward_code'];
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_POSTFIELDS => '{
+                "service_type_id": 2,
+                "from_district_id": ' . $shopDistrict . ',
+                "from_ward_code": "' . $shopWard . '",
+                "to_district_id": ' . $districtID . ',
+                "to_ward_code": "' . $wardID . '",
+                "weight": 1
+            }',
+            CURLOPT_HTTPHEADER => array(
+                'token: 534caacb-1284-11ee-b0c6-a260851ba65c',
+                'shop_id: 4277742',
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($response, true)["data"]["total"];
     }
 
     public function GetProducts($items)

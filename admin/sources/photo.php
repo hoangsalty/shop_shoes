@@ -269,6 +269,41 @@ function savePhoto()
                 }
             }
 
+            $galleryFiles = (!empty($_FILES['files'])) ? $_FILES['files'] : array();
+            /* Gallery */
+            if (!empty($galleryFiles)) {
+                for ($index = 0; $index < count($galleryFiles['name']); $index++) {
+                    $_FILES['file_gallery'] = array(
+                        'name' => $galleryFiles['name'][$index],
+                        'type' => $galleryFiles['type'][$index],
+                        'tmp_name' => $galleryFiles['tmp_name'][$index],
+                        'error' => $galleryFiles['error'][$index],
+                        'size' => $galleryFiles['size'][$index]
+                    );
+
+                    /* Xử lý lưu image */
+                    $data_file = array();
+                    $data_file['id_parent'] = $id_insert;
+                    $data_file['status'] = 'hienthi';
+                    $data_file['date_created'] = time();
+
+                    if ($d->insert('table_gallery_album', $data_file)) {
+                        $id_phot_inserted = $d->getLastInsertId();
+
+                        if ($func->hasFile("file_gallery")) {
+                            $photoUpdate = array();
+                            if ($photo = $func->uploadImage("file_gallery", UPLOAD_PRODUCT)) {
+                                $photoUpdate['photo'] = $photo;
+                                $d->where('id', $id_phot_inserted);
+                                $d->update('table_gallery_album', $photoUpdate);
+                                unset($photoUpdate);
+                                unset($_FILES['file_gallery']);
+                            }
+                        }
+                    }
+                }
+            }
+
             $response['status'] = 200;
             $response['messages'][] = 'Thêm dữ liệu thành công';
             $response['link'] = "index.php?com=photo&act=edit_photo&type=" . $cur_Type . "&id=" . $id_insert;
@@ -295,6 +330,7 @@ function deletePhoto()
         $row = $d->rawQueryOne("select id from table_photo where id = ? limit 0,1", array($id));
         if (!empty($row)) {
             $d->rawQuery("delete from table_photo where id = ?", array($id));
+            $d->rawQuery("delete from table_gallery_album where id_parent = ?", array($id));
 
             $response['status'] = 200;
             $response['messages'][] = 'Xóa dữ liệu thành công';
@@ -310,6 +346,7 @@ function deletePhoto()
             $row = $d->rawQueryOne("select id from table_photo where id = ? limit 0,1", array($id));
             if (!empty($row)) {
                 $d->rawQuery("delete from table_photo where id = ?", array($id));
+                $d->rawQuery("delete from table_gallery_album where id_parent = ?", array($id));
             }
         }
         $response['status'] = 200;
@@ -318,7 +355,7 @@ function deletePhoto()
         $response['status'] = 404;
         $response['messages'][] = 'Không nhận được dữ liệu';
     }
-    
+
     $response['link'] = "index.php?com=photo&act=list&type=" . $cur_Type . "&page=" . $cur_Page;
     $message = json_encode($response);
     echo $message;

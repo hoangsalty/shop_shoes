@@ -1,7 +1,4 @@
-<?php
-$linkSave = "index.php?com=photo&act=save_static&type=" . $type;
-?>
-<!-- Main content -->
+ <!-- Main content -->
 <section class="content">
     <form id="form_static_photo" class="validation-form" novalidate method="post" enctype="multipart/form-data">
         <div class="card-header text-sm sticky-top">

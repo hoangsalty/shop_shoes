@@ -4,7 +4,7 @@ if ($act == "add")
 else if ($act == "edit" || $act == 'info')
     $labelAct = "Chỉnh sửa";
 
-$linkMan = "index.php?com=user&act=man";
+$linkMan = "index.php?com=user&act=list";
 
 $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" => "Chưa kích hoạt");
 ?>

@@ -334,6 +334,41 @@ function saveProduct()
                 }
             }
 
+            $galleryFiles = (!empty($_FILES['files'])) ? $_FILES['files'] : array();
+            /* Gallery */
+            if (!empty($galleryFiles)) {
+                for ($index = 0; $index < count($galleryFiles['name']); $index++) {
+                    $_FILES['file_gallery'] = array(
+                        'name' => $galleryFiles['name'][$index],
+                        'type' => $galleryFiles['type'][$index],
+                        'tmp_name' => $galleryFiles['tmp_name'][$index],
+                        'error' => $galleryFiles['error'][$index],
+                        'size' => $galleryFiles['size'][$index]
+                    );
+
+                    /* Xử lý lưu image */
+                    $data_file = array();
+                    $data_file['id_parent'] = $id_insert;
+                    $data_file['status'] = 'hienthi';
+                    $data_file['date_created'] = time();
+
+                    if ($d->insert('table_gallery', $data_file)) {
+                        $id_phot_inserted = $d->getLastInsertId();
+
+                        if ($func->hasFile("file_gallery")) {
+                            $photoUpdate = array();
+                            if ($photo = $func->uploadImage("file_gallery", UPLOAD_PRODUCT)) {
+                                $photoUpdate['photo'] = $photo;
+                                $d->where('id', $id_phot_inserted);
+                                $d->update('table_gallery', $photoUpdate);
+                                unset($photoUpdate);
+                                unset($_FILES['file_gallery']);
+                            }
+                        }
+                    }
+                }
+            }
+
             if (!empty($dataSize)) {
                 $d->rawQuery("delete from table_product_size where id_product = ?", array($id_insert));
 
@@ -403,6 +438,7 @@ function deleteProduct()
             $d->rawQuery("delete from table_product_color where id_product = ?", array($id));
             $d->rawQuery("delete from table_product_size where id_product = ?", array($id));
             $d->rawQuery("delete from table_product where id = ?", array($id));
+            $d->rawQuery("delete from table_gallery where id_parent = ?", array($id));
 
             $response['status'] = 200;
             $response['messages'][] = 'Xóa dữ liệu thành công';
@@ -420,6 +456,7 @@ function deleteProduct()
                 $d->rawQuery("delete from table_product_color where id_product = ?", array($id));
                 $d->rawQuery("delete from table_product_size where id_product = ?", array($id));
                 $d->rawQuery("delete from table_product where id = ?", array($id));
+                $d->rawQuery("delete from table_gallery where id_parent = ?", array($id));
             }
         }
         $response['status'] = 200;

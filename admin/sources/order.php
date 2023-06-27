@@ -74,7 +74,7 @@ function viewOrders()
     $sqlNum = "select count(*) as 'num' from table_order where id > 0 $where order by date_created desc";
     $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
-    $url = "index.php?com=order&act=man" . $strUrl;
+    $url = "index.php?com=order&act=list" . $strUrl;
     $paging = $func->pagination($total, $perPage, $curPage, $url);
 
     /* Lấy tổng giá min */
@@ -120,12 +120,12 @@ function editOrder()
     $id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
 
     if (empty($id)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=order&act=man&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=order&act=list&page=" . $curPage, false);
     } else {
         $item = $d->rawQueryOne("select * from table_order where id = ? limit 0,1", array($id));
 
         if (empty($item)) {
-            $func->transferAdmin("Dữ liệu không có thực", "index.php?com=order&act=man&page=" . $curPage, false);
+            $func->transferAdmin("Dữ liệu không có thực", "index.php?com=order&act=list&page=" . $curPage, false);
         } else {
             /* Lấy chi tiết đơn hàng */
             $order_detail = $d->rawQuery("select * from table_order_detail where id_order = ? order by id desc", array($id));
@@ -172,7 +172,7 @@ function saveOrder()
 /* Delete order */
 function deleteOrder()
 {
-    global $d, $func, $cur_Page;
+    global $d, $cur_Page;
 
     $message = '';
     $response = array();

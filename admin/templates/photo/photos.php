@@ -2,7 +2,6 @@
 $linkMan = "index.php?com=photo&act=man_photo&type=" . $type;
 $linkAdd = "index.php?com=photo&act=add_photo&type=" . $type;
 $linkEdit = "index.php?com=photo&act=edit_photo&type=" . $type;
-$linkDelete = "index.php?com=photo&act=delete_photo&type=" . $type;
 
 $status = array("hienthi" => "Hiển thị");
 

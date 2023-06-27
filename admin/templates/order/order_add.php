@@ -1,6 +1,5 @@
 <?php
-$linkMan = "index.php?com=order&act=man";
-$linkSave = "index.php?com=order&act=save&id=" . $id;
+$linkMan = "index.php?com=order&act=list";
 ?>
 <!-- Main content -->
 <section class="content">

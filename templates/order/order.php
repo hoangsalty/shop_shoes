@@ -1,4 +1,8 @@
 <form class="form-cart validation-cart" novalidate method="post" action="" enctype="multipart/form-data">
+    <input type="hidden" name="dataOrder[ship_price]" id="ship_price" value="0">
+    <input type="hidden" name="dataOrder[temp_price]" id="temp_price" value="<?= $cart->getOrderTotal() ?>">
+    <input type="hidden" name="dataOrder[total_price]" id="total_price" value="<?= $cart->getOrderTotal() ?>">
+
     <div id="popup-order">
         <div class="popup-content">
             <div class="header">
@@ -25,13 +29,15 @@
                                         <div class="payments-cart custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="payments-<?= $value['slug'] ?>" name="dataOrder[payments]" value="<?= $value['slug'] ?>" required>
                                             <label class="payments-label custom-control-label" for="payments-<?= $value['slug'] ?>" data-payments="<?= $value['slug'] ?>"><?= $value['name'] ?></label>
-                                            <div class="payments-info payments-info-<?= $value['slug'] ?> transition"><?= str_replace("\n", "<br>", $value['desc']) ?></div>
+                                            <?php if (!empty($value['desc'])) { ?>
+                                                <div class="payments-info payments-info-<?= $value['slug'] ?> transition"><?= str_replace("\n", "<br>", $value['desc']) ?></div>
+                                            <?php } ?>
                                         </div>
                                     <?php } ?>
 
                                     <?php /* 
                                <div class="payments-cart custom-control custom-radio">
-                                   <input type="radio" class="custom-control-input" id="payments-momo" name="dataOrder[payments]" value="momo" <?= (!empty($flashPayment) && $flashPayment == 'momo') ? 'checked' : '' ?> required>
+                                   <input type="radio" class="custom-control-input" id="payments-momo" name="dataOrder[payments]" value="momo" required>
                                    <label class="payments-label custom-control-label" for="payments-momo" data-payments="momo"><img src="assets/images/momo_icon.png" alt=""> Thanh toán qua Momo</label>
                                    <div class="payments-info payments-info-momo transition">Thanh toán qua cổng thanh toán momo</div>
                                </div>
@@ -39,16 +45,12 @@
 
                                     <div class="payments-cart custom-control custom-radio">
                                         <input type="radio" class="custom-control-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" required>
-                                        <label class="payments-label custom-control-label" for="payments-vnpay" data-payments="vnpay"><img src="assets/images/vnpay_icon.png" alt=""> Thanh toán qua
-                                            VNPay</label>
-                                        <div class="payments-info payments-info-vnpay transition">Thanh toán qua cổng thanh toán
-                                            VNPay</div>
+                                        <label class="payments-label custom-control-label" for="payments-vnpay" data-payments="vnpay"><img src="assets/images/vnpay_icon.png" alt=""> Thanh toán qua VNPay</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="infoBox">
-                                <div class="title">Phương thức giao hàng (Giao Hàng Nhanh)</div>
-
+                                <div class="title">Địa chỉ giao hàng</div>
                                 <div class="form-input-user">
                                     <div class="form-input">
                                         <div class="input-select">
@@ -181,7 +183,7 @@
                                         <div class="priceFlx chk-ship">
                                             <div class="text">Phí vận chuyển</div>
                                             <div class="price-detail chk-free-ship">
-                                                <span class="total-price load-price-ship" rel="currency" id="price-ship">0đ</span>
+                                                <span class="total-price load-price-ship" rel="currency" id="price-ship">0 ₫</span>
                                             </div>
                                         </div>
                                     </div>
@@ -195,7 +197,7 @@
                                     <div class="text">Tổng tiền</div>
                                     <div class="price-bill">
                                         <div class="price-final" id="checkout-cart-price-final" rel="currency">
-                                            <p class="total-price load-price-temp">
+                                            <p class="total-price load-price-total">
                                                 <?= $func->formatMoney($cart->getOrderTotal()) ?>
                                             </p>
                                         </div>

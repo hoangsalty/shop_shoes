@@ -788,58 +788,43 @@ FRAMEWORK.Comments = function () {
         $loadControl = $this.parents("." + $this.attr("data-parents")).find(".comment-load-more-control");
         var id = $this.attr('data-id');
 
-        $.confirm({
-            title: 'Thông báo',
-            icon: 'fas fa-exclamation-triangle', // font awesome
-            type: 'blue', // red, green, orange, blue, purple, dark
-            content: 'Bạn muốn xóa bình luận này ?', // html, text
-            backgroundDismiss: true,
-            animationSpeed: 600,
-            animation: 'zoom',
-            closeAnimation: 'scale',
-            typeAnimated: true,
-            animateFromElement: false,
-            autoClose: 'cancel|2000',
-            escapeKey: 'cancel',
-            buttons: {
-                success: {
-                    text: '<i class="fas fa-check align-middle mr-2"></i>Đồng ý',
-                    btnClass: 'btn-blue btn-sm bg-gradient-primary',
-                    action: function () {
-                        $.ajax({
-                            url: 'api/comment.php',
-                            method: 'POST',
-                            dataType: 'json',
-                            async: false,
-                            data: {
-                                type: 'delete',
-                                id: id
-                            },
-                            beforeSend: function () {
-                                holdonOpen();
-                            },
-                            error: function (e) {
-                                holdonClose();
-                                console('API Comment Delete bị lỗi. Vui lòng thử lại sau.');
-                            },
-                            success: function (response) {
-                                holdonClose();
+        Swal.fire({
+            title: 'Thông báo!',
+            text: "Bạn muốn xóa bình luận này ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Chấp nhận xóa dữ liệu'
+        }).then((state) => {
+            if (state.isConfirmed) {
+                $.ajax({
+                    url: 'api/comment.php',
+                    method: 'POST',
+                    dataType: 'json',
+                    async: false,
+                    data: {
+                        type: 'delete',
+                        id: id
+                    },
+                    beforeSend: function () {
+                        holdonOpen();
+                    },
+                    error: function (e) {
+                        holdonClose();
+                        console('API Comment Delete bị lỗi. Vui lòng thử lại sau.');
+                    },
+                    success: function (response) {
+                        holdonClose();
 
-                                if (response.errors) {
-                                    console('API Comment Delete ' + response.errors);
-                                }
-                                else {
-                                    $this.parents('.' + $this.data('class')).remove();
-
-                                }
-                            }
-                        });
+                        if (response.errors) {
+                            console('API Comment Delete ' + response.errors);
+                        }
+                        else {
+                            $this.parents('.' + $this.data('class')).remove();
+                        }
                     }
-                },
-                cancel: {
-                    text: '<i class="fas fa-times align-middle mr-2"></i>Hủy',
-                    btnClass: 'btn-red btn-sm bg-gradient-danger'
-                }
+                });
             }
         });
     });
@@ -889,13 +874,9 @@ FRAMEWORK.AlbumFiler = function () {
                 enctype: 'multipart/form-data',
                 dataType: 'json',
                 async: false,
-                beforeSend: function () {
-                    holdonOpen();
-                },
                 success: function (data) {
                     data = JSON.parse(data);
                     if (data['success'] == true) {
-                        holdonClose();
                         location.reload();
                     } else {
                         alert(data['msg']);
@@ -912,7 +893,32 @@ FRAMEWORK.AlbumFiler = function () {
         var id = $(this).data('id');
         var table = $(this).data('table');
 
-        confirmDialog('delete-filer', 'Bạn có chắc muốn xóa hình ảnh này ?', id, table);
+        Swal.fire({
+            title: 'Bạn có chắc muốn xóa hình ảnh này ?',
+            text: "Bạn sẽ không thể hoàn tác dữ liệu này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Chấp nhận xóa ảnh này'
+        }).then((state) => {
+            if (state.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'api/gallery.php',
+                    data: {
+                        id: id,
+                        cmd: 'delete',
+                        table: table,
+                    }
+                });
+
+                $('.my-jFiler-item-' + id).remove();
+                if ($('.my-jFiler-items ul li').length == 0) {
+                    $('.form-group-gallery').remove();
+                }
+            }
+        });
     });
     /* Check all filer */
     $('body').on('click', '.check-all-filer', function () {
@@ -946,7 +952,52 @@ FRAMEWORK.AlbumFiler = function () {
     /* Delete all filer */
     $('body').on('click', '.delete-all-filer', function () {
         var table = $(this).data('table');
-        confirmDialog('delete-all-filer', 'Bạn có chắc muốn xóa các hình ảnh đã chọn ?', table);
+
+        Swal.fire({
+            title: 'Bạn có chắc muốn xóa hình ảnh này ?',
+            text: "Bạn sẽ không thể hoàn tác dữ liệu này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Chấp nhận xóa ảnh này'
+        }).then((state) => {
+            if (state.isConfirmed) {
+                var listid = '';
+                $('input.filer-checkbox').each(function () {
+                    if (this.checked) listid = listid + ',' + this.value;
+                });
+                listid = listid.substring(1);
+                if (listid == '') {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Thông báo!',
+                        text: 'Bạn hãy chọn ít nhất 1 mục để xóa',
+                        allowOutsideClick: false,
+                    });
+                    return false;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'api/gallery.php',
+                    data: {
+                        listid: listid,
+                        cmd: 'delete-all',
+                        table: table,
+                    },
+                });
+
+                listid = listid.split(',');
+                for (var i = 0; i < listid.length; i++) {
+                    $('.my-jFiler-item-' + listid[i]).remove();
+                }
+
+                if ($('.my-jFiler-items ul li').length == 0) {
+                    $('.form-group-gallery').remove();
+                }
+            }
+        });
     });
 }
 

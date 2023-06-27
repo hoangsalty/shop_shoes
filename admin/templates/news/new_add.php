@@ -2,7 +2,7 @@
 if ($act == "add") $labelAct = "Thêm mới";
 else if ($act == "edit") $labelAct = "Chỉnh sửa";
 
-$linkMan = "index.php?com=news&act=man&type=" . $type;
+$linkMan = "index.php?com=news&act=list&type=" . $type;
 
 $name = '';
 if ($type == 'tin-tuc') $name = 'Tin tức';

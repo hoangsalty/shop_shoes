@@ -80,113 +80,6 @@ function holdonOpen(theme = 'sk-circle', text = 'Loading...', backgroundColor = 
 function holdonClose() {
     HoldOn.close();
 }
-/* Notify */
-function notifyDialog(content = '', title = 'Thông báo', icon = 'fas fa-exclamation-triangle', type = 'blue') {
-    $.alert({
-        title: title,
-        icon: icon, // font awesome
-        type: type, // red, green, orange, blue, purple, dark
-        content: content, // html, text
-        backgroundDismiss: false,
-        backgroundDismissAnimation: 'shake',
-        animationSpeed: 600,
-        animation: 'zoom',
-        closeAnimation: 'scale',
-        typeAnimated: true,
-        animateFromElement: false,
-        autoClose: 'accept|3000',
-        escapeKey: 'accept',
-        buttons: {
-            accept: {
-                text: '<i class="fas fa-check align-middle mr-2"></i>Đồng ý',
-                btnClass: 'btn-blue btn-sm bg-gradient-primary',
-                action: function () {
-                    location.reload();
-                }
-            }
-        }
-    });
-}
-/* Confirm */
-function confirmDialog(action, text, value, table = '', title = 'Thông báo', icon = 'fas fa-exclamation-triangle', type = 'blue') {
-    $.confirm({
-        title: title,
-        icon: icon, // font awesome
-        type: type, // red, green, orange, blue, purple, dark
-        content: text, // html, text
-        backgroundDismiss: false,
-        backgroundDismissAnimation: 'shake',
-        animationSpeed: 600,
-        animation: 'zoom',
-        closeAnimation: 'scale',
-        typeAnimated: true,
-        animateFromElement: false,
-        autoClose: 'cancel|3000',
-        escapeKey: 'cancel',
-        buttons: {
-            success: {
-                text: '<i class="fas fa-check align-middle mr-2"></i>Đồng ý',
-                btnClass: 'btn-blue btn-sm bg-gradient-primary',
-                action: function () {
-                    if (action == 'delete-filer') deleteFiler(value, table);
-                    if (action == 'delete-all-filer') deleteAllFiler(value);
-                }
-            },
-            cancel: {
-                text: '<i class="fas fa-times align-middle mr-2"></i>Hủy',
-                btnClass: 'btn-red btn-sm bg-gradient-danger'
-            }
-        }
-    });
-}
-/* Delete filer */
-function deleteFiler(id, table) {
-    $.ajax({
-        type: 'POST',
-        url: 'api/gallery.php',
-        data: {
-            id: id,
-            cmd: 'delete',
-            table: table,
-        }
-    });
-
-    $('.my-jFiler-item-' + id).remove();
-    if ($('.my-jFiler-items ul li').length == 0) {
-        $('.form-group-gallery').remove();
-    }
-}
-/* Delete all filer */
-function deleteAllFiler(table) {
-    var listid = '';
-    $('input.filer-checkbox').each(function () {
-        if (this.checked) listid = listid + ',' + this.value;
-    });
-    listid = listid.substring(1);
-    if (listid == '') {
-        notifyDialog('Bạn hãy chọn ít nhất 1 mục để xóa');
-        return false;
-    }
-
-    $.ajax({
-        type: 'POST',
-        url: 'api/gallery.php',
-        data: {
-            listid: listid,
-            cmd: 'delete-all',
-            table: table,
-        },
-    });
-
-    listid = listid.split(',');
-    for (var i = 0; i < listid.length; i++) {
-        $('.my-jFiler-item-' + listid[i]).remove();
-    }
-
-    if ($('.my-jFiler-items ul li').length == 0) {
-        $('.form-group-gallery').remove();
-    }
-}
 /* Slug */
 function slugConvert(slug, focus = false) {
     slug = slug.toLowerCase();
@@ -338,12 +231,23 @@ function readImage(inputFile, elementPhoto) {
                 };
                 reader.readAsDataURL(inputFile[0].files[0]);
             } else {
-                notifyDialog('Dung lượng hình ảnh lớn. Dung lượng cho phép <= 4MB ~ 4096KB');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Có lỗi phát sinh...',
+                    text: 'Dung lượng hình ảnh lớn. Dung lượng cho phép <= 4MB ~ 4096KB',
+                    allowOutsideClick: false,
+                });
+
                 return false;
             }
         } else {
             $(elementPhoto).attr('src', '');
-            notifyDialog('Định dạng hình ảnh không hợp lệ');
+            Swal.fire({
+                icon: 'error',
+                title: 'Có lỗi phát sinh...',
+                text: 'Định dạng hình ảnh không hợp lệ',
+                allowOutsideClick: false,
+            });
             return false;
         }
     } else {
@@ -377,10 +281,20 @@ function photoZone(eDrag, iDrag, eLoad) {
                 $(iDrag).prop('files', e.originalEvent.dataTransfer.files);
                 readImage($(iDrag), eLoad);
             } else if (lengthZone > 1) {
-                notifyDialog('Bạn chỉ được chọn 1 hình ảnh để upload');
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Nhắc nhở !',
+                    text: 'Bạn chỉ được chọn 1 hình ảnh để upload',
+                    allowOutsideClick: false,
+                });
                 return false;
             } else {
-                notifyDialog('Dữ liệu không hợp lệ');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Có lỗi phát sinh...',
+                    text: 'Dữ liệu không hợp lệ',
+                    allowOutsideClick: false,
+                });
                 return false;
             }
         });
@@ -393,7 +307,12 @@ function photoZone(eDrag, iDrag, eLoad) {
 }
 function onSearch(obj, url) {
     if (url == '') {
-        notifyDialog('Đường dẫn không hợp lệ');
+        Swal.fire({
+            icon: 'error',
+            title: 'Có lỗi phát sinh...',
+            text: 'Đường dẫn không hợp lệ',
+            allowOutsideClick: false,
+        });
         return false;
     } else {
         var keyword = $('#' + obj).val();

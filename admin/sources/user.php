@@ -73,7 +73,7 @@ function ViewUsers()
     $sqlNum = "select count(*) as 'num' from table_user where id <> 1 $where order by id desc";
     $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
-    $url = "index.php?com=user&act=man";
+    $url = "index.php?com=user&act=list";
     $paging = $func->pagination($total, $perPage, $curPage, $url);
 }
 /* Edit user */
@@ -84,7 +84,7 @@ function editUser()
     $id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
 
     if ($act == 'edit' && empty($id)) {
-        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=user&act=man&page=" . $curPage, false);
+        $func->transferAdmin("Không nhận được dữ liệu", "index.php?com=user&act=list&page=" . $curPage, false);
     } else {
         if ($act == 'info' && !empty($_SESSION['account']['username'])) {
             $item = $d->rawQueryOne("select * from table_user where username = ? limit 0,1", array($_SESSION['account']['username']));
@@ -92,7 +92,7 @@ function editUser()
             $item = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($id));
         }
         if (empty($item)) {
-            $func->transferAdmin("Dữ liệu không có thực", "index.php?com=user&act=man&page=" . $curPage, false);
+            $func->transferAdmin("Dữ liệu không có thực", "index.php?com=user&act=list&page=" . $curPage, false);
         }
     }
 }

@@ -286,7 +286,7 @@
   align-items: center;
   padding: 10px 15px;
   border-radius: 3px;
-  margin-bottom: 0px;
+  margin: 0px !important;
   color: #313131 !important;
 }
 

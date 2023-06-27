@@ -1888,3 +1888,8 @@ select.form-control option:disabled {
 input#color {
     padding: 0;
 }
+
+.sticky-top {
+    position: sticky !important;
+    background-color: white;
+}
