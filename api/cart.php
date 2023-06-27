@@ -7,7 +7,6 @@ $color = (!empty($_POST['color'])) ? htmlspecialchars($_POST['color']) : 0;
 $size = (!empty($_POST['size'])) ? htmlspecialchars($_POST['size']) : 0;
 $quantity = (!empty($_POST['quantity'])) ? htmlspecialchars($_POST['quantity']) : 1;
 $code = (!empty($_POST['code'])) ? htmlspecialchars($_POST['code']) : '';
-$ward = (!empty($_POST['ward'])) ? htmlspecialchars($_POST['ward']) : 0;
 
 if ($cmd == 'add-cart' && $id > 0) {
     $cart->addToCart($quantity, $id, $color, $size);
@@ -31,42 +30,41 @@ if ($cmd == 'add-cart' && $id > 0) {
     $temp = $cart->getOrderTotal();
     $tempText = $func->formatMoney($temp);
     $total = $cart->getOrderTotal();
-    if (!empty($ship)) $total += $ship;
     $totalText = $func->formatMoney($total);
-    $data = array('regularPrice' => $regular_price, 'salePrice' => $sale_price, 'tempText' => $tempText, 'totalText' => $totalText);
+    $data = array(
+        'regularPrice' => $regular_price,
+        'salePrice' => $sale_price,
+        'tempText' => $tempText,
+        'totalText' => $totalText,
+    );
+
+    echo json_encode($data);
+} else if ($cmd == 'update-ship-total') {
+    $ship = (!empty($_POST['ship_price'])) ? htmlspecialchars($_POST['ship_price']) : 0;
+
+    $temp = $cart->getOrderTotal();
+    $tempText = $func->formatMoney($temp);
+
+    $total = $cart->getOrderTotal() + $ship;
+    $totalText = $func->formatMoney($total);
+
+    $data = array(
+        'shipPrice' => $ship,
+        'tempPrice' => $temp,
+        'tempText' => $tempText,
+        'totalPrice' => $total,
+        'totalText' => $totalText,
+    );
 
     echo json_encode($data);
 } else if ($cmd == 'delete-cart' && $code != '') {
-        $shipData = (!empty($ward)) ? $func->getInfoDetail('ship_price', "ward", $ward) : array();
-        $ship = (!empty($shipData)) ? $shipData['ship_price'] : 0;
-
     $cart->removeProduct($code);
     $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
     $temp = $cart->getOrderTotal();
     $tempText = $func->formatMoney($temp);
     $total = $cart->getOrderTotal();
-    if (!empty($ship)) $total += $ship;
     $totalText = $func->formatMoney($total);
     $data = array('max' => $max, 'tempText' => $tempText, 'totalText' => $totalText);
-
-    echo json_encode($data);
-} else if ($cmd == 'ship-cart') {
-    $shipData = array();
-    $shipPrice = 0;
-    $shipText = '0đ';
-    $total = 0;
-    $totalText = '';
-
-    if ($id) $shipData = $func->getInfoDetail('ship_price', "ward", $id);
-
-    $total = $cart->getOrderTotal();
-    if (!empty($shipData['ship_price'])) {
-        $total += $shipData['ship_price'];
-        $shipText = $func->formatMoney($shipData['ship_price']);
-    }
-    $totalText = $func->formatMoney($total);
-    $shipPrice = (!empty($shipData['ship_price'])) ? $shipData['ship_price'] : 0;
-    $data = array('shipText' => $shipText, 'ship' => $shipPrice, 'totalText' => $totalText);
 
     echo json_encode($data);
 } else if ($cmd == 'popup-cart') { ?>

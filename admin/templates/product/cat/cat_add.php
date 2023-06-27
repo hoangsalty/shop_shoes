@@ -3,8 +3,6 @@ if ($act == "add_cat") $labelAct = "Thêm mới";
 else if ($act == "edit_cat") $labelAct = "Chỉnh sửa";
 
 $linkMan = "index.php?com=product&act=man_cat";
-if ($act == 'add_cat') $linkSave = "index.php?com=product&act=save_cat";
-else if ($act == 'edit_cat') $linkSave = "index.php?com=product&act=save_cat&id=" . $id;
 ?>
 
 <!-- Main content -->

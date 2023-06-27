@@ -1,7 +1,6 @@
 <?php
 $linkView = $configBase;
 $linkMan = "index.php?com=product&act=man_color";
-$linkDelete = "index.php?com=product&act=delete_color";
 
 $status = array("hienthi" => "Hiển thị");
 ?>

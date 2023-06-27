@@ -3,8 +3,6 @@ if ($act == "add_photo") $labelAct = "Thêm mới";
 else if ($act == "edit_photo") $labelAct = "Chỉnh sửa";
 
 $linkMan = "index.php?com=photo&act=man_photo&type=" . $type;
-if ($act == 'add_photo') $linkSave = "index.php?com=photo&act=save_photo&type=" . $type;
-else if ($act == 'edit_photo') $linkSave = "index.php?com=photo&act=save_photo&type=" . $type . "&id=" . $id;
 
 $name = '';
 if ($type == 'logo') $name = 'Logo';
@@ -87,7 +85,7 @@ else if ($type == 'album') $name = 'Album';
             </div>
         </div>
 
-        <?php if ($type == 'album' && $act == 'edit_photo') { ?>
+        <?php if ($type == 'album') { ?>
             <div class="card card-primary card-outline text-sm">
                 <div class="card-header">
                     <h3 class="card-title">Album hình ảnh</h3>

@@ -6,9 +6,7 @@ if (empty($_GET["vnp_Amount"])) {
 
 if (!empty($_GET["vnp_Amount"])) {
     $vnp_ResponseCode = $_GET['vnp_ResponseCode'];
-
     $message = '';
-
     if ($vnp_ResponseCode == '00') {
         $vnp_Amount = $_GET['vnp_Amount'];
         $vnp_BankCode = $_GET['vnp_BankCode'];
@@ -34,24 +32,21 @@ if (!empty($_GET["vnp_Amount"])) {
             $requirements = (!empty($dataOrder['requirements'])) ? htmlspecialchars($dataOrder['requirements']) : '';
 
             /* Place */
-            $city = (!empty($dataOrder['city'])) ? htmlspecialchars($dataOrder['city']) : 0;
-            $district = (!empty($dataOrder['district'])) ? htmlspecialchars($dataOrder['district']) : 0;
-            $ward = (!empty($dataOrder['ward'])) ? htmlspecialchars($dataOrder['ward']) : 0;
-            $city_text = $func->getInfoDetail('name', "city", $city);
-            $district_text = $func->getInfoDetail('name', "district", $district);
-            $ward_text = $func->getInfoDetail('name', "ward", $ward);
-            $address = htmlspecialchars($dataOrder['address']);
+            $city = (!empty($dataOrder['city'])) ? htmlspecialchars($dataOrder['city']) : '';
+            $district = (!empty($dataOrder['district'])) ? htmlspecialchars($dataOrder['district']) : '';
+            $ward = (!empty($dataOrder['ward'])) ? htmlspecialchars($dataOrder['ward']) : '';
+
+            $address = htmlspecialchars($dataOrder['address']) . ', ' . strtok($ward, '__') . ', ' . strtok($district, '__') . ', ' . strtok($city, '__');
 
             /* Payment */
             $order_payment = (!empty($dataOrder['payments'])) ? htmlspecialchars($dataOrder['payments']) : '';
 
             /* Ship */
-            $ship_data = (!empty($dataOrder['ward'])) ? $func->getInfoDetail('ship_price', "ward", $dataOrder['ward']) : array();
-            $ship_price = (!empty($ship_data['ship_price'])) ? $ship_data['ship_price'] : 0;
+            $ship_price = (!empty($dataOrder['ship_price'])) ? $dataOrder['ship_price'] : 0;
 
             /* Price */
-            $temp_price = $cart->getOrderTotal();
-            $total_price = (!empty($ship_price)) ? $cart->getOrderTotal() + $ship_price : $cart->getOrderTotal();
+            $temp_price = (!empty($dataOrder['temp_price'])) ? $dataOrder['temp_price'] : 0;
+            $total_price = (!empty($ship_price)) ? $temp_price + $ship_price : $temp_price;
 
             /* Cart */
             $orderDetails = (!empty($_SESSION['cart'])) ? $_SESSION['cart'] : array();
@@ -72,9 +67,6 @@ if (!empty($_GET["vnp_Amount"])) {
             $data_donhang['requirements'] = $requirements;
             $data_donhang['date_created'] = $order_date;
             $data_donhang['order_status'] = 'moidat';
-            $data_donhang['city'] = $city;
-            $data_donhang['district'] = $district;
-            $data_donhang['ward'] = $ward;
 
             /* lưu đơn hàng chi tiết */
             if ($d->insert('table_order', $data_donhang)) {
@@ -125,19 +117,10 @@ if (!empty($_GET["vnp_Amount"])) {
                 $data_vnpay['vnp_transactionno'] = $vnp_TransactionNo;
                 $d->insert('table_vnpay', $data_vnpay);
 
+                $currentOrder = $d->rawQueryOne("select * from table_order where transId=? limit 0,1", array($vnp_TransactionNo));
+
                 /* Xóa giỏ hàng và đơn hàng session */
                 $tempCart = $_SESSION['cart'];
-                $currentOrder = $d->rawQueryOne("select * from table_order where transId=? limit 0,1", array($vnp_TransactionNo));
-                /* Place */
-                $city = (!empty($currentOrder['city'])) ? htmlspecialchars($currentOrder['city']) : 0;
-                $district = (!empty($currentOrder['district'])) ? htmlspecialchars($currentOrder['district']) : 0;
-                $ward = (!empty($currentOrder['ward'])) ? htmlspecialchars($currentOrder['ward']) : 0;
-                $city_text = $func->getInfoDetail('name', "city", $city);
-                $district_text = $func->getInfoDetail('name', "district", $district);
-                $ward_text = $func->getInfoDetail('name', "ward", $ward);
-                $address = htmlspecialchars($currentOrder['address']) . ', ' . $ward_text['name'] . ', ' . $district_text['name'] . ', ' . $city_text['name'];
-
-
                 unset($_SESSION['cart']);
                 unset($_SESSION['dataOrder']);
                 $message = 'Thanh toán qua VNPay Thành Công!';

@@ -34,7 +34,7 @@ require_once LIBRARIES . "requick.php";
     <?php include TEMPLATE . LAYOUT . "css.php"; ?>
 </head>
 
-<body class="layout-fixed layout-navbar-fixed layout-footer-fixed <?= (!isset($_SESSION['account']['active']) || $_SESSION['account']['active'] == false) ? 'login-page' : '' ?>">
+<body class="<?= (!isset($_SESSION['account']['active']) || $_SESSION['account']['active'] == false) ? 'login-page' : '' ?>">
     <?php if (isset($_SESSION['account']['active']) && ($_SESSION['account']['active'] == true)) { ?>
         <!-- Main -->
         <div class=" wrapper">

@@ -57,12 +57,12 @@ $countNotify += count($commentNotify);
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Thông báo</span>
                 <div class="dropdown-divider"></div>
-                <a href="index.php?com=order&act=man" class="dropdown-item">
+                <a href="index.php?com=order&act=list" class="dropdown-item">
                     <i class="fas fa-cart-arrow-down"></i> Đơn hàng
                     <span class="float-right text-danger text-sm text-bold"><?= count($orderNotify) ?> đơn hàng mới</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="index.php?com=product&act=man&comment_status=new" class="dropdown-item">
+                <a href="index.php?com=product&act=list&comment_status=new" class="dropdown-item">
                 <i class="fas fa-comment-dots"></i> Comments
                     <span class="float-right text-danger text-sm text-bold"><?= count($commentNotify) ?> bình luận mới</span>
                 </a>

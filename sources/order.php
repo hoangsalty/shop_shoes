@@ -38,15 +38,13 @@ if (!empty($_POST['thanhtoan'])) {
         $order_payment = (!empty($dataOrder['payments'])) ? htmlspecialchars($dataOrder['payments']) : '';
 
         /* Ship */
-        $ship_data = (!empty($dataOrder['ward'])) ? $func->getInfoDetail('ship_price', "ward", $dataOrder['ward']) : array();
-        $ship_price = (!empty($ship_data['ship_price'])) ? $ship_data['ship_price'] : 0;
+        $ship_price = (!empty($dataOrder['ship_price'])) ? $dataOrder['ship_price'] : 0;
 
         /* Price */
-        $temp_price = $cart->getOrderTotal();
-        $total_price = (!empty($ship_price)) ? $cart->getOrderTotal() + $ship_price : $cart->getOrderTotal();
+        $temp_price = (!empty($dataOrder['temp_price'])) ? $dataOrder['temp_price'] : 0;
+        $total_price = (!empty($ship_price)) ? $temp_price + $ship_price : $temp_price;
 
         /* Cart */
-        $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
         $orderDetails = (!empty($_SESSION['cart'])) ? $_SESSION['cart'] : array();
     }
 
@@ -227,9 +225,6 @@ if (!empty($_POST['thanhtoan'])) {
     $data_donhang['requirements'] = $requirements;
     $data_donhang['date_created'] = $order_date;
     $data_donhang['order_status'] = 'moidat';
-    $data_donhang['city'] = $city;
-    $data_donhang['district'] = $district;
-    $data_donhang['ward'] = $ward;
 
     /* lưu đơn hàng chi tiết */
     if ($d->insert('table_order', $data_donhang)) {
@@ -247,8 +242,7 @@ if (!empty($_POST['thanhtoan'])) {
                 $size = ($value['size'] > 0) ? $value['size'] : NULL;
                 $code_order = $value['code'];
 
-                if ($q == 0)
-                    continue;
+                if ($q == 0) continue;
 
                 $data_orderdetail = array();
                 $data_orderdetail['id_product'] = $pid;
@@ -266,12 +260,23 @@ if (!empty($_POST['thanhtoan'])) {
                 $data_orderdetail['quantity'] = $q;
                 $d->insert('table_order_detail', $data_orderdetail);
             }
+
+            $currentOrder = $d->rawQueryOne("select * from table_order where id=? limit 0,1", array($id_insert));
+            $tempCart = $_SESSION['cart'];
+            $statusOrder = 200;
+            $message = 'Thông tin đơn hàng đã được gửi thành công. Hệ thống sẽ tự đưa bạn quay trở về trang chủ...';
         }
 
         /* Xóa giỏ hàng */
         unset($_SESSION['cart']);
-        $func->transfer("Thông tin đơn hàng đã được gửi thành công.", $configBase);
+        include(TEMPLATE . "order/order_status.php");
+        exit();
+        //$func->transfer("Thông tin đơn hàng đã được gửi thành công.", $configBase);
     } else {
-        $func->transfer("Lỗi lưu đơn hàng.", $configBase, false);
+        $statusOrder = 404;
+        $message = 'Lỗi lưu đơn hàng.';
+        include(TEMPLATE . "order/order_status.php");
+        exit();
+        //$func->transfer("Lỗi lưu đơn hàng.", $configBase, false);
     }
 }

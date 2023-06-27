@@ -9,11 +9,11 @@
 <body>
     <div class="wap_main">
         <?php
-        if ($com != 'gio-hang') {
+        if ($com != 'gio-hang' && $source != 'vnpay') {
             include TEMPLATE . LAYOUT . "header.php";
             include TEMPLATE . LAYOUT . "menu.php";
             include TEMPLATE . LAYOUT . "mmenu.php";
-            include TEMPLATE . LAYOUT . "slide.php";
+            if ($source == 'index') include TEMPLATE . LAYOUT . "slide.php";
             if ($source != 'index' && $source != 'vnpay' && $source != 'user' && $source != 'order') include TEMPLATE . LAYOUT . "breadcrumb.php";
         }
         ?>
@@ -21,7 +21,7 @@
             <?php include TEMPLATE . $template . ".php"; ?>
         </div>
         <?php
-        if ($com != 'gio-hang') {
+        if ($com != 'gio-hang' && $source != 'vnpay') {
             include TEMPLATE . LAYOUT . "footer.php";
             include TEMPLATE . LAYOUT . "modal.php";
         }

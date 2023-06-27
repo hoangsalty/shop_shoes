@@ -31,7 +31,6 @@
 <script src="assets/datetimepicker/jquery.mousewheel.js"></script>
 <script src="assets/datetimepicker/php-date-formatter.min.js"></script>
 <script src="assets/js/priceFormat.js"></script>
-<script src="assets/confirm/confirm.js"></script>
 <script src="assets/ckeditor4/ckeditor.js"></script>
 <script src="assets/sumoselect/jquery.sumoselect.js"></script>
 <script src="assets/rangeSlider/ion.rangeSlider.js"></script>

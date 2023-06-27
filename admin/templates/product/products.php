@@ -3,7 +3,6 @@ $linkView = $configBase;
 $linkMan = "index.php?com=product&act=list";
 $linkAdd = "index.php?com=product&act=add";
 $linkEdit = "index.php?com=product&act=edit";
-$linkDelete = "index.php?com=product&act=delete";
 $linkComment = "index.php?com=comment&act=list";
 
 $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
@@ -80,7 +79,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                 </td>
                                 <td class="align-middle">
                                     <a href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                        <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 130, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
+                                        <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 150, 'height' => 150, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
                                     </a>
                                 </td>
                                 <td class="align-middle">
