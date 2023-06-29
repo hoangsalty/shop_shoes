@@ -22,7 +22,7 @@
 
                 <div class="contain">
                     <div class="login">
-                        <form class="validation-form" id="form-user-login" novalidate method="post" action="" enctype="multipart/form-data">
+                        <form id="form-user-login" novalidate method="post" action="" enctype="multipart/form-data">
                             <h2>Đăng nhập</h2>
 
                             <div class="login_response"></div>
@@ -70,7 +70,7 @@
                 </button>
 
                 <div class="contain">
-                    <form class="validation-form" id="form-user-register" novalidate method="post" action="" enctype="multipart/form-data">
+                    <form id="form-user-register" novalidate method="post" action="" enctype="multipart/form-data">
                         <h2>Đăng ký</h2>
 
                         <div class="register_response"></div>
@@ -143,10 +143,10 @@
                 </button>
 
                 <div class="contain">
-                    <form class="validation-form" id="form-user-forgot" novalidate method="post" action="" enctype="multipart/form-data">
+                    <form id="form_forgotpassword" novalidate method="post" action="" enctype="multipart/form-data">
                         <h2>Quên mật khẩu</h2>
 
-                        <div class="register_response"></div>
+                        <div class="forgotpassword_response"></div>
 
                         <div class="input-group input-user">
                             <div class="input-group-prepend">
@@ -157,6 +157,51 @@
 
                         <div class="button-user">
                             <input type="submit" class="log" name="forgotpassword-account" value="Lấy lại mật khẩu">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="popup-changepassword" tabindex="-1" role="dialog" aria-labelledby="popup-changepassword-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div class="contain">
+                    <form id="form_changepassword" novalidate method="post" action="" enctype="multipart/form-data">
+                        <input type="hidden" name="id" id="id">
+
+                        <h2>Đổi mật khẩu</h2>
+
+                        <div class="changepassword_response"></div>
+
+                        <div class="input-group input-user">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
+                            </div>
+                            <input type="password" class="form-control text-sm" name="old-password" id="old-password" placeholder="Mật khẩu cũ" required>
+                        </div>
+                        <div class="input-group input-user">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
+                            </div>
+                            <input type="password" class="form-control text-sm" name="new-password" id="new-password" placeholder="Mật khẩu mới" required>
+                        </div>
+                        <div class="input-group input-user">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa-solid fa-lock"></i></div>
+                            </div>
+                            <input type="password" class="form-control text-sm" name="renew-password" id="renew-password" placeholder="Nhập lại mật khẩu mới" required>
+                        </div>
+
+                        <div class="button-user">
+                            <input type="submit" class="log" name="changepassword-account" value="Đổi mật khẩu">
                         </div>
                     </form>
                 </div>

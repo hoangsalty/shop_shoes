@@ -75,9 +75,16 @@ if ($cmd == 'change-status' && $id > 0) {
                                     <a id="cancel-order" data-id="<?= $v1['id'] ?>" data-status="dahuy" href="javascript:void()" class="change_order_status">Hủy đơn hàng</a>
                                 <?php } ?>
 
-                                <div class="total-procart">
-                                    <p class="mr-3">Tổng tiền:</p>
-                                    <p class="total-price load-price-total"><?= $func->formatMoney($v1['total_price']) ?></p>
+                                <div class="price-procart">
+                                    <div class="total-procart">
+                                        <p class="mr-3">Phí Ship:</p>
+                                        <p class="total-price load-price-total"><?= $func->formatMoney($v1['ship_price']) ?></p>
+                                    </div>
+
+                                    <div class="total-procart">
+                                        <p class="mr-3">Tổng tiền:</p>
+                                        <p class="total-price load-price-total"><?= $func->formatMoney($v1['total_price']) ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

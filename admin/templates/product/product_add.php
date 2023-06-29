@@ -180,6 +180,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                         <input type="file" name="files[]" id="filer-gallery" data-table="gallery" multiple="multiple">
                         <input type="hidden" class="col-filer" value="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
                     </div>
+                    
                     <div class="form-group form-group-gallery">
                         <label class="label-filer">Album hiện tại:</label>
                         <div class="action-filer mb-3">
@@ -190,7 +191,6 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                         <div class="jFiler-items my-jFiler-items jFiler-row">
                             <ul class="jFiler-items-list jFiler-items-grid row scroll-bar" id="jFilerSortable">
                                 <?php if (!empty($gallery)) { ?>
-
                                     <?php foreach ($gallery as $v) { ?>
                                         <li class="jFiler-item my-jFiler-item my-jFiler-item-<?= $v['id'] ?> col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6" data-id="<?= $v['id'] ?>">
                                             <div class="jFiler-item-container">

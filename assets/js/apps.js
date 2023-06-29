@@ -45,6 +45,110 @@ FRAMEWORK.DbUser = function () {
       }
     });
   });
+
+  $("#form_forgotpassword").submit(function (e) {
+    e.preventDefault();
+
+    data = new FormData($(this)[0]);
+    data.append('act', 'quen-mat-khau');
+
+    $.ajax({
+      type: "POST",
+      url: 'sources/user.php',
+      processData: false,
+      cache: false,
+      contentType: false,
+      dataType: "json",
+      data: data,
+      beforeSend: function () {
+        holdonOpen();
+      },
+      success: function (result) {
+        holdonClose();
+        if (result["status"] == 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Thông báo!',
+            text: result["messages"][0],
+            allowOutsideClick: false,
+          }).then((state) => {
+            if (state.isConfirmed) {
+              $('.modal').modal('hide');
+            }
+          });
+        } else {
+          var myHTML = '';
+          result["messages"].forEach(e => {
+            myHTML += '<p class="mb-1">' + e + '</p>';
+          });
+
+          $('.forgotpassword_response').html(
+            '<div style="color:red">' +
+            myHTML +
+            '</div>'
+          )
+        }
+      }
+    });
+  });
+
+  $("#change_pass_user").click(function (e) {
+    e.preventDefault();
+
+    $('.modal').modal('hide');
+
+    var id = $(this).data('id');
+    $('#popup-changepassword').modal('show');
+    $('#popup-changepassword').find('#id').val(id);
+  });
+
+  $("#form_changepassword").submit(function (e) {
+    e.preventDefault();
+
+    data = new FormData($(this)[0]);
+    data.append('act', 'luu-thong-tin');
+    data.append('changepass', 1);
+
+    $.ajax({
+      type: "POST",
+      url: 'sources/user.php',
+      processData: false,
+      cache: false,
+      contentType: false,
+      dataType: "json",
+      data: data,
+      beforeSend: function () {
+        holdonOpen();
+      },
+      success: function (result) {
+        holdonClose();
+        if (result["status"] == 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Thông báo!',
+            text: result["messages"][0],
+            allowOutsideClick: false,
+          }).then((state) => {
+            if (state.isConfirmed) {
+              $('.modal').modal('hide');
+              location.href = result['link'];
+            }
+          });
+        } else {
+          var myHTML = '';
+          result["messages"].forEach(e => {
+            myHTML += '<p class="mb-1">' + e + '</p>';
+          });
+
+          $('.changepassword_response').html(
+            '<div style="color:red">' +
+            myHTML +
+            '</div>'
+          )
+        }
+      }
+    });
+  });
 }
 
 FRAMEWORK.Order = function () {
