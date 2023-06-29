@@ -34,20 +34,19 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" =>
                             <div class="row">
                                 <div class="form-group col-xl-4 col-lg-6 col-md-6">
                                     <label for="old-password">Mật khẩu cũ:</label>
-                                    <input type="password" class="form-control text-sm" name="old-password" id="old-password" placeholder="Mật khẩu cũ">
+                                    <input type="password" class="form-control text-sm" name="old-password" id="old-password" placeholder="Mật khẩu cũ" required>
                                 </div>
                                 <div class="form-group col-xl-4 col-lg-6 col-md-6">
                                     <label for="new-password">
                                         <span class="d-inline-block align-middle">Mật khẩu mới:</span>
-                                        <span class="btn btn-danger btn-sm ml-2" id="show-password"></span>
                                     </label>
                                     <div class="row align-items-center">
-                                        <input type="password" class="form-control text-sm" name="new-password" id="new-password" placeholder="Mật khẩu mới">
+                                        <input type="password" class="form-control text-sm" name="new-password" id="new-password" placeholder="Mật khẩu mới" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-4 col-lg-6 col-md-6">
                                     <label for="renew-password">Nhập lại mật khẩu mới:</label>
-                                    <input type="password" class="form-control text-sm" name="renew-password" id="renew-password" placeholder="Nhập lại mật khẩu mới">
+                                    <input type="password" class="form-control text-sm" name="renew-password" id="renew-password" placeholder="Nhập lại mật khẩu mới" required>
                                 </div>
                             </div>
                         </div>

@@ -11,11 +11,12 @@ define('LAYOUT', './layout/');
 require_once LIBRARIES . "config.php";
 
 /* Load all files in folder class */
-$files = glob(LIBRARIES . '/class/*.php');
+$files = glob(LIBRARIES . 'class/*.php');
 foreach ($files as $file) require_once $file;
 
 $d = new PDODb($config['database']);
 $flash = new Flash();
+$emailer = new Email($d);
 $router = new AltoRouter();
 $func = new Functions($d);
 $breadcr = new BreadCrumbs($d);

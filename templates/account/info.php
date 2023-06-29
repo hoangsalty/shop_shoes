@@ -18,6 +18,7 @@
                 <a href="#order" class="sty_list" id="order-tab" data-toggle="tab" data-target="#order" type="button" role="tab" aria-controls="order" aria-selected="false">Quản lý đơn hàng</a>
             </li>
         </ul>
+        <a id="change_pass_user" type="button"><img src="assets/images/user_acc.png" alt=""> Đổi mật khẩu</a>
     </div>
 
     <div class="right_info">

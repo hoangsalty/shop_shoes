@@ -55,41 +55,41 @@ $linkEdit = "index.php?com=user&act=edit";
                     </tbody>
                 <?php } else { ?>
                     <tbody>
-                        <?php for ($i = 0; $i < count($items); $i++) { ?>
+                        <?php foreach ($items as $key => $user) { ?>
                             <tr>
                                 <td class="align-middle">
                                     <div class="custom-control custom-checkbox my-checkbox">
-                                        <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?= $items[$i]['id'] ?>" value="<?= $items[$i]['id'] ?>">
-                                        <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
+                                        <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?= $user['id'] ?>" value="<?= $user['id'] ?>">
+                                        <label for="select-checkbox-<?= $user['id'] ?>" class="custom-control-label"></label>
                                     </div>
                                 </td>
-                                <td class="align-middle text-center">
-                                    <?= $i + 1 ?>
+                                <td class="align-middle text-center"><?= $key + 1 ?></td>
+                                <td class="align-middle">
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $user['id'] ?>" title="<?= $user['username'] ?>"><?= $user['username'] ?> <?= $_SESSION['account']['id'] == $user['id'] ? '(Bạn)' : '' ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['username'] ?>"><?= $items[$i]['username'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $user['id'] ?>" title="<?= $user['fullname'] ?>"><?= $user['fullname'] ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['fullname'] ?>"><?= $items[$i]['fullname'] ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $user['id'] ?>" title="<?= $user['email'] ?>"><?= $user['email'] ?></a>
                                 </td>
                                 <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['email'] ?>"><?= $items[$i]['email'] ?></a>
-                                </td>
-                                <td class="align-middle">
-                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $func->getPermissionName($items[$i]['permission']) ?>"><?= $func->getPermissionName($items[$i]['permission']) ?></a>
+                                    <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $user['id'] ?>" title="<?= $func->getPermissionName($user['permission']) ?>"><?= $func->getPermissionName($user['permission']) ?></a>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <?php if ($items[$i]['status'] == 'hoatdong') { ?>
+                                    <?php if ($user['status'] == 'hoatdong') { ?>
                                         <span class="badge bg-success">Hoạt động</span>
-                                    <?php } else if ($items[$i]['status'] == 'khoa') { ?>
+                                    <?php } else if ($user['status'] == 'khoa') { ?>
                                         <span class="badge bg-danger">Khóa</span>
-                                    <?php } else if ($items[$i]['status'] == 'kichhoat') { ?>
+                                    <?php } else if ($user['status'] == 'kichhoat') { ?>
                                         <span class="badge bg-warning">Chưa kích hoạt</span>
                                     <?php } ?>
                                 </td>
                                 <td class="align-middle text-center text-md text-nowrap">
-                                    <a class="btn btn-primary btn-sm mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/user.php" data-act="delete" title="<?= $items[$i]['fullname'] ?>"><i class="far fa-trash-alt mr-1"></i></a>
+                                    <?php if ($_SESSION['account']['id'] != $user['id']) { ?>
+                                        <a class="btn btn-primary btn-sm mr-2" href="<?= $linkEdit ?>&id=<?= $user['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                        <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $user['id'] ?>" data-url="sources/user.php" data-act="delete" title="<?= $user['fullname'] ?>"><i class="far fa-trash-alt mr-1"></i></a>
+                                    <?php } ?>
                                 </td>
                             </tr>
                         <?php } ?>

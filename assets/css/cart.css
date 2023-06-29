@@ -171,6 +171,7 @@
 .price-procart {
   width: 20%;
   text-align: right;
+  margin-left: auto;
 }
 
 .price-new-cart {
@@ -213,12 +214,11 @@
 
 .money-procart .total-procart {
   border-top: none;
-  padding: 10px 0 !important;
-  margin-left: auto;
+  padding: 0 !important;
 }
 
 .money-procart p:last-child {
-  font-size: 20px !important;
+  font-size: 16px !important;
   line-height: normal;
 }
 
@@ -464,4 +464,9 @@
   line-height: 25px;
   font-size: 11px;
   border-radius: 100%;
+}
+
+.ship-procart {
+  display: flex;
+  align-items: center;
 }
