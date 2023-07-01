@@ -14,7 +14,7 @@ if ($cmd == 'delete' && $id > 0) {
 } else if ($cmd == 'delete-all' && $listid != '') {
     $listid = array_map('intval', explode(',', $listid));
     $listid = implode("','", $listid);
-    $row = $d->rawQuery("select id,photo from table_$table where id in ('" . $listid . "')", array());
+    $row = $d->rawQuery("select id,photo from table_$table where id in ('" . $listid . "')");
 
     for ($i = 0; $i < count($row); $i++) {
         $path = "../../upload/product/" . $row[$i]['photo'];

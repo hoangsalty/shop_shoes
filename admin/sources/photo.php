@@ -252,6 +252,7 @@ function savePhoto()
             $response['status'] = 404;
             $response['messages'][] = 'Cập nhật dữ liệu bị lỗi';
         }
+        $response['link'] = "index.php?com=photo&act=edit_photo&type=" . $cur_Type . "&id=" . $id;
     } else {
         $data['date_created'] = time();
 

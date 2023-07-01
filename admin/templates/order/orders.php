@@ -65,7 +65,7 @@ $linkDelete = "index.php?com=order&act=delete";
             <h3 class="card-title">Tìm kiếm đơn hàng</h3>
         </div>
         <div class="card-body row">
-            <div class="form-group col-md-3 col-sm-3">
+            <div class="form-group col-4">
                 <label>Ngày đặt:</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -74,17 +74,13 @@ $linkDelete = "index.php?com=order&act=delete";
                     <input type="text" class="form-control float-right text-sm" name="order_date" id="order_date" value="<?= (isset($_GET['order_date'])) ? $_GET['order_date'] : '' ?>" readonly>
                 </div>
             </div>
-            <div class="form-group col-md-3 col-sm-3">
+            <div class="form-group col-4">
                 <label>Tình trạng:</label>
                 <?= $func->orderStatus() ?>
             </div>
-            <div class="form-group col-md-3 col-sm-3">
+            <div class="form-group col-4">
                 <label>Hình thức thanh toán:</label>
                 <?= $func->orderPayments() ?>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Khoảng giá:</label>
-                <input type="text" class="primary" id="range_price" name="range_price">
             </div>
             <div class="form-group text-center mt-2 mb-0 col-12">
                 <a class="btn btn-sm bg-gradient-success text-white" onclick="actionOrder('<?= $linkMan ?>')" title="Tìm kiếm"><i class="fas fa-search mr-1"></i>Tìm kiếm</a>

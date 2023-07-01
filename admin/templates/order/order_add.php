@@ -6,7 +6,6 @@ $linkMan = "index.php?com=order&act=list";
     <form id="form_order" class="validation-form" novalidate method="post" enctype="multipart/form-data">
         <div class="card-header text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary"><i class="far fa-save mr-2"></i>Lưu</button>
-            <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <input type="hidden" name="id" value="<?= @$item['id'] ?>">
         </div>
 
@@ -17,46 +16,52 @@ $linkMan = "index.php?com=order&act=list";
                 <h3 class="card-title">Thông tin chính</h3>
             </div>
             <div class="card-body row">
-                <div class="form-group col-md-3 col-sm-6">
-                    <label>Mã đơn hàng:</label>
-                    <p class="text-primary"><?= @$item['code'] ?></p>
+                <div class="col-6">
+                    <div class="form-row">
+                        <div class="col-12 mb-2">
+                            <label>Mã đơn hàng:</label>
+                            <span class="text-primary"><?= @$item['code'] ?></span>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label>Mã giao dịch:</label>
+                            <span class="text-info cap bold"><?= @$item['transId'] ?></span>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label>Hình thức thanh toán:</label>
+                            <?php (@$item['order_payment'] == "momo" || @$item['order_payment'] == "vnpay") ? $order_payment['name'] = @$item['order_payment'] : $order_payment = $func->getInfoDetailSlug('name', 'news', @$item['order_payment']); ?>
+                            <span class="text-info cap"><?= $order_payment['name'] ?></span>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label>Ngày đặt:</label>
+                            <span><?= date("d/m/Y - h:i:s A", @$item['date_created']) ?></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group col-md-3 col-sm-6">
-                    <label>Hình thức thanh toán:</label>
-                    <?php (@$item['order_payment'] == "momo" || @$item['order_payment'] == "vnpay") ? $order_payment['name'] = @$item['order_payment'] : $order_payment = $func->getInfoDetailSlug('name', 'news', @$item['order_payment']); ?>
-                    <p class="text-info cap"><?= $order_payment['name'] ?></p>
+                <div class="col-6">
+                    <div class="form-row">
+                        <div class="col-12 mb-2">
+                            <label>Họ tên:</label>
+                            <span class="font-weight-bold text-uppercase text-success"><?= @$item['fullname'] ?></span>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label>Điện thoại:</label>
+                            <span><?= @$item['phone'] ?></span>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label>Email:</label>
+                            <span><?= @$item['email'] ?></span>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label>Địa chỉ:</label>
+                            <span><?= @$item['address'] ?></span>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-group col-md-3 col-sm-6">
-                    <label>Mã giao dịch:</label>
-                    <p class="text-info cap bold"><?= @$item['transId'] ?></p>
-                </div>
-
-                <div class="form-group col-md-3 col-sm-6">
-                    <label>Họ tên:</label>
-                    <p class="font-weight-bold text-uppercase text-success"><?= @$item['fullname'] ?></p>
-                </div>
-                <div class="form-group col-md-3 col-sm-6">
-                    <label>Điện thoại:</label>
-                    <p><?= @$item['phone'] ?></p>
-                </div>
-                <div class="form-group col-md-3 col-sm-6">
-                    <label>Email:</label>
-                    <p><?= @$item['email'] ?></p>
-                </div>
-                <div class="form-group col-md-3 col-sm-6">
-                    <label>Địa chỉ:</label>
-                    <p><?= @$item['address'] ?></p>
-                </div>
-                <div class="form-group col-md-3 col-sm-6">
-                    <label>Ngày đặt:</label>
-                    <p><?= date("d/m/Y - h:i:s A", @$item['date_created']) ?></p>
-                </div>
-                <div class="form-group col-12">
+                <div class="mt-3">
                     <label for="requirements">Yêu cầu khác:</label>
                     <textarea class="form-control text-sm" name="data[requirements]" id="requirements" rows="5" placeholder="Yêu cầu khác"><?= @$item['requirements'] ?></textarea>
                 </div>
-                <div class="form-group col-12">
+                <div class="mt-3">
                     <label for="order_status" class="mr-2">Tình trạng:</label>
                     <?= $func->orderStatus(@$item['order_status']) ?>
                 </div>

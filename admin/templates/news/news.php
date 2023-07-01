@@ -82,7 +82,7 @@ if ($type == 'tin-tuc') {
                                 <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
                                     <td class="align-middle">
                                         <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                            <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 80, 'upload' => UPLOAD_NEWS_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
+                                            <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_NEWS_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
                                         </a>
                                     </td>
                                 <?php } ?>

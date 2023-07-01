@@ -9,7 +9,7 @@ $name = '';
 if ($type == 'logo') $name = 'Logo';
 else if ($type == 'slideshow') $name = 'Slideshow';
 else if ($type == 'album') $name = 'Album';
-?> 
+?>
 <!-- Main content -->
 <section class="content">
     <div class="card-header text-sm sticky-top">
@@ -33,8 +33,10 @@ else if ($type == 'album') $name = 'Album';
                         </th>
                         <th class="align-middle text-center" width="10%">STT</th>
                         <th class="align-middle text-center" width="8%">Hình</th>
-                        <th class="align-middle" style="width:30%">Tiêu đề</th>
-                        <th class="align-middle">Link</th>
+                        <th class="align-middle" style="width:20%">Tiêu đề</th>
+                        <?php if ($type != 'video') { ?>
+                            <th class="align-middle">Link</th>
+                        <?php } ?>
                         <?php if ($type == 'video') { ?>
                             <th class="align-middle">Link video</th>
                         <?php } ?>
@@ -60,11 +62,11 @@ else if ($type == 'album') $name = 'Album';
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <?= $i+1 ?>
+                                    <?= $i + 1 ?>
                                 </td>
                                 <td class="align-middle text-center">
                                     <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                        <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 80, 'upload' => UPLOAD_PHOTO_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
+                                        <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PHOTO_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
                                     </a>
                                 </td>
                                 <td class="align-middle">
@@ -74,7 +76,10 @@ else if ($type == 'album') $name = 'Album';
                                         <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/photo.php" data-act="delete_photo" data-type="<?= $type ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                                     </div>
                                 </td>
-                                <td class="align-middle"><?= $items[$i]['link'] ?></td>
+
+                                <?php if ($type != 'video') { ?>
+                                    <td class="align-middle"><?= $items[$i]['link'] ?></td>
+                                <?php } ?>
 
                                 <?php if ($type == 'video') { ?>
                                     <td class="align-middle"><?= $items[$i]['link_video'] ?></td>

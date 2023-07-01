@@ -29,7 +29,7 @@ if (is_array($match)) {
 }
 
 /* Setting */
-$setting = $d->rawQueryOne('select * from table_setting', array());
+$setting = $d->rawQueryOne('select * from table_setting');
 $optsetting = (!empty($setting['options'])) ? json_decode($setting['options'], true) : null;
 
 /* Tối ưu link */

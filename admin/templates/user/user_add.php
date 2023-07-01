@@ -6,7 +6,7 @@ else if ($act == "edit" || $act == 'info')
 
 $linkMan = "index.php?com=user&act=list";
 
-$status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa", "kichhoat" => "Chưa kích hoạt");
+$status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa");
 ?>
 <!-- Main content -->
 <section class="content">

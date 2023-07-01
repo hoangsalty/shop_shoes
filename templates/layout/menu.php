@@ -16,7 +16,7 @@
                     </li>
                     <?php if (count($splistht)) { ?>
                         <?php foreach ($splistht as $klist => $vlist) {
-                            $spcatht = $d->rawQuery("select * from table_product_cat where id_list = '" . $vlist['id'] . "' and find_in_set('hienthi',status)", array());
+                            $spcatht = $d->rawQuery("select * from table_product_cat where id_list = '" . $vlist['id'] . "' and find_in_set('hienthi',status)");
                         ?>
                             <li>
                                 <a class="transition" title="<?= $vlist['name'] ?>" href="<?= $vlist['slug'] ?>"><?= $vlist['name'] ?></a>

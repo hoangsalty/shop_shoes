@@ -12,7 +12,6 @@ $strUrl = "";
 $strUrl .= (isset($_REQUEST['order_status'])) ? "&order_status=" . htmlspecialchars($_REQUEST['order_status']) : "";
 $strUrl .= (isset($_REQUEST['order_payment'])) ? "&order_payment=" . htmlspecialchars($_REQUEST['order_payment']) : "";
 $strUrl .= (isset($_REQUEST['order_date'])) ? "&order_date=" . htmlspecialchars($_REQUEST['order_date']) : "";
-$strUrl .= (isset($_REQUEST['range_price'])) ? "&range_price=" . htmlspecialchars($_REQUEST['range_price']) : "";
 $strUrl .= (isset($_REQUEST['keyword'])) ? "&keyword=" . htmlspecialchars($_REQUEST['keyword']) : "";
 
 switch ($act) {
@@ -41,7 +40,6 @@ function viewOrders()
     $order_status = (isset($_REQUEST['order_status'])) ? htmlspecialchars($_REQUEST['order_status']) : '';
     $order_payment = (isset($_REQUEST['order_payment'])) ? htmlspecialchars($_REQUEST['order_payment']) : '';
     $order_date = (isset($_REQUEST['order_date'])) ? htmlspecialchars($_REQUEST['order_date']) : 0;
-    $range_price = (isset($_REQUEST['range_price'])) ? htmlspecialchars($_REQUEST['range_price']) : 0;
     if ($order_status)
         $where .= " and order_status='$order_status'";
     if ($order_payment)
@@ -53,12 +51,6 @@ function viewOrders()
         $date_from = strtotime(str_replace("/", "-", $date_from));
         $date_to = strtotime(str_replace("/", "-", $date_to));
         $where .= " and date_created<=$date_to and date_created>=$date_from";
-    }
-    if ($range_price) {
-        $range_price = explode(";", $range_price);
-        $price_from = trim($range_price[0]);
-        $price_to = trim($range_price[1]);
-        $where .= " and total_price<=$price_to and total_price>=$price_from";
     }
 
     if (isset($_REQUEST['keyword'])) {

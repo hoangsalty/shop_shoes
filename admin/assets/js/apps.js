@@ -1048,20 +1048,6 @@ FRAMEWORK.Order = function () {
         $(this).val('');
     });
 
-    /* rangeSlider */
-    $('#range_price').ionRangeSlider({
-        skin: 'flat',
-        min: ORDER_MIN_TOTAL,
-        max: ORDER_MAX_TOTAL,
-        from: ORDER_PRICE_FROM,
-        to: ORDER_PRICE_TO,
-        type: 'double',
-        step: 1,
-        postfix: ' đ',
-        prettify: true,
-        hasGrid: true
-    });
-
     $('body').on('click', '.update-order', function (e) {
         var id = $(this).attr('data-id');
         var table = $(this).attr('data-table');
