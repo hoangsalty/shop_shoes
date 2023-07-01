@@ -6,7 +6,7 @@ $orderNotify = $d->rawQuery("select id from table_order where order_status = 'mo
 $countNotify += count($orderNotify);
 
 /* Comment */
-$commentNotify = $d->rawQuery("select id from table_comment where find_in_set('new-admin',status)", array());
+$commentNotify = $d->rawQuery("select id from table_comment where find_in_set('new-admin',status)");
 $countNotify += count($commentNotify);
 
 ?>
@@ -63,7 +63,7 @@ $countNotify += count($commentNotify);
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="index.php?com=product&act=list&comment_status=new" class="dropdown-item">
-                <i class="fas fa-comment-dots"></i> Comments
+                    <i class="fas fa-comment-dots"></i> Comments
                     <span class="float-right text-danger text-sm text-bold"><?= count($commentNotify) ?> bình luận mới</span>
                 </a>
                 <div class="dropdown-divider"></div>

@@ -337,13 +337,11 @@ function actionOrder(url) {
     var order_status = $('#order_status').val();
     var order_payment = $('#order_payment').val();
     var order_date = $('#order_date').val();
-    var range_price = $('#range_price').val();
     var keyword = $('#keyword').val();
 
     if (order_status) url += '&order_status=' + order_status;
     if (order_payment) url += '&order_payment=' + order_payment;
     if (order_date) url += '&order_date=' + order_date;
-    if (range_price) url += '&range_price=' + range_price;
     if (keyword) url += '&keyword=' + encodeURI(keyword);
 
     window.location = url;

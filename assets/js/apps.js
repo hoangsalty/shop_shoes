@@ -311,7 +311,21 @@ FRAMEWORK.Comments = function () {
           });
         },
         confirm: function (e, t) {
-          $.confirm({
+          Swal.fire({
+            title: 'Thông báo!',
+            text: "Bạn có chắc muốn xóa ảnh này ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Chấp nhận xóa ảnh này'
+          }).then((state) => {
+            if (state.isConfirmed) {
+              t();
+            }
+          });
+
+          /* $.confirm({
             title: "Thông báo",
             icon: "fas fa-exclamation-triangle",
             type: "orange",
@@ -337,7 +351,7 @@ FRAMEWORK.Comments = function () {
                 btnClass: "btn-sm btn-danger",
               },
             },
-          });
+          }); */
         },
       },
       afterSelect: function () { },

@@ -81,8 +81,6 @@ $linkEdit = "index.php?com=user&act=edit";
                                         <span class="badge bg-success">Hoạt động</span>
                                     <?php } else if ($user['status'] == 'khoa') { ?>
                                         <span class="badge bg-danger">Khóa</span>
-                                    <?php } else if ($user['status'] == 'kichhoat') { ?>
-                                        <span class="badge bg-warning">Chưa kích hoạt</span>
                                     <?php } ?>
                                 </td>
                                 <td class="align-middle text-center text-md text-nowrap">

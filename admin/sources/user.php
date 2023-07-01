@@ -68,9 +68,9 @@ function ViewUsers()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_user where id <> 1 $where order by id desc $limit";
+    $sql = "select * from table_user where id <> 1 $where order by permission asc $limit";
     $items = $d->rawQuery($sql);
-    $sqlNum = "select count(*) as 'num' from table_user where id <> 1 $where order by id desc";
+    $sqlNum = "select count(*) as 'num' from table_user where id <> 1 $where";
     $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=user&act=list";

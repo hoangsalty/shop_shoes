@@ -547,7 +547,7 @@ class Functions
             $temps = (!empty($temps)) ? $this->joinCols($temps, 'id_color') : array();
             $temps = (!empty($temps)) ? explode(",", $temps) : array();
         }
-        $row_color = $d->rawQuery("select * from table_color where find_in_set('hienthi',status) order by id desc", array());
+        $row_color = $d->rawQuery("select * from table_color where find_in_set('hienthi',status) order by id desc");
 
         $str = '<select id="dataColor" name="dataColor[]" class="select multiselect" multiple="multiple" >';
         for ($i = 0; $i < count($row_color); $i++) {
@@ -573,7 +573,7 @@ class Functions
             $temps = (!empty($temps)) ? $this->joinCols($temps, 'id_size') : array();
             $temps = (!empty($temps)) ? explode(",", $temps) : array();
         }
-        $row_size = $d->rawQuery("select * from table_size where find_in_set('hienthi',status) order by id desc", array());
+        $row_size = $d->rawQuery("select * from table_size where find_in_set('hienthi',status) order by id desc");
 
         $str = '<select id="dataSize" name="dataSize[]" class="select multiselect" multiple="multiple" >';
         for ($i = 0; $i < count($row_size); $i++) {

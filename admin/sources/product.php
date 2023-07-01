@@ -136,7 +136,7 @@ function viewProducts()
     if ($idbrand) $where .= " and id_brand=$idbrand";
 
     if ($comment_status == 'new') {
-        $comment = $d->rawQuery("select distinct id_parent from table_comment where find_in_set('new-admin',status)", array());
+        $comment = $d->rawQuery("select * from table_comment where find_in_set('new-admin',status)");
         $idcomment = (!empty($comment)) ? $func->joinCols($comment, 'id_parent') : 0;
         $where .= " and id in ($idcomment)";
     }
@@ -149,9 +149,9 @@ function viewProducts()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_product where id > 0 $where order by id desc $limit", array());
+    $items = $d->rawQuery("select * from table_product where id > 0 $where order by id desc $limit");
     $sqlNum = "select count(*) as 'num' from table_product where id > 0 $where order by id desc";
-    $count = $d->rawQueryOne($sqlNum, array());
+    $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=list" . $strUrl;
     $paging = $func->pagination($total, $perPage, $curPage, $url);
@@ -484,9 +484,9 @@ function viewLists()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_product_list where id > 0 $where order by id desc $limit", array());
+    $items = $d->rawQuery("select * from table_product_list where id > 0 $where order by id desc $limit");
     $sqlNum = "select count(*) as 'num' from table_product_list where id > 0 $where order by id desc";
-    $count = $d->rawQueryOne($sqlNum, array());
+    $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=list_list" . $strUrl;
     $paging = $func->pagination($total, $perPage, $curPage, $url);
@@ -678,9 +678,9 @@ function viewCats()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_product_cat where id > 0 $where order by id desc $limit", array());
+    $items = $d->rawQuery("select * from table_product_cat where id > 0 $where order by id desc $limit");
     $sqlNum = "select count(*) as 'num' from table_product_cat where id > 0 $where order by id desc";
-    $count = $d->rawQueryOne($sqlNum, array());
+    $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=list_cat" . $strUrl;
     $paging = $func->pagination($total, $perPage, $curPage, $url);
@@ -878,9 +878,9 @@ function viewSizes()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_size where id > 0 $where order by id desc $limit", array());
+    $items = $d->rawQuery("select * from table_size where id > 0 $where order by id desc $limit");
     $sqlNum = "select count(*) as 'num' from table_size where id > 0 $where order by id desc";
-    $count = $d->rawQueryOne($sqlNum, array());
+    $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=list_size" . $strUrl;
     $paging = $func->pagination($total, $perPage, $curPage, $url);
@@ -1021,9 +1021,9 @@ function viewColors()
     $perPage = 10;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $items = $d->rawQuery("select * from table_color where id > 0 $where order by id desc $limit", array());
+    $items = $d->rawQuery("select * from table_color where id > 0 $where order by id desc $limit");
     $sqlNum = "select count(*) as 'num' from table_color where id > 0 $where order by id desc";
-    $count = $d->rawQueryOne($sqlNum, array());
+    $count = $d->rawQueryOne($sqlNum);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = "index.php?com=product&act=list_color" . $strUrl;
     $paging = $func->pagination($total, $perPage, $curPage, $url);

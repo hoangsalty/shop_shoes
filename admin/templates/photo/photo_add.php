@@ -17,6 +17,7 @@ else if ($type == 'album') $name = 'Album';
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <input type="hidden" id="type" name="type" value="<?= $type ?>">
+            <input type="hidden" id="id" name="id" value="<?= @$item['id'] ?>">
         </div>
 
         <div class="box_response"></div>
