@@ -244,6 +244,13 @@ if (!empty($_POST['thanhtoan'])) {
 
                 if ($q == 0) continue;
 
+                // Cập nhật số lượng sản phẩm
+                $old_value = $d->rawQueryOne("select quantity from table_product where id = ? limit 0,1", array($pid));
+                $data_product['quantity'] = $old_value['quantity'] - $q;
+                $d->where('id', $pid);
+                $d->update('table_product', $data_product);
+
+                // Thêm order detail
                 $data_orderdetail = array();
                 $data_orderdetail['id_product'] = $pid;
                 $data_orderdetail['id_order'] = $id_insert;

@@ -34,7 +34,7 @@ switch ($act) {
 /* View order */
 function viewOrders()
 {
-    global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal, $price_from, $price_to, $allNewOrder, $totalNewOrder, $allConfirmOrder, $totalConfirmOrder, $allDeliveriedOrder, $totalDeliveriedOrder, $allCanceledOrder, $totalCanceledOrder;
+    global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal, $allNewOrder, $totalNewOrder, $allConfirmOrder, $totalConfirmOrder, $allDeliveriedOrder, $totalDeliveriedOrder, $allCanceledOrder, $totalCanceledOrder;
 
     $where = "";
     $order_status = (isset($_REQUEST['order_status'])) ? htmlspecialchars($_REQUEST['order_status']) : '';
@@ -82,26 +82,6 @@ function viewOrders()
         $maxTotal = $maxTotal['max(total_price)'];
     else
         $maxTotal = 0;
-
-    /* Lấy đơn hàng - mới đặt */
-    $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'moidat'");
-    $allNewOrder = $order_count['count(id)'];
-    $totalNewOrder = $order_count['sum(total_price)'];
-
-    /* Lấy đơn hàng - đã xác nhận */
-    $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'daxacnhan'");
-    $allConfirmOrder = $order_count['count(id)'];
-    $totalConfirmOrder = $order_count['sum(total_price)'];
-
-    /* Lấy đơn hàng - đã giao */
-    $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'dagiao'");
-    $allDeliveriedOrder = $order_count['count(id)'];
-    $totalDeliveriedOrder = $order_count['sum(total_price)'];
-
-    /* Lấy đơn hàng - đã hủy */
-    $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'dahuy'");
-    $allCanceledOrder = $order_count['count(id)'];
-    $totalCanceledOrder = $order_count['sum(total_price)'];
 }
 
 /* Edit order */

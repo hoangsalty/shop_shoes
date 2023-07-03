@@ -51,7 +51,7 @@ if ((!empty($_SESSION['account']['status']) && $_SESSION['account']['status'] ==
     setcookie('login_account_session', "", -1, '/');
 
     $statusCode = 404;
-    $statusMsg = "Tài khoản của bạn hiện tại đang bị KHÓA, bạn vui lòng liên hệ với phía quản trị viên để được hỗ trợ";
+    $statusMsg = "Tài khoản của bạn hiện tại đang bị KHÓA";
 }
 
 $response['status'] = $statusCode;

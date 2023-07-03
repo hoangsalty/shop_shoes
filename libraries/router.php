@@ -2,14 +2,18 @@
 /* Check login */
 $func->checkLogin();
 
-/* Router */
+/* Kiểm tra trạng thái */
+if ((!empty($_SESSION['account']['status']) && $_SESSION['account']['status'] == 'khoa')) {
+    unset($_SESSION['account']);
+    setcookie('login_account_id', "", -1, '/');
+    setcookie('login_account_session', "", -1, '/');
+    $func->transfer("Tài khoản của bạn hiện tại đang bị KHÓA", "/", false);
+}
 
-/* Set default route (index)*/
+/* Router */
 $router->setBasePath($config['database']['url']);
-/* Route com = index */
 $router->map('GET|POST', '', 'index');
 $router->map('GET|POST', '[a:com]', '[a:com]');
-$router->map('GET|POST', '[a:com]/[a:action]', '[a:com]');
 
 /* Router match */
 $match = $router->match();

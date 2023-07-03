@@ -121,7 +121,7 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa");
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="gender">Giới tính:</label>
-                                    <select class="custom-select text-sm" name="data[gender]" id="gender" required>
+                                    <select class="form-control select2 text-sm" name="data[gender]" id="gender" required>
                                         <option value="">Chọn giới tính</option>
                                         <option <?= ((@$item['gender'] == 1) ? 'selected' : '') ?> value="1">Nam</option>
                                         <option <?= ((@$item['gender'] == 2) ? 'selected' : '') ?> value="2">Nữ</option>
@@ -137,7 +137,7 @@ $status = array("hoatdong" => "Hoạt động", "khoa" => "Khóa");
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="status">Trạng thái:</label>
-                                    <select class="custom-select text-sm" name="data[status]" id="data[status]" required>
+                                    <select class="form-control select2 text-sm" name="data[status]" id="data[status]" required>
                                         <option value="">Chọn trạng thái</option>
                                         <?php foreach ($status as $i => $v) { ?>
                                             <option <?= ((@$item['status'] == $i) ? 'selected' : '') ?> value="<?= $i ?>"><?= $v ?></option>

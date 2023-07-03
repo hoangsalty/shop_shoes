@@ -19,8 +19,34 @@ $func = new Functions($d);
 $setting = $d->rawQueryOne("select * from table_setting limit 0,1");
 $optsetting = (isset($setting['options']) && $setting['options'] != '') ? json_decode($setting['options'], true) : null;
 
-/* Requick */
-require_once LIBRARIES . "requick.php";
+/* Request data */
+$type = (!empty($_REQUEST['type'])) ? htmlspecialchars($_REQUEST['type']) : '';
+$com = (!empty($_REQUEST['com'])) ? htmlspecialchars($_REQUEST['com']) : '';
+$act = (!empty($_REQUEST['act'])) ? htmlspecialchars($_REQUEST['act']) : '';
+$id_parent = (!empty($_REQUEST['id_parent'])) ? htmlspecialchars($_REQUEST['id_parent']) : '';
+$id = (!empty($_REQUEST['id'])) ? htmlspecialchars($_REQUEST['id']) : '';
+$curPage = (!empty($_GET['page'])) ? htmlspecialchars($_GET['page']) : 1;
+
+/* Check login */
+$func->checkLogin();
+
+/* Kiểm tra trạng thái */
+if ((!empty($_SESSION['account']['status']) && $_SESSION['account']['status'] == 'khoa')) {
+    $func->transferAdmin("Tài khoản của bạn hiện tại đang bị KHÓA", "../", false);
+}
+
+/* Kiểm tra quyền */
+if ((!empty($_SESSION['account']['role']) && $_SESSION['account']['role'] == 'user')) {
+    header('HTTP/1.0 404 Not Found', true, 404);
+    include("../404.php");
+    exit;
+}
+
+/* Include sources */
+if (file_exists(SOURCES . $com . '.php'))
+    include SOURCES . $com . ".php";
+else
+    $template = "index";
 ?>
 <!DOCTYPE html>
 <html lang="vi">

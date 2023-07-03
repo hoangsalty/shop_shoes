@@ -39,6 +39,18 @@
                         <label class="attr-label-pro-detail">Lượt xem:</label>
                         <div class="attr-content-pro-detail"><?= $rowDetail['view'] ?></div>
                     </li>
+                    <li class="">
+                        <?php $status = '';
+                        if ($rowDetail['quantity'] <= 0) {
+                            $status = '<span class="d-inline-block text-danger">Hết hàng</span>';
+                        } else {
+                            $status = '<span class="d-inline-block text-success">Còn hàng</span>';
+                        }
+                        ?>
+
+                        <label class="attr-label-pro-detail">Tình trạng:</label>
+                        <div class="attr-content-pro-detail"><?= $status ?></div>
+                    </li>
                     <?php if (!empty($rowDetail['code'])) { ?>
                         <li class="">
                             <label class="attr-label-pro-detail">Mã sản phẩm:</label>
@@ -92,7 +104,7 @@
                         <div class="attr-content-pro-detail">
                             <div class="quantity-pro-detail">
                                 <span class="quantity-minus-pro-detail counter-procart">-</span>
-                                <input type="number" class="qty-pro" min="1" value="1" readonly />
+                                <input type="number" class="qty-pro" min="1" value="1" data-pid="<?= $rowDetail['id'] ?>" readonly />
                                 <span class="quantity-plus-pro-detail counter-procart">+</span>
                             </div>
                         </div>
@@ -102,11 +114,16 @@
                 <?php /* <div class="desc-pro-detail"><?= $func->decodeHtmlChars($rowDetail['desc']) ?></div> */ ?>
 
                 <div class="cart-pro-detail">
-                    <a class="btn_addcart addcart rounded-0 mr-2" data-id="<?= $rowDetail['id'] ?>" data-action="addnow">
+                    <?php $disabled = '';
+                    if ($rowDetail['quantity'] <= 0) {
+                        $disabled = 'disabled';
+                    }
+                    ?>
+                    <a type="button" class="btn_addcart addcart rounded-0 mr-2 <?= $disabled ?>" data-id="<?= $rowDetail['id'] ?>" data-action="addnow">
                         <i class="fa-solid fa-cart-shopping fa-bounce mr-1"></i>
                         <span>Thêm vào giỏ hàng</span>
                     </a>
-                    <a class="btn_buynow addcart rounded-0" data-id="<?= $rowDetail['id'] ?>" data-action="buynow">
+                    <a type="button" class="btn_buynow addcart rounded-0 <?= $disabled ?>" data-id="<?= $rowDetail['id'] ?>" data-action="buynow">
                         <i class="fa-solid fa-bag-shopping fa-beat mr-1"></i>
                         <span>Mua ngay</span>
                     </a>

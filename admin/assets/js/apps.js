@@ -836,21 +836,14 @@ FRAMEWORK.AlbumFiler = function () {
         var table = $("#gallery_table")[0].value;;
 
         $('#filer-gallery').filer({
-            limit: null,
+            limit: 3,
             maxSize: null,
-            extensions: ['jpg', 'png', 'jpeg', 'JPG', 'PNG', 'JPEG', 'Png'],
-            changeInput: '<div class="jFiler-input-dragDrop"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-cloud-up-o"></i></div><div class="jFiler-input-text"><h3>Kéo và thả hình vào đây</h3> <span style="display:inline-block; margin: 15px 0">hoặc</span></div><a class="jFiler-input-choose-btn blue">Chọn hình</a></div></div>',
-            theme: 'dragdropbox',
-            showThumbs: false,
+            extensions: ['jpg', 'png', 'jpeg'],
+            changeInput: '<div class="jFiler-input-dragDrop"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-cloud-up-o"></i></div><div class="jFiler-input-text"><h3>Bấm vào đây</h3> <span style="display:inline-block; margin: 15px 0">hoặc</span></div><a class="jFiler-input-choose-btn blue">Chọn hình</a></div></div>',
+            showThumbs: true,
             addMore: true,
             allowDuplicates: false,
             clipBoardPaste: false,
-            dragDrop: {
-                dragEnter: null,
-                dragLeave: null,
-                drop: null,
-                dragContainer: null
-            },
             captions: {
                 button: 'Thêm hình',
                 feedback: 'Vui lòng chọn hình ảnh',
@@ -863,28 +856,6 @@ FRAMEWORK.AlbumFiler = function () {
                     filesSize: 'Hình {{fi-name}} có kích thước quá lớn. Vui lòng upload hình ảnh có kích thước tối đa {{fi-maxSize}} MB.',
                     filesSizeAll: 'Những hình ảnh bạn chọn có kích thước quá lớn. Vui lòng chọn những hình ảnh có kích thước tối đa {{fi-maxSize}} MB.'
                 }
-            },
-            uploadFile: {
-                url: 'api/upload.php',
-                data: {
-                    'params': QUERY_STRING,
-                    'album_table': table,
-                },
-                type: 'POST',
-                enctype: 'multipart/form-data',
-                dataType: 'json',
-                async: false,
-                success: function (data) {
-                    data = JSON.parse(data);
-                    if (data['success'] == true) {
-                        location.reload();
-                    } else {
-                        alert(data['msg']);
-                    }
-                },
-                error: function () {
-                    alert('Error with filer');
-                },
             },
         });
     }
@@ -922,30 +893,22 @@ FRAMEWORK.AlbumFiler = function () {
     });
     /* Check all filer */
     $('body').on('click', '.check-all-filer', function () {
-        var input = $('.my-jFiler-items .jFiler-items-list').find('input.filer-checkbox');
+        var input = $('#jFilerSortable').find('input.filer-checkbox');
         var jFilerItems = $('#jFilerSortable').find('.my-jFiler-item');
 
         $(this).find('i').toggleClass('far fa-square fas fa-check-square');
         if ($(this).hasClass('active')) {
             $(this).removeClass('active');
-            $('.sort-filer').removeClass('active');
-            $('.sort-filer').attr('disabled', false);
             input.each(function () {
                 $(this).prop('checked', false);
             });
         } else {
             $(this).addClass('active');
-            $('.sort-filer').attr('disabled', true);
-            $('.alert-sort-filer').hide();
-            $('.my-jFiler-item-trash').show();
             input.each(function () {
                 $(this).prop('checked', true);
             });
             jFilerItems.each(function () {
                 $(this).find('input').attr('disabled', false);
-            });
-            jFilerItems.each(function () {
-                $(this).removeClass('moved');
             });
         }
     });
@@ -986,16 +949,22 @@ FRAMEWORK.AlbumFiler = function () {
                         cmd: 'delete-all',
                         table: table,
                     },
+                    beforeSend: function () {
+                        holdonOpen();
+                    },
+                    success: function (result) {
+                        listid = listid.split(',');
+                        for (var i = 0; i < listid.length; i++) {
+                            $('.my-jFiler-item-' + listid[i]).remove();
+                        }
+
+                        if ($('.my-jFiler-items ul li').length == 0) {
+                            $('.form-group-gallery').remove();
+                        }
+
+                        holdonClose();
+                    }
                 });
-
-                listid = listid.split(',');
-                for (var i = 0; i < listid.length; i++) {
-                    $('.my-jFiler-item-' + listid[i]).remove();
-                }
-
-                if ($('.my-jFiler-items ul li').length == 0) {
-                    $('.form-group-gallery').remove();
-                }
             }
         });
     });
@@ -1084,7 +1053,9 @@ FRAMEWORK.Slug = function () {
 
 FRAMEWORK.PhotoZone = function () {
     if ($('#photo-zone').length) {
-        photoZone('#photo-zone', '#file-zone', '#photoUpload-preview img');
+        $('#file-zone').change(function () {
+            readImage($(this), '#photoUpload-preview img');
+        });
     }
 }
 

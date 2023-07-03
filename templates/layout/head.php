@@ -9,7 +9,7 @@
 <!-- Viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <?php if ($com == 'payment-vnpay') { ?>
-    <meta http-equiv="REFRESH" content="10; url=<?= $configBase ?>account/thong-tin#order">
+    <meta http-equiv="REFRESH" content="10; url=<?= $configBase ?>account?act=thong-tin#order">
 <?php } ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
