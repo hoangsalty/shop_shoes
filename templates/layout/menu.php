@@ -35,10 +35,6 @@
                     <li>
                         <a class="<?php if ($com == 'tin-tuc') echo 'active'; ?> transition" href="tin-tuc" title="Tin tức">Tin tức</a>
                     </li>
-                    <li>
-                        <a class="<?php if ($com == 'lien-he') echo 'active'; ?> transition" href="lien-he" title="Liên hệ">Liên hệ
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="right">

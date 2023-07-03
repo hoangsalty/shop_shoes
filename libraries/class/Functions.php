@@ -592,19 +592,13 @@ class Functions
     }
 
     /* Format money */
-    public function formatMoney($price = 0, $unit = ' ₫', $html = false)
+    public function formatMoney($price = 0, $unit = ' ₫')
     {
         $str = '';
 
-        if ($price) {
-            $str .= number_format($price, 0, ',', '.');
-            if ($unit != '') {
-                if ($html) {
-                    $str .= '<span>' . $unit . '</span>';
-                } else {
-                    $str .= $unit;
-                }
-            }
+        $str .= number_format($price, 0, ',', '.');
+        if ($unit != '') {
+            $str .= $unit;
         }
 
         return $str;

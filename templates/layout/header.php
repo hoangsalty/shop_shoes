@@ -5,10 +5,10 @@
             <div class="login_header text-right">
                 <?php if (array_key_exists('account', $_SESSION) && $_SESSION['account']['active'] == true) { ?>
                     <div class="user-header">
-                        <a href="account/thong-tin">
+                        <a href="account?act=thong-tin">
                             <span>Hi, <?= $_SESSION['account']['fullname'] ?></span>
                         </a>
-                        <a href="account/dang-xuat">
+                        <a href="account?act=dang-xuat">
                             <i class="fas fa-sign-out-alt"></i>
                             <span>Đăng xuất</span>
                         </a>

@@ -255,56 +255,6 @@ function readImage(inputFile, elementPhoto) {
         return false;
     }
 }
-/* Photo zone */
-function photoZone(eDrag, iDrag, eLoad) {
-    if ($(eDrag).length) {
-        /* Drag over */
-        $(eDrag).on('dragover', function () {
-            $(this).addClass('drag-over');
-            return false;
-        });
-
-        /* Drag leave */
-        $(eDrag).on('dragleave', function () {
-            $(this).removeClass('drag-over');
-            return false;
-        });
-
-        /* Drop */
-        $(eDrag).on('drop', function (e) {
-            e.preventDefault();
-            $(this).removeClass('drag-over');
-
-            var lengthZone = e.originalEvent.dataTransfer.files.length;
-
-            if (lengthZone == 1) {
-                $(iDrag).prop('files', e.originalEvent.dataTransfer.files);
-                readImage($(iDrag), eLoad);
-            } else if (lengthZone > 1) {
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Nhắc nhở !',
-                    text: 'Bạn chỉ được chọn 1 hình ảnh để upload',
-                    allowOutsideClick: false,
-                });
-                return false;
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Có lỗi phát sinh...',
-                    text: 'Dữ liệu không hợp lệ',
-                    allowOutsideClick: false,
-                });
-                return false;
-            }
-        });
-
-        /* File zone */
-        $(iDrag).change(function () {
-            readImage($(this), eLoad);
-        });
-    }
-}
 function onSearch(obj, url) {
     if (url == '') {
         Swal.fire({

@@ -8,12 +8,8 @@ if (!defined('SOURCES')) {
 }
 
 $action = '';
-if (isset($match)) {
-    $action = htmlspecialchars($match['params']['action']);
-} else {
-    if (isset($_REQUEST['act'])) {
-        $action = htmlspecialchars($_REQUEST['act']);
-    }
+if (isset($_REQUEST['act'])) {
+    $action = htmlspecialchars($_REQUEST['act']);
 }
 
 switch ($action) {

@@ -57,10 +57,15 @@ else if ($type == 'album') $name = 'Album';
                             <label for="name">Tiêu đề:</label>
                             <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
-                        <div class="form-group">
-                            <label for="desc">Mô tả:</label>
-                            <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
-                        </div>
+
+                        <?php if ($type != 'video' && $type != 'album') { ?>
+                            <div class="form-group">
+                                <label for="desc">Mô tả:</label>
+                                <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
+                            </div>
+                        <?php } ?>
+
+
                     </div>
                 </div>
             </div>
@@ -103,48 +108,39 @@ else if ($type == 'album') $name = 'Album';
                         <input type="hidden" class="col-filer" value="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
                         <input type="hidden" class="folder-filer" value="product">
                     </div>
-                    <div class="form-group form-group-gallery">
-                        <label class="label-filer">Album hiện tại:</label>
-                        <div class="action-filer mb-3">
-                            <a class="btn btn-sm bg-gradient-primary text-white check-all-filer mr-1"><i class="far fa-square mr-2"></i>Chọn tất cả</a>
-                            <a class="btn btn-sm bg-gradient-danger text-white delete-all-filer" data-table="gallery_album"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
-                        </div>
-                        <div class="alert my-alert alert-sort-filer alert-info text-sm text-white bg-gradient-info"><i class="fas fa-info-circle mr-2"></i>Có thể chọn nhiều hình để di chuyển</div>
-                        <div class="jFiler-items my-jFiler-items jFiler-row">
-                            <ul class="jFiler-items-list jFiler-items-grid row scroll-bar" id="jFilerSortable">
-                                <?php if (!empty($gallery)) { ?>
+                    <?php if (!empty($gallery)) { ?>
+                        <div class="form-group form-group-gallery">
+                            <label class="label-filer">Album hiện tại:</label>
+                            <div class="action-filer mb-3">
+                                <a class="btn btn-sm bg-gradient-primary text-white check-all-filer mr-1"><i class="far fa-square mr-2"></i>Chọn tất cả</a>
+                                <a class="btn btn-sm bg-gradient-danger text-white delete-all-filer" data-table="gallery_album"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
+                            </div>
+                            <div class="jFiler-items my-jFiler-items">
+                                <ul id="jFilerSortable" class="row">
                                     <?php foreach ($gallery as $v) { ?>
-                                        <li class="jFiler-item my-jFiler-item my-jFiler-item-<?= $v['id'] ?> col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6" data-id="<?= $v['id'] ?>">
-                                            <div class="jFiler-item-container">
-                                                <div class="jFiler-item-inner">
-                                                    <div class="jFiler-item-thumb">
-                                                        <div class="jFiler-item-thumb-image">
-                                                            <?= $func->getImage(['class' => 'rounded', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
-                                                            <i class="fas fa-arrows-alt"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="jFiler-item-assets jFiler-row">
-                                                        <ul class="list-inline pull-right d-flex align-items-center justify-content-between">
-                                                            <li class="ml-1">
-                                                                <a class="icon-jfi-trash jFiler-item-trash-action my-jFiler-item-trash" data-id="<?= $v['id'] ?>" data-table="gallery_album"></a>
-                                                            </li>
-                                                            <li class="mr-1">
-                                                                <div class="custom-control custom-checkbox d-inline-block align-middle text-md">
-                                                                    <input type="checkbox" class="custom-control-input filer-checkbox" id="filer-checkbox-<?= $v['id'] ?>" value="<?= $v['id'] ?>">
-                                                                    <label for="filer-checkbox-<?= $v['id'] ?>" class="custom-control-label font-weight-normal">Chọn</label>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <input type="text" class="form-control form-control-sm my-jFiler-item-info rounded text-sm" value="<?= $v['name'] ?>" placeholder="Tiêu đề" data-info="name" data-id="<?= $v['id'] ?>" />
+                                        <li class="my-jFiler-item my-jFiler-item-<?= $v['id'] ?> col-2 mb-4" data-id="<?= $v['id'] ?>">
+                                            <div class="jFiler-item-container border border-primary">
+                                                <?= $func->getImage(['class' => 'rounded w-100', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                                <div class="jFiler-item-assets">
+                                                    <ul class="list-inline pull-right d-flex align-items-center justify-content-between">
+                                                        <li class="ml-1">
+                                                            <a class="icon-jfi-trash jFiler-item-trash-action my-jFiler-item-trash" data-id="<?= $v['id'] ?>" data-table="gallery_album"></a>
+                                                        </li>
+                                                        <li class="mr-1">
+                                                            <div class="custom-control custom-checkbox d-inline-block align-middle text-md">
+                                                                <input type="checkbox" class="custom-control-input filer-checkbox" id="filer-checkbox-<?= $v['id'] ?>" value="<?= $v['id'] ?>">
+                                                                <label for="filer-checkbox-<?= $v['id'] ?>" class="custom-control-label font-weight-normal">Chọn</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </li>
                                     <?php } ?>
-                                <?php } ?>
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         <?php } ?>

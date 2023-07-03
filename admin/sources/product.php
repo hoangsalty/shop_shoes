@@ -216,6 +216,7 @@ function saveProduct()
         }
         $data['regular_price'] = (isset($data['regular_price']) && $data['regular_price'] != '') ? str_replace(",", "", $data['regular_price']) : 0;
         $data['sale_price'] = (isset($data['sale_price']) && $data['sale_price'] != '') ? str_replace(",", "", $data['sale_price']) : 0;
+        $data['quantity'] = (isset($data['quantity']) && $data['quantity'] != '') ? str_replace(",", "", $data['quantity']) : 0;
     }
     /* Valid data */
     $checkTitle = $func->checkTitle($data);
@@ -267,6 +268,41 @@ function saveProduct()
                     $d->where('id', $id);
                     $d->update('table_product', $photoUpdate);
                     unset($photoUpdate);
+                }
+            }
+
+            $galleryFiles = (!empty($_FILES['files'])) ? $_FILES['files'] : array();
+            /* Gallery */
+            if (!empty($galleryFiles)) {
+                for ($index = 0; $index < count($galleryFiles['name']); $index++) {
+                    $_FILES['file_gallery'] = array(
+                        'name' => $galleryFiles['name'][$index],
+                        'type' => $galleryFiles['type'][$index],
+                        'tmp_name' => $galleryFiles['tmp_name'][$index],
+                        'error' => $galleryFiles['error'][$index],
+                        'size' => $galleryFiles['size'][$index]
+                    );
+
+                    /* Xử lý lưu image */
+                    $data_file = array();
+                    $data_file['id_parent'] = $id;
+                    $data_file['status'] = 'hienthi';
+                    $data_file['date_created'] = time();
+
+                    if ($d->insert('table_gallery', $data_file)) {
+                        $id_phot_inserted = $d->getLastInsertId();
+
+                        if ($func->hasFile("file_gallery")) {
+                            $photoUpdate = array();
+                            if ($photo = $func->uploadImage("file_gallery", UPLOAD_PRODUCT)) {
+                                $photoUpdate['photo'] = $photo;
+                                $d->where('id', $id_phot_inserted);
+                                $d->update('table_gallery', $photoUpdate);
+                                unset($photoUpdate);
+                                unset($_FILES['file_gallery']);
+                            }
+                        }
+                    }
                 }
             }
 

@@ -1040,7 +1040,8 @@ FRAMEWORK.Cart = function () {
     $this = $(this);
 
     Swal.fire({
-      title: 'Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?',
+      title: 'Thông báo!',
+      text: 'Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -1080,16 +1081,41 @@ FRAMEWORK.Cart = function () {
   });
   /* Counter */
   $("body").on("click", ".counter-procart", function () {
-    var $button = $(this);
     var quantity = 1;
-    var input = $button.parent().find("input");
+    var input = $(this).parent().find("input");
     var id = input.data("pid");
-    var code = input.data("code");
-    var oldValue = $button.parent().find("input").val();
-    if ($button.text() == "+") quantity = parseFloat(oldValue) + 1;
-    else if (oldValue > 1) quantity = parseFloat(oldValue) - 1;
-    $button.parent().find("input").val(quantity);
-    updateCart(id, code, quantity);
+    var oldValue = $(this).parent().find("input").val();
+    if ($(this).text() == "+") {
+      $.ajax({
+        url: "api/cart_counter.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+          cmd: "plus",
+          oldValue: oldValue,
+          id: id,
+        },
+        success: function (result) {
+          input.val(result['quantity']);
+          updateCart(id, code, result['quantity']);
+        },
+      });
+    } else if (oldValue > 1) {
+      $.ajax({
+        url: "api/cart_counter.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+          cmd: "minus",
+          oldValue: oldValue,
+          id: id,
+        },
+        success: function (result) {
+          input.val(result['quantity']);
+          updateCart(id, code, result['quantity']);
+        },
+      });
+    }
   });
 
   /* City */
@@ -1129,7 +1155,6 @@ FRAMEWORK.Cart = function () {
     $(".color-pro-detail input").click(function () {
       $this = $(this).parents("label.color-pro-detail");
       $parents = $this.parents(".attr-pro-detail");
-      $parents_detail = $this.parents(".grid-pro-detail");
       $parents
         .find(".color-block-pro-detail")
         .find(".color-pro-detail")

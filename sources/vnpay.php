@@ -1,7 +1,9 @@
 <?php
 
 if (empty($_GET["vnp_Amount"])) {
-    $func->transfer("Dữ liệu không có thực.", $configBase, false);
+    header('HTTP/1.0 404 Not Found', true, 404);
+    include("404.php");
+    exit;
 }
 
 if (!empty($_GET["vnp_Amount"])) {
@@ -86,6 +88,12 @@ if (!empty($_GET["vnp_Amount"])) {
 
                         if ($q == 0) continue;
 
+                        // Cập nhật số lượng sản phẩm
+                        $old_value = $d->rawQueryOne("select quantity from table_product where id = ? limit 0,1", array($pid));
+                        $data_product['quantity'] = $old_value['quantity'] - $q;
+                        $d->where('id', $pid);
+                        $d->update('table_product', $data_product);
+
                         $data_orderdetail = array();
                         $data_orderdetail['id_product'] = $pid;
                         $data_orderdetail['id_order'] = $id_insert;
@@ -124,14 +132,18 @@ if (!empty($_GET["vnp_Amount"])) {
                 unset($_SESSION['cart']);
                 unset($_SESSION['dataOrder']);
                 $message = 'Thanh toán qua VNPay Thành Công!';
-                //$func->transfer("Thanh toán qua VNPay Thành Công!", $configBase);
             } else {
                 $message = 'Lỗi lưu đơn hàng';
-                //$func->transfer("Lỗi lưu đơn hàng.", $configBase, false);
             }
         }
     } else {
         $message = 'Lỗi thanh toán thất bại.';
         //Lỗi nếu thanh toán thất bại
     }
+}
+
+if (!isset($_SESSION['cart']) || empty($tempCart)) {
+    header('HTTP/1.0 404 Not Found', true, 404);
+    include("404.php");
+    exit;
 }

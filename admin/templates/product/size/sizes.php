@@ -22,75 +22,62 @@ $status = array("hienthi" => "Hiển thị");
             </div>
         </div>
     </div>
-    <div class="card card-primary card-outline text-sm">
-        <div class="card-header">
-            <h3 class="card-title">Danh sách size sản phẩm</h3>
-
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-            <table class="table table-hover">
-                <thead>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="align-middle" width="5%">
+                    <div class="custom-control custom-checkbox my-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
+                        <label for="selectall-checkbox" class="custom-control-label"></label>
+                    </div>
+                </th>
+                <th class="align-middle text-center" width="75px">STT</th>
+                <th class="align-middle">Tiêu đề</th>
+                <?php foreach ($status as $key => $value) { ?>
+                    <th class="align-middle text-center" width="120px"><?= $value ?></th>
+                <?php } ?>
+            </tr>
+        </thead>
+        <?php if (empty($items)) { ?>
+            <tbody>
+                <tr>
+                    <td colspan="100" class="text-center">Không có dữ liệu</td>
+                </tr>
+            </tbody>
+        <?php } else { ?>
+            <tbody>
+                <?php for ($i = 0; $i < count($items); $i++) { ?>
                     <tr>
-                        <th class="align-middle" width="5%">
+                        <td class="align-middle">
                             <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
+                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?= $items[$i]['id'] ?>" value="<?= $items[$i]['id'] ?>">
+                                <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
                             </div>
-                        </th>
-                        <th class="align-middle text-center" width="75px">STT</th>
-                        <th class="align-middle">Tiêu đề</th>
+                        </td>
+                        <td class="align-middle text-center">
+                            <?= $i + 1 ?>
+                        </td>
+                        <td class="align-middle">
+                            <span class="text-dark text-break" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></span>
+                            <div class="tool-action mt-2 w-clear">
+                                <a class="btn btn-info btn-sm mr-2" id="edit-size" data-id="<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
+                                <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete_size" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
+                            </div>
+                        </td>
+                        <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                         <?php foreach ($status as $key => $value) { ?>
-                            <th class="align-middle text-center" width="120px"><?= $value ?></th>
+                            <td class="align-middle text-center">
+                                <div class="custom-control custom-checkbox my-checkbox">
+                                    <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_size" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
+                                    <label for="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
+                                </div>
+                            </td>
                         <?php } ?>
                     </tr>
-                </thead>
-                <?php if (empty($items)) { ?>
-                    <tbody>
-                        <tr>
-                            <td colspan="100" class="text-center">Không có dữ liệu</td>
-                        </tr>
-                    </tbody>
-                <?php } else { ?>
-                    <tbody>
-                        <?php for ($i = 0; $i < count($items); $i++) { ?>
-                            <tr>
-                                <td class="align-middle">
-                                    <div class="custom-control custom-checkbox my-checkbox">
-                                        <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?= $items[$i]['id'] ?>" value="<?= $items[$i]['id'] ?>">
-                                        <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <?= $i + 1 ?>
-                                </td>
-                                <td class="align-middle">
-                                    <span class="text-dark text-break" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></span>
-                                    <div class="tool-action mt-2 w-clear">
-                                        <a class="btn btn-info btn-sm mr-2" id="edit-size" data-id="<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
-                                        <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete_size" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
-                                    </div>
-                                </td>
-                                <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
-                                <?php foreach ($status as $key => $value) { ?>
-                                    <td class="align-middle text-center">
-                                        <div class="custom-control custom-checkbox my-checkbox">
-                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" data-table="table_size" data-id="<?= $items[$i]['id'] ?>" data-attr="<?= $key ?>" <?= (in_array($key, $status_array)) ? 'checked' : '' ?>>
-                                            <label for="show-checkbox-<?= $key ?>-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
-                                        </div>
-                                    </td>
-                                <?php } ?>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
                 <?php } ?>
-            </table>
-        </div>
-    </div>
+            </tbody>
+        <?php } ?>
+    </table>
     <?php if ($paging) { ?>
         <div class="card-header text-sm pb-0"><?= $paging ?></div>
     <?php } ?>
