@@ -19,6 +19,8 @@ $router->map('GET|POST', '[a:com]', '[a:com]');
 $match = $router->match();
 
 /* Router check */
+$com = '';
+$getPage = 1;
 if (is_array($match)) {
     if (is_callable($match['target'])) {
         call_user_func_array($match['target'], $match['params']);
@@ -41,7 +43,6 @@ $requick = array(
     /* Sản phẩm */
     array("tbl" => "product_list", "field" => "id_list", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product_cat", "field" => "id_cat", "source" => "product", "com" => "san-pham"),
-    array("tbl" => "product_brand", "field" => "id_brand", "source" => "product", "com" => "san-pham"),
     array("tbl" => "product", "field" => "id", "source" => "product", "com" => "san-pham"),
 
     /* Thư viện ảnh */

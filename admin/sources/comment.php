@@ -18,6 +18,8 @@ function viewMans()
         $item = $d->rawQueryOne("select * from table_product where id = ? limit 0,1", array($id));
         $comment = new Comments($d, $func, $item['id'], true);
     } else {
-        $func->transferAdmin("Trang không tồn tại", "index.php", false);
+        header('HTTP/1.0 404 Not Found', true, 404);
+        include("404.php");
+        exit;
     }
 }

@@ -192,7 +192,7 @@ function save()
                 $response['status'] = 404;
                 $response['messages'][] = 'Cập nhật thông tin thất bại';
             }
-            $response['link'] = $configBase . "account/thong-tin";
+            $response['link'] = $configBase . "account?act=thong-tin";
         }
     } else {
         $response['status'] = 404;
@@ -210,12 +210,17 @@ function info()
     global $d, $func, $configBase, $rowDetail;
 
     $iduser = $_SESSION['account']['id'];
+    
     if (empty($iduser)) {
-        $func->transfer("Không nhận được dữ liệu", $configBase, false);
+        header('HTTP/1.0 404 Not Found', true, 404);
+        include("404.php");
+        exit;
     } else {
         $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($iduser));
         if (empty($rowDetail)) {
-            $func->transfer("Không có dữ liệu", $configBase, false);
+            header('HTTP/1.0 404 Not Found', true, 404);
+            include("404.php");
+            exit;
         }
     }
 }

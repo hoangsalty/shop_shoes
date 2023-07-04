@@ -9,10 +9,16 @@ $quantity = (!empty($_POST['quantity'])) ? htmlspecialchars($_POST['quantity']) 
 $code = (!empty($_POST['code'])) ? htmlspecialchars($_POST['code']) : '';
 
 if ($cmd == 'add-cart' && $id > 0) {
-    $cart->addToCart($quantity, $id, $color, $size);
-    $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
-    $data = array('max' => $max);
-    echo json_encode($data);
+    $quantityDB = $d->rawQueryOne("select quantity from table_product where id = ? limit 0,1", array($id));
+    if ($quantity > $quantityDB['quantity']) {
+        $data = array('status' => 404, 'message' => 'Sản phẩm này đã hết.');
+        echo json_encode($data);
+    } else {
+        $cart->addToCart($quantity, $id, $color, $size);
+        $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
+        $data = array('status' => 200, 'max' => $max);
+        echo json_encode($data);
+    }
 } else if ($cmd == 'update-cart' && $id > 0 && $code != '') {
     if (!empty($_SESSION['cart'])) {
         $max = count($_SESSION['cart']);

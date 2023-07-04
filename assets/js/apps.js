@@ -180,7 +180,7 @@ FRAMEWORK.Order = function () {
   });
   inti_order_status('nav_status_order', 'status_order', 'table_order_detail');
 
-  $("#thanhtoan").prop("disabled", true);
+  /* $("#thanhtoan").prop("disabled", true);
   $("#thanhtoan").addClass("disabled");
   if (isExist($(".form-cart"))) {
     $(".form-cart")[0].onchange = function () {
@@ -189,7 +189,82 @@ FRAMEWORK.Order = function () {
         $("#thanhtoan").removeClass("disabled");
       }
     };
-  }
+  } */
+
+  $("#form_cart").submit(function (e) {
+    e.preventDefault();
+
+    if (!IS_LOGIN) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Thông báo!',
+        text: 'Vui lòng đăng nhập để có thể thanh toán',
+        allowOutsideClick: false,
+      }).then((state) => {
+        if (state.isConfirmed) {
+          $('#popup-login').modal('show');
+        }
+      });
+      return false;
+    }
+
+    data = new FormData($(this)[0]);
+    data.append('thanhtoan', true);
+
+    $.ajax({
+      type: "POST",
+      url: 'sources/order.php',
+      processData: false,
+      cache: false,
+      contentType: false,
+      dataType: "json",
+      data: data,
+      success: function (result) {
+        if (result['status'] == 201) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Thông báo!',
+            text: result["messages"][0],
+            allowOutsideClick: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+            },
+          }).then((state) => {
+            if (state.dismiss === Swal.DismissReason.timer) {
+              location.href = result['link'];
+            }
+          });
+        } else if (result['status'] == 404) {
+          var myHTML = '';
+          result["messages"].forEach(e => {
+            myHTML += '<p class="mb-1">' + e + '</p>';
+          });
+
+          $('.content-debug').html('<div class="alert alert-danger">' + myHTML + '</div>');
+        } else if (result['status'] == 200) {
+          $.ajax({
+            url: "api/order_status.php",
+            type: "POST",
+            dataType: "html",
+            data: {
+              currentOrder: result['currentOrder'],
+              tempCart: result['tempCart'],
+              messages: result['messages'][0],
+              statusOrder: result['status'],
+            },
+            success: function (result2) {
+              $('#order_holder').html(result2);
+              window.setTimeout(function () {
+                window.location.href = result['link'];
+              }, 10000);
+            },
+          });
+        }
+      }
+    });
+  });
 }
 
 FRAMEWORK.DatePicker = function () {
@@ -221,8 +296,9 @@ FRAMEWORK.UserInfo = function () {
   /* Cancel order */
   $("body").on("click", "#cancel-order", function () {
     Swal.fire({
-      title: 'Bạn muốn hủy đơn hàng này ?',
       icon: 'warning',
+      title: 'Thông báo!',
+      text: 'Bạn muốn hủy đơn hàng này ?',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -981,15 +1057,9 @@ FRAMEWORK.Cart = function () {
     quantity = quantity ? quantity : 1;
 
     /* size màu*/
-    var color = $parents
-      .find(".color-block-pro-detail")
-      .find(".color-pro-detail input:checked")
-      .val();
+    var color = $parents.find(".color-block-pro-detail").find(".color-pro-detail input:checked").val();
     color = color ? color : 0;
-    var size = $parents
-      .find(".size-block-pro-detail")
-      .find(".size-pro-detail input:checked")
-      .val();
+    var size = $parents.find(".size-block-pro-detail").find(".size-pro-detail input:checked").val();
     size = size ? size : 0;
 
     if (id) {
@@ -1008,28 +1078,38 @@ FRAMEWORK.Cart = function () {
           holdonOpen();
         },
         success: function (result) {
-          if (action == "addnow") {
-            $(".count-cart").html(result.max);
+          if (result['status'] == 200) {
+            if (action == "addnow") {
+              $(".count-cart").html(result.max);
 
-            $.ajax({
-              url: "api/cart.php",
-              type: "POST",
-              dataType: "html",
-              data: {
-                cmd: "popup-cart",
-              },
-              beforeSend: function () {
-                holdonOpen();
-              },
-              success: function (result) {
-                $("#popup-cart .modal-body").html(result);
-                $("#popup-cart").modal("show");
-                $("#popup-quickview").modal("hide");
-                holdonClose();
-              },
+              $.ajax({
+                url: "api/cart.php",
+                type: "POST",
+                dataType: "html",
+                data: {
+                  cmd: "popup-cart",
+                },
+                beforeSend: function () {
+                  holdonOpen();
+                },
+                success: function (result) {
+                  $("#popup-cart .modal-body").html(result);
+                  $("#popup-cart").modal("show");
+                  $("#popup-quickview").modal("hide");
+                  holdonClose();
+                },
+              });
+            } else if (action == "buynow") {
+              window.location = CONFIG_BASE + "gio-hang";
+            }
+          } else if (result['status'] == 404) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Thông báo!',
+              text: result["message"],
+              allowOutsideClick: false,
             });
-          } else if (action == "buynow") {
-            window.location = CONFIG_BASE + "gio-hang";
+            holdonClose();
           }
         },
       });

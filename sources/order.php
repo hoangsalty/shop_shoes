@@ -1,22 +1,20 @@
 <?php
-if (!defined('SOURCES'))
-    die("Error");
+if (!defined('SOURCES')) {
+    require_once "../api/config.php";
+    /* die("Error"); */
+}
 
 /* Tỉnh thành */
 $city = $func->getProvince();
-
 /* Hình thức thanh toán */
 $payments_info = $d->rawQuery("select * from table_news where type = ? and find_in_set('hienthi',status) order by id desc", array('hinh-thuc-thanh-toan'));
 
-if (!empty($_POST['thanhtoan'])) {
-    /* Check order */
-    if (empty($_SESSION['cart'])) {
-        $func->transferAdmin("Đơn hàng không hợp lệ. Vui lòng thử lại sau.", "index.php", false);
-    }
+if (!empty($_POST['thanhtoan']) && $_POST['thanhtoan'] == true) {
+    $message = '';
+    $response = array();
 
     /* Data */
     $dataOrder = (!empty($_POST['dataOrder'])) ? $_POST['dataOrder'] : array();
-
     /* Check data */
     if (!empty($dataOrder)) {
         /* Info */
@@ -91,20 +89,11 @@ if (!empty($_POST['thanhtoan'])) {
     }
 
     if (!empty($response)) {
-        /* Flash data */
-        if (!empty($dataOrder)) {
-            foreach ($dataOrder as $k => $v) {
-                if (!empty($v)) {
-                    $flash->set($k, $v);
-                }
-            }
-        }
-
         /* Errors */
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set("message", $message);
-        $func->redirect("gio-hang");
+        $response['status'] = 404;
+        $message = json_encode($response);
+        echo $message;
+        return;
     }
 
     //Momo - VNPay
@@ -206,7 +195,12 @@ if (!empty($_POST['thanhtoan'])) {
         }
 
         $_SESSION['dataOrder'] = $dataOrder;
-        $func->redirect($vnp_Url);
+
+        $response['status'] = 201;
+        $response['link'] = $vnp_Url;
+        $response['messages'][] = "Di chuyển đến trang thanh toán VNPay...";
+        $message = json_encode($response);
+        echo $message;
         return;
     }
 
@@ -267,23 +261,26 @@ if (!empty($_POST['thanhtoan'])) {
                 $data_orderdetail['quantity'] = $q;
                 $d->insert('table_order_detail', $data_orderdetail);
             }
-
-            $currentOrder = $d->rawQueryOne("select * from table_order where id=? limit 0,1", array($id_insert));
-            $tempCart = $_SESSION['cart'];
-            $statusOrder = 200;
-            $message = 'Thông tin đơn hàng đã được gửi thành công. Hệ thống sẽ tự đưa bạn quay trở về trang chủ...';
         }
 
+        $currentOrder = $d->rawQueryOne("select * from table_order where id=? limit 0,1", array($id_insert));
+        $tempCart = $_SESSION['cart'];
+        
         /* Xóa giỏ hàng */
         unset($_SESSION['cart']);
-        include(TEMPLATE . "order/order_status.php");
-        exit();
-        //$func->transfer("Thông tin đơn hàng đã được gửi thành công.", $configBase);
+
+        $response['status'] = 200;
+        $response['currentOrder'] = $currentOrder;
+        $response['tempCart'] = $tempCart;
+        $response['link'] = $configBase . 'account?act=thong-tin#order';
+        $response['messages'][] = "Thông tin đơn hàng đã được gửi thành công. Hệ thống sẽ tự động đưa bạn đến với khu vực đơn hàng...";
+        $message = json_encode($response);
+        echo $message;
+        return;
     } else {
         $statusOrder = 404;
         $message = 'Lỗi lưu đơn hàng.';
         include(TEMPLATE . "order/order_status.php");
         exit();
-        //$func->transfer("Lỗi lưu đơn hàng.", $configBase, false);
     }
 }

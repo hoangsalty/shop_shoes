@@ -23,8 +23,8 @@
         <?php
         if ($com != 'gio-hang' && $source != 'vnpay') {
             include TEMPLATE . LAYOUT . "footer.php";
-            include TEMPLATE . LAYOUT . "modal.php";
         }
+        include TEMPLATE . LAYOUT . "modal.php";
         include TEMPLATE . LAYOUT . "js.php";
         ?>
     </div>

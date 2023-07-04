@@ -12,22 +12,22 @@ $commentNotify = $d->rawQuery("select id from table_comment where find_in_set('n
 /* Lấy đơn hàng - mới đặt */
 $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'moidat'");
 $allNewOrder = $order_count['count(id)'];
-$totalNewOrder = $order_count['sum(total_price)'];
+$totalNewOrder = ($order_count['sum(total_price)'] > 0) ? $order_count['sum(total_price)'] : 0;
 
 /* Lấy đơn hàng - đã xác nhận */
 $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'daxacnhan'");
 $allConfirmOrder = $order_count['count(id)'];
-$totalConfirmOrder = $order_count['sum(total_price)'];
+$totalConfirmOrder = ($order_count['sum(total_price)'] > 0) ? $order_count['sum(total_price)'] : 0;
 
 /* Lấy đơn hàng - đã giao */
 $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'dagiao'");
 $allDeliveriedOrder = $order_count['count(id)'];
-$totalDeliveriedOrder = $order_count['sum(total_price)'];
+$totalDeliveriedOrder = ($order_count['sum(total_price)'] > 0) ? $order_count['sum(total_price)'] : 0;
 
 /* Lấy đơn hàng - đã hủy */
 $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'dahuy'");
 $allCanceledOrder = $order_count['count(id)'];
-$totalCanceledOrder = $order_count['sum(total_price)'];
+$totalCanceledOrder = ($order_count['sum(total_price)'] > 0) ? $order_count['sum(total_price)'] : 0;
 ?>
 
 <section class="content">

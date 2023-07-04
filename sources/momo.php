@@ -1,7 +1,9 @@
 <?php
 
 if (empty($_GET["partnerCode"])) {
-    $func->transfer("Dữ liệu không có thực.", $configBase, false);
+    header('HTTP/1.0 404 Not Found', true, 404);
+    include("404.php");
+    exit;
 }
 
 if (!empty($_GET["partnerCode"])) {
