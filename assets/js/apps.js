@@ -1167,7 +1167,7 @@ FRAMEWORK.Cart = function () {
     var oldValue = $(this).parent().find("input").val();
     if ($(this).text() == "+") {
       $.ajax({
-        url: "api/cart_counter.php",
+        url: "api/cart.php",
         type: "POST",
         dataType: "json",
         data: {
@@ -1182,7 +1182,7 @@ FRAMEWORK.Cart = function () {
       });
     } else if (oldValue > 1) {
       $.ajax({
-        url: "api/cart_counter.php",
+        url: "api/cart.php",
         type: "POST",
         dataType: "json",
         data: {

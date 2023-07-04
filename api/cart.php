@@ -7,8 +7,22 @@ $color = (!empty($_POST['color'])) ? htmlspecialchars($_POST['color']) : 0;
 $size = (!empty($_POST['size'])) ? htmlspecialchars($_POST['size']) : 0;
 $quantity = (!empty($_POST['quantity'])) ? htmlspecialchars($_POST['quantity']) : 1;
 $code = (!empty($_POST['code'])) ? htmlspecialchars($_POST['code']) : '';
+$oldValue = (!empty($_POST['oldValue'])) ? htmlspecialchars($_POST['oldValue']) : 0;
 
-if ($cmd == 'add-cart' && $id > 0) {
+if ($cmd == 'plus') {
+    $newValue = $oldValue + 1;
+    $quantityDB = $d->rawQueryOne("select quantity from table_product where id = ? limit 0,1", array($id));
+    if (!empty($quantityDB) && $newValue > $quantityDB['quantity']) {
+        $newValue = $quantityDB['quantity'];
+    }
+
+    $data = array('quantity' => $newValue);
+    echo json_encode($data);
+} else if ($cmd == 'minus' && $oldValue > 1) {
+    $newValue = $oldValue - 1;
+    $data = array('quantity' => $newValue);
+    echo json_encode($data);
+} else if ($cmd == 'add-cart' && $id > 0) {
     $quantityDB = $d->rawQueryOne("select quantity from table_product where id = ? limit 0,1", array($id));
     if ($quantity > $quantityDB['quantity']) {
         $data = array('status' => 404, 'message' => 'Sản phẩm này đã hết.');
