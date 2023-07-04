@@ -4,7 +4,6 @@ if (!defined('SOURCES')) die("Error");
 @$id = htmlspecialchars($_GET['id']);
 @$idl = htmlspecialchars($_GET['id_list']);
 @$idc = htmlspecialchars($_GET['id_cat']);
-@$idb = htmlspecialchars($_GET['id_brand']);
 
 if ($id != '') {
     /* Lấy sản phẩm detail */
@@ -16,8 +15,6 @@ if ($id != '') {
     $d->update('table_product', $views);
     /* Lấy danh mục */
     $productList = $d->rawQueryOne("select * from table_product_list where id = ? and find_in_set('hienthi',status) limit 0,1", array($rowDetail['id_list']));
-    /* Lấy thương hiệu */
-    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? and find_in_set('hienthi',status)", array($rowDetail['id_brand']));
     /* Lấy gallery */
     $rowDetailPhoto = $d->rawQuery("select photo from table_gallery where id_parent = ? order by id desc", array($rowDetail['id']));
     /* Lấy màu */
@@ -109,32 +106,6 @@ if ($id != '') {
     /* breadCrumbs */
     if (!empty($titleMain)) $breadcr->set($com, $titleMain);
     if (!empty($productList)) $breadcr->set($productList['slug'], $productList['name']);
-    $breadcrumbs = $breadcr->get();
-} else if ($idb != '') {
-    /* Lấy brand detail */
-    $productBrand = $d->rawQueryOne("select * from table_product_brand where id = ? limit 0,1", array($idb));
-    $titleCate = $productBrand['name'];
-
-    /* Lấy sản phẩm */
-    $where = "";
-    $where = "id_brand = ? and find_in_set('hienthi',status)";
-    $params = array($productBrand['id']);
-
-    $curPage = $getPage;
-    $perPage = 20;
-    $startpoint = ($curPage * $perPage) - $perPage;
-    $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_product where $where order by id desc $limit";
-    $product = $d->rawQuery($sql, $params);
-    $sqlNum = "select count(*) as 'num' from table_product where $where order by id desc";
-    $count = $d->rawQueryOne($sqlNum, $params);
-    $total = (!empty($count)) ? $count['num'] : 0;
-    $url = $func->getCurrentPageURL();
-    $paging = $func->pagination($total, $perPage, $curPage, $url);
-
-    /* breadCrumbs */
-    if (!empty($titleMain)) $breadcr->set($com, $titleMain);
-    if (!empty($productBrand)) $breadcr->set($productBrand['slug'], $productBrand['name']);
     $breadcrumbs = $breadcr->get();
 } else {
     /* Lấy tất cả sản phẩm */

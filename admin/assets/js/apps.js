@@ -836,7 +836,7 @@ FRAMEWORK.AlbumFiler = function () {
         var table = $("#gallery_table")[0].value;;
 
         $('#filer-gallery').filer({
-            limit: 3,
+            limit: null,
             maxSize: null,
             extensions: ['jpg', 'png', 'jpeg'],
             changeInput: '<div class="jFiler-input-dragDrop"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-cloud-up-o"></i></div><div class="jFiler-input-text"><h3>Bấm vào đây</h3> <span style="display:inline-block; margin: 15px 0">hoặc</span></div><a class="jFiler-input-choose-btn blue">Chọn hình</a></div></div>',

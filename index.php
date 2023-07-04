@@ -15,7 +15,6 @@ $files = glob(LIBRARIES . 'class/*.php');
 foreach ($files as $file) require_once $file;
 
 $d = new PDODb($config['database']);
-$flash = new Flash();
 $emailer = new Email($d);
 $router = new AltoRouter();
 $func = new Functions($d);

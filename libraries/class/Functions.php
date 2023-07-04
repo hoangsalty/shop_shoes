@@ -267,7 +267,7 @@ class Functions
     {
         if (isset($_FILES[$file]) && !$_FILES[$file]['error']) {
             $postMaxSize = ini_get('post_max_size');
-            $MaxSize = explode('M', $postMaxSize);
+            $MaxSize = explode('G', $postMaxSize);
             $MaxSize = $MaxSize[0];
 
             if ($_FILES[$file]['size'] > $MaxSize * 1048576) {
@@ -501,7 +501,6 @@ class Functions
             if (!empty($slug)) {
                 $table = array(
                     "table_product_list",
-                    "table_product_brand",
                     "table_product",
                     "table_news",
                     "table_static",

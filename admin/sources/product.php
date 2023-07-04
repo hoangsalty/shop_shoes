@@ -399,6 +399,8 @@ function saveProduct()
                                 $d->update('table_gallery', $photoUpdate);
                                 unset($photoUpdate);
                                 unset($_FILES['file_gallery']);
+                            } else {
+                                
                             }
                         }
                     }
