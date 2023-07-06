@@ -190,7 +190,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                                     <?php foreach ($gallery as $v) { ?>
                                         <li class="my-jFiler-item my-jFiler-item-<?= $v['id'] ?> col-2 mb-4" data-id="<?= $v['id'] ?>">
                                             <div class="jFiler-item-container border border-primary">
-                                                <?= $func->getImage(['class' => 'rounded w-100', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                                <?= $func->getImage(['class' => 'rounded w-100', 'width' => 120, 'height' => 150, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
                                                 <div class="jFiler-item-assets">
                                                     <ul class="list-inline pull-right d-flex align-items-center justify-content-between">
                                                         <li class="ml-1">

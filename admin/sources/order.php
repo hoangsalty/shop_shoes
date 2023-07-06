@@ -34,7 +34,7 @@ switch ($act) {
 /* View order */
 function viewOrders()
 {
-    global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal, $allNewOrder, $totalNewOrder, $allConfirmOrder, $totalConfirmOrder, $allDeliveriedOrder, $totalDeliveriedOrder, $allCanceledOrder, $totalCanceledOrder;
+    global $d, $func, $strUrl, $curPage, $items, $paging, $minTotal, $maxTotal;
 
     $where = "";
     $order_status = (isset($_REQUEST['order_status'])) ? htmlspecialchars($_REQUEST['order_status']) : '';
