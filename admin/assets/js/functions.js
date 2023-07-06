@@ -296,3 +296,10 @@ function actionOrder(url) {
 
     window.location = url;
 }
+
+/* Chart */
+function actionChart(url) {
+    var chart_date = $('#chart_date').val();
+    if (chart_date) url += '?chart_date=' + chart_date;
+    window.location = url;
+}

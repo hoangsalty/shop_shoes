@@ -1,9 +1,11 @@
 <!-- Js Config -->
 <script type="text/javascript">
+    var CHARTS = <?= (!empty($charts)) ? json_encode($charts) : '{}' ?>;
+    var FRAMEWORK = FRAMEWORK || {};
+
     var CONFIG_BASE = '<?= $configBase ?>';
     var ADMIN = '<?= ADMIN ?>';
     var MAX_DATE = '<?= date("Y/m/d", time()) ?>';
-    var FRAMEWORK = FRAMEWORK || {};
 
     var CUR_PAGE = '<?= $curPage ?>';
 
@@ -39,3 +41,4 @@
 <script src="assets/js/apps.js"></script>
 <script src="assets/js/adminlte.js"></script>
 <script src="assets/sweetalert/sweetalert.min.js"></script>
+<script src="assets/charts/apexcharts.js"></script>

@@ -18,3 +18,4 @@
 <link href="assets/css/adminlte.min.css" rel="stylesheet">
 <link href="assets/css/adminlte-style.css" rel="stylesheet">
 <link href="assets/sweetalert/sweetalert.min.css" rel="stylesheet">
+<link href="assets/charts/apexcharts.css" rel="stylesheet">

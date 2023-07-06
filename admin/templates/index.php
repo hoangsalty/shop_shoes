@@ -28,6 +28,41 @@ $totalDeliveriedOrder = ($order_count['sum(total_price)'] > 0) ? $order_count['s
 $order_count = $d->rawQueryOne("select count(id), sum(total_price) from table_order where order_status = 'dahuy'");
 $allCanceledOrder = $order_count['count(id)'];
 $totalCanceledOrder = ($order_count['sum(total_price)'] > 0) ? $order_count['sum(total_price)'] : 0;
+
+/* Chart */
+function getBetweenDates($startDate, $endDate)
+{
+    $rangArray = [];
+
+    $startDate = strtotime(str_replace("/", "-", $startDate));
+    $endDate = strtotime(str_replace("/", "-", $endDate));
+
+    for ($currentDate = $startDate; $currentDate <= $endDate; $currentDate += (86400)) {
+        $date = date('d-m-Y', $currentDate);
+        $rangArray[] = $date;
+    }
+
+    return $rangArray;
+}
+
+$chart_date = (isset($_REQUEST['chart_date'])) ? htmlspecialchars($_REQUEST['chart_date']) : '';
+$daysInMonth = array();
+if (!empty($chart_date)) {
+    $chart_date = explode("-", $chart_date);
+    $date_from = trim($chart_date[0]);
+    $date_to = trim($chart_date[1]);
+    $daysInMonth = getBetweenDates($date_from, $date_to);
+
+    $charts = array();
+    for ($i = 0; $i < count($daysInMonth); $i++) {
+        $from_date = strtotime($daysInMonth[$i] . ' 12:00:00 AM');
+        $to_date = strtotime($daysInMonth[$i] . ' 11:59:59 PM');
+
+        $sqlData = $d->rawQueryOne("select sum(total_price) as totals from table_order where date_created >= ? and date_created <= ?", array($from_date, $to_date));
+        $charts['series'][] = ($sqlData['totals']) ? $sqlData['totals'] : 0;
+        $charts['labels'][] = $daysInMonth[$i];
+    }
+}
 ?>
 
 <section class="content">
@@ -134,5 +169,20 @@ $totalCanceledOrder = ($order_count['sum(total_price)'] > 0) ? $order_count['sum
                 </div>
             </div>
         </div>
+
+        <div class="form-group col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <input type="text" class="form-control float-right text-sm" name="chart_date" id="chart_date" value="<?= (isset($_GET['chart_date'])) ? $_GET['chart_date'] : '' ?>" readonly>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group"><a type="button" class="btn btn-success" onclick="actionChart('index.php')">Thống Kê Doanh Thu</a></div>
+        </div>
+
+        <div id="doanhthuChart"></div>
     </div>
 </section>
