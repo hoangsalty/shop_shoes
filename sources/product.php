@@ -7,23 +7,29 @@ if (!defined('SOURCES')) die("Error");
 @$sort = htmlspecialchars($_GET['sort']);
 
 #các sản phẩm khác======================
-$orderby_search = 'order by id desc';
+$sql_search = '';
+$orderby_search = 'order by date_created desc';
 if ($sort != '') {
-    $sql_search = '';
     switch ($sort) {
         case '1':
-            $orderby_search = 'order by id desc';
+            $check = 'Mới nhất';
+            $orderby_search = 'order by date_created desc';
             break;
         case '2':
-            $sql_search .= ' and regular_price!=0';
+            $check = 'Bán chạy nhất';
+            $sql_search .= ' and banchay=1';
             break;
         case '3':
+            $check = 'Giá cao nhất';
             $orderby_search = 'order by regular_price desc';
             break;
         case '4':
+            $check = 'Giá thấp nhất';
             $orderby_search = 'order by regular_price asc';
             break;
     }
+} else {
+    $check = 'Mới nhất';
 }
 
 if ($id != '') {

@@ -3771,3 +3771,93 @@ small {
   color: red;
   font-weight: 600;
 }
+
+/* Sort */
+.sort-select {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.sort-select .click-sort {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 6px 10px 6px 8px;
+  margin: 0px;
+}
+
+.sort-select-main {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 20%);
+  display: none;
+  position: absolute;
+  padding: 0 7px;
+  top: 30px;
+  right: 0;
+  width: 160px;
+  z-index: 2;
+}
+
+.sort-select-main p {
+  border-bottom: 1px solid #f1f1f1;
+  margin: 0px;
+}
+
+.sort a {
+  color: #000;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 11px 3px;
+  display: block;
+  cursor: pointer;
+}
+
+.sort a.check i {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  transform: scale(var(--ggs, 1));
+  width: 22px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+  vertical-align: middle;
+}
+
+.sort a.check i::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 3px;
+  top: -4px;
+  width: 6px;
+  height: 10px;
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  transform-origin: bottom left;
+  transform: rotate(45deg);
+}
+
+.sort-select .sort-show {
+  padding-right: 12px;
+  position: relative;
+}
+
+.sort-select .sort-show::before {
+  content: "";
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #333;
+  content: "";
+  height: 0;
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 0;
+}

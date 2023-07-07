@@ -3,19 +3,6 @@ class Functions
 {
     private $d;
 
-    public function getCurrentPageURL_Sort()
-    {
-        $pageURL = 'http';
-        $pageURL .= "://";
-        if ($_SERVER["SERVER_PORT"] != "80") {
-            $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-        } else {
-            $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-        }
-        $pageURL = explode("&", $pageURL);
-        return $pageURL[0];
-    }
-
     function __construct($d)
     {
         $this->d = $d;
@@ -369,6 +356,16 @@ class Functions
         include("./templates/layout/transfer.php");
         exit();
     }
+
+    /* Lấy link sort hiện tại */
+    public function getCurrentPageURL_Sort()
+    {
+        $pageURL = 'http://';
+        $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+        $pageURL = explode("&", $pageURL);
+        return $pageURL[0];
+    }
+
     /* Lấy link page hiện tại */
     public function getCurrentPageURL()
     {
