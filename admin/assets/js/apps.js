@@ -1,3 +1,48 @@
+FRAMEWORK.Charts = function () {
+    console.log(CHARTS['series']);
+    if ($('#doanhthuChart').length) {
+        var doanhthuChart;
+        var options = {
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        return value.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
+            },
+            chart: {
+                id: 'doanhthuChart',
+                height: 450,
+                type: 'line',
+            },
+            series: [
+                {
+                    name: 'Doanh thu',
+                    type: 'line',
+                    data: CHARTS['series']
+                },
+            ],
+            stroke: {
+                curve: 'smooth'
+            },
+            grid: {
+                borderColor: '#e7e7e7',
+                row: {
+                    colors: ['#f3f3f3', 'transparent'],
+                    opacity: 0.5
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            labels: CHARTS['labels'],
+        };
+
+        doanhthuChart = new ApexCharts(document.querySelector('#doanhthuChart'), options);
+        doanhthuChart.render();
+    }
+}
+
 FRAMEWORK.DbSizeColor = function () {
     $('.modal').on('hidden.bs.modal', function (e) {
         $(this)
@@ -1001,6 +1046,17 @@ FRAMEWORK.Login = function () {
 FRAMEWORK.Order = function () {
     /* Order */
     /* Date range picker */
+    $('#chart_date').daterangepicker({
+        maxDate: new Date(),
+        callback: this.render,
+        autoUpdateInput: false,
+        timePicker: false,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    });
+
     $('#order_date').daterangepicker({
         callback: this.render,
         autoUpdateInput: false,
@@ -1010,10 +1066,10 @@ FRAMEWORK.Order = function () {
             format: 'DD/MM/YYYY'
         }
     });
-    $('#order_date').on('apply.daterangepicker', function (ev, picker) {
+    $('#order_date, #chart_date').on('apply.daterangepicker', function (ev, picker) {
         $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
     });
-    $('#order_date').on('cancel.daterangepicker', function (ev, picker) {
+    $('#order_date, #chart_date').on('cancel.daterangepicker', function (ev, picker) {
         $(this).val('');
     });
 
@@ -1289,4 +1345,5 @@ $(document).ready(function () {
     FRAMEWORK.Order();
     FRAMEWORK.Comments();
     FRAMEWORK.CustomSelect();
+    FRAMEWORK.Charts();
 });

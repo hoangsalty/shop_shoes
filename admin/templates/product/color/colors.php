@@ -30,8 +30,9 @@ $status = array("hienthi" => "Hiển thị");
                         <label for="selectall-checkbox" class="custom-control-label"></label>
                     </div>
                 </th>
-                <th class="align-middle text-center" width="75px">STT</th>
-                <th class="align-middle">Tiêu đề</th>
+                <th class="align-middle text-center" width="5%">STT</th>
+                <th class="align-middle" style="width:30%">Tiêu đề</th>
+                <th class="align-middle" style="width:30%">Màu</th>
                 <?php foreach ($status as $key => $value) { ?>
                     <th class="align-middle text-center" width="120px"><?= $value ?></th>
                 <?php } ?>
@@ -61,8 +62,10 @@ $status = array("hienthi" => "Hiển thị");
                             <div class="tool-action mt-2 w-clear">
                                 <a class="btn btn-info btn-sm mr-2" id="edit-color" data-id="<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><i class="far fa-edit mr-1"></i>Edit</a>
                                 <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/product.php" data-act="delete_color" title="<?= $items[$i]['name'] ?>"><i class="far fa-trash-alt mr-1"></i>Delete</a>
-
                             </div>
+                        </td>
+                        <td class="align-middle">
+                            <span class="d-block w-100" style="border-radius:10px; height:40px; background-color: <?= $items[$i]['color'] ?>;" title="<?= $items[$i]['name'] ?>"></span>
                         </td>
                         <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                         <?php foreach ($status as $key => $value) { ?>
