@@ -254,3 +254,19 @@ function changeOrderStatus(obj) {
     },
   });
 }
+
+function loadSort() {
+  var sort = $('.sort-select-main p .check').data('sort');
+  var url_sort = $('.link').val();
+  var link_search = '';
+
+  if (url_sort != '') {
+    link_search += url_sort;
+  }
+
+  if (sort != '') {
+    link_search += "?sort=" + sort;
+  }
+
+  window.location.href = link_search;
+}

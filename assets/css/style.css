@@ -253,6 +253,17 @@ a:hover {
   z-index: 10;
 }
 
+.menu.fixed .left {
+  max-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu.fixed .left .logo-header {
+  transform: scale(0.6);
+}
+
 .menu ul {
   width: 100%;
   padding: 0px;
@@ -340,6 +351,7 @@ a:hover {
   padding: 10px 12px;
   line-height: 24px;
   height: auto;
+  text-transform: lowercase;
 }
 
 .menu ul li ul li:hover a {
@@ -590,14 +602,24 @@ a:hover {
 
 .title-main span:after {
   position: absolute;
-  left: 0;
+  content: "";
+  background: var(--color-main);
+  left: calc(50% - 80px/2);
   bottom: -10px;
-  right: 0;
   height: 4px;
   width: 80px;
-  background: var(--color-main);
-  content: "";
-  margin: 0 auto;
+}
+
+.title-main-detail {
+  margin-bottom: 1.5rem;
+}
+
+.title-main-detail span {
+  font-size: 20px;
+  color: #1c1c1c;
+  font-weight: 700;
+  position: relative;
+  text-transform: uppercase;
 }
 
 .list_monnb {
@@ -930,9 +952,20 @@ a:hover {
 
 .footer-title {
   text-transform: uppercase;
+  font-weight: 500;
   font-size: 16px;
   margin-bottom: 1.5rem;
-  font-weight: 500;
+  position: relative;
+}
+
+.footer-title:after {
+  position: absolute;
+  content: "";
+  background: #ffffff;
+  width: 40px;
+  height: 2px;
+  left: 0;
+  bottom: -7px;
 }
 
 .footer-ul {
@@ -941,12 +974,8 @@ a:hover {
   margin: 0px;
 }
 
-.footer-ul li {
+.footer-ul li:not(:last-child) {
   margin-bottom: 15px;
-}
-
-.footer-ul li:last-child {
-  margin-bottom: 0px;
 }
 
 .footer-ul li a {
@@ -964,6 +993,10 @@ a:hover {
 
 .copyright {
   color: #ffffff;
+}
+
+.footer-map iframe {
+  width: 100%;
 }
 
 .breadCrumbs {
@@ -1331,6 +1364,34 @@ div.css_flex_baiviet {
   flex-wrap: wrap;
 }
 
+.sticky_right_news {
+  display: inline-block;
+  width: 100%;
+  position: sticky;
+  top: 10px;
+  z-index: 1;
+}
+
+.title_news_right {
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 10px;
+  text-transform: uppercase;
+  background: var(--color-main);
+}
+
+.box_news_right {
+  border: 1px solid #ccc;
+  padding: 15px 10px 0;
+  border-top: 0;
+}
+
+.news_item {
+  display: block;
+  margin-bottom: 15px;
+}
+
 .news {
   width: calc(50% - 20px);
   margin: 0 10px;
@@ -1359,10 +1420,9 @@ div.css_flex_baiviet {
   color: #333;
   font-weight: 600;
   font-size: 16px;
-  display: block;
-  line-height: normal;
   margin-bottom: 5px;
   -webkit-line-clamp: 2;
+  text-transform: capitalize;
 }
 
 .name-news:hover {

@@ -33,13 +33,13 @@ FRAMEWORK.DbUser = function () {
 
           $(".box_response").html(
             '<div class="card bg-gradient-red">' +
-              '<div class="card-header">' +
-              '<h3 class="card-title">Thông báo</h3>' +
-              "</div>" +
-              '<div class="card-body">' +
-              myHTML +
-              "</div>" +
-              "</div>"
+            '<div class="card-header">' +
+            '<h3 class="card-title">Thông báo</h3>' +
+            "</div>" +
+            '<div class="card-body">' +
+            myHTML +
+            "</div>" +
+            "</div>"
           );
         }
       },
@@ -434,9 +434,9 @@ FRAMEWORK.Comments = function () {
           }); */
         },
       },
-      afterSelect: function () {},
-      onEmpty: function () {},
-      onRemove: function () {},
+      afterSelect: function () { },
+      onEmpty: function () { },
+      onRemove: function () { },
     });
   }
 
@@ -1061,15 +1061,9 @@ FRAMEWORK.Cart = function () {
     quantity = quantity ? quantity : 1;
 
     /* size màu*/
-    var color = $parents
-      .find(".color-block-pro-detail")
-      .find(".color-pro-detail input:checked")
-      .val();
+    var color = $parents.find(".color-block-pro-detail").find(".color-pro-detail input:checked").val();
     color = color ? color : 0;
-    var size = $parents
-      .find(".size-block-pro-detail")
-      .find(".size-pro-detail input:checked")
-      .val();
+    var size = $parents.find(".size-block-pro-detail").find(".size-pro-detail input:checked").val();
     size = size ? size : 0;
 
     if (id) {
@@ -1290,16 +1284,25 @@ FRAMEWORK.Sort = function () {
   $(".click-sort").click(function (e) {
     $(".sort-select-main").slideToggle();
   });
+  $('body').on('click', '.sort-select-main p .check', function (event) {
+    loadSort();
+  });
+};
 
-  var sort = $(".sort-select-main p .check").data("sort");
-  var link_search = "";
-  if (url_sort != "") {
-    link_search += url_sort;
+/* Logo mã màu đặc biệt: monoHL, oceanHL, fireHL */
+FRAMEWORK.ShinerLogo = function () {
+  if (isExist($(".peShiner"))) {
+    $(window).bind("load", function () {
+      var api = $(".peShiner").peShiner({
+        api: true,
+        paused: true,
+        reverse: true,
+        repeat: 1,
+        color: "oceanHL",
+      });
+      api.resume();
+    });
   }
-  if (sort != "") {
-    link_search += "?sort=" + sort;
-  }
-  window.location.href = link_search;
 };
 
 /* Ready */
@@ -1321,4 +1324,5 @@ $(document).ready(function () {
   FRAMEWORK.Order();
   FRAMEWORK.DbUser();
   FRAMEWORK.Sort();
+  FRAMEWORK.ShinerLogo();
 });

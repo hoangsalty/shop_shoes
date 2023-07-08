@@ -4,7 +4,9 @@
         <div class="css_flex_baiviet">
             <?php foreach ($news as $k => $v) { ?>
                 <a class="news" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
-                    <p class="pic-news scale-img"><?= $func->getImage(['class' => 'w-100', 'width' => 222, 'height' => 166, 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?></p>
+                    <p class="pic-news scale-img">
+                        <?= $func->getImage(['class' => 'w-100', 'width' => 222, 'height' => 166, 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                    </p>
                     <div class="info-news">
                         <h3 class="name-news text-split"><?= $v['name'] ?></h3>
                         <p class="time-news">Ngày đăng: <?= date("d/m/Y", $v['date_created']) ?></p>

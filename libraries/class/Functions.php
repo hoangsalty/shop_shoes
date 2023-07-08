@@ -362,7 +362,7 @@ class Functions
     {
         $pageURL = 'http://';
         $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-        $pageURL = explode("&", $pageURL);
+        $pageURL = explode("?", $pageURL);
         return $pageURL[0];
     }
 

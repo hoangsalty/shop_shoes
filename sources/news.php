@@ -7,6 +7,9 @@ if ($id != '') {
     /* Lấy bài viết detail */
     $rowDetail = $d->rawQueryOne("select * from table_news where id = ? and find_in_set('hienthi',status) limit 0,1", array($id));
 
+    /* Lấy bài viết khác */
+    $news = $d->rawQuery("select * from table_news where id <> " . $rowDetail['id'] . " and find_in_set('noibat',status) and find_in_set('hienthi',status) and type = ? order by id desc", array('tin-tuc'));
+
     /* breadCrumbs */
     if (!empty($titleMain)) $breadcr->set($com, $titleMain);
     $breadcr->set($rowDetail['slug'], $rowDetail['name']);

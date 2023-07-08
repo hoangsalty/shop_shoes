@@ -15,7 +15,6 @@ if ($cmd == 'plus') {
     if (!empty($quantityDB) && $newValue > $quantityDB['quantity']) {
         $newValue = $quantityDB['quantity'];
     }
-
     $data = array('quantity' => $newValue);
     echo json_encode($data);
 } else if ($cmd == 'minus' && $oldValue > 1) {
