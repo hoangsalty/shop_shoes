@@ -7,7 +7,6 @@ if (!defined('SOURCES')) die("Error");
 @$sort = htmlspecialchars($_GET['sort']);
 
 #các sản phẩm khác======================
-$sql_search = '';
 $orderby_search = 'order by date_created desc';
 if ($sort != '') {
     switch ($sort) {
@@ -16,14 +15,10 @@ if ($sort != '') {
             $orderby_search = 'order by date_created desc';
             break;
         case '2':
-            $check = 'Bán chạy nhất';
-            $sql_search .= ' and banchay=1';
-            break;
-        case '3':
             $check = 'Giá cao nhất';
             $orderby_search = 'order by regular_price desc';
             break;
-        case '4':
+        case '3':
             $check = 'Giá thấp nhất';
             $orderby_search = 'order by regular_price asc';
             break;
@@ -144,9 +139,9 @@ if ($id != '') {
     $perPage = 12;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_product where $where $sql_search $limit";
+    $sql = "select * from table_product where $where $orderby_search $limit";
     $product = $d->rawQuery($sql, $params);
-    $sqlNum = "select count(*) as 'num' from table_product where $where $sql_search";
+    $sqlNum = "select count(*) as 'num' from table_product where $where $orderby_search";
     $count = $d->rawQueryOne($sqlNum, $params);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = $func->getCurrentPageURL();

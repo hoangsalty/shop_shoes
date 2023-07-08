@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 04, 2023 at 05:09 PM
+-- Generation Time: Jul 08, 2023 at 03:51 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `table_color` (
   `id` int UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
@@ -62,20 +62,13 @@ CREATE TABLE `table_comment` (
   `id_parent` int UNSIGNED DEFAULT NULL,
   `id_user` int UNSIGNED DEFAULT NULL,
   `star` int DEFAULT '0',
-  `content` text COLLATE utf8mb4_unicode_ci,
-  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT NULL,
   `date_updated` int DEFAULT NULL,
   `date_deleted` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_comment`
---
-
-INSERT INTO `table_comment` (`id`, `id_parent`, `id_user`, `star`, `content`, `fullname`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, NULL, 149, 4, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'Hoàng Phạm', 'hienthi', 1685952489, 1685953493, NULL);
 
 -- --------------------------------------------------------
 
@@ -89,15 +82,6 @@ CREATE TABLE `table_comment_photo` (
   `photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
---
--- Dumping data for table `table_comment_photo`
---
-
-INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
-(1, 1, '1-79450.jpg'),
-(2, 1, '2-7335-5701.jpg'),
-(3, 1, 'nature35-5158-6128.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -107,9 +91,9 @@ INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
 CREATE TABLE `table_gallery` (
   `id` int UNSIGNED NOT NULL,
   `id_parent` int UNSIGNED DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
@@ -120,16 +104,6 @@ CREATE TABLE `table_gallery` (
 --
 
 INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(50, NULL, 'poduct-9-5006-2691.jpg', '', 'hienthi', 1686412347, 0, 0),
-(51, NULL, 'poduct-1-1318-4164.jpg', '', 'hienthi', 1686412347, 0, 0),
-(52, NULL, 'poduct-1-1758-1072.jpeg', '', 'hienthi', 1686412347, 0, 0),
-(53, NULL, 'poduct-2-3013-1627.jpg', '', 'hienthi', 1686412347, 0, 0),
-(54, NULL, 'poduct-3-5224-6755.jpg', '', 'hienthi', 1686412347, 0, 0),
-(55, NULL, 'poduct-4-1646-2779.jpg', '', 'hienthi', 1686412347, 0, 0),
-(56, NULL, 'poduct-5-3937-3600.jpg', '', 'hienthi', 1686412347, 0, 0),
-(57, NULL, 'poduct-6-8870-7717.jpg', '', 'hienthi', 1686412347, 0, 0),
-(58, NULL, 'poduct-7-3820-1176.jpg', '', 'hienthi', 1686412347, 0, 0),
-(59, NULL, 'poduct-8-2281-2890.jpg', '', 'hienthi', 1686412348, 0, 0),
 (60, 18, 'air-force-1-07-shoes-WrLlWX (5).png', '', 'hienthi', 1686903025, 0, 0),
 (61, 18, 'air-force-1-07-shoes-WrLlWX (3).png', '', 'hienthi', 1686903025, 0, 0),
 (62, 18, 'air-force-1-07-shoes-WrLlWX (4).png', '', 'hienthi', 1686903025, 0, 0),
@@ -233,7 +207,14 @@ INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `status`, `date
 (180, 26, NULL, NULL, 'hienthi', 1688400769, 0, 0),
 (181, 27, NULL, NULL, 'hienthi', 1688486749, 0, 0),
 (182, 26, NULL, NULL, 'hienthi', 1688486753, 0, 0),
-(183, 27, NULL, NULL, 'hienthi', 1688488009, 0, 0);
+(183, 27, NULL, NULL, 'hienthi', 1688488009, 0, 0),
+(184, NULL, '1.png', NULL, 'hienthi', 1688831365, 0, 0),
+(185, NULL, '1-7945.jpg', NULL, 'hienthi', 1688831365, 0, 0),
+(186, NULL, '2.png', NULL, 'hienthi', 1688831365, 0, 0),
+(187, NULL, '3-4271-9228.jpg', NULL, 'hienthi', 1688831381, 0, 0),
+(188, NULL, '3-9404.png', NULL, 'hienthi', 1688831381, 0, 0),
+(189, NULL, '4.png', NULL, 'hienthi', 1688831381, 0, 0),
+(190, 28, NULL, NULL, 'hienthi', 1688831403, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -251,18 +232,6 @@ CREATE TABLE `table_gallery_album` (
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Dumping data for table `table_gallery_album`
---
-
-INSERT INTO `table_gallery_album` (`id`, `id_parent`, `photo`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, NULL, 'nature29-4181-6079.jpg', '', 'hienthi', 1679830543, 0, 0),
-(2, NULL, 'nature19-5997-8815.jpg', '', 'hienthi', 1679830543, 0, 0),
-(3, NULL, 'nature37-9108-1942.jpg', '', 'hienthi', 1679830543, 0, 0),
-(4, NULL, 'nature32-2173-5148.jpg', '', 'hienthi', 1679830543, 0, 0),
-(5, NULL, 'nature35-5158-4279.jpg', '', 'hienthi', 1679830543, 0, 0),
-(6, NULL, 'nature34-7605-4530.jpg', '', 'hienthi', 1679830543, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -289,13 +258,13 @@ CREATE TABLE `table_momo` (
 
 CREATE TABLE `table_news` (
   `id` int UNSIGNED NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` mediumtext COLLATE utf8mb4_unicode_ci,
-  `desc` mediumtext COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `view` int DEFAULT '0',
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
@@ -325,28 +294,21 @@ CREATE TABLE `table_order` (
   `id` int UNSIGNED NOT NULL,
   `id_user` int UNSIGNED DEFAULT NULL,
   `transId` int DEFAULT '0',
-  `order_payment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `requirements` mediumtext COLLATE utf8mb4_unicode_ci,
+  `order_payment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `requirements` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `temp_price` double DEFAULT '0',
   `ship_price` double DEFAULT '0',
   `total_price` double DEFAULT '0',
-  `order_status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_order`
---
-
-INSERT INTO `table_order` (`id`, `id_user`, `transId`, `order_payment`, `code`, `fullname`, `phone`, `address`, `email`, `requirements`, `temp_price`, `ship_price`, `total_price`, `order_status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(35, 149, 0, 'thanh-toan-bang-chuyen-khoan', 'RFPCQF', 'Hoàng Phạm', '0909090909', 'Địa chỉ 123 123, Xã Văn Sơn, Huyện Văn Bàn, Lào Cai', 'hoangsalty@gmail.com', '', 6478000, 39001, 6517001, 'moidat', 1688488141, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -360,19 +322,12 @@ CREATE TABLE `table_order_detail` (
   `id_product` int UNSIGNED DEFAULT NULL,
   `id_color` int UNSIGNED DEFAULT '0',
   `id_size` int UNSIGNED DEFAULT '0',
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `quantity` int DEFAULT '0',
   `price` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `table_order_detail`
---
-
-INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `id_size`, `photo`, `name`, `code`, `quantity`, `price`) VALUES
-(36, 35, 28, 11, 17, 'tech-hera-shoes-JlV5km.png', 'Nike Tech Hera', 'RFPCQF', 2, 3239000);
 
 -- --------------------------------------------------------
 
@@ -382,13 +337,13 @@ INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `i
 
 CREATE TABLE `table_photo` (
   `id` int UNSIGNED NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc` mediumtext COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link` mediumtext COLLATE utf8mb4_unicode_ci,
-  `link_video` mediumtext COLLATE utf8mb4_unicode_ci,
-  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `link_video` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
@@ -417,18 +372,17 @@ CREATE TABLE `table_product` (
   `id` int UNSIGNED NOT NULL,
   `id_list` int UNSIGNED DEFAULT NULL,
   `id_cat` int UNSIGNED DEFAULT NULL,
-  `id_brand` int DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` mediumtext COLLATE utf8mb4_unicode_ci,
-  `desc` mediumtext COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `regular_price` double DEFAULT '0',
   `sale_price` double DEFAULT '0',
   `quantity` int DEFAULT '0',
   `view` int DEFAULT '0',
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
@@ -438,18 +392,18 @@ CREATE TABLE `table_product` (
 -- Dumping data for table `table_product`
 --
 
-INSERT INTO `table_product` (`id`, `id_list`, `id_cat`, `id_brand`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `quantity`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(18, 21, 42, NULL, 'air-force-1-07-shoes-WrLlWX.png', 'nike-air-force-1-07', '&lt;p&gt;The radiance lives on with the b-ball original. Crossing hardwood comfort with off-court flair, it puts a fresh spin on what you know best: &amp;#39;80s-inspired construction, bold details and nothin&amp;#39;-but-net style.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;From tough stitching to pristine leather, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circles adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/University Blue&lt;/li&gt;\r\n	&lt;li&gt;Style: DV0788-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '\r\n', 'Nike Air Force 1 &#039;07', 'CW2288-111', 2929000, 0, 0, 16, 'noibat,hienthi', 1686902948, 1686906017, 0),
-(19, 21, 42, NULL, 'jordan-series-es-shoes-FDtg9v.png', 'jordan-series-es', '&lt;p&gt;Inspired by Mike&amp;#39;s backyard battles with his older brother Larry, the Jordan Series references their legendary sibling rivalry throughout the design. The rubber sole offers more than just impressive traction&amp;mdash;it also tells the story of how MJ came to be #23. Look for the hidden reminder to &amp;quot;Swing for the Fence&amp;quot;, a direct quote from Larry to his little bro.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Circular traction inspired by the Air Jordan 1 adds durability.&lt;/li&gt;\r\n	&lt;li&gt;Suede and smooth leather are combined with a sleek, low-cut silhouette for versatile styling.&lt;/li&gt;\r\n	&lt;li&gt;Stretchy, triangular cut-outs add flex to accommodate wider feet.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Woven tongue and label&lt;/li&gt;\r\n	&lt;li&gt;Embroidered graphics&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Grey Fog/University Red&lt;/li&gt;\r\n	&lt;li&gt;Style: DN1856-160&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Jordan Series ES', 'DN1856-002', 2499000, 0, 0, 3, 'noibat,hienthi', 1686905082, 1686905939, 0),
-(20, 21, 42, NULL, 'blazer-mid-77-shoes-fW78R7.png', 'nike-blazer-mid-77', '&lt;p&gt;50 years after the birth of the genre, hip-hop is still influencing streetwear. Nike shoes have always been an integral part of this culture&amp;mdash;both influencing and being influenced by iconic musicians, artists and fans. Celebrate half a century of art and culture with platinum details like a microphone charm. Lace up and get spinning.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nThrow Ya Hands Up&lt;/p&gt;\r\n\r\n&lt;p&gt;11 August 1973 is known as the day hip-hop was born. Music makers and lovers came together at 1520 Sedgwick Avenue for the now famous &amp;quot;Back to School Jam&amp;quot;, which changed the course of music history and helped kick off the movement that became hip-hop as we know it.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nWalk This Way&lt;/p&gt;\r\n\r\n&lt;p&gt;Elevate your look to platinum status with a microphone charm and a metallic grey Swoosh.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nRapper&amp;#39;s Delight&lt;/p&gt;\r\n\r\n&lt;p&gt;The sockliner features a Nike logo inspired by the &amp;quot;Parental Advisory&amp;quot; label, and the tongue features a logo that pays homage to classic performer posters.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nMore Benefits&lt;/p&gt;\r\n\r\n&lt;p&gt;The leather upper and exposed needlework create a clean look that&amp;#39;s easy to style.&lt;br /&gt;\r\nVulcanised construction fuses the sole to the upper for a flexible, broken-in feel.&lt;br /&gt;\r\nRubber sole with herringbone pattern adds traction and durability.&lt;/p&gt;\r\n\r\n&lt;p&gt;Product Details&lt;/p&gt;\r\n\r\n&lt;p&gt;Padded collar&lt;br /&gt;\r\nFoam midsole&lt;br /&gt;\r\nRubber sole&lt;br /&gt;\r\nColour Shown: White/Black/White/Smoke Grey&lt;br /&gt;\r\nStyle: DV7194-100&lt;br /&gt;\r\nCountry/Region of Origin: Vietnam&lt;/p&gt;\r\n\r\n&lt;p&gt;Blazer Origins&lt;/p&gt;\r\n\r\n&lt;p&gt;Originally introduced in 1972 as a basketball shoe, the Blazer has since transformed into a modern staple for skaters and sneakerheads alike. Maturing from a simple canvas high top to a leather mid top and casual low top, this shoe just gets better with age.&lt;/p&gt;\r\n', '', 'Nike Blazer Mid &#039;77', 'DV7194-100', 3239000, 0, 0, 4, 'noibat,hienthi', 1686905828, 1686905890, 0),
-(21, 21, 42, NULL, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx0.png', 'air-jordan-1-zoom-cmft-2', '&lt;p&gt;Premium suede and Jordan Brand&amp;#39;s signature Formula 23 foam come together to give you an extra luxurious (and extra cosy) AJ1. You don&amp;#39;t need to play &amp;quot;either or&amp;quot; when it comes to choosing style or comfort with this one&amp;mdash;which is nice, &amp;#39;cause you deserve both.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Suede on the upper and toe breaks in easily and contours to your feet.&lt;/li&gt;\r\n	&lt;li&gt;Jordan Formula 23 foam keeps your feet extra padded.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: Light Orewood Brown/Sail/Celestial Gold/Bright Citrus&lt;/li&gt;\r\n	&lt;li&gt;Style: DV1307-180&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Indonesia&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Zoom CMFT 2', 'DV1307-180', 4259000, 0, 0, 5, 'noibat,hienthi', 1686906249, 1686906404, 0),
-(22, 21, 42, NULL, 'jumpman-two-trey-shoes-rhmBzG.png', 'jumpman-two-trey', '&lt;p&gt;Like &amp;quot;Two Trey&amp;quot; on MJ&amp;#39;s licence plate, let your presence be known. This new generation of Jordan celebrates Mike&amp;#39;s time in Chicago, complete with high-quality leather uppers and Air cushioned soles. Made as an homage to the on-court styles worn during his championship years, the Two Trey&amp;#39;s midsole design references both the AJ11 and the AJ12.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Genuine leather offers durable support with a premium look.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole delivers lasting traction where you need it.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Padded collar with fabric lining&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with herringbone traction at the forefoot&lt;/li&gt;\r\n	&lt;li&gt;Heel pull tab&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Black/Lucky Green&lt;/li&gt;\r\n	&lt;li&gt;Style: DO1925-130&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Jumpman Two Trey', 'DO1925-130', 4909000, 0, 0, 3, 'noibat,hienthi', 1686906470, 1686906606, 0),
-(23, 21, 42, NULL, 'air-jordan-1-mid-shoes-SQf7DM.png', 'air-jordan-1-mid', '&lt;p&gt;Inspired by the original AJ1, this mid-top edition maintains the iconic look you love while choice colours and crisp leather give it a distinct identity.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Leather, synthetic leather and textile upper for a supportive feel.&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole and Nike Air cushioning provide lightweight comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circle gives you durable traction.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: University Blue/White/Black&lt;/li&gt;\r\n	&lt;li&gt;Style: DQ8426-401&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Mid', 'DQ8426-401', 3669000, 0, 0, 20, 'noibat,hienthi', 1686907505, 1686907516, 0),
-(24, 21, 42, NULL, '1.png', 'nike-react-phantom-run-flyknit-2', '', 'The Nike React Phantom Run Flyknit 2 offers versatility for the everyday runner.Building on the foundation of its predecessor, the shoe expands on its laceless design by adding secure support that feels like it &quot;disappears&quot; on your foot.More foam means better cushioning, keeping you comfortable as you run', 'Nike React Phantom Run Flyknit 2', 'CJ0277-100', 4109000, 0, 0, 1, 'noibat,hienthi', 1687142303, 1687142317, 0),
-(25, 21, 42, NULL, 'jordan-stadium-90-shoes-Jn6ZH4.png', 'jordan-stadium-90', '&lt;p&gt;Comfort is king, but that doesn&amp;#39;t mean you have to sacrifice style. Taking design inspiration from the AJ1 and AJ5, the Stadium 90 is ready for everyday wear. The upper is made from leather and airy woven, so you get both breathability and durability, and Nike Air cushioning in the sole keeps your every step light and cushioned.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Durable upper is made from real leather, synthetic leather and textile materials.&lt;/li&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole provides everyday traction.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Rubber outsole pays homage to the AJ1&lt;/li&gt;\r\n	&lt;li&gt;Flame details and heel branding reference the AJ5&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Sail/Black/Clover&lt;/li&gt;\r\n	&lt;li&gt;Style: DX4397-103&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: China&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Comfort is king, but that doesn&#039;t mean you have to sacrifice style. Taking design inspiration from the AJ1 and AJ5, the Stadium 90 is ready for everyday wear. The upper is made from leather and airy woven, so you get both breathability and durability, and Nike Air cushioning in the sole keeps your every step light and cushioned.', 'Jordan Stadium 90', 'DX4397-103', 4109000, 0, 0, 10, 'noibat,hienthi', 1687142490, 1687142509, 0),
-(26, 21, 42, NULL, 'renew-elevate-3-basketball-shoes-QT43Gj.png', 'nike-renew-elevate-3', '&lt;p&gt;Level up your game on both ends of the floor in the Nike Renew Elevate 3. Specifically tuned for 2-way players who want to make an impact offensively and defensively, this shoe helps you optimise your ability with all-game, all-season support and stability. Improved traction and arch support enhance cutting and pivoting, which can make the difference down the stretch.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;On-Point Pivots&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;A generative, athlete-tested traction allows for better pivoting around the forefoot, allowing you to feel more secure and locked in when spinning, stopping and starting.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Lace Up&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;We added extra lace holes on the medial midfoot to give you the extra security you need for all-important arch support.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;More Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Structured mesh in the upper feels plush around your foot. It fits snugly to help reduce in-shoe movement during play.&lt;/li&gt;\r\n	&lt;li&gt;The padded collar is contoured to provide a precise fit and support around your ankle.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;No-sew overlays&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole&lt;/li&gt;\r\n	&lt;li&gt;Plush tongue&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Phantom/University Red/Team Red&lt;/li&gt;\r\n	&lt;li&gt;Style: DD9304-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Level up your game on both ends of the floor in the Nike Renew Elevate 3. Specifically tuned for 2-way players who want to make an impact offensively and defensively, this shoe helps you optimise your ability with all-game, all-season support and stability. Improved traction and arch support enhance cutting and pivoting, which can make the difference down the stretch.', 'Nike Renew Elevate 3', 'DD9304-101', 2349000, 0, 5, 8, 'noibat,hienthi', 1687142650, 1688486753, 0),
-(27, 21, 43, NULL, 'air-force-1-07-flyease-shoes-lpjTWM.png', 'nike-air-force-1-07-flyease', '&lt;p&gt;Quicker than 1, 2, 3&amp;mdash;the original hoops shoe lets you step in and get going. Its easy-entry FlyEase system gives you a hands-free experience. Crisp leather dons the cleanest colour for the ultimate wearability. Yeah, it&amp;#39;s everything you love and then some.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FlyEase entry system (hidden in the heel) makes it easy to get your shoes on and off.&lt;/li&gt;\r\n	&lt;li&gt;From tough stitching to pristine materials to the cupsole design, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with classic pivot circle pattern adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/White&lt;/li&gt;\r\n	&lt;li&gt;Style: DX5883-100&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '', 'Nike Air Force 1 &#039;07 FlyEase', 'DX5883-100', 3239000, 0, 0, 13, 'noibat,hienthi', 1687142871, 1688488009, 0),
-(28, 21, 43, NULL, 'tech-hera-shoes-JlV5km.png', 'nike-tech-hera', '&lt;p&gt;The Tech Hera is here to fulfil all of your chunky sneaker wishes. The wavy lifted midsole and suede accents level up your look while keeping you comfortable. Its durable design holds up beautifully to everyday wear&amp;mdash;which is perfect, because you&amp;#39;ll definitely want to wear these every day.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;The textile upper and suede accents add dimension and durability.&lt;/li&gt;\r\n	&lt;li&gt;The chunky design has a subtle platform to give you just enough height.&lt;/li&gt;\r\n	&lt;li&gt;A full-length rubber outsole gives you durable traction.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Padded collar&lt;/li&gt;\r\n	&lt;li&gt;Embroidered Swoosh logo&lt;/li&gt;\r\n	&lt;li&gt;Pull tab on heel&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Summit White/Photon Dust/White&lt;/li&gt;\r\n	&lt;li&gt;Style: DR9761-100&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'The Tech Hera is here to fulfil all of your chunky sneaker wishes. The wavy lifted midsole and suede accents level up your look while keeping you comfortable. Its durable design holds up beautifully to everyday wear—which is perfect, because you&#039;ll definitely want to wear these every day.', 'Nike Tech Hera', 'DR9761-100', 3239000, 0, 1, 33, 'noibat,hienthi', 1687143813, 1688400655, 0);
+INSERT INTO `table_product` (`id`, `id_list`, `id_cat`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `quantity`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
+(18, 21, 42, 'air-force-1-07-shoes-WrLlWX.png', 'nike-air-force-1-07', '&lt;p&gt;The radiance lives on with the b-ball original. Crossing hardwood comfort with off-court flair, it puts a fresh spin on what you know best: &amp;#39;80s-inspired construction, bold details and nothin&amp;#39;-but-net style.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;From tough stitching to pristine leather, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circles adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/University Blue&lt;/li&gt;\r\n	&lt;li&gt;Style: DV0788-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '\r\n', 'Nike Air Force 1 &#039;07', 'CW2288-111', 2929000, 0, 0, 16, 'noibat,hienthi', 1686902948, 1686906017, 0),
+(19, 21, 42, 'jordan-series-es-shoes-FDtg9v.png', 'jordan-series-es', '&lt;p&gt;Inspired by Mike&amp;#39;s backyard battles with his older brother Larry, the Jordan Series references their legendary sibling rivalry throughout the design. The rubber sole offers more than just impressive traction&amp;mdash;it also tells the story of how MJ came to be #23. Look for the hidden reminder to &amp;quot;Swing for the Fence&amp;quot;, a direct quote from Larry to his little bro.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Circular traction inspired by the Air Jordan 1 adds durability.&lt;/li&gt;\r\n	&lt;li&gt;Suede and smooth leather are combined with a sleek, low-cut silhouette for versatile styling.&lt;/li&gt;\r\n	&lt;li&gt;Stretchy, triangular cut-outs add flex to accommodate wider feet.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Woven tongue and label&lt;/li&gt;\r\n	&lt;li&gt;Embroidered graphics&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Grey Fog/University Red&lt;/li&gt;\r\n	&lt;li&gt;Style: DN1856-160&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Jordan Series ES', 'DN1856-002', 2499000, 0, 0, 3, 'noibat,hienthi', 1686905082, 1686905939, 0),
+(20, 21, 42, 'blazer-mid-77-shoes-fW78R7.png', 'nike-blazer-mid-77', '&lt;p&gt;50 years after the birth of the genre, hip-hop is still influencing streetwear. Nike shoes have always been an integral part of this culture&amp;mdash;both influencing and being influenced by iconic musicians, artists and fans. Celebrate half a century of art and culture with platinum details like a microphone charm. Lace up and get spinning.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nThrow Ya Hands Up&lt;/p&gt;\r\n\r\n&lt;p&gt;11 August 1973 is known as the day hip-hop was born. Music makers and lovers came together at 1520 Sedgwick Avenue for the now famous &amp;quot;Back to School Jam&amp;quot;, which changed the course of music history and helped kick off the movement that became hip-hop as we know it.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nWalk This Way&lt;/p&gt;\r\n\r\n&lt;p&gt;Elevate your look to platinum status with a microphone charm and a metallic grey Swoosh.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nRapper&amp;#39;s Delight&lt;/p&gt;\r\n\r\n&lt;p&gt;The sockliner features a Nike logo inspired by the &amp;quot;Parental Advisory&amp;quot; label, and the tongue features a logo that pays homage to classic performer posters.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nMore Benefits&lt;/p&gt;\r\n\r\n&lt;p&gt;The leather upper and exposed needlework create a clean look that&amp;#39;s easy to style.&lt;br /&gt;\r\nVulcanised construction fuses the sole to the upper for a flexible, broken-in feel.&lt;br /&gt;\r\nRubber sole with herringbone pattern adds traction and durability.&lt;/p&gt;\r\n\r\n&lt;p&gt;Product Details&lt;/p&gt;\r\n\r\n&lt;p&gt;Padded collar&lt;br /&gt;\r\nFoam midsole&lt;br /&gt;\r\nRubber sole&lt;br /&gt;\r\nColour Shown: White/Black/White/Smoke Grey&lt;br /&gt;\r\nStyle: DV7194-100&lt;br /&gt;\r\nCountry/Region of Origin: Vietnam&lt;/p&gt;\r\n\r\n&lt;p&gt;Blazer Origins&lt;/p&gt;\r\n\r\n&lt;p&gt;Originally introduced in 1972 as a basketball shoe, the Blazer has since transformed into a modern staple for skaters and sneakerheads alike. Maturing from a simple canvas high top to a leather mid top and casual low top, this shoe just gets better with age.&lt;/p&gt;\r\n', '', 'Nike Blazer Mid &#039;77', 'DV7194-100', 3239000, 0, 0, 4, 'noibat,hienthi', 1686905828, 1686905890, 0),
+(21, 21, 42, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx0.png', 'air-jordan-1-zoom-cmft-2', '&lt;p&gt;Premium suede and Jordan Brand&amp;#39;s signature Formula 23 foam come together to give you an extra luxurious (and extra cosy) AJ1. You don&amp;#39;t need to play &amp;quot;either or&amp;quot; when it comes to choosing style or comfort with this one&amp;mdash;which is nice, &amp;#39;cause you deserve both.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Suede on the upper and toe breaks in easily and contours to your feet.&lt;/li&gt;\r\n	&lt;li&gt;Jordan Formula 23 foam keeps your feet extra padded.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: Light Orewood Brown/Sail/Celestial Gold/Bright Citrus&lt;/li&gt;\r\n	&lt;li&gt;Style: DV1307-180&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Indonesia&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Zoom CMFT 2', 'DV1307-180', 4259000, 0, 0, 5, 'noibat,hienthi', 1686906249, 1686906404, 0),
+(22, 21, 42, 'jumpman-two-trey-shoes-rhmBzG.png', 'jumpman-two-trey', '&lt;p&gt;Like &amp;quot;Two Trey&amp;quot; on MJ&amp;#39;s licence plate, let your presence be known. This new generation of Jordan celebrates Mike&amp;#39;s time in Chicago, complete with high-quality leather uppers and Air cushioned soles. Made as an homage to the on-court styles worn during his championship years, the Two Trey&amp;#39;s midsole design references both the AJ11 and the AJ12.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Genuine leather offers durable support with a premium look.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole delivers lasting traction where you need it.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Padded collar with fabric lining&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with herringbone traction at the forefoot&lt;/li&gt;\r\n	&lt;li&gt;Heel pull tab&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Black/Lucky Green&lt;/li&gt;\r\n	&lt;li&gt;Style: DO1925-130&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Jumpman Two Trey', 'DO1925-130', 4909000, 0, 0, 3, 'noibat,hienthi', 1686906470, 1686906606, 0),
+(23, 21, 42, 'air-jordan-1-mid-shoes-SQf7DM.png', 'air-jordan-1-mid', '&lt;p&gt;Inspired by the original AJ1, this mid-top edition maintains the iconic look you love while choice colours and crisp leather give it a distinct identity.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Leather, synthetic leather and textile upper for a supportive feel.&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole and Nike Air cushioning provide lightweight comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circle gives you durable traction.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: University Blue/White/Black&lt;/li&gt;\r\n	&lt;li&gt;Style: DQ8426-401&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Mid', 'DQ8426-401', 3669000, 0, 0, 20, 'noibat,hienthi', 1686907505, 1686907516, 0),
+(24, 21, 42, '1.png', 'nike-react-phantom-run-flyknit-2', '', 'The Nike React Phantom Run Flyknit 2 offers versatility for the everyday runner.Building on the foundation of its predecessor, the shoe expands on its laceless design by adding secure support that feels like it &quot;disappears&quot; on your foot.More foam means better cushioning, keeping you comfortable as you run', 'Nike React Phantom Run Flyknit 2', 'CJ0277-100', 4109000, 0, 0, 1, 'noibat,hienthi', 1687142303, 1687142317, 0),
+(25, 21, 42, 'jordan-stadium-90-shoes-Jn6ZH4.png', 'jordan-stadium-90', '&lt;p&gt;Comfort is king, but that doesn&amp;#39;t mean you have to sacrifice style. Taking design inspiration from the AJ1 and AJ5, the Stadium 90 is ready for everyday wear. The upper is made from leather and airy woven, so you get both breathability and durability, and Nike Air cushioning in the sole keeps your every step light and cushioned.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Durable upper is made from real leather, synthetic leather and textile materials.&lt;/li&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole provides everyday traction.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Rubber outsole pays homage to the AJ1&lt;/li&gt;\r\n	&lt;li&gt;Flame details and heel branding reference the AJ5&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Sail/Black/Clover&lt;/li&gt;\r\n	&lt;li&gt;Style: DX4397-103&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: China&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Comfort is king, but that doesn&#039;t mean you have to sacrifice style. Taking design inspiration from the AJ1 and AJ5, the Stadium 90 is ready for everyday wear. The upper is made from leather and airy woven, so you get both breathability and durability, and Nike Air cushioning in the sole keeps your every step light and cushioned.', 'Jordan Stadium 90', 'DX4397-103', 4109000, 0, 0, 10, 'noibat,hienthi', 1687142490, 1687142509, 0),
+(26, 21, 42, 'renew-elevate-3-basketball-shoes-QT43Gj.png', 'nike-renew-elevate-3', '&lt;p&gt;Level up your game on both ends of the floor in the Nike Renew Elevate 3. Specifically tuned for 2-way players who want to make an impact offensively and defensively, this shoe helps you optimise your ability with all-game, all-season support and stability. Improved traction and arch support enhance cutting and pivoting, which can make the difference down the stretch.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;On-Point Pivots&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;A generative, athlete-tested traction allows for better pivoting around the forefoot, allowing you to feel more secure and locked in when spinning, stopping and starting.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Lace Up&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;We added extra lace holes on the medial midfoot to give you the extra security you need for all-important arch support.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;More Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Structured mesh in the upper feels plush around your foot. It fits snugly to help reduce in-shoe movement during play.&lt;/li&gt;\r\n	&lt;li&gt;The padded collar is contoured to provide a precise fit and support around your ankle.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;No-sew overlays&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole&lt;/li&gt;\r\n	&lt;li&gt;Plush tongue&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Phantom/University Red/Team Red&lt;/li&gt;\r\n	&lt;li&gt;Style: DD9304-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Level up your game on both ends of the floor in the Nike Renew Elevate 3. Specifically tuned for 2-way players who want to make an impact offensively and defensively, this shoe helps you optimise your ability with all-game, all-season support and stability. Improved traction and arch support enhance cutting and pivoting, which can make the difference down the stretch.', 'Nike Renew Elevate 3', 'DD9304-101', 2349000, 0, 5, 8, 'noibat,hienthi', 1687142650, 1688486753, 0),
+(27, 21, 43, 'air-force-1-07-flyease-shoes-lpjTWM.png', 'nike-air-force-1-07-flyease', '&lt;p&gt;Quicker than 1, 2, 3&amp;mdash;the original hoops shoe lets you step in and get going. Its easy-entry FlyEase system gives you a hands-free experience. Crisp leather dons the cleanest colour for the ultimate wearability. Yeah, it&amp;#39;s everything you love and then some.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FlyEase entry system (hidden in the heel) makes it easy to get your shoes on and off.&lt;/li&gt;\r\n	&lt;li&gt;From tough stitching to pristine materials to the cupsole design, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with classic pivot circle pattern adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/White&lt;/li&gt;\r\n	&lt;li&gt;Style: DX5883-100&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '', 'Nike Air Force 1 &#039;07 FlyEase', 'DX5883-100', 3239000, 0, 0, 13, 'noibat,hienthi', 1687142871, 1688488009, 0),
+(28, 21, 43, 'tech-hera-shoes-JlV5km.png', 'nike-tech-hera', '&lt;p&gt;The Tech Hera is here to fulfil all of your chunky sneaker wishes. The wavy lifted midsole and suede accents level up your look while keeping you comfortable. Its durable design holds up beautifully to everyday wear&amp;mdash;which is perfect, because you&amp;#39;ll definitely want to wear these every day.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;The textile upper and suede accents add dimension and durability.&lt;/li&gt;\r\n	&lt;li&gt;The chunky design has a subtle platform to give you just enough height.&lt;/li&gt;\r\n	&lt;li&gt;A full-length rubber outsole gives you durable traction.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Padded collar&lt;/li&gt;\r\n	&lt;li&gt;Embroidered Swoosh logo&lt;/li&gt;\r\n	&lt;li&gt;Pull tab on heel&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Summit White/Photon Dust/White&lt;/li&gt;\r\n	&lt;li&gt;Style: DR9761-100&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'The Tech Hera is here to fulfil all of your chunky sneaker wishes. The wavy lifted midsole and suede accents level up your look while keeping you comfortable. Its durable design holds up beautifully to everyday wear—which is perfect, because you&#039;ll definitely want to wear these every day.', 'Nike Tech Hera', 'DR9761-100', 3239000, 0, 0, 33, 'noibat,hienthi', 1687143813, 1688831403, 0);
 
 -- --------------------------------------------------------
 
@@ -460,11 +414,11 @@ INSERT INTO `table_product` (`id`, `id_list`, `id_cat`, `id_brand`, `photo`, `sl
 CREATE TABLE `table_product_cat` (
   `id` int UNSIGNED NOT NULL,
   `id_list` int UNSIGNED DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc` mediumtext COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
@@ -535,10 +489,6 @@ INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
 (116, 25, 11),
 (117, 25, 9),
 (118, 25, 8),
-(181, 28, 13),
-(182, 28, 11),
-(183, 28, 10),
-(184, 28, 9),
 (203, 26, 14),
 (204, 26, 13),
 (205, 26, 12),
@@ -551,7 +501,11 @@ INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
 (212, 27, 13),
 (213, 27, 12),
 (214, 27, 11),
-(215, 27, 10);
+(215, 27, 10),
+(232, 28, 13),
+(233, 28, 11),
+(234, 28, 10),
+(235, 28, 9);
 
 -- --------------------------------------------------------
 
@@ -561,11 +515,11 @@ INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
 
 CREATE TABLE `table_product_list` (
   `id` int UNSIGNED NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc` mediumtext COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
@@ -628,10 +582,6 @@ INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
 (317, 25, 15),
 (318, 25, 13),
 (319, 25, 12),
-(400, 28, 17),
-(401, 28, 15),
-(402, 28, 12),
-(403, 28, 11),
 (422, 26, 17),
 (423, 26, 16),
 (424, 26, 15),
@@ -645,7 +595,11 @@ INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
 (432, 27, 16),
 (433, 27, 15),
 (434, 27, 14),
-(435, 27, 12);
+(435, 27, 12),
+(456, 28, 17),
+(457, 28, 15),
+(458, 28, 12),
+(459, 28, 11);
 
 -- --------------------------------------------------------
 
@@ -655,8 +609,8 @@ INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
 
 CREATE TABLE `table_setting` (
   `id` int NOT NULL,
-  `options` mediumtext COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `options` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -674,8 +628,8 @@ INSERT INTO `table_setting` (`id`, `options`, `name`) VALUES
 
 CREATE TABLE `table_size` (
   `id` int UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
@@ -705,13 +659,13 @@ INSERT INTO `table_size` (`id`, `name`, `status`, `date_created`, `date_updated`
 
 CREATE TABLE `table_static` (
   `id` int UNSIGNED NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` mediumtext COLLATE utf8mb4_unicode_ci,
-  `desc` mediumtext COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
   `date_deleted` int DEFAULT '0'
@@ -733,18 +687,18 @@ INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `t
 
 CREATE TABLE `table_user` (
   `id` int UNSIGNED NOT NULL,
-  `permission` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fullname` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullname` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` tinyint(1) DEFAULT '0',
-  `login_session` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lastlogin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `login_session` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastlogin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birthday` int DEFAULT '0',
   `date_created` int DEFAULT '0',
   `date_updated` int DEFAULT '0',
@@ -861,7 +815,6 @@ ALTER TABLE `table_photo`
 --
 ALTER TABLE `table_product`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `product_brand` (`id_brand`),
   ADD KEY `product_list` (`id_list`),
   ADD KEY `product_cat` (`id_cat`);
 
@@ -951,7 +904,7 @@ ALTER TABLE `table_comment_photo`
 -- AUTO_INCREMENT for table `table_gallery`
 --
 ALTER TABLE `table_gallery`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
 -- AUTO_INCREMENT for table `table_gallery_album`
@@ -993,7 +946,7 @@ ALTER TABLE `table_photo`
 -- AUTO_INCREMENT for table `table_product`
 --
 ALTER TABLE `table_product`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `table_product_cat`
@@ -1005,7 +958,7 @@ ALTER TABLE `table_product_cat`
 -- AUTO_INCREMENT for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
 
 --
 -- AUTO_INCREMENT for table `table_product_list`
@@ -1017,7 +970,7 @@ ALTER TABLE `table_product_list`
 -- AUTO_INCREMENT for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=436;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=460;
 
 --
 -- AUTO_INCREMENT for table `table_setting`
@@ -1103,9 +1056,8 @@ ALTER TABLE `table_order_detail`
 -- Constraints for table `table_product`
 --
 ALTER TABLE `table_product`
-  ADD CONSTRAINT `product_brand` FOREIGN KEY (`id_brand`) REFERENCES `table_product_brand` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `product_cat` FOREIGN KEY (`id_cat`) REFERENCES `table_product_cat` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `product_list` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `product cat` FOREIGN KEY (`id_cat`) REFERENCES `table_product_cat` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `product list` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `table_product_cat`
@@ -1117,21 +1069,15 @@ ALTER TABLE `table_product_cat`
 -- Constraints for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
-  ADD CONSTRAINT `product1` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `product_color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `product color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
-  ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `product_size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
-
---
--- Constraints for table `table_vnpay`
---
-ALTER TABLE `table_vnpay`
-  ADD CONSTRAINT `erdfgdfgd` FOREIGN KEY (`order_id`) REFERENCES `table_order` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `product 1` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `product size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

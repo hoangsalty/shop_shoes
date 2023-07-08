@@ -38,12 +38,6 @@ function viewNews()
     global $d, $func, $strUrl, $curPage, $paging, $items, $type;
 
     $where = "";
-    $idlist = (isset($_REQUEST['id_list'])) ? htmlspecialchars($_REQUEST['id_list']) : 0;
-    $idbrand = (isset($_REQUEST['id_brand'])) ? htmlspecialchars($_REQUEST['id_brand']) : 0;
-    if ($idlist)
-        $where .= " and id_list=$idlist";
-    if ($idbrand)
-        $where .= " and id_brand=$idbrand";
     if (isset($_REQUEST['keyword'])) {
         $keyword = htmlspecialchars($_REQUEST['keyword']);
         $where .= " and (name LIKE '%$keyword%')";

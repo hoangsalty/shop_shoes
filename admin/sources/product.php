@@ -9,7 +9,7 @@ $cur_Page = (isset($_REQUEST['cur_Page'])) ? htmlspecialchars($_REQUEST['cur_Pag
 
 /* Cấu hình đường dẫn trả về */
 $strUrl = "";
-$arrUrl = array('id_list', 'id_cat', 'id_brand');
+$arrUrl = array('id_list', 'id_cat');
 if (isset($_POST['data'])) {
     $dataUrl = isset($_POST['data']) ? $_POST['data'] : null;
     if ($dataUrl) {
@@ -128,12 +128,10 @@ function viewProducts()
     $where = "";
     $idlist = (isset($_REQUEST['id_list'])) ? htmlspecialchars($_REQUEST['id_list']) : 0;
     $idcat = (isset($_REQUEST['id_cat'])) ? htmlspecialchars($_REQUEST['id_cat']) : 0;
-    $idbrand = (isset($_REQUEST['id_brand'])) ? htmlspecialchars($_REQUEST['id_brand']) : 0;
     $comment_status = (!empty($_REQUEST['comment_status'])) ? htmlspecialchars($_REQUEST['comment_status']) : '';
 
     if ($idlist) $where .= " and id_list=$idlist";
     if ($idcat) $where .= " and id_cat=$idcat";
-    if ($idbrand) $where .= " and id_brand=$idbrand";
 
     if ($comment_status == 'new') {
         $comment = $d->rawQuery("select * from table_comment where find_in_set('new-admin',status)");
@@ -192,7 +190,7 @@ function saveProduct()
         foreach ($data as $column => $value) {
             $data[$column] = htmlspecialchars($func->checkInput($value));
 
-            if (strpos($column, 'id_list') !== false || strpos($column, 'id_cat') !== false || strpos($column, 'id_brand') !== false) {
+            if (strpos($column, 'id_list') !== false || strpos($column, 'id_cat') !== false) {
                 if (empty($value) || $value == 0) {
                     $data[$column] = NULL;
                 }

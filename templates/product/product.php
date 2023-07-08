@@ -8,13 +8,10 @@
                     <a href="<?= $func->getCurrentPageURL_Sort() ?>?sort=1" data-sort="1" class="<?= ($sort == 1 || $sort == '') ? 'check' : '' ?>"><i></i>Mới nhất</a>
                 </p>
                 <p>
-                    <a href="<?= $func->getCurrentPageURL_Sort() ?>?sort=2" data-sort="2" class="<?= ($sort == 2) ? 'check' : '' ?>"><i></i>Bán chạy nhất</a>
+                    <a href="<?= $func->getCurrentPageURL_Sort() ?>?sort=2" data-sort="2" class="<?= ($sort == 2) ? 'check' : '' ?>"><i></i>Giá cao nhất</a>
                 </p>
                 <p>
-                    <a href="<?= $func->getCurrentPageURL_Sort() ?>?sort=3" data-sort="3" class="<?= ($sort == 3) ? 'check' : '' ?>"><i></i>Giá cao nhất</a>
-                </p>
-                <p>
-                    <a href="<?= $func->getCurrentPageURL_Sort() ?>?sort=4" data-sort="4" class="<?= ($sort == 4) ? 'check' : '' ?>"><i></i>Giá thấp nhất</a>
+                    <a href="<?= $func->getCurrentPageURL_Sort() ?>?sort=3" data-sort="3" class="<?= ($sort == 3) ? 'check' : '' ?>"><i></i>Giá thấp nhất</a>
                 </p>
             </div>
         </div>
