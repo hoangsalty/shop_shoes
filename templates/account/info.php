@@ -157,7 +157,6 @@
                             <a href="javascript:void()" data-id="<?= $status['id'] ?>" title="<?= $status['name'] ?>"><span><?= $status['name'] ?></span></a>
                         <?php } ?>
                     </div>
-
                     <div class="status_order"></div>
                 </div>
             </div>

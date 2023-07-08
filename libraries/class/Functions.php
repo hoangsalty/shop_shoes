@@ -359,6 +359,16 @@ class Functions
         include("./templates/layout/transfer.php");
         exit();
     }
+
+    /* Lấy link sort hiện tại */
+    public function getCurrentPageURL_Sort()
+    {
+        $pageURL = 'http://';
+        $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+        $pageURL = explode("?", $pageURL);
+        return $pageURL[0];
+    }
+
     /* Lấy link page hiện tại */
     public function getCurrentPageURL()
     {

@@ -34,6 +34,13 @@
                 </div>
                 <div class="footer-news col-lg-4 col-md-4 col-12">
                     <h2 class="footer-title">Fanpage facebook</h2>
+                    <div class="fb-page" data-href="<?= $optsetting['fanpage'] ?>" data-tabs="timeline" data-width="500" data-height="300" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <div class="fb-xfbml-parse-ignore">
+                            <blockquote cite="<?= $optsetting['fanpage'] ?>">
+                                <a href="<?= $optsetting['fanpage'] ?>">Facebook</a>
+                            </blockquote>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,6 +49,9 @@
         <div class="wrap-content">
             <div class="copyright text-center">Copyright © 2023 CKC. Design by CKC</div>
         </div>
+    </div>
+    <div class="footer-map">
+        <?= $func->decodeHtmlChars($optsetting['googlemap']) ?>
     </div>
 </div>
 

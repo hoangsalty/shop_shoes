@@ -2,8 +2,8 @@
     <div class="wrap-content">
         <div class="menu_container d-flex justify-content-between align-items-center">
             <div class="left">
-                <a class="logo-header" href="">
-                    <?= $func->getImage(['class' => '', 'width' => $config['logo']['width'], 'height' => $config['logo']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $logo['photo']]) ?>
+                <a class="logo-header peShiner" href="">
+                    <?= $func->getImage(['class' => '', 'width' => $config['logo']['width'], 'height' => $config['logo']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $logo['photo'], 'alt' => $logo['name']]) ?>
                 </a>
             </div>
             <div class="center">

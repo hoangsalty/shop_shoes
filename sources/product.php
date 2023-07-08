@@ -4,6 +4,33 @@ if (!defined('SOURCES')) die("Error");
 @$id = htmlspecialchars($_GET['id']);
 @$idl = htmlspecialchars($_GET['id_list']);
 @$idc = htmlspecialchars($_GET['id_cat']);
+@$sort = htmlspecialchars($_GET['sort']);
+
+#các sản phẩm khác======================
+$sql_search = '';
+$orderby_search = 'order by date_created desc';
+if ($sort != '') {
+    switch ($sort) {
+        case '1':
+            $check = 'Mới nhất';
+            $orderby_search = 'order by date_created desc';
+            break;
+        case '2':
+            $check = 'Bán chạy nhất';
+            $sql_search .= ' and banchay=1';
+            break;
+        case '3':
+            $check = 'Giá cao nhất';
+            $orderby_search = 'order by regular_price desc';
+            break;
+        case '4':
+            $check = 'Giá thấp nhất';
+            $orderby_search = 'order by regular_price asc';
+            break;
+    }
+} else {
+    $check = 'Mới nhất';
+}
 
 if ($id != '') {
     /* Lấy sản phẩm detail */
@@ -69,9 +96,9 @@ if ($id != '') {
     $perPage = 20;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_product where $where order by id desc $limit";
+    $sql = "select * from table_product where $where $orderby_search $limit";
     $product = $d->rawQuery($sql, $params);
-    $sqlNum = "select count(*) as 'num' from table_product where $where order by id desc";
+    $sqlNum = "select count(*) as 'num' from table_product where $where $orderby_search";
     $count = $d->rawQueryOne($sqlNum, $params);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = $func->getCurrentPageURL();
@@ -95,14 +122,14 @@ if ($id != '') {
     $perPage = 20;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_product where $where order by id desc $limit";
+    $sql = "select * from table_product where $where $orderby_search $limit";
+
     $product = $d->rawQuery($sql, $params);
-    $sqlNum = "select count(*) as 'num' from table_product where $where order by id desc";
+    $sqlNum = "select count(*) as 'num' from table_product where $where $orderby_search";
     $count = $d->rawQueryOne($sqlNum, $params);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = $func->getCurrentPageURL();
     $paging = $func->pagination($total, $perPage, $curPage, $url);
-
     /* breadCrumbs */
     if (!empty($titleMain)) $breadcr->set($com, $titleMain);
     if (!empty($productList)) $breadcr->set($productList['slug'], $productList['name']);
@@ -117,14 +144,13 @@ if ($id != '') {
     $perPage = 12;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
-    $sql = "select * from table_product where $where order by id desc $limit";
+    $sql = "select * from table_product where $where $sql_search $limit";
     $product = $d->rawQuery($sql, $params);
-    $sqlNum = "select count(*) as 'num' from table_product where $where order by id desc";
+    $sqlNum = "select count(*) as 'num' from table_product where $where $sql_search";
     $count = $d->rawQueryOne($sqlNum, $params);
     $total = (!empty($count)) ? $count['num'] : 0;
     $url = $func->getCurrentPageURL();
     $paging = $func->pagination($total, $perPage, $curPage, $url);
-
     /* breadCrumbs */
     if (!empty($titleMain)) $breadcr->set($com, $titleMain);
     $breadcrumbs = $breadcr->get();
