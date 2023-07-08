@@ -12,6 +12,9 @@ if ($type == 'tin-tuc') {
 } else if ($type == 'hinh-thuc-thanh-toan') {
     $name = 'Hình thức thanh toán';
     $status = array("hienthi" => "Hiển thị");
+} else if ($type == 'chinh-sach') {
+    $name = 'Chính sách';
+    $status = array("hienthi" => "Hiển thị");
 }
 ?>
 <!-- Main content -->

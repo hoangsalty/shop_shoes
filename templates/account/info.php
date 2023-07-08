@@ -152,9 +152,9 @@
                     );
                     ?>
                     <div class="nav_status_order">
-                        <a href="javascript:void()" data-status="" title="Tất cả"><span>Tất cả</span></a>
+                        <a data-status="" title="Tất cả"><span>Tất cả</span></a>
                         <?php foreach ($row_status as $i => $status) { ?>
-                            <a href="javascript:void()" data-id="<?= $status['id'] ?>" title="<?= $status['name'] ?>"><span><?= $status['name'] ?></span></a>
+                            <a data-id="<?= $status['id'] ?>" title="<?= $status['name'] ?>"><span><?= $status['name'] ?></span></a>
                         <?php } ?>
                     </div>
                     <div class="status_order"></div>

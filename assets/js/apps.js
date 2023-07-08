@@ -32,14 +32,7 @@ FRAMEWORK.DbUser = function () {
           });
 
           $(".box_response").html(
-            '<div class="card bg-gradient-red">' +
-            '<div class="card-header">' +
-            '<h3 class="card-title">Thông báo</h3>' +
-            "</div>" +
-            '<div class="card-body">' +
-            myHTML +
-            "</div>" +
-            "</div>"
+            '<div class="alert alert-danger">' + myHTML + "</div>"
           );
         }
       },

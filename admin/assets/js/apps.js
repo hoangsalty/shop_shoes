@@ -359,8 +359,14 @@ FRAMEWORK.DbNews = function () {
 
         type = $("#form_news #type").val();
         data = new FormData($(this)[0]);
-        value = CKEDITOR.instances['content'].getData();
-        data.set('data[content]', value);
+
+        if ($('#content').length > 0) {
+            if (CKEDITOR.instances['content'].getData() != "") {
+                value = CKEDITOR.instances['content'].getData();
+                data.set('data[content]', value);
+            }
+        }
+
         data.append('act', 'save');
         data.append('cur_Page', CUR_PAGE);
         data.append('cur_Type', type);

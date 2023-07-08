@@ -7,6 +7,7 @@ $linkMan = "index.php?com=news&act=list&type=" . $type;
 $name = '';
 if ($type == 'tin-tuc') $name = 'Tin tức';
 else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
+else if ($type == 'chinh-sach') $name = 'Chính sách';
 ?>
 
 <!-- Main content -->
@@ -35,14 +36,18 @@ else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
                             <label for="name">Tiêu đề:</label>
                             <input type="text" class="form-control text-sm for-slug" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                         </div>
-                        <div class="form-group">
-                            <label for="desc">Mô tả:</label>
-                            <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="content">Nội dung:</label>
-                            <textarea class="form-control text-sm form-control-ckeditor" name="data[content]" id="content" rows="5" placeholder="Nội dung"><?= $func->decodeHtmlChars(@$item['content']) ?></textarea>
-                        </div>
+                        <?php if ($type != 'chinh-sach') { ?>
+                            <div class="form-group">
+                                <label for="desc">Mô tả:</label>
+                                <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
+                            </div>
+                        <?php } ?>
+                        <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
+                            <div class="form-group">
+                                <label for="content">Nội dung:</label>
+                                <textarea class="form-control text-sm form-control-ckeditor" name="data[content]" id="content" rows="5" placeholder="Nội dung"><?= $func->decodeHtmlChars(@$item['content']) ?></textarea>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -53,25 +58,26 @@ else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
                     include TEMPLATE . LAYOUT . "slug.php";
                     ?>
                 </div>
-
-                <div class="card card-primary card-outline text-sm">
-                    <div class="card-header">
-                        <h3 class="card-title">Hình ảnh <?= $name ?></h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
+                    <div class="card card-primary card-outline text-sm">
+                        <div class="card-header">
+                            <h3 class="card-title">Hình ảnh <?= $name ?></h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            /* Photo detail */
+                            $photoDetail = array();
+                            $photoDetail['upload'] = UPLOAD_NEWS_L;
+                            $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
+                            /* Image */
+                            include TEMPLATE . LAYOUT . "image.php";
+                            ?>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <?php
-                        /* Photo detail */
-                        $photoDetail = array();
-                        $photoDetail['upload'] = UPLOAD_NEWS_L;
-                        $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                        /* Image */
-                        include TEMPLATE . LAYOUT . "image.php";
-                        ?>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </form>
