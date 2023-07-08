@@ -3,7 +3,7 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-start align-items-center">
             <div class="image">
                 <?php $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($_SESSION['account']['id'])); ?>
-                <?= $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo'], 'alt' => $_SESSION['account']['fullname']]) ?>
+                <?= $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo']]) ?>
             </div>
             <a href="#" class="d-block ml-3 text-light font-weight"><?= $_SESSION['account']['fullname'] ?></a>
         </div>
@@ -97,15 +97,57 @@
 
                 <?php
                 $active = "";
-                if ($com == 'news' && $_GET['type'] == 'tin-tuc') {
+                $menuopen = "";
+                if ($com == 'news') {
                     $active = 'active';
+                    $menuopen = 'menu-open';
                 }
                 ?>
-                <li class="nav-item">
-                    <a href="index.php?com=news&act=list&type=tin-tuc" class="nav-link <?= $active ?>">
+                <li class="nav-item <?= $menuopen ?>">
+                    <a href="#" class="nav-link <?= $active ?>">
                         <i class="nav-icon far fa-newspaper"></i>
-                        <p>Quản lý tin tức</p>
+                        <p>Quản lý bài viết<i class="fas fa-angle-left right"></i></p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <?php
+                        $active = "";
+                        if ($com == 'news' && $_GET['type'] == 'tin-tuc') {
+                            $active = 'active';
+                        }
+                        ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=news&act=list&type=tin-tuc" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản lý tin tức</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'news' && $_GET['type'] == 'chinh-sach') {
+                            $active = 'active';
+                        }
+                        ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=news&act=list&type=chinh-sach" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản lý chính sách</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'news' && $_GET['type'] == 'hinh-thuc-thanh-toan') {
+                            $active = 'active';
+                        }
+                        ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=news&act=list&type=hinh-thuc-thanh-toan" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Hình thức thanh toán</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <?php
@@ -203,6 +245,17 @@
                                 <p>Video</p>
                             </a>
                         </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'photo' && $_GET['type'] == 'social')
+                            $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=photo&act=list&type=social" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Social</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -219,38 +272,12 @@
 
                 <?php
                 $active = "";
-                $menuopen = "";
-                if ($com == 'order' || ($com == 'news' && $_GET['type'] == 'hinh-thuc-thanh-toan')) {
-                    $active = 'active';
-                    $menuopen = 'menu-open';
-                }
-                ?>
-                <li class="nav-item <?= $menuopen ?>">
-                    <a href="#" class="nav-link <?= $active ?>">
+                if ($com == 'order') $active = "active"; ?>
+                <li class="nav-item">
+                    <a href="index.php?com=order&act=list" class="nav-link <?= $active ?>">
                         <i class="nav-icon fas fa-shopping-bag"></i>
-                        <p>Quản lý đơn hàng<i class="fas fa-angle-left right"></i></p>
+                        <p>Đơn hàng</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <?php
-                        $active = "";
-                        if ($com == 'news') $active = "active"; ?>
-                        <li class="nav-item">
-                            <a href="index.php?com=news&act=list&type=hinh-thuc-thanh-toan" class="nav-link <?= $active ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Hình thức thanh toán</p>
-                            </a>
-                        </li>
-
-                        <?php
-                        $active = "";
-                        if ($com == 'order') $active = "active"; ?>
-                        <li class="nav-item">
-                            <a href="index.php?com=order&act=list" class="nav-link <?= $active ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đơn hàng</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <?php

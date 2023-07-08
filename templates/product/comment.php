@@ -94,7 +94,7 @@
                                 <div class="comment-item-poster col-2">
                                     <div class="comment-item-letter">
                                         <?php if (!empty($poster)) { ?>
-                                            <?= $func->getImage(['class' => '', 'width' => 65, 'height' => 65, 'upload' => UPLOAD_USER_L, 'image' => $poster['photo'], 'alt' => $rowDetail['name']]) ?>
+                                            <?= $func->getImage(['class' => '', 'width' => 65, 'height' => 65, 'upload' => UPLOAD_USER_L, 'image' => $poster['photo']]) ?>
                                         <?php } else { ?>
                                             <?= $comment->subName($params['lists']['fullname']) ?>
                                         <?php } ?>
@@ -127,7 +127,7 @@
                                             <?php if (!empty($params['lists']['photo'])) {
                                                 foreach ($params['lists']['photo'] as $k_photo => $v_photo) { ?>
                                                     <a class="transition" data-fancybox="comment_gallery_<?= $params['lists']['id'] ?>" href="<?= UPLOAD_PHOTO_L . $v_photo['photo'] ?>" data-caption="<?= $rowDetail['name'] ?>">
-                                                        <?= $func->getImage(['class' => '', 'width' => 70, 'height' => 70, 'upload' => UPLOAD_PHOTO_L, 'image' => $v_photo['photo'], 'alt' => $rowDetail['name']]) ?>
+                                                        <?= $func->getImage(['class' => '', 'width' => 70, 'height' => 70, 'upload' => UPLOAD_PHOTO_L, 'image' => $v_photo['photo']]) ?>
                                                     </a>
                                             <?php }
                                             } ?>
@@ -174,7 +174,7 @@
                                 <div class="form-group review-preview">
                                     <div class="row">
                                         <div class="col-4">
-                                            <?= $func->getImage(['class' => '', 'width' => 150, 'height' => 150, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                                            <?= $func->getImage(['class' => '', 'width' => 150, 'height' => 150, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo']]) ?>
                                         </div>
                                         <div class="col-8">
                                             <h6 class="text-uppercase"><?= $rowDetail['name'] ?></h6>

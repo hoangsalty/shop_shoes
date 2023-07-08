@@ -11,6 +11,7 @@ $linkMan = "index.php?com=product&act=man_list";
         <div class="card-header text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
+            <input type="hidden" name="id" value="<?= @$item['id'] ?>">
         </div>
 
         <div class="box_response"></div>
@@ -31,7 +32,7 @@ $linkMan = "index.php?com=product&act=man_list";
                         </div>
                         <div class="form-group">
                             <label for="desc">Mô tả:</label>
-                            <textarea class="form-control text-sm <?= (isset($config['product']['desc_cke']) && $config['product']['desc_cke'] == true) ? 'form-control-ckeditor' : '' ?>" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
+                            <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
                         </div>
                     </div>
                 </div>

@@ -84,7 +84,7 @@ $statusOrder = (!empty($_POST['statusOrder'])) ? $_POST['statusOrder'] : '';
                                         $pro_price_new_qty = $pro_price_new * $quantity; ?>
                                         <tr>
                                             <td width="20%">
-                                                <?= $func->getImage(['class' => 'w-100', 'width' => 80, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo'], 'alt' => $proinfo['name']]) ?>
+                                                <?= $func->getImage(['class' => 'w-100', 'width' => 80, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $proinfo['photo']]) ?>
                                             </td>
                                             <td width="60%" class="text-left">
                                                 <span class="font-weight-bold"><?= $proinfo['name'] ?></span>

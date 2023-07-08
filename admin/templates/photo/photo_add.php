@@ -8,6 +8,7 @@ $name = '';
 if ($type == 'logo') $name = 'Logo';
 else if ($type == 'slideshow') $name = 'Slideshow';
 else if ($type == 'album') $name = 'Album';
+else if ($type == 'social') $name = 'Social';
 ?>
 
 <!-- Main content -->
@@ -38,34 +39,34 @@ else if ($type == 'album') $name = 'Album';
                                 <input type="text" class="form-control text-sm" name="data[link]" id="link" placeholder="Link" value="<?= @$item['link'] ?>">
                             </div>
                         <?php } ?>
-                        <?php if ($type == 'video') { ?>
+                        <?php if ($type != 'social') { ?>
+                            <?php if ($type == 'video') { ?>
+                                <div class="form-group">
+                                    <label for="link_video">Link Video (Youtube):</label>
+                                    <input type="text" class="form-control text-sm" name="data[link_video]" id="link_video" onchange="youtubePreview(this.value,'#loadVideo');" placeholder="Video" value="<?= @$item['link_video'] ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="link_video">Video preview:</label>
+                                    <?php if (!empty($item['link_video'])) { ?>
+                                        <div><iframe id="loadVideo" width="500" <?= (@$item["link_video"] == '') ? "height='0px'" : "height='300px'"; ?> src="//www.youtube.com/embed/<?= $func->getYoutube($item['link_video']) ?>" frameborder="0" allowfullscreen></iframe></div>
+                                    <?php } else { ?>
+                                        <div><iframe id="loadVideo" width="0px" height="0px" frameborder="0" allowfullscreen></iframe></div>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+
                             <div class="form-group">
-                                <label for="link_video">Link Video (Youtube):</label>
-                                <input type="text" class="form-control text-sm" name="data[link_video]" id="link_video" onchange="youtubePreview(this.value,'#loadVideo');" placeholder="Video" value="<?= @$item['link_video'] ?>">
+                                <label for="name">Tiêu đề:</label>
+                                <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
                             </div>
-                            <div class="form-group">
-                                <label for="link_video">Video preview:</label>
-                                <?php if (!empty($item['link_video'])) { ?>
-                                    <div><iframe id="loadVideo" width="500" <?= (@$item["link_video"] == '') ? "height='0px'" : "height='300px'"; ?> src="//www.youtube.com/embed/<?= $func->getYoutube($item['link_video']) ?>" frameborder="0" allowfullscreen></iframe></div>
-                                <?php } else { ?>
-                                    <div><iframe id="loadVideo" width="0px" height="0px" frameborder="0" allowfullscreen></iframe></div>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
 
-                        <div class="form-group">
-                            <label for="name">Tiêu đề:</label>
-                            <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
-                        </div>
-
-                        <?php if ($type != 'video' && $type != 'album') { ?>
-                            <div class="form-group">
-                                <label for="desc">Mô tả:</label>
-                                <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
-                            </div>
-                        <?php } ?>
-
-
+                            <?php if ($type != 'video' && $type != 'album') { ?>
+                                <div class="form-group">
+                                    <label for="desc">Mô tả:</label>
+                                    <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>  
                     </div>
                 </div>
             </div>
@@ -120,7 +121,7 @@ else if ($type == 'album') $name = 'Album';
                                     <?php foreach ($gallery as $v) { ?>
                                         <li class="my-jFiler-item my-jFiler-item-<?= $v['id'] ?> col-2 mb-4" data-id="<?= $v['id'] ?>">
                                             <div class="jFiler-item-container border border-primary">
-                                                <?= $func->getImage(['class' => 'rounded w-100', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                                <?= $func->getImage(['class' => 'rounded w-100', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                                                 <div class="jFiler-item-assets">
                                                     <ul class="list-inline pull-right d-flex align-items-center justify-content-between">
                                                         <li class="ml-1">

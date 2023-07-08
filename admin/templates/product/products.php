@@ -55,8 +55,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                 <?php for ($i = 0; $i < count($items); $i++) {
                     $linkID = "";
                     if ($items[$i]['id_list']) $linkID .= "&id_list=" . $items[$i]['id_list'];
-                    if ($items[$i]['id_cat']) $linkID .= "&id_cat=" . $items[$i]['id_cat'];
-                    if ($items[$i]['id_brand']) $linkID .= "&id_brand=" . $items[$i]['id_brand']; ?>
+                    if ($items[$i]['id_cat']) $linkID .= "&id_cat=" . $items[$i]['id_cat']; ?>
                     <tr>
                         <td class="align-middle">
                             <div class="custom-control custom-checkbox my-checkbox">
@@ -69,7 +68,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                         </td>
                         <td class="align-middle">
                             <a href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
+                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo']]) ?>
                             </a>
                         </td>
                         <td class="align-middle">

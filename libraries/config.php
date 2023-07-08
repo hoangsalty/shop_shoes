@@ -20,12 +20,9 @@ $config = array(
         "secretKey" => "at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa"
     ),
 );
-/*Ảnh Ablout*/
+/*Ảnh About*/
 $config['about']['width'] = 600;
 $config['about']['height'] = 440;
-/*Ảnh Brand*/
-$config['brand']['width'] = 150;
-$config['brand']['height'] = 150;
 /*Ảnh Categories*/
 $config['product_list']['width'] = 150;
 $config['product_list']['height'] = 150;

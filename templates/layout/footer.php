@@ -34,6 +34,13 @@
                 </div>
                 <div class="footer-news col-lg-4 col-md-4 col-12">
                     <h2 class="footer-title">Fanpage facebook</h2>
+                    <div class="fb-page" data-href="<?= $optsetting['fanpage'] ?>" data-tabs="timeline" data-width="500" data-height="300" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <div class="fb-xfbml-parse-ignore">
+                            <blockquote cite="<?= $optsetting['fanpage'] ?>">
+                                <a href="<?= $optsetting['fanpage'] ?>">Facebook</a>
+                            </blockquote>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,6 +49,9 @@
         <div class="wrap-content">
             <div class="copyright text-center">Copyright © 2023 CKC. Design by CKC</div>
         </div>
+    </div>
+    <div class="footer-map">
+        <?= $func->decodeHtmlChars($optsetting['googlemap']) ?>
     </div>
 </div>
 
@@ -56,11 +66,11 @@
     <a class="btn-zalo btn-frame" target="_blank" href="https://zalo.me/<?= preg_replace('/[^0-9]/', '', $optsetting['zalo']); ?>">
         <div class="animated infinite zoomIn kenit-alo-circle"></div>
         <div class="animated infinite pulse kenit-alo-circle-fill"></div>
-        <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'zl.png', 'alt' => 'Zalo']) ?></i>
+        <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'zl.png']) ?></i>
     </a>
     <a class="btn-phone btn-frame" href="tel:<?= preg_replace('/[^0-9]/', '', $optsetting['hotline']); ?>">
         <div class="animated infinite zoomIn kenit-alo-circle"></div>
         <div class="animated infinite pulse kenit-alo-circle-fill"></div>
-        <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'hl.png', 'alt' => 'Hotline']) ?></i>
+        <i><?= $func->getImage(['size-error' => '35x35x2', 'upload' => 'assets/images/', 'image' => 'hl.png']) ?></i>
     </a>
 </div>

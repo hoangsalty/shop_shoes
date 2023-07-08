@@ -26,5 +26,6 @@
 <script type="text/javascript" src="<?= $configBase ?>assets/photobox/photobox.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/select2/select2.min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/functions.js"></script>
+<script type="text/javascript" src="<?= $configBase ?>assets/js/jquery.pixelentity.shiner.min.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/js/apps.js"></script>
 <script type="text/javascript" src="<?= $configBase ?>assets/sweetalert/sweetalert.min.js"></script>

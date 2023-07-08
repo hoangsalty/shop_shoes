@@ -9,7 +9,7 @@
                     <div>
                         <div class="item-categories">
                             <a class="image scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
-                                <?= $func->getImage(['class' => '', 'width' => $config['product_list']['width'], 'height' => $config['product_list']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                <?= $func->getImage(['class' => '', 'width' => $config['product_list']['width'], 'height' => $config['product_list']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                             </a>
                             <div class="info">
                                 <h3 class="name transition">
@@ -37,7 +37,7 @@
                             <div class="box-product">
                                 <div class="box-image">
                                     <a class="pic-product scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
-                                        <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                        <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                                     </a>
                                     <p class="social-product transition">
                                         <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product">
@@ -97,7 +97,7 @@
                         <div class="grid-item">
                             <a class="album_item transition" href="<?= UPLOAD_PHOTO_L . $v['photo'] ?>" title="<?= $v['name'] ?>">
                                 <div class="images transition">
-                                    <?= $func->getImage(['class' => 'w-100', 'width' => $config['album']['width'], 'height' => $config['album']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                    <?= $func->getImage(['class' => 'w-100', 'width' => $config['album']['width'], 'height' => $config['album']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $v['photo']]) ?>
                                 </div>
                                 <div class="info">
                                     <h3 class="name text-split"><?= $v['name'] ?> </h3>
@@ -122,7 +122,7 @@
                     <div>
                         <div class="item-newsnb">
                             <a class="image scale-img transition" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
-                                <?= $func->getImage(['class' => 'w-100', 'width' => $config['news']['width'], 'height' => $config['news']['height'], 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                <?= $func->getImage(['class' => 'w-100', 'width' => $config['news']['width'], 'height' => $config['news']['height'], 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo']]) ?>
                             </a>
                             <div class="info">
                                 <a class="name text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>

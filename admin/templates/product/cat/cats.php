@@ -63,7 +63,7 @@ $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
                         </td>
                         <td class="align-middle">
                             <a href="<?= $linkEdit ?><?= $linkID ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
+                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PRODUCT_L, 'image' => $items[$i]['photo']]) ?>
                             </a>
                         </td>
                         <td class="align-middle">

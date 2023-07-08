@@ -3,11 +3,11 @@ FRAMEWORK.DbUser = function () {
     e.preventDefault();
 
     data = new FormData($(this)[0]);
-    data.append('act', 'luu-thong-tin');
+    data.append("act", "luu-thong-tin");
 
     $.ajax({
       type: "POST",
-      url: 'sources/user.php',
+      url: "sources/user.php",
       processData: false,
       cache: false,
       contentType: false,
@@ -16,33 +16,26 @@ FRAMEWORK.DbUser = function () {
       success: function (result) {
         if (result["status"] == 200) {
           Swal.fire({
-            icon: 'success',
-            title: 'Thông báo!',
+            icon: "success",
+            title: "Thông báo!",
             text: result["messages"][0],
             allowOutsideClick: false,
           }).then((state) => {
             if (state.isConfirmed) {
-              location.href = result['link'];
+              location.href = result["link"];
             }
           });
         } else {
-          var myHTML = '';
-          result["messages"].forEach(e => {
-            myHTML += '<p class="mb-1">' + e + '</p>';
+          var myHTML = "";
+          result["messages"].forEach((e) => {
+            myHTML += '<p class="mb-1">' + e + "</p>";
           });
 
-          $('.box_response').html(
-            '<div class="card bg-gradient-red">' +
-            '<div class="card-header">' +
-            '<h3 class="card-title">Thông báo</h3>' +
-            '</div>' +
-            '<div class="card-body">' +
-            myHTML +
-            '</div>' +
-            '</div>'
-          )
+          $(".box_response").html(
+            '<div class="alert alert-danger">' + myHTML + "</div>"
+          );
         }
-      }
+      },
     });
   });
 
@@ -50,11 +43,11 @@ FRAMEWORK.DbUser = function () {
     e.preventDefault();
 
     data = new FormData($(this)[0]);
-    data.append('act', 'quen-mat-khau');
+    data.append("act", "quen-mat-khau");
 
     $.ajax({
       type: "POST",
-      url: 'sources/user.php',
+      url: "sources/user.php",
       processData: false,
       cache: false,
       contentType: false,
@@ -67,51 +60,49 @@ FRAMEWORK.DbUser = function () {
         holdonClose();
         if (result["status"] == 200) {
           Swal.fire({
-            icon: 'success',
-            title: 'Thông báo!',
+            icon: "success",
+            title: "Thông báo!",
             text: result["messages"][0],
             allowOutsideClick: false,
           }).then((state) => {
             if (state.isConfirmed) {
-              $('.modal').modal('hide');
+              $(".modal").modal("hide");
             }
           });
         } else {
-          var myHTML = '';
-          result["messages"].forEach(e => {
-            myHTML += '<p class="mb-1">' + e + '</p>';
+          var myHTML = "";
+          result["messages"].forEach((e) => {
+            myHTML += '<p class="mb-1">' + e + "</p>";
           });
 
-          $('.forgotpassword_response').html(
-            '<div style="color:red">' +
-            myHTML +
-            '</div>'
-          )
+          $(".forgotpassword_response").html(
+            '<div style="color:red">' + myHTML + "</div>"
+          );
         }
-      }
+      },
     });
   });
 
   $("#change_pass_user").click(function (e) {
     e.preventDefault();
 
-    $('.modal').modal('hide');
+    $(".modal").modal("hide");
 
-    var id = $(this).data('id');
-    $('#popup-changepassword').modal('show');
-    $('#popup-changepassword').find('#id').val(id);
+    var id = $(this).data("id");
+    $("#popup-changepassword").modal("show");
+    $("#popup-changepassword").find("#id").val(id);
   });
 
   $("#form_changepassword").submit(function (e) {
     e.preventDefault();
 
     data = new FormData($(this)[0]);
-    data.append('act', 'luu-thong-tin');
-    data.append('changepass', 1);
+    data.append("act", "luu-thong-tin");
+    data.append("changepass", 1);
 
     $.ajax({
       type: "POST",
-      url: 'sources/user.php',
+      url: "sources/user.php",
       processData: false,
       cache: false,
       contentType: false,
@@ -124,148 +115,143 @@ FRAMEWORK.DbUser = function () {
         holdonClose();
         if (result["status"] == 200) {
           Swal.fire({
-            icon: 'success',
-            title: 'Thông báo!',
+            icon: "success",
+            title: "Thông báo!",
             text: result["messages"][0],
             allowOutsideClick: false,
           }).then((state) => {
             if (state.isConfirmed) {
-              $('.modal').modal('hide');
-              location.href = result['link'];
+              $(".modal").modal("hide");
+              location.href = result["link"];
             }
           });
         } else {
-          var myHTML = '';
-          result["messages"].forEach(e => {
-            myHTML += '<p class="mb-1">' + e + '</p>';
+          var myHTML = "";
+          result["messages"].forEach((e) => {
+            myHTML += '<p class="mb-1">' + e + "</p>";
           });
 
-          $('.changepassword_response').html(
-            '<div style="color:red">' +
-            myHTML +
-            '</div>'
-          )
+          $(".changepassword_response").html(
+            '<div style="color:red">' + myHTML + "</div>"
+          );
         }
-      }
+      },
     });
   });
-}
+};
 
 FRAMEWORK.Order = function () {
-  function inti_order_status(tab_class = '', tab_return = '', table_select = '') {
-    if (tab_class != '') {
-      if ($('.' + tab_class + ' a.active').length == 0) {
-        $('.' + tab_class + ' a').eq(0).addClass('active');
+  function inti_order_status(
+    tab_class = "",
+    tab_return = "",
+    table_select = ""
+  ) {
+    if (tab_class != "") {
+      if ($("." + tab_class + " a.active").length == 0) {
+        $("." + tab_class + " a")
+          .eq(0)
+          .addClass("active");
       }
-      var where_select = '' + $('.' + tab_class + ' a.active').data('id');
+      var where_select = "" + $("." + tab_class + " a.active").data("id");
     }
 
     $.ajax({
-      url: 'api/order.php',
-      type: 'post',
+      url: "api/order.php",
+      type: "post",
       data: {
         cmd: "show-order-by-status",
         where_select: where_select,
       },
     }).done(function (result) {
-      $('.' + tab_return).html(result);
+      $("." + tab_return).html(result);
     });
   }
 
-  $(document).on('click', '.nav_status_order a', function (event) {
+  $(document).on("click", ".nav_status_order a", function (event) {
     event.preventDefault();
-    $(this).parent('.nav_status_order').find('a').removeClass('active');
-    $(this).addClass('active');
-    inti_order_status('nav_status_order', 'status_order', 'table_order_detail');
+    $(this).parent(".nav_status_order").find("a").removeClass("active");
+    $(this).addClass("active");
+    inti_order_status("nav_status_order", "status_order", "table_order_detail");
   });
-  inti_order_status('nav_status_order', 'status_order', 'table_order_detail');
-
-  /* $("#thanhtoan").prop("disabled", true);
-  $("#thanhtoan").addClass("disabled");
-  if (isExist($(".form-cart"))) {
-    $(".form-cart")[0].onchange = function () {
-      if ($(".form-cart")[0].checkValidity() == true) {
-        $("#thanhtoan").prop("disabled", false);
-        $("#thanhtoan").removeClass("disabled");
-      }
-    };
-  } */
+  inti_order_status("nav_status_order", "status_order", "table_order_detail");
 
   $("#form_cart").submit(function (e) {
     e.preventDefault();
 
     if (!IS_LOGIN) {
       Swal.fire({
-        icon: 'info',
-        title: 'Thông báo!',
-        text: 'Vui lòng đăng nhập để có thể thanh toán',
+        icon: "info",
+        title: "Thông báo!",
+        text: "Vui lòng đăng nhập để có thể thanh toán",
         allowOutsideClick: false,
       }).then((state) => {
         if (state.isConfirmed) {
-          $('#popup-login').modal('show');
+          $("#popup-login").modal("show");
         }
       });
       return false;
     }
 
     data = new FormData($(this)[0]);
-    data.append('thanhtoan', true);
+    data.append("thanhtoan", true);
 
     $.ajax({
       type: "POST",
-      url: 'sources/order.php',
+      url: "sources/order.php",
       processData: false,
       cache: false,
       contentType: false,
       dataType: "json",
       data: data,
       success: function (result) {
-        if (result['status'] == 201) {
+        if (result["status"] == 201) {
           Swal.fire({
-            icon: 'success',
-            title: 'Thông báo!',
+            icon: "success",
+            title: "Thông báo!",
             text: result["messages"][0],
             allowOutsideClick: false,
             timer: 2000,
             timerProgressBar: true,
             didOpen: () => {
-              Swal.showLoading()
+              Swal.showLoading();
             },
           }).then((state) => {
             if (state.dismiss === Swal.DismissReason.timer) {
-              location.href = result['link'];
+              location.href = result["link"];
             }
           });
-        } else if (result['status'] == 404) {
-          var myHTML = '';
-          result["messages"].forEach(e => {
-            myHTML += '<p class="mb-1">' + e + '</p>';
+        } else if (result["status"] == 404) {
+          var myHTML = "";
+          result["messages"].forEach((e) => {
+            myHTML += '<p class="mb-1">' + e + "</p>";
           });
 
-          $('.content-debug').html('<div class="alert alert-danger">' + myHTML + '</div>');
-        } else if (result['status'] == 200) {
+          $(".content-debug").html(
+            '<div class="alert alert-danger">' + myHTML + "</div>"
+          );
+        } else if (result["status"] == 200) {
           $.ajax({
             url: "api/order_status.php",
             type: "POST",
             dataType: "html",
             data: {
-              currentOrder: result['currentOrder'],
-              tempCart: result['tempCart'],
-              messages: result['messages'][0],
-              statusOrder: result['status'],
+              currentOrder: result["currentOrder"],
+              tempCart: result["tempCart"],
+              messages: result["messages"][0],
+              statusOrder: result["status"],
             },
             success: function (result2) {
-              $('#order_holder').html(result2);
+              $("#order_holder").html(result2);
               window.setTimeout(function () {
-                window.location.href = result['link'];
+                window.location.href = result["link"];
               }, 10000);
             },
           });
         }
-      }
+      },
     });
   });
-}
+};
 
 FRAMEWORK.DatePicker = function () {
   if (isExist($("#birthday"))) {
@@ -280,9 +266,9 @@ FRAMEWORK.DatePicker = function () {
 };
 
 FRAMEWORK.UserInfo = function () {
-  $('#myTab a').click(function (e) {
+  $("#myTab a").click(function (e) {
     e.preventDefault();
-    $(this).tab('show');
+    $(this).tab("show");
   });
   // store the currently selected tab in the hash value
   $("ul.nav-tabs > li > a").on("shown.bs.tab", function (e) {
@@ -291,18 +277,18 @@ FRAMEWORK.UserInfo = function () {
   });
   // on load of the page: switch to the currently selected tab
   var hash = window.location.hash;
-  $('#myTab a[href="' + hash + '"]').tab('show');
+  $('#myTab a[href="' + hash + '"]').tab("show");
 
   /* Cancel order */
   $("body").on("click", "#cancel-order", function () {
     Swal.fire({
-      icon: 'warning',
-      title: 'Thông báo!',
-      text: 'Bạn muốn hủy đơn hàng này ?',
+      icon: "warning",
+      title: "Thông báo!",
+      text: "Bạn muốn hủy đơn hàng này ?",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Chấp nhận'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Chấp nhận",
     }).then((state) => {
       if (state.isConfirmed) {
         var id = $(this).data("id");
@@ -380,21 +366,21 @@ FRAMEWORK.Comments = function () {
       dialogs: {
         alert: function (e) {
           return Swal.fire({
-            icon: 'error',
-            title: 'Có lỗi phát sinh...',
+            icon: "error",
+            title: "Có lỗi phát sinh...",
             text: e,
             allowOutsideClick: false,
           });
         },
         confirm: function (e, t) {
           Swal.fire({
-            title: 'Thông báo!',
+            title: "Thông báo!",
             text: "Bạn có chắc muốn xóa ảnh này ?",
-            icon: 'warning',
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Chấp nhận xóa ảnh này'
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Chấp nhận xóa ảnh này",
           }).then((state) => {
             if (state.isConfirmed) {
               t();
@@ -479,8 +465,8 @@ FRAMEWORK.Comments = function () {
       error: function (e) {
         holdonClose();
         Swal.fire({
-          icon: 'error',
-          title: 'Có lỗi phát sinh...',
+          icon: "error",
+          title: "Có lỗi phát sinh...",
           text: "Hệ thống bị lỗi. Vui lòng thử lại sau.",
           allowOutsideClick: false,
         });
@@ -489,8 +475,8 @@ FRAMEWORK.Comments = function () {
         form.trigger("reset");
         holdonClose();
         Swal.fire({
-          icon: 'success',
-          title: 'Thông báo!',
+          icon: "success",
+          title: "Thông báo!",
           text: "Bình luận sẽ được hiển thị sau khi được Bản Quản Trị kiểm duyệt",
           allowOutsideClick: false,
         });
@@ -507,15 +493,15 @@ FRAMEWORK.PopupLogin = function () {
   $(".btn_signup").click(function (e) {
     e.preventDefault();
 
-    $('.modal').modal('hide');
-    $('#popup-register').modal('show');
+    $(".modal").modal("hide");
+    $("#popup-register").modal("show");
   });
 
   $(".btn_forgot").click(function (e) {
     e.preventDefault();
 
-    $('.modal').modal('hide');
-    $('#popup-forgot').modal('show');
+    $(".modal").modal("hide");
+    $("#popup-forgot").modal("show");
   });
 
   $("#form-user-login").submit(function (e) {
@@ -1035,15 +1021,15 @@ FRAMEWORK.Cart = function () {
   });
   /* Add */
   $("body").on("click", ".addcart", function () {
-    if (!IS_LOGIN && $(this).hasClass('btn_buynow')) {
+    if (!IS_LOGIN && $(this).hasClass("btn_buynow")) {
       Swal.fire({
-        icon: 'info',
-        title: 'Thông báo!',
-        text: 'Vui lòng đăng nhập để có thể thanh toán',
+        icon: "info",
+        title: "Thông báo!",
+        text: "Vui lòng đăng nhập để có thể thanh toán",
         allowOutsideClick: false,
       }).then((state) => {
         if (state.isConfirmed) {
-          $('#popup-login').modal('show');
+          $("#popup-login").modal("show");
         }
       });
       return false;
@@ -1078,7 +1064,7 @@ FRAMEWORK.Cart = function () {
           holdonOpen();
         },
         success: function (result) {
-          if (result['status'] == 200) {
+          if (result["status"] == 200) {
             if (action == "addnow") {
               $(".count-cart").html(result.max);
 
@@ -1102,10 +1088,10 @@ FRAMEWORK.Cart = function () {
             } else if (action == "buynow") {
               window.location = CONFIG_BASE + "gio-hang";
             }
-          } else if (result['status'] == 404) {
+          } else if (result["status"] == 404) {
             Swal.fire({
-              icon: 'warning',
-              title: 'Thông báo!',
+              icon: "warning",
+              title: "Thông báo!",
               text: result["message"],
               allowOutsideClick: false,
             });
@@ -1120,13 +1106,13 @@ FRAMEWORK.Cart = function () {
     $this = $(this);
 
     Swal.fire({
-      title: 'Thông báo!',
-      text: 'Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?',
-      icon: 'warning',
+      title: "Thông báo!",
+      text: "Bạn muốn xóa sản phẩm này khỏi giỏ hàng ?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Chấp nhận'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Chấp nhận",
     }).then((state) => {
       if (state.isConfirmed) {
         var code = $this.data("code");
@@ -1149,7 +1135,9 @@ FRAMEWORK.Cart = function () {
             if (result.max) {
               $(".form-cart").find(".load-price-temp").html(result.tempText);
               $(".form-cart").find(".load-price-total").html(result.totalText);
-              $(".form-cart").find(".procart-" + code).remove();
+              $(".form-cart")
+                .find(".procart-" + code)
+                .remove();
             } else {
               location.reload();
             }
@@ -1176,8 +1164,8 @@ FRAMEWORK.Cart = function () {
           id: id,
         },
         success: function (result) {
-          input.val(result['quantity']);
-          updateCart(id, code, result['quantity']);
+          input.val(result["quantity"]);
+          updateCart(id, code, result["quantity"]);
         },
       });
     } else if (oldValue > 1) {
@@ -1191,8 +1179,8 @@ FRAMEWORK.Cart = function () {
           id: id,
         },
         success: function (result) {
-          input.val(result['quantity']);
-          updateCart(id, code, result['quantity']);
+          input.val(result["quantity"]);
+          updateCart(id, code, result["quantity"]);
         },
       });
     }
@@ -1201,22 +1189,22 @@ FRAMEWORK.Cart = function () {
   /* City */
   if (isExist($(".select-city-cart"))) {
     $(".select-city-cart").change(function () {
-      var id = $(this).val().split('__')[1];
+      var id = $(this).val().split("__")[1];
       loadDistrict(id);
     });
   }
   /* District */
   if (isExist($(".select-district-cart"))) {
     $(".select-district-cart").change(function () {
-      var id = $(this).val().split('__')[1];
+      var id = $(this).val().split("__")[1];
       loadWard(id);
     });
   }
   /* Ward */
   if (isExist($(".select-ward-cart"))) {
     $(".select-ward-cart").change(function () {
-      var districtID = $('.select-district-cart').val().split('__')[1];
-      var wardID = $(this).val().split('__')[1];
+      var districtID = $(".select-district-cart").val().split("__")[1];
+      var wardID = $(this).val().split("__")[1];
       loadShipPrice(districtID, wardID);
     });
   }
@@ -1273,10 +1261,35 @@ FRAMEWORK.Photobox = function () {
   }
 };
 
+/* Load Sort */
+FRAMEWORK.Sort = function () {
+  $(".click-sort").click(function (e) {
+    $(".sort-select-main").slideToggle();
+  });
+  $('body').on('click', '.sort-select-main p .check', function (event) {
+    loadSort();
+  });
+};
+
+/* Logo mã màu đặc biệt: monoHL, oceanHL, fireHL */
+FRAMEWORK.ShinerLogo = function () {
+  if (isExist($(".peShiner"))) {
+    $(window).bind("load", function () {
+      var api = $(".peShiner").peShiner({
+        api: true,
+        paused: true,
+        reverse: true,
+        repeat: 1,
+        color: "oceanHL",
+      });
+      api.resume();
+    });
+  }
+};
+
 /* Ready */
 $(document).ready(function () {
-  validateForm('validation-form');
-
+  validateForm("validation-form");
   FRAMEWORK.Menu();
   FRAMEWORK.Search();
   FRAMEWORK.Carousel();
@@ -1292,4 +1305,6 @@ $(document).ready(function () {
   FRAMEWORK.Random();
   FRAMEWORK.Order();
   FRAMEWORK.DbUser();
+  FRAMEWORK.Sort();
+  FRAMEWORK.ShinerLogo();
 });

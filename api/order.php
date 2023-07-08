@@ -56,7 +56,7 @@ if ($cmd == 'change-status' && $id > 0) {
                                 ?>
                                     <tbody>
                                         <th class="text-center"><span><?= $k2 + 1 ?></span></th>
-                                        <th><?= $func->getImage(['class' => 'rounded img-preview', 'width' => 100, 'height' => 80, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v2['photo'], 'alt' => $v2['name']]) ?></th>
+                                        <th><?= $func->getImage(['class' => 'rounded img-preview', 'width' => 100, 'height' => 80, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v2['photo']]) ?></th>
                                         <th>
                                             <h3 class="name-procart"><a class="text-decoration-none" target="_blank" title="<?= $v2['name'] ?>" href="<?= $proinfo['slug'] ?>"><?= $v2['name'] ?></a></h3>
                                             <span>x<?= $quantity ?></span>

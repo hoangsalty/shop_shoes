@@ -1,7 +1,7 @@
 <div class="flex_info">
     <div class="left_info">
         <div class="flex_info_user">
-            <?= $func->getImage(['class' => 'img-circle', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['fullname']]) ?>
+            <?= $func->getImage(['class' => 'img-circle', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo']]) ?>
             <div class="info_user">
                 <p class="name_user"><?= $rowDetail['fullname'] ?></p>
                 <p class="username_user"><?= $rowDetail['username'] ?></p>
@@ -125,7 +125,7 @@
                                 <div class="avatar_user">
                                     <div class="photoUpload-zone">
                                         <div class="photoUpload-detail" id="photoUpload-preview">
-                                            <?= $func->getImage(['class' => 'rounded', 'size-error' => '250x250x1', 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo'], 'alt' => 'Alt Photo']) ?>
+                                            <?= $func->getImage(['class' => 'rounded', 'size-error' => '250x250x1', 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo']]) ?>
                                         </div>
                                         <label class="photoUpload-file" id="photo-zone" for="file-zone">
                                             <input type="file" name="file" id="file-zone">
@@ -152,12 +152,11 @@
                     );
                     ?>
                     <div class="nav_status_order">
-                        <a href="javascript:void()" data-status="" title="Tất cả"><span>Tất cả</span></a>
+                        <a data-status="" title="Tất cả"><span>Tất cả</span></a>
                         <?php foreach ($row_status as $i => $status) { ?>
-                            <a href="javascript:void()" data-id="<?= $status['id'] ?>" title="<?= $status['name'] ?>"><span><?= $status['name'] ?></span></a>
+                            <a data-id="<?= $status['id'] ?>" title="<?= $status['name'] ?>"><span><?= $status['name'] ?></span></a>
                         <?php } ?>
                     </div>
-
                     <div class="status_order"></div>
                 </div>
             </div>

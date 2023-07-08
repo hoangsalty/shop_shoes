@@ -4,17 +4,17 @@
             <div class="left-pro-detail d-flex col-lg-6 mb-4">
                 <?php if (!empty($rowDetailPhoto)) { ?>
                     <div class="product__details__pic__left col-lg-3">
-                        <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 120, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                        <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 120, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo']]) ?>
                         <?php foreach ($rowDetailPhoto as $i => $v) { ?>
-                            <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 120, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
+                            <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 120, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                         <?php } ?>
                     </div>
                 <?php } ?>
 
                 <div class="product__details__pic__right mb-1 col-lg-9">
-                    <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 455, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo'], 'alt' => $rowDetail['name']]) ?>
+                    <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 455, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo']]) ?>
                     <?php foreach ($rowDetailPhoto as $i => $v) { ?>
-                        <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 455, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $rowDetail['name']]) ?>
+                        <?= $func->getImage(['class' => '', 'width' => 540, 'height' => 455, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                     <?php } ?>
                 </div>
             </div>
