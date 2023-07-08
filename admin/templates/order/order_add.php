@@ -96,7 +96,7 @@ $linkMan = "index.php?com=order&act=list";
                                     <td class="align-middle text-center"><?= ($k + 1) ?></td>
                                     <td class="align-middle">
                                         <a title="<?= $v['name'] ?>">
-                                            <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 55, 'height' => 55, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                            <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 55, 'height' => 55, 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                                         </a>
                                     </td>
                                     <td class="align-middle">

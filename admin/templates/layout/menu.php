@@ -3,7 +3,7 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-start align-items-center">
             <div class="image">
                 <?php $rowDetail = $d->rawQueryOne("select * from table_user where id = ? limit 0,1", array($_SESSION['account']['id'])); ?>
-                <?= $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo'], 'alt' => $_SESSION['account']['fullname']]) ?>
+                <?= $func->getImage(['class' => 'img-circle elevation-2', 'width' => 50, 'height' => 50, 'upload' => UPLOAD_USER_L, 'image' => $rowDetail['photo']]) ?>
             </div>
             <a href="#" class="d-block ml-3 text-light font-weight"><?= $_SESSION['account']['fullname'] ?></a>
         </div>
@@ -201,6 +201,17 @@
                             <a href="index.php?com=photo&act=list&type=video" class="nav-link <?= $active ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Video</p>
+                            </a>
+                        </li>
+
+                        <?php
+                        $active = "";
+                        if ($com == 'photo' && $_GET['type'] == 'social')
+                            $active = "active"; ?>
+                        <li class="nav-item">
+                            <a href="index.php?com=photo&act=list&type=social" class="nav-link <?= $active ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Social</p>
                             </a>
                         </li>
                     </ul>

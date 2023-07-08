@@ -180,17 +180,6 @@ FRAMEWORK.Order = function () {
   });
   inti_order_status('nav_status_order', 'status_order', 'table_order_detail');
 
-  /* $("#thanhtoan").prop("disabled", true);
-  $("#thanhtoan").addClass("disabled");
-  if (isExist($(".form-cart"))) {
-    $(".form-cart")[0].onchange = function () {
-      if ($(".form-cart")[0].checkValidity() == true) {
-        $("#thanhtoan").prop("disabled", false);
-        $("#thanhtoan").removeClass("disabled");
-      }
-    };
-  } */
-
   $("#form_cart").submit(function (e) {
     e.preventDefault();
 

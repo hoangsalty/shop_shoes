@@ -4,7 +4,7 @@
             <div class="slideshow-item" owl-item-animation>
                 <div class="images">
                     <a class="slideshow-image" href="<?= $v['link'] ?>" target="_blank" title="<?= $v['name'] ?>">
-                        <?= $func->getImage(['class' => 'w-100', 'width' => $config['slideshow']['width'], 'height' => $config['slideshow']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                        <?= $func->getImage(['class' => 'w-100', 'width' => $config['slideshow']['width'], 'height' => $config['slideshow']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $v['photo']]) ?>
                     </a>
                 </div>
                 <div class="info">

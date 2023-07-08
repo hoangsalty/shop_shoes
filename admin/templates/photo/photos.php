@@ -4,11 +4,6 @@ $linkAdd = "index.php?com=photo&act=add_photo&type=" . $type;
 $linkEdit = "index.php?com=photo&act=edit_photo&type=" . $type;
 
 $status = array("hienthi" => "Hiển thị");
-
-$name = '';
-if ($type == 'logo') $name = 'Logo';
-else if ($type == 'slideshow') $name = 'Slideshow';
-else if ($type == 'album') $name = 'Album';
 ?>
 <!-- Main content -->
 <section class="content">
@@ -61,7 +56,7 @@ else if ($type == 'album') $name = 'Album';
                         </td>
                         <td class="align-middle text-center">
                             <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PHOTO_L, 'image' => $items[$i]['photo'], 'alt' => $items[$i]['name']]) ?>
+                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_PHOTO_L, 'image' => $items[$i]['photo']]) ?>
                             </a>
                         </td>
                         <td class="align-middle">

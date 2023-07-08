@@ -305,7 +305,6 @@ class Functions
             'image' => '',
             'upload-error' => 'assets/images/',
             'image-error' => 'noimage.png',
-            'alt' => ''
         ];
         /* Data */
         $info = array_merge($defaults, $data);
@@ -326,7 +325,11 @@ class Functions
         $info['class'] = (!empty($info['class'])) ? "class='" . $info['class'] . "'" : "";
 
         /* Image */
-        $result = "<img " . $info['class'] . " style='width:" . $info['width'] . "px; height:" . $info['height'] . "px' onerror=\"this.src='" . $info['pathError'] . "';\" " . $info['src'] . " alt='" . $info['alt'] . "'/>";
+        if (!empty($info['width']) && !empty($info['height']))
+            $result = "<img " . $info['class'] . " style='width:" . $info['width'] . "px; height:" . $info['height'] . "px' onerror=\"this.src='" . $info['pathError'] . "';\" " . $info['src'] . "/>";
+        else
+            $result = "<img " . $info['class'] . " style='width:auto; height:auto onerror=\"this.src='" . $info['pathError'] . "';\" " . $info['src'] . "/>";
+
         return $result;
     }
     /* Redirect */
@@ -878,7 +881,7 @@ class Functions
                     <div class="box-product">
                         <div class="box-image">
                             <a class="pic-product scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
-                                <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo'], 'alt' => $v['name']]) ?>
+                                <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                             </a>
                             <p class="social-product transition">
                                 <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product">

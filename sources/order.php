@@ -9,7 +9,7 @@ $city = $func->getProvince();
 /* Hình thức thanh toán */
 $payments_info = $d->rawQuery("select * from table_news where type = ? and find_in_set('hienthi',status) order by id desc", array('hinh-thuc-thanh-toan'));
 
-if (!empty($_POST['thanhtoan']) && $_POST['thanhtoan'] == true) {
+if (isset($_POST['thanhtoan'])) {
     $message = '';
     $response = array();
 
@@ -46,6 +46,15 @@ if (!empty($_POST['thanhtoan']) && $_POST['thanhtoan'] == true) {
         $orderDetails = (!empty($_SESSION['cart'])) ? $_SESSION['cart'] : array();
     }
 
+    if (!empty($orderDetails)) {
+        foreach ($orderDetails as $i => $v) {
+            $outOfProduct = $d->rawQueryOne("select * from table_product where id=? and quantity <= 0", array($v['productid']));
+            if (!empty($outOfProduct)) {
+                $response['messages'][] = 'Sản phẩm <a target="_blank" href="' . $outOfProduct['slug'] . '"><b>' . $outOfProduct['name'] . '</b></a> đã hết nên không thể thanh toán';
+            }
+        }
+    }
+
     /* Valid data */
     if (empty($dataOrder['payments'])) {
         $response['messages'][] = 'Chưa chọn hình thức thanh toán';
@@ -74,7 +83,6 @@ if (!empty($_POST['thanhtoan']) && $_POST['thanhtoan'] == true) {
     if (empty($dataOrder['ward'])) {
         $response['messages'][] = 'Chưa chọn phường/xã';
     }
-
 
     if (empty($dataOrder['address'])) {
         $response['messages'][] = 'Địa chỉ không được trống';
@@ -265,7 +273,7 @@ if (!empty($_POST['thanhtoan']) && $_POST['thanhtoan'] == true) {
 
         $currentOrder = $d->rawQueryOne("select * from table_order where id=? limit 0,1", array($id_insert));
         $tempCart = $_SESSION['cart'];
-        
+
         /* Xóa giỏ hàng */
         unset($_SESSION['cart']);
 

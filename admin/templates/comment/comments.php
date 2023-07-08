@@ -102,7 +102,7 @@
                                         <div class="comment-item-poster col-2">
                                             <div class="comment-item-letter">
                                                 <?php if (!empty($poster)) { ?>
-                                                    <?= $func->getImage(['class' => '', 'width' => 65, 'height' => 65, 'upload' => UPLOAD_USER_L, 'image' => $poster['photo'], 'alt' => $item['name']]) ?>
+                                                    <?= $func->getImage(['class' => '', 'width' => 65, 'height' => 65, 'upload' => UPLOAD_USER_L, 'image' => $poster['photo']]) ?>
                                                 <?php } else { ?>
                                                     <?= $comment->subName($params['lists']['fullname']) ?>
                                                 <?php } ?>
@@ -144,7 +144,7 @@
                                                     <?php if (!empty($params['lists']['photo'])) {
                                                         foreach ($params['lists']['photo'] as $k_photo => $v_photo) { ?>
                                                             <a class="transition" data-fancybox="comment_gallery_<?= $params['lists']['id'] ?>" href="<?= UPLOAD_PHOTO_L . $v_photo['photo'] ?>" data-caption="<?= $item['name'] ?>">
-                                                                <?= $func->getImage(['class' => '', 'width' => 70, 'height' => 70, 'upload' => UPLOAD_PHOTO_L, 'image' => $v_photo['photo'], 'alt' => $item['name']]) ?>
+                                                                <?= $func->getImage(['class' => '', 'width' => 70, 'height' => 70, 'upload' => UPLOAD_PHOTO_L, 'image' => $v_photo['photo']]) ?>
                                                             </a>
                                                     <?php }
                                                     } ?>

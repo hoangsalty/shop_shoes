@@ -3,7 +3,7 @@
         <div class="menu_container d-flex justify-content-between align-items-center">
             <div class="left">
                 <a class="logo-header" href="">
-                    <?= $func->getImage(['class' => '', 'width' => $config['logo']['width'], 'height' => $config['logo']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $logo['photo'], 'alt' => $logo['name']]) ?>
+                    <?= $func->getImage(['class' => '', 'width' => $config['logo']['width'], 'height' => $config['logo']['height'], 'upload' => UPLOAD_PHOTO_L, 'image' => $logo['photo']]) ?>
                 </a>
             </div>
             <div class="center">
