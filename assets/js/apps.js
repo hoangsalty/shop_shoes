@@ -416,9 +416,9 @@ FRAMEWORK.Comments = function () {
           }); */
         },
       },
-      afterSelect: function () { },
-      onEmpty: function () { },
-      onRemove: function () { },
+      afterSelect: function () {},
+      onEmpty: function () {},
+      onRemove: function () {},
     });
   }
 
@@ -970,39 +970,6 @@ FRAMEWORK.Pagings = function () {
   }
 };
 
-FRAMEWORK.Bootstrap = function () {
-  if (isExist($("[data-margin]"))) {
-    $("[data-margin]").each(function () {
-      var $margin = $(this).data("margin");
-      $(this).css({ "margin-bottom": $margin + "px" });
-    });
-  }
-
-  if (isExist($("[data-padding]"))) {
-    $("[data-padding]").each(function () {
-      var $padding = $(this).data("padding");
-      $(this).css({ "padding-top": $padding + "px" });
-      $(this).css({ "padding-bottom": $padding + "px" });
-    });
-  }
-
-  if (isExist($("[data-row]"))) {
-    $("[data-row]").each(function () {
-      var $padding = $(this).data("row");
-
-      $this.children('[class*="col"]').css({
-        paddingLeft: $padding + "px",
-        paddingRight: $padding + "px",
-      });
-
-      $this.css({
-        marginLeft: -$padding + "px",
-        marginRight: -$padding + "px",
-      });
-    });
-  }
-};
-
 FRAMEWORK.Cart = function () {
   /* Popup */
   $("body").on("click", ".popup_cart", function () {
@@ -1043,9 +1010,15 @@ FRAMEWORK.Cart = function () {
     quantity = quantity ? quantity : 1;
 
     /* size màu*/
-    var color = $parents.find(".color-block-pro-detail").find(".color-pro-detail input:checked").val();
+    var color = $parents
+      .find(".color-block-pro-detail")
+      .find(".color-pro-detail input:checked")
+      .val();
     color = color ? color : 0;
-    var size = $parents.find(".size-block-pro-detail").find(".size-pro-detail input:checked").val();
+    var size = $parents
+      .find(".size-block-pro-detail")
+      .find(".size-pro-detail input:checked")
+      .val();
     size = size ? size : 0;
 
     if (id) {
@@ -1266,7 +1239,7 @@ FRAMEWORK.Sort = function () {
   $(".click-sort").click(function (e) {
     $(".sort-select-main").slideToggle();
   });
-  $('body').on('click', '.sort-select-main p .check', function (event) {
+  $("body").on("click", ".sort-select-main p .check", function (event) {
     loadSort();
   });
 };
@@ -1293,7 +1266,6 @@ $(document).ready(function () {
   FRAMEWORK.Menu();
   FRAMEWORK.Search();
   FRAMEWORK.Carousel();
-  FRAMEWORK.Bootstrap();
   FRAMEWORK.Cart();
   FRAMEWORK.Pagings();
   FRAMEWORK.PopupLogin();
