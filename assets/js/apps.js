@@ -573,7 +573,7 @@ FRAMEWORK.PopupRegister = function () {
     var phone = $(this).find("#phone");
     var address = $(this).find("#address");
 
-    if (isEmpty(fullname.val())) {
+    /* if (isEmpty(fullname.val())) {
       $(".register_response").html(
         '<div class="alert alert-danger">Vui lòng nhập họ tên</div>'
       );
@@ -627,21 +627,19 @@ FRAMEWORK.PopupRegister = function () {
       );
       address.focus();
       return false;
-    }
+    } */
+
+    data = new FormData($(this)[0]);
+    data.append("act", "luu-thong-tin");
 
     $.ajax({
-      url: "api/register.php",
       type: "POST",
+      url: "sources/user.php",
+      processData: false,
+      cache: false,
+      contentType: false,
       dataType: "json",
-      data: {
-        fullname: fullname.val(),
-        username: username.val(),
-        password: password.val(),
-        birthday: birthday.val(),
-        email: email.val(),
-        phone: phone.val(),
-        address: address.val(),
-      },
+      data: data,
       beforeSend: function () {
         holdonOpen();
         $("#popup-register").find(".modal-body").css("opacity", "0.5");
@@ -653,7 +651,7 @@ FRAMEWORK.PopupRegister = function () {
 
         if (result.status == 200) {
           $(".register_response").html(
-            '<div class="alert alert-success">' + result.message + "</div>"
+            '<div class="alert alert-success">' + result["messages"][0] + "</div>"
           );
 
           setTimeout(function () {
@@ -673,9 +671,15 @@ FRAMEWORK.PopupRegister = function () {
             });
           }, 3000);
         } else if (result.status == 404) {
+          var myHTML = "";
+          result["messages"].forEach((e) => {
+            myHTML += '<p class="mb-1">' + e + "</p>";
+          });
+
           $(".register_response").html(
-            '<div class="alert alert-danger">' + result.message + "</div>"
+            '<div class="alert alert-danger">' + myHTML + "</div>"
           );
+
         }
         holdonClose();
       },

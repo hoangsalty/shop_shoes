@@ -73,16 +73,20 @@
 <?php } ?>
 
 <?php if (count($productlist)) {
-    foreach ($productlist as $vlist) { ?>
-        <div class="wrap-product spacing">
-            <div class="wrap-content">
-                <div class="title-main">
-                    <span><?= $vlist['name'] ?></span>
+    foreach ($productlist as $vlist) {
+        $products = $d->rawQuery("select * from table_product where id_list = ? and find_in_set('noibat',status) and find_in_set('hienthi',status) order by id desc", array($vlist['id']));
+        if (!empty($products)) {
+?>
+            <div class="wrap-product spacing">
+                <div class="wrap-content">
+                    <div class="title-main">
+                        <span><?= $vlist['name'] ?></span>
+                    </div>
+                    <div class="paging-product-category paging-product-category-<?= $vlist['id'] ?>" data-list="<?= $vlist['id'] ?>"></div>
                 </div>
-                <div class="paging-product-category paging-product-category-<?= $vlist['id'] ?>" data-list="<?= $vlist['id'] ?>"></div>
             </div>
-        </div>
 <?php }
+    }
 } ?>
 
 <?php if (count($albumnb)) { ?>

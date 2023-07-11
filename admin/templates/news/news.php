@@ -9,9 +9,6 @@ $name = '';
 if ($type == 'tin-tuc') {
     $name = 'Tin tức';
     $status = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
-} else if ($type == 'hinh-thuc-thanh-toan') {
-    $name = 'Hình thức thanh toán';
-    $status = array("hienthi" => "Hiển thị");
 } else if ($type == 'chinh-sach') {
     $name = 'Chính sách';
     $status = array("hienthi" => "Hiển thị");
@@ -43,9 +40,7 @@ if ($type == 'tin-tuc') {
                     </div>
                 </th>
                 <th class="align-middle text-center" width="75px">STT</th>
-                <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
-                    <th class="align-middle text-center" width="150px">Hình</th>
-                <?php } ?>
+                <th class="align-middle text-center" width="150px">Hình</th>
                 <th class="align-middle">Tiêu đề</th>
                 <?php foreach ($status as $key => $value) { ?>
                     <th class="align-middle text-center" width="120px"><?= $value ?></th>
@@ -71,13 +66,11 @@ if ($type == 'tin-tuc') {
                         <td class="align-middle text-center">
                             <?= $i + 1 ?>
                         </td>
-                        <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
-                            <td class="align-middle">
-                                <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
-                                    <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_NEWS_L, 'image' => $items[$i]['photo']]) ?>
-                                </a>
-                            </td>
-                        <?php } ?>
+                        <td class="align-middle">
+                            <a href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>">
+                                <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 120, 'height' => 100, 'upload' => UPLOAD_NEWS_L, 'image' => $items[$i]['photo']]) ?>
+                            </a>
+                        </td>
 
                         <td class="align-middle">
                             <a class="text-dark text-break" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['name'] ?>"><?= $items[$i]['name'] ?></a>

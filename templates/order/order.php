@@ -24,23 +24,10 @@
                                     <div class="title">Hình thức thanh toán</div>
 
                                     <div class="payment-box">
-                                        <?php foreach ($payments_info as $key => $value) { ?>
-                                            <div class="payments-cart custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="payments-<?= $value['slug'] ?>" name="dataOrder[payments]" value="<?= $value['slug'] ?>" required>
-                                                <label class="payments-label custom-control-label" for="payments-<?= $value['slug'] ?>" data-payments="<?= $value['slug'] ?>"><?= $value['name'] ?></label>
-                                                <?php if (!empty($value['desc'])) { ?>
-                                                    <div class="payments-info payments-info-<?= $value['slug'] ?> transition"><?= str_replace("\n", "<br>", $value['desc']) ?></div>
-                                                <?php } ?>
-                                            </div>
-                                        <?php } ?>
-
-                                        <?php /* 
-                               <div class="payments-cart custom-control custom-radio">
-                                   <input type="radio" class="custom-control-input" id="payments-momo" name="dataOrder[payments]" value="momo" required>
-                                   <label class="payments-label custom-control-label" for="payments-momo" data-payments="momo"><img src="assets/images/momo_icon.png" alt=""> Thanh toán qua Momo</label>
-                                   <div class="payments-info payments-info-momo transition">Thanh toán qua cổng thanh toán momo</div>
-                               </div>
-                               */ ?>
+                                        <div class="payments-cart custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payments-nhanhang" name="dataOrder[payments]" value="nhanhang" required>
+                                            <label class="payments-label custom-control-label" for="payments-nhanhang" data-payments="nhanhang">Thanh toán khi nhận hàng</label>
+                                        </div>
 
                                         <div class="payments-cart custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" required>

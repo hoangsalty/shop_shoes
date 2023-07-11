@@ -6,8 +6,6 @@ if (!defined('SOURCES')) {
 
 /* Tỉnh thành */
 $city = $func->getProvince();
-/* Hình thức thanh toán */
-$payments_info = $d->rawQuery("select * from table_news where type = ? and find_in_set('hienthi',status) order by id desc", array('hinh-thuc-thanh-toan'));
 
 if (isset($_POST['thanhtoan'])) {
     $message = '';

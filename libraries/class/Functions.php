@@ -679,12 +679,10 @@ class Functions
     {
         global $d;
 
-        //$momoPayment = array('slug' => 'momo', 'name' => 'Momo');
-        $vnpayPayment = array('slug' => 'vnpay', 'name' => 'VNPAY');
-
-        $row = $d->rawQuery("select * from table_news where type = ? order by id desc", array('hinh-thuc-thanh-toan'));
-        //array_push($row, $momoPayment);
-        array_push($row, $vnpayPayment);
+        $row = array(
+            array('slug' => 'vnpay', 'name' => 'VNPay'),
+            array('slug' => 'nhanhang', 'name' => 'Thanh toán khi nhận hàng'),
+        );
 
         $str = '<select id="order_payment" name="order_payment" class="form-control select2"><option value="0">Chọn hình thức thanh toán</option>';
         foreach ($row as $v) {
@@ -712,11 +710,18 @@ class Functions
     {
         global $d;
 
-        $row = array();
-        if (!empty($cols) && !empty($table) && !empty($slug)) {
-            $row = $d->rawQueryOne("select $cols from table_$table where slug = ? limit 0,1", array($slug));
+        $row = array(
+            array('id' => 'nhanhang', 'name' => 'Thanh toán khi nhận hàng'),
+            array('id' => 'vnpay', 'name' => 'VNPay'),
+        );
+
+        $selected = '';
+        foreach ($row as $v) {
+            if ($v["id"] == $slug)
+                $selected = $v['name'];
         }
-        return $row;
+
+        return $selected;
     }
     /* String random */
     public function stringRandom($sokytu = 10)

@@ -35,7 +35,6 @@
 <script src="assets/js/priceFormat.js"></script>
 <script src="assets/ckeditor4/ckeditor.js"></script>
 <script src="assets/sumoselect/jquery.sumoselect.js"></script>
-<script src="assets/rangeSlider/ion.rangeSlider.js"></script>
 <script src="assets/fancybox/fancybox.js"></script>
 <script src="assets/js/functions.js"></script>
 <script src="assets/js/apps.js"></script>
