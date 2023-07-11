@@ -1,7 +1,7 @@
 <div class="product-details mb-3">
     <div class="wrap_productdetail">
         <div class="d-flex flex-wrap">
-            <div class="left-pro-detail d-flex col-lg-6 mb-4">
+            <div class="left-pro-detail d-flex flex-wrap col-lg-6 mb-4">
                 <?php if (!empty($rowDetailPhoto)) { ?>
                     <div class="product__details__pic__left col-lg-3">
                         <?= $func->getImage(['class' => '', 'width' => 100, 'height' => 120, 'upload' => UPLOAD_PRODUCT_L, 'image' => $rowDetail['photo']]) ?>

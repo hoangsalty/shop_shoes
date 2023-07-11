@@ -721,7 +721,7 @@ FRAMEWORK.Menu = function () {
   if (isExist($(".header"))) {
     $(window).scroll(function () {
       if ($(window).width() > 991) {
-        if ($(window).scrollTop() >= $(".slideshow").height() / 3) {
+        if ($(window).scrollTop() >= $(".menu").height()) {
           $(".header").height($(".header").height());
           $(".menu").addClass("fixed animate__fadeInDown animate__animated");
         } else {
@@ -781,7 +781,22 @@ FRAMEWORK.Carousel = function () {
     centerMode: false,
     dots: false,
     draggable: true,
-    responsive: [],
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      }
+    ],
   });
 
   $(".product__details__pic__left").slick({
@@ -801,7 +816,24 @@ FRAMEWORK.Carousel = function () {
     centerMode: false,
     dots: false,
     draggable: true,
-    responsive: [],
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          vertical: false
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          vertical: false
+        }
+      }
+    ],
   });
 
   $(".product__details__pic__right").slick({
@@ -876,7 +908,7 @@ FRAMEWORK.Carousel = function () {
 
   $(".product__slider").owlCarousel({
     loop: false,
-    margin: 20,
+    margin: 10,
     items: 2,
     dots: false,
     nav: true,
@@ -896,21 +928,24 @@ FRAMEWORK.Carousel = function () {
 
       480: {
         items: 2,
+        margin: 10,
       },
 
       768: {
         items: 3,
+        margin: 15,
       },
 
       992: {
         items: 4,
+        margin: 20,
       },
     },
   });
 
   $(".newsnb__owl").owlCarousel({
     loop: false,
-    margin: 20,
+    margin: 10,
     items: 1,
     dots: false,
     nav: true,
@@ -930,14 +965,17 @@ FRAMEWORK.Carousel = function () {
 
       480: {
         items: 2,
+        margin: 10,
       },
 
       768: {
         items: 3,
+        margin: 15,
       },
 
       992: {
         items: 4,
+        margin: 20,
       },
     },
   });
@@ -972,36 +1010,16 @@ FRAMEWORK.Pagings = function () {
       );
     });
   }
-};
-
-FRAMEWORK.Bootstrap = function () {
-  if (isExist($("[data-margin]"))) {
-    $("[data-margin]").each(function () {
-      var $margin = $(this).data("margin");
-      $(this).css({ "margin-bottom": $margin + "px" });
-    });
-  }
-
-  if (isExist($("[data-padding]"))) {
-    $("[data-padding]").each(function () {
-      var $padding = $(this).data("padding");
-      $(this).css({ "padding-top": $padding + "px" });
-      $(this).css({ "padding-bottom": $padding + "px" });
-    });
-  }
-
-  if (isExist($("[data-row]"))) {
-    $("[data-row]").each(function () {
-      var $padding = $(this).data("row");
-
-      $this.children('[class*="col"]').css({
-        paddingLeft: $padding + "px",
-        paddingRight: $padding + "px",
-      });
-
-      $this.css({
-        marginLeft: -$padding + "px",
-        marginRight: -$padding + "px",
+  if (isExist($(".load-page-category"))) {
+    $('.load-page-category').each(function (index) {
+      var idList = $(this).data("rel");
+      loadPaging("api/product.php?idList=" + idList + "&perpage=8", '.load-page-pronb' + idList);
+      $(document).on('click', '.title-product-' + idList + ' .a-title-product', function () {
+        $('.title-product-' + idList + ' .a-title-product').removeClass('active');
+        $(this).addClass('active');
+        var _list = $(this).data("list");
+        var _cat = $(this).data("cat");
+        loadPaging("api/product.php?idList=" + _list + "&idCat=" + _cat + "&perpage=8", '.load-page-pronb' + idList);
       });
     });
   }
@@ -1047,9 +1065,15 @@ FRAMEWORK.Cart = function () {
     quantity = quantity ? quantity : 1;
 
     /* size màu*/
-    var color = $parents.find(".color-block-pro-detail").find(".color-pro-detail input:checked").val();
+    var color = $parents
+      .find(".color-block-pro-detail")
+      .find(".color-pro-detail input:checked")
+      .val();
     color = color ? color : 0;
-    var size = $parents.find(".size-block-pro-detail").find(".size-pro-detail input:checked").val();
+    var size = $parents
+      .find(".size-block-pro-detail")
+      .find(".size-pro-detail input:checked")
+      .val();
     size = size ? size : 0;
 
     if (id) {
@@ -1270,7 +1294,7 @@ FRAMEWORK.Sort = function () {
   $(".click-sort").click(function (e) {
     $(".sort-select-main").slideToggle();
   });
-  $('body').on('click', '.sort-select-main p .check', function (event) {
+  $("body").on("click", ".sort-select-main p .check", function (event) {
     loadSort();
   });
 };
@@ -1297,7 +1321,6 @@ $(document).ready(function () {
   FRAMEWORK.Menu();
   FRAMEWORK.Search();
   FRAMEWORK.Carousel();
-  FRAMEWORK.Bootstrap();
   FRAMEWORK.Cart();
   FRAMEWORK.Pagings();
   FRAMEWORK.PopupLogin();

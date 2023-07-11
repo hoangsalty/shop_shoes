@@ -72,22 +72,34 @@
     </div>
 <?php } ?>
 
-<?php if (count($productlist)) {
-    foreach ($productlist as $vlist) {
-        $products = $d->rawQuery("select * from table_product where id_list = ? and find_in_set('noibat',status) and find_in_set('hienthi',status) order by id desc", array($vlist['id']));
-        if (!empty($products)) {
-?>
-            <div class="wrap-product spacing">
-                <div class="wrap-content">
+<?php if (count($productlist)) { ?>
+    <?php foreach ($productlist as $klist => $vlist) {
+        $productcat = $d->rawQuery("select * from table_product_cat where id_list = ? and find_in_set('noibat',status) and find_in_set('hienthi',status) order by id desc", array($vlist['id']));
+    ?>
+        <section class="section-4">
+            <div class="wrap-content">
+                <div class="title-top flexbox">
                     <div class="title-main">
                         <span><?= $vlist['name'] ?></span>
                     </div>
-                    <div class="paging-product-category paging-product-category-<?= $vlist['id'] ?>" data-list="<?= $vlist['id'] ?>"></div>
+                    <div class="title-product-cat">
+                        <div class="title-product-<?= $vlist['id'] ?> d-flex justify-content-center align-items-center flex-wrap gap-20">
+                            <a class="a-title-product active" data-list="<?= $vlist['id'] ?>" data-cat="0">
+                                Tất cả
+                            </a>
+                            <?php foreach ($productcat as $k => $v) { ?>
+                                <a class="a-title-product" data-list="<?= $vlist['id'] ?>" data-cat="<?= $v['id'] ?>">
+                                    <?= $v['name'] ?>
+                                </a>
+                            <?php } ?>
+                        </div>
+                    </div>
                 </div>
+                <div class="load-page-category load-page-pronb<?= $vlist['id'] ?>" data-rel="<?= $vlist['id'] ?>"></div>
             </div>
-<?php }
-    }
-} ?>
+        </section>
+    <?php } ?>
+<?php } ?>
 
 <?php if (count($albumnb)) { ?>
     <section class="wrap-album spacing">
