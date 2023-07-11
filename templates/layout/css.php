@@ -17,7 +17,8 @@
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/fancybox/fancybox.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/photobox/photobox.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/select2/select2.min.css" />
+<link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/mmenu/mmenu.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/cart.css" />
-<link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/style-responsive.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/style.css" />
+<link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/css/media.css" />
 <link type="text/css" rel="stylesheet" href="<?= $configBase ?>assets/sweetalert/sweetalert.min.css" />

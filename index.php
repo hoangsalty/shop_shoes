@@ -20,6 +20,7 @@ $router = new AltoRouter();
 $func = new Functions($d);
 $breadcr = new BreadCrumbs($d);
 $cart = new Cart($d);
+$detect = new MobileDetect();
 
 /* Router */
 require_once LIBRARIES . "router.php";

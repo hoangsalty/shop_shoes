@@ -2,6 +2,9 @@
 /* Check login */
 $func->checkLogin();
 
+/* Mobile detect */
+$deviceType = ($detect->isMobile() || $detect->isTablet()) ? 'mobile' : 'computer';
+
 /* Kiểm tra trạng thái */
 if ((!empty($_SESSION['account']['status']) && $_SESSION['account']['status'] == 'khoa')) {
     unset($_SESSION['account']);
@@ -97,6 +100,13 @@ switch ($com) {
         $template = isset($_GET['id']) ? "news/news_detail" : "news/news";
         $type = $com;
         $titleMain = "Tin tức";
+        break;
+
+    case 'chinh-sach':
+        $source = "news";
+        $template = isset($_GET['id']) ? "news/news_detail" : "";
+        $type = $com;
+        $titleMain = "Chính sách";
         break;
 
     case 'san-pham':

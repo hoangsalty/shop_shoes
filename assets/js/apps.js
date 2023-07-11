@@ -416,9 +416,9 @@ FRAMEWORK.Comments = function () {
           }); */
         },
       },
-      afterSelect: function () {},
-      onEmpty: function () {},
-      onRemove: function () {},
+      afterSelect: function () { },
+      onEmpty: function () { },
+      onRemove: function () { },
     });
   }
 
@@ -717,7 +717,7 @@ FRAMEWORK.Menu = function () {
   if (isExist($(".header"))) {
     $(window).scroll(function () {
       if ($(window).width() > 991) {
-        if ($(window).scrollTop() >= $(".slideshow").height() / 3) {
+        if ($(window).scrollTop() >= $(".menu").height()) {
           $(".header").height($(".header").height());
           $(".menu").addClass("fixed animate__fadeInDown animate__animated");
         } else {
@@ -777,7 +777,22 @@ FRAMEWORK.Carousel = function () {
     centerMode: false,
     dots: false,
     draggable: true,
-    responsive: [],
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      }
+    ],
   });
 
   $(".product__details__pic__left").slick({
@@ -797,7 +812,24 @@ FRAMEWORK.Carousel = function () {
     centerMode: false,
     dots: false,
     draggable: true,
-    responsive: [],
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          vertical: false
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          vertical: false
+        }
+      }
+    ],
   });
 
   $(".product__details__pic__right").slick({
@@ -872,7 +904,7 @@ FRAMEWORK.Carousel = function () {
 
   $(".product__slider").owlCarousel({
     loop: false,
-    margin: 20,
+    margin: 10,
     items: 2,
     dots: false,
     nav: true,
@@ -892,21 +924,24 @@ FRAMEWORK.Carousel = function () {
 
       480: {
         items: 2,
+        margin: 10,
       },
 
       768: {
         items: 3,
+        margin: 15,
       },
 
       992: {
         items: 4,
+        margin: 20,
       },
     },
   });
 
   $(".newsnb__owl").owlCarousel({
     loop: false,
-    margin: 20,
+    margin: 10,
     items: 1,
     dots: false,
     nav: true,
@@ -926,14 +961,17 @@ FRAMEWORK.Carousel = function () {
 
       480: {
         items: 2,
+        margin: 10,
       },
 
       768: {
         items: 3,
+        margin: 15,
       },
 
       992: {
         items: 4,
+        margin: 20,
       },
     },
   });
@@ -966,6 +1004,19 @@ FRAMEWORK.Pagings = function () {
         ".page_splist",
         0
       );
+    });
+  }
+  if (isExist($(".load-page-category"))) {
+    $('.load-page-category').each(function (index) {
+      var idList = $(this).data("rel");
+      loadPaging("api/product.php?idList=" + idList + "&perpage=8", '.load-page-pronb' + idList);
+      $(document).on('click', '.title-product-' + idList + ' .a-title-product', function () {
+        $('.title-product-' + idList + ' .a-title-product').removeClass('active');
+        $(this).addClass('active');
+        var _list = $(this).data("list");
+        var _cat = $(this).data("cat");
+        loadPaging("api/product.php?idList=" + _list + "&idCat=" + _cat + "&perpage=8", '.load-page-pronb' + idList);
+      });
     });
   }
 };
