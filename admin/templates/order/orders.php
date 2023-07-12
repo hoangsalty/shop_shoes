@@ -72,48 +72,48 @@ $linkDelete = "index.php?com=order&act=delete";
             </tbody>
         <?php } else { ?>
             <tbody>
-                <?php for ($i = 0; $i < count($items); $i++) { ?>
+                <?php 
+                foreach ($items as $i => $order) { ?>
                     <tr class="order_table">
                         <td class="align-middle">
                             <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?= $items[$i]['id'] ?>" value="<?= $items[$i]['id'] ?>">
-                                <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
+                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?= $order['id'] ?>" value="<?= $order['id'] ?>">
+                                <label for="select-checkbox-<?= $order['id'] ?>" class="custom-control-label"></label>
                             </div>
                         </td>
                         <td class="align-middle">
-                            <a class="text-primary" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['code'] ?>"><?= $items[$i]['code'] ?></a>
+                            <a class="text-primary" href="<?= $linkEdit ?>&id=<?= $order['id'] ?>" title="<?= $order['code'] ?>"><?= $order['code'] ?></a>
                         </td>
                         <td class="align-middle">
-                            <a class="text-primary" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="<?= $items[$i]['fullname'] ?>"><?= $items[$i]['fullname'] ?></a>
+                            <a class="text-primary" href="<?= $linkEdit ?>&id=<?= $order['id'] ?>" title="<?= $order['fullname'] ?>"><?= $order['fullname'] ?></a>
                         </td>
-                        <td class="align-middle"><?= date("d/m/Y - h:i:s A", $items[$i]['date_created']) ?></td>
+                        <td class="align-middle"><?= date("d/m/Y - h:i:s A", $order['date_created']) ?></td>
                         <td class="align-middle">
-                            <?php /* $items[$i]['order_payment'] == "momo" */ ($items[$i]['order_payment'] == "vnpay") ? $order_payment['name'] = $items[$i]['order_payment'] :  $order_payment = $func->getInfoDetailSlug('name', 'news', $items[$i]['order_payment']); ?>
-                            <span class="text-info cap"><?= $order_payment['name'] ?></span>
+                            <span class="text-info"><?= $func->getInfoDetailSlug('name', 'news', $order['order_payment']) ?></span>
                         </td>
                         <td class="align-middle">
-                            <span class="text-danger font-weight-bold"><?= $func->formatMoney($items[$i]['total_price']) ?></span>
+                            <span class="text-danger font-weight-bold"><?= $func->formatMoney($order['total_price']) ?></span>
                         </td>
                         <td class="align-middle order_status">
-                            <?php if ($items[$i]['order_status'] == 'moidat') { ?>
+                            <?php if ($order['order_status'] == 'moidat') { ?>
                                 <span class="badge bg-primary">Mới đặt</span>
-                            <?php } else if ($items[$i]['order_status'] == 'daxacnhan') { ?>
+                            <?php } else if ($order['order_status'] == 'daxacnhan') { ?>
                                 <span class="badge bg-info">Đã xác nhận</span>
-                            <?php } else if ($items[$i]['order_status'] == 'danggiaohang') { ?>
+                            <?php } else if ($order['order_status'] == 'danggiaohang') { ?>
                                 <span class="badge bg-warning">Đang giao hàng</span>
-                            <?php } else if ($items[$i]['order_status'] == 'dagiao') { ?>
+                            <?php } else if ($order['order_status'] == 'dagiao') { ?>
                                 <span class="badge bg-success">Đã giao</span>
-                            <?php } else if ($items[$i]['order_status'] == 'dahuy') { ?>
+                            <?php } else if ($order['order_status'] == 'dahuy') { ?>
                                 <span class="badge bg-danger">Đã hủy</span>
                             <?php } ?>
                         </td>
                         <td class="align-middle text-center text-md text-nowrap">
-                            <?php $arr = explode(',', $items[$i]['order_status']);
+                            <?php $arr = explode(',', $order['order_status']);
                             if (in_array('moidat', $arr)) { ?>
-                                <a class="btn btn-success btn-sm update-order mr-2" href="javascript:void(0)" data-id="<?= $items[$i]['id'] ?>" data-table="table_order" data-newstatus="daxacnhan" title="Xác nhận"><i class="fas fa-check-square"></i></a>
+                                <a class="btn btn-success btn-sm update-order mr-2" href="javascript:void(0)" data-id="<?= $order['id'] ?>" data-table="table_order" data-newstatus="daxacnhan" title="Xác nhận"><i class="fas fa-check-square"></i></a>
                             <?php } ?>
-                            <a class="btn btn-primary btn-sm mr-2" href="<?= $linkEdit ?>&id=<?= $items[$i]['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $items[$i]['id'] ?>" data-url="sources/order.php" data-act="delete" title="Xóa"><i class="far fa-trash-alt"></i></a>
+                            <a class="btn btn-primary btn-sm mr-2" href="<?= $linkEdit ?>&id=<?= $order['id'] ?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger btn-sm" id="delete-item" data-id="<?= $order['id'] ?>" data-url="sources/order.php" data-act="delete" title="Xóa"><i class="far fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 <?php } ?>

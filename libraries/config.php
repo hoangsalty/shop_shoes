@@ -50,6 +50,9 @@ $config['video']['height'] = 300;
 /*Ảnh logo*/
 $config['logo']['width'] = 209;
 $config['logo']['height'] = 96;
+/*Ảnh logo mmenuu*/
+$config['logo_mmenu']['width'] = 209;
+$config['logo_mmenu']['height'] = 96;
 /*Ảnh avatar user*/
 $config['user']['width'] = 100;
 $config['user']['height'] = 100;

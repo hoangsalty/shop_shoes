@@ -6,7 +6,6 @@ $linkMan = "index.php?com=news&act=list&type=" . $type;
 
 $name = '';
 if ($type == 'tin-tuc') $name = 'Tin tức';
-else if ($type == 'hinh-thuc-thanh-toan') $name = 'Hình thức thanh toán';
 else if ($type == 'chinh-sach') $name = 'Chính sách';
 ?>
 
@@ -42,12 +41,10 @@ else if ($type == 'chinh-sach') $name = 'Chính sách';
                                 <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
                             </div>
                         <?php } ?>
-                        <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
-                            <div class="form-group">
-                                <label for="content">Nội dung:</label>
-                                <textarea class="form-control text-sm form-control-ckeditor" name="data[content]" id="content" rows="5" placeholder="Nội dung"><?= $func->decodeHtmlChars(@$item['content']) ?></textarea>
-                            </div>
-                        <?php } ?>
+                        <div class="form-group">
+                            <label for="content">Nội dung:</label>
+                            <textarea class="form-control text-sm form-control-ckeditor" name="data[content]" id="content" rows="5" placeholder="Nội dung"><?= $func->decodeHtmlChars(@$item['content']) ?></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,26 +55,24 @@ else if ($type == 'chinh-sach') $name = 'Chính sách';
                     include TEMPLATE . LAYOUT . "slug.php";
                     ?>
                 </div>
-                <?php if ($type != 'hinh-thuc-thanh-toan') { ?>
-                    <div class="card card-primary card-outline text-sm">
-                        <div class="card-header">
-                            <h3 class="card-title">Hình ảnh <?= $name ?></h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <?php
-                            /* Photo detail */
-                            $photoDetail = array();
-                            $photoDetail['upload'] = UPLOAD_NEWS_L;
-                            $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
-                            /* Image */
-                            include TEMPLATE . LAYOUT . "image.php";
-                            ?>
+                <div class="card card-primary card-outline text-sm">
+                    <div class="card-header">
+                        <h3 class="card-title">Hình ảnh <?= $name ?></h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
-                <?php } ?>
+                    <div class="card-body">
+                        <?php
+                        /* Photo detail */
+                        $photoDetail = array();
+                        $photoDetail['upload'] = UPLOAD_NEWS_L;
+                        $photoDetail['image'] = (!empty($item)) ? $item['photo'] : '';
+                        /* Image */
+                        include TEMPLATE . LAYOUT . "image.php";
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

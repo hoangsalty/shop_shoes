@@ -36,7 +36,7 @@ else if ($type == 'social') $name = 'Social';
                         <?php if ($type != 'video' && $type != 'album') { ?>
                             <div class="form-group">
                                 <label for="link">Link:</label>
-                                <input type="text" class="form-control text-sm" name="data[link]" id="link" placeholder="Link" value="<?= @$item['link'] ?>">
+                                <input type="text" class="form-control text-sm" name="data[link]" id="link" placeholder="Link" value="<?= @$item['link'] ?>" required>
                             </div>
                         <?php } ?>
                         <?php if ($type != 'social') { ?>
@@ -54,19 +54,21 @@ else if ($type == 'social') $name = 'Social';
                                     <?php } ?>
                                 </div>
                             <?php } ?>
+                        <?php } ?>
 
-                            <div class="form-group">
-                                <label for="name">Tiêu đề:</label>
-                                <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
-                            </div>
-
+                        <div class="form-group">
+                            <label for="name">Tiêu đề:</label>
+                            <input type="text" class="form-control text-sm" name="data[name]" id="name" placeholder="Tiêu đề" value="<?= @$item['name'] ?>" required>
+                        </div>
+                        
+                        <?php if ($type != 'social') { ?>
                             <?php if ($type != 'video' && $type != 'album') { ?>
                                 <div class="form-group">
                                     <label for="desc">Mô tả:</label>
                                     <textarea class="form-control text-sm" name="data[desc]" id="desc" rows="5" placeholder="Mô tả"><?= $func->decodeHtmlChars(@$item['desc']) ?></textarea>
                                 </div>
                             <?php } ?>
-                        <?php } ?>  
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,153 @@
+@media (max-width: 1001px) {
+  .menu {
+    display: none;
+  }
+
+  .menu-res {
+    display: block;
+  }
+
+  [class*="col-"],
+  .col {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .row {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+  }
+
+  .logo_mmenu img {
+    max-height: 45px;
+    width: auto !important;
+  }
+
+  .spacing {
+    margin: 30px 0;
+  }
+}
+@media (max-width: 769px) {
+  .slideshow .slideshow-item .info {
+    right: 10px;
+  }
+
+  .title-main span {
+    font-size: 25px;
+  }
+
+  .boxProduct {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px 15px;
+  }
+
+  .grid_album {
+    --grid: 3;
+    --gap-column: 15px;
+    --gap-row: 15px;
+  }
+
+  .footer-article .row {
+    gap: 20px 20px;
+  }
+
+  .footer-article {
+    padding: 30px 0;
+  }
+
+  .left-pro-detail {
+    flex-direction: column-reverse;
+    padding: 0 !important;
+  }
+
+  .product__details__pic__left {
+    margin-top: 10px;
+  }
+
+  .product__details__pic__left .slick-list {
+    margin: 0 -5px;
+  }
+
+  .product__details__pic__left img {
+    margin: 0 5px;
+  }
+
+  #tabsProDetail .nav-item {
+    margin-right: 0;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+  }
+
+  #tabsProDetail::before,
+  #tabsProDetail::after {
+    width: 100%;
+  }
+}
+@media (max-width: 576px) {
+  .hotline_header {
+    display: none;
+  }
+
+  .login_header {
+    width: 100%;
+  }
+
+  .slideshow .slideshow-item .info {
+    max-width: 100%;
+    padding: 10px;
+    right: 0;
+  }
+
+  .slideshow .slideshow-item .info span {
+    font-size: 26px;
+  }
+
+  .title-main span {
+    font-size: 23px;
+  }
+
+  .gap-20 {
+    gap: 5px 5px;
+  }
+
+  .title-product-cat {
+    border: 0;
+    padding: 0;
+    margin: 0 auto 10px;
+  }
+
+  .title-product-cat a {
+    padding: 10px 20px;
+  }
+
+  .boxProduct {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 10px;
+  }
+
+  .grid_album {
+    --grid: 2;
+    --gap-column: 10px;
+    --gap-row: 10px;
+  }
+
+  .cart-pro-detail a {
+    margin-bottom: 0.5rem;
+  }
+
+  .slick_more_product .boxProduct .product {
+    margin: 0 5px;
+  }
+
+  .slick_more_product .boxProduct {
+    display: block;
+    margin: 0 -5px;
+  }
+}
+@media (max-width: 376px) {
+  .title-main span {
+    font-size: 22px;
+  }
+}

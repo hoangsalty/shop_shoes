@@ -28,8 +28,7 @@ $linkMan = "index.php?com=order&act=list";
                         </div>
                         <div class="col-12 mb-2">
                             <label>Hình thức thanh toán:</label>
-                            <?php (@$item['order_payment'] == "momo" || @$item['order_payment'] == "vnpay") ? $order_payment['name'] = @$item['order_payment'] : $order_payment = $func->getInfoDetailSlug('name', 'news', @$item['order_payment']); ?>
-                            <span class="text-info cap"><?= $order_payment['name'] ?></span>
+                            <span class="text-info cap"><?= $func->getInfoDetailSlug('name', 'news', @$item['order_payment']) ?></span>
                         </div>
                         <div class="col-12 mb-2">
                             <label>Ngày đặt:</label>

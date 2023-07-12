@@ -55,7 +55,7 @@ $statusOrder = (!empty($_POST['statusOrder'])) ? $_POST['statusOrder'] : '';
                                         <td>
                                             <div class="py-2">
                                                 <span class="d-block text-muted">Phương thức thanh toán</span>
-                                                <span><?= $func->getInfoDetailSlug('name', 'news', $currentOrder['order_payment'])['name'] ?></span>
+                                                <span><?= $func->getInfoDetailSlug('name', 'news', $currentOrder['order_payment']) ?></span>
                                             </div>
                                         </td>
                                         <td>

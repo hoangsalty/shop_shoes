@@ -661,30 +661,34 @@ class Functions
             array('id' => 'danggiaohang', 'name' => 'Đang giao hàng'),
             array('id' => 'dagiao', 'name' => 'Đã giao'),
             array('id' => 'dahuy', 'name' => 'Đã hủy'),
-        );
+        ); ?>
 
-        $str = '<select id="order_status" name="data[order_status]" class="form-control select2"><option value="">Chọn tình trạng</option>';
-        foreach ($row as $v) {
-            if (isset($_REQUEST['order_status']) && ($v["id"] == $_REQUEST['order_status']) || ($v["id"] == $status))
-                $selected = "selected";
-            else
-                $selected = "";
-            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
-        }
-        $str .= '</select>';
-        return $str;
-    }
+        <select id="order_status" name="data[order_status]" class="form-control select2" <?= ($status == 'dagiao' || $status == 'dahuy') ? 'disabled' : '' ?>>
+            <option value="">Chọn tình trạng</option>
+            <?php foreach ($row as $v) {
+                if (isset($_REQUEST['order_status']) && ($v["id"] == $_REQUEST['order_status']) || ($v["id"] == $status))
+                    $selected = "selected";
+                else
+                    $selected = "";
+
+                if ($v["id"] == 'dahuy')
+                    $disabled = "disabled";
+                else
+                    $disabled = "";
+            ?>
+                <option value="<?= $v["id"] ?>" <?= $selected ?> <?= $disabled ?>><?= $v["name"] ?></option>
+            <?php } ?>
+        </select>
+    <?php }
     /* Get payments order */
     function orderPayments()
     {
         global $d;
 
-        //$momoPayment = array('slug' => 'momo', 'name' => 'Momo');
-        $vnpayPayment = array('slug' => 'vnpay', 'name' => 'VNPAY');
-
-        $row = $d->rawQuery("select * from table_news where type = ? order by id desc", array('hinh-thuc-thanh-toan'));
-        //array_push($row, $momoPayment);
-        array_push($row, $vnpayPayment);
+        $row = array(
+            array('slug' => 'vnpay', 'name' => 'VNPay'),
+            array('slug' => 'nhanhang', 'name' => 'Thanh toán khi nhận hàng'),
+        );
 
         $str = '<select id="order_payment" name="order_payment" class="form-control select2"><option value="0">Chọn hình thức thanh toán</option>';
         foreach ($row as $v) {
@@ -712,11 +716,18 @@ class Functions
     {
         global $d;
 
-        $row = array();
-        if (!empty($cols) && !empty($table) && !empty($slug)) {
-            $row = $d->rawQueryOne("select $cols from table_$table where slug = ? limit 0,1", array($slug));
+        $row = array(
+            array('id' => 'nhanhang', 'name' => 'Thanh toán khi nhận hàng'),
+            array('id' => 'vnpay', 'name' => 'VNPay'),
+        );
+
+        $selected = '';
+        foreach ($row as $v) {
+            if ($v["id"] == $slug)
+                $selected = $v['name'];
         }
-        return $row;
+
+        return $selected;
     }
     /* String random */
     public function stringRandom($sokytu = 10)
@@ -893,14 +904,6 @@ class Functions
                             <a class="pic-product scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
                                 <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                             </a>
-                            <p class="social-product transition">
-                                <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a class="cart-add addcart" data-id="<?= $v['id'] ?>" data-action="addnow">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
-                            </p>
                         </div>
                         <div class="info-product">
                             <a class="name-product text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>

@@ -204,6 +204,18 @@ function savePhoto()
         $response['messages'][] = 'Đường dẫn không hợp lệ';
     }
 
+    if (empty($data['link'])) {
+        $response['messages'][] = 'Đường dẫn không được trống';
+    }
+
+    if (empty($data['name'])) {
+        $response['messages'][] = 'Tiêu đề không được trống';
+    }
+
+    if (!$func->hasFile("file")) {
+        $response['messages'][] = 'Vui lòng chọn ảnh';
+    }
+
     if ($cur_Type == 'video') {
         /* Valid data video */
         if (empty($data['link_video'])) {

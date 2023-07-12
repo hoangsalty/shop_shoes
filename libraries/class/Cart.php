@@ -58,9 +58,8 @@ class Cart
         $sum = 0;
 
         if (!empty($_SESSION['cart'])) {
-            $max = count($_SESSION['cart']);
 
-            for ($i = 0; $i < $max; $i++) {
+            foreach ($_SESSION['cart'] as $i => $v) {
                 $pid = $_SESSION['cart'][$i]['productid'];
                 $q = $_SESSION['cart'][$i]['qty'];
                 $proinfo = $this->getProductInfo($pid);

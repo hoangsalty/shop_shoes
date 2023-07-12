@@ -19,14 +19,13 @@
                          <p>Upload hình ảnh:</p>
                          <label class="upload-file-label mb-2" for="file">
                              <div class="upload-file-image rounded mb-3">
-                                 <?= $func->getImage(['class' => 'rounded img-preview', 'width' => 98, 'height' => 31, 'upload' => UPLOAD_PHOTO_L, 'image' => @$item['photo']]) ?>
+                                 <?= $func->getImage(['class' => 'rounded img-preview', 'upload' => UPLOAD_PHOTO_L, 'image' => @$item['photo']]) ?>
                              </div>
                              <div class="custom-file my-custom-file">
                                  <input type="file" class="custom-file-input" name="file" id="file" lang="vi">
                                  <label class="custom-file-label mb-0" data-browse="Chọn" for="file">Chọn file</label>
                              </div>
                          </label>
-                         <strong class="d-block text-sm"><?php echo "Width: " . $config['logo']['width'] . " px - Height: " . $config['logo']['height'] . " px (.jpg|.gif|.png|.jpeg|.gif)" ?></strong>
                      </div>
                  </div>
              </div>

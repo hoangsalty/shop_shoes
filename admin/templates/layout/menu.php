@@ -134,19 +134,6 @@
                                 <p>Quản lý chính sách</p>
                             </a>
                         </li>
-
-                        <?php
-                        $active = "";
-                        if ($com == 'news' && $_GET['type'] == 'hinh-thuc-thanh-toan') {
-                            $active = 'active';
-                        }
-                        ?>
-                        <li class="nav-item">
-                            <a href="index.php?com=news&act=list&type=hinh-thuc-thanh-toan" class="nav-link <?= $active ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Hình thức thanh toán</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
 

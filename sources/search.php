@@ -8,8 +8,8 @@ if (!empty($_GET['keyword'])) {
 
     if ($tukhoa) {
         $where = "";
-        $where = "(name LIKE ? or slug LIKE ?) and find_in_set('hienthi',status)";
-        $params = array("%$tukhoa%", "%$tukhoa%");
+        $where = "(name LIKE ? or slug LIKE ? or code LIKE ?) and find_in_set('hienthi',status)";
+        $params = array("%$tukhoa%", "%$tukhoa%", "%$tukhoa%");
 
         $curPage = $getPage;
         $perPage = 20;

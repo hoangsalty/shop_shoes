@@ -100,21 +100,13 @@ function updateCart(id = 0, code = "", quantity = 1) {
         code: code,
         quantity: quantity,
       },
-      beforeSend: function () {
-        holdonOpen();
-      },
       success: function (result) {
         if (result) {
-          $(".form-cart")
-            .find(".load-price-" + code)
-            .html(result.regularPrice);
-          $(".form-cart")
-            .find(".load-price-new-" + code)
-            .html(result.salePrice);
+          $(".form-cart").find(".load-price-" + code).html(result.regularPrice);
+          $(".form-cart").find(".load-price-new-" + code).html(result.salePrice);
           $(".form-cart").find(".load-price-temp").html(result.tempText);
           $(".form-cart").find(".load-price-total").html(result.totalText);
         }
-        holdonClose();
       },
     });
   }

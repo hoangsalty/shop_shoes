@@ -47,10 +47,10 @@ function save()
 
     $message = '';
     $response = array();
-    $iduser = $_SESSION['account']['id'];
+    $iduser = isset($_SESSION['account']) ? $_SESSION['account']['id'] : '';
     $changepass = (!empty($_REQUEST['changepass'])) ? htmlspecialchars($_REQUEST['changepass']) : 0;
 
-    if ($iduser) {
+    if (!empty($iduser)) {
         $message = '';
         $response = array();
 
@@ -78,6 +78,10 @@ function save()
 
             if (!empty($new_pass) && in_array($new_pass, array('123', '123qwe', '123456'))) {
                 $response['messages'][] = 'Mật khẩu bạn đặt quá đơn giãn';
+            }
+
+            if (strlen($new_pass) < 3) {
+                $response['messages'][] = 'Mật khẩu tối thiểu 3 kí tự';
             }
 
             if (!empty($new_pass) && empty($renew_pass)) {
@@ -195,9 +199,74 @@ function save()
             $response['link'] = $configBase . "account?act=thong-tin";
         }
     } else {
-        $response['status'] = 404;
-        $response['messages'][] = 'Trang không tồn tại';
-        $response['link'] = $configBase;
+        $username = (!empty($_POST['username'])) ? htmlspecialchars($_POST['username']) : '';
+        $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
+        $password = (!empty($_POST['password'])) ? htmlspecialchars($_POST['password']) : '';
+        $repassword = (!empty($_POST['repassword'])) ? $_POST['repassword'] : '';
+
+        /* Valid data */
+        if (empty($email)) {
+            $response['messages'][] = 'Email không được trống';
+        }
+
+        if (!empty($email)) {
+            if (!$func->isEmail($email)) {
+                $response['messages'][] = 'Email không hợp lệ';
+            }
+
+            if ($func->checkExist($email, 'email', 'user', $iduser)) {
+                $response['messages'][] = 'Email đã tồn tại';
+            }
+        }
+
+        if (empty($username)) {
+            $response['messages'][] = 'Username không được trống';
+        }
+
+        if (!empty($username) && $func->checkExist($username, 'username', 'user', $iduser)) {
+            $response['messages'][] = 'Username đã tồn tại';
+        }
+
+        if (empty($password)) {
+            $response['messages'][] = 'Mật khẩu không được trống';
+        }
+
+        if (!empty($password) && in_array($password, array('123', '123qwe', '123456'))) {
+            $response['messages'][] = 'Mật khẩu bạn đặt quá đơn giãn';
+        }
+
+        if (strlen($password) < 3) {
+            $response['messages'][] = 'Mật khẩu tối thiểu 3 kí tự';
+        }
+
+        if (!empty($password) && !empty($repassword) && !$func->isMatch($password, $repassword)) {
+            $response['messages'][] = 'Mật khẩu không trùng khớp';
+        }
+
+        if (!empty($response)) {
+            /* Errors */
+            $response['status'] = 404;
+            $message = json_encode($response);
+            echo $message;
+            return;
+        }
+
+        /* Save data */
+        $data = array();
+        $data['date_created'] = time();
+        $data['username'] = $username;
+        $data['password'] = md5($password);
+        $data['email'] = $email;
+        $data['status'] = 'hoatdong';
+        $data['permission'] = 'user';
+
+        if ($d->insert('table_user', $data)) {
+            $response['status'] = 200;
+            $response['messages'][] = 'Đăng ký thành công. Vui lòng đợi hệ thống sẽ tự động đăng nhập giúp bạn...';
+        } else {
+            $response['status'] = 404;
+            $response['messages'][] = 'Đăng ký thất bại';
+        }
     }
 
     $message = json_encode($response);
@@ -210,7 +279,7 @@ function info()
     global $d, $func, $configBase, $rowDetail;
 
     $iduser = $_SESSION['account']['id'];
-    
+
     if (empty($iduser)) {
         header('HTTP/1.0 404 Not Found', true, 404);
         include("404.php");

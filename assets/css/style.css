@@ -29,6 +29,8 @@ img {
   max-width: 100%;
   height: auto;
   vertical-align: top;
+  display: inline;
+  object-fit: cover;
 }
 
 a,
@@ -238,15 +240,6 @@ a:hover {
   box-shadow: 0 0 5px var(--color-main);
 }
 
-.menu-res.fixed {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 0 5px var(--color-main);
-}
-
 .menu {
   background-color: #ffffff;
   position: sticky;
@@ -321,7 +314,6 @@ a:hover {
 }
 
 /*Border bottom animation*/
-
 .menu ul li ul {
   position: absolute;
   min-width: 250px;
@@ -366,6 +358,182 @@ a:hover {
 .menu ul li ul li ul {
   top: 0;
   left: 100%;
+}
+
+/* Mmenu */
+.menu-res {
+  display: none;
+  height: 50px;
+  z-index: 10;
+  background: var(--color-main);
+  position: relative;
+  line-height: normal;
+}
+
+.menu-res.fixed {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 0 5px #fff;
+}
+
+.menu-bar-res {
+  height: 50px;
+  padding: 0px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+#hamburger {
+  display: block;
+  width: 45px;
+  height: 23px;
+  position: relative;
+}
+
+#menu {
+  display: none;
+}
+
+#hamburger:before,
+#hamburger:after,
+#hamburger span {
+  background: #ffffff;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  left: 0px;
+}
+
+#hamburger:before {
+  top: 0px;
+}
+
+#hamburger span {
+  top: 10px;
+}
+
+#hamburger:after {
+  top: 20px;
+}
+
+#hamburger:before,
+#hamburger:after,
+#hamburger span {
+  -webkit-transition: none 0.5s ease 0.5s;
+  transition: none 0.5s ease 0.5s;
+  -webkit-transition-property: transform, top, bottom, left, opacity;
+  -webkit-transition-property: top, bottom, left, opacity, -webkit-transform;
+  transition-property: top, bottom, left, opacity, -webkit-transform;
+  transition-property: transform, top, bottom, left, opacity;
+  transition-property: transform, top, bottom, left, opacity, -webkit-transform;
+}
+
+.mm-wrapper_opening #hamburger:before,
+.mm-wrapper_opening #hamburger:after {
+  top: 10px;
+}
+
+.mm-wrapper_opening #hamburger span {
+  left: -50px;
+  opacity: 0;
+}
+
+.mm-wrapper_opening #hamburger:before {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.mm-wrapper_opening #hamburger:after {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.mm-menu_opened {
+  display: block !important;
+}
+
+.mm-slideout {
+  z-index: unset;
+}
+
+/* Search Responsive */
+.search-res {
+  position: relative;
+}
+
+.search-res .icon-search {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 40px;
+  color: #ffffff;
+  font-size: 17px;
+  margin: 0px;
+}
+
+.search-res .icon-search.active {
+  color: var(--color-main);
+  background: #ffffff;
+  border-radius: 100%;
+}
+
+.search-res .search-grid {
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  width: 0px;
+  height: 40px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--color-main);
+  z-index: 2;
+  border-radius: 25px;
+  line-height: normal;
+  opacity: 0;
+}
+
+.search-res .search-grid p {
+  float: left;
+  width: 35px;
+  height: 38px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin: 0px;
+  font-size: 17px;
+  display: block;
+  color: var(--color-main);
+  line-height: 40px;
+  text-align: center;
+}
+
+.search-res .search-grid input {
+  width: calc(100% - 35px);
+  float: right;
+  line-height: 38px;
+  outline: none;
+  border: none;
+  color: #313131;
+}
+
+.search-res .search-grid input::-webkit-input-placeholder,
+.search-res .search-grid input:-moz-placeholder,
+.search-res .search-grid input::-moz-placeholder,
+.search-res .search-grid input:-ms-input-placeholder {
+  color: #313131;
 }
 
 .slideshow {
@@ -604,7 +772,7 @@ a:hover {
   position: absolute;
   content: "";
   background: var(--color-main);
-  left: calc(50% - 80px/2);
+  left: calc(50% - 80px / 2);
   bottom: -10px;
   height: 4px;
   width: 80px;
@@ -715,6 +883,34 @@ a:hover {
 
 .pagination-ajax a.next:before {
   background-image: url(../images/page-next.png);
+}
+
+.title-product-cat {
+  border-radius: 50px;
+  border: 1px solid var(--color-main);
+  padding: 2px 3px;
+  width: fit-content;
+  margin: 0 auto 25px;
+}
+
+.title-product-cat a {
+  color: var(--color-main);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 23px;
+  display: inline-block;
+}
+
+.title-product-cat a.active,
+.title-product-cat a:hover {
+  border-radius: 50px;
+  background: var(--color-main);
+  color: #ffffff;
+}
+
+.gap-20 {
+  gap: 15px 15px;
 }
 
 .boxProduct {
@@ -1420,6 +1616,7 @@ div.css_flex_baiviet {
   color: #333;
   font-weight: 600;
   font-size: 16px;
+  line-height: 25px;
   margin-bottom: 5px;
   -webkit-line-clamp: 2;
   text-transform: capitalize;
@@ -1449,7 +1646,7 @@ div.css_flex_baiviet {
 .wrap_network {
   position: fixed;
   right: 20px;
-  bottom: 50px;
+  bottom: 90px;
   z-index: 999;
 }
 
@@ -3920,4 +4117,67 @@ small {
   top: 6px;
   right: 0;
   width: 0;
+}
+
+.progress-wrap {
+  position: fixed;
+  bottom: 25px;
+  right: 20px;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  display: block;
+  border-radius: 50px;
+  z-index: 1001010;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(20px);
+  -ms-transform: translateY(20px);
+  transform: translateY(20px);
+  -webkit-transition: all 400ms linear;
+  -o-transition: all 400ms linear;
+  transition: all 400ms linear;
+}
+
+.progress-wrap.active-progress {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.progress-wrap::after {
+  position: absolute;
+  font-family: "Font Awesome 6 Pro";
+  content: "\f106";
+  text-align: center;
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--color-main);
+  left: 0;
+  top: 0;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  display: block;
+  z-index: 1;
+  -webkit-transition: all 400ms linear;
+  -o-transition: all 400ms linear;
+  transition: all 400ms linear;
+}
+
+.progress-wrap svg path {
+  fill: none;
+}
+
+.progress-wrap svg.progress-circle path {
+  stroke: var(--color-main);
+  stroke-width: 4;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 400ms linear;
+  -o-transition: all 400ms linear;
+  transition: all 400ms linear;
 }
