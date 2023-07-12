@@ -200,26 +200,11 @@ function save()
         }
     } else {
         $username = (!empty($_POST['username'])) ? htmlspecialchars($_POST['username']) : '';
-        $fullname = (!empty($_POST['fullname'])) ? htmlspecialchars($_POST['fullname']) : '';
         $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
-        $phone = (!empty($_POST['phone'])) ? htmlspecialchars($_POST['phone']) : 0;
-        $address = (!empty($_POST['address'])) ? htmlspecialchars($_POST['address']) : '';
-        $birthday = (!empty($_POST['birthday'])) ? htmlspecialchars($_POST['birthday']) : '';
         $password = (!empty($_POST['password'])) ? htmlspecialchars($_POST['password']) : '';
+        $repassword = (!empty($_POST['repassword'])) ? $_POST['repassword'] : '';
 
         /* Valid data */
-        if (empty($fullname)) {
-            $response['messages'][] = 'Họ tên không được trống';
-        }
-
-        if (empty($birthday)) {
-            $response['messages'][] = 'Ngày sinh không được trống';
-        }
-
-        if (!empty($birthday) && !$func->isDate($birthday)) {
-            $response['messages'][] = 'Ngày sinh không hợp lệ';
-        }
-
         if (empty($email)) {
             $response['messages'][] = 'Email không được trống';
         }
@@ -254,16 +239,8 @@ function save()
             $response['messages'][] = 'Mật khẩu tối thiểu 3 kí tự';
         }
 
-        if (empty($phone)) {
-            $response['messages'][] = 'Số điện thoại không được trống';
-        }
-
-        if (!empty($phone) && !$func->isPhone($phone)) {
-            $response['messages'][] = 'Số điện thoại không hợp lệ';
-        }
-
-        if (empty($address)) {
-            $response['messages'][] = 'Địa chỉ không được trống';
+        if (!empty($password) && !empty($repassword) && !$func->isMatch($password, $repassword)) {
+            $response['messages'][] = 'Mật khẩu không trùng khớp';
         }
 
         if (!empty($response)) {
@@ -277,13 +254,9 @@ function save()
         /* Save data */
         $data = array();
         $data['date_created'] = time();
-        $data['fullname'] = $fullname;
         $data['username'] = $username;
         $data['password'] = md5($password);
         $data['email'] = $email;
-        $data['phone'] = $phone;
-        $data['address'] = $address;
-        $data['birthday'] = strtotime(str_replace("/", "-", $birthday));
         $data['status'] = 'hoatdong';
         $data['permission'] = 'user';
 

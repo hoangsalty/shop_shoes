@@ -10,15 +10,53 @@ $code = (!empty($_POST['code'])) ? htmlspecialchars($_POST['code']) : '';
 $oldValue = (!empty($_POST['oldValue'])) ? htmlspecialchars($_POST['oldValue']) : 0;
 
 if ($cmd == 'plus') {
-    $newValue = $oldValue + 1;
     $quantityDB = $d->rawQueryOne("select quantity from table_product where id = ? limit 0,1", array($id));
-    if (!empty($quantityDB) && $newValue > $quantityDB['quantity']) {
-        $newValue = $quantityDB['quantity'];
+
+    $totalQty = 0;
+    if (!empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $i => $v) {
+            if ($_SESSION['cart'][$i]['productid'] == $id) {
+                $totalQty += $_SESSION['cart'][$i]['qty'];
+            }
+        }
     }
-    $data = array('quantity' => $newValue);
-    echo json_encode($data);
+
+    if (($quantityDB['quantity'] - $totalQty) > 0) {
+        $newValue = $oldValue + 1;
+        if (!empty($quantityDB) && $newValue > $quantityDB['quantity']) {
+            $newValue = $quantityDB['quantity'];
+        }
+
+        if (!empty($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $i => $v) {
+                if ($code == $_SESSION['cart'][$i]['code']) {
+                    $_SESSION['cart'][$i]['qty'] = $newValue;
+                    break;
+                }
+            }
+        }
+
+        $data = array('quantity' => $newValue);
+        echo json_encode($data);
+    } else {
+        if (!empty($quantityDB) && $oldValue >= $quantityDB['quantity']) {
+            $oldValue = 1;
+        }
+
+        $data = array('quantity' => $oldValue);
+        echo json_encode($data);
+    }
 } else if ($cmd == 'minus' && $oldValue > 1) {
     $newValue = $oldValue - 1;
+    if (!empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $i => $v) {
+            if ($code == $_SESSION['cart'][$i]['code']) {
+                $_SESSION['cart'][$i]['qty'] = $newValue;
+                break;
+            }
+        }
+    }
+
     $data = array('quantity' => $newValue);
     echo json_encode($data);
 } else if ($cmd == 'add-cart' && $id > 0) {
@@ -27,17 +65,31 @@ if ($cmd == 'plus') {
         $data = array('status' => 404, 'message' => 'Sản phẩm này đã hết.');
         echo json_encode($data);
     } else {
-        $cart->addToCart($quantity, $id, $color, $size);
-        $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
-        $data = array('status' => 200, 'max' => $max);
-        echo json_encode($data);
+        $totalQty = 0;
+        if (!empty($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $i => $v) {
+                if ($_SESSION['cart'][$i]['productid'] == $id) {
+                    $totalQty += $_SESSION['cart'][$i]['qty'];
+                }
+            }
+        }
+
+        if (($quantityDB['quantity'] - ($totalQty + $quantity)) >= 0) {
+            $cart->addToCart($quantity, $id, $color, $size);
+            $max = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
+            $data = array('status' => 200, 'max' => $max);
+            echo json_encode($data);
+        } else {
+            $last = $quantityDB['quantity'] - $totalQty;
+            $data = array('quantity' => $last, 'status' => 404, 'message' => 'Không đủ sản phẩm tồn theo số lượng thêm vào giỏ hàng');
+            echo json_encode($data);
+        }
     }
 } else if ($cmd == 'update-cart' && $id > 0 && $code != '') {
     if (!empty($_SESSION['cart'])) {
-        $max = count($_SESSION['cart']);
-        for ($i = 0; $i < $max; $i++) {
+        foreach ($_SESSION['cart'] as $i => $v) {
             if ($code == $_SESSION['cart'][$i]['code']) {
-                if ($quantity) $_SESSION['cart'][$i]['qty'] = $quantity;
+                $_SESSION['cart'][$i]['qty'] = $quantity;
                 break;
             }
         }

@@ -39,14 +39,6 @@
                                     <a class="pic-product scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
                                         <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                                     </a>
-                                    <p class="social-product transition">
-                                        <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a class="cart-add addcart" data-id="<?= $v['id'] ?>" data-action="addnow">
-                                            <i class="fas fa-cart-plus"></i>
-                                        </a>
-                                    </p>
                                 </div>
                                 <div class="info-product">
                                     <a class="name-product text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>

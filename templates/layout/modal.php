@@ -77,13 +77,6 @@
 
                         <div class="input-group input-user">
                             <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa-regular fa-signature"></i></div>
-                            </div>
-                            <input type="text" class="form-control text-sm" id="fullname" name="fullname" placeholder="Họ và tên" required>
-                        </div>
-
-                        <div class="input-group input-user">
-                            <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-user"></i></div>
                             </div>
                             <input type="text" class="form-control text-sm" id="username" name="username" placeholder="Tài khoản" required>
@@ -98,9 +91,9 @@
 
                         <div class="input-group input-user">
                             <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa-regular fa-calendar-days"></i></div>
+                                <div class="input-group-text"><i class="fa fa-lock"></i></div>
                             </div>
-                            <input type="text" class="form-control text-sm birth-date" id="birthday" name="birthday" placeholder="Chọn ngày sinh" required autocomplete="off">
+                            <input type="password" class="form-control text-sm" id="repassword" name="repassword" placeholder="Nhập lại mật khẩu" required>
                         </div>
 
                         <div class="input-group input-user">
@@ -108,20 +101,6 @@
                                 <div class="input-group-text"><i class="fa fa-envelope"></i></div>
                             </div>
                             <input type="email" class="form-control text-sm" id="email" name="email" placeholder="Email" required>
-                        </div>
-
-                        <div class="input-group input-user">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-phone-square"></i></div>
-                            </div>
-                            <input type="number" class="form-control text-sm" id="phone" name="phone" placeholder="Số điện thoại" required>
-                        </div>
-
-                        <div class="input-group input-user">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-map"></i></div>
-                            </div>
-                            <input type="text" class="form-control text-sm" id="address" name="address" placeholder="Địa chỉ" required>
                         </div>
 
                         <div class="button-user">

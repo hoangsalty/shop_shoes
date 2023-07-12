@@ -13,6 +13,112 @@ if ($cmd == 'change-status' && $id > 0) {
     $data['order_status'] = (!empty($status)) ? $status : "";
     $d->where('id', $id);
     $d->update('table_order', $data);
+
+    if ($status == 'dahuy') {
+        $order = $d->rawQueryOne("select * from table_order where id = ? limit 0,1", array($id));
+        if (!empty($order) && $order['order_payment'] == 'vnpay') {
+            $vnpay_order = $d->rawQueryOne("select * from table_vnpay where order_id = ? limit 0,1", array($id));
+            function callAPI_auth($method, $url, $data)
+            {
+                $curl = curl_init();
+                switch ($method) {
+                    case "POST":
+                        curl_setopt($curl, CURLOPT_POST, 1);
+                        if ($data)
+                            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                        break;
+                    case "PUT":
+                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                        if ($data)
+                            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                        break;
+                    default:
+                        if ($data)
+                            $url = sprintf("%s?%s", $url, http_build_query($data));
+                }
+                // OPTIONS:
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json'
+                ));
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                // EXECUTE:
+                $result = curl_exec($curl);
+                if (!$result) {
+                    die("Connection Failure");
+                }
+                curl_close($curl);
+                return $result;
+            }
+
+            $vnp_RequestId = rand(1, 10000); // Mã truy vấn
+            $vnp_Command = "refund"; // Mã api
+            $vnp_TransactionType = '02'; // 02 hoàn trả toàn phần - 03 hoàn trả một phần
+            $vnp_TxnRef = $order["code"]; // Mã tham chiếu của giao dịch
+            $vnp_Amount = $order["total_price"] * 100; // Số tiền hoàn trả
+            $vnp_OrderInfo = "Hoan Tien Giao Dich"; // Mô tả thông tin
+            $vnp_TransactionNo = "0"; // Tuỳ chọn, "0": giả sử merchant không ghi nhận được mã GD do VNPAY phản hồi.
+            $vnp_TransactionDate = date('YmdHis', $order["date_created"]); // Thời gian ghi nhận giao dịch
+            $ispTxnRequest = array(
+                "vnp_RequestId" => $vnp_RequestId,
+                "vnp_Version" => "2.1.0",
+                "vnp_Command" => $vnp_Command,
+                "vnp_TmnCode" => $vnp_TmnCode,
+                "vnp_TransactionType" => $vnp_TransactionType,
+                "vnp_TxnRef" => $vnp_TxnRef,
+                "vnp_Amount" => $vnp_Amount,
+                "vnp_OrderInfo" => $vnp_OrderInfo,
+                "vnp_TransactionNo" => $vnp_TransactionNo,
+                "vnp_TransactionDate" => $vnp_TransactionDate,
+                "vnp_CreateBy" => "ADMIN",
+                "vnp_CreateDate" => date('YmdHis'),
+                "vnp_IpAddr" => $_SERVER['REMOTE_ADDR'],
+            );
+
+            $format = '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s';
+
+            $dataHash = sprintf(
+                $format,
+                $ispTxnRequest['vnp_RequestId'], //1
+                $ispTxnRequest['vnp_Version'], //2
+                $ispTxnRequest['vnp_Command'], //3
+                $ispTxnRequest['vnp_TmnCode'], //4
+                $ispTxnRequest['vnp_TransactionType'], //5
+                $ispTxnRequest['vnp_TxnRef'], //6
+                $ispTxnRequest['vnp_Amount'], //7
+                $ispTxnRequest['vnp_TransactionNo'],  //8
+                $ispTxnRequest['vnp_TransactionDate'], //9
+                $ispTxnRequest['vnp_CreateBy'], //10
+                $ispTxnRequest['vnp_CreateDate'], //11
+                $ispTxnRequest['vnp_IpAddr'], //12
+                $ispTxnRequest['vnp_OrderInfo'] //13
+            );
+
+            $checksum = hash_hmac('SHA512', $dataHash, $vnp_HashSecret);
+            $ispTxnRequest["vnp_SecureHash"] = $checksum;
+            $txnData = callAPI_auth("POST", $apiUrl, json_encode($ispTxnRequest));
+            $ispTxn = json_decode($txnData, true);
+        }
+
+
+
+        $products_in_order = $d->rawQuery("select * from table_order_detail where id_order = ?", array($id));
+        if (!empty($products_in_order)) {
+            foreach ($products_in_order as $i => $v) {
+                $product = $d->rawQueryOne("select * from table_product where id = ?", array($v['id_product']));
+
+                if (!empty($product)) {
+                    $current_product_quantity = $product['quantity'];
+                    $order_product_quantity = $v['quantity'];
+
+                    $data = array();
+                    $data['quantity'] = $current_product_quantity + $order_product_quantity;
+                    $d->where('id', $v['id_product']);
+                    $d->update('table_product', $data);
+                }
+            }
+        }
+    }
 } else if ($cmd == 'show-order-by-status') {
     if (array_key_exists("account", $_SESSION) && $_SESSION["account"]['active'] == true) { ?>
         <?php
@@ -72,7 +178,7 @@ if ($cmd == 'change-status' && $id > 0) {
                         <div class="money-procart">
                             <div class="d-flex align-items-center justify-content-between">
                                 <?php if ($tinhtrang == 'moidat') { ?>
-                                    <a id="cancel-order" data-id="<?= $v1['id'] ?>" data-status="dahuy" href="javascript:void()" class="change_order_status">Hủy đơn hàng</a>
+                                    <a id="cancel-order" data-id="<?= $v1['id'] ?>" href="javascript:void()" class="change_order_status">Hủy đơn hàng</a>
                                 <?php } ?>
 
                                 <div class="price-procart">

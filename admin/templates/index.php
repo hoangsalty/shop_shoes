@@ -47,6 +47,30 @@ function getBetweenDates($startDate, $endDate)
 
 $chart_date = (isset($_REQUEST['chart_date'])) ? htmlspecialchars($_REQUEST['chart_date']) : '';
 $daysInMonth = array();
+
+if (date('D') != 'Sun') {
+    $staticstart = date('Y-m-d', strtotime('last Sunday'));
+} else {
+    $staticstart = date('Y-m-d');
+}
+
+if (date('D') != 'Sat') {
+    $staticfinish = date('Y-m-d', strtotime('next Saturday'));
+} else {
+    $staticfinish = date('Y-m-d');
+}
+
+$daysInMonth = getBetweenDates($staticstart, $staticfinish);
+$charts = array();
+for ($i = 0; $i < count($daysInMonth); $i++) {
+    $from_date = strtotime($daysInMonth[$i] . ' 12:00:00 AM');
+    $to_date = strtotime($daysInMonth[$i] . ' 11:59:59 PM');
+
+    $sqlData = $d->rawQueryOne("select sum(total_price) as totals from table_order where date_created >= ? and date_created <= ?", array($from_date, $to_date));
+    $charts['series'][] = ($sqlData['totals']) ? $sqlData['totals'] : 0;
+    $charts['labels'][] = $daysInMonth[$i];
+}
+
 if (!empty($chart_date)) {
     $chart_date = explode("-", $chart_date);
     $date_from = trim($chart_date[0]);

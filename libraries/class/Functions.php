@@ -661,19 +661,25 @@ class Functions
             array('id' => 'danggiaohang', 'name' => 'Đang giao hàng'),
             array('id' => 'dagiao', 'name' => 'Đã giao'),
             array('id' => 'dahuy', 'name' => 'Đã hủy'),
-        );
+        ); ?>
 
-        $str = '<select id="order_status" name="data[order_status]" class="form-control select2"><option value="">Chọn tình trạng</option>';
-        foreach ($row as $v) {
-            if (isset($_REQUEST['order_status']) && ($v["id"] == $_REQUEST['order_status']) || ($v["id"] == $status))
-                $selected = "selected";
-            else
-                $selected = "";
-            $str .= '<option value=' . $v["id"] . ' ' . $selected . '>' . $v["name"] . '</option>';
-        }
-        $str .= '</select>';
-        return $str;
-    }
+        <select id="order_status" name="data[order_status]" class="form-control select2" <?= ($status == 'dagiao' || $status == 'dahuy') ? 'disabled' : '' ?>>
+            <option value="">Chọn tình trạng</option>
+            <?php foreach ($row as $v) {
+                if (isset($_REQUEST['order_status']) && ($v["id"] == $_REQUEST['order_status']) || ($v["id"] == $status))
+                    $selected = "selected";
+                else
+                    $selected = "";
+
+                if ($v["id"] == 'dahuy')
+                    $disabled = "disabled";
+                else
+                    $disabled = "";
+            ?>
+                <option value="<?= $v["id"] ?>" <?= $selected ?> <?= $disabled ?>><?= $v["name"] ?></option>
+            <?php } ?>
+        </select>
+    <?php }
     /* Get payments order */
     function orderPayments()
     {
@@ -898,14 +904,6 @@ class Functions
                             <a class="pic-product scale-img" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
                                 <?= $func->getImage(['class' => 'w-100', 'width' => $config['product']['width'], 'height' => $config['product']['height'], 'upload' => UPLOAD_PRODUCT_L, 'image' => $v['photo']]) ?>
                             </a>
-                            <p class="social-product transition">
-                                <a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>" class="view-product">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a class="cart-add addcart" data-id="<?= $v['id'] ?>" data-action="addnow">
-                                    <i class="fas fa-cart-plus"></i>
-                                </a>
-                            </p>
                         </div>
                         <div class="info-product">
                             <a class="name-product text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>

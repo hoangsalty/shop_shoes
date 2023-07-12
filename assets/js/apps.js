@@ -292,7 +292,6 @@ FRAMEWORK.UserInfo = function () {
     }).then((state) => {
       if (state.isConfirmed) {
         var id = $(this).data("id");
-        var status = $(this).data("status");
 
         $.ajax({
           type: "POST",
@@ -300,7 +299,7 @@ FRAMEWORK.UserInfo = function () {
           data: {
             cmd: "change-status",
             id: id,
-            status: status,
+            status: 'dahuy',
           },
           beforeSend: function () {
             holdonOpen();
@@ -565,69 +564,8 @@ FRAMEWORK.PopupRegister = function () {
   $("#form-user-register").submit(function (e) {
     e.preventDefault();
 
-    var fullname = $(this).find("#fullname");
     var username = $(this).find("#username");
     var password = $(this).find("#password");
-    var birthday = $(this).find("#birthday");
-    var email = $(this).find("#email");
-    var phone = $(this).find("#phone");
-    var address = $(this).find("#address");
-
-    /* if (isEmpty(fullname.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập họ tên</div>'
-      );
-      fullname.focus();
-      return false;
-    }
-
-    if (isEmpty(username.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập tài khoản</div>'
-      );
-      username.focus();
-      return false;
-    }
-
-    if (isEmpty(password.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập mật khẩu</div>'
-      );
-      password.focus();
-      return false;
-    }
-
-    if (isEmpty(birthday.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng chọn ngày sinh</div>'
-      );
-      birthday.focus();
-      return false;
-    }
-
-    if (isEmpty(email.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập email</div>'
-      );
-      email.focus();
-      return false;
-    }
-
-    if (isEmpty(phone.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập số điện thoại</div>'
-      );
-      phone.focus();
-      return false;
-    }
-
-    if (isEmpty(address.val())) {
-      $(".register_response").html(
-        '<div class="alert alert-danger">Vui lòng nhập địa chỉ</div>'
-      );
-      address.focus();
-      return false;
-    } */
 
     data = new FormData($(this)[0]);
     data.append("act", "luu-thong-tin");
@@ -1117,6 +1055,7 @@ FRAMEWORK.Cart = function () {
               window.location = CONFIG_BASE + "gio-hang";
             }
           } else if (result["status"] == 404) {
+            $('.counter-procart').parent().find("input").val(result['quantity']);
             Swal.fire({
               icon: "warning",
               title: "Thông báo!",
@@ -1175,11 +1114,12 @@ FRAMEWORK.Cart = function () {
       }
     });
   });
+
   /* Counter */
   $("body").on("click", ".counter-procart", function () {
-    var quantity = 1;
     var input = $(this).parent().find("input");
     var id = input.data("pid");
+    var code = input.data("code");
     var oldValue = $(this).parent().find("input").val();
     if ($(this).text() == "+") {
       $.ajax({
@@ -1190,13 +1130,14 @@ FRAMEWORK.Cart = function () {
           cmd: "plus",
           oldValue: oldValue,
           id: id,
+          code: code,
         },
         success: function (result) {
           input.val(result["quantity"]);
           updateCart(id, code, result["quantity"]);
         },
       });
-    } else if (oldValue > 1) {
+    } else if ($(this).text() == "-" && oldValue > 1) {
       $.ajax({
         url: "api/cart.php",
         type: "POST",
@@ -1205,6 +1146,7 @@ FRAMEWORK.Cart = function () {
           cmd: "minus",
           oldValue: oldValue,
           id: id,
+          code: code,
         },
         success: function (result) {
           input.val(result["quantity"]);

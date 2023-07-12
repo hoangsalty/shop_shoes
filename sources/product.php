@@ -136,7 +136,7 @@ if ($id != '') {
     $params = array();
 
     $curPage = $getPage;
-    $perPage = 12;
+    $perPage = 8;
     $startpoint = ($curPage * $perPage) - $perPage;
     $limit = " limit " . $startpoint . "," . $perPage;
     $sql = "select * from table_product where $where $orderby_search $limit";

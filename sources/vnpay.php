@@ -141,9 +141,3 @@ if (!empty($_GET["vnp_Amount"])) {
         //Lỗi nếu thanh toán thất bại
     }
 }
-
-/* if (!isset($_SESSION['cart']) || empty($tempCart)) {
-    header('HTTP/1.0 404 Not Found', true, 404);
-    include("404.php");
-    exit;
-} */
