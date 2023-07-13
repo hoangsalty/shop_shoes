@@ -1,5 +1,8 @@
 <div class="title-main"><span><?= (!empty($titleCate)) ? $titleCate : @$titleMain ?></span></div>
 <div class="content-main">
+    <?php if (!empty($tukhoa)) { ?>
+        <div class="mb-3">Tìm thấy <b><?= $count['num'] ?> sản phẩm</b> với từ khóa là <b>"<?= $tukhoa ?>"</b></div>
+    <?php } ?>
     <?php if (!empty($product)) { ?>
         <?php if (!empty($sort)) { ?>
             <div class="sort-select ">
