@@ -36,7 +36,7 @@ else if ($type == 'social') $name = 'Social';
                         <?php if ($type != 'video' && $type != 'album') { ?>
                             <div class="form-group">
                                 <label for="link">Link:</label>
-                                <input type="text" class="form-control text-sm" name="data[link]" id="link" placeholder="Link" value="<?= @$item['link'] ?>" required>
+                                <input type="text" class="form-control text-sm" name="data[link]" id="link" placeholder="Link" value="<?= @$item['link'] ?>">
                             </div>
                         <?php } ?>
                         <?php if ($type != 'social') { ?>
