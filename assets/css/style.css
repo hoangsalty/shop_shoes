@@ -1055,9 +1055,21 @@ a:hover {
   line-height: 25px;
 }
 
+.slick_tintuc .slick-list {
+  margin: -10px 0;
+}
+
+.item-newsnb {
+  gap: 20px 20px;
+  margin: 10px 0;
+}
+
 .item-newsnb .image {
   display: block;
-  margin-bottom: 1rem;
+}
+
+.item-newsnb .info {
+  flex: 1;
 }
 
 .item-newsnb .info .name {
@@ -1120,6 +1132,16 @@ a:hover {
 
 .item-newsnb .info .view:hover i {
   margin-left: 10px;
+}
+
+.video-main {
+  height: 600px;
+}
+
+.listvideos {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
 }
 
 .footer {

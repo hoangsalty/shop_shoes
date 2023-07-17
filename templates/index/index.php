@@ -123,27 +123,45 @@
     <section class="wrap-newsnb spacing">
         <div class="wrap-content">
             <div class="title-main">
-                <span>Tin tức</span>
+                <span>Video clip - tin tức</span>
             </div>
-            <div class="newsnb__owl owl-carousel control-owl">
-                <?php foreach ($newsnb as $k => $v) { ?>
-                    <div>
-                        <div class="item-newsnb">
-                            <a class="image scale-img transition" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
-                                <?= $func->getImage(['class' => 'w-100', 'width' => $config['news']['width'], 'height' => $config['news']['height'], 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo']]) ?>
-                            </a>
-                            <div class="info">
-                                <a class="name text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
-                                <span class="ngaydang"><i class="fas fa-calendar-day"></i><?= date("d/m/Y", $v['date_created']) ?></span>
-                                <div class="desc text-split"><?= $v['desc'] ?></div>
-                                <a class="view" href="<?= $v['slug'] ?>" tabindex="0">
-                                    Xem thêm
-                                    <i class="fa fa-long-arrow-right"></i>
-                                </a>
+            <div class="row">
+                <div class="col-6">
+                    <?php if (!empty($newsnb)) { ?>
+                        <div class="news-intro position-relative">
+                            <div class="slick_tintuc position-relative">
+                                <?php foreach ($newsnb as $k => $v) { ?>
+                                    <div class="item-newsnb d-flex align-items-center <?php if ($k % 2 != 0) echo 'flex-row-reverse' ?>">
+                                        <a class="image scale-img transition" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>">
+                                            <?= $func->getImage(['class' => 'w-100', 'width' => $config['news']['width'], 'height' => $config['news']['height'], 'upload' => UPLOAD_NEWS_L, 'image' => $v['photo']]) ?>
+                                        </a>
+                                        <div class="info">
+                                            <a class="name text-split" href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a>
+                                            <span class="ngaydang"><i class="fas fa-calendar-day"></i><?= date("d/m/Y", $v['date_created']) ?></span>
+                                            <div class="desc text-split"><?= $v['desc'] ?></div>
+                                            <a class="view" href="<?= $v['slug'] ?>" tabindex="0">
+                                                Xem thêm
+                                                <i class="fa fa-long-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
+                    <?php } ?>
+                </div>
+                <div class="col-6">
+                    <div class="video-intro">
+                        <div class="video-main">
+                            <iframe width="100%" height="100%" src="//www.youtube.com/embed/<?= $func->getYoutube($video_home[0]['link_video']) ?>" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <select class="listvideos">
+                            <?php foreach ($video_home as $k => $v) { ?>
+                                <option value="<?= $v['id'] ?>"><?= $v['name'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
-                <?php } ?>
+                </div>
             </div>
         </div>
     </section>

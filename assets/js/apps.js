@@ -299,7 +299,7 @@ FRAMEWORK.UserInfo = function () {
           data: {
             cmd: "change-status",
             id: id,
-            status: 'dahuy',
+            status: "dahuy",
           },
           beforeSend: function () {
             holdonOpen();
@@ -415,9 +415,9 @@ FRAMEWORK.Comments = function () {
           }); */
         },
       },
-      afterSelect: function () { },
-      onEmpty: function () { },
-      onRemove: function () { },
+      afterSelect: function () {},
+      onEmpty: function () {},
+      onRemove: function () {},
     });
   }
 
@@ -589,7 +589,9 @@ FRAMEWORK.PopupRegister = function () {
 
         if (result.status == 200) {
           $(".register_response").html(
-            '<div class="alert alert-success">' + result["messages"][0] + "</div>"
+            '<div class="alert alert-success">' +
+              result["messages"][0] +
+              "</div>"
           );
 
           setTimeout(function () {
@@ -617,7 +619,6 @@ FRAMEWORK.PopupRegister = function () {
           $(".register_response").html(
             '<div class="alert alert-danger">' + myHTML + "</div>"
           );
-
         }
         holdonClose();
       },
@@ -725,15 +726,15 @@ FRAMEWORK.Carousel = function () {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-        }
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      }
+          slidesToScroll: 1,
+        },
+      },
     ],
   });
 
@@ -760,17 +761,17 @@ FRAMEWORK.Carousel = function () {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-          vertical: false
-        }
+          vertical: false,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          vertical: false
-        }
-      }
+          vertical: false,
+        },
+      },
     ],
   });
 
@@ -844,6 +845,39 @@ FRAMEWORK.Carousel = function () {
     },
   });
 
+  $(".slick_tintuc").slick({
+    lazyLoad: "progressive",
+    infinite: true,
+    accessibility: true,
+    vertical: true,
+    verticalSwiping: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1000,
+    arrows: false,
+    centerMode: false,
+    dots: false,
+    draggable: true,
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  });
+
   $(".product__slider").owlCarousel({
     loop: false,
     margin: 10,
@@ -862,43 +896,6 @@ FRAMEWORK.Carousel = function () {
     responsive: {
       0: {
         items: 2,
-      },
-
-      480: {
-        items: 2,
-        margin: 10,
-      },
-
-      768: {
-        items: 3,
-        margin: 15,
-      },
-
-      992: {
-        items: 4,
-        margin: 20,
-      },
-    },
-  });
-
-  $(".newsnb__owl").owlCarousel({
-    loop: false,
-    margin: 10,
-    items: 1,
-    dots: false,
-    nav: true,
-    navText: [
-      "<span class='fa fa-angle-left'><span/>",
-      "<span class='fa fa-angle-right'><span/>",
-    ],
-    animateOut: "fadeOut",
-    animateIn: "fadeIn",
-    smartSpeed: 1200,
-    autoHeight: false,
-    autoplay: true,
-    responsive: {
-      0: {
-        items: 1,
       },
 
       480: {
@@ -949,16 +946,28 @@ FRAMEWORK.Pagings = function () {
     });
   }
   if (isExist($(".load-page-category"))) {
-    $('.load-page-category').each(function (index) {
+    $(".load-page-category").each(function (index) {
       var idList = $(this).data("rel");
-      loadPaging("api/product.php?idList=" + idList + "&perpage=8", '.load-page-pronb' + idList);
-      $(document).on('click', '.title-product-' + idList + ' .a-title-product', function () {
-        $('.title-product-' + idList + ' .a-title-product').removeClass('active');
-        $(this).addClass('active');
-        var _list = $(this).data("list");
-        var _cat = $(this).data("cat");
-        loadPaging("api/product.php?idList=" + _list + "&idCat=" + _cat + "&perpage=8", '.load-page-pronb' + idList);
-      });
+      loadPaging(
+        "api/product.php?idList=" + idList + "&perpage=8",
+        ".load-page-pronb" + idList
+      );
+      $(document).on(
+        "click",
+        ".title-product-" + idList + " .a-title-product",
+        function () {
+          $(".title-product-" + idList + " .a-title-product").removeClass(
+            "active"
+          );
+          $(this).addClass("active");
+          var _list = $(this).data("list");
+          var _cat = $(this).data("cat");
+          loadPaging(
+            "api/product.php?idList=" + _list + "&idCat=" + _cat + "&perpage=8",
+            ".load-page-pronb" + idList
+          );
+        }
+      );
     });
   }
 };
@@ -1055,7 +1064,10 @@ FRAMEWORK.Cart = function () {
               window.location = CONFIG_BASE + "gio-hang";
             }
           } else if (result["status"] == 404) {
-            $('.counter-procart').parent().find("input").val(result['quantity']);
+            $(".counter-procart")
+              .parent()
+              .find("input")
+              .val(result["quantity"]);
             Swal.fire({
               icon: "warning",
               title: "Thông báo!",
@@ -1256,6 +1268,29 @@ FRAMEWORK.ShinerLogo = function () {
     });
   }
 };
+/* Dom Change */
+FRAMEWORK.DomChange = function () {
+  $("#video-select").one("DOMSubtreeModified", function () {
+    $(".listvideos").change(function () {
+      var id = $(this).val();
+      $.ajax({
+        url: "api/video.php",
+        type: "POST",
+        dataType: "html",
+        data: {
+          id: id,
+        },
+        beforeSend: function () {
+          holdonOpen();
+        },
+        success: function (result) {
+          $(".video-main").html(result);
+          holdonClose();
+        },
+      });
+    });
+  });
+};
 
 /* Ready */
 $(document).ready(function () {
@@ -1276,4 +1311,5 @@ $(document).ready(function () {
   FRAMEWORK.DbUser();
   FRAMEWORK.Sort();
   FRAMEWORK.ShinerLogo();
+  FRAMEWORK.DomChange();
 });
