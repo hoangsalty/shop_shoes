@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jul 08, 2023 at 04:55 PM
--- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th7 17, 2023 lúc 04:17 AM
+-- Phiên bản máy phục vụ: 10.4.25-MariaDB
+-- Phiên bản PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,27 +18,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db`
+-- Cơ sở dữ liệu: `db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_color`
+-- Cấu trúc bảng cho bảng `table_color`
 --
 
 CREATE TABLE `table_color` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_color`
+-- Đang đổ dữ liệu cho bảng `table_color`
 --
 
 INSERT INTO `table_color` (`id`, `name`, `color`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -54,43 +54,47 @@ INSERT INTO `table_color` (`id`, `name`, `color`, `status`, `date_created`, `dat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_comment`
+-- Cấu trúc bảng cho bảng `table_comment`
 --
 
 CREATE TABLE `table_comment` (
-  `id` int NOT NULL,
-  `id_parent` int UNSIGNED DEFAULT NULL,
-  `id_user` int UNSIGNED DEFAULT NULL,
-  `star` int DEFAULT '0',
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT NULL,
-  `date_updated` int DEFAULT NULL,
-  `date_deleted` int DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `id_parent` int(10) UNSIGNED DEFAULT NULL,
+  `id_user` int(10) UNSIGNED DEFAULT NULL,
+  `star` int(11) DEFAULT 0,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT NULL,
+  `date_updated` int(11) DEFAULT NULL,
+  `date_deleted` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_comment`
+-- Đang đổ dữ liệu cho bảng `table_comment`
 --
 
 INSERT INTO `table_comment` (`id`, `id_parent`, `id_user`, `star`, `content`, `fullname`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(2, 28, 149, 4, 'Sản phẩm tốt', 'Hoàng Phạm', 'hienthi', 1688833093, 1688833107, NULL);
+(2, 28, 149, 4, 'Sản phẩm tốt', 'Hoàng Phạm', 'hienthi', 1688833093, 1688833107, NULL),
+(4, 28, 162, 5, 'sản phẩm tốt', 'Mạnh cường', 'new-admin', 1689315086, NULL, NULL),
+(5, 28, 162, 5, 'Sản phẩm rất tốt', 'Mạnh cường', 'new-admin', 1689315187, NULL, NULL),
+(6, 28, 162, 5, '10 điểm', 'Mạnh cường', 'new-admin', 1689315217, NULL, NULL),
+(7, 28, 162, 5, 'SẢN PHẨM HAY', 'Mạnh cường', 'hienthi', 1689315379, 1689315391, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_comment_photo`
+-- Cấu trúc bảng cho bảng `table_comment_photo`
 --
 
 CREATE TABLE `table_comment_photo` (
-  `id` int NOT NULL,
-  `id_parent` int DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `id_parent` int(11) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `table_comment_photo`
+-- Đang đổ dữ liệu cho bảng `table_comment_photo`
 --
 
 INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
@@ -101,22 +105,22 @@ INSERT INTO `table_comment_photo` (`id`, `id_parent`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_gallery`
+-- Cấu trúc bảng cho bảng `table_gallery`
 --
 
 CREATE TABLE `table_gallery` (
-  `id` int UNSIGNED NOT NULL,
-  `id_parent` int UNSIGNED DEFAULT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_parent` int(10) UNSIGNED DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_gallery`
+-- Đang đổ dữ liệu cho bảng `table_gallery`
 --
 
 INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -225,65 +229,80 @@ INSERT INTO `table_gallery` (`id`, `id_parent`, `photo`, `name`, `status`, `date
 (187, NULL, '3-4271-9228.jpg', NULL, 'hienthi', 1688831381, 0, 0),
 (188, NULL, '3-9404.png', NULL, 'hienthi', 1688831381, 0, 0),
 (189, NULL, '4.png', NULL, 'hienthi', 1688831381, 0, 0),
-(191, 18, NULL, NULL, 'hienthi', 1688832071, 0, 0);
+(191, 18, NULL, NULL, 'hienthi', 1688832071, 0, 0),
+(194, 28, NULL, NULL, 'hienthi', 1688891349, 0, 0),
+(195, 37, NULL, NULL, 'hienthi', 1689305594, 0, 0),
+(196, 26, NULL, NULL, 'hienthi', 1689305609, 0, 0),
+(197, 27, NULL, NULL, 'hienthi', 1689305619, 0, 0),
+(198, 25, NULL, NULL, 'hienthi', 1689305628, 0, 0),
+(199, 24, NULL, NULL, 'hienthi', 1689305636, 0, 0),
+(200, 37, NULL, NULL, 'hienthi', 1689305768, 0, 0),
+(201, 37, NULL, NULL, 'hienthi', 1689305769, 0, 0),
+(202, 37, NULL, NULL, 'hienthi', 1689305770, 0, 0),
+(203, 37, NULL, NULL, 'hienthi', 1689305770, 0, 0),
+(204, 37, NULL, NULL, 'hienthi', 1689305772, 0, 0),
+(205, 37, NULL, NULL, 'hienthi', 1689305772, 0, 0),
+(206, 37, NULL, NULL, 'hienthi', 1689305773, 0, 0),
+(207, 37, NULL, NULL, 'hienthi', 1689305773, 0, 0),
+(208, 37, NULL, NULL, 'hienthi', 1689305773, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_gallery_album`
+-- Cấu trúc bảng cho bảng `table_gallery_album`
 --
 
 CREATE TABLE `table_gallery_album` (
-  `id` int UNSIGNED NOT NULL,
-  `id_parent` int UNSIGNED DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_parent` int(10) UNSIGNED DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_momo`
+-- Cấu trúc bảng cho bảng `table_momo`
 --
 
 CREATE TABLE `table_momo` (
-  `id` int NOT NULL,
-  `order_id` int UNSIGNED DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
   `partner_code` varchar(255) NOT NULL,
-  `amount` int NOT NULL,
+  `amount` int(11) NOT NULL,
   `order_info` varchar(255) NOT NULL,
   `order_type` varchar(255) NOT NULL,
-  `transId` int NOT NULL,
+  `transId` int(11) NOT NULL,
   `pay_type` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_news`
+-- Cấu trúc bảng cho bảng `table_news`
 --
 
 CREATE TABLE `table_news` (
-  `id` int UNSIGNED NOT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `view` int DEFAULT '0',
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `view` int(11) DEFAULT 0,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_news`
+-- Đang đổ dữ liệu cho bảng `table_news`
 --
 
 INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `status`, `type`, `view`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -300,86 +319,87 @@ INSERT INTO `table_news` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `sta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_order`
+-- Cấu trúc bảng cho bảng `table_order`
 --
 
 CREATE TABLE `table_order` (
-  `id` int UNSIGNED NOT NULL,
-  `id_user` int UNSIGNED DEFAULT NULL,
-  `transId` int DEFAULT '0',
-  `order_payment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `requirements` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `temp_price` double DEFAULT '0',
-  `ship_price` double DEFAULT '0',
-  `total_price` double DEFAULT '0',
-  `order_status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_user` int(10) UNSIGNED DEFAULT NULL,
+  `transId` int(11) DEFAULT 0,
+  `order_payment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `requirements` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `temp_price` double DEFAULT 0,
+  `ship_price` double DEFAULT 0,
+  `total_price` double DEFAULT 0,
+  `order_status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_order`
+-- Đang đổ dữ liệu cho bảng `table_order`
 --
 
 INSERT INTO `table_order` (`id`, `id_user`, `transId`, `order_payment`, `code`, `fullname`, `phone`, `address`, `email`, `requirements`, `temp_price`, `ship_price`, `total_price`, `order_status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(36, 149, 0, 'thanh-toan-bang-chuyen-khoan', 'KFK9GM', 'Hoàng Phạm', '0909090909', 'Địa chỉ 123 123, Xã Tân Tiến, Huyện Văn Giang, Hưng Yên', 'hoangsalty@gmail.com', '', 12956000, 39001, 12995001, 'moidat', 1688832996, 0, 0),
-(37, 149, 0, 'thanh-toan-bang-chuyen-khoan', '4RWYHV', 'Hoàng Phạm', '0909090909', 'Địa chỉ 123 123, Xã Đồng Tân, Huyện Mai Châu, Hòa Bình', 'hoangsalty@gmail.com', '', 3239000, 39001, 3278001, 'dahuy', 1688833326, 0, 0);
+(40, 162, 0, 'nhanhang', '2BEYOM', 'Mạnh cường', '0868202710', 'Lâm đồng, Xã Tống Phan, Huyện Phù Cừ, Hưng Yên', 'manhcuong26092001@gmail.com', '', 16195000, 39001, 16234001, 'danggiaohang', 1689316027, 0, 0),
+(41, 162, 0, 'nhanhang', 'BT62MB', 'Mạnh cường', '0868202710', 'Lâm đồng, Xã Trưng Trắc, Huyện Văn Lâm, Hưng Yên', 'manhcuong26092001@gmail.com', '', 9717000, 39001, 9756001, 'dahuy', 1689316149, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_order_detail`
+-- Cấu trúc bảng cho bảng `table_order_detail`
 --
 
 CREATE TABLE `table_order_detail` (
-  `id` int UNSIGNED NOT NULL,
-  `id_order` int UNSIGNED DEFAULT NULL,
-  `id_product` int UNSIGNED DEFAULT NULL,
-  `id_color` int UNSIGNED DEFAULT '0',
-  `id_size` int UNSIGNED DEFAULT '0',
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `quantity` int DEFAULT '0',
-  `price` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_order` int(10) UNSIGNED DEFAULT NULL,
+  `id_product` int(10) UNSIGNED DEFAULT NULL,
+  `id_color` int(10) UNSIGNED DEFAULT 0,
+  `id_size` int(10) UNSIGNED DEFAULT 0,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quantity` int(11) DEFAULT 0,
+  `price` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_order_detail`
+-- Đang đổ dữ liệu cho bảng `table_order_detail`
 --
 
 INSERT INTO `table_order_detail` (`id`, `id_order`, `id_product`, `id_color`, `id_size`, `photo`, `name`, `code`, `quantity`, `price`) VALUES
-(37, 36, 28, 11, 17, 'tech-hera-shoes-JlV5km.png', 'Nike Tech Hera', 'KFK9GM', 4, 3239000),
-(38, 37, 28, 13, 17, 'tech-hera-shoes-JlV5km.png', 'Nike Tech Hera', '4RWYHV', 1, 3239000);
+(42, 40, 28, 13, 17, 'tech-hera-shoes-JlV5km.png', 'Nike Tech Hera', '2BEYOM', 4, 3239000),
+(43, 40, 27, NULL, NULL, 'air-force-1-07-flyease-shoes-lpjTWM.png', 'Nike', '2BEYOM', 1, 3239000),
+(44, 41, 27, 14, 16, 'air-force-1-07-flyease-shoes-lpjTWM.png', 'Nike', 'BT62MB', 3, 3239000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_photo`
+-- Cấu trúc bảng cho bảng `table_photo`
 --
 
 CREATE TABLE `table_photo` (
-  `id` int UNSIGNED NOT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `link_video` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link_video` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_photo`
+-- Đang đổ dữ liệu cho bảng `table_photo`
 --
 
 INSERT INTO `table_photo` (`id`, `photo`, `desc`, `name`, `link`, `link_video`, `type`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -389,78 +409,83 @@ INSERT INTO `table_photo` (`id`, `photo`, `desc`, `name`, `link`, `link_video`, 
 (6, 'poduct-2-3013-4492.jpg', '', 'Hình ảnh giày Nike Air Max', NULL, NULL, 'album', 'hienthi', 1686900262, 0, 0),
 (7, 'poduct-1-1758-8192.jpeg', '', 'Hình ảnh giày Nike Zoom', NULL, NULL, 'album', 'hienthi', 1686900281, 0, 0),
 (8, 'poduct-1-1318-8006.jpg', '', 'Hình ảnh giày Nike Air Force', NULL, NULL, 'album', 'hienthi', 1686900294, 0, 0),
-(9, 'poduct-5-3937-5589-3198.jpg', '', 'Hình ảnh giày Nike Phantom', NULL, NULL, 'album', 'hienthi', 1686900307, 0, 0);
+(9, 'poduct-5-3937-5589-3198.jpg', '', 'Hình ảnh giày Nike Phantom', NULL, NULL, 'album', 'hienthi', 1686900307, 0, 0),
+(10, NULL, NULL, 'Video giới thiệu giày adidas', NULL, 'https://www.youtube.com/watch?v=23yJOu9LSwE&amp;ab_channel=L%C3%A2mB%E1%BA%A3o', 'video', 'hienthi', 1689559002, 0, 0),
+(11, NULL, NULL, 'Video giới thiệu giày nike', NULL, 'https://www.youtube.com/watch?v=GdlSWFyYA8s&amp;ab_channel=T%C3%BAThanhBlog', 'video', 'hienthi', 1689559048, 0, 0),
+(12, NULL, NULL, 'Video quảng cáo giày nike', NULL, 'https://www.youtube.com/watch?v=Sc2QqS7tX40&amp;ab_channel=Cao%C4%91%E1%BA%B3ngFPTPolytechnic', 'video', 'hienthi', 1689559074, 0, 0),
+(13, NULL, NULL, 'Video giới thiệu cửa hàng', NULL, 'https://www.youtube.com/watch?v=2p2InBqKTRs&amp;ab_channel=KINGSHOESC%E1%BB%ADah%C3%A0nggi%C3%A0ySneakerch%C3%ADnhh%C3%A3ngt%E1%BA%A1iHCM', 'video', 'hienthi', 1689559100, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product`
+-- Cấu trúc bảng cho bảng `table_product`
 --
 
 CREATE TABLE `table_product` (
-  `id` int UNSIGNED NOT NULL,
-  `id_list` int UNSIGNED DEFAULT NULL,
-  `id_cat` int UNSIGNED DEFAULT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `regular_price` double DEFAULT '0',
-  `sale_price` double DEFAULT '0',
-  `quantity` int DEFAULT '0',
-  `view` int DEFAULT '0',
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_list` int(10) UNSIGNED DEFAULT NULL,
+  `id_cat` int(10) UNSIGNED DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `regular_price` double DEFAULT 0,
+  `sale_price` double DEFAULT 0,
+  `quantity` int(11) DEFAULT 0,
+  `view` int(11) DEFAULT 0,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_product`
+-- Đang đổ dữ liệu cho bảng `table_product`
 --
 
 INSERT INTO `table_product` (`id`, `id_list`, `id_cat`, `photo`, `slug`, `content`, `desc`, `name`, `code`, `regular_price`, `sale_price`, `quantity`, `view`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(18, 21, 42, 'air-force-1-07-shoes-WrLlWX.png', 'nike-air-force-1-07', '&lt;p&gt;The radiance lives on with the b-ball original. Crossing hardwood comfort with off-court flair, it puts a fresh spin on what you know best: &amp;#39;80s-inspired construction, bold details and nothin&amp;#39;-but-net style.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;From tough stitching to pristine leather, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circles adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/University Blue&lt;/li&gt;\r\n	&lt;li&gt;Style: DV0788-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '', 'Nike Air Force 1 &#039;07', 'CW2288-111', 2929000, 0, 10, 16, 'noibat,hienthi', 1686902948, 1688832071, 0),
+(18, 21, 42, 'air-force-1-07-shoes-WrLlWX.png', 'nike-air-force-1-07', '&lt;p&gt;The radiance lives on with the b-ball original. Crossing hardwood comfort with off-court flair, it puts a fresh spin on what you know best: &amp;#39;80s-inspired construction, bold details and nothin&amp;#39;-but-net style.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;From tough stitching to pristine leather, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circles adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/University Blue&lt;/li&gt;\r\n	&lt;li&gt;Style: DV0788-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '', 'Nike Air Force 1 &#039;07', 'CW2288-111', 2929000, 0, 10, 18, 'noibat,hienthi', 1686902948, 1688832071, 0),
 (19, 21, 42, 'jordan-series-es-shoes-FDtg9v.png', 'jordan-series-es', '&lt;p&gt;Inspired by Mike&amp;#39;s backyard battles with his older brother Larry, the Jordan Series references their legendary sibling rivalry throughout the design. The rubber sole offers more than just impressive traction&amp;mdash;it also tells the story of how MJ came to be #23. Look for the hidden reminder to &amp;quot;Swing for the Fence&amp;quot;, a direct quote from Larry to his little bro.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Circular traction inspired by the Air Jordan 1 adds durability.&lt;/li&gt;\r\n	&lt;li&gt;Suede and smooth leather are combined with a sleek, low-cut silhouette for versatile styling.&lt;/li&gt;\r\n	&lt;li&gt;Stretchy, triangular cut-outs add flex to accommodate wider feet.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Woven tongue and label&lt;/li&gt;\r\n	&lt;li&gt;Embroidered graphics&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Grey Fog/University Red&lt;/li&gt;\r\n	&lt;li&gt;Style: DN1856-160&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Jordan Series ES', 'DN1856-002', 2499000, 0, 0, 3, 'noibat,hienthi', 1686905082, 1686905939, 0),
-(20, 21, 42, 'blazer-mid-77-shoes-fW78R7.png', 'nike-blazer-mid-77', '&lt;p&gt;50 years after the birth of the genre, hip-hop is still influencing streetwear. Nike shoes have always been an integral part of this culture&amp;mdash;both influencing and being influenced by iconic musicians, artists and fans. Celebrate half a century of art and culture with platinum details like a microphone charm. Lace up and get spinning.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nThrow Ya Hands Up&lt;/p&gt;\r\n\r\n&lt;p&gt;11 August 1973 is known as the day hip-hop was born. Music makers and lovers came together at 1520 Sedgwick Avenue for the now famous &amp;quot;Back to School Jam&amp;quot;, which changed the course of music history and helped kick off the movement that became hip-hop as we know it.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nWalk This Way&lt;/p&gt;\r\n\r\n&lt;p&gt;Elevate your look to platinum status with a microphone charm and a metallic grey Swoosh.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nRapper&amp;#39;s Delight&lt;/p&gt;\r\n\r\n&lt;p&gt;The sockliner features a Nike logo inspired by the &amp;quot;Parental Advisory&amp;quot; label, and the tongue features a logo that pays homage to classic performer posters.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nMore Benefits&lt;/p&gt;\r\n\r\n&lt;p&gt;The leather upper and exposed needlework create a clean look that&amp;#39;s easy to style.&lt;br /&gt;\r\nVulcanised construction fuses the sole to the upper for a flexible, broken-in feel.&lt;br /&gt;\r\nRubber sole with herringbone pattern adds traction and durability.&lt;/p&gt;\r\n\r\n&lt;p&gt;Product Details&lt;/p&gt;\r\n\r\n&lt;p&gt;Padded collar&lt;br /&gt;\r\nFoam midsole&lt;br /&gt;\r\nRubber sole&lt;br /&gt;\r\nColour Shown: White/Black/White/Smoke Grey&lt;br /&gt;\r\nStyle: DV7194-100&lt;br /&gt;\r\nCountry/Region of Origin: Vietnam&lt;/p&gt;\r\n\r\n&lt;p&gt;Blazer Origins&lt;/p&gt;\r\n\r\n&lt;p&gt;Originally introduced in 1972 as a basketball shoe, the Blazer has since transformed into a modern staple for skaters and sneakerheads alike. Maturing from a simple canvas high top to a leather mid top and casual low top, this shoe just gets better with age.&lt;/p&gt;\r\n', '', 'Nike Blazer Mid &#039;77', 'DV7194-100', 3239000, 0, 0, 4, 'noibat,hienthi', 1686905828, 1686905890, 0),
+(20, 21, 42, 'blazer-mid-77-shoes-fW78R7.png', 'nike-blazer-mid-77', '&lt;p&gt;50 years after the birth of the genre, hip-hop is still influencing streetwear. Nike shoes have always been an integral part of this culture&amp;mdash;both influencing and being influenced by iconic musicians, artists and fans. Celebrate half a century of art and culture with platinum details like a microphone charm. Lace up and get spinning.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nThrow Ya Hands Up&lt;/p&gt;\r\n\r\n&lt;p&gt;11 August 1973 is known as the day hip-hop was born. Music makers and lovers came together at 1520 Sedgwick Avenue for the now famous &amp;quot;Back to School Jam&amp;quot;, which changed the course of music history and helped kick off the movement that became hip-hop as we know it.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nWalk This Way&lt;/p&gt;\r\n\r\n&lt;p&gt;Elevate your look to platinum status with a microphone charm and a metallic grey Swoosh.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nRapper&amp;#39;s Delight&lt;/p&gt;\r\n\r\n&lt;p&gt;The sockliner features a Nike logo inspired by the &amp;quot;Parental Advisory&amp;quot; label, and the tongue features a logo that pays homage to classic performer posters.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;br /&gt;\r\nMore Benefits&lt;/p&gt;\r\n\r\n&lt;p&gt;The leather upper and exposed needlework create a clean look that&amp;#39;s easy to style.&lt;br /&gt;\r\nVulcanised construction fuses the sole to the upper for a flexible, broken-in feel.&lt;br /&gt;\r\nRubber sole with herringbone pattern adds traction and durability.&lt;/p&gt;\r\n\r\n&lt;p&gt;Product Details&lt;/p&gt;\r\n\r\n&lt;p&gt;Padded collar&lt;br /&gt;\r\nFoam midsole&lt;br /&gt;\r\nRubber sole&lt;br /&gt;\r\nColour Shown: White/Black/White/Smoke Grey&lt;br /&gt;\r\nStyle: DV7194-100&lt;br /&gt;\r\nCountry/Region of Origin: Vietnam&lt;/p&gt;\r\n\r\n&lt;p&gt;Blazer Origins&lt;/p&gt;\r\n\r\n&lt;p&gt;Originally introduced in 1972 as a basketball shoe, the Blazer has since transformed into a modern staple for skaters and sneakerheads alike. Maturing from a simple canvas high top to a leather mid top and casual low top, this shoe just gets better with age.&lt;/p&gt;\r\n', '', 'Nike Blazer Mid &#039;77', 'DV7194-100', 3239000, 0, 0, 5, 'noibat,hienthi', 1686905828, 1686905890, 0),
 (21, 21, 42, 'air-jordan-1-zoom-cmft-2-shoes-nX8Qqx0.png', 'air-jordan-1-zoom-cmft-2', '&lt;p&gt;Premium suede and Jordan Brand&amp;#39;s signature Formula 23 foam come together to give you an extra luxurious (and extra cosy) AJ1. You don&amp;#39;t need to play &amp;quot;either or&amp;quot; when it comes to choosing style or comfort with this one&amp;mdash;which is nice, &amp;#39;cause you deserve both.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Suede on the upper and toe breaks in easily and contours to your feet.&lt;/li&gt;\r\n	&lt;li&gt;Jordan Formula 23 foam keeps your feet extra padded.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: Light Orewood Brown/Sail/Celestial Gold/Bright Citrus&lt;/li&gt;\r\n	&lt;li&gt;Style: DV1307-180&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Indonesia&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Zoom CMFT 2', 'DV1307-180', 4259000, 0, 0, 7, 'noibat,hienthi', 1686906249, 1686906404, 0),
 (22, 21, 42, 'jumpman-two-trey-shoes-rhmBzG.png', 'jumpman-two-trey', '&lt;p&gt;Like &amp;quot;Two Trey&amp;quot; on MJ&amp;#39;s licence plate, let your presence be known. This new generation of Jordan celebrates Mike&amp;#39;s time in Chicago, complete with high-quality leather uppers and Air cushioned soles. Made as an homage to the on-court styles worn during his championship years, the Two Trey&amp;#39;s midsole design references both the AJ11 and the AJ12.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Genuine leather offers durable support with a premium look.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole delivers lasting traction where you need it.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Padded collar with fabric lining&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with herringbone traction at the forefoot&lt;/li&gt;\r\n	&lt;li&gt;Heel pull tab&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Black/Lucky Green&lt;/li&gt;\r\n	&lt;li&gt;Style: DO1925-130&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Jumpman Two Trey', 'DO1925-130', 4909000, 0, 0, 3, 'noibat,hienthi', 1686906470, 1686906606, 0),
-(23, 21, 42, 'air-jordan-1-mid-shoes-SQf7DM.png', 'air-jordan-1-mid', '&lt;p&gt;Inspired by the original AJ1, this mid-top edition maintains the iconic look you love while choice colours and crisp leather give it a distinct identity.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Leather, synthetic leather and textile upper for a supportive feel.&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole and Nike Air cushioning provide lightweight comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circle gives you durable traction.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: University Blue/White/Black&lt;/li&gt;\r\n	&lt;li&gt;Style: DQ8426-401&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Mid', 'DQ8426-401', 3669000, 0, 0, 20, 'noibat,hienthi', 1686907505, 1686907516, 0),
-(24, 21, 42, '1.png', 'nike-react-phantom-run-flyknit-2', '', 'The Nike React Phantom Run Flyknit 2 offers versatility for the everyday runner.Building on the foundation of its predecessor, the shoe expands on its laceless design by adding secure support that feels like it &quot;disappears&quot; on your foot.More foam means better cushioning, keeping you comfortable as you run', 'Nike React Phantom Run Flyknit 2', 'CJ0277-100', 4109000, 0, 0, 1, 'noibat,hienthi', 1687142303, 1687142317, 0),
-(25, 21, 42, 'jordan-stadium-90-shoes-Jn6ZH4.png', 'jordan-stadium-90', '&lt;p&gt;Comfort is king, but that doesn&amp;#39;t mean you have to sacrifice style. Taking design inspiration from the AJ1 and AJ5, the Stadium 90 is ready for everyday wear. The upper is made from leather and airy woven, so you get both breathability and durability, and Nike Air cushioning in the sole keeps your every step light and cushioned.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Durable upper is made from real leather, synthetic leather and textile materials.&lt;/li&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole provides everyday traction.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Rubber outsole pays homage to the AJ1&lt;/li&gt;\r\n	&lt;li&gt;Flame details and heel branding reference the AJ5&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Sail/Black/Clover&lt;/li&gt;\r\n	&lt;li&gt;Style: DX4397-103&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: China&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Comfort is king, but that doesn&#039;t mean you have to sacrifice style. Taking design inspiration from the AJ1 and AJ5, the Stadium 90 is ready for everyday wear. The upper is made from leather and airy woven, so you get both breathability and durability, and Nike Air cushioning in the sole keeps your every step light and cushioned.', 'Jordan Stadium 90', 'DX4397-103', 4109000, 0, 0, 10, 'noibat,hienthi', 1687142490, 1687142509, 0),
-(26, 21, 42, 'renew-elevate-3-basketball-shoes-QT43Gj.png', 'nike-renew-elevate-3', '&lt;p&gt;Level up your game on both ends of the floor in the Nike Renew Elevate 3. Specifically tuned for 2-way players who want to make an impact offensively and defensively, this shoe helps you optimise your ability with all-game, all-season support and stability. Improved traction and arch support enhance cutting and pivoting, which can make the difference down the stretch.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;On-Point Pivots&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;A generative, athlete-tested traction allows for better pivoting around the forefoot, allowing you to feel more secure and locked in when spinning, stopping and starting.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Lace Up&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;We added extra lace holes on the medial midfoot to give you the extra security you need for all-important arch support.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;More Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Structured mesh in the upper feels plush around your foot. It fits snugly to help reduce in-shoe movement during play.&lt;/li&gt;\r\n	&lt;li&gt;The padded collar is contoured to provide a precise fit and support around your ankle.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;No-sew overlays&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole&lt;/li&gt;\r\n	&lt;li&gt;Plush tongue&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Phantom/University Red/Team Red&lt;/li&gt;\r\n	&lt;li&gt;Style: DD9304-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Level up your game on both ends of the floor in the Nike Renew Elevate 3. Specifically tuned for 2-way players who want to make an impact offensively and defensively, this shoe helps you optimise your ability with all-game, all-season support and stability. Improved traction and arch support enhance cutting and pivoting, which can make the difference down the stretch.', 'Nike Renew Elevate 3', 'DD9304-101', 2349000, 0, 5, 8, 'noibat,hienthi', 1687142650, 1688486753, 0),
-(27, 21, 43, 'air-force-1-07-flyease-shoes-lpjTWM.png', 'nike-air-force-1-07-flyease', '&lt;p&gt;Quicker than 1, 2, 3&amp;mdash;the original hoops shoe lets you step in and get going. Its easy-entry FlyEase system gives you a hands-free experience. Crisp leather dons the cleanest colour for the ultimate wearability. Yeah, it&amp;#39;s everything you love and then some.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FlyEase entry system (hidden in the heel) makes it easy to get your shoes on and off.&lt;/li&gt;\r\n	&lt;li&gt;From tough stitching to pristine materials to the cupsole design, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with classic pivot circle pattern adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/White&lt;/li&gt;\r\n	&lt;li&gt;Style: DX5883-100&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '', 'Nike', 'DX5883-100', 3239000, 0, 0, 17, 'noibat,hienthi', 1687142871, 1688832108, 0),
-(28, 21, 43, 'tech-hera-shoes-JlV5km.png', 'nike-tech-hera', '&lt;p&gt;The Tech Hera is here to fulfil all of your chunky sneaker wishes. The wavy lifted midsole and suede accents level up your look while keeping you comfortable. Its durable design holds up beautifully to everyday wear&amp;mdash;which is perfect, because you&amp;#39;ll definitely want to wear these every day.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;The textile upper and suede accents add dimension and durability.&lt;/li&gt;\r\n	&lt;li&gt;The chunky design has a subtle platform to give you just enough height.&lt;/li&gt;\r\n	&lt;li&gt;A full-length rubber outsole gives you durable traction.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Padded collar&lt;/li&gt;\r\n	&lt;li&gt;Embroidered Swoosh logo&lt;/li&gt;\r\n	&lt;li&gt;Pull tab on heel&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Summit White/Photon Dust/White&lt;/li&gt;\r\n	&lt;li&gt;Style: DR9761-100&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'The Tech Hera is here to fulfil all of your chunky sneaker wishes. The wavy lifted midsole and suede accents level up your look while keeping you comfortable. Its durable design holds up beautifully to everyday wear—which is perfect, because you&#039;ll definitely want to wear these every day.', 'Nike Tech Hera', 'DR9761-100', 3239000, 0, 0, 47, 'noibat,hienthi', 1687143813, 1688832762, 0);
+(23, 21, 42, 'air-jordan-1-mid-shoes-SQf7DM.png', 'air-jordan-1-mid', '&lt;p&gt;Inspired by the original AJ1, this mid-top edition maintains the iconic look you love while choice colours and crisp leather give it a distinct identity.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Leather, synthetic leather and textile upper for a supportive feel.&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole and Nike Air cushioning provide lightweight comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with pivot circle gives you durable traction.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: University Blue/White/Black&lt;/li&gt;\r\n	&lt;li&gt;Style: DQ8426-401&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', 'Air Jordan 1 Mid', 'DQ8426-401', 3669000, 0, 0, 21, 'noibat,hienthi', 1686907505, 1686907516, 0),
+(24, 21, 42, '1.png', 'nike-react-phantom-run-flyknit-2', '', 'The Nike React Phantom Run Flyknit 2 offers versatility for the everyday runner.Building on the foundation of its predecessor, the shoe expands on its laceless design by adding secure support that feels like it &quot;disappears&quot; on your foot.More foam means better cushioning, keeping you comfortable as you run', 'Nike React Phantom Run Flyknit 2', 'CJ0277-100', 4109000, 0, 10, 4, 'noibat,hienthi', 1687142303, 1689305636, 0),
+(25, 21, 42, 'jordan-stadium-90-shoes-Jn6ZH4.png', 'jordan-stadium-90', '&lt;p&gt;Comfort is king, but that doesn&amp;#39;t mean you have to sacrifice style. Taking design inspiration from the AJ1 and AJ5, the Stadium 90 is ready for everyday wear. The upper is made from leather and airy woven, so you get both breathability and durability, and Nike Air cushioning in the sole keeps your every step light and cushioned.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Durable upper is made from real leather, synthetic leather and textile materials.&lt;/li&gt;\r\n	&lt;li&gt;Nike Air technology absorbs impact for cushioning with every step.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole provides everyday traction.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Rubber outsole pays homage to the AJ1&lt;/li&gt;\r\n	&lt;li&gt;Flame details and heel branding reference the AJ5&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Sail/Black/Clover&lt;/li&gt;\r\n	&lt;li&gt;Style: DX4397-103&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: China&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Comfort is king, but that doesn&#039;t mean you have to sacrifice style. Taking design inspiration from the AJ1 and AJ5, the Stadium 90 is ready for everyday wear. The upper is made from leather and airy woven, so you get both breathability and durability, and Nike Air cushioning in the sole keeps your every step light and cushioned.', 'Jordan Stadium 90', 'DX4397-103', 4109000, 0, 10, 12, 'noibat,hienthi', 1687142490, 1689305628, 0),
+(26, 21, 42, 'renew-elevate-3-basketball-shoes-QT43Gj.png', 'nike-renew-elevate-3', '&lt;p&gt;Level up your game on both ends of the floor in the Nike Renew Elevate 3. Specifically tuned for 2-way players who want to make an impact offensively and defensively, this shoe helps you optimise your ability with all-game, all-season support and stability. Improved traction and arch support enhance cutting and pivoting, which can make the difference down the stretch.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;On-Point Pivots&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;A generative, athlete-tested traction allows for better pivoting around the forefoot, allowing you to feel more secure and locked in when spinning, stopping and starting.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Lace Up&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;We added extra lace holes on the medial midfoot to give you the extra security you need for all-important arch support.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;More Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Structured mesh in the upper feels plush around your foot. It fits snugly to help reduce in-shoe movement during play.&lt;/li&gt;\r\n	&lt;li&gt;The padded collar is contoured to provide a precise fit and support around your ankle.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;No-sew overlays&lt;/li&gt;\r\n	&lt;li&gt;Foam midsole&lt;/li&gt;\r\n	&lt;li&gt;Plush tongue&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Phantom/University Red/Team Red&lt;/li&gt;\r\n	&lt;li&gt;Style: DD9304-101&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'Level up your game on both ends of the floor in the Nike Renew Elevate 3. Specifically tuned for 2-way players who want to make an impact offensively and defensively, this shoe helps you optimise your ability with all-game, all-season support and stability. Improved traction and arch support enhance cutting and pivoting, which can make the difference down the stretch.', 'Nike Renew Elevate 3', 'DD9304-101', 2349000, 0, 10, 14, 'noibat,hienthi', 1687142650, 1689305609, 0),
+(27, 21, 43, 'air-force-1-07-flyease-shoes-lpjTWM.png', 'nike-air-force-1-07-flyease', '&lt;p&gt;Quicker than 1, 2, 3&amp;mdash;the original hoops shoe lets you step in and get going. Its easy-entry FlyEase system gives you a hands-free experience. Crisp leather dons the cleanest colour for the ultimate wearability. Yeah, it&amp;#39;s everything you love and then some.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FlyEase entry system (hidden in the heel) makes it easy to get your shoes on and off.&lt;/li&gt;\r\n	&lt;li&gt;From tough stitching to pristine materials to the cupsole design, it delivers durable style that&amp;#39;s smoother than backboard glass.&lt;/li&gt;\r\n	&lt;li&gt;Originally designed for performance hoops, Nike Air cushioning delivers lasting comfort.&lt;/li&gt;\r\n	&lt;li&gt;Rubber outsole with classic pivot circle pattern adds traction and durability.&lt;/li&gt;\r\n	&lt;li&gt;Padded, low-cut collar looks sleek and feels great.&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/White/White&lt;/li&gt;\r\n	&lt;li&gt;Style: DX5883-100&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Air Force 1&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Debuting in 1982 as a basketball must-have, the Air Force 1 came into its own in the &amp;#39;90s. The clean look of the classic white-on-white AF-1 was endorsed from the basketball courts to the street and beyond. Finding its rhythm in hip-hop culture, releasing limited collabs and colourways, Air Force 1 became an iconic sneaker around the globe. And with over 2,000 iterations of this staple, its impact on fashion, music and sneaker culture can&amp;#39;t be denied.&lt;/p&gt;\r\n', '', 'Nike', 'DX5883-100', 3239000, 0, 9, 21, 'noibat,hienthi', 1687142871, 1689305619, 0),
+(28, 21, 43, 'tech-hera-shoes-JlV5km.png', 'nike-tech-hera', '&lt;p&gt;The Tech Hera is here to fulfil all of your chunky sneaker wishes. The wavy lifted midsole and suede accents level up your look while keeping you comfortable. Its durable design holds up beautifully to everyday wear&amp;mdash;which is perfect, because you&amp;#39;ll definitely want to wear these every day.&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Benefits&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;The textile upper and suede accents add dimension and durability.&lt;/li&gt;\r\n	&lt;li&gt;The chunky design has a subtle platform to give you just enough height.&lt;/li&gt;\r\n	&lt;li&gt;A full-length rubber outsole gives you durable traction.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Product Details&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Padded collar&lt;/li&gt;\r\n	&lt;li&gt;Embroidered Swoosh logo&lt;/li&gt;\r\n	&lt;li&gt;Pull tab on heel&lt;/li&gt;\r\n	&lt;li&gt;Colour Shown: White/Summit White/Photon Dust/White&lt;/li&gt;\r\n	&lt;li&gt;Style: DR9761-100&lt;/li&gt;\r\n	&lt;li&gt;Country/Region of Origin: Vietnam&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'The Tech Hera is here to fulfil all of your chunky sneaker wishes. The wavy lifted midsole and suede accents level up your look while keeping you comfortable. Its durable design holds up beautifully to everyday wear—which is perfect, because you&#039;ll definitely want to wear these every day.', 'Nike Tech Hera', 'DR9761-100', 3239000, 0, 95, 69, 'noibat,hienthi', 1687143813, 1688891349, 0),
+(37, 19, 26, 'gx4696_0_84b395ea7c264d12b62159a2f24d6291_86e40147556c49d9b7f3bbcbbef38f74_compact.jpg', 'giay-sneakers-nam-adidas-nebzed', '&lt;p&gt;&amp;bull; Đ&amp;Ocirc;I GI&amp;Agrave;Y THƯỜNG NG&amp;Agrave;Y SI&amp;Ecirc;U NHẸ C&amp;Oacute; SỬ DỤNG CHẤT LIỆU T&amp;Aacute;I CHẾ.&lt;br /&gt;\r\n&amp;bull; Kh&amp;ocirc;ng ngừng dịch chuyển. Với đế giữa Cloudfoam chạm khắc, đ&amp;ocirc;i gi&amp;agrave;y adidas n&amp;agrave;y l&amp;agrave; d&amp;agrave;nh cho những ng&amp;agrave;y năng động. Th&amp;acirc;n gi&amp;agrave;y bằng vải dệt tho&amp;aacute;ng kh&amp;iacute; kết hợp với đệm g&amp;oacute;t gi&amp;agrave;y đ&amp;uacute;c gi&amp;uacute;p đ&amp;ocirc;i ch&amp;acirc;n bạn lu&amp;ocirc;n thoải m&amp;aacute;i kể cả sau nhiều giờ liền di chuyển khắp nơi. L&amp;agrave;m từ một nh&amp;oacute;m chất liệu t&amp;aacute;i chế, th&amp;acirc;n gi&amp;agrave;y c&amp;oacute; chứa tối thiểu 50% th&amp;agrave;nh phần t&amp;aacute;i chế. Sản phẩm n&amp;agrave;y chỉ đại diện cho một trong số rất nhiều c&amp;aacute;c giải ph&amp;aacute;p của ch&amp;uacute;ng t&amp;ocirc;i hướng tới chấm dứt r&amp;aacute;c thải nhựa.&lt;br /&gt;\r\n&amp;bull; Th&amp;ocirc;ng tin chi tiết&lt;br /&gt;\r\n&amp;bull; D&amp;aacute;ng regular fit&lt;br /&gt;\r\n&amp;bull; C&amp;oacute; d&amp;acirc;y gi&amp;agrave;y&lt;br /&gt;\r\n&amp;bull; Th&amp;acirc;n gi&amp;agrave;y bằng vải dệt&lt;br /&gt;\r\n&amp;bull; Lớp l&amp;oacute;t bằng vải dệt&lt;br /&gt;\r\n&amp;bull; Đế giữa Cloudfoam&lt;br /&gt;\r\n&amp;bull; Đệm g&amp;oacute;t gi&amp;agrave;y đ&amp;uacute;c&lt;br /&gt;\r\n&amp;bull; Đế ngo&amp;agrave;i bằng cao su&lt;br /&gt;\r\n&amp;bull; Th&amp;acirc;n gi&amp;agrave;y c&amp;oacute; chứa tối thiểu 50% th&amp;agrave;nh phần t&amp;aacute;i chế&lt;br /&gt;\r\n&amp;bull; M&amp;agrave;u sản phẩm: Core Black / Iron Metallic / Vivid Red&lt;br /&gt;\r\n&amp;bull; M&amp;atilde; sản phẩm: GX4696&lt;/p&gt;\r\n', 'TRẢ GÓP CHO HÓA ĐƠN TỪ 3 TRIỆU \r\n\r\nMUA TRƯỚC TRẢ SAU CHO HÓA ĐƠN TỪ 200K \r\n\r\nGọi 0906.773.723 để mua hàng nhanh hơn\r\nMiễn phí giao hàng từ 800.000đ', 'Giày Sneakers Nam ADIDAS Nebzed', '4065426719840', 1700000, 1190000, 10, 0, 'noibat,hienthi', 1689305594, 1689305773, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_cat`
+-- Cấu trúc bảng cho bảng `table_product_cat`
 --
 
 CREATE TABLE `table_product_cat` (
-  `id` int UNSIGNED NOT NULL,
-  `id_list` int UNSIGNED DEFAULT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_list` int(10) UNSIGNED DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_product_cat`
+-- Đang đổ dữ liệu cho bảng `table_product_cat`
 --
 
 INSERT INTO `table_product_cat` (`id`, `id_list`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(26, 19, 'nam-adidas', '', 'NAM ADIDAS', 'poduct-1-1758-10720.jpeg', 'hienthi', 1686897564, 1686898155, 0),
-(27, 19, 'nu-adidas', '', 'NỮ ADIDAS', 'poduct-2-3013-4492.jpg', 'hienthi', 1686897584, 1686898168, 0),
-(28, 19, 'kids-adidas', '', 'KIDS ADIDAS', 'poduct-1-1318-1352.jpg', 'hienthi', 1686897625, 1686898185, 0),
+(26, 19, 'nam-adidas', '', 'NAM ADIDAS', 'poduct-1-1758-10720.jpeg', 'hienthi,noibat', 1686897564, 1686898155, 0),
+(27, 19, 'nu-adidas', '', 'NỮ ADIDAS', 'poduct-2-3013-4492.jpg', 'hienthi,noibat', 1686897584, 1686898168, 0),
+(28, 19, 'kids-adidas', '', 'KIDS ADIDAS', 'poduct-1-1318-1352.jpg', 'hienthi,noibat', 1686897625, 1686898185, 0),
 (29, 15, 'men-puma', '', 'MEN PUMA', 'poduct-5-3937-3609.jpg', 'hienthi', 1686897827, 1686898141, 0),
 (30, 15, 'women-puma', '', 'WOMEN PUMA', 'poduct-6-4025-8782.jpg', 'hienthi', 1686897838, 1686898200, 0),
 (31, 15, 'kids-puma', '', 'KIDS PUMA', 'poduct-1-1318-13520.jpg', 'hienthi', 1686897864, 1686898215, 0),
@@ -474,24 +499,24 @@ INSERT INTO `table_product_cat` (`id`, `id_list`, `slug`, `desc`, `name`, `photo
 (39, 18, 'women-converse', '', 'WOMEN CONVERSE', 'poduct-1-1318-74850.jpg', 'hienthi', 1686898829, 0, 0),
 (40, 18, 'kids-converse', '', 'KIDS CONVERSE', 'poduct-1-1318-74851.jpg', 'hienthi', 1686898835, 0, 0),
 (41, 20, 'air-jordan', '', 'AIR JORDAN', 'poduct-3-5224-9280.jpg', 'hienthi', 1686898920, 0, 0),
-(42, 21, 'men-nike', '', 'MEN NIKE', 'poduct-3-5224-92800.jpg', 'hienthi', 1686898940, 0, 0),
-(43, 21, 'women-nike', '', 'WOMEN NIKE', 'poduct-1-1318-7456.jpg', 'hienthi', 1686898950, 0, 0),
-(44, 21, 'kids-nike', '', 'KIDS NIKE', 'poduct-2-3013-44920.jpg', 'hienthi', 1686898959, 1688832280, 0);
+(42, 21, 'men-nike', '', 'MEN NIKE', 'poduct-3-5224-92800.jpg', 'hienthi,noibat', 1686898940, 0, 0),
+(43, 21, 'women-nike', '', 'WOMEN NIKE', 'poduct-1-1318-7456.jpg', 'hienthi,noibat', 1686898950, 0, 0),
+(44, 21, 'kids-nike', '', 'KIDS NIKE', 'poduct-2-3013-44920.jpg', 'hienthi,noibat', 1686898959, 1688832280, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_color`
+-- Cấu trúc bảng cho bảng `table_product_color`
 --
 
 CREATE TABLE `table_product_color` (
-  `id` int UNSIGNED NOT NULL,
-  `id_product` int UNSIGNED DEFAULT NULL,
-  `id_color` int UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_product` int(10) UNSIGNED DEFAULT NULL,
+  `id_color` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `table_product_color`
+-- Đang đổ dữ liệu cho bảng `table_product_color`
 --
 
 INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
@@ -501,23 +526,6 @@ INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
 (98, 22, 14),
 (99, 22, 11),
 (100, 22, 9),
-(105, 24, 14),
-(106, 24, 10),
-(107, 24, 9),
-(108, 24, 8),
-(114, 25, 14),
-(115, 25, 12),
-(116, 25, 11),
-(117, 25, 9),
-(118, 25, 8),
-(203, 26, 14),
-(204, 26, 13),
-(205, 26, 12),
-(206, 26, 11),
-(207, 26, 10),
-(208, 26, 9),
-(209, 26, 8),
-(210, 26, 7),
 (236, 18, 14),
 (237, 18, 13),
 (238, 18, 12),
@@ -526,36 +534,61 @@ INSERT INTO `table_product_color` (`id`, `id_product`, `id_color`) VALUES
 (241, 18, 9),
 (242, 18, 8),
 (243, 18, 7),
-(244, 27, 14),
-(245, 27, 13),
-(246, 27, 12),
-(247, 27, 11),
-(248, 27, 10),
-(249, 28, 13),
-(250, 28, 11),
-(251, 28, 10),
-(252, 28, 9);
+(253, 28, 13),
+(254, 28, 11),
+(255, 28, 10),
+(256, 28, 9),
+(265, 26, 14),
+(266, 26, 13),
+(267, 26, 12),
+(268, 26, 11),
+(269, 26, 10),
+(270, 26, 9),
+(271, 26, 8),
+(272, 26, 7),
+(273, 27, 14),
+(274, 27, 13),
+(275, 27, 12),
+(276, 27, 11),
+(277, 27, 10),
+(278, 25, 14),
+(279, 25, 12),
+(280, 25, 11),
+(281, 25, 9),
+(282, 25, 8),
+(283, 24, 14),
+(284, 24, 10),
+(285, 24, 9),
+(286, 24, 8),
+(351, 37, 14),
+(352, 37, 13),
+(353, 37, 12),
+(354, 37, 11),
+(355, 37, 10),
+(356, 37, 9),
+(357, 37, 8),
+(358, 37, 7);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_list`
+-- Cấu trúc bảng cho bảng `table_product_list`
 --
 
 CREATE TABLE `table_product_list` (
-  `id` int UNSIGNED NOT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_product_list`
+-- Đang đổ dữ liệu cho bảng `table_product_list`
 --
 
 INSERT INTO `table_product_list` (`id`, `slug`, `desc`, `name`, `photo`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -563,24 +596,24 @@ INSERT INTO `table_product_list` (`id`, `slug`, `desc`, `name`, `photo`, `status
 (16, 'new-balance', '', 'New balance', 'brand-6-8551-10390.jpg', 'hienthi', 1686897346, 0, 0),
 (17, 'reebok', '', 'Reebok', 'brand-5-3471-22340.jpg', 'hienthi', 1686897360, 1686898623, 0),
 (18, 'converse', '', 'Converse', 'brand-4-3020-17440.jpg', 'hienthi', 1686897381, 0, 0),
-(19, 'adidas', '', 'Adidas', 'brand-3-1828-50791.jpg', 'hienthi,noibat', 1686897411, 0, 0),
-(20, 'jordan', '', 'Jordan', 'brand-2-9477-75040.jpg', '', 1686897422, 0, 0),
-(21, 'nike', '', 'Nike', 'brand-1-5394-25161.jpg', 'hienthi', 1686897433, 1688832246, 0);
+(19, 'adidas', '', 'Adidas', 'brand-3-1828-50791.jpg', 'noibat,hienthi', 1686897411, 0, 0),
+(20, 'jordan', '', 'Jordan', 'brand-2-9477-75040.jpg', 'hienthi', 1686897422, 0, 0),
+(21, 'nike', '', 'Nike', 'brand-1-5394-25161.jpg', 'noibat,hienthi', 1686897433, 1688832246, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_size`
+-- Cấu trúc bảng cho bảng `table_product_size`
 --
 
 CREATE TABLE `table_product_size` (
-  `id` int UNSIGNED NOT NULL,
-  `id_product` int UNSIGNED DEFAULT NULL,
-  `id_size` int UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_product` int(10) UNSIGNED DEFAULT NULL,
+  `id_size` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `table_product_size`
+-- Đang đổ dữ liệu cho bảng `table_product_size`
 --
 
 INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
@@ -592,25 +625,6 @@ INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
 (299, 22, 14),
 (300, 22, 13),
 (301, 22, 12),
-(307, 24, 17),
-(308, 24, 15),
-(309, 24, 13),
-(310, 24, 11),
-(311, 24, 9),
-(316, 25, 16),
-(317, 25, 15),
-(318, 25, 13),
-(319, 25, 12),
-(422, 26, 17),
-(423, 26, 16),
-(424, 26, 15),
-(425, 26, 14),
-(426, 26, 13),
-(427, 26, 12),
-(428, 26, 11),
-(429, 26, 10),
-(430, 26, 9),
-(431, 26, 8),
 (460, 18, 17),
 (461, 18, 16),
 (462, 18, 15),
@@ -621,51 +635,80 @@ INSERT INTO `table_product_size` (`id`, `id_product`, `id_size`) VALUES
 (467, 18, 10),
 (468, 18, 9),
 (469, 18, 8),
-(470, 27, 16),
-(471, 27, 15),
-(472, 27, 14),
-(473, 27, 12),
-(474, 28, 17),
-(475, 28, 15),
-(476, 28, 12),
-(477, 28, 11);
+(478, 28, 17),
+(479, 28, 15),
+(480, 28, 12),
+(481, 28, 11),
+(492, 26, 17),
+(493, 26, 16),
+(494, 26, 15),
+(495, 26, 14),
+(496, 26, 13),
+(497, 26, 12),
+(498, 26, 11),
+(499, 26, 10),
+(500, 26, 9),
+(501, 26, 8),
+(502, 27, 16),
+(503, 27, 15),
+(504, 27, 14),
+(505, 27, 12),
+(506, 25, 16),
+(507, 25, 15),
+(508, 25, 13),
+(509, 25, 12),
+(510, 24, 17),
+(511, 24, 15),
+(512, 24, 13),
+(513, 24, 11),
+(514, 24, 9),
+(595, 37, 17),
+(596, 37, 16),
+(597, 37, 15),
+(598, 37, 14),
+(599, 37, 13),
+(600, 37, 12),
+(601, 37, 11),
+(602, 37, 10),
+(603, 37, 9),
+(604, 37, 8);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_setting`
+-- Cấu trúc bảng cho bảng `table_setting`
 --
 
 CREATE TABLE `table_setting` (
-  `id` int NOT NULL,
-  `options` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `options` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_setting`
+-- Đang đổ dữ liệu cho bảng `table_setting`
 --
 
 INSERT INTO `table_setting` (`id`, `options`, `name`) VALUES
-(1, '{\"address\":\"X\\u00e3 Qu\\u1ea3ng L\\u1ee3i, Huy\\u1ec7n \\u0110\\u1ea7m H\\u00e0, Qu\\u1ea3ng Ninh\",\"email\":\"abc@gmail.com\",\"hotline\":\"099 3228 279\",\"zalo\":\"099 3228 279\",\"website\":\"https:\\/\\/viblo.asia\\/p\\/json-encode-va-json-decode-trong-php-1Je5EEyL5nL\",\"fanpage\":\"https:\\/\\/www.facebook.com\\/Leagueoflegendsvn\",\"slogan\":\"Let\\u2019s get started. Which of these best describes you?\",\"opentime\":\"9h - 22h | Th\\u1ee9 2 - Th\\u1ee9 7\",\"googlemap\":\"<iframe src=\\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d3715.2099915274066!2d107.57700925!3d21.38163475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314b3eaa2ae2b87d%3A0x8659b2a88483ddd1!2zUXXhuqNuZyBM4bujaSwgxJDhuqdtIEjDoCBEaXN0cmljdCwgUXXhuqNuZyBOaW5o!5e0!3m2!1sen!2s!4v1680709633757!5m2!1sen!2s\\\" width=\\\"600\\\" height=\\\"450\\\" style=\\\"border:0;\\\" allowfullscreen=\\\"\\\" loading=\\\"lazy\\\" referrerpolicy=\\\"no-referrer-when-downgrade\\\"><\\/iframe>\"}', 'Sneakers Crew');
+(1, '{\"address\":\"X\\u00e3 Qu\\u1ea3ng L\\u1ee3i, Huy\\u1ec7n \\u0110\\u1ea7m H\\u00e0, Qu\\u1ea3ng Ninh\",\"email\":\"abc@gmail.com\",\"hotline\":\"099 3228 279\",\"zalo\":\"099 3228 279\",\"website\":\"https:\\/\\/viblo.asia\\/p\\/json-encode-va-json-decode-trong-php-1Je5EEyL5nL\",\"fanpage\":\"https:\\/\\/www.facebook.com\\/caothang.edu.vn\",\"slogan\":\"Let\\u2019s get started. Which of these best describes you?\",\"opentime\":\"9h - 22h | Th\\u1ee9 2 - Th\\u1ee9 7\",\"googlemap\":\"<iframe src=\\\"https:\\/\\/www.google.com\\/maps\\/embed?pb=!1m18!1m12!1m3!1d3919.5178266801163!2d106.69877667469706!3d10.771594989376862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f40a3b49e59%3A0xa1bd14e483a602db!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEvhu7kgdGh14bqtdCBDYW8gVGjhuq9uZw!5e0!3m2!1svi!2s!4v1689310223476!5m2!1svi!2s\\\" width=\\\"600\\\" height=\\\"450\\\" style=\\\"border:0;\\\" allowfullscreen=\\\"\\\" loading=\\\"lazy\\\" referrerpolicy=\\\"no-referrer-when-downgrade\\\"><\\/iframe>\"}', 'Sneakers Crew');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_size`
+-- Cấu trúc bảng cho bảng `table_size`
 --
 
 CREATE TABLE `table_size` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_size`
+-- Đang đổ dữ liệu cho bảng `table_size`
 --
 
 INSERT INTO `table_size` (`id`, `name`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -683,25 +726,25 @@ INSERT INTO `table_size` (`id`, `name`, `status`, `date_created`, `date_updated`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_static`
+-- Cấu trúc bảng cho bảng `table_static`
 --
 
 CREATE TABLE `table_static` (
-  `id` int UNSIGNED NOT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `desc` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_static`
+-- Đang đổ dữ liệu cho bảng `table_static`
 --
 
 INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `type`, `status`, `date_created`, `date_updated`, `date_deleted`) VALUES
@@ -711,49 +754,49 @@ INSERT INTO `table_static` (`id`, `photo`, `slug`, `content`, `desc`, `name`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_user`
+-- Cấu trúc bảng cho bảng `table_user`
 --
 
 CREATE TABLE `table_user` (
-  `id` int UNSIGNED NOT NULL,
-  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fullname` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gender` tinyint(1) DEFAULT '0',
-  `login_session` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lastlogin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `birthday` int DEFAULT '0',
-  `date_created` int DEFAULT '0',
-  `date_updated` int DEFAULT '0',
-  `date_deleted` int DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL,
+  `permission` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fullname` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT 0,
+  `login_session` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastlogin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `birthday` int(11) DEFAULT 0,
+  `date_created` int(11) DEFAULT 0,
+  `date_updated` int(11) DEFAULT 0,
+  `date_deleted` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `table_user`
+-- Đang đổ dữ liệu cho bảng `table_user`
 --
 
 INSERT INTO `table_user` (`id`, `permission`, `username`, `password`, `email`, `photo`, `fullname`, `phone`, `address`, `gender`, `login_session`, `lastlogin`, `status`, `birthday`, `date_created`, `date_updated`, `date_deleted`) VALUES
-(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, 'bd7155dff15893867bd46f6423faf897', '1687532897', 'hoatdong', 1608051600, 0, 0, 0),
-(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoangsalty@gmail.com', '1.png', 'Hoàng Phạm', '0909090909', 'Địa chỉ 123 123', 2, 'bf5e8450405410aa8b39529b08dcb6b1', '1688833699', 'hoatdong', 992797200, 1682254418, 1685591349, 0),
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '', 'Administrator', '0939513667', '', 0, '', '1689305161', 'hoatdong', 1608051600, 0, 0, 0),
+(149, 'admin', 'hoang', 'f82e62d7c3ea69cc12b5cdb8d621dab6', 'hoangsalty@gmail.com', '1.png', 'Hoàng Phạm', '0909090909', 'Địa chỉ 123 123', 2, 'b0468fe87ce8d4f9363701ca42470375', '1689558898', 'hoatdong', 992797200, 1682254418, 1685591349, 0),
 (150, 'user', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'user@gmail.com', '2-7335-5701.jpg', 'User', '0909090909', 'Địa chỉ test 1', 1, '8d5380c4013549d32fe23cbe14cd2c06', '1686908272', 'hoatdong', 1044378000, 1682254452, 1686908258, 0),
-(159, 'user', 'cuong', 'cf4d87e50be6390ee9bd8ad6e7498cae', 'cuong@gmail.com', 'product-1.jpg', 'Cường', '0909090909', 'Bình Trị Đông A, Bình Tân, TP. HCM', 1, 'fcce87bae0a2aa224dcf6ee1508a1fe1', '1686014824', 'hoatdong', 1092261600, 1683906702, 1683909972, 0),
-(160, 'user', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gmail.com', 'product-10.jpg', 'Test', '0909090925', 'Địa chỉ test 123', 1, '22ddbec4e7eda70761d8be8f87f6b3f7', '1685939648', 'hoatdong', 1004979600, 1685939644, 1687444475, 0);
+(160, 'user', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@gmail.com', 'product-10.jpg', 'Test', '0909090925', 'Địa chỉ test 123', 1, '22ddbec4e7eda70761d8be8f87f6b3f7', '1685939648', 'hoatdong', 1004979600, 1685939644, 1687444475, 0),
+(162, 'user', 'cuong', 'b6d7fd56ad7a6fd175098a7ca1bd8081', 'manhcuong26092001@gmail.com', 'anh bìa.jpg', 'Mạnh cường', '0868202710', 'Lâm đồng', 1, '6fcc8abdd924aae8136c6c3124ac1985', '1689315037', 'hoatdong', 998758800, 1689308330, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_vnpay`
+-- Cấu trúc bảng cho bảng `table_vnpay`
 --
 
 CREATE TABLE `table_vnpay` (
-  `id` int NOT NULL,
-  `order_id` int UNSIGNED DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
   `vnp_amount` varchar(255) DEFAULT NULL,
   `vnp_bankcode` varchar(255) DEFAULT NULL,
   `vnp_banktranno` varchar(255) DEFAULT NULL,
@@ -762,20 +805,20 @@ CREATE TABLE `table_vnpay` (
   `vnp_paydate` varchar(255) DEFAULT NULL,
   `vnp_tmncode` varchar(255) DEFAULT NULL,
   `vnp_transactionno` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `table_color`
+-- Chỉ mục cho bảng `table_color`
 --
 ALTER TABLE `table_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_comment`
+-- Chỉ mục cho bảng `table_comment`
 --
 ALTER TABLE `table_comment`
   ADD PRIMARY KEY (`id`),
@@ -783,48 +826,48 @@ ALTER TABLE `table_comment`
   ADD KEY `comment_user` (`id_user`);
 
 --
--- Indexes for table `table_comment_photo`
+-- Chỉ mục cho bảng `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `comment_photo` (`id_parent`);
 
 --
--- Indexes for table `table_gallery`
+-- Chỉ mục cho bảng `table_gallery`
 --
 ALTER TABLE `table_gallery`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gallery_product` (`id_parent`);
 
 --
--- Indexes for table `table_gallery_album`
+-- Chỉ mục cho bảng `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gallery_album` (`id_parent`);
 
 --
--- Indexes for table `table_momo`
+-- Chỉ mục cho bảng `table_momo`
 --
 ALTER TABLE `table_momo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `momo order` (`order_id`);
 
 --
--- Indexes for table `table_news`
+-- Chỉ mục cho bảng `table_news`
 --
 ALTER TABLE `table_news`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_order`
+-- Chỉ mục cho bảng `table_order`
 --
 ALTER TABLE `table_order`
   ADD PRIMARY KEY (`id`),
   ADD KEY `order_user` (`id_user`);
 
 --
--- Indexes for table `table_order_detail`
+-- Chỉ mục cho bảng `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
   ADD PRIMARY KEY (`id`),
@@ -834,13 +877,13 @@ ALTER TABLE `table_order_detail`
   ADD KEY `order_detail_color` (`id_color`);
 
 --
--- Indexes for table `table_photo`
+-- Chỉ mục cho bảng `table_photo`
 --
 ALTER TABLE `table_photo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_product`
+-- Chỉ mục cho bảng `table_product`
 --
 ALTER TABLE `table_product`
   ADD PRIMARY KEY (`id`),
@@ -848,14 +891,14 @@ ALTER TABLE `table_product`
   ADD KEY `product_cat` (`id_cat`);
 
 --
--- Indexes for table `table_product_cat`
+-- Chỉ mục cho bảng `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
   ADD PRIMARY KEY (`id`),
   ADD KEY `asdsad` (`id_list`);
 
 --
--- Indexes for table `table_product_color`
+-- Chỉ mục cho bảng `table_product_color`
 --
 ALTER TABLE `table_product_color`
   ADD PRIMARY KEY (`id`),
@@ -863,13 +906,13 @@ ALTER TABLE `table_product_color`
   ADD KEY `product1` (`id_product`);
 
 --
--- Indexes for table `table_product_list`
+-- Chỉ mục cho bảng `table_product_list`
 --
 ALTER TABLE `table_product_list`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_product_size`
+-- Chỉ mục cho bảng `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD PRIMARY KEY (`id`),
@@ -877,203 +920,203 @@ ALTER TABLE `table_product_size`
   ADD KEY `product` (`id_product`);
 
 --
--- Indexes for table `table_setting`
+-- Chỉ mục cho bảng `table_setting`
 --
 ALTER TABLE `table_setting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_size`
+-- Chỉ mục cho bảng `table_size`
 --
 ALTER TABLE `table_size`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_static`
+-- Chỉ mục cho bảng `table_static`
 --
 ALTER TABLE `table_static`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_user`
+-- Chỉ mục cho bảng `table_user`
 --
 ALTER TABLE `table_user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_vnpay`
+-- Chỉ mục cho bảng `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
   ADD PRIMARY KEY (`id`),
   ADD KEY `erdfgdfgd` (`order_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `table_color`
+-- AUTO_INCREMENT cho bảng `table_color`
 --
 ALTER TABLE `table_color`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `table_comment`
+-- AUTO_INCREMENT cho bảng `table_comment`
 --
 ALTER TABLE `table_comment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `table_comment_photo`
+-- AUTO_INCREMENT cho bảng `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `table_gallery`
+-- AUTO_INCREMENT cho bảng `table_gallery`
 --
 ALTER TABLE `table_gallery`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
--- AUTO_INCREMENT for table `table_gallery_album`
+-- AUTO_INCREMENT cho bảng `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `table_momo`
+-- AUTO_INCREMENT cho bảng `table_momo`
 --
 ALTER TABLE `table_momo`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `table_news`
+-- AUTO_INCREMENT cho bảng `table_news`
 --
 ALTER TABLE `table_news`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `table_order`
+-- AUTO_INCREMENT cho bảng `table_order`
 --
 ALTER TABLE `table_order`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `table_order_detail`
+-- AUTO_INCREMENT cho bảng `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT for table `table_photo`
+-- AUTO_INCREMENT cho bảng `table_photo`
 --
 ALTER TABLE `table_photo`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `table_product`
+-- AUTO_INCREMENT cho bảng `table_product`
 --
 ALTER TABLE `table_product`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `table_product_cat`
+-- AUTO_INCREMENT cho bảng `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT for table `table_product_color`
+-- AUTO_INCREMENT cho bảng `table_product_color`
 --
 ALTER TABLE `table_product_color`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=359;
 
 --
--- AUTO_INCREMENT for table `table_product_list`
+-- AUTO_INCREMENT cho bảng `table_product_list`
 --
 ALTER TABLE `table_product_list`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `table_product_size`
+-- AUTO_INCREMENT cho bảng `table_product_size`
 --
 ALTER TABLE `table_product_size`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=478;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=605;
 
 --
--- AUTO_INCREMENT for table `table_setting`
+-- AUTO_INCREMENT cho bảng `table_setting`
 --
 ALTER TABLE `table_setting`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `table_size`
+-- AUTO_INCREMENT cho bảng `table_size`
 --
 ALTER TABLE `table_size`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `table_static`
+-- AUTO_INCREMENT cho bảng `table_static`
 --
 ALTER TABLE `table_static`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `table_user`
+-- AUTO_INCREMENT cho bảng `table_user`
 --
 ALTER TABLE `table_user`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
--- AUTO_INCREMENT for table `table_vnpay`
+-- AUTO_INCREMENT cho bảng `table_vnpay`
 --
 ALTER TABLE `table_vnpay`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `table_comment`
+-- Các ràng buộc cho bảng `table_comment`
 --
 ALTER TABLE `table_comment`
   ADD CONSTRAINT `comment_product` FOREIGN KEY (`id_parent`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `comment_user` FOREIGN KEY (`id_user`) REFERENCES `table_user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_comment_photo`
+-- Các ràng buộc cho bảng `table_comment_photo`
 --
 ALTER TABLE `table_comment_photo`
   ADD CONSTRAINT `comment_photo` FOREIGN KEY (`id_parent`) REFERENCES `table_comment` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_gallery`
+-- Các ràng buộc cho bảng `table_gallery`
 --
 ALTER TABLE `table_gallery`
   ADD CONSTRAINT `gallery_product` FOREIGN KEY (`id_parent`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_gallery_album`
+-- Các ràng buộc cho bảng `table_gallery_album`
 --
 ALTER TABLE `table_gallery_album`
   ADD CONSTRAINT `gallery_album` FOREIGN KEY (`id_parent`) REFERENCES `table_photo` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_momo`
+-- Các ràng buộc cho bảng `table_momo`
 --
 ALTER TABLE `table_momo`
   ADD CONSTRAINT `momo order` FOREIGN KEY (`order_id`) REFERENCES `table_order` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_order`
+-- Các ràng buộc cho bảng `table_order`
 --
 ALTER TABLE `table_order`
   ADD CONSTRAINT `order_user` FOREIGN KEY (`id_user`) REFERENCES `table_user` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_order_detail`
+-- Các ràng buộc cho bảng `table_order_detail`
 --
 ALTER TABLE `table_order_detail`
   ADD CONSTRAINT `order_detail_color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
@@ -1082,27 +1125,27 @@ ALTER TABLE `table_order_detail`
   ADD CONSTRAINT `order_detail_size` FOREIGN KEY (`id_size`) REFERENCES `table_size` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_product`
+-- Các ràng buộc cho bảng `table_product`
 --
 ALTER TABLE `table_product`
   ADD CONSTRAINT `product cat` FOREIGN KEY (`id_cat`) REFERENCES `table_product_cat` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `product list` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_product_cat`
+-- Các ràng buộc cho bảng `table_product_cat`
 --
 ALTER TABLE `table_product_cat`
   ADD CONSTRAINT `asdsad` FOREIGN KEY (`id_list`) REFERENCES `table_product_list` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_product_color`
+-- Các ràng buộc cho bảng `table_product_color`
 --
 ALTER TABLE `table_product_color`
   ADD CONSTRAINT `product` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `product color` FOREIGN KEY (`id_color`) REFERENCES `table_color` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Constraints for table `table_product_size`
+-- Các ràng buộc cho bảng `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD CONSTRAINT `product 1` FOREIGN KEY (`id_product`) REFERENCES `table_product` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
